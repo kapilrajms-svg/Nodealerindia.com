@@ -3,11 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No Dealer India</title>
+    <title>No Dealer | Peer-to-Peer Car Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .preloader { position: fixed; inset: 0; background: #0f172a; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .hidden-transition { display: none; }
+    </style>
 </head>
-<body class="bg-slate-100 p-10">
-    <h1 class="text-4xl font-bold text-slate-800">No Dealer India</h1>
-    <p class="mt-4 text-xl">The site is now live and working.</p>
+<body>
+
+    <div id="preloader" class="preloader">
+        <div class="mb-8 animate-pulse text-white text-center">
+            <h1 class="text-4xl font-black mb-2">NO DEALER</h1>
+            <p class="text-gray-400 tracking-widest uppercase text-xs">Buy Direct from Owners</p>
+        </div>
+        <button onclick="startEngine()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-red-500/50 transition-all transform hover:scale-105 active:scale-95">
+            START ENGINE
+        </button>
+    </div>
+
+    <div id="main-content" class="hidden-transition">
+        <header class="bg-white shadow-sm border-b sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+                <h1 class="text-2xl font-black text-slate-900">NO <span class="text-blue-600">DEALER</span></h1>
+                <div class="flex gap-4">
+                    <button onclick="document.getElementById('adminPanel').classList.remove('hidden')" class="text-xs font-bold bg-slate-100 px-4 py-2 rounded-lg text-slate-600">Admin</button>
+                    <a href="https://wa.me/917838335143" class="bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-green-600 transition-all"><i class="fa-brands fa-whatsapp mr-1"></i> Support</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="max-w-7xl mx-auto px-4 py-16 text-center">
+            <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-6">Skip the Brokerage. <br>Buy Direct from <span class="text-red-600">Owners.</span></h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10">The safest peer-to-peer car marketplace in India. No middleman, no hidden fees, just verified car deals.</p>
+            <div class="flex justify-center gap-4">
+                <button onclick="scrollToInventory()" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-black transition-all">Browse Inventory</button>
+                <button onclick="openSellModal()" class="bg-white border-2 border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition-all">List Your Car</button>
+            </div>
+        </section>
+
+        <section id="inventory" class="max-w-7xl mx-auto px-4 py-16">
+            <h3 class="text-2xl font-black mb-8">Verified Listings</h3>
+            <div id="carGrid" class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-2xl border shadow-sm text-center py-20">
+                    <p class="text-gray-400">No cars listed yet. Use the admin panel to add your first listing.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="adminPanel" class="hidden fixed inset-0 bg-black/50 z-[10000] flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl">
+            <h2 class="text-xl font-bold mb-6">Admin Panel</h2>
+            <form id="carForm" onsubmit="addCar(event)" class="space-y-4">
+                <input type="text" id="carTitle" placeholder="Car Model (e.g. Swift 2021)" required class="w-full border p-3 rounded-lg">
+                <input type="number" id="carPrice" placeholder="Price (INR)" required class="w-full border p-3 rounded-lg">
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold">Add Listing</button>
+                <button type="button" onclick="document.getElementById('adminPanel').classList.add('hidden')" class="w-full text-gray-400 text-sm">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Start Engine Logic
+        function startEngine() {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('main-content').classList.remove('hidden-transition');
+        }
+
+        // Inventory Logic
+        function addCar(e) {
+            e.preventDefault();
+            const grid = document.getElementById('carGrid');
+            if (grid.querySelector('p')) grid.innerHTML = '';
+            
+            const title = document.getElementById('carTitle').value;
+            const price = document.getElementById('carPrice').value;
+            
+            const div = document.createElement('div');
+            div.className = "bg-white p-6 rounded-2xl border shadow-sm";
+            div.innerHTML = `<h4 class="font-bold text-lg">${title}</h4><p class="text-red-600 font-bold mt-2">₹${price}</p>`;
+            grid.appendChild(div);
+            
+            document.getElementById('adminPanel').classList.add('hidden');
+            e.target.reset();
+        }
+
+        function scrollToInventory() { document.getElementById('inventory').scrollIntoView({ behavior: 'smooth' }); }
+        function openSellModal() { alert('Feature coming soon!'); }
+    </script>
 </body>
 </html>
