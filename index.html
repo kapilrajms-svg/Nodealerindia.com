@@ -265,7 +265,7 @@
                     </div>
                     
                     <div>
-                        <h4 class="font-bold text-xs uppercase text-slate-400 mb-2 tracking-wider">Live Booking Logs (Local Browser Mode)</h4>
+                        <h4 class="font-bold text-xs uppercase text-slate-400 mb-2 tracking-wider">Live Booking Logs</h4>
                         <div id="inquiriesLogBox" class="border border-slate-100 rounded-xl bg-slate-50 p-4 max-h-40 overflow-y-auto text-xs space-y-2 font-mono"></div>
                     </div>
 
@@ -330,7 +330,7 @@
                 <div>
                     <h4 class="font-bold uppercase mb-3 text-slate-800 tracking-wider">System Core</h4>
                     <p class="mb-2">&copy; 2026 NoDealer India. Deployment Matrix Locked.</p>
-                    <span class="inline-block bg-slate-100 text-slate-600 font-mono text-[10px] px-2 py-0.5 rounded">v3.2-Production</span>
+                    <span class="inline-block bg-slate-100 text-slate-600 font-mono text-[10px] px-2 py-0.5 rounded">v3.0-Production</span>
                 </div>
             </div>
         </footer>
@@ -338,11 +338,11 @@
 
     <script>
         const SYSTEM_MASTER_PIN = "7838"; 
-        const WEBHOOK_URL = "https://webhook.site/c17f176a-a3e0-4943-a350-bb952634ff99";
 
         if(!localStorage.getItem('uploadedCars')) localStorage.setItem('uploadedCars', JSON.stringify([]));
         if(!localStorage.getItem('clientInquiries')) localStorage.setItem('clientInquiries', JSON.stringify([]));
 
+        // Runs instantly on tap without blocking audio checks
         function startEngine() {
             document.getElementById('preloader').style.transform = 'translateY(-100%)';
             document.body.classList.remove('overflow-hidden');
@@ -370,20 +370,12 @@
             }
         }
 
-        function sendToWebhook(payload) {
-            fetch(WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            }).catch(err => console.log("Stream sync pending..."));
-        }
-
         function handleCarUpload(e) {
             e.preventDefault();
             const carsList = JSON.parse(localStorage.getItem('uploadedCars')) || [];
             const imgInput = document.getElementById('carImageSrc').value.trim();
             
-            const newCar = {
+            carsList.push({
                 id: Date.now(),
                 title: document.getElementById('carTitle').value,
                 price: parseInt(document.getElementById('carPrice').value),
@@ -395,13 +387,8 @@
                 owner: document.getElementById('carOwner').value,
                 notes: document.getElementById('carSpecNotes').value,
                 image: imgInput ? imgInput : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400'
-            };
-
-            carsList.push(newCar);
+            });
             localStorage.setItem('uploadedCars', JSON.stringify(carsList));
-            
-            sendToWebhook({ event_type: "ADMIN_CAR_UPLOAD", car_data: newCar });
-
             document.getElementById('carUploadForm').reset();
             alert("New verified marketplace listing injected cleanly!");
             renderCars();
@@ -437,12 +424,12 @@
                         <div class="text-[11px] text-gray-500 space-y-0.5 border-t pt-2 mt-2">
                             <p><strong class="text-slate-700">Driven:</strong> ${car.driven}</p>
                             <p><strong class="text-slate-700">Ownership:</strong> ${car.owner}</p>
-                            \${car.notes ? `<p class="italic text-slate-500 font-medium mt-1">"\${car.notes}"</p>` : ''}
+                            ${car.notes ? `<p class="italic text-slate-500 font-medium mt-1">"${car.notes}"</p>` : ''}
                         </div>
                     </div>
                     <div class="bg-slate-50 p-3.5 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-base font-black brand-red">₹\${car.price.toLocaleString('en-IN')}</span>
-                        <a href="https://wa.me/917838335143?text=Hi%20NoDealer,%20I%20am%20interested%20in%20the%20listed%20\${encodeURIComponent(car.title)}%20priced%20at%20\${car.price}" target="_blank" class="bg-blue-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-all">Contact Seller →</a>
+                        <span class="text-base font-black brand-red">₹${car.price.toLocaleString('en-IN')}</span>
+                        <a href="https://wa.me/917838335143?text=Hi%20NoDealer,%20I%20am%20interested%20in%20the%20listed%20${encodeURIComponent(car.title)}%20priced%20at%20${car.price}" target="_blank" class="bg-blue-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg hover:bg-blue-700 transition-all">Contact Seller →</a>
                     </div>
                 `;
                 carGrid.appendChild(card);
@@ -472,20 +459,15 @@
         function handleCustomerSellSubmit(e) {
             e.preventDefault();
             const inquiries = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            const submission = {
+            inquiries.push({
                 timestamp: new Date().toLocaleString(),
                 type: "Car Submission Lead",
                 name: document.getElementById('custName').value,
                 phone: document.getElementById('custPhone').value,
                 details: document.getElementById('custCarDetails').value,
                 expected: document.getElementById('custExpectedPrice').value
-            };
-            
-            inquiries.push(submission);
+            });
             localStorage.setItem('clientInquiries', JSON.stringify(inquiries));
-            
-            sendToWebhook(submission);
-
             e.target.reset();
             closeSellModal();
             alert("Your vehicle data has been added to the registry successfully!");
@@ -499,20 +481,15 @@
             const phoneField = document.getElementById('pdiPhone').value;
             const locationField = document.getElementById('pdiLocation').value;
 
-            const submission = {
+            inquiries.push({
                 timestamp: new Date().toLocaleString(),
                 type: "PDI Inspection Request",
                 name: nameField,
                 phone: phoneField,
                 details: "Inspection Hub Location: " + locationField,
                 expected: "Pending Verification Scheduling"
-            };
-
-            inquiries.push(submission);
+            });
             localStorage.setItem('clientInquiries', JSON.stringify(inquiries));
-            
-            sendToWebhook(submission);
-
             e.target.reset();
             alert("Your PDI diagnostic request slot is saved! We will coordinate shortly via WhatsApp.");
         }
@@ -522,22 +499,22 @@
             const data = JSON.parse(localStorage.getItem('clientInquiries')) || [];
             box.innerHTML = '';
             if(data.length === 0) {
-                box.innerHTML = "<p class='text-gray-400 font-medium'>No form submissions logged locally on this device yet.</p>";
+                box.innerHTML = "<p class='text-gray-400 font-medium'>No form submissions logged yet.</p>";
                 return;
             }
             data.forEach(item => {
                 const p = document.createElement('div');
                 p.className = "p-2 bg-white border border-slate-100 rounded-lg mb-1.5 shadow-sm";
-                p.innerHTML = `<strong>[\${item.type}]</strong> <span class="text-blue-600">\${item.timestamp}</span><br>Name: \${item.name} (\${item.phone})<br>Specs: \${item.details} | Status: \${item.expected}`;
+                p.innerHTML = `<strong>[${item.type}]</strong> <span class="text-blue-600">${item.timestamp}</span><br>Name: ${item.name} (${item.phone})<br>Specs: ${item.details} | Status: ${item.expected}`;
                 box.appendChild(p);
             });
         }
 
         function exportInquiriesToExcel() {
             const data = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            if(data.length === 0) { alert("No data logs recorded locally to export."); return; }
+            if(data.length === 0) { alert("No data logs recorded to export."); return; }
             let csvContent = "data:text/csv;charset=utf-8,Timestamp,Submission Type,Client Name,Contact Phone,Vehicle Details / Location,Expected Value / Status\n";
-            data.forEach(r => { csvContent += `"\${r.timestamp}","\${r.type}","\${r.name}","\${r.phone}","\${r.details}","\${r.expected}"\n`; });
+            data.forEach(r => { csvContent += `"${r.timestamp}","${r.type}","${r.name}","${r.phone}","${r.details}","${r.expected}"\n`; });
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
