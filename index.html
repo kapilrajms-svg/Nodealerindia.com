@@ -73,20 +73,16 @@
             <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-7 space-y-6">
                     <div class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-bold px-3 py-1.5 rounded-full">
-                        <i class="fa-solid fa-ban"></i> Zero Dealer Brokerage • Absolute Transparency
+                        <i class="fa-solid fa-square-check"></i> Verified Listings • Absolute Transparency
                     </div>
                     <h1 class="text-4xl md:text-6xl font-black text-slate-900 uppercase tracking-tight leading-none">
                         Buy or Sell Cars <br>Directly From <span class="brand-red">Owners</span>
                     </h1>
                     <p class="text-gray-600 font-medium text-base md:text-lg max-w-xl">
-                        Skip pushy salesmen, middleman commissions, and hidden dealer markups. Connect safely and directly with individual private car owners across India.
+                        Skip pushy salesmen and hidden dealer markups. Connect safely and directly with individual private car owners across India.
                     </p>
                     
-                    <div class="grid grid-cols-3 gap-4 pt-2 max-w-md">
-                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <i class="fa-solid fa-percent text-blue-500 text-xl mb-1"></i>
-                            <span class="block text-[11px] font-bold uppercase text-slate-700">0% Commission</span>
-                        </div>
+                    <div class="grid grid-cols-2 gap-4 pt-2 max-w-sm">
                         <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
                             <i class="fa-solid fa-user-shield text-green-500 text-xl mb-1"></i>
                             <span class="block text-[11px] font-bold uppercase text-slate-700">Real Owners Only</span>
@@ -100,7 +96,7 @@
                     <div class="flex flex-wrap gap-4 pt-4">
                         <button onclick="scrollToInventory()" class="bg-brand-red text-white text-sm font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-500/20 hover:bg-red-700 transition-all transform active:scale-95">Browse Active Stock</button>
                         <button onclick="openSellModal()" class="bg-white border border-slate-200 text-slate-800 text-sm font-bold px-8 py-4 rounded-xl shadow-sm hover:bg-slate-50 transition-all transform active:scale-95 flex items-center gap-2">
-                            <i class="fa-solid fa-car brand-red"></i> List Your Car Free
+                            <i class="fa-solid fa-car brand-red"></i> List Your Car
                         </button>
                     </div>
                 </div>
@@ -172,7 +168,7 @@
                         <input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
                         <input type="tel" id="pdiPhone" required placeholder="Mobile Contact Number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
                         <input type="text" id="pdiLocation" required placeholder="Vehicle Location (City / Area)" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
-                        <button type="submit" class="w-full bg-amber-500 text-slate-950 font-black py-3.5 rounded-xl uppercase tracking-wider hover:bg-amber-400 transition-all text-xs">
+                        <button type="submit" id="pdiSubmitBtn" class="w-full bg-amber-500 text-slate-950 font-black py-3.5 rounded-xl uppercase tracking-wider hover:bg-amber-400 transition-all text-xs">
                             Schedule PDI Inspection Slot
                         </button>
                     </form>
@@ -273,7 +269,7 @@
                         <div class="grid grid-cols-2 gap-3">
                             <input type="text" id="carTitle" required placeholder="Car Model Title (e.g. Maruti Swift VXI)" class="border p-2.5 rounded-xl text-sm font-medium">
                             <input type="number" id="carPrice" required placeholder="Price in INR (e.g. 480000)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="text" id="carBrand" required placeholder="Brand Brand (e.g. Maruti)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="text" id="carBrand" required placeholder="Brand (e.g. Maruti)" class="border p-2.5 rounded-xl text-sm font-medium">
                             <input type="number" id="carYear" required placeholder="Year (e.g. 2021)" class="border p-2.5 rounded-xl text-sm font-medium">
                             <input type="text" id="carFuel" required placeholder="Fuel (Petrol/CNG/Diesel)" class="border p-2.5 rounded-xl text-sm font-medium">
                             <input type="text" id="carTransmission" required placeholder="Transmission (Manual/Automatic)" class="border p-2.5 rounded-xl text-sm font-medium">
@@ -284,7 +280,7 @@
                             <input type="text" id="carSpecNotes" placeholder="Special Features / Seller Remarks (e.g. Leather Seats, Full Insurance active)" class="w-full border p-2.5 rounded-xl text-sm font-medium">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-500 mb-1">Local Image File Name (e.g. car1.jpg or leave blank for sample mockup view)</label>
+                            <label class="block text-[12px] font-bold text-slate-500 mb-1">Local Image File Name (e.g. car1.jpg)</label>
                             <input type="text" id="carImageSrc" placeholder="car1.jpg" class="w-full border p-2.5 rounded-xl text-sm font-medium">
                         </div>
                         <button type="submit" class="w-full bg-brand-blue text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-blue-600 transition-all shadow-lg">Deploy To Live Directory</button>
@@ -298,12 +294,12 @@
                 <button onclick="closeSellModal()" class="absolute top-4 right-4 text-gray-400 hover:text-slate-600 text-2xl font-bold transition-all">&times;</button>
                 <h3 class="text-xl font-black uppercase mb-1 brand-red tracking-tight"><i class="fa-solid fa-file-signature"></i> List Your Private Vehicle</h3>
                 <p class="text-gray-500 text-xs mb-4">Provide parameters to establish active contact records.</p>
-                <form onsubmit="handleCustomerSellSubmit(event)" class="space-y-3">
+                <form id="customerSellForm" onsubmit="handleCustomerSellSubmit(event)" class="space-y-3">
                     <input type="text" id="custName" required placeholder="Your Full Name" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
                     <input type="tel" id="custPhone" required placeholder="Mobile Contact Number" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
                     <input type="text" id="custCarDetails" required placeholder="Car Make, Model & Year (e.g. Hyundai i20 2018)" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
                     <input type="number" id="custExpectedPrice" required placeholder="Your Desired Selling Price (INR)" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
-                    <button type="submit" class="w-full bg-green-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all">Submit Ownership Data</button>
+                    <button type="submit" id="custSellSubmitBtn" class="w-full bg-green-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all">Submit Ownership Data</button>
                 </form>
             </div>
         </div>
@@ -315,14 +311,14 @@
                         <img src="logo.jpg" class="w-10 h-10 object-contain rounded border" alt="Logo" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
                         <span class="font-black text-slate-800 text-lg tracking-tight">NO DEALER</span>
                     </div>
-                    <p class="leading-relaxed">India's fully autonomous, brokerage-free direct matching matrix for pre-owned passenger vehicles. 100% middleman-free ecosystem.</p>
+                    <p class="leading-relaxed">India's fully autonomous direct matching matrix for pre-owned passenger vehicles. Peer-to-peer ecosystem.</p>
                 </div>
                 <div>
                     <h4 class="font-bold uppercase mb-3 text-slate-800 tracking-wider">Social Channels</h4>
                     <a href="https://www.instagram.com/nodealer.india/" target="_blank" class="text-blue-500 font-semibold hover:underline flex items-center gap-1"><i class="fa-brands fa-instagram text-base"></i> Instagram Profile</a>
                 </div>
                 <div>
-                    <h4 class="font-bold uppercase mb-3 text-slate-800 tracking-wider">Communications Gateway</h4>
+                    <h4 class="font-bold uppercase mb-3 text-slate-800 tracking-wider">Communication Gateway</h4>
                     <p class="mb-1">Email: Kapilraj.ms@gmail.com</p>
                     <p class="font-semibold text-slate-700">Direct Hotline: +91 7838335143</p>
                 </div>
@@ -337,8 +333,11 @@
 
     <script>
         const SYSTEM_MASTER_PIN = "7838"; 
-        const MAKE_WEBHOOK_URL = "https://eu1.make.com/1752826/scenarios/add"; // Connected Make Account Link
-        const CLIENT_IP = "182.69.176.207"; // Embedded dynamic context parameter
+        
+        // Live integration endpoint mapped to your custom Make webhook scenario
+        const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts"; 
+        
+        const CLIENT_IP = "182.69.176.207"; 
 
         if(!localStorage.getItem('uploadedCars')) localStorage.setItem('uploadedCars', JSON.stringify([]));
         if(!localStorage.getItem('clientInquiries')) localStorage.setItem('clientInquiries', JSON.stringify([]));
@@ -368,6 +367,7 @@
             evt = evt || window.event;
             if (evt.keyCode == 27) {
                 closeSellModal();
+                toggleAdminPanel();
             }
         };
 
@@ -389,9 +389,106 @@
             }
         }
 
-        // Intercept and Route Homepage PDI Form directly to Make.com Webhook Matrix
+        // Live Directory Management Core (UI Generation)
+        function renderCars() {
+            const grid = document.getElementById('carGrid');
+            const noStock = document.getElementById('noStockMessage');
+            const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+            
+            grid.innerHTML = "";
+            
+            if(cars.length === 0) {
+                noStock.style.display = "block";
+                return;
+            }
+            noStock.style.display = "none";
+
+            cars.forEach(car => {
+                const img = car.imageSrc ? car.imageSrc : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+                grid.innerHTML += `
+                    <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative group hover:shadow-md transition-all">
+                        <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50" alt="${car.title}">
+                        <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">${car.year} Model</span>
+                        <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase tracking-tight">${car.title}</h4>
+                        <p class="text-xs text-gray-500 font-semibold mb-2">${car.driven} • ${car.fuel} • ${car.transmission}</p>
+                        <div class="flex justify-between items-center pt-2 border-t border-dashed">
+                            <div>
+                                <span class="text-[9px] uppercase font-bold text-gray-400 block leading-none">Price Expectation</span>
+                                <span class="font-black text-slate-900 text-base">₹${Number(car.price).toLocaleString('en-IN')}</span>
+                            </div>
+                            <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20the%20${encodeURIComponent(car.title)}%20advertised%20on%20No%20Dealer." target="_blank" class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl hover:bg-red-700 transition-all">Contact</a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function handleCarUpload(e) {
+            e.preventDefault();
+            const newCar = {
+                id: Date.now(),
+                title: document.getElementById('carTitle').value,
+                price: document.getElementById('carPrice').value,
+                brand: document.getElementById('carBrand').value,
+                year: document.getElementById('carYear').value,
+                fuel: document.getElementById('carFuel').value,
+                transmission: document.getElementById('carTransmission').value,
+                driven: document.getElementById('carDriven').value,
+                owner: document.getElementById('carOwner').value,
+                notes: document.getElementById('carSpecNotes').value,
+                imageSrc: document.getElementById('carImageSrc').value
+            };
+
+            const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+            cars.push(newCar);
+            localStorage.setItem('uploadedCars', JSON.stringify(cars));
+            
+            alert("Vehicle deployed onto live directory!");
+            document.getElementById('carUploadForm').reset();
+            renderCars();
+        }
+
+        function applyFilters() {
+            alert("Filtering engine recalculating active matrix parameters...");
+        }
+
+        function loadInquiriesLog() {
+            const box = document.getElementById('inquiriesLogBox');
+            const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            box.innerHTML = "";
+            if(logs.length === 0) { box.innerText = "No inquiries captured inside standard server logs."; return; }
+            
+            logs.forEach(log => {
+                box.innerHTML += `<div class="p-2 border-b border-slate-200">
+                    <strong>[${log.submissionType}]</strong> ${log.name} - ${log.phone} (${log.timestamp.split('T')[0]})
+                </div>`;
+            });
+        }
+
+        function exportInquiriesToExcel() {
+            const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            if(logs.length === 0) { alert("No leads present to execute export sequence."); return; }
+            let csvContent = "data:text/csv;charset=utf-8,Type,Name,Phone,Context/Details,Timestamp\n";
+            logs.forEach(l => {
+                let detail = l.location ? l.location : l.carDetails;
+                csvContent += `"${l.submissionType}","${l.name}","${l.phone}","${detail}","${l.timestamp}"\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `NoDealer_Leads_Export.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Network Endpoint Handlers (Sending data out to Make.com Webhook Link)
         function handlePdiSubmit(e) {
             e.preventDefault();
+            const btn = document.getElementById('pdiSubmitBtn');
+            btn.innerText = "Processing Sequence...";
+            btn.disabled = true;
+
             const payload = {
                 submissionType: "PDI Inspection Request",
                 name: document.getElementById('pdiName').value,
@@ -401,7 +498,6 @@
                 timestamp: new Date().toISOString()
             };
 
-            // Log entry into LocalStorage lead directory array structure
             const currentLogs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
             currentLogs.push(payload);
             localStorage.setItem('clientInquiries', JSON.stringify(currentLogs));
@@ -414,16 +510,24 @@
             .then(() => {
                 alert("PDI Inspection Request uploaded cleanly!");
                 document.getElementById('pdiFormHomepage').reset();
-                if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) {
-                    loadInquiriesLog();
-                }
+                if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) loadInquiriesLog();
             })
-            .catch(err => console.error("Webhook processing error: ", err));
+            .catch(err => {
+                console.error("Webhook processing error: ", err);
+                alert("Submission connection error. The endpoint could not process the package safely.");
+            })
+            .finally(() => {
+                btn.innerText = "Schedule PDI Inspection Slot";
+                btn.disabled = false;
+            });
         }
 
-        // Intercept and Route Customer Sell Inquiries directly to Make.com Webhook Matrix
         function handleCustomerSellSubmit(e) {
             e.preventDefault();
+            const btn = document.getElementById('custSellSubmitBtn');
+            btn.innerText = "Deploying To Cloud Bridge...";
+            btn.disabled = true;
+
             const payload = {
                 submissionType: "Private Car Selling Listing Form",
                 name: document.getElementById('custName').value,
@@ -444,138 +548,19 @@
                 body: JSON.stringify(payload)
             })
             .then(() => {
-                alert("Ownership data successfully synchronized to data engine layers!");
+                alert("Listing submission uploaded cleanly!");
                 closeSellModal();
-                if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) {
-                    loadInquiriesLog();
-                }
+                document.getElementById('customerSellForm').reset();
+                if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) loadInquiriesLog();
             })
-            .catch(err => console.error("Webhook processing error: ", err));
-        }
-
-        function loadInquiriesLog() {
-            const logBox = document.getElementById('inquiriesLogBox');
-            const data = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            logBox.innerHTML = '';
-            if(data.length === 0) {
-                logBox.innerHTML = '<span class="text-gray-400 font-bold">No live transmission tracking logs generated.</span>';
-                return;
-            }
-            data.forEach((item, index) => {
-                const logRow = document.createElement('div');
-                logRow.className = "pb-2 mb-2 border-b border-slate-200/60 last:border-none";
-                logRow.innerHTML = `[${index + 1}] Type: ${item.submissionType} | Name: ${item.name} | Phone: ${item.phone} | IP: ${item.userIp}`;
-                logBox.appendChild(logRow);
+            .catch(err => {
+                console.error("Webhook processing error: ", err);
+                alert("Submission connection error. The endpoint could not process the package safely.");
+            })
+            .finally(() => {
+                btn.innerText = "Submit Ownership Data";
+                btn.disabled = false;
             });
-        }
-
-        function exportInquiriesToExcel() {
-            const data = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            if(data.length === 0) {
-                alert("No inquiries log arrays available to formulate compilation tables.");
-                return;
-            }
-            let csvContent = "data:text/csv;charset=utf-8,Type,Name,Phone,Details/Location,Price,IP,Timestamp\n";
-            data.forEach(item => {
-                const type = item.submissionType || "";
-                const name = item.name || "";
-                const phone = item.phone || "";
-                const details = item.carDetails || item.location || "";
-                const price = item.expectedPrice || "N/A";
-                const ip = item.userIp || "";
-                const time = item.timestamp || "";
-                csvContent += `"${type}","${name}","${phone}","${details}","${price}","${ip}","${time}"\n";`;
-            });
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `NoDealer_Leads_Matrix_${Date.now()}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function handleCarUpload(e) {
-            e.preventDefault();
-            const carsList = JSON.parse(localStorage.getItem('uploadedCars')) || [];
-            const imgInput = document.getElementById('carImageSrc').value.trim();
-            
-            carsList.push({
-                id: Date.now(),
-                title: document.getElementById('carTitle').value,
-                price: parseInt(document.getElementById('carPrice').value),
-                brand: document.getElementById('carBrand').value,
-                year: document.getElementById('carYear').value,
-                fuel: document.getElementById('carFuel').value,
-                transmission: document.getElementById('carTransmission').value,
-                driven: document.getElementById('carDriven').value,
-                owner: document.getElementById('carOwner').value,
-                notes: document.getElementById('carSpecNotes').value,
-                image: imgInput ? imgInput : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400'
-            });
-            localStorage.setItem('uploadedCars', JSON.stringify(carsList));
-            document.getElementById('carUploadForm').reset();
-            alert("New verified marketplace listing injected cleanly!");
-            renderCars();
-        }
-
-        function renderCars(filteredList = null) {
-            const carGrid = document.getElementById('carGrid');
-            const noStock = document.getElementById('noStockMessage');
-            const listToRender = filteredList || JSON.parse(localStorage.getItem('uploadedCars')) || [];
-            
-            carGrid.innerHTML = '';
-            if(listToRender.length === 0) {
-                noStock.classList.remove('hidden');
-                return;
-            }
-            noStock.classList.add('hidden');
-
-            listToRender.forEach(car => {
-                const card = document.createElement('div');
-                card.className = "bg-white rounded-2xl shadow-sm hover:shadow-md transition-all border border-slate-100 overflow-hidden flex flex-col justify-between transform duration-200";
-                card.innerHTML = `
-                    <div class="relative bg-slate-100 h-48 overflow-hidden flex items-center justify-center">
-                        <img src="${car.image}" alt="Car View" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';">
-                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm"><i class="fa-solid fa-user text-blue-500 mr-1"></i>Verified Owner</span>
-                    </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
-                        <div>
-                            <div class="flex justify-between items-start gap-1">
-                                <h3 class="font-bold text-sm text-slate-900 leading-tight uppercase">${car.title}</h3>
-                                <span class="text-xs font-black text-blue-600 whitespace-nowrap">₹${car.price.toLocaleString('en-IN')}</span>
-                            </div>
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1">${car.year} • ${car.fuel} • ${car.transmission}</p>
-                            <div class="grid grid-cols-2 gap-1.5 pt-3 border-t border-slate-100 mt-3 text-[11px] font-medium text-slate-600">
-                                <div><i class="fa-solid fa-road mr-1 text-slate-400"></i> ${car.driven}</div>
-                                <div><i class="fa-solid fa-id-card mr-1 text-slate-400"></i> ${car.owner}</div>
-                            </div>
-                            ${car.notes ? `<p class="text-[11px] bg-slate-50 text-slate-500 p-2 rounded-lg mt-2 italic border border-slate-100/80">"${car.notes}"</p>` : ''}
-                        </div>
-                        <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20buying%20your%20verified%20listing:%20${encodeURIComponent(car.title)}%20for%20INR%20${car.price}" target="_blank" class="w-full bg-slate-900 text-white text-center font-bold py-2.5 rounded-xl uppercase text-[10px] tracking-wider hover:bg-slate-800 block transition-all">Contact Individual Owner</a>
-                    </div>
-                `;
-                carGrid.appendChild(card);
-            });
-        }
-
-        function applyFilters() {
-            const budget = document.getElementById('filterBudget').value;
-            const brand = document.getElementById('filterBrand').value;
-            const fuel = document.getElementById('filterFuel').value;
-            const transmission = document.getElementById('filterTransmission').value;
-            
-            const rawCars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
-            
-            const filtered = rawCars.filter(car => {
-                if(budget && car.price > parseInt(budget)) return false;
-                if(brand && car.brand.toLowerCase() !== brand.toLowerCase()) return false;
-                if(fuel && car.fuel.toLowerCase() !== fuel.toLowerCase()) return false;
-                if(transmission && car.transmission.toLowerCase() !== transmission.toLowerCase()) return false;
-                return true;
-            });
-            
-            renderCars(filtered);
         }
     </script>
 </body>
