@@ -16,11 +16,12 @@
 </head>
 <body class="text-slate-800">
 
-    <div id="publicSiteView">
+    <div id="publicSiteView" class="block">
         <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
             <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <img src="logo.jpg" alt="No Dealer Logo" class="h-10 w-auto object-contain">
+                    <img src="logo.jpg" alt="No Dealer Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
+                    <span class="font-black text-xl text-slate-900 uppercase">NO <span class="text-blue-500">Dealer</span></span>
                 </div>
                 <div class="flex items-center space-x-4">
                     <a href="#admin" class="text-xs font-bold text-slate-500 hover:text-slate-900 transition-all">Admin Portal</a>
@@ -46,9 +47,8 @@
     <div id="secureAdminPortal" class="fixed inset-0 bg-slate-950 z-[99999] hidden overflow-y-auto p-4 md:p-8">
         <div class="max-w-6xl mx-auto">
             
-            <div id="adminAuthGateCard" class="max-w-md mx-auto mt-20 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl text-white">
+            <div id="adminAuthGateCard" class="max-w-md mx-auto mt-10 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl text-white">
                 <div class="text-center mb-6">
-                    <img src="logo.jpg" alt="No Dealer Logo" class="h-12 w-auto mx-auto mb-4 object-contain">
                     <h2 class="text-lg font-black uppercase tracking-tight">System Security Gateway</h2>
                     <p class="text-[11px] text-slate-400 mt-1">Please log in to manage secure dealership operations</p>
                 </div>
@@ -67,12 +67,9 @@
 
             <div id="adminWorkspaceMain" class="hidden text-white space-y-8">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-4 gap-4">
-                    <div class="flex items-center gap-4">
-                        <img src="logo.jpg" alt="No Dealer Logo" class="h-10 w-auto object-contain bg-white p-1 rounded-lg">
-                        <div>
-                            <h1 class="text-xl font-black uppercase text-blue-500 tracking-tight">Master Admin Workspace</h1>
-                            <p class="text-xs text-slate-400">Add or manage stock inventory listings and inspect customer vehicle data forms.</p>
-                        </div>
+                    <div>
+                        <h1 class="text-xl font-black uppercase text-blue-500 tracking-tight">Master Admin Workspace</h1>
+                        <p class="text-xs text-slate-400">Add or manage stock inventory listings and inspect customer vehicle data forms.</p>
                     </div>
                     <button onclick="lockAdminConsole()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition-all">Secure Log Out</button>
                 </div>
@@ -82,23 +79,34 @@
                         <h3 id="formModeHeader" class="text-sm font-black uppercase text-emerald-400 mb-4">Upload New Stock Car</h3>
                         <form id="inventoryForm" onsubmit="saveInventoryCar(event)" class="space-y-3 text-slate-900">
                             <input type="hidden" id="editVehicleId" value="">
+                            
                             <input type="text" id="vTitle" required placeholder="Car Name (e.g. Maruti Swift VXI)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
                             <input type="number" id="vPrice" required placeholder="Price in INR (e.g. 450000)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
                             <input type="text" id="vYear" required placeholder="Model Year (e.g. 2021)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
                             <input type="text" id="vDriven" required placeholder="Distance Driven (e.g. 25,000 km)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
                             <input type="text" id="vFuel" required placeholder="Fuel Setup (Petrol / Diesel / CNG)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
                             <input type="text" id="vTrans" required placeholder="Transmission (Manual / Automatic)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
+                            
+                            <input type="text" id="vOwners" required placeholder="Number of Owners (e.g. 1st Owner)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
+                            <input type="text" id="vInsurance" required placeholder="Insurance Validity (e.g. Comprehensive valid till Dec 2026)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
+                            <input type="text" id="vColor" required placeholder="Car Exterior Color (e.g. Pearl White)" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs focus:border-blue-500 focus:outline-none">
+
                             <div class="bg-slate-950 p-2.5 border border-slate-800 rounded-xl">
                                 <label class="block text-[9px] uppercase font-bold text-slate-400 mb-1">Vehicle Image File</label>
                                 <input type="file" id="vPhoto" accept="image/*" onchange="convertAdminPhotoToBase64(this)" class="block w-full text-xs text-slate-400 file:bg-blue-600 file:text-white file:border-0 file:rounded-lg file:px-2 file:py-1 file:mr-2 cursor-pointer">
+                                <div id="photoPreviewContainer" class="mt-2 hidden">
+                                    <span class="text-[9px] text-slate-400 block mb-1">Current Selected Photo:</span>
+                                    <img id="vPhotoPreview" src="" class="h-12 w-20 object-cover rounded border border-slate-700">
+                                </div>
                             </div>
                             <button type="submit" id="formSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all">Deploy Vehicle Live</button>
+                            <button type="button" onclick="clearAdminFormState()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-1.5 rounded-xl text-[11px] uppercase tracking-wider transition-all">Reset Form</button>
                         </form>
                     </div>
 
                     <div class="lg:col-span-7 bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col">
                         <h3 class="text-sm font-black uppercase text-blue-400 mb-4">Active Inventory Listings</h3>
-                        <div class="overflow-x-auto max-h-96">
+                        <div class="overflow-x-auto max-h-[500px]">
                             <table class="w-full text-left text-xs text-slate-300">
                                 <thead class="bg-slate-950 text-slate-400 uppercase text-[10px] font-bold">
                                     <tr>
@@ -214,7 +222,11 @@
         function convertAdminPhotoToBase64(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                reader.onload = (e) => { encodedAdminImageBase64 = e.target.result; };
+                reader.onload = (e) => { 
+                    encodedAdminImageBase64 = e.target.result; 
+                    document.getElementById('vPhotoPreview').src = encodedAdminImageBase64;
+                    document.getElementById('photoPreviewContainer').classList.remove('hidden');
+                };
                 reader.readAsDataURL(input.files[0]);
             }
         }
@@ -247,7 +259,8 @@
                         <img src="${fallbackImg}" class="w-full h-40 object-cover rounded-xl mb-3 border">
                         <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wide">${car.year}</span>
                         <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase">${car.title}</h4>
-                        <p class="text-xs text-gray-500 mb-3">${car.driven} • ${car.fuel} • ${car.trans}</p>
+                        <p class="text-xs text-gray-500 mb-1">${car.driven} • ${car.fuel} • ${car.trans}</p>
+                        <p class="text-[11px] text-slate-400 mb-3">${car.owners || '1st Owner'} • ${car.color || 'N/A'} • Ins: ${car.insurance || 'Active'}</p>
                         <div class="flex justify-between items-center pt-2.5 border-t border-dashed">
                             <div>
                                 <span class="text-[9px] uppercase font-bold text-gray-400 block">Price</span>
@@ -274,13 +287,13 @@
                 tableBody.innerHTML += `
                     <tr class="hover:bg-slate-800/40 transition-colors">
                         <td class="p-3">
-                            <span class="font-bold block text-sm uppercase">${car.title}</span>
-                            <span class="text-[10px] text-slate-400">${car.year} • ${car.driven} • ${car.fuel} • ${car.trans}</span>
+                            <span class="font-bold block text-sm uppercase text-white">${car.title}</span>
+                            <span class="text-[10px] text-slate-400">${car.year} • ${car.driven} • ${car.fuel} • ${car.trans} • ${car.owners || '1st Owner'}</span>
                         </td>
                         <td class="p-3 font-bold text-emerald-400">₹${Number(car.price).toLocaleString('en-IN')}</td>
                         <td class="p-3 text-right space-x-3">
-                            <button onclick="loadCarDataToFields(${car.id})" class="text-blue-400 hover:text-blue-300 font-bold transition-colors">Edit</button>
-                            <button onclick="deleteInventoryCar(${car.id})" class="text-red-400 hover:text-red-300 font-bold transition-colors">Delete</button>
+                            <button type="button" onclick="loadCarDataToFields(${car.id})" class="text-blue-400 hover:text-blue-300 font-bold transition-colors">Edit</button>
+                            <button type="button" onclick="deleteInventoryCar(${car.id})" class="text-red-400 hover:text-red-300 font-bold transition-colors">Delete</button>
                         </td>
                     </tr>
                 `;
@@ -302,8 +315,11 @@
                     cars[idx].driven = document.getElementById('vDriven').value;
                     cars[idx].fuel = document.getElementById('vFuel').value;
                     cars[idx].trans = document.getElementById('vTrans').value;
+                    cars[idx].owners = document.getElementById('vOwners').value;
+                    cars[idx].insurance = document.getElementById('vInsurance').value;
+                    cars[idx].color = document.getElementById('vColor').value;
                     if(encodedAdminImageBase64) cars[idx].image = encodedAdminImageBase64;
-                    alert("Vehicle parameters saved successfully!");
+                    alert("Vehicle parameters updated successfully!");
                 }
             } else {
                 const freshCar = {
@@ -314,6 +330,9 @@
                     driven: document.getElementById('vDriven').value,
                     fuel: document.getElementById('vFuel').value,
                     trans: document.getElementById('vTrans').value,
+                    owners: document.getElementById('vOwners').value,
+                    insurance: document.getElementById('vInsurance').value,
+                    color: document.getElementById('vColor').value,
                     image: encodedAdminImageBase64
                 };
                 cars.push(freshCar);
@@ -338,9 +357,22 @@
             document.getElementById('vDriven').value = target.driven;
             document.getElementById('vFuel').value = target.fuel;
             document.getElementById('vTrans').value = target.trans;
+            document.getElementById('vOwners').value = target.owners || "";
+            document.getElementById('vInsurance').value = target.insurance || "";
+            document.getElementById('vColor').value = target.color || "";
+            
+            if(target.image) {
+                encodedAdminImageBase64 = target.image;
+                document.getElementById('vPhotoPreview').src = target.image;
+                document.getElementById('photoPreviewContainer').classList.remove('hidden');
+            } else {
+                encodedAdminImageBase64 = "";
+                document.getElementById('photoPreviewContainer').classList.add('hidden');
+            }
             
             document.getElementById('formModeHeader').innerText = "Edit Selected Vehicle Parameters";
             document.getElementById('formSubmitBtn').innerText = "Save Data Alterations";
+            document.getElementById('formWorkspaceMain').scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function deleteInventoryCar(id) {
@@ -357,6 +389,8 @@
             document.getElementById('inventoryForm').reset();
             document.getElementById('editVehicleId').value = "";
             encodedAdminImageBase64 = "";
+            document.getElementById('photoPreviewContainer').classList.add('hidden');
+            document.getElementById('vPhotoPreview').src = "";
             document.getElementById('formModeHeader').innerText = "Upload New Stock Car";
             document.getElementById('formSubmitBtn').innerText = "Deploy Vehicle Live";
         }
