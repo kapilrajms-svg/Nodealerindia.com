@@ -3,311 +3,579 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No Dealer | India's Premium Peer-to-Peer Car Marketplace</title>
+    <title>No Dealer - Buy Cars Directly From Owners</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b0f19; color: #f8fafc; }
-        .preloader { position: fixed; inset: 0; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .hidden-layout { display: none !important; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .neon-glow { box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); }
+        body { font-family: 'Open Sans', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Montserrat', sans-serif; }
+        .brand-red { color: #E31E24; }
+        .bg-brand-red { background-color: #E31E24; }
+        .bg-brand-blue { background-color: #1E88E5; }
+        
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+            z-index: 99999; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center;
+            transition: all 0.4s ease-in-out;
+        }
+        .start-btn {
+            background: linear-gradient(145deg, #ef4444, #E31E24);
+            box-shadow: 0 0 30px rgba(227, 30, 36, 0.5);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 25px rgba(227, 30, 36, 0.5); }
+            50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(227, 30, 36, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 25px rgba(227, 30, 36, 0.5); }
+        }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body class="overflow-hidden text-slate-800">
 
-    <div id="preloader" class="preloader transition-all duration-700 ease-in-out">
-        <div class="mb-8 text-center relative">
-            <div class="absolute -inset-1 rounded-full bg-gradient-to-r freom-red-600 to-blue-600 blur opacity-30 animate-pulse"></div>
-            <div class="relative bg-slate-900 p-6 rounded-3xl border border-slate-800">
-                <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=120&q=80" alt="Engine" class="w-20 h-20 object-cover rounded-2xl mx-auto mb-4 border border-slate-700 shadow-xl">
-                <h1 class="text-4xl font-extrabold tracking-tight text-white">NO <span class="text-red-500">DEALER</span></h1>
-                <p class="text-slate-400 tracking-widest uppercase text-[10px] mt-1 font-semibold">Peer-To-Peer Super Engine</p>
+    <div id="preloader">
+        <div class="text-center p-4 max-w-sm flex flex-col items-center w-full">
+            <div class="mb-6 bg-white p-2 rounded-xl shadow-2xl flex items-center justify-center w-28 h-28 overflow-hidden">
+                <img src="logo.jpg" alt="No Dealer Logo" class="max-w-full max-h-full object-contain block" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
             </div>
+            <h2 class="text-white text-2xl font-extrabold tracking-tight font-heading mb-1">NO <span class="text-blue-500">Dealer</span></h2>
+            <p class="text-gray-400 text-[10px] font-semibold tracking-widest uppercase mb-12">Buy Car Directly From Owner's</p>
+            <button onclick="startEngine()" class="start-btn text-white font-heading font-black text-lg w-28 h-28 rounded-full border-4 border-slate-900 flex flex-col items-center justify-center transition-all focus:outline-none active:scale-95">
+                <i class="fa-solid fa-power-off text-xl mb-1"></i>
+                <span class="text-[10px] uppercase tracking-wider">START ENGINE</span>
+            </button>
         </div>
-        <button onclick="startEngine()" class="neon-glow group relative bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-14 rounded-full shadow-lg transition-all transform hover:scale-105 active:scale-95 overflow-hidden">
-            <span class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></span>
-            <i class="fa-solid fa-key mr-2 animate-bounce"></i>START ENGINE
-        </button>
     </div>
 
-    <div id="main-content" class="hidden-layout min-h-screen flex flex-col">
+    <div id="main-content" class="opacity-0 transition-opacity duration-300">
         
-        <header class="glass-card sticky top-0 z-50 border-b border-slate-800 backdrop-blur-md">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="bg-gradient-to-br from-red-500 to-red-700 p-2 rounded-xl shadow-lg">
-                        <i class="fa-solid fa-car-side text-white text-lg"></i>
+        <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+                <a href="#" class="flex items-center gap-3">
+                    <div class="bg-white p-1 rounded shadow-sm w-12 h-12 flex items-center justify-center overflow-hidden border border-gray-100">
+                        <img src="logo.jpg" alt="No Dealer" class="max-w-full max-h-full object-contain block" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
                     </div>
-                    <span class="text-2xl font-black tracking-tight text-white">NO<span class="text-red-500">DEALER</span><span class="text-xs text-slate-400 font-normal ml-1">.com</span></span>
-                </div>
-                
-                <div id="admin-trigger-zone" class="flex items-center gap-3">
-                    <a href="https://wa.me/917838335143" target="_blank" class="bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/30 px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-sm">
-                        <i class="fa-brands fa-whatsapp text-sm"></i> Direct Support
-                    </a>
+                    <div>
+                        <span class="font-black text-xl text-slate-900 block leading-none">NO <span class="text-blue-500">Dealer</span></span>
+                        <span class="text-[9px] uppercase font-bold tracking-tight text-gray-500 block mt-1">100% Peer-to-Peer Car Marketplace</span>
+                    </div>
+                </a>
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button onclick="toggleAdminPanel()" class="bg-slate-800 text-white text-[10px] sm:text-xs font-bold px-3 py-2 rounded-lg shadow hover:bg-slate-900 transition-all"><i class="fa-solid fa-lock mr-1"></i> Admin Dashboard</button>
+                    <a href="https://wa.me/917838335143" target="_blank" class="bg-green-500 text-white text-[10px] sm:text-xs font-bold px-3 py-2 rounded-lg shadow hover:bg-green-600 flex items-center gap-1 transition-all"><i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Support</a>
                 </div>
             </div>
         </header>
 
-        <section class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-center overflow-hidden">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-            <div class="absolute top-20 left-1/3 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
-            
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 mb-6 animate-pulse">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Zero Commissions, Zero Brokers
-            </span>
-            <h2 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-                Buy & Sell Cars Directly <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-400 to-red-600">From Real Owners.</span>
-            </h2>
-            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
-                Skip dealer markups, processing fees, and shady histories. Welcome to India's most secure peer-to-peer automotive network.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button onclick="scrollToSection('inventory')" class="w-full sm:w-auto bg-white text-slate-950 px-8 py-4 rounded-2xl font-bold text-sm shadow-xl hover:bg-slate-200 transition-all flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-magnifying-glass"></i> Browse Live Listings
-                </button>
-                <button onclick="scrollToSection('lead-form-section')" class="w-full sm:w-auto glass-card text-white px-8 py-4 rounded-2xl font-bold text-sm hover:bg-slate-800/60 transition-all border border-slate-700 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-tag text-red-400"></i> List Your Vehicle
-                </button>
-            </div>
-        </section>
+        <section class="bg-gradient-to-b from-white to-slate-50 pt-12 pb-20 border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-bold px-3 py-1.5 rounded-full">
+                        <i class="fa-solid fa-ban"></i> Zero Dealer Brokerage • Absolute Transparency
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-black text-slate-900 uppercase tracking-tight leading-none">
+                        Buy or Sell Cars <br>Directly From <span class="brand-red">Owners</span>
+                    </h1>
+                    <p class="text-gray-600 font-medium text-base md:text-lg max-w-xl">
+                        Skip pushy salesmen, middleman commissions, and hidden dealer markups. Connect safely and directly with individual private car owners across India.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-4 pt-2 max-w-md">
+                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
+                            <i class="fa-solid fa-percent text-blue-500 text-xl mb-1"></i>
+                            <span class="block text-[11px] font-bold uppercase text-slate-700">0% Commission</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
+                            <i class="fa-solid fa-user-shield text-green-500 text-xl mb-1"></i>
+                            <span class="block text-[11px] font-bold uppercase text-slate-700">Real Owners Only</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
+                            <i class="fa-solid fa-shield-virus text-amber-500 text-xl mb-1"></i>
+                            <span class="block text-[11px] font-bold uppercase text-slate-700">100% Verified</span>
+                        </div>
+                    </div>
 
-        <section id="inventory" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-900 bg-slate-950/40 w-full rounded-3xl">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
-                <div>
-                    <h3 class="text-3xl font-bold text-white tracking-tight flex items-center gap-2">
-                        <i class="fa-solid fa-fire text-orange-500 text-2xl"></i> Verified Live Inventory
-                    </h3>
-                    <p class="text-slate-400 text-sm mt-1">Direct verification from background history checks.</p>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all">All Cars</button>
-                    <button class="glass-card text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl hover:bg-slate-800 transition-all">SUVs</button>
-                    <button class="glass-card text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl hover:bg-slate-800 transition-all">Sedans</button>
-                    <button class="glass-card text-slate-300 text-xs font-semibold px-4 py-2 rounded-xl hover:bg-slate-800 transition-all">Luxury</button>
-                </div>
-            </div>
-            
-            <div id="carGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glass-card rounded-2xl overflow-hidden shadow-lg border border-slate-800 group hover:border-slate-700 transition-all">
-                    <div class="relative h-52 bg-slate-900 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=500&q=80" alt="Car" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
-                        <span class="absolute top-3 right-3 bg-slate-900/80 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm border border-emerald-500/20"><i class="fa-solid fa-circle-check mr-1"></i>VERIFIED OWNER</span>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-xl text-white">Chevrolet Corvette V8</h4>
-                        <div class="flex items-center gap-4 my-3 text-xs text-slate-400 font-semibold">
-                            <span><i class="fa-solid fa-road text-slate-500 mr-1"></i> 14,200 km</span>
-                            <span><i class="fa-solid fa-gas-pump text-slate-500 mr-1"></i> Petrol</span>
-                            <span><i class="fa-solid fa-calendar text-slate-500 mr-1"></i> 2022</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-5 pt-4 border-t border-slate-800/60">
-                            <span class="text-2xl font-black text-white">₹54,50,000</span>
-                            <button onclick="alert('Owner connection request routed.')" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md transition-all">Contact Owner</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-card rounded-2xl overflow-hidden shadow-lg border border-slate-800 group hover:border-slate-700 transition-all">
-                    <div class="relative h-52 bg-slate-900 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=500&q=80" alt="Car" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
-                        <span class="absolute top-3 right-3 bg-slate-900/80 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm border border-emerald-500/20"><i class="fa-solid fa-circle-check mr-1"></i>VERIFIED OWNER</span>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-xl text-white">BMW 3 Series M-Sport</h4>
-                        <div class="flex items-center gap-4 my-3 text-xs text-slate-400 font-semibold">
-                            <span><i class="fa-solid fa-road text-slate-500 mr-1"></i> 28,000 km</span>
-                            <span><i class="fa-solid fa-gas-pump text-slate-500 mr-1"></i> Diesel</span>
-                            <span><i class="fa-solid fa-calendar text-slate-500 mr-1"></i> 2021</span>
-                        </div>
-                        <div class="flex justify-between items-center mt-5 pt-4 border-t border-slate-800/60">
-                            <span class="text-2xl font-black text-white">₹38,90,000</span>
-                            <button onclick="alert('Owner connection request routed.')" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md transition-all">Contact Owner</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="lead-form-section" class="max-w-3xl mx-auto px-4 py-20 w-full">
-            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-slate-800/80 shadow-2xl relative overflow-hidden bg-slate-900/40">
-                <div class="absolute -right-20 -bottom-20 w-60 h-60 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-                
-                <h3 class="text-3xl font-black text-white tracking-tight mb-2">Sell Your Vehicle Intelligently</h3>
-                <p class="text-sm text-slate-400 mb-8 font-medium">Input your accurate specifications. Our secure routing matrices forward inquiries straight to prospective buyers without any intermediary listings.</p>
-                
-                <form id="clientLeadForm" onsubmit="submitLead(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="col-span-1">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Your Name</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-user absolute left-4 top-4 text-slate-500 text-sm"></i>
-                            <input type="text" id="leadName" required class="w-full bg-slate-950 border border-slate-800 p-3.5 pl-11 rounded-xl focus:outline-none focus:border-red-500 text-white font-medium transition-all">
-                        </div>
-                    </div>
-                    <div class="col-span-1">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">WhatsApp / Phone Number</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-phone absolute left-4 top-4 text-slate-500 text-sm"></i>
-                            <input type="tel" id="leadPhone" required class="w-full bg-slate-950 border border-slate-800 p-3.5 pl-11 rounded-xl focus:outline-none focus:border-red-500 text-white font-medium transition-all">
-                        </div>
-                    </div>
-                    <div class="col-span-2">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Car Model, Year & Key Features</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-car absolute left-4 top-4 text-slate-500 text-sm"></i>
-                            <input type="text" id="leadCar" placeholder="e.g., Honda City ZX 2022 i-VTEC - Automatic - Sunroof" required class="w-full bg-slate-950 border border-slate-800 p-3.5 pl-11 rounded-xl focus:outline-none focus:border-red-500 text-white font-medium transition-all">
-                        </div>
-                    </div>
-                    <div class="col-span-2 mt-2">
-                        <button type="submit" class="w-full neon-glow bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-extrabold py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5">
-                            Submit Live Listing Request
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <button onclick="scrollToInventory()" class="bg-brand-red text-white text-sm font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-500/20 hover:bg-red-700 transition-all transform active:scale-95">Browse Active Stock</button>
+                        <button onclick="openSellModal()" class="bg-white border border-slate-200 text-slate-800 text-sm font-bold px-8 py-4 rounded-xl shadow-sm hover:bg-slate-50 transition-all transform active:scale-95 flex items-center gap-2">
+                            <i class="fa-solid fa-car brand-red"></i> List Your Car Free
                         </button>
                     </div>
-                </form>
+                </div>
+                <div class="lg:col-span-5 hidden lg:block relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-red-500 rounded-2xl blur-xl opacity-10"></div>
+                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800" class="relative w-full rounded-2xl shadow-xl border border-white" alt="Premium Car Marketplace Showcase">
+                </div>
             </div>
         </section>
 
-        <footer class="mt-auto border-t border-slate-900 bg-slate-950/80 py-6 text-center text-xs text-slate-500 font-semibold">
-            <p>&copy; 2026 No Dealer India. All Rights Reserved. Fully Encrypted Decentralized Channel.</p>
+        <section class="py-16 bg-white border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center max-w-xl mx-auto mb-12">
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 uppercase">How No Dealer Protects You</h2>
+                    <p class="text-gray-500 text-sm mt-2">A secure, simple process built entirely for private car buying and selling.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
+                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">01</span>
+                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-filter text-blue-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-base mb-1 uppercase">Filter Owner Listings</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed">Browse authentic listings uploaded directly by individual owners. Sort by your exact budget, brand choice, and transmission layout.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
+                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">02</span>
+                        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-magnifying-glass-chart text-amber-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-base mb-1 uppercase">Book a PDI Check</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed">Don't guess vehicle health. Request an expert on-site 150+ point Pre-Delivery Inspection to scan for hidden accidents or tamper flags.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
+                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">03</span>
+                        <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-4">
+                            <i class="fa-solid fa-handshake text-green-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-base mb-1 uppercase">Connect & Close Safely</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed">Chat directly with the vehicle owner via secure WhatsApp routing, arrange a safe public test drive, verify papers, and trade seamlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-slate-900 text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.15),transparent_50%)]"></div>
+            <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-amber-500/20">
+                        <i class="fa-solid fa-shield-halved"></i> Buyer Protection Suite
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-black uppercase tracking-tight">Book a Professional 150+ Point PDI Inspection Before Buying</h2>
+                    <p class="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
+                        Never buy a used car blindly. Our mechanics run comprehensive on-site diagnostics tracking engine compression, chassis accidental alignments, electronic faults, repaint thickness levels, and registry validity.
+                    </p>
+                    <ul class="grid sm:grid-cols-2 gap-3 text-xs font-semibold text-gray-200 pt-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400"></i> Engine Diagnostic Error Code Scan</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400"></i> Frame Realignment & Accidental Checks</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400"></i> Odometer Rollback Tracking Scan</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-400"></i> Complete RTO Registration Checklist</li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-5 bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 w-full">
+                    <h3 class="text-lg font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-amber-400">
+                        <i class="fa-solid fa-calendar-check"></i> Secure On-Site Inspection Booking
+                    </h3>
+                    <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3 text-slate-900">
+                        <input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
+                        <input type="tel" id="pdiPhone" required placeholder="Mobile Contact Number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
+                        <input type="text" id="pdiLocation" required placeholder="Vehicle Location (City / Area)" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
+                        <button type="submit" class="w-full bg-amber-500 text-slate-950 font-black py-3.5 rounded-xl uppercase tracking-wider hover:bg-amber-400 transition-all text-xs">
+                            Schedule PDI Inspection Slot
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-16 relative z-20">
+            <div class="bg-brand-blue rounded-2xl p-6 shadow-xl text-white">
+                <h3 class="font-heading font-bold text-base sm:text-xl uppercase mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search Filter Active Stock
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Max Budget (INR)</label>
+                        <select id="filterBudget" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
+                            <option value="">All Budgets</option>
+                            <option value="400000">Under 4 Lakh</option>
+                            <option value="500000">Under 5 Lakh</option>
+                            <option value="600000">Under 6 Lakh</option>
+                            <option value="800000">Under 8 Lakh</option>
+                            <option value="1000000">Under 10 Lakh</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Make / Brand</label>
+                        <select id="filterBrand" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
+                            <option value="">All Brands</option>
+                            <option value="Maruti">Maruti</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Tata">Tata</option>
+                            <option value="Mahindra">Mahindra</option>
+                            <option value="Honda">Honda</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Fuel Type</label>
+                        <select id="filterFuel" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
+                            <option value="">All Fuel Types</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="CNG">CNG</option>
+                            <option value="Diesel">Diesel</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Transmission</label>
+                        <select id="filterTransmission" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
+                            <option value="">All Transmissions</option>
+                            <option value="Manual">Manual</option>
+                            <option value="Automatic">Automatic</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main id="inventoryContainer" class="max-w-7xl mx-auto px-4 py-12">
+            <div class="flex justify-between items-center mb-6 pb-2 border-b border-slate-200">
+                <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">Verified In-Stock Marketplace</h2>
+                <span class="bg-blue-100 text-blue-700 text-xs font-extrabold px-2.5 py-1 rounded-md uppercase">Private Seller Direct</span>
+            </div>
+            
+            <div id="carGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            
+            <div id="noStockMessage" class="text-center p-16 bg-white rounded-2xl shadow-sm border border-slate-100 text-gray-400 font-bold max-w-md mx-auto mt-6">
+                <i class="fa-solid fa-car-tunnel text-4xl mb-3 text-slate-300 block"></i>
+                No vehicles matching this filter layout currently active. Open the Admin dashboard at the top right to easily add vehicle listings.
+            </div>
+        </main>
+
+        <div id="adminPanel" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+                <button onclick="toggleAdminPanel()" class="absolute top-4 right-4 text-gray-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+                
+                <div id="adminAuthPort" class="py-4">
+                    <h3 class="text-xl font-black mb-1 uppercase tracking-tight">Admin Portal Gateway</h3>
+                    <p class="text-gray-500 text-xs mb-4">Enter master access verification PIN to unlock directory additions.</p>
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold uppercase mb-1.5 text-slate-500">Secure Pin Key</label>
+                        <input type="password" id="adminPin" class="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-slate-800 focus:outline-none font-medium" placeholder="Enter Admin PIN">
+                    </div>
+                    <button onclick="verifyAdminAuth()" class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl uppercase text-xs tracking-wider hover:bg-slate-900 transition-all">Unlock Dashboard Controls</button>
+                </div>
+
+                <div id="adminControlsPanel" class="hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-2 border-b border-slate-100 gap-2">
+                        <h3 class="text-lg font-black uppercase text-blue-600 tracking-tight">Active Inquiries Lead Center</h3>
+                        <button onclick="exportInquiriesToExcel()" class="bg-green-600 text-white font-bold px-3 py-2 text-xs rounded-lg hover:bg-green-700 flex items-center gap-1 transition-all"><i class="fa-solid fa-file-excel"></i> Export Leads CSV</button>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-xs uppercase text-slate-400 mb-2 tracking-wider">Live Booking Logs</h4>
+                        <div id="inquiriesLogBox" class="border border-slate-100 rounded-xl bg-slate-50 p-4 max-h-40 overflow-y-auto text-xs space-y-2 font-mono"></div>
+                    </div>
+
+                    <form id="carUploadForm" onsubmit="handleCarUpload(event)" class="space-y-4">
+                        <h4 class="font-bold text-xs uppercase text-slate-400 tracking-wider">Publish New Verified Vehicle Listing</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" id="carTitle" required placeholder="Car Model Title (e.g. Maruti Swift VXI)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="number" id="carPrice" required placeholder="Price in INR (e.g. 480000)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="text" id="carBrand" required placeholder="Brand Brand (e.g. Maruti)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="number" id="carYear" required placeholder="Year (e.g. 2021)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="text" id="carFuel" required placeholder="Fuel (Petrol/CNG/Diesel)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="text" id="carTransmission" required placeholder="Transmission (Manual/Automatic)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="text" id="carDriven" required placeholder="Distance Driven (e.g. 32,000 km)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <input type="text" id="carOwner" required placeholder="Ownership Status (e.g. 1st Owner)" class="border p-2.5 rounded-xl text-sm font-medium">
+                        </div>
+                        <div>
+                            <input type="text" id="carSpecNotes" placeholder="Special Features / Seller Remarks (e.g. Leather Seats, Full Insurance active)" class="w-full border p-2.5 rounded-xl text-sm font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">Local Image File Name (e.g. car1.jpg or leave blank for sample mockup view)</label>
+                            <input type="text" id="carImageSrc" placeholder="car1.jpg" class="w-full border p-2.5 rounded-xl text-sm font-medium">
+                        </div>
+                        <button type="submit" class="w-full bg-brand-blue text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-blue-600 transition-all shadow-lg">Deploy To Live Directory</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="sellModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+            <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+                <button onclick="closeSellModal()" class="absolute top-4 right-4 text-gray-400 hover:text-slate-600 text-2xl font-bold transition-all">&times;</button>
+                <h3 class="text-xl font-black uppercase mb-1 brand-red tracking-tight"><i class="fa-solid fa-file-signature"></i> List Your Private Vehicle</h3>
+                <p class="text-gray-500 text-xs mb-4">Provide parameters to establish active contact records.</p>
+                <form onsubmit="handleCustomerSellSubmit(event)" class="space-y-3">
+                    <input type="text" id="custName" required placeholder="Your Full Name" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
+                    <input type="tel" id="custPhone" required placeholder="Mobile Contact Number" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
+                    <input type="text" id="custCarDetails" required placeholder="Car Make, Model & Year (e.g. Hyundai i20 2018)" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
+                    <input type="number" id="custExpectedPrice" required placeholder="Your Desired Selling Price (INR)" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
+                    <button type="submit" class="w-full bg-green-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all">Submit Ownership Data</button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="bg-white border-t border-slate-200 py-16 px-4">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 text-xs text-gray-500">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <img src="logo.jpg" class="w-10 h-10 object-contain rounded border" alt="Logo" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
+                        <span class="font-black text-slate-800 text-lg tracking-tight">NO DEALER</span>
+                    </div>
+                    <p class="leading-relaxed">India's fully autonomous, brokerage-free direct matching matrix for pre-owned passenger vehicles. 100% middleman-free ecosystem.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold uppercase mb-3 text-slate-800 tracking-wider">Social Channels</h4>
+                    <a href="https://www.instagram.com/nodealer.india/" target="_blank" class="text-blue-500 font-semibold hover:underline flex items-center gap-1"><i class="fa-brands fa-instagram text-base"></i> Instagram Profile</a>
+                </div>
+                <div>
+                    <h4 class="font-bold uppercase mb-3 text-slate-800 tracking-wider">Communications Gateway</h4>
+                    <p class="mb-1">Email: Kapilraj.ms@gmail.com</p>
+                    <p class="font-semibold text-slate-700">Direct Hotline: +91 7838335143</p>
+                </div>
+                <div>
+                    <h4 class="font-bold uppercase mb-3 text-slate-800 tracking-wider">System Core</h4>
+                    <p class="mb-2">&copy; 2026 NoDealer India. Deployment Matrix Locked.</p>
+                    <span class="inline-block bg-slate-100 text-slate-600 font-mono text-[10px] px-2 py-0.5 rounded">v3.0-Production</span>
+                </div>
+            </div>
         </footer>
     </div>
 
-    <div id="adminPanel" class="hidden-layout fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[10000] flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-lg p-8 rounded-3xl shadow-2xl border border-slate-700/60 bg-slate-900">
-            <div class="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
-                <h2 class="text-2xl font-black text-white flex items-center gap-2"><i class="fa-solid fa-shield-halved text-red-500"></i> Secure System Portal</h2>
-                <button onclick="closeAdmin()" class="text-slate-400 hover:text-white transition-all p-1 bg-slate-800 rounded-lg"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            
-            <div class="bg-red-500/10 border border-red-500/20 p-4 rounded-xl mb-6 text-xs text-red-300 font-medium leading-relaxed">
-                <i class="fa-solid fa-circle-exclamation mr-1.5"></i> This administrative console is locked and dynamically displayed strictly on your verified desktop hardware network layer.
-            </div>
-
-            <form id="carForm" onsubmit="addCar(event)" class="space-y-4">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-1"><i class="fa-solid fa-plus mr-1"></i> Add Direct Marketplace Listing</h3>
-                <div>
-                    <input type="text" id="carTitle" placeholder="Vehicle Name & Model (e.g. Audi A4 Premium)" required class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:outline-none focus:border-red-500 text-white text-sm font-medium">
-                </div>
-                <div class="grid grid-cols-3 gap-3">
-                    <input type="text" id="carKM" placeholder="KM (e.g. 12,000)" required class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:outline-none focus:border-red-500 text-white text-sm font-medium">
-                    <input type="text" id="carFuel" placeholder="Fuel (e.g. Petrol)" required class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:outline-none focus:border-red-500 text-white text-sm font-medium">
-                    <input type="text" id="carYear" placeholder="Year (e.g. 2023)" required class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:outline-none focus:border-red-500 text-white text-sm font-medium">
-                </div>
-                <div>
-                    <input type="text" id="carImg" placeholder="Image URL (Leave empty for default showroom image)" class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:outline-none focus:border-red-500 text-white text-sm font-medium">
-                </div>
-                <div>
-                    <input type="number" id="carPrice" placeholder="Final Pricing (INR)" required class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:outline-none focus:border-red-500 text-white text-sm font-medium">
-                </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold text-sm shadow-lg transition-all transform active:scale-95">
-                    Inject Listing Onto Public Grid
-                </button>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // CRITICAL SECURE DISPATCH ENDPOINTS
-        const YOUR_DESKTOP_IP = "182.69.176.207"; 
-        const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts"; 
+        const SYSTEM_MASTER_PIN = "7838"; 
+        const MAKE_WEBHOOK_URL = "https://eu1.make.com/1752826/scenarios/add"; // Connected Make Account Link
+        const CLIENT_IP = "182.69.176.207"; // Embedded dynamic context parameter
 
-        // Secure hardware protocol injection check on load
-        window.onload = function() {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ip === YOUR_DESKTOP_IP) {
-                        const container = document.getElementById('admin-trigger-zone');
-                        const adminBtn = document.createElement('button');
-                        adminBtn.className = "bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-md mr-2";
-                        adminBtn.innerHTML = "<i class='fa-solid fa-gauge-high text-red-500'></i> Admin Console";
-                        adminBtn.onclick = function() { document.getElementById('adminPanel').classList.remove('hidden-layout'); };
-                        container.insertBefore(adminBtn, container.firstChild);
-                    }
-                })
-                .catch(err => console.log("Security handshake initialization cleared."));
-        };
+        if(!localStorage.getItem('uploadedCars')) localStorage.setItem('uploadedCars', JSON.stringify([]));
+        if(!localStorage.getItem('clientInquiries')) localStorage.setItem('clientInquiries', JSON.stringify([]));
 
         function startEngine() {
-            document.getElementById('preloader').style.opacity = '0';
+            document.getElementById('preloader').style.transform = 'translateY(-100%)';
+            document.body.classList.remove('overflow-hidden');
+            
             setTimeout(() => {
                 document.getElementById('preloader').style.display = 'none';
-                document.getElementById('main-content').classList.remove('hidden-layout');
-            }, 600);
+                const mainLayout = document.getElementById('main-content');
+                mainLayout.classList.remove('opacity-0');
+                mainLayout.classList.add('opacity-100');
+                renderCars();
+            }, 400);
         }
 
-        function scrollToSection(id) { 
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); 
-        }
-        
-        function closeAdmin() { 
-            document.getElementById('adminPanel').classList.add('hidden-layout'); 
+        function toggleAdminPanel() {
+            document.getElementById('adminPanel').classList.toggle('hidden');
         }
 
-        // Admin-Exclusive Form Engine: Renders a new car item on the public storefront
-        function addCar(e) {
-            e.preventDefault();
-            const grid = document.getElementById('carGrid');
-            
-            const title = document.getElementById('carTitle').value;
-            const km = document.getElementById('carKM').value;
-            const fuel = document.getElementById('carFuel').value;
-            const year = document.getElementById('carYear').value;
-            let img = document.getElementById('carImg').value;
-            const price = parseInt(document.getElementById('carPrice').value).toLocaleString('en-IN');
-            
-            if(!img) {
-                img = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=80";
+        function openSellModal() {
+            document.getElementById('sellModal').classList.remove('hidden');
+        }
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode == 27) {
+                closeSellModal();
             }
-            
-            const div = document.createElement('div');
-            div.className = "glass-card rounded-2xl overflow-hidden shadow-lg border border-slate-800 group hover:border-slate-700 transition-all";
-            div.innerHTML = `
-                <div class="relative h-52 bg-slate-900 overflow-hidden">
-                    <img src="${img}" alt="Car" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
-                    <span class="absolute top-3 right-3 bg-slate-900/80 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm border border-emerald-500/20"><i class="fa-solid fa-circle-check mr-1"></i>VERIFIED OWNER</span>
-                </div>
-                <div class="p-6">
-                    <h4 class="font-bold text-xl text-white">${title}</h4>
-                    <div class="flex items-center gap-4 my-3 text-xs text-slate-400 font-semibold">
-                        <span><i class="fa-solid fa-road text-slate-500 mr-1"></i> ${km} km</span>
-                        <span><i class="fa-solid fa-gas-pump text-slate-500 mr-1"></i> ${fuel}</span>
-                        <span><i class="fa-solid fa-calendar text-slate-500 mr-1"></i> ${year}</span>
-                    </div>
-                    <div class="flex justify-between items-center mt-5 pt-4 border-t border-slate-800/60">
-                        <span class="text-2xl font-black text-white">₹${price}</span>
-                        <button onclick="alert('Owner connection request routed.')" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md transition-all">Contact Owner</button>
-                    </div>
-                </div>
-            `;
-            
-            grid.insertBefore(div, grid.firstChild);
-            document.getElementById('adminPanel').classList.add('hidden-layout');
-            e.target.reset();
+        };
+
+        function closeSellModal() {
+            document.getElementById('sellModal').classList.add('hidden');
         }
 
-        // Client Form Engine: Pipes inputs securely to Make.com
-        function submitLead(e) {
+        function scrollToInventory() {
+            document.getElementById('inventory-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function verifyAdminAuth() {
+            if(document.getElementById('adminPin').value === SYSTEM_MASTER_PIN) {
+                document.getElementById('adminAuthPort').classList.add('hidden');
+                document.getElementById('adminControlsPanel').classList.remove('hidden');
+                loadInquiriesLog();
+            } else {
+                alert("Incorrect administration unlock credentials.");
+            }
+        }
+
+        // Intercept and Route Homepage PDI Form directly to Make.com Webhook Matrix
+        function handlePdiSubmit(e) {
             e.preventDefault();
-            const leadData = {
-                name: document.getElementById('leadName').value,
-                phone: document.getElementById('leadPhone').value,
-                car: document.getElementById('leadCar').value,
-                timestamp: new Date().toLocaleString('en-IN')
+            const payload = {
+                submissionType: "PDI Inspection Request",
+                name: document.getElementById('pdiName').value,
+                phone: document.getElementById('pdiPhone').value,
+                location: document.getElementById('pdiLocation').value,
+                userIp: CLIENT_IP,
+                timestamp: new Date().toISOString()
             };
 
+            // Log entry into LocalStorage lead directory array structure
+            const currentLogs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            currentLogs.push(payload);
+            localStorage.setItem('clientInquiries', JSON.stringify(currentLogs));
+
             fetch(MAKE_WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(leadData)
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
             })
             .then(() => {
-                alert("Details submitted successfully! Our backend lead sync is live.");
-                e.target.reset();
+                alert("PDI Inspection Request uploaded cleanly!");
+                document.getElementById('pdiFormHomepage').reset();
+                if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) {
+                    loadInquiriesLog();
+                }
             })
-            .catch(() => alert("Submission processing error. Please contact administrative support."));
+            .catch(err => console.error("Webhook processing error: ", err));
+        }
+
+        // Intercept and Route Customer Sell Inquiries directly to Make.com Webhook Matrix
+        function handleCustomerSellSubmit(e) {
+            e.preventDefault();
+            const payload = {
+                submissionType: "Private Car Selling Listing Form",
+                name: document.getElementById('custName').value,
+                phone: document.getElementById('custPhone').value,
+                carDetails: document.getElementById('custCarDetails').value,
+                expectedPrice: document.getElementById('custExpectedPrice').value,
+                userIp: CLIENT_IP,
+                timestamp: new Date().toISOString()
+            };
+
+            const currentLogs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            currentLogs.push(payload);
+            localStorage.setItem('clientInquiries', JSON.stringify(currentLogs));
+
+            fetch(MAKE_WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                alert("Ownership data successfully synchronized to data engine layers!");
+                closeSellModal();
+                if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) {
+                    loadInquiriesLog();
+                }
+            })
+            .catch(err => console.error("Webhook processing error: ", err));
+        }
+
+        function loadInquiriesLog() {
+            const logBox = document.getElementById('inquiriesLogBox');
+            const data = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            logBox.innerHTML = '';
+            if(data.length === 0) {
+                logBox.innerHTML = '<span class="text-gray-400 font-bold">No live transmission tracking logs generated.</span>';
+                return;
+            }
+            data.forEach((item, index) => {
+                const logRow = document.createElement('div');
+                logRow.className = "pb-2 mb-2 border-b border-slate-200/60 last:border-none";
+                logRow.innerHTML = `[${index + 1}] Type: ${item.submissionType} | Name: ${item.name} | Phone: ${item.phone} | IP: ${item.userIp}`;
+                logBox.appendChild(logRow);
+            });
+        }
+
+        function exportInquiriesToExcel() {
+            const data = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            if(data.length === 0) {
+                alert("No inquiries log arrays available to formulate compilation tables.");
+                return;
+            }
+            let csvContent = "data:text/csv;charset=utf-8,Type,Name,Phone,Details/Location,Price,IP,Timestamp\n";
+            data.forEach(item => {
+                const type = item.submissionType || "";
+                const name = item.name || "";
+                const phone = item.phone || "";
+                const details = item.carDetails || item.location || "";
+                const price = item.expectedPrice || "N/A";
+                const ip = item.userIp || "";
+                const time = item.timestamp || "";
+                csvContent += `"${type}","${name}","${phone}","${details}","${price}","${ip}","${time}"\n";`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `NoDealer_Leads_Matrix_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function handleCarUpload(e) {
+            e.preventDefault();
+            const carsList = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+            const imgInput = document.getElementById('carImageSrc').value.trim();
+            
+            carsList.push({
+                id: Date.now(),
+                title: document.getElementById('carTitle').value,
+                price: parseInt(document.getElementById('carPrice').value),
+                brand: document.getElementById('carBrand').value,
+                year: document.getElementById('carYear').value,
+                fuel: document.getElementById('carFuel').value,
+                transmission: document.getElementById('carTransmission').value,
+                driven: document.getElementById('carDriven').value,
+                owner: document.getElementById('carOwner').value,
+                notes: document.getElementById('carSpecNotes').value,
+                image: imgInput ? imgInput : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400'
+            });
+            localStorage.setItem('uploadedCars', JSON.stringify(carsList));
+            document.getElementById('carUploadForm').reset();
+            alert("New verified marketplace listing injected cleanly!");
+            renderCars();
+        }
+
+        function renderCars(filteredList = null) {
+            const carGrid = document.getElementById('carGrid');
+            const noStock = document.getElementById('noStockMessage');
+            const listToRender = filteredList || JSON.parse(localStorage.getItem('uploadedCars')) || [];
+            
+            carGrid.innerHTML = '';
+            if(listToRender.length === 0) {
+                noStock.classList.remove('hidden');
+                return;
+            }
+            noStock.classList.add('hidden');
+
+            listToRender.forEach(car => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl shadow-sm hover:shadow-md transition-all border border-slate-100 overflow-hidden flex flex-col justify-between transform duration-200";
+                card.innerHTML = `
+                    <div class="relative bg-slate-100 h-48 overflow-hidden flex items-center justify-center">
+                        <img src="${car.image}" alt="Car View" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-slate-800 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm"><i class="fa-solid fa-user text-blue-500 mr-1"></i>Verified Owner</span>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex justify-between items-start gap-1">
+                                <h3 class="font-bold text-sm text-slate-900 leading-tight uppercase">${car.title}</h3>
+                                <span class="text-xs font-black text-blue-600 whitespace-nowrap">₹${car.price.toLocaleString('en-IN')}</span>
+                            </div>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mt-1">${car.year} • ${car.fuel} • ${car.transmission}</p>
+                            <div class="grid grid-cols-2 gap-1.5 pt-3 border-t border-slate-100 mt-3 text-[11px] font-medium text-slate-600">
+                                <div><i class="fa-solid fa-road mr-1 text-slate-400"></i> ${car.driven}</div>
+                                <div><i class="fa-solid fa-id-card mr-1 text-slate-400"></i> ${car.owner}</div>
+                            </div>
+                            ${car.notes ? `<p class="text-[11px] bg-slate-50 text-slate-500 p-2 rounded-lg mt-2 italic border border-slate-100/80">"${car.notes}"</p>` : ''}
+                        </div>
+                        <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20buying%20your%20verified%20listing:%20${encodeURIComponent(car.title)}%20for%20INR%20${car.price}" target="_blank" class="w-full bg-slate-900 text-white text-center font-bold py-2.5 rounded-xl uppercase text-[10px] tracking-wider hover:bg-slate-800 block transition-all">Contact Individual Owner</a>
+                    </div>
+                `;
+                carGrid.appendChild(card);
+            });
+        }
+
+        function applyFilters() {
+            const budget = document.getElementById('filterBudget').value;
+            const brand = document.getElementById('filterBrand').value;
+            const fuel = document.getElementById('filterFuel').value;
+            const transmission = document.getElementById('filterTransmission').value;
+            
+            const rawCars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+            
+            const filtered = rawCars.filter(car => {
+                if(budget && car.price > parseInt(budget)) return false;
+                if(brand && car.brand.toLowerCase() !== brand.toLowerCase()) return false;
+                if(fuel && car.fuel.toLowerCase() !== fuel.toLowerCase()) return false;
+                if(transmission && car.transmission.toLowerCase() !== transmission.toLowerCase()) return false;
+                return true;
+            });
+            
+            renderCars(filtered);
         }
     </script>
 </body>
