@@ -255,51 +255,111 @@
 
                 <div id="adminControlsPanel" class="hidden space-y-6">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-2 border-b border-slate-100 gap-2">
-                        <h3 class="text-lg font-black uppercase text-blue-600 tracking-tight">Active Inquiries Lead Center</h3>
-                        <button onclick="exportInquiriesToExcel()" class="bg-green-600 text-white font-bold px-3 py-2 text-xs rounded-lg hover:bg-green-700 flex items-center gap-1 transition-all"><i class="fa-solid fa-file-excel"></i> Export Leads CSV</button>
+                        <h3 class="text-lg font-black uppercase text-blue-600 tracking-tight">Live Inquiries & Lead Center</h3>
+                        <button onclick="exportInquiriesToExcel()" class="bg-green-600 text-white font-bold px-3 py-1.5 text-xs rounded-lg hover:bg-green-700 flex items-center gap-1 transition-all"><i class="fa-solid fa-file-excel"></i> Export CSV</button>
                     </div>
                     
                     <div>
-                        <h4 class="font-bold text-xs uppercase text-slate-400 mb-2 tracking-wider">Live Booking Logs</h4>
-                        <div id="inquiriesLogBox" class="border border-slate-100 rounded-xl bg-slate-50 p-4 max-h-40 overflow-y-auto text-xs space-y-2 font-mono"></div>
+                        <div id="inquiriesLogBox" class="border border-slate-100 rounded-xl bg-slate-50 p-4 max-h-36 overflow-y-auto text-xs space-y-2 font-mono"></div>
                     </div>
 
-                    <form id="carUploadForm" onsubmit="handleCarUpload(event)" class="space-y-4">
-                        <h4 class="font-bold text-xs uppercase text-slate-400 tracking-wider">Publish New Verified Vehicle Listing</h4>
+                    <form id="carUploadForm" onsubmit="handleCarUpload(event)" class="space-y-4 border-t border-slate-100 pt-4">
+                        <h3 class="text-lg font-black uppercase text-slate-900 tracking-tight flex items-center gap-2">
+                            <i class="fa-solid fa-folder-plus text-blue-500"></i> Add Car to Website Inventory
+                        </h3>
+                        <p class="text-xs text-gray-400 -mt-2">Fill this simple form to immediately list a verified vehicle live on the main dashboard grid.</p>
+                        
                         <div class="grid grid-cols-2 gap-3">
-                            <input type="text" id="carTitle" required placeholder="Car Model Title (e.g. Maruti Swift VXI)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="number" id="carPrice" required placeholder="Price in INR (e.g. 480000)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="text" id="carBrand" required placeholder="Brand (e.g. Maruti)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="number" id="carYear" required placeholder="Year (e.g. 2021)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="text" id="carFuel" required placeholder="Fuel (Petrol/CNG/Diesel)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="text" id="carTransmission" required placeholder="Transmission (Manual/Automatic)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="text" id="carDriven" required placeholder="Distance Driven (e.g. 32,000 km)" class="border p-2.5 rounded-xl text-sm font-medium">
-                            <input type="text" id="carOwner" required placeholder="Ownership Status (e.g. 1st Owner)" class="border p-2.5 rounded-xl text-sm font-medium">
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Car Brand & Model</label>
+                                <input type="text" id="carTitle" required placeholder="e.g. Maruti Swift VXI" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Selling Price (INR)</label>
+                                <input type="number" id="carPrice" required placeholder="e.g. 480000" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Brand Category Filter</label>
+                                <input type="text" id="carBrand" required placeholder="e.g. Maruti" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Manufacture Year</label>
+                                <input type="number" id="carYear" required placeholder="e.g. 2021" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Fuel Setup</label>
+                                <input type="text" id="carFuel" required placeholder="Petrol / CNG / Diesel" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Gear Transmission</label>
+                                <input type="text" id="carTransmission" required placeholder="Manual / Automatic" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Total Driven Distance</label>
+                                <input type="text" id="carDriven" required placeholder="e.g. 32,000 km" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Vehicle Color</label>
+                                <input type="text" id="carColorAdmin" required placeholder="e.g. White" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
+                            </div>
                         </div>
                         <div>
-                            <input type="text" id="carSpecNotes" placeholder="Special Features / Seller Remarks (e.g. Leather Seats, Full Insurance active)" class="w-full border p-2.5 rounded-xl text-sm font-medium">
+                            <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Car Image (Paste Any Web Image URL or Local Name)</label>
+                            <input type="text" id="carImageSrc" placeholder="https://images.unsplash.com/... or car1.jpg" class="w-full border p-2.5 rounded-xl text-sm font-medium focus:border-slate-400 focus:outline-none">
                         </div>
-                        <div>
-                            <label class="block text-[12px] font-bold text-slate-500 mb-1">Local Image File Name (e.g. car1.jpg)</label>
-                            <input type="text" id="carImageSrc" placeholder="car1.jpg" class="w-full border p-2.5 rounded-xl text-sm font-medium">
-                        </div>
-                        <button type="submit" class="w-full bg-brand-blue text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-blue-600 transition-all shadow-lg">Deploy To Live Directory</button>
+                        <button type="submit" class="w-full bg-brand-blue text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-blue-600 transition-all shadow-md">Deploy Vehicle onto Live Website</button>
                     </form>
                 </div>
             </div>
         </div>
 
         <div id="sellModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-            <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative">
+            <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative max-h-[95vh] overflow-y-auto">
                 <button onclick="closeSellModal()" class="absolute top-4 right-4 text-gray-400 hover:text-slate-600 text-2xl font-bold transition-all">&times;</button>
-                <h3 class="text-xl font-black uppercase mb-1 brand-red tracking-tight"><i class="fa-solid fa-file-signature"></i> List Your Private Vehicle</h3>
-                <p class="text-gray-500 text-xs mb-4">Provide parameters to establish active contact records.</p>
+                <h3 class="text-xl font-black uppercase mb-1 brand-red tracking-tight"><i class="fa-solid fa-car-on"></i> List Your Private Vehicle</h3>
+                <p class="text-gray-500 text-xs mb-4">Provide exact parameters to establish active contact records.</p>
+                
                 <form id="customerSellForm" onsubmit="handleCustomerSellSubmit(event)" class="space-y-3">
-                    <input type="text" id="custName" required placeholder="Your Full Name" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
-                    <input type="tel" id="custPhone" required placeholder="Mobile Contact Number" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
-                    <input type="text" id="custCarDetails" required placeholder="Car Make, Model & Year (e.g. Hyundai i20 2018)" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
-                    <input type="number" id="custExpectedPrice" required placeholder="Your Desired Selling Price (INR)" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none">
-                    <button type="submit" id="custSellSubmitBtn" class="w-full bg-green-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all">Submit Ownership Data</button>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">1. Full Name</label>
+                        <input type="text" id="custName" required placeholder="Enter your name" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">2. Mobile Contact Number</label>
+                        <input type="tel" id="custPhone" required placeholder="Enter contact number" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">3. Current Location</label>
+                        <input type="text" id="custLocation" required placeholder="e.g. Raipur, Chhattisgarh" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">4. Car Brand</label>
+                            <input type="text" id="custCarBrand" required placeholder="e.g. Hyundai" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">5. Car Model</label>
+                            <input type="text" id="custModel" required placeholder="e.g. i20 Elite" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">6. Registration Year</label>
+                            <input type="number" id="custYear" required placeholder="e.g. 2019" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">7. Car Color</label>
+                            <input type="text" id="custColor" required placeholder="e.g. Polar White" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        </div>
+                    </div>
+
+                    <div class="border-2 border-dashed border-slate-200 rounded-xl p-3 bg-slate-50">
+                        <label class="block text-[10px] font-bold uppercase text-slate-600 mb-1"><i class="fa-solid fa-camera mr-1 text-red-500"></i> 8. Add Car Photos</label>
+                        <input type="file" id="custPhotos" accept="image/*" multiple onchange="handlePhotoAttachmentPreview(this)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-900 cursor-pointer">
+                        
+                        <div id="photoPreviewContainer" class="grid grid-cols-4 gap-2 mt-2 hidden"></div>
+                    </div>
+
+                    <button type="submit" id="custSellSubmitBtn" class="w-full bg-green-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all shadow-md mt-2">Submit Ownership Data</button>
                 </form>
             </div>
         </div>
@@ -334,10 +394,11 @@
     <script>
         const SYSTEM_MASTER_PIN = "7838"; 
         
-        // Live integration endpoint mapped to your custom Make webhook scenario
+        // Active integration endpoint mapped to your custom Make webhook scenario
         const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts"; 
         
         const CLIENT_IP = "182.69.176.207"; 
+        let ATTACHED_BASE64_PHOTOS = []; // Holds customer uploaded car images data safely
 
         if(!localStorage.getItem('uploadedCars')) localStorage.setItem('uploadedCars', JSON.stringify([]));
         if(!localStorage.getItem('clientInquiries')) localStorage.setItem('clientInquiries', JSON.stringify([]));
@@ -373,6 +434,9 @@
 
         function closeSellModal() {
             document.getElementById('sellModal').classList.add('hidden');
+            document.getElementById('photoPreviewContainer').innerHTML = "";
+            document.getElementById('photoPreviewContainer').classList.add('hidden');
+            ATTACHED_BASE64_PHOTOS = [];
         }
 
         function scrollToInventory() {
@@ -386,6 +450,32 @@
                 loadInquiriesLog();
             } else {
                 alert("Incorrect administration unlock credentials.");
+            }
+        }
+
+        // Handle file reader conversions dynamically for customer uploads
+        function handlePhotoAttachmentPreview(input) {
+            const container = document.getElementById('photoPreviewContainer');
+            container.innerHTML = "";
+            ATTACHED_BASE64_PHOTOS = [];
+            
+            if (input.files && input.files.length > 0) {
+                container.classList.remove('hidden');
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        ATTACHED_BASE64_PHOTOS.push(e.target.result); // Save Base64 data image URL
+                        
+                        // Create visual preview node elements
+                        const div = document.createElement('div');
+                        div.className = "relative h-12 w-12 bg-slate-200 rounded-lg overflow-hidden border";
+                        div.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
+                        container.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                container.classList.add('hidden');
             }
         }
 
@@ -410,7 +500,7 @@
                         <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50" alt="${car.title}">
                         <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">${car.year} Model</span>
                         <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase tracking-tight">${car.title}</h4>
-                        <p class="text-xs text-gray-500 font-semibold mb-2">${car.driven} • ${car.fuel} • ${car.transmission}</p>
+                        <p class="text-xs text-gray-500 font-semibold mb-2">${car.driven} • ${car.fuel} • ${car.transmission} • ${car.color || 'N/A'}</p>
                         <div class="flex justify-between items-center pt-2 border-t border-dashed">
                             <div>
                                 <span class="text-[9px] uppercase font-bold text-gray-400 block leading-none">Price Expectation</span>
@@ -423,6 +513,7 @@
             });
         }
 
+        // SIMPLIFIED MANUAL CAR UPLOAD HANDLER
         function handleCarUpload(e) {
             e.preventDefault();
             const newCar = {
@@ -434,8 +525,7 @@
                 fuel: document.getElementById('carFuel').value,
                 transmission: document.getElementById('carTransmission').value,
                 driven: document.getElementById('carDriven').value,
-                owner: document.getElementById('carOwner').value,
-                notes: document.getElementById('carSpecNotes').value,
+                color: document.getElementById('carColorAdmin').value,
                 imageSrc: document.getElementById('carImageSrc').value
             };
 
@@ -443,7 +533,7 @@
             cars.push(newCar);
             localStorage.setItem('uploadedCars', JSON.stringify(cars));
             
-            alert("Vehicle deployed onto live directory!");
+            alert("Vehicle successfully deployed onto website directory inventory!");
             document.getElementById('carUploadForm').reset();
             renderCars();
         }
@@ -468,10 +558,10 @@
         function exportInquiriesToExcel() {
             const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
             if(logs.length === 0) { alert("No leads present to execute export sequence."); return; }
-            let csvContent = "data:text/csv;charset=utf-8,Type,Name,Phone,Context/Details,Timestamp\n";
+            let csvContent = "data:text/csv;charset=utf-8,Type,Name,Phone,Location,Details,Timestamp\n";
             logs.forEach(l => {
-                let detail = l.location ? l.location : l.carDetails;
-                csvContent += `"${l.submissionType}","${l.name}","${l.phone}","${detail}","${l.timestamp}"\n`;
+                let carSummary = l.carBrand ? `${l.carBrand} ${l.carModel} (${l.carYear})` : 'N/A';
+                csvContent += `"${l.submissionType}","${l.name}","${l.phone}","${l.location || 'N/A'}","${carSummary}","${l.timestamp}"\n`;
             });
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
@@ -482,7 +572,6 @@
             document.body.removeChild(link);
         }
 
-        // Network Endpoint Handlers (Sending data out to Make.com Webhook Link)
         function handlePdiSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('pdiSubmitBtn');
@@ -513,8 +602,8 @@
                 if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) loadInquiriesLog();
             })
             .catch(err => {
-                console.error("Webhook processing error: ", err);
-                alert("Submission connection error. The endpoint could not process the package safely.");
+                console.error("Webhook error: ", err);
+                alert("Submission error. The endpoint could not process the package safely.");
             })
             .finally(() => {
                 btn.innerText = "Schedule PDI Inspection Slot";
@@ -522,6 +611,7 @@
             });
         }
 
+        // CLEAN STREAMLINED CUSTOMER SELLING FORM SUBMISSION
         function handleCustomerSellSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('custSellSubmitBtn');
@@ -532,8 +622,13 @@
                 submissionType: "Private Car Selling Listing Form",
                 name: document.getElementById('custName').value,
                 phone: document.getElementById('custPhone').value,
-                carDetails: document.getElementById('custCarDetails').value,
-                expectedPrice: document.getElementById('custExpectedPrice').value,
+                location: document.getElementById('custLocation').value,
+                carBrand: document.getElementById('custCarBrand').value,
+                carModel: document.getElementById('custModel').value,
+                carYear: document.getElementById('custYear').value,
+                carColor: document.getElementById('custColor').value,
+                attachedPhotosCount: ATTACHED_BASE64_PHOTOS.length,
+                attachedPhotosData: ATTACHED_BASE64_PHOTOS, // Sends full list of raw base64 data to Make
                 userIp: CLIENT_IP,
                 timestamp: new Date().toISOString()
             };
@@ -548,13 +643,13 @@
                 body: JSON.stringify(payload)
             })
             .then(() => {
-                alert("Listing submission uploaded cleanly!");
+                alert("Listing submission uploaded cleanly! Your photos and data are on the way.");
                 closeSellModal();
                 document.getElementById('customerSellForm').reset();
                 if(!document.getElementById('adminControlsPanel').classList.contains('hidden')) loadInquiriesLog();
             })
             .catch(err => {
-                console.error("Webhook processing error: ", err);
+                console.error("Webhook submission error: ", err);
                 alert("Submission connection error. The endpoint could not process the package safely.");
             })
             .finally(() => {
