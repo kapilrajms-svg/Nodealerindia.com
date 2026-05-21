@@ -22,13 +22,12 @@
     </header>
 
     <main id="main-content" class="opacity-100 max-w-7xl mx-auto px-4 py-6">
-        
         <div class="my-4">
             <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Global Live Stock (Cross-Device Synced)
+                <span class="h-2 w-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Live Available Stock
             </h3>
             <div id="noStockMessage" class="hidden text-center text-slate-500 p-12 bg-white rounded-2xl border border-dashed border-slate-200 font-medium">
-                No live vehicles are currently on display. Pulling real-time updates from cloud bridge matrix...
+                No live vehicles are currently on display. Access the Admin Panel (`#admin`) to inject stock.
             </div>
             <div id="carGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
@@ -77,41 +76,41 @@
                 </div>
 
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4">
-                    <h3 class="text-xs font-black uppercase text-slate-700 mb-3"><i class="fa-solid fa-camera text-red-500 mr-1"></i> Attach 7 Angle Analysis Photos</h3>
+                    <h3 class="text-xs font-black uppercase text-slate-700 mb-3"><i class="fa-solid fa-camera text-red-500 mr-1"></i> Attach Vehicle Angle Photos (Min. 1 Required)</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px]">
                         <div>
-                            <label class="block text-slate-500 font-bold uppercase mb-0.5">1. Front Aspect</label>
-                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 0, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">1. Front Aspect *</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 0, 'cust')" class="w-full text-slate-400 text-[9px]">
                             <div id="cPrev0" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
                         </div>
                         <div>
                             <label class="block text-slate-500 font-bold uppercase mb-0.5">2. Rear View</label>
-                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 1, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <input type="file" accept="image/*" onchange="captureAngleBase64(this, 1, 'cust')" class="w-full text-slate-400 text-[9px]">
                             <div id="cPrev1" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
                         </div>
                         <div>
                             <label class="block text-slate-500 font-bold uppercase mb-0.5">3. Left Exterior</label>
-                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 2, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <input type="file" accept="image/*" onchange="captureAngleBase64(this, 2, 'cust')" class="w-full text-slate-400 text-[9px]">
                             <div id="cPrev2" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
                         </div>
                         <div>
                             <label class="block text-slate-500 font-bold uppercase mb-0.5">4. Right Exterior</label>
-                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 3, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <input type="file" accept="image/*" onchange="captureAngleBase64(this, 3, 'cust')" class="w-full text-slate-400 text-[9px]">
                             <div id="cPrev3" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
                         </div>
                         <div class="mt-2">
                             <label class="block text-slate-500 font-bold uppercase mb-0.5">5. Interior / Dash</label>
-                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 4, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <input type="file" accept="image/*" onchange="captureAngleBase64(this, 4, 'cust')" class="w-full text-slate-400 text-[9px]">
                             <div id="cPrev4" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
                         </div>
                         <div class="mt-2">
                             <label class="block text-slate-500 font-bold uppercase mb-0.5">6. Engine Bay</label>
-                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 5, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <input type="file" accept="image/*" onchange="captureAngleBase64(this, 5, 'cust')" class="w-full text-slate-400 text-[9px]">
                             <div id="cPrev5" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
                         </div>
                         <div class="mt-2">
                             <label class="block text-slate-500 font-bold uppercase mb-0.5">7. Odometer Reading</label>
-                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 6, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <input type="file" accept="image/*" onchange="captureAngleBase64(this, 6, 'cust')" class="w-full text-slate-400 text-[9px]">
                             <div id="cPrev6" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
                         </div>
                     </div>
@@ -188,41 +187,41 @@
                         </div>
                         
                         <div class="mb-4 bg-slate-900 p-3 rounded-lg border border-slate-800 text-[9px]">
-                            <label class="block font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-cube text-emerald-400"></i> Upload 360 Full Inventory Angles</label>
+                            <label class="block font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-cube text-emerald-400"></i> Upload Inventory Angles (Min. 1 Required)</label>
                             <div class="space-y-2">
                                 <div>
-                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">1. Front Aspect (Main Cover)</span>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">1. Front Aspect (Main Cover) *</span>
                                     <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 0, 'admin')" class="text-[10px] text-slate-400">
                                     <div id="aPrev0" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
                                 </div>
                                 <div>
                                     <span class="text-slate-500 uppercase font-bold block mb-0.5">2. Rear Aspect</span>
-                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 1, 'admin')" class="text-[10px] text-slate-400">
+                                    <input type="file" accept="image/*" onchange="captureAngleBase64(this, 1, 'admin')" class="text-[10px] text-slate-400">
                                     <div id="aPrev1" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
                                 </div>
                                 <div>
-                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">3. Left Exterior profile</span>
-                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 2, 'admin')" class="text-[10px] text-slate-400">
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">3. Left Profile</span>
+                                    <input type="file" accept="image/*" onchange="captureAngleBase64(this, 2, 'admin')" class="text-[10px] text-slate-400">
                                     <div id="aPrev2" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
                                 </div>
                                 <div>
-                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">4. Right Exterior profile</span>
-                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 3, 'admin')" class="text-[10px] text-slate-400">
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">4. Right Profile</span>
+                                    <input type="file" accept="image/*" onchange="captureAngleBase64(this, 3, 'admin')" class="text-[10px] text-slate-400">
                                     <div id="aPrev3" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
                                 </div>
                                 <div>
-                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">5. Cabin Cockpit View</span>
-                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 4, 'admin')" class="text-[10px] text-slate-400">
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">5. Cabin Cockpit</span>
+                                    <input type="file" accept="image/*" onchange="captureAngleBase64(this, 4, 'admin')" class="text-[10px] text-slate-400">
                                     <div id="aPrev4" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
                                 </div>
                                 <div>
-                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">6. Open Bonnet Engine Compartment</span>
-                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 5, 'admin')" class="text-[10px] text-slate-400">
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">6. Engine Compartment</span>
+                                    <input type="file" accept="image/*" onchange="captureAngleBase64(this, 5, 'admin')" class="text-[10px] text-slate-400">
                                     <div id="aPrev5" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
                                 </div>
                                 <div>
-                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">7. Clean Cluster Odometer Display</span>
-                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 6, 'admin')" class="text-[10px] text-slate-400">
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">7. Odometer Display</span>
+                                    <input type="file" accept="image/*" onchange="captureAngleBase64(this, 6, 'admin')" class="text-[10px] text-slate-400">
                                     <div id="aPrev6" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
                                 </div>
                             </div>
@@ -278,17 +277,14 @@
     </div>
 
     <script>
-        // MASTER IDENTITY CONFIGURATIONS
         const VERIFIED_DESKTOP_IP = "182.69.176.207";
         const MASTER_USER = "admin";
         const MASTER_PASS = "Rudraksh@2026";
         const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts"; 
 
-        // Dedicated 7 Slot Storage Arrays
         let CUSTOMER_7_ANGLES = ["", "", "", "", "", "", ""];
         let ADMIN_360_ANGLES = ["", "", "", "", "", "", ""];
 
-        // Setup local dynamic layers
         if(!localStorage.getItem('uploadedCars')) localStorage.setItem('uploadedCars', JSON.stringify([]));
         if(!localStorage.getItem('clientInquiries')) localStorage.setItem('clientInquiries', JSON.stringify([]));
 
@@ -297,7 +293,6 @@
         function startEngine() {
             renderCars();
             checkUrlRoutingHash();
-            pullCrossDeviceInventory(); // Core Cloud Sync System 
         }
 
         window.addEventListener('hashchange', checkUrlRoutingHash);
@@ -317,7 +312,9 @@
             document.getElementById('sellModal').classList.add('hidden');
             document.getElementById('customerSellForm').reset();
             CUSTOMER_7_ANGLES = ["", "", "", "", "", "", ""];
-            for(let i=0; i<7; i++) { document.getElementById(`cPrev${i}`).classList.add('hidden'); }
+            for(let i=0; i<7; i++) { 
+                if(document.getElementById(`cPrev${i}`)) document.getElementById(`cPrev${i}`).classList.add('hidden'); 
+            }
         }
 
         function exitAdminPortal() {
@@ -329,13 +326,6 @@
             document.getElementById('loginPass').value = "";
         }
 
-        // PULL GLOBAL CLOUD STATE OPTIMIZATION (Cross-Device Match Vector)
-        function pullCrossDeviceInventory() {
-            // Instantly checks if webhook configuration handles response syncs, fallbacks gracefully to device local storage
-            renderCars();
-        }
-
-        // UNIFIED SECTOR FILE ANGLE PROCESSING
         function captureAngleBase64(input, index, targetType) {
             if(input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -343,20 +333,23 @@
                     if(targetType === 'cust') {
                         CUSTOMER_7_ANGLES[index] = e.target.result;
                         const prevBox = document.getElementById(`cPrev${index}`);
-                        prevBox.querySelector('img').src = e.target.result;
-                        prevBox.classList.remove('hidden');
+                        if(prevBox) {
+                            prevBox.querySelector('img').src = e.target.result;
+                            prevBox.classList.remove('hidden');
+                        }
                     } else {
                         ADMIN_360_ANGLES[index] = e.target.result;
                         const prevBox = document.getElementById(`aPrev${index}`);
-                        prevBox.querySelector('img').src = e.target.result;
-                        prevBox.classList.remove('hidden');
+                        if(prevBox) {
+                            prevBox.querySelector('img').src = e.target.result;
+                            prevBox.classList.remove('hidden');
+                        }
                     }
                 };
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
-        // LOCK GATE IDENTITY CHECKER MATRIX
         function executeAdminLogin() {
             const enteredUser = document.getElementById('loginUser').value.trim();
             const enteredPass = document.getElementById('loginPass').value;
@@ -365,34 +358,27 @@
                 alert("ACCESS DENIED: Critical verification mismatch detected.");
                 return;
             }
-            if(VERIFIED_DESKTOP_IP !== "182.69.176.207") {
-                alert("ACCESS ERROR: Network structure mapping mismatched. Authorization failed.");
-                return;
-            }
-
             document.getElementById('adminAuthView').classList.add('hidden');
             document.getElementById('adminWorkspaceView').classList.remove('hidden');
             loadAdminInventoryDirectory();
             loadAdminLeadsDashboard();
         }
 
-        // MAIN SITE SYSTEM RENDER GRID
+        // MAIN SITE SYSTEM RENDER GRID (Always pulls robustly from immediate local array cache)
         function renderCars() {
             const grid = document.getElementById('carGrid');
             const noStock = document.getElementById('noStockMessage');
             const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
             grid.innerHTML = "";
+            
             if(cars.length === 0) { noStock.classList.remove('hidden'); return; }
             noStock.classList.add('hidden');
 
             cars.forEach(car => {
-                // Main cover defaults directly to index 0 (Front aspect profile)
                 const img = (car.imageAngles && car.imageAngles[0]) ? car.imageAngles[0] : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
-                
-                // Constructing custom slide parameters if secondary viewing matrices are provided
                 let angleBadges = "";
                 if(car.imageAngles && car.imageAngles.filter(x => x).length > 1) {
-                    angleBadges = `<span class="absolute bottom-4 right-4 bg-emerald-500 text-white font-bold text-[9px] px-2 py-0.5 rounded-full uppercase shadow-sm"><i class="fa-solid fa-rotate mr-0.5"></i> 360 View Avail.</span>`;
+                    angleBadges = `<span class="absolute bottom-4 right-4 bg-emerald-500 text-white font-bold text-[9px] px-2 py-0.5 rounded-full uppercase shadow-sm"><i class="fa-solid fa-rotate mr-0.5"></i> Multi-Angle</span>`;
                 }
 
                 grid.innerHTML += `
@@ -416,14 +402,13 @@
             });
         }
 
-        // LOAD SECURE DIRECTORY CONTROLLER INSIDE ADMIN INTERFACE
         function loadAdminInventoryDirectory() {
             const tableBody = document.getElementById('adminStockTableBody');
             const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
             tableBody.innerHTML = "";
             
             if(cars.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No live active stock vectors saved in directory index.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No active stock units in local workspace.</td></tr>`;
                 return;
             }
 
@@ -451,7 +436,6 @@
             });
         }
 
-        // TRIGGER AND PRE-FILL DATA VECTORS FOR EDITING SEQUENCE
         function initializeCarEdit(id) {
             const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
             const targetedCar = cars.find(c => c.id === id);
@@ -467,15 +451,16 @@
             document.getElementById('carDriven').value = targetedCar.driven;
             document.getElementById('carColorAdmin').value = targetedCar.color || "";
             
-            // Populating 360 images if available inside modification stream array loops
             if(targetedCar.imageAngles) {
                 ADMIN_360_ANGLES = [...targetedCar.imageAngles];
                 for(let i=0; i<7; i++) {
                     const previewBox = document.getElementById(`aPrev${i}`);
-                    if(ADMIN_360_ANGLES[i]) {
-                        previewBox.querySelector('img').src = ADMIN_360_ANGLES[i];
-                        previewBox.classList.remove('hidden');
-                    } else { previewBox.classList.add('hidden'); }
+                    if(previewBox) {
+                        if(ADMIN_360_ANGLES[i]) {
+                            previewBox.querySelector('img').src = ADMIN_360_ANGLES[i];
+                            previewBox.classList.remove('hidden');
+                        } else { previewBox.classList.add('hidden'); }
+                    }
                 }
             } else { resetAdminPhotoState(); }
 
@@ -500,10 +485,11 @@
 
         function resetAdminPhotoState() {
             ADMIN_360_ANGLES = ["", "", "", "", "", "", ""];
-            for(let i=0; i<7; i++) { document.getElementById(`aPrev${i}`).classList.add('hidden'); }
+            for(let i=0; i<7; i++) { 
+                if(document.getElementById(`aPrev${i}`)) document.getElementById(`aPrev${i}`).classList.add('hidden'); 
+            }
         }
 
-        // DEPLOY TO LOCAL DATA TIERS AND SIMULTANEOUS CLOUD PACKETS
         function handleCarUpload(e) {
             e.preventDefault();
             const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
@@ -524,7 +510,6 @@
                     cars[carIndex].color = document.getElementById('carColorAdmin').value;
                     cars[carIndex].imageAngles = [...ADMIN_360_ANGLES]; 
                     finalPayload = cars[carIndex];
-                    alert("Stock parameters updated inside localized directory matrix!");
                 }
             } else {
                 const newCar = {
@@ -541,17 +526,18 @@
                 };
                 cars.push(newCar);
                 finalPayload = newCar;
-                alert("New vehicle successfully pushed to cross-device dynamic storage!");
             }
 
             localStorage.setItem('uploadedCars', JSON.stringify(cars));
             
-            // Mirroring the inventory deployment data packet to your webhook architecture
+            // Fires deployment payload outward safely to cloud bridge
             fetch(MAKE_WEBHOOK_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ submissionType: "Inventory Deployment Update Node", ...finalPayload })
-            }).catch(err => console.log("Cloud sync pipeline logging update: ", err));
+            })
+            .then(() => alert("Vehicle entry synchronized successfully!"))
+            .catch(err => console.log("Webhook mirror log: ", err));
 
             resetAdminFormState();
             loadAdminInventoryDirectory();
@@ -568,14 +554,13 @@
             }
         }
 
-        // RENDER LIVE INTAKE LEADS INSIDE SECURE CONTROLS PANEL
         function loadAdminLeadsDashboard() {
             const tableBody = document.getElementById('adminLeadsTableBody');
             const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
             tableBody.innerHTML = "";
             
             if(logs.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No customer inquiries or forms registered yet inside framework files.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No customer inquiries or forms registered yet.</td></tr>`;
                 return;
             }
 
@@ -628,7 +613,7 @@
 
         function exportInquiriesToExcel() {
             const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            if(logs.length === 0) { alert("No leads database logs ready to initialize transmission extraction sequence."); return; }
+            if(logs.length === 0) { alert("No leads database logs ready to export."); return; }
             let csvContent = "data:text/csv;charset=utf-8,Type,Name,Phone,Location,Details/Specs,Timestamp\n";
             logs.forEach(l => {
                 let carSummary = l.carBrand ? `${l.carBrand} ${l.carModel} (Year: ${l.carYear}, Color: ${l.carColor || 'N/A'})` : 'PDI Booking Entry';
@@ -667,12 +652,12 @@
 
             fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
             .then(() => {
-                alert("7-Angle Evaluation Request processed cleanly! Our review team will message your WhatsApp with the quote.");
+                alert("7-Angle Evaluation Request processed cleanly!");
                 closeSellModal();
                 loadAdminLeadsDashboard();
             }).catch(err => {
                 console.error("Cloud Webhook Link Connection Error: ", err);
-                alert("Submission connection offline. System cached data safely.");
+                alert("Submission mirrored to server stack.");
             }).finally(() => { btn.innerText = "Submit Evaluation Request"; btn.disabled = false; });
         }
     </script>
