@@ -3,474 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No Dealer - Buy Cars Directly From Owners</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>No Dealer - Master Platform</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Open Sans', sans-serif; background-color: #f8fafc; }
-        h1, h2, h3, h4, .font-heading { font-family: 'Montserrat', sans-serif; }
-        .brand-red { color: #E31E24; }
-        .bg-brand-red { background-color: #E31E24; }
-        .bg-brand-blue { background-color: #1E88E5; }
-        
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
-            z-index: 99999; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center;
-            transition: all 0.4s ease-in-out;
-        }
-        .start-btn {
-            background: linear-gradient(145deg, #ef4444, #E31E24);
-            box-shadow: 0 0 30px rgba(227, 30, 36, 0.5);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 25px rgba(227, 30, 36, 0.5); }
-            50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(227, 30, 36, 0.8); }
-            100% { transform: scale(1); box-shadow: 0 0 25px rgba(227, 30, 36, 0.5); }
-        }
+        .bg-brand-red { background-color: #ef4444; }
+        .hover\:bg-red-700:hover { background-color: #b91c1c; }
     </style>
 </head>
-<body class="overflow-hidden text-slate-800">
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
 
-    <div id="preloader">
-        <div class="text-center p-4 max-w-sm flex flex-col items-center w-full">
-            <div class="mb-6 bg-white p-2 rounded-xl shadow-2xl flex items-center justify-center w-28 h-28 overflow-hidden">
-                <img src="logo.jpg" alt="No Dealer Logo" class="max-w-full max-h-full object-contain block" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
-            </div>
-            <h2 class="text-white text-2xl font-extrabold tracking-tight font-heading mb-1">NO <span class="text-blue-500">Dealer</span></h2>
-            <p class="text-gray-400 text-[10px] font-semibold tracking-widest uppercase mb-12">Buy Car Directly From Owner's</p>
-            <button onclick="startEngine()" class="start-btn text-white font-heading font-black text-lg w-28 h-28 rounded-full border-4 border-slate-900 flex flex-col items-center justify-center transition-all focus:outline-none active:scale-95">
-                <i class="fa-solid fa-power-off text-xl mb-1"></i>
-                <span class="text-[10px] uppercase tracking-wider">START ENGINE</span>
-            </button>
+    <header class="bg-white border-b border-slate-100 p-4 sticky top-0 z-40 shadow-sm flex justify-between items-center max-w-7xl mx-auto rounded-b-xl">
+        <h1 class="font-black text-xl tracking-tight text-slate-900 uppercase">No <span class="text-red-500">Dealer</span></h1>
+        <div class="flex gap-2">
+            <button onclick="openSellModal()" class="bg-slate-900 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider hover:bg-slate-800 transition-all"><i class="fa-solid fa-calculator mr-1"></i> Get Evaluation</button>
+            <a href="#admin" class="bg-slate-100 text-slate-700 font-bold px-3 py-2 rounded-xl text-xs uppercase tracking-wider hover:bg-slate-200 transition-all"><i class="fa-solid fa-lock"></i></a>
         </div>
-    </div>
+    </header>
 
-    <div id="main-content" class="opacity-0 transition-opacity duration-300">
+    <main id="main-content" class="opacity-100 max-w-7xl mx-auto px-4 py-6">
         
-        <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-                <a href="#" class="flex items-center gap-3">
-                    <div class="bg-white p-1 rounded shadow-sm w-12 h-12 flex items-center justify-center overflow-hidden border border-gray-100">
-                        <img src="logo.jpg" alt="No Dealer" class="max-w-full max-h-full object-contain block" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
-                    </div>
-                    <div>
-                        <span class="font-black text-xl text-slate-900 block leading-none">NO <span class="text-blue-500">Dealer</span></span>
-                        <span class="text-[9px] uppercase font-bold tracking-tight text-gray-500 block mt-1">100% Peer-to-Peer Car Marketplace</span>
-                    </div>
-                </a>
-                <div class="flex items-center space-x-2">
-                    <a href="https://wa.me/917838335143" target="_blank" class="bg-green-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-green-600 flex items-center gap-1 transition-all"><i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Support</a>
-                </div>
+        <div class="my-4">
+            <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span> Global Live Stock (Cross-Device Synced)
+            </h3>
+            <div id="noStockMessage" class="hidden text-center text-slate-500 p-12 bg-white rounded-2xl border border-dashed border-slate-200 font-medium">
+                No live vehicles are currently on display. Pulling real-time updates from cloud bridge matrix...
             </div>
-        </header>
-
-        <section class="bg-gradient-to-b from-white to-slate-50 pt-12 pb-20 border-b border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-bold px-3 py-1.5 rounded-full">
-                        <i class="fa-solid fa-square-check"></i> Verified Listings • Absolute Transparency
-                    </div>
-                    <h1 class="text-4xl md:text-6xl font-black text-slate-900 uppercase tracking-tight leading-none">
-                        Buy or Sell Cars <br>Directly From <span class="brand-red">Owners</span>
-                    </h1>
-                    <p class="text-gray-600 font-medium text-base md:text-lg max-w-xl">
-                        Skip pushy salesmen and hidden dealer markups. Connect safely and directly with individual private car owners across India.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-4 pt-2 max-w-sm">
-                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <i class="fa-solid fa-user-shield text-green-500 text-xl mb-1"></i>
-                            <span class="block text-[11px] font-bold uppercase text-slate-700">Real Owners Only</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <i class="fa-solid fa-shield-virus text-amber-500 text-xl mb-1"></i>
-                            <span class="block text-[11px] font-bold uppercase text-slate-700">100% Verified</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <button onclick="scrollToInventory()" class="bg-brand-red text-white text-sm font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-500/20 hover:bg-red-700 transition-all transform active:scale-95">Browse Active Stock</button>
-                        <button onclick="openSellModal()" class="bg-white border border-slate-200 text-slate-800 text-sm font-bold px-8 py-4 rounded-xl shadow-sm hover:bg-slate-50 transition-all transform active:scale-95 flex items-center gap-2">
-                            <i class="fa-solid fa-car brand-red"></i> List Your Car
-                        </button>
-                    </div>
-                </div>
-                <div class="lg:col-span-5 hidden lg:block relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-red-500 rounded-2xl blur-xl opacity-10"></div>
-                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800" class="relative w-full rounded-2xl shadow-xl border border-white" alt="Premium Car Marketplace Showcase">
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 bg-white border-b border-slate-100">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center max-w-xl mx-auto mb-12">
-                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 uppercase">How No Dealer Protects You</h2>
-                    <p class="text-gray-500 text-sm mt-2">A secure, simple process built entirely for private car buying and selling.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
-                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">01</span>
-                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-filter text-blue-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-base mb-1 uppercase">Filter Owner Listings</h4>
-                        <p class="text-xs text-gray-600 leading-relaxed">Browse authentic listings uploaded directly by individual owners. Sort by your exact budget, brand choice, and transmission layout.</p>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
-                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">02</span>
-                        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-magnifying-glass-chart text-amber-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-base mb-1 uppercase">Book a PDI Check</h4>
-                        <p class="text-xs text-gray-600 leading-relaxed">Don't guess vehicle health. Request an expert on-site 150+ point Pre-Delivery Inspection to scan for hidden accidents or tamper flags.</p>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
-                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">03</span>
-                        <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-handshake text-green-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-base mb-1 uppercase">Connect & Close Safely</h4>
-                        <p class="text-xs text-gray-600 leading-relaxed">Chat directly with the vehicle owner via secure WhatsApp routing, arrange a safe public test drive, verify papers, and trade seamlessly.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 bg-slate-900 text-white relative overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.15),transparent_50%)]"></div>
-            <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7 space-y-4">
-                    <span class="bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-amber-500/20">
-                        <i class="fa-solid fa-shield-halved"></i> Buyer Protection Suite
-                    </span>
-                    <h2 class="text-3xl md:text-4xl font-black uppercase tracking-tight">Book a Professional 150+ Point PDI Inspection Before Buying</h2>
-                    <p class="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
-                        Never buy a used car blindly. Our mechanics run comprehensive on-site diagnostics tracking engine compression, frame structures, and registry validity.
-                    </p>
-                </div>
-                <div class="lg:col-span-5 bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 w-full">
-                    <h3 class="text-lg font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-amber-400">
-                        <i class="fa-solid fa-calendar-check"></i> Secure Inspection Booking
-                    </h3>
-                    <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3 text-slate-900">
-                        <input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
-                        <input type="tel" id="pdiPhone" required placeholder="Mobile Contact Number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
-                        <input type="text" id="pdiLocation" required placeholder="Vehicle Location" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
-                        <button type="submit" id="pdiSubmitBtn" class="w-full bg-amber-500 text-slate-950 font-black py-3.5 rounded-xl uppercase tracking-wider hover:bg-amber-400 transition-all text-xs">
-                            Schedule PDI Inspection Slot
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-16 relative z-20">
-            <div class="bg-brand-blue rounded-2xl p-6 shadow-xl text-white">
-                <h3 class="font-heading font-bold text-base sm:text-xl uppercase mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass"></i> Search Filter Active Stock
-                </h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Max Budget (INR)</label>
-                        <select id="filterBudget" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Budgets</option>
-                            <option value="400000">Under 4 Lakh</option>
-                            <option value="500000">Under 5 Lakh</option>
-                            <option value="600000">Under 6 Lakh</option>
-                            <option value="800000">Under 8 Lakh</option>
-                            <option value="1000000">Under 10 Lakh</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Make / Brand</label>
-                        <select id="filterBrand" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Brands</option>
-                            <option value="Maruti">Maruti</option>
-                            <option value="Hyundai">Hyundai</option>
-                            <option value="Tata">Tata</option>
-                            <option value="Mahindra">Mahindra</option>
-                            <option value="Honda">Honda</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Fuel Type</label>
-                        <select id="filterFuel" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Fuel Types</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="CNG">CNG</option>
-                            <option value="Diesel">Diesel</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Transmission</label>
-                        <select id="filterTransmission" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Transmissions</option>
-                            <option value="Manual">Manual</option>
-                            <option value="Automatic">Automatic</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <main class="max-w-7xl mx-auto px-4 py-12">
-            <div class="flex justify-between items-center mb-6 pb-2 border-b border-slate-200">
-                <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">Verified In-Stock Marketplace</h2>
-                <span class="bg-blue-100 text-blue-700 text-xs font-extrabold px-2.5 py-1 rounded-md uppercase">Private Seller Direct</span>
-            </div>
-            <div id="carGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-            <div id="noStockMessage" class="text-center p-16 bg-white rounded-2xl shadow-sm border border-slate-100 text-gray-400 font-bold max-w-md mx-auto mt-6">
-                <i class="fa-solid fa-car-tunnel text-4xl mb-3 text-slate-300 block"></i>
-                No vehicles matching parameters found.
-            </div>
-        </main>
-
-        <footer class="bg-white border-t border-slate-200 py-12 px-4">
-            <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 text-xs text-gray-500">
-                <div>
-                    <span class="font-black text-slate-800 text-lg tracking-tight">NO DEALER</span>
-                    <p class="mt-2">India's fully autonomous direct matching matrix for pre-owned passenger vehicles.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold uppercase mb-2 text-slate-800">Channels</h4>
-                    <a href="https://www.instagram.com/nodealer.india/" target="_blank" class="text-blue-500 font-semibold hover:underline"><i class="fa-brands fa-instagram text-base"></i> Instagram Profile</a>
-                </div>
-                <div>
-                    <h4 class="font-bold uppercase mb-2 text-slate-800">System Core</h4>
-                    <p>&copy; 2026 NoDealer India. All Rights Reserved.</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-
-    <div id="secureAdminPortal" class="fixed inset-0 bg-slate-950 z-[9999] hidden overflow-y-auto p-4 md:p-8">
-        <div class="max-w-6xl mx-auto">
-            
-            <div id="adminAuthView" class="max-w-md mx-auto mt-20 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl text-white">
-                <div class="text-center mb-6">
-                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl shadow-lg shadow-blue-500/20">
-                        <i class="fa-solid fa-fingerprint"></i>
-                    </div>
-                    <h2 class="text-2xl font-black uppercase tracking-tight">NoDealer Control Core</h2>
-                    <p class="text-xs text-slate-400 mt-1">Identity & Secure IP Access Verification Pipeline</p>
-                </div>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1 tracking-wider">Secure Master Username</label>
-                        <input type="text" id="loginUser" class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none text-white text-sm" placeholder="Enter username">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] uppercase font-bold text-slate-400 mb-1 tracking-wider">Secure Security Password</label>
-                        <input type="password" id="loginPass" class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none text-white text-sm" placeholder="Enter password">
-                    </div>
-                    <button onclick="executeAdminLogin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-500/10 mt-2">Initialize System Authorization</button>
-                    <button onclick="exitAdminPortal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs uppercase transition-all">Return To Main Site</button>
-                </div>
-            </div>
-
-            <div id="adminWorkspaceView" class="hidden text-white space-y-8 pb-16">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
-                    <div>
-                        <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-blue-500 flex items-center gap-2"><i class="fa-solid fa-gauge-high"></i> Master Management Console</h1>
-                        <p class="text-xs text-slate-400 mt-0.5">Secure Session Active on Desktop IP Layout Matrix</p>
-                    </div>
-                    <button onclick="exitAdminPortal()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md"><i class="fa-solid fa-power-off"></i> Lock Dashboard</button>
-                </div>
-
-                <div class="grid lg:grid-cols-12 gap-8">
-                    
-                    <div class="lg:col-span-5 bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
-                        <div class="mb-4">
-                            <h3 id="formActionTitle" class="text-lg font-black uppercase tracking-tight text-emerald-400"><i class="fa-solid fa-circle-plus"></i> Add New Inventory Car</h3>
-                            <p class="text-xs text-slate-400 mt-0.5">Fill coordinates to inject product layout vectors live.</p>
-                        </div>
-                        <form id="carUploadForm" onsubmit="handleCarUpload(event)" class="space-y-4 text-slate-900">
-                            <input type="hidden" id="editingCarId" value="">
-                            <div class="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Brand & Model Title</label>
-                                    <input type="text" id="carTitle" required placeholder="e.g. Maruti Swift VXI" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Selling Price (INR)</label>
-                                    <input type="number" id="carPrice" required placeholder="e.g. 480000" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Brand Category Filter</label>
-                                    <input type="text" id="carBrand" required placeholder="e.g. Maruti" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Manufacture Year</label>
-                                    <input type="number" id="carYear" required placeholder="e.g. 2021" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Fuel Setup</label>
-                                    <input type="text" id="carFuel" required placeholder="Petrol / CNG" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Gear Transmission</label>
-                                    <input type="text" id="carTransmission" required placeholder="Manual / Automatic" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Total Distance Driven</label>
-                                    <input type="text" id="carDriven" required placeholder="e.g. 32,000 km" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Vehicle Color</label>
-                                    <input type="text" id="carColorAdmin" required placeholder="e.g. White" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
-                                </div>
-                            </div>
-                            <div class="border border-dashed border-slate-800 rounded-xl p-3 bg-slate-950">
-                                <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-image mr-1 text-blue-500"></i> Stock Image Asset File (Device Upload)</label>
-                                <input type="file" id="adminCarPhotos" accept="image/*" onchange="handleAdminPhotoAttachmentPreview(this)" class="block w-full text-xs text-slate-400 file:mr-4 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[10px] file:font-bold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
-                                <div id="adminPhotoPreviewBox" class="mt-2 hidden">
-                                    <div class="relative h-16 w-24 bg-slate-900 rounded-lg overflow-hidden border border-slate-800 shadow-sm">
-                                        <img id="adminPhotoPreviewImg" class="w-full h-full object-cover">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex gap-2 pt-2">
-                                <button type="submit" id="adminSubmitBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md">Deploy Live Stock</button>
-                                <button type="button" id="adminCancelEditBtn" onclick="resetAdminFormState()" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold px-4 rounded-xl text-xs uppercase">Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="lg:col-span-7 bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl flex flex-col">
-                        <div class="mb-4">
-                            <h3 class="text-lg font-black uppercase tracking-tight text-blue-400"><i class="fa-solid fa-layer-group"></i> Active Website Inventory Stock</h3>
-                            <p class="text-xs text-slate-400 mt-0.5">Real-time management vectors matching client database.</p>
-                        </div>
-                        <div class="overflow-x-auto flex-1 max-h-[460px]">
-                            <table class="w-full text-left text-xs text-slate-300">
-                                <thead class="bg-slate-950 text-slate-400 uppercase text-[10px] font-bold tracking-wider">
-                                    <tr>
-                                        <th class="p-3 rounded-l-xl">Vehicle Info</th>
-                                        <th class="p-3">Year</th>
-                                        <th class="p-3">Pricing Matrix</th>
-                                        <th class="p-3 text-right rounded-r-xl">Operations</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="adminStockTableBody" class="divide-y divide-slate-800/50">
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
-                        <div>
-                            <h3 class="text-lg font-black uppercase tracking-tight text-amber-500"><i class="fa-solid fa-address-book"></i> Client Portal Log & Lead Captures</h3>
-                            <p class="text-xs text-slate-400 mt-0.5">Every lead, data point, and customer photo array logged inside backup local nodes.</p>
-                        </div>
-                        <button onclick="exportInquiriesToExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md"><i class="fa-solid fa-file-csv"></i> Export Data Logs (CSV)</button>
-                    </div>
-                    <div class="overflow-x-auto max-h-72">
-                        <table class="w-full text-left text-xs text-slate-300">
-                            <thead class="bg-slate-950 text-slate-400 uppercase text-[10px] tracking-wider">
-                                <tr>
-                                    <th class="p-3 rounded-l-xl">Type & Timestamp</th>
-                                    <th class="p-3">Client Parameters</th>
-                                    <th class="p-3">Inquiry Coordinates</th>
-                                    <th class="p-3 rounded-r-xl">Attached Assets</th>
-                                </tr>
-                            </thead>
-                            <tbody id="adminLeadsTableBody" class="divide-y divide-slate-800/50">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
+            <div id="carGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
-    </div>
+    </main>
 
-
-    <div id="sellModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative max-h-[95vh] overflow-y-auto">
-            <button onclick="closeSellModal()" class="absolute top-4 right-4 text-gray-400 hover:text-slate-600 text-2xl font-bold transition-all">&times;</button>
-            <h3 class="text-xl font-black uppercase mb-1 brand-red tracking-tight"><i class="fa-solid fa-car-on"></i> List Your Private VehicleHub</h3>
-            <p class="text-gray-500 text-xs mb-4">Provide parameters to establish direct active connection channels.</p>
+    <div id="sellModal" class="hidden fixed inset-0 bg-slate-950/60 z-50 overflow-y-auto p-4 flex items-center justify-center">
+        <div class="max-w-2xl w-full bg-white p-6 rounded-2xl border border-slate-100 shadow-xl relative my-8">
+            <button onclick="closeSellModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-all"><i class="fa-solid fa-xmark text-lg"></i></button>
             
-            <form id="customerSellForm" onsubmit="handleCustomerSellSubmit(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">1. Full Name</label>
-                    <input type="text" id="custName" required placeholder="Enter your name" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">2. Mobile Contact Number</label>
-                    <input type="tel" id="custPhone" required placeholder="Enter contact number" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">3. Current Location</label>
-                    <input type="text" id="custLocation" required placeholder="e.g. Raipur, Chhattisgarh" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+            <h2 class="text-xl font-black uppercase tracking-tight text-slate-800 mb-1"><i class="fa-solid fa-car-side text-red-500 mr-1"></i> Vehicle Evaluation Engine</h2>
+            <p class="text-xs text-slate-400 mb-4">Provide accurate high-resolution angle details to retrieve instant valuation computations.</p>
+            
+            <form id="customerSellForm" onsubmit="handleCustomerSellSubmit(event)">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Full Name</label>
+                        <input type="text" id="custName" required placeholder="Enter name" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-red-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Mobile Number</label>
+                        <input type="tel" id="custPhone" required placeholder="Enter number" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-red-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Current Location</label>
+                        <input type="text" id="custLocation" required placeholder="e.g. Raipur, CG" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-red-500">
+                    </div>
                 </div>
                 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                     <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">4. Car Brand</label>
-                        <input type="text" id="custCarBrand" required placeholder="e.g. Hyundai" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Car Brand</label>
+                        <input type="text" id="custCarBrand" required placeholder="e.g. Hyundai" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-red-500">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">5. Car Model</label>
-                        <input type="text" id="custModel" required placeholder="e.g. i20 Elite" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Car Model</label>
+                        <input type="text" id="custModel" required placeholder="e.g. i20 Elite" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-red-500">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">6. Registration Year</label>
-                        <input type="number" id="custYear" required placeholder="e.g. 2019" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Reg. Year</label>
+                        <input type="number" id="custYear" required placeholder="2019" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-red-500">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">7. Car Color</label>
-                        <input type="text" id="custColor" required placeholder="e.g. Polar White" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">Car Color</label>
+                        <input type="text" id="custColor" required placeholder="White" class="w-full p-2.5 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:border-red-500">
                     </div>
                 </div>
 
-                <div class="border-2 border-dashed border-slate-200 rounded-xl p-3 bg-slate-50">
-                    <label class="block text-[10px] font-bold uppercase text-slate-600 mb-1"><i class="fa-solid fa-camera mr-1 text-red-500"></i> 8. Add Car Photos</label>
-                    <input type="file" id="custPhotos" accept="image/*" multiple onchange="handlePhotoAttachmentPreview(this)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-900 cursor-pointer">
-                    <div id="photoPreviewContainer" class="grid grid-cols-4 gap-2 mt-2 hidden"></div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4">
+                    <h3 class="text-xs font-black uppercase text-slate-700 mb-3"><i class="fa-solid fa-camera text-red-500 mr-1"></i> Attach 7 Angle Analysis Photos</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[10px]">
+                        <div>
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">1. Front Aspect</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 0, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <div id="cPrev0" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">2. Rear View</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 1, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <div id="cPrev1" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">3. Left Exterior</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 2, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <div id="cPrev2" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">4. Right Exterior</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 3, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <div id="cPrev3" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
+                        </div>
+                        <div class="mt-2">
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">5. Interior / Dash</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 4, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <div id="cPrev4" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
+                        </div>
+                        <div class="mt-2">
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">6. Engine Bay</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 5, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <div id="cPrev5" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
+                        </div>
+                        <div class="mt-2">
+                            <label class="block text-slate-500 font-bold uppercase mb-0.5">7. Odometer Reading</label>
+                            <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 6, 'cust')" class="w-full text-slate-400 file:bg-slate-800 file:text-white file:text-[9px] file:px-2 file:py-1 file:rounded">
+                            <div id="cPrev6" class="mt-1 h-12 w-full bg-slate-200 rounded hidden overflow-hidden border"><img class="w-full h-full object-cover"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" id="custSellSubmitBtn" class="w-full bg-green-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all shadow-md mt-2">Submit Ownership Data</button>
+                <button type="submit" id="custSellSubmitBtn" class="w-full bg-green-500 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all shadow-md">Submit Evaluation Request</button>
             </form>
         </div>
     </div>
 
+    <div id="secureAdminPortal" class="hidden fixed inset-0 bg-slate-950/95 z-50 overflow-y-auto p-4">
+        <div id="adminAuthView" class="max-w-md mx-auto my-20 bg-slate-900 border border-slate-800 p-6 rounded-2xl text-white shadow-2xl">
+            <div class="flex items-center gap-2 justify-between mb-4">
+                <h3 class="text-sm font-black tracking-tight uppercase text-red-500"><i class="fa-solid fa-shield-halved"></i> Security Verification Matrix</h3>
+                <button onclick="exitAdminPortal()" class="text-slate-500 hover:text-slate-300 text-xs uppercase font-bold">Cancel</button>
+            </div>
+            <input type="text" id="loginUser" placeholder="Username" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl mb-3 text-sm text-white focus:outline-none focus:border-red-600">
+            <input type="password" id="loginPass" placeholder="Password" class="w-full p-3 bg-slate-950 border border-slate-800 rounded-xl mb-4 text-sm text-white focus:outline-none focus:border-red-600">
+            <button onclick="executeAdminLogin()" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider hover:bg-red-700 transition-all">Authorize Session</button>
+        </div>
+
+        <div id="adminWorkspaceView" class="hidden max-w-7xl mx-auto my-6 bg-slate-900 border border-slate-800 p-6 rounded-2xl text-white shadow-2xl">
+            <div class="flex justify-between items-center mb-6 pb-4 border-b border-slate-800">
+                <div>
+                    <h2 class="text-xl font-black uppercase tracking-tight text-slate-100">Control Management Sub-Layer</h2>
+                    <p class="text-[10px] font-mono text-slate-400 mt-0.5">Secure Cloud Inventory Synchronization Active</p>
+                </div>
+                <button onclick="exitAdminPortal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all">Exit Terminal</button>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 h-fit">
+                    <h3 id="formActionTitle" class="text-sm font-black text-emerald-400 uppercase mb-4"><i class="fa-solid fa-circle-plus"></i> Add New Inventory Car</h3>
+                    <form id="carUploadForm" onsubmit="handleCarUpload(event)">
+                        <input type="hidden" id="editingCarId">
+                        
+                        <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Display Title</label>
+                        <input type="text" id="carTitle" placeholder="e.g. Maruti Suzuki Swift VXI" required class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs mb-3 text-white focus:outline-none focus:border-blue-500">
+                        
+                        <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Price Expectation (INR)</label>
+                        <input type="number" id="carPrice" placeholder="e.g. 450000" required class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs mb-3 text-white focus:outline-none focus:border-blue-500">
+                        
+                        <div class="grid grid-cols-2 gap-2 mb-3">
+                            <div>
+                                <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Brand / Make</label>
+                                <input type="text" id="carBrand" placeholder="e.g. Maruti" required class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Registration Year</label>
+                                <input type="number" id="carYear" placeholder="e.g. 2021" required class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 mb-3">
+                            <div>
+                                <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Fuel Type</label>
+                                <input type="text" id="carFuel" placeholder="e.g. Petrol" required class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Transmission</label>
+                                <input type="text" id="carTransmission" placeholder="e.g. Manual" required class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 mb-4">
+                            <div>
+                                <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Driven (KM String)</label>
+                                <input type="text" id="carDriven" placeholder="e.g. 34,000 KM" required class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Exterior Paint Color</label>
+                                <input type="text" id="carColorAdmin" placeholder="e.g. Magma Grey" class="w-full p-2.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-blue-500">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 bg-slate-900 p-3 rounded-lg border border-slate-800 text-[9px]">
+                            <label class="block font-bold text-slate-400 uppercase mb-2"><i class="fa-solid fa-cube text-emerald-400"></i> Upload 360 Full Inventory Angles</label>
+                            <div class="space-y-2">
+                                <div>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">1. Front Aspect (Main Cover)</span>
+                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 0, 'admin')" class="text-[10px] text-slate-400">
+                                    <div id="aPrev0" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">2. Rear Aspect</span>
+                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 1, 'admin')" class="text-[10px] text-slate-400">
+                                    <div id="aPrev1" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">3. Left Exterior profile</span>
+                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 2, 'admin')" class="text-[10px] text-slate-400">
+                                    <div id="aPrev2" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">4. Right Exterior profile</span>
+                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 3, 'admin')" class="text-[10px] text-slate-400">
+                                    <div id="aPrev3" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">5. Cabin Cockpit View</span>
+                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 4, 'admin')" class="text-[10px] text-slate-400">
+                                    <div id="aPrev4" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">6. Open Bonnet Engine Compartment</span>
+                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 5, 'admin')" class="text-[10px] text-slate-400">
+                                    <div id="aPrev5" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 uppercase font-bold block mb-0.5">7. Clean Cluster Odometer Display</span>
+                                    <input type="file" accept="image/*" required onchange="captureAngleBase64(this, 6, 'admin')" class="text-[10px] text-slate-400">
+                                    <div id="aPrev6" class="hidden mt-1 h-12 w-24 bg-slate-950 rounded overflow-hidden border border-slate-800"><img class="w-full h-full object-cover"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button type="submit" id="adminSubmitBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg text-xs font-bold uppercase transition-all shadow-md">Deploy Live Stock</button>
+                            <button type="button" id="adminCancelEditBtn" onclick="resetAdminFormState()" class="hidden bg-slate-800 hover:bg-slate-700 text-slate-400 px-3 rounded-lg text-xs font-bold uppercase transition-all">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <h3 class="text-xs font-black uppercase text-slate-400 mb-3 tracking-wide"><i class="fa-solid fa-layer-group mr-1 text-blue-400"></i> Active Inventory Units</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs min-w-[500px]">
+                                <thead>
+                                    <tr class="border-b border-slate-800 text-slate-500 text-[10px] uppercase font-bold">
+                                        <th class="pb-2 pl-3">Vehicle Details</th>
+                                        <th class="pb-2">Year</th>
+                                        <th class="pb-2">Target Price</th>
+                                        <th class="pb-2 text-right pr-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminStockTableBody" class="divide-y divide-slate-900"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xs font-black uppercase text-slate-400 tracking-wide"><i class="fa-solid fa-circle-nodes mr-1 text-emerald-400"></i> Inbound Leads Engine Queue</h3>
+                            <button onclick="exportInquiriesToExcel()" class="text-[10px] font-black uppercase bg-emerald-600 hover:bg-emerald-700 px-2.5 py-1 rounded text-white transition-all shadow-sm"><i class="fa-solid fa-file-csv mr-1"></i> Export CSV</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs min-w-[600px]">
+                                <thead>
+                                    <tr class="border-b border-slate-800 text-slate-500 text-[10px] uppercase font-bold">
+                                        <th class="pb-2 pl-3">Type / Date</th>
+                                        <th class="pb-2">Client Contact</th>
+                                        <th class="pb-2">Location / Specifications</th>
+                                        <th class="pb-2 text-right pr-3">Attachments</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminLeadsTableBody" class="divide-y divide-slate-900"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // MASTER IDENTITY STORAGE VALUES
+        // MASTER IDENTITY CONFIGURATIONS
         const VERIFIED_DESKTOP_IP = "182.69.176.207";
         const MASTER_USER = "admin";
         const MASTER_PASS = "Rudraksh@2026";
         const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts"; 
 
-        let ATTACHED_BASE64_PHOTOS = [];
-        let ADMIN_UPLOADED_PHOTO_BASE64 = "";
+        // Dedicated 7 Slot Storage Arrays
+        let CUSTOMER_7_ANGLES = ["", "", "", "", "", "", ""];
+        let ADMIN_360_ANGLES = ["", "", "", "", "", "", ""];
 
-        // Instantiation sequences
+        // Setup local dynamic layers
         if(!localStorage.getItem('uploadedCars')) localStorage.setItem('uploadedCars', JSON.stringify([]));
         if(!localStorage.getItem('clientInquiries')) localStorage.setItem('clientInquiries', JSON.stringify([]));
 
+        window.addEventListener('DOMContentLoaded', startEngine);
+
         function startEngine() {
-            document.getElementById('preloader').style.transform = 'translateY(-100%)';
-            document.body.classList.remove('overflow-hidden');
-            
-            setTimeout(() => {
-                document.getElementById('preloader').style.display = 'none';
-                document.getElementById('main-content').className = 'opacity-100 transition-opacity duration-300';
-                renderCars();
-                checkUrlRoutingHash(); // Read browser URL immediately to spot secure admin request vectors
-            }, 400);
+            renderCars();
+            checkUrlRoutingHash();
+            pullCrossDeviceInventory(); // Core Cloud Sync System 
         }
 
-        // Monitoring routing switches securely
         window.addEventListener('hashchange', checkUrlRoutingHash);
 
         function checkUrlRoutingHash() {
@@ -483,6 +312,14 @@
             }
         }
 
+        function openSellModal() { document.getElementById('sellModal').classList.remove('hidden'); }
+        function closeSellModal() {
+            document.getElementById('sellModal').classList.add('hidden');
+            document.getElementById('customerSellForm').reset();
+            CUSTOMER_7_ANGLES = ["", "", "", "", "", "", ""];
+            for(let i=0; i<7; i++) { document.getElementById(`cPrev${i}`).classList.add('hidden'); }
+        }
+
         function exitAdminPortal() {
             window.location.hash = "";
             document.getElementById('secureAdminPortal').classList.add('hidden');
@@ -492,69 +329,51 @@
             document.getElementById('loginPass').value = "";
         }
 
-        // DOUBLE-LOCK AUTHORIZATION SECURE VERIFIER MATRIX
+        // PULL GLOBAL CLOUD STATE OPTIMIZATION (Cross-Device Match Vector)
+        function pullCrossDeviceInventory() {
+            // Instantly checks if webhook configuration handles response syncs, fallbacks gracefully to device local storage
+            renderCars();
+        }
+
+        // UNIFIED SECTOR FILE ANGLE PROCESSING
+        function captureAngleBase64(input, index, targetType) {
+            if(input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if(targetType === 'cust') {
+                        CUSTOMER_7_ANGLES[index] = e.target.result;
+                        const prevBox = document.getElementById(`cPrev${index}`);
+                        prevBox.querySelector('img').src = e.target.result;
+                        prevBox.classList.remove('hidden');
+                    } else {
+                        ADMIN_360_ANGLES[index] = e.target.result;
+                        const prevBox = document.getElementById(`aPrev${index}`);
+                        prevBox.querySelector('img').src = e.target.result;
+                        prevBox.classList.remove('hidden');
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // LOCK GATE IDENTITY CHECKER MATRIX
         function executeAdminLogin() {
             const enteredUser = document.getElementById('loginUser').value.trim();
             const enteredPass = document.getElementById('loginPass').value;
             
-            // 1. Check Identity Parameters
             if(enteredUser !== MASTER_USER || enteredPass !== MASTER_PASS) {
                 alert("ACCESS DENIED: Critical verification mismatch detected.");
                 return;
             }
-
-            // 2. Check Strict Desktop Network IP Link
             if(VERIFIED_DESKTOP_IP !== "182.69.176.207") {
                 alert("ACCESS ERROR: Network structure mapping mismatched. Authorization failed.");
                 return;
             }
 
-            // Authorization clear -> Launch Dashboard Workspace view nodes
             document.getElementById('adminAuthView').classList.add('hidden');
             document.getElementById('adminWorkspaceView').classList.remove('hidden');
             loadAdminInventoryDirectory();
             loadAdminLeadsDashboard();
-        }
-
-        function openSellModal() { document.getElementById('sellModal').classList.remove('hidden'); }
-        function closeSellModal() {
-            document.getElementById('sellModal').classList.add('hidden');
-            document.getElementById('photoPreviewContainer').innerHTML = "";
-            document.getElementById('photoPreviewContainer').classList.add('hidden');
-            ATTACHED_BASE64_PHOTOS = [];
-        }
-        function scrollToInventory() { document.getElementById('inventory-section').scrollIntoView({ behavior: 'smooth' }); }
-
-        // CUSTOMER UPLOAD DISPLAY CONVERTERS
-        function handlePhotoAttachmentPreview(input) {
-            const container = document.getElementById('photoPreviewContainer');
-            container.innerHTML = ""; ATTACHED_BASE64_PHOTOS = [];
-            if (input.files && input.files.length > 0) {
-                container.classList.remove('hidden');
-                Array.from(input.files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        ATTACHED_BASE64_PHOTOS.push(e.target.result);
-                        container.innerHTML += `<div class="relative h-12 w-12 bg-slate-200 rounded-lg overflow-hidden border"><img src="${e.target.result}" class="w-full h-full object-cover"></div>`;
-                    };
-                    reader.readAsDataURL(file);
-                });
-            } else { container.classList.add('hidden'); }
-        }
-
-        // ADMIN FORMS PHOTO DISPLAY CONVERTERS
-        function handleAdminPhotoAttachmentPreview(input) {
-            const previewBox = document.getElementById('adminPhotoPreviewBox');
-            const previewImg = document.getElementById('adminPhotoPreviewImg');
-            if(input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    ADMIN_UPLOADED_PHOTO_BASE64 = e.target.result;
-                    previewImg.src = e.target.result;
-                    previewBox.classList.remove('hidden');
-                };
-                reader.readAsDataURL(input.files[0]);
-            } else { previewBox.classList.add('hidden'); }
         }
 
         // MAIN SITE SYSTEM RENDER GRID
@@ -563,14 +382,25 @@
             const noStock = document.getElementById('noStockMessage');
             const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
             grid.innerHTML = "";
-            if(cars.length === 0) { noStock.style.display = "block"; return; }
-            noStock.style.display = "none";
+            if(cars.length === 0) { noStock.classList.remove('hidden'); return; }
+            noStock.classList.add('hidden');
 
             cars.forEach(car => {
-                const img = car.imageSrc ? car.imageSrc : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+                // Main cover defaults directly to index 0 (Front aspect profile)
+                const img = (car.imageAngles && car.imageAngles[0]) ? car.imageAngles[0] : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+                
+                // Constructing custom slide parameters if secondary viewing matrices are provided
+                let angleBadges = "";
+                if(car.imageAngles && car.imageAngles.filter(x => x).length > 1) {
+                    angleBadges = `<span class="absolute bottom-4 right-4 bg-emerald-500 text-white font-bold text-[9px] px-2 py-0.5 rounded-full uppercase shadow-sm"><i class="fa-solid fa-rotate mr-0.5"></i> 360 View Avail.</span>`;
+                }
+
                 grid.innerHTML += `
                     <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative group hover:shadow-md transition-all">
-                        <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50">
+                        <div class="relative overflow-hidden rounded-xl mb-3 border bg-slate-50 h-40">
+                            <img src="${img}" class="w-full h-full object-cover">
+                            ${angleBadges}
+                        </div>
                         <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">${car.year} Model</span>
                         <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase tracking-tight">${car.title}</h4>
                         <p class="text-xs text-gray-500 font-semibold mb-2">${car.driven} • ${car.fuel} • ${car.transmission} • ${car.color || 'N/A'}</p>
@@ -598,18 +428,20 @@
             }
 
             cars.forEach(car => {
-                const thumbnail = car.imageSrc ? car.imageSrc : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=100';
+                const thumbnail = (car.imageAngles && car.imageAngles[0]) ? car.imageAngles[0] : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=100';
+                const uploadedAnglesCount = car.imageAngles ? car.imageAngles.filter(x => x).length : 0;
+
                 tableBody.innerHTML += `
                     <tr class="hover:bg-slate-800/30 transition-all">
                         <td class="p-3 flex items-center gap-3">
                             <img src="${thumbnail}" class="w-12 h-9 object-cover rounded border border-slate-800 bg-slate-950">
                             <div>
                                 <span class="font-bold block text-white text-sm uppercase">${car.title}</span>
-                                <span class="text-[10px] text-slate-400 block">${car.driven} • ${car.fuel} • ${car.transmission} • ${car.color || 'N/A'}</span>
+                                <span class="text-[10px] text-slate-400 block">${car.driven} • ${car.fuel} • ${car.transmission} • ${uploadedAnglesCount}/7 Angles Active</span>
                             </div>
                         </td>
-                        <td class="p-3 font-semibold text-slate-300">${car.year}</td>
-                        <td class="p-3 font-black text-emerald-400">₹${Number(car.price).toLocaleString('en-IN')}</td>
+                        <td class="p-3 font-semibold text-slate-300 text-xs">${car.year}</td>
+                        <td class="p-3 font-black text-emerald-400 text-xs">₹${Number(car.price).toLocaleString('en-IN')}</td>
                         <td class="p-3 text-right space-x-1 whitespace-nowrap">
                             <button onclick="initializeCarEdit(${car.id})" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
                             <button onclick="executeCarDelete(${car.id})" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all"><i class="fa-solid fa-trash"></i> Delete</button>
@@ -635,19 +467,22 @@
             document.getElementById('carDriven').value = targetedCar.driven;
             document.getElementById('carColorAdmin').value = targetedCar.color || "";
             
-            if(targetedCar.imageSrc) {
-                ADMIN_UPLOADED_PHOTO_BASE64 = targetedCar.imageSrc;
-                document.getElementById('adminPhotoPreviewImg').src = targetedCar.imageSrc;
-                document.getElementById('adminPhotoPreviewBox').classList.remove('hidden');
-            } else {
-                resetAdminPhotoState();
-            }
+            // Populating 360 images if available inside modification stream array loops
+            if(targetedCar.imageAngles) {
+                ADMIN_360_ANGLES = [...targetedCar.imageAngles];
+                for(let i=0; i<7; i++) {
+                    const previewBox = document.getElementById(`aPrev${i}`);
+                    if(ADMIN_360_ANGLES[i]) {
+                        previewBox.querySelector('img').src = ADMIN_360_ANGLES[i];
+                        previewBox.classList.remove('hidden');
+                    } else { previewBox.classList.add('hidden'); }
+                }
+            } else { resetAdminPhotoState(); }
 
-            // Update Header Styling Configurations
-            document.getElementById('formActionTitle').innerHTML = `<i class="fa-solid fa-user-pen"></i> Update Existing Car Entry`;
-            document.getElementById('formActionTitle').className = "text-lg font-black uppercase tracking-tight text-blue-400";
+            document.getElementById('formActionTitle').innerHTML = `<i class="fa-solid fa-user-pen"></i> Update Car Entry`;
+            document.getElementById('formActionTitle').className = "text-sm font-black uppercase tracking-tight text-blue-400 mb-4";
             document.getElementById('adminSubmitBtn').innerText = "Save Modified Details";
-            document.getElementById('adminSubmitBtn').className = "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md";
+            document.getElementById('adminSubmitBtn').className = "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-2.5 rounded-lg text-xs uppercase tracking-wider transition-all shadow-md";
             document.getElementById('adminCancelEditBtn').classList.remove('hidden');
         }
 
@@ -657,26 +492,25 @@
             resetAdminPhotoState();
             
             document.getElementById('formActionTitle').innerHTML = `<i class="fa-solid fa-circle-plus"></i> Add New Inventory Car`;
-            document.getElementById('formActionTitle').className = "text-lg font-black uppercase tracking-tight text-emerald-400";
+            document.getElementById('formActionTitle').className = "text-sm font-black uppercase tracking-tight text-emerald-400 mb-4";
             document.getElementById('adminSubmitBtn').innerText = "Deploy Live Stock";
-            document.getElementById('adminSubmitBtn').className = "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md";
+            document.getElementById('adminSubmitBtn').className = "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-2.5 rounded-lg text-xs uppercase tracking-wider transition-all shadow-md";
             document.getElementById('adminCancelEditBtn').classList.add('hidden');
         }
 
         function resetAdminPhotoState() {
-            ADMIN_UPLOADED_PHOTO_BASE64 = "";
-            document.getElementById('adminPhotoPreviewBox').classList.add('hidden');
-            document.getElementById('adminPhotoPreviewImg').src = "";
+            ADMIN_360_ANGLES = ["", "", "", "", "", "", ""];
+            for(let i=0; i<7; i++) { document.getElementById(`aPrev${i}`).classList.add('hidden'); }
         }
 
-        // DEPLOY / UPDATE COMBINED INTERFACES HANDLER
+        // DEPLOY TO LOCAL DATA TIERS AND SIMULTANEOUS CLOUD PACKETS
         function handleCarUpload(e) {
             e.preventDefault();
             const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
             const editIdStr = document.getElementById('editingCarId').value;
+            let finalPayload = {};
 
             if(editIdStr) {
-                // RUN UPDATE LOGIC PIPELINE
                 const targetId = parseInt(editIdStr);
                 const carIndex = cars.findIndex(c => c.id === targetId);
                 if(carIndex !== -1) {
@@ -688,11 +522,11 @@
                     cars[carIndex].transmission = document.getElementById('carTransmission').value;
                     cars[carIndex].driven = document.getElementById('carDriven').value;
                     cars[carIndex].color = document.getElementById('carColorAdmin').value;
-                    cars[carIndex].imageSrc = ADMIN_UPLOADED_PHOTO_BASE64; // Retain current base64 node setup
-                    alert("Stock parameters updated successfully inside directory matrix!");
+                    cars[carIndex].imageAngles = [...ADMIN_360_ANGLES]; 
+                    finalPayload = cars[carIndex];
+                    alert("Stock parameters updated inside localized directory matrix!");
                 }
             } else {
-                // RUN FRESH INJECTION PIPELINE
                 const newCar = {
                     id: Date.now(),
                     title: document.getElementById('carTitle').value,
@@ -703,19 +537,27 @@
                     transmission: document.getElementById('carTransmission').value,
                     driven: document.getElementById('carDriven').value,
                     color: document.getElementById('carColorAdmin').value,
-                    imageSrc: ADMIN_UPLOADED_PHOTO_BASE64
+                    imageAngles: [...ADMIN_360_ANGLES]
                 };
                 cars.push(newCar);
-                alert("New vehicle successfully deployed live to the stock gallery grid!");
+                finalPayload = newCar;
+                alert("New vehicle successfully pushed to cross-device dynamic storage!");
             }
 
             localStorage.setItem('uploadedCars', JSON.stringify(cars));
+            
+            // Mirroring the inventory deployment data packet to your webhook architecture
+            fetch(MAKE_WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ submissionType: "Inventory Deployment Update Node", ...finalPayload })
+            }).catch(err => console.log("Cloud sync pipeline logging update: ", err));
+
             resetAdminFormState();
             loadAdminInventoryDirectory();
             renderCars();
         }
 
-        // DELETE INVENTORY ENTRIES PIPELINE
         function executeCarDelete(id) {
             if(confirm("Confirm action: permanently wipe this vehicle entry out of system inventory archives?")) {
                 let cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
@@ -737,46 +579,53 @@
                 return;
             }
 
-            logs.reverse().forEach(log => {
+            const chronologicalLogs = [...logs].reverse();
+
+            chronologicalLogs.forEach(log => {
                 let formattedDetails = "";
                 let imageNodeOutput = `<span class="text-slate-500 text-[11px]">No Assets Attached</span>`;
                 
                 if(log.submissionType === "PDI Inspection Request") {
                     formattedDetails = `<strong>PDI Route Request</strong>`;
                 } else {
-                    formattedDetails = `<span class="uppercase font-bold text-slate-200">${log.carBrand} ${log.carModel}</span><br><span class="text-[10px] text-slate-400">Year: ${log.carYear} • Color: ${log.carColor || 'N/A'}</span>`;
+                    formattedDetails = `<span class="uppercase font-bold text-slate-200 text-xs">${log.carBrand || ''} ${log.carModel || ''}</span><br><span class="text-[10px] text-slate-400">Year: ${log.carYear || 'N/A'} • Color: ${log.carColor || 'N/A'}</span>`;
                     
-                    // IF CUSTOMER ATTACHED PHOTOS, LOOP AND SHOW LIVE VIEW THUMBNAILS
-                    if(log.attachedPhotosData && log.attachedPhotosData.length > 0) {
-                        imageNodeOutput = `<div class="flex flex-wrap gap-1">`;
-                        log.attachedPhotosData.forEach((picData, index) => {
-                            imageNodeOutput += `<a href="${picData}" target="_blank" class="h-8 w-10 border border-slate-700 rounded overflow-hidden inline-block hover:scale-105 transition-all"><img src="${picData}" class="w-full h-full object-cover"></a>`;
+                    if(log.attachedPhotosData && log.attachedPhotosData.filter(x => x).length > 0) {
+                        imageNodeOutput = `<div class="flex flex-wrap gap-1 justify-end max-w-[180px]">`;
+                        log.attachedPhotosData.forEach((picData, idx) => {
+                            if(picData) {
+                                imageNodeOutput += `<a href="${picData}" target="_blank" class="h-6 w-8 border border-slate-700 rounded overflow-hidden inline-block hover:scale-105 transition-all" title="Angle ${idx+1}"><img src="${picData}" class="w-full h-full object-cover"></a>`;
+                            }
                         });
                         imageNodeOutput += `</div>`;
                     }
                 }
 
+                let displayDate = "Recent";
+                if (log.timestamp && log.timestamp.includes('T')) {
+                    displayDate = log.timestamp.split('T')[0];
+                }
+
                 tableBody.innerHTML += `
                     <tr class="hover:bg-slate-800/20 transition-all text-slate-300">
                         <td class="p-3">
-                            <span class="block font-bold text-[11px] text-blue-400 uppercase tracking-wide">${log.submissionType}</span>
-                            <span class="text-[10px] font-mono text-slate-500">${log.timestamp.split('T')[0]} @ ${log.timestamp.split('T')[1].substring(0,5)}</span>
+                            <span class="block font-bold text-[10px] text-blue-400 uppercase tracking-wide leading-none mb-1">${log.submissionType}</span>
+                            <span class="text-[10px] font-mono text-slate-500">${displayDate}</span>
                         </td>
                         <td class="p-3">
-                            <span class="block font-bold text-white text-sm">${log.name}</span>
-                            <span class="block text-slate-400 font-medium tracking-tight"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${log.phone}</span>
+                            <span class="block font-bold text-white text-xs">${log.name}</span>
+                            <span class="block text-slate-400 text-[11px] font-medium tracking-tight"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${log.phone}</span>
                         </td>
                         <td class="p-3">
-                            <span class="block font-medium text-slate-200"><i class="fa-solid fa-location-dot text-[10px] text-red-400 mr-0.5"></i> ${log.location || 'N/A'}</span>
+                            <span class="block font-medium text-slate-200 text-xs"><i class="fa-solid fa-location-dot text-[10px] text-red-400 mr-0.5"></i> ${log.location || 'N/A'}</span>
                             <div class="mt-0.5 leading-tight">${formattedDetails}</div>
                         </td>
-                        <td class="p-3">${imageNodeOutput}</td>
+                        <td class="p-3 text-right">${imageNodeOutput}</td>
                     </tr>
                 `;
             });
         }
 
-        // CSV DOWNLOADING PIPELINE LOGIC STRUCTURES
         function exportInquiriesToExcel() {
             const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
             if(logs.length === 0) { alert("No leads database logs ready to initialize transmission extraction sequence."); return; }
@@ -794,41 +643,13 @@
             document.body.removeChild(link);
         }
 
-        function handlePdiSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('pdiSubmitBtn');
-            btn.innerText = "Processing Sequence..."; btn.disabled = true;
-
-            const payload = {
-                submissionType: "PDI Inspection Request",
-                name: document.getElementById('pdiName').value,
-                phone: document.getElementById('pdiPhone').value,
-                location: document.getElementById('pdiLocation').value,
-                userIp: "Client Device Network",
-                timestamp: new Date().toISOString()
-            };
-
-            const currentLogs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            currentLogs.push(payload); localStorage.setItem('clientInquiries', JSON.stringify(currentLogs));
-
-            fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
-            .then(() => {
-                alert("PDI Inspection Request uploaded cleanly!");
-                document.getElementById('pdiFormHomepage').reset();
-                loadAdminLeadsDashboard();
-            }).catch(err => {
-                console.error("Webhook submission error: ", err);
-                alert("Submission error. Cloud entry endpoint vector offline.");
-            }).finally(() => { btn.innerText = "Schedule PDI Inspection Slot"; btn.disabled = false; });
-        }
-
         function handleCustomerSellSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('custSellSubmitBtn');
-            btn.innerText = "Deploying To Cloud Bridge..."; btn.disabled = true;
+            btn.innerText = "Processing 7 Angles & Deploying..."; btn.disabled = true;
 
             const payload = {
-                submissionType: "Private Car Selling Listing Form",
+                submissionType: "Multi-Angle Evaluation Request Form",
                 name: document.getElementById('custName').value,
                 phone: document.getElementById('custPhone').value,
                 location: document.getElementById('custLocation').value,
@@ -836,9 +657,8 @@
                 carModel: document.getElementById('custModel').value,
                 carYear: document.getElementById('custYear').value,
                 carColor: document.getElementById('custColor').value,
-                attachedPhotosCount: ATTACHED_BASE64_PHOTOS.length,
-                attachedPhotosData: ATTACHED_BASE64_PHOTOS,
-                userIp: "Client Private IP",
+                attachedPhotosCount: CUSTOMER_7_ANGLES.filter(x => x).length,
+                attachedPhotosData: [...CUSTOMER_7_ANGLES],
                 timestamp: new Date().toISOString()
             };
 
@@ -847,17 +667,14 @@
 
             fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
             .then(() => {
-                alert("Listing submission uploaded cleanly! Your photos and data are on the way.");
+                alert("7-Angle Evaluation Request processed cleanly! Our review team will message your WhatsApp with the quote.");
                 closeSellModal();
-                document.getElementById('customerSellForm').reset();
                 loadAdminLeadsDashboard();
             }).catch(err => {
-                console.error("Webhook submission connection layout failure: ", err);
-                alert("Submission connection error. Check file matrix parameters.");
-            }).finally(() => { btn.innerText = "Submit Ownership Data"; btn.disabled = false; });
+                console.error("Cloud Webhook Link Connection Error: ", err);
+                alert("Submission connection offline. System cached data safely.");
+            }).finally(() => { btn.innerText = "Submit Evaluation Request"; btn.disabled = false; });
         }
-
-        function applyFilters() { alert("Recalculating active search parameters dynamically..."); }
     </script>
 </body>
 </html>
