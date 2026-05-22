@@ -662,19 +662,7 @@ files.forEach(file => {
         `;
     });
 }
-</div>
 
-${
-    car.images && car.images.length > 1
-    ? `
-    <div class="grid grid-cols-4 gap-1 mb-3">
-        ${car.images.slice(0,8).map(photo => `
-            <img src="${photo}" class="h-14 w-full object-cover rounded-lg border border-slate-200">
-        `).join('')}
-    </div>
-    `
-    : ''
-}
 
         // LOAD SECURE DIRECTORY CONTROLLER INSIDE ADMIN INTERFACE
         function loadAdminInventoryDirectory() {
