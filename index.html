@@ -463,7 +463,17 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
     </div>
 
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://ahpiqihruhfkvyzoarde.supabase.co";
+const SUPABASE_KEY = "sb_publishable_0vFfZDHjow24NQoyMXwqTw_zpR1SbUR";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
         // MASTER IDENTITY STORAGE VALUES
         const VERIFIED_DESKTOP_IP = "182.69.176.207";
         const MASTER_USER = "admin";
