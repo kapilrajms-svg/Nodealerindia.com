@@ -469,10 +469,14 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
 const SUPABASE_URL = "https://ahpiqihruhfkvyzoarde.supabase.co";
 const SUPABASE_KEY = "sb_publishable_0vFfZDHjow24NQoyMXwqTw_zpR1SbUR";
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+let supabaseClient = null;
+
+if (window.supabase) {
+    supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+}
     
         // MASTER IDENTITY STORAGE VALUES
         const VERIFIED_DESKTOP_IP = "182.69.176.207";
