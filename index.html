@@ -678,38 +678,38 @@ ${
 
         // LOAD SECURE DIRECTORY CONTROLLER INSIDE ADMIN INTERFACE
         function loadAdminInventoryDirectory() {
-            const tableBody = document.getElementById('adminStockTableBody');
-            const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
-            tableBody.innerHTML = "";
-            
-            if(cars.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No live active stock vectors saved in directory index.</td></tr>`;
-                return;
-            }
+    const tableBody = document.getElementById('adminStockTableBody');
+    const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+    tableBody.innerHTML = "";
 
-            cars.forEach(car => {
-                const thumbnail = car.images && car.images.length > 0
-    ? car.images[0]
-    : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=100';
-                tableBody.innerHTML += `
-                    <tr class="hover:bg-slate-800/30 transition-all">
-                        <td class="p-3 flex items-center gap-3">
-                            <img src="${thumbnail}" class="w-12 h-9 object-cover rounded border border-slate-800 bg-slate-950">
-                            <div>
-                                <span class="font-bold block text-white text-sm uppercase">${car.title}</span>
-                                <span class="text-[10px] text-slate-400 block">${car.driven} • ${car.fuel} • ${car.transmission} • ${car.color || 'N/A'}</span>
-                            </div>
-                        </td>
-                        <td class="p-3 font-semibold text-slate-300">${car.year}</td>
-                        <td class="p-3 font-black text-emerald-400">₹${Number(car.price).toLocaleString('en-IN')}</td>
-                        <td class="p-3 text-right space-x-1 whitespace-nowrap">
-                            <button onclick="initializeCarEdit(${car.id})" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-                            <button onclick="executeCarDelete(${car.id})" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all"><i class="fa-solid fa-trash"></i> Delete</button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
+    if (cars.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No live active stock vectors saved in directory index.</td></tr>`;
+        return;
+    }
+
+    cars.forEach(car => {
+        const gallery = car.images && car.images.length > 0 ? car.images : (car.imageSrc ? [car.imageSrc] : []);
+        const thumbnail = gallery.length > 0 ? gallery[0] : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=100';
+
+        tableBody.innerHTML += `
+            <tr class="hover:bg-slate-800/30 transition-all">
+                <td class="p-3 flex items-center gap-3">
+                    <img src="${thumbnail}" class="w-12 h-9 object-cover rounded border border-slate-800 bg-slate-950">
+                    <div>
+                        <span class="font-bold block text-white text-sm uppercase">${car.title}</span>
+                        <span class="text-[10px] text-slate-400 block">${car.driven} • ${car.fuel} • ${car.transmission} • ${car.color || 'N/A'}</span>
+                    </div>
+                </td>
+                <td class="p-3 font-semibold text-slate-300">${car.year}</td>
+                <td class="p-3 font-black text-emerald-400">₹${Number(car.price).toLocaleString('en-IN')}</td>
+                <td class="p-3 text-right space-x-1 whitespace-nowrap">
+                    <button onclick="initializeCarEdit(${car.id})" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
+                    <button onclick="executeCarDelete(${car.id})" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all"><i class="fa-solid fa-trash"></i> Delete</button>
+                </td>
+            </tr>
+        `;
+    });
+}
 
         // TRIGGER AND PRE-FILL DATA VECTORS FOR EDITING SEQUENCE
         function initializeCarEdit(id) {
