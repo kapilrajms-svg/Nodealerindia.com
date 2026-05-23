@@ -590,7 +590,8 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
                 document.getElementById('preloader').style.display = 'none';
                 document.getElementById('main-content').className = 'opacity-100 transition-opacity duration-300';
                 renderCars();
-                checkUrlRoutingHash();
+loadDynamicBrandFilter();
+checkUrlRoutingHash();
             }, 400);
         }
 
@@ -1298,6 +1299,29 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
         document.getElementById("simpleSliderImage").src = gallery[currentIndex];
         document.getElementById("simpleSliderCount").innerText = `${currentIndex + 1} / ${gallery.length}`;
     };
+}
+        async function loadDynamicBrandFilter() {
+    const brandSelect = document.getElementById('filterBrand');
+
+    if (!brandSelect || !supabaseClient) return;
+
+    const { data, error } = await supabaseClient
+        .from('cars')
+        .select('brand');
+
+    if (error || !data) return;
+
+    const brands = [...new Set(
+        data
+            .map(car => (car.brand || '').trim())
+            .filter(Boolean)
+    )].sort();
+
+    brandSelect.innerHTML = `<option value="">All Brands</option>`;
+
+    brands.forEach(brand => {
+        brandSelect.innerHTML += `<option value="${brand}">${brand}</option>`;
+    });
 }
     </script>
 </body>
