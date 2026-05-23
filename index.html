@@ -626,7 +626,7 @@ files.forEach(file => {
     .order('created_at', { ascending: false });
 
 const cars = data || [];
-
+window.CAR_CACHE = cars;
     grid.innerHTML = "";
 
     if (cars.length === 0) {
@@ -641,7 +641,7 @@ const cars = data || [];
         const img = gallery.length > 0 ? gallery[0] : 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
 
         grid.innerHTML += `
-    <div onclick='openCarDetails(${JSON.stringify(car)})' class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative group hover:shadow-md transition-all cursor-pointer">
+    <div onclick="openCarDetailsById(${car.id})" class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative group hover:shadow-md transition-all cursor-pointer">
         
         <div class="relative">
             <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50">
@@ -1003,6 +1003,10 @@ delete newCarForCloud.id;
         }
 
         function applyFilters() { alert("Recalculating active search parameters dynamically..."); }
+    function openCarDetailsById(id) {
+    const car = (window.CAR_CACHE || []).find(c => Number(c.id) === Number(id));
+    if(car) openCarDetails(car);
+}
 function openCarDetails(car) {
     const gallery = car.images && car.images.length > 0 ? car.images : (car.imageSrc ? [car.imageSrc] : []);
     const photos = gallery.map(img => `<img src="${img}" class="w-full h-44 object-cover rounded-xl border">`).join("");
