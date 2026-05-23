@@ -1119,59 +1119,96 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
             });
         }
 
-        function applyFilters() {
-            const budget = document.getElementById('filterBudget').value;
-            const brand = document.getElementById('filterBrand').value;
-            const fuel = document.getElementById('filterFuel').value;
-            const transmission = document.getElementById('filterTransmission').value;
+        async function applyFilters() {
 
-            const filteredCars = (window.CAR_CACHE || []).filter(car => {
-                const okBudget = !budget || Number(car.price || 0) <= Number(budget);
-                const okBrand = !brand || safeText(car.brand).toLowerCase() === brand.toLowerCase();
-                const okFuel = !fuel || safeText(car.fuel).toLowerCase() === fuel.toLowerCase();
-                const okTransmission = !transmission || safeText(car.transmission).toLowerCase() === transmission.toLowerCase();
-                return okBudget && okBrand && okFuel && okTransmission;
-            });
+    const budget = document.getElementById('filterBudget').value;
+    const brand = document.getElementById('filterBrand').value;
+    const fuel = document.getElementById('filterFuel').value;
+    const transmission = document.getElementById('filterTransmission').value;
 
-            const oldCache = window.CAR_CACHE;
-            window.CAR_CACHE = filteredCars;
-            renderCarsFromCache(filteredCars);
-            window.CAR_CACHE = oldCache;
-        }
+    let query = supabaseClient
+        .from('cars')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-        function renderCarsFromCache(cars) {
-            const grid = document.getElementById('carGrid');
-            const noStock = document.getElementById('noStockMessage');
-            grid.innerHTML = "";
+    if (budget) {
+        query = query.lte('price', Number(budget));
+    }
 
-            if (cars.length === 0) {
-                noStock.style.display = "block";
-                return;
-            }
+    if (brand) {
+        query = query.ilike('brand', `%${brand}%`);
+    }
 
-            noStock.style.display = "none";
+    if (fuel) {
+        query = query.ilike('fuel', `%${fuel}%`);
+    }
 
-            cars.forEach(car => {
-                const gallery = carGallery(car);
-                const img = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+    if (transmission) {
+        query = query.ilike('transmission', `%${transmission}%`);
+    }
 
-                grid.innerHTML += `
-                    <div onclick="openCarDetailsById(${car.id})" class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative group hover:shadow-md transition-all cursor-pointer">
-                        <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50">
-                        <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">${safeText(car.year)} Model</span>
-                        <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase tracking-tight">${safeText(car.title)}</h4>
-                        <p class="text-xs text-gray-500 font-semibold mb-2">${safeText(car.driven)} • ${safeText(car.fuel)} • ${safeText(car.transmission)} • ${safeText(car.color) || 'N/A'}</p>
-                        <div class="flex justify-between items-center pt-2 border-t border-dashed">
-                            <div>
-                                <span class="text-[9px] uppercase font-bold text-gray-400 block leading-none">Price Expectation</span>
-                                <span class="font-black text-slate-900 text-base">₹${money(car.price)}</span>
-                            </div>
-                            <a onclick="event.stopPropagation()" href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20the%20${encodeURIComponent(safeText(car.title))}%20advertised%20on%20No%20Dealer." target="_blank" class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl hover:bg-red-700 transition-all">Contact</a>
-                        </div>
-                    </div>
-                `;
-            });
-        }
+    const { data } = await query;
+
+    const cars = data || [];
+
+    const grid = document.getElementById('carGrid');
+    const noStock = document.getElementById('noStockMessage');
+
+    grid.innerHTML = "";
+
+    if(cars.length === 0){
+        noStock.style.display = "block";
+        return;
+    }
+
+    noStock.style.display = "none";
+
+    cars.forEach(car => {
+
+        const gallery = Array.isArray(car.images) && car.images.length > 0
+            ? car.images
+            : (car.imageSrc ? [car.imageSrc] : []);
+
+        const img = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+
+        grid.innerHTML += `
+        <div onclick="openCarDetailsById(${car.id})" class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative group hover:shadow-md transition-all cursor-pointer">
+
+            <div class="relative">
+                <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50">
+            </div>
+
+            <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">
+                ${car.year} Model
+            </span>
+
+            <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase tracking-tight">
+                ${car.title}
+            </h4>
+
+            <p class="text-xs text-gray-500 font-semibold mb-2">
+                ${car.driven} • ${car.fuel} • ${car.transmission}
+            </p>
+
+            <div class="flex justify-between items-center pt-2 border-t border-dashed">
+                <div>
+                    <span class="text-[9px] uppercase font-bold text-gray-400 block leading-none">
+                        Price
+                    </span>
+
+                    <span class="font-black text-slate-900 text-base">
+                        ₹${Number(car.price).toLocaleString('en-IN')}
+                    </span>
+                </div>
+
+                <button class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl">
+                    View
+                </button>
+            </div>
+        </div>
+        `;
+    });
+}
 
         function openCarDetailsById(id) {
             const car = (window.CAR_CACHE || []).find(c => Number(c.id) === Number(id));
