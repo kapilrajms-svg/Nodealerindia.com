@@ -275,6 +275,54 @@
             </div>
 
             <div id="adminWorkspaceView" class="hidden text-white space-y-8 pb-16">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-black text-white uppercase">NoDealer OS</h2>
+            <p class="text-xs text-slate-400 mt-1">Your complete business control center</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button onclick="document.getElementById('carUploadForm').scrollIntoView({behavior:'smooth'})" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-3 rounded-xl text-xs uppercase">
+                Inventory
+            </button>
+
+            <button onclick="document.getElementById('adminLeadsTableBody').scrollIntoView({behavior:'smooth'})" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-3 rounded-xl text-xs uppercase">
+                Leads
+            </button>
+
+            <button onclick="document.getElementById('pdiFormHomepage').scrollIntoView({behavior:'smooth'})" class="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-3 rounded-xl text-xs uppercase">
+                PDI
+            </button>
+
+            <button onclick="renderCars(); loadAdminInventoryDirectory(); loadAdminLeadsDashboard();" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-4 py-3 rounded-xl text-xs uppercase">
+                Refresh
+            </button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
+            <p class="text-[10px] uppercase text-slate-500 font-bold">Control</p>
+            <h3 class="text-lg font-black text-blue-400">Inventory</h3>
+        </div>
+
+        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
+            <p class="text-[10px] uppercase text-slate-500 font-bold">CRM</p>
+            <h3 class="text-lg font-black text-amber-400">Lead Desk</h3>
+        </div>
+
+        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
+            <p class="text-[10px] uppercase text-slate-500 font-bold">Service</p>
+            <h3 class="text-lg font-black text-green-400">PDI</h3>
+        </div>
+
+        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
+            <p class="text-[10px] uppercase text-slate-500 font-bold">System</p>
+            <h3 class="text-lg font-black text-red-400">Live</h3>
+        </div>
+    </div>
+</div>
                 <div class="flex justify-between items-center border-b border-slate-800 pb-4">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-blue-500 flex items-center gap-2"><i class="fa-solid fa-gauge-high"></i> Master Management Console</h1>
