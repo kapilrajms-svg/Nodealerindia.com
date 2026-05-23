@@ -839,7 +839,7 @@ cars = data || [];
     alert("Updated locally. For Supabase full edit sync, we will connect edit next.");
 } else {
     const newCarForCloud = cars[cars.length - 1];
-
+delete newCarForCloud.id;
     const { error } = await supabaseClient
         .from('cars')
         .insert([newCarForCloud]);
