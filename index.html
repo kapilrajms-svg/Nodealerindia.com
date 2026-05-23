@@ -617,10 +617,15 @@ files.forEach(file => {
 }
 
         // MAIN SITE SYSTEM RENDER GRID
-        function renderCars() {
+        async function renderCars() {
     const grid = document.getElementById('carGrid');
     const noStock = document.getElementById('noStockMessage');
-    const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+    const { data } = await supabaseClient
+    .from('cars')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+const cars = data || [];
 
     grid.innerHTML = "";
 
