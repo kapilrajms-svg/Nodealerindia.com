@@ -830,7 +830,21 @@ cars = data || [];
                 alert("New vehicle successfully deployed live to the stock gallery grid!");
             }
 
-            localStorage.setItem('uploadedCars', JSON.stringify(cars));
+            if (editIdStr) {
+    alert("Updated locally. For Supabase full edit sync, we will connect edit next.");
+} else {
+    const newCarForCloud = cars[cars.length - 1];
+
+    const { error } = await supabaseClient
+        .from('cars')
+        .insert([newCarForCloud]);
+
+    if (error) {
+        alert("Supabase upload failed: " + error.message);
+        console.error(error);
+        return;
+    }
+}
             resetAdminFormState();
             loadAdminInventoryDirectory();
             renderCars();
