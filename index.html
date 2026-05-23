@@ -745,36 +745,40 @@ const cars = data || [];
 }
 
         // TRIGGER AND PRE-FILL DATA VECTORS FOR EDITING SEQUENCE
-        function initializeCarEdit(id) {
-            const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
-            const targetedCar = cars.find(c => c.id === id);
-            if(!targetedCar) return;
+       function initializeCarEdit(id) {
+    const cars = window.CAR_CACHE || [];
+    const targetedCar = cars.find(c => Number(c.id) === Number(id));
+    if (!targetedCar) {
+        alert("Car not found. Refresh admin and try again.");
+        return;
+    }
 
-            document.getElementById('editingCarId').value = targetedCar.id;
-            document.getElementById('carTitle').value = targetedCar.title;
-            document.getElementById('carPrice').value = targetedCar.price;
-            document.getElementById('carBrand').value = targetedCar.brand;
-            document.getElementById('carYear').value = targetedCar.year;
-            document.getElementById('carFuel').value = targetedCar.fuel;
-            document.getElementById('carTransmission').value = targetedCar.transmission;
-            document.getElementById('carDriven').value = targetedCar.driven;
-            document.getElementById('carColorAdmin').value = targetedCar.color || "";
-            
-            if(targetedCar.images && targetedCar.images.length > 0) {
-                ADMIN_UPLOADED_PHOTO_BASE64 = targetedCar.images;
-                document.getElementById('adminPhotoPreviewImg').src = targetedCar.images[0];
-                document.getElementById('adminPhotoPreviewBox').classList.remove('hidden');
-            } else {
-                resetAdminPhotoState();
-            }
+    document.getElementById('editingCarId').value = targetedCar.id;
+    document.getElementById('carTitle').value = targetedCar.title || "";
+    document.getElementById('carPrice').value = targetedCar.price || "";
+    document.getElementById('carBrand').value = targetedCar.brand || "";
+    document.getElementById('carYear').value = targetedCar.year || "";
+    document.getElementById('carFuel').value = targetedCar.fuel || "";
+    document.getElementById('carTransmission').value = targetedCar.transmission || "";
+    document.getElementById('carDriven').value = targetedCar.driven || "";
+    document.getElementById('carColorAdmin').value = targetedCar.color || "";
 
-            // Update Header Styling Configurations
-            document.getElementById('formActionTitle').innerHTML = `<i class="fa-solid fa-user-pen"></i> Update Existing Car Entry`;
-            document.getElementById('formActionTitle').className = "text-lg font-black uppercase tracking-tight text-blue-400";
-            document.getElementById('adminSubmitBtn').innerText = "Save Modified Details";
-            document.getElementById('adminSubmitBtn').className = "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md";
-            document.getElementById('adminCancelEditBtn').classList.remove('hidden');
-        }
+    if (targetedCar.images && targetedCar.images.length > 0) {
+        ADMIN_UPLOADED_PHOTO_BASE64 = targetedCar.images;
+        document.getElementById('adminPhotoPreviewImg').src = targetedCar.images[0];
+        document.getElementById('adminPhotoPreviewBox').classList.remove('hidden');
+    } else {
+        resetAdminPhotoState();
+    }
+
+    document.getElementById('formActionTitle').innerHTML = `<i class="fa-solid fa-user-pen"></i> Update Existing Car Entry`;
+    document.getElementById('formActionTitle').className = "text-lg font-black uppercase tracking-tight text-blue-400";
+    document.getElementById('adminSubmitBtn').innerText = "Save Modified Details";
+    document.getElementById('adminSubmitBtn').className = "flex-1 bg-blue-600 hover:bg-blue-700 text-white font-black py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md";
+    document.getElementById('adminCancelEditBtn').classList.remove('hidden');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
         function resetAdminFormState() {
             document.getElementById('carUploadForm').reset();
