@@ -811,22 +811,33 @@ cars = data || [];
             const editIdStr = document.getElementById('editingCarId').value;
 
             if(editIdStr) {
-                // RUN UPDATE LOGIC PIPELINE
-                const targetId = parseInt(editIdStr);
-                const carIndex = cars.findIndex(c => c.id === targetId);
-                if(carIndex !== -1) {
-                    cars[carIndex].title = document.getElementById('carTitle').value;
-                    cars[carIndex].price = document.getElementById('carPrice').value;
-                    cars[carIndex].brand = document.getElementById('carBrand').value;
-                    cars[carIndex].year = document.getElementById('carYear').value;
-                    cars[carIndex].fuel = document.getElementById('carFuel').value;
-                    cars[carIndex].transmission = document.getElementById('carTransmission').value;
-                    cars[carIndex].driven = document.getElementById('carDriven').value;
-                    cars[carIndex].color = document.getElementById('carColorAdmin').value;
-                    cars[carIndex].images = ADMIN_UPLOADED_PHOTO_BASE64; // Retain current base64 node setup
-                    alert("Stock parameters updated successfully inside directory matrix!");
-                }
-            } else {
+    const targetId = Number(editIdStr);
+
+    const updatedCar = {
+        title: document.getElementById('carTitle').value,
+        price: document.getElementById('carPrice').value,
+        brand: document.getElementById('carBrand').value,
+        year: document.getElementById('carYear').value,
+        fuel: document.getElementById('carFuel').value,
+        transmission: document.getElementById('carTransmission').value,
+        driven: document.getElementById('carDriven').value,
+        color: document.getElementById('carColorAdmin').value,
+        images: ADMIN_UPLOADED_PHOTO_BASE64
+    };
+
+    const { error } = await supabaseClient
+        .from('cars')
+        .update(updatedCar)
+        .eq('id', targetId);
+
+    if(error) {
+        alert("Update failed: " + error.message);
+        console.error(error);
+        return;
+    }
+
+    alert("Stock updated successfully.");
+}
                 // RUN FRESH INJECTION PIPELINE
                 const newCar = {
                     
