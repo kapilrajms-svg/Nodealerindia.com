@@ -838,6 +838,7 @@ cars = data || [];
 
     alert("Stock updated successfully.");
 }
+            else {
                 // RUN FRESH INJECTION PIPELINE
                 const newCar = {
                     
@@ -854,7 +855,7 @@ cars = data || [];
                 cars.push(newCar);
                 alert("New vehicle successfully deployed live to the stock gallery grid!");
             }
-
+            }  
             if (editIdStr) {
     alert("Updated locally. For Supabase full edit sync, we will connect edit next.");
 } else {
