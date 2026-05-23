@@ -1185,7 +1185,7 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
             const thumbnails = gallery.map(img => `
                 <img onclick="document.getElementById('mainCarDetailImage').src='${img}'"
                      src="${img}"
-                     class="h-20 w-full object-cover rounded-xl border cursor-pointer hover:scale-105 transition-all">
+                    class="h-28 w-full object-cover rounded-2xl border border-slate-200 cursor-pointer hover:scale-105 transition-all duration-300"
             `).join("");
 
             const box = document.createElement("div");
@@ -1194,9 +1194,9 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
                 <div class="bg-white max-w-6xl mx-auto rounded-3xl p-5 md:p-7 relative shadow-2xl">
                     <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-5 text-3xl font-black text-slate-500 hover:text-red-600">&times;</button>
 
-                    <div class="grid lg:grid-cols-2 gap-6">
+                    <div class="grid lg:grid-cols-2 gap-8">
                         <div>
-                            <img id="mainCarDetailImage" src="${mainImage}" class="w-full h-[260px] md:h-[480px] object-contain bg-slate-100 rounded-2xl border shadow-lg mb-3">
+                            <img id="mainCarDetailImage" src="${mainImage}" class="w-full h-[320px] md:h-[520px] object-cover bg-slate-100 rounded-2xl border shadow-xl mb-4 transition-all duration-300"
                             <div class="grid grid-cols-4 gap-2">
                                 ${thumbnails}
                             </div>
