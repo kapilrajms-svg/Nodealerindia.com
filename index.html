@@ -705,9 +705,14 @@ const cars = data || [];
 
 
         // LOAD SECURE DIRECTORY CONTROLLER INSIDE ADMIN INTERFACE
-        function loadAdminInventoryDirectory() {
+        async function loadAdminInventoryDirectory() {
     const tableBody = document.getElementById('adminStockTableBody');
-    const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+    const { data } = await supabaseClient
+    .from('cars')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+const cars = data || [];
     tableBody.innerHTML = "";
 
     if (cars.length === 0) {
