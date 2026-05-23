@@ -861,7 +861,7 @@ delete newCarForCloud.id;
         }
 
         // DELETE INVENTORY ENTRIES PIPELINE
-        async function executeCarDelete(id) {
+       async function executeCarDelete(id) {
     if (!confirm("Confirm delete this vehicle from live website?")) return;
 
     const { error } = await supabaseClient
@@ -874,6 +874,11 @@ delete newCarForCloud.id;
         console.error(error);
         return;
     }
+
+    alert("Vehicle deleted successfully.");
+    loadAdminInventoryDirectory();
+    renderCars();
+}
 
     alert("Vehicle deleted successfully.");
     loadAdminInventoryDirectory();
