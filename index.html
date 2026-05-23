@@ -799,21 +799,12 @@ const cars = data || [];
         }
 
         // DEPLOY / UPDATE COMBINED INTERFACES HANDLER
-        async function handleCarUpload(e) {
-            e.preventDefault();
-            let cars = [];
+       async function handleCarUpload(e) {
+    e.preventDefault();
 
-const { data } = await supabaseClient
-    .from('cars')
-    .select('*');
+    const editIdStr = document.getElementById('editingCarId').value;
 
-cars = data || [];
-            const editIdStr = document.getElementById('editingCarId').value;
-
-            if(editIdStr) {
-    const targetId = Number(editIdStr);
-
-    const updatedCar = {
+    const carData = {
         title: document.getElementById('carTitle').value,
         price: document.getElementById('carPrice').value,
         brand: document.getElementById('carBrand').value,
@@ -825,56 +816,37 @@ cars = data || [];
         images: ADMIN_UPLOADED_PHOTO_BASE64
     };
 
-    const { error } = await supabaseClient
-        .from('cars')
-        .update(updatedCar)
-        .eq('id', targetId);
+    if (editIdStr) {
+        const { error } = await supabaseClient
+            .from('cars')
+            .update(carData)
+            .eq('id', Number(editIdStr));
 
-    if(error) {
-        alert("Update failed: " + error.message);
-        console.error(error);
-        return;
-    }
-
-    alert("Stock updated successfully.");
-}
-            else {
-                // RUN FRESH INJECTION PIPELINE
-                const newCar = {
-                    
-                    title: document.getElementById('carTitle').value,
-                    price: document.getElementById('carPrice').value,
-                    brand: document.getElementById('carBrand').value,
-                    year: document.getElementById('carYear').value,
-                    fuel: document.getElementById('carFuel').value,
-                    transmission: document.getElementById('carTransmission').value,
-                    driven: document.getElementById('carDriven').value,
-                    color: document.getElementById('carColorAdmin').value,
-                    images: ADMIN_UPLOADED_PHOTO_BASE64
-                };
-                cars.push(newCar);
-                alert("New vehicle successfully deployed live to the stock gallery grid!");
-            }
-            }  
-            if (editIdStr) {
-    alert("Updated locally. For Supabase full edit sync, we will connect edit next.");
-} else {
-    const newCarForCloud = cars[cars.length - 1];
-delete newCarForCloud.id;
-    const { error } = await supabaseClient
-        .from('cars')
-        .insert([newCarForCloud]);
-
-    if (error) {
-        alert("Supabase upload failed: " + error.message);
-        console.error(error);
-        return;
-    }
-}
-            resetAdminFormState();
-            loadAdminInventoryDirectory();
-            renderCars();
+        if (error) {
+            alert("Update failed: " + error.message);
+            console.error(error);
+            return;
         }
+
+        alert("Stock updated successfully.");
+    } else {
+        const { error } = await supabaseClient
+            .from('cars')
+            .insert([carData]);
+
+        if (error) {
+            alert("Upload failed: " + error.message);
+            console.error(error);
+            return;
+        }
+
+        alert("New vehicle successfully deployed live.");
+    }
+
+    resetAdminFormState();
+    loadAdminInventoryDirectory();
+    renderCars();
+}
 
         // DELETE INVENTORY ENTRIES PIPELINE
        async function executeCarDelete(id) {
