@@ -861,15 +861,24 @@ delete newCarForCloud.id;
         }
 
         // DELETE INVENTORY ENTRIES PIPELINE
-        function executeCarDelete(id) {
-            if(confirm("Confirm action: permanently wipe this vehicle entry out of system inventory archives?")) {
-                let cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
-                cars = cars.filter(car => car.id !== id);
-                localStorage.setItem('uploadedCars', JSON.stringify(cars));
-                loadAdminInventoryDirectory();
-                renderCars();
-            }
-        }
+        async function executeCarDelete(id) {
+    if (!confirm("Confirm delete this vehicle from live website?")) return;
+
+    const { error } = await supabaseClient
+        .from('cars')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        alert("Delete failed: " + error.message);
+        console.error(error);
+        return;
+    }
+
+    alert("Vehicle deleted successfully.");
+    loadAdminInventoryDirectory();
+    renderCars();
+}
 
         // RENDER LIVE INTAKE LEADS INSIDE SECURE CONTROLS PANEL
         function loadAdminLeadsDashboard() {
@@ -1009,31 +1018,54 @@ delete newCarForCloud.id;
 }
 function openCarDetails(car) {
     const gallery = car.images && car.images.length > 0 ? car.images : (car.imageSrc ? [car.imageSrc] : []);
-    const photos = gallery.map(img => `<img src="${img}" class="w-full h-44 object-cover rounded-xl border">`).join("");
+    const mainImage = gallery[0] || "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800";
+
+    const thumbnails = gallery.map(img => `
+        <img onclick="document.getElementById('mainCarDetailImage').src='${img}'"
+             src="${img}"
+             class="h-20 w-full object-cover rounded-xl border cursor-pointer hover:scale-105 transition-all">
+    `).join("");
 
     const box = document.createElement("div");
-    box.className = "fixed inset-0 bg-black/80 z-[99999] p-4 overflow-y-auto";
+    box.className = "fixed inset-0 bg-black/85 z-[99999] p-4 overflow-y-auto";
     box.innerHTML = `
-        <div class="bg-white max-w-4xl mx-auto rounded-2xl p-5 relative">
-            <button onclick="this.closest('.fixed').remove()" class="absolute top-3 right-4 text-3xl font-bold">&times;</button>
+        <div class="bg-white max-w-5xl mx-auto rounded-3xl p-5 md:p-7 relative shadow-2xl">
+            <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-5 text-3xl font-black text-slate-500 hover:text-red-600">&times;</button>
 
-            <h2 class="text-2xl font-black uppercase text-slate-900 mb-2">${car.title}</h2>
-            <p class="text-sm text-gray-500 mb-4">${car.year} • ${car.fuel} • ${car.transmission} • ${car.driven} • ${car.color || 'N/A'}</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <img id="mainCarDetailImage" src="${mainImage}" class="w-full h-[420px] object-cover rounded-2xl border shadow-lg mb-3">
+                    <div class="grid grid-cols-4 gap-2">
+                        ${thumbnails}
+                    </div>
+                </div>
 
-            <div class="grid md:grid-cols-2 gap-3 mb-5">
-                ${photos}
+                <div class="space-y-4">
+                    <div>
+                        <span class="bg-red-50 text-red-600 text-xs font-black px-3 py-1 rounded-full uppercase">Verified Owner Stock</span>
+                        <h2 class="text-3xl md:text-4xl font-black uppercase text-slate-900 mt-3">${car.title}</h2>
+                        <p class="text-sm text-gray-500 font-semibold mt-1">${car.year} Model • ${car.color || 'N/A'}</p>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-5 border">
+                        <p class="text-xs uppercase font-black text-gray-400">Price Expectation</p>
+                        <p class="text-4xl font-black text-slate-900">₹${Number(car.price).toLocaleString('en-IN')}</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-white border rounded-xl p-3"><b>Fuel</b><br>${car.fuel}</div>
+                        <div class="bg-white border rounded-xl p-3"><b>Transmission</b><br>${car.transmission}</div>
+                        <div class="bg-white border rounded-xl p-3"><b>Driven</b><br>${car.driven}</div>
+                        <div class="bg-white border rounded-xl p-3"><b>Brand</b><br>${car.brand || 'N/A'}</div>
+                    </div>
+
+                    <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(car.title)}%20listed%20on%20No%20Dealer."
+                       target="_blank"
+                       class="block text-center bg-green-500 hover:bg-green-600 text-white font-black py-4 rounded-2xl shadow-lg">
+                       WhatsApp For This Car
+                    </a>
+                </div>
             </div>
-
-            <div class="bg-slate-50 rounded-xl p-4 mb-4">
-                <p class="text-xs uppercase font-bold text-gray-400">Price Expectation</p>
-                <p class="text-3xl font-black text-slate-900">₹${Number(car.price).toLocaleString('en-IN')}</p>
-            </div>
-
-            <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(car.title)}"
-               target="_blank"
-               class="block text-center bg-green-500 text-white font-black py-4 rounded-xl">
-               WhatsApp For This Car
-            </a>
         </div>
     `;
     document.body.appendChild(box);
