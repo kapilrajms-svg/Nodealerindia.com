@@ -785,9 +785,15 @@ files.forEach(file => {
         }
 
         // DEPLOY / UPDATE COMBINED INTERFACES HANDLER
-        function handleCarUpload(e) {
+        async function handleCarUpload(e) {
             e.preventDefault();
-            const cars = JSON.parse(localStorage.getItem('uploadedCars')) || [];
+            let cars = [];
+
+const { data } = await supabaseClient
+    .from('cars')
+    .select('*');
+
+cars = data || [];
             const editIdStr = document.getElementById('editingCarId').value;
 
             if(editIdStr) {
