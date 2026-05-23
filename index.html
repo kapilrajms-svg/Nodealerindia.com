@@ -1179,65 +1179,88 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
         }
 
         function openCarDetails(car) {
-    const gallery = carGallery(car);
-    const mainImage = gallery[0] || "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800";
+    const gallery = Array.isArray(car.images) && car.images.length > 0
+        ? car.images
+        : (car.imageSrc ? [car.imageSrc] : []);
 
-    const thumbnails = gallery.map((img, index) => `
-        <button onclick="document.getElementById('mainCarDetailImage').src='${img}'" class="block">
-            <img src="${img}" class="h-24 w-full object-cover rounded-xl border border-slate-200 hover:scale-105 transition-all duration-300">
-        </button>
-    `).join("");
+    let currentIndex = 0;
 
     const box = document.createElement("div");
-    box.className = "fixed inset-0 bg-black/85 z-[99999] p-3 md:p-6 overflow-y-auto";
+    box.className = "fixed inset-0 bg-black/90 z-[99999] flex items-center justify-center p-3";
 
     box.innerHTML = `
-        <div class="bg-white max-w-6xl mx-auto rounded-3xl p-5 md:p-7 relative shadow-2xl max-h-none">
-            <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-5 text-3xl font-black text-slate-500 hover:text-red-600 z-10">&times;</button>
+        <div class="bg-white w-full max-w-4xl rounded-3xl overflow-hidden relative shadow-2xl">
 
-            <div class="grid lg:grid-cols-2 gap-8">
+            <button onclick="this.closest('.fixed').remove()" 
+                class="absolute top-3 right-4 z-20 bg-white text-slate-900 w-10 h-10 rounded-full text-2xl font-black shadow">
+                ×
+            </button>
+
+            <div class="bg-slate-950 p-3 text-white text-center font-black text-sm uppercase">
+                ${safeText(car.title)} • ${gallery.length} Photos
+            </div>
+
+            <div class="relative bg-black">
+                <img id="simpleSliderImage" 
+                    src="${gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800'}" 
+                    class="w-full h-[360px] md:h-[560px] object-contain bg-black">
+
+                <button onclick="changeCarPhoto(-1)" 
+                    class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 text-black w-11 h-11 rounded-full font-black text-xl shadow">
+                    ‹
+                </button>
+
+                <button onclick="changeCarPhoto(1)" 
+                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 text-black w-11 h-11 rounded-full font-black text-xl shadow">
+                    ›
+                </button>
+
+                <div id="simpleSliderCount" 
+                    class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs font-bold px-4 py-2 rounded-full">
+                    1 / ${gallery.length || 1}
+                </div>
+            </div>
+
+            <div class="p-5 space-y-4 max-h-[35vh] overflow-y-auto">
                 <div>
-                    <img id="mainCarDetailImage" src="${mainImage}" class="w-full h-[280px] md:h-[500px] object-contain bg-slate-100 rounded-2xl border shadow-xl mb-4">
-
-                    <div class="grid grid-cols-3 md:grid-cols-4 gap-3 pb-4">
-                        ${thumbnails}
-                    </div>
+                    <h2 class="text-2xl font-black text-slate-900 uppercase">${safeText(car.title)}</h2>
+                    <p class="text-sm text-gray-500 font-semibold">${safeText(car.year)} Model • ${safeText(car.color) || 'N/A'}</p>
                 </div>
 
-                <div class="space-y-5">
-                    <div>
-                        <span class="bg-red-50 text-red-600 text-xs font-black px-3 py-1 rounded-full uppercase">Verified Owner Stock</span>
-                        <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-900 mt-4">${safeText(car.title)}</h2>
-                        <p class="text-base text-gray-500 font-semibold mt-2">${safeText(car.year)} Model • ${safeText(car.color) || 'N/A'}</p>
-                    </div>
-
-                    <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-lg">
-                        <p class="text-xs uppercase font-black text-gray-400">Price Expectation</p>
-                        <p class="text-4xl font-black">₹${money(car.price)}</p>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div class="bg-white border rounded-2xl p-4 shadow-sm"><b>Fuel</b><br>${safeText(car.fuel)}</div>
-                        <div class="bg-white border rounded-2xl p-4 shadow-sm"><b>Transmission</b><br>${safeText(car.transmission)}</div>
-                        <div class="bg-white border rounded-2xl p-4 shadow-sm"><b>Driven</b><br>${safeText(car.driven)}</div>
-                        <div class="bg-white border rounded-2xl p-4 shadow-sm"><b>Brand</b><br>${safeText(car.brand) || 'N/A'}</div>
-                    </div>
-
-                    <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 text-sm text-blue-900 font-semibold">
-                        This listing is from a direct owner. Book PDI or contact support before final payment.
-                    </div>
-
-                    <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(car.title)}%20listed%20on%20No%20Dealer."
-                       target="_blank"
-                       class="block text-center bg-green-500 hover:bg-green-600 text-white font-black py-4 rounded-2xl shadow-lg text-lg">
-                       WhatsApp For This Car
-                    </a>
+                <div class="bg-slate-900 text-white rounded-2xl p-4">
+                    <p class="text-[10px] uppercase text-gray-400 font-bold">Price Expectation</p>
+                    <p class="text-3xl font-black">₹${money(car.price)}</p>
                 </div>
+
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="border rounded-xl p-3"><b>Fuel</b><br>${safeText(car.fuel)}</div>
+                    <div class="border rounded-xl p-3"><b>Transmission</b><br>${safeText(car.transmission)}</div>
+                    <div class="border rounded-xl p-3"><b>Driven</b><br>${safeText(car.driven)}</div>
+                    <div class="border rounded-xl p-3"><b>Brand</b><br>${safeText(car.brand) || 'N/A'}</div>
+                </div>
+
+                <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(car.title)}%20listed%20on%20No%20Dealer."
+                    target="_blank"
+                    class="block text-center bg-green-500 text-white font-black py-4 rounded-2xl">
+                    WhatsApp For This Car
+                </a>
             </div>
         </div>
     `;
 
     document.body.appendChild(box);
+
+    window.changeCarPhoto = function(step) {
+        if (!gallery.length) return;
+
+        currentIndex = currentIndex + step;
+
+        if (currentIndex < 0) currentIndex = gallery.length - 1;
+        if (currentIndex >= gallery.length) currentIndex = 0;
+
+        document.getElementById("simpleSliderImage").src = gallery[currentIndex];
+        document.getElementById("simpleSliderCount").innerText = `${currentIndex + 1} / ${gallery.length}`;
+    };
 }
     </script>
 </body>
