@@ -620,7 +620,7 @@ checkUrlRoutingHash();
             const enteredUser = document.getElementById('loginUser').value.trim();
             const enteredPass = document.getElementById('loginPass').value;
 
-            if (enteredUser !== MASTER_USER || enteredPass !== MASTER_PASS) {
+            if(enteredUser.toLowerCase() !== "admin" || enteredPass !== "Rudraksh@2026") {
                 alert("ACCESS DENIED: Critical verification mismatch detected.");
                 return;
             }
