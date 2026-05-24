@@ -1066,6 +1066,16 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                                     <button onclick="addLeadNote('${log.timestamp}')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Add Note</button>
                                     <button onclick="aiSuggestLeadAction('${log.timestamp}')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">AI Suggest</button>
                                 </div>
+                                <button onclick="setFollowUpDate('${log.timestamp}')"
+    class="mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
+    Set Follow-Up Date
+</button>
+
+${log.followUpDate ? `
+    <div class="mt-2 bg-orange-950/40 border border-orange-800 rounded-lg p-2 text-[10px] text-orange-200">
+        <strong class="text-orange-300">Follow-Up Date:</strong> ${log.followUpDate}
+    </div>
+` : ''}
 
                                 ${log.aiSuggestion ? `
                                     <div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200">
@@ -1524,6 +1534,28 @@ ${car.status === 'sold'
     setText("negotiationLeadsCount", negotiations);
     setText("closedLeadsCount", closed);
     setText("followUpCount", followUps);
+}
+        function setFollowUpDate(timestamp) {
+    const followUpDate = prompt("Enter follow-up date, example: 2026-05-25 or Tomorrow 4 PM");
+
+    if (!followUpDate) return;
+
+    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+
+    const updatedLogs = logs.map(log => {
+        if (log.timestamp === timestamp) {
+            return {
+                ...log,
+                followUpDate: followUpDate
+            };
+        }
+
+        return log;
+    });
+
+    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
+    loadAdminLeadsDashboard();
+    updateActionCenter();
 }
     </script>
 </body>
