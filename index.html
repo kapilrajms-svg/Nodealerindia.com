@@ -373,7 +373,18 @@
                                     <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1">Vehicle Color</label>
                                     <input type="text" id="carColorAdmin" required placeholder="e.g. White" class="w-full bg-slate-950 text-white border border-slate-800 p-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-blue-500">
                                 </div>
+                                <div>
+    <label class="text-[10px] uppercase text-slate-400 font-bold">Vehicle Status</label>
+
+    <select id="carStatus"
+        class="w-full mt-1 bg-black/40 border border-slate-800 rounded-xl px-3 py-3 text-sm text-white">
+        <option value="available">Available</option>
+        <option value="reserved">Reserved</option>
+        <option value="sold">Sold</option>
+    </select>
+</div>
                             </div>
+                            
                             <div class="border border-dashed border-slate-800 rounded-xl p-3 bg-slate-950">
                                 <label class="block text-[9px] font-bold uppercase text-slate-400 mb-1"><i class="fa-solid fa-image mr-1 text-blue-500"></i> Stock Image Asset File (Device Upload)</label>
                                 <input
@@ -817,6 +828,7 @@ checkUrlRoutingHash();
             document.getElementById('carTransmission').value = targetedCar.transmission || "";
             document.getElementById('carDriven').value = targetedCar.driven || "";
             document.getElementById('carColorAdmin').value = targetedCar.color || "";
+            status: document.getElementById('carStatus').value,
 
             const gallery = carGallery(targetedCar);
             if (gallery.length > 0) {
@@ -874,6 +886,7 @@ checkUrlRoutingHash();
                 transmission: document.getElementById('carTransmission').value.trim(),
                 driven: document.getElementById('carDriven').value.trim(),
                 color: document.getElementById('carColorAdmin').value.trim(),
+                status: document.getElementById('carStatus').value,
                 images: ADMIN_UPLOADED_PHOTO_BASE64
             };
 
@@ -1245,6 +1258,16 @@ checkUrlRoutingHash();
 
             <div class="p-5 space-y-4 max-h-[35vh] overflow-y-auto">
                 <div>
+                <div class="flex gap-2 mb-2">
+
+${car.status === 'sold'
+? '<span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Sold</span>'
+: car.status === 'reserved'
+? '<span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Reserved</span>'
+: '<span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Available</span>'
+}
+
+</div>
                     <h2 class="text-2xl font-black text-slate-900 uppercase">${safeText(car.title)}</h2>
                     <p class="text-sm text-gray-500 font-semibold">${safeText(car.year)} Model • ${safeText(car.color) || 'N/A'}</p>
                 </div>
