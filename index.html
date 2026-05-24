@@ -617,6 +617,7 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
         let ADMIN_UPLOADED_PHOTO_BASE64 = [];
         let ADMIN_SELECTED_PHOTO_FILES = [];
         window.CAR_CACHE = [];
+        window.LEAD_CACHE = [];
         window.ACTIVE_LEAD_FILTER = 'all';
 
         if (!localStorage.getItem('clientInquiries')) {
@@ -680,15 +681,16 @@ checkUrlRoutingHash();
             document.getElementById('loginUser').value = "";
             document.getElementById('loginPass').value = "";
         }
+        async function executeAdminLogin() {
+            document.getElementById('adminAuthView').classList.add('hidden');
+            document.getElementById('adminWorkspaceView').classList.remove('hidden');
 
-       function executeAdminLogin() {
-    document.getElementById('adminAuthView').classList.add('hidden');
-    document.getElementById('adminWorkspaceView').classList.remove('hidden');
+            await migrateLocalLeadsToSupabase();
+            await loadAdminInventoryDirectory();
+            await loadAdminLeadsDashboard();
+            updateActionCenter();
+        }
 
-    loadAdminInventoryDirectory();
-    loadAdminLeadsDashboard();
-    updateActionCenter();
-}
 
         function openSellModal() {
             document.getElementById('sellModal').classList.remove('hidden');
@@ -1066,49 +1068,144 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             await loadAdminInventoryDirectory();
             await renderCars();
         }
+        function mapLeadRowToLog(row) {
+            const raw = row.raw_data || {};
+            return {
+                id: row.id,
+                submissionType: row.submission_type || raw.submissionType || "Website Lead",
+                leadStatus: row.lead_status || raw.leadStatus || "New Lead",
+                name: row.name || raw.name || "",
+                phone: row.phone || raw.phone || "",
+                location: row.location || raw.location || "",
+                carBrand: row.car_brand || raw.carBrand || "",
+                carModel: row.car_model || raw.carModel || "",
+                carYear: row.car_year || raw.carYear || "",
+                carColor: row.car_color || raw.carColor || "",
+                note: row.note || raw.note || "",
+                aiSuggestion: row.ai_suggestion || raw.aiSuggestion || "",
+                followUpReminder: row.follow_up_reminder || raw.followUpReminder || "",
+                followUpDate: row.follow_up_date || raw.followUpDate || "",
+                source: row.source || raw.source || "Website",
+                timestamp: row.created_at || raw.timestamp || new Date().toISOString(),
+                attachedPhotosData: raw.attachedPhotosData || [],
+                attachedPhotosCount: raw.attachedPhotosCount || 0,
+                rawData: raw
+            };
+        }
 
-        function loadAdminLeadsDashboard() {
+        function buildLeadRowFromPayload(payload) {
+            return {
+                submission_type: payload.submissionType || "Website Lead",
+                name: payload.name || "",
+                phone: payload.phone || "",
+                location: payload.location || "",
+                car_brand: payload.carBrand || "",
+                car_model: payload.carModel || "",
+                car_year: payload.carYear || "",
+                car_color: payload.carColor || "",
+                lead_status: payload.leadStatus || "New Lead",
+                note: payload.note || null,
+                ai_suggestion: payload.aiSuggestion || null,
+                follow_up_reminder: payload.followUpReminder || null,
+                follow_up_date: payload.followUpDate || null,
+                source: payload.source || "Website",
+                raw_data: payload
+            };
+        }
+
+        async function saveLeadToSupabase(payload) {
+            if (!ensureSupabase()) return false;
+
+            const { error } = await supabaseClient
+                .from('leads')
+                .insert([buildLeadRowFromPayload(payload)]);
+
+            if (error) {
+                console.error("Lead cloud save failed:", error);
+                alert("Lead could not be saved to Supabase: " + error.message);
+                return false;
+            }
+
+            return true;
+        }
+
+        async function migrateLocalLeadsToSupabase() {
+            if (!ensureSupabase()) return;
+            if (localStorage.getItem('legacyLeadsMigratedToSupabase') === 'yes') return;
+
+            const oldLogs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            if (!oldLogs.length) {
+                localStorage.setItem('legacyLeadsMigratedToSupabase', 'yes');
+                return;
+            }
+
+            const rows = oldLogs.map(log => buildLeadRowFromPayload({
+                ...log,
+                source: log.source || "Old Browser Backup"
+            }));
+
+            const { error } = await supabaseClient
+                .from('leads')
+                .insert(rows);
+
+            if (!error) {
+                localStorage.setItem('legacyLeadsMigratedToSupabase', 'yes');
+            } else {
+                console.warn("Old local leads were not migrated:", error);
+            }
+        }
+
+        async function loadAdminLeadsDashboard() {
             const tableBody = document.getElementById('adminLeadsTableBody');
-            const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
             const searchTerm = (document.getElementById('leadSearchInput')?.value || '').toLowerCase();
+            tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">Loading cloud CRM leads...</td></tr>`;
+
+            if (!ensureSupabase()) return;
+
+            const { data, error } = await supabaseClient
+                .from('leads')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error(error);
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400 font-medium">Could not load Supabase leads: ${safeText(error.message)}</td></tr>`;
+                return;
+            }
+
+            const logs = (data || []).map(mapLeadRowToLog);
+            window.LEAD_CACHE = logs;
             tableBody.innerHTML = "";
 
             if (logs.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No customer inquiries or forms registered yet inside framework files.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No customer inquiries saved in Supabase yet.</td></tr>`;
                 updateActionCenter();
                 return;
             }
 
-            [...logs]
-.filter(log => {
-    const matchesSearch = JSON.stringify(log).toLowerCase().includes(searchTerm);
+            const filteredLogs = logs.filter(log => {
+                const matchesSearch = JSON.stringify(log).toLowerCase().includes(searchTerm);
+                const matchesStatus = window.ACTIVE_LEAD_FILTER === 'all' ? true : (log.leadStatus || 'New Lead') === window.ACTIVE_LEAD_FILTER;
+                return matchesSearch && matchesStatus;
+            });
 
-    const matchesStatus =
-        window.ACTIVE_LEAD_FILTER === 'all'
-        ? true
-        : (log.leadStatus || 'New Lead') === window.ACTIVE_LEAD_FILTER;
+            if (filteredLogs.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No leads match this search/filter.</td></tr>`;
+                updateActionCenter();
+                return;
+            }
 
-    return matchesSearch && matchesStatus;
-})
-.reverse()
-.forEach(log => {
+            filteredLogs.forEach(log => {
                 let formattedDetails = "";
                 let imageNodeOutput = `<span class="text-slate-500 text-[11px]">No Assets Attached</span>`;
                 const phoneClean = safeText(log.phone).replace(/\D/g, '');
                 const status = log.leadStatus || 'New Lead';
-                const statusClass = status === 'Closed'
-                    ? 'bg-green-500/20 text-green-300'
-                    : status === 'Negotiation'
-                    ? 'bg-amber-500/20 text-amber-300'
-                    : status === 'Contacted'
-                    ? 'bg-blue-500/20 text-blue-300'
-                    : 'bg-red-500/20 text-red-300';
+                const statusClass = status === 'Closed' ? 'bg-green-500/20 text-green-300' : status === 'Negotiation' ? 'bg-amber-500/20 text-amber-300' : status === 'Contacted' ? 'bg-blue-500/20 text-blue-300' : 'bg-red-500/20 text-red-300';
 
                 if (log.submissionType === "PDI Inspection Request") {
                     formattedDetails = `<strong>PDI Route Request</strong>`;
                 } else {
                     formattedDetails = `<span class="uppercase font-bold text-slate-200">${safeText(log.carBrand)} ${safeText(log.carModel)}</span><br><span class="text-[10px] text-slate-400">Year: ${safeText(log.carYear)} • Color: ${safeText(log.carColor) || 'N/A'}</span>`;
-
                     if (log.attachedPhotosData && log.attachedPhotosData.length > 0) {
                         imageNodeOutput = `<div class="flex flex-wrap gap-1">`;
                         log.attachedPhotosData.forEach(picData => {
@@ -1129,7 +1226,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                             <div class="flex gap-1 mt-1 flex-wrap">
                                 <span class="${statusClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${status}</span>
                                 <span class="bg-red-500/20 text-red-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">Hot Lead</span>
-                                <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">Instagram</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${safeText(log.source) || 'Website'}</span>
                             </div>
                             <span class="block text-slate-400 font-medium tracking-tight mt-1"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${safeText(log.phone)}</span>
                         </td>
@@ -1140,128 +1237,72 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                         <td class="p-3">
                             <div class="space-y-2">
                                 ${imageNodeOutput}
-
-                                <a href="https://wa.me/${phoneClean}"
-                                   target="_blank"
-                                   class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all">
-                                   <i class="fa-brands fa-whatsapp"></i>
-                                   WhatsApp Lead
-                                </a>
-
+                                <a href="https://wa.me/${phoneClean}" target="_blank" class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all"><i class="fa-brands fa-whatsapp"></i> WhatsApp Lead</a>
                                 <div class="flex flex-wrap gap-1 mt-2">
                                     <button onclick="updateLeadStatus('${log.timestamp}', 'Contacted')" class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black">Contacted</button>
                                     <button onclick="updateLeadStatus('${log.timestamp}', 'Negotiation')" class="bg-amber-500 text-black px-2 py-1 rounded text-[9px] font-black">Negotiation</button>
                                     <button onclick="updateLeadStatus('${log.timestamp}', 'Closed')" class="bg-green-600 text-white px-2 py-1 rounded text-[9px] font-black">Closed</button>
                                 </div>
-
                                 <div class="flex flex-wrap gap-1 mt-2">
                                     <button onclick="addLeadNote('${log.timestamp}')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Add Note</button>
                                     <button onclick="aiSuggestLeadAction('${log.timestamp}')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">AI Suggest</button>
                                 </div>
-                                <button onclick="setFollowUpDate('${log.timestamp}')"
-    class="mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
-    Set Follow-Up Date
-</button>
-
-${log.followUpDate ? `
-    <div class="mt-2 bg-orange-950/40 border border-orange-800 rounded-lg p-2 text-[10px] text-orange-200">
-        <strong class="text-orange-300">Follow-Up Date:</strong> ${log.followUpDate}
-    </div>
-` : ''}
-
-                                ${log.aiSuggestion ? `
-                                    <div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200">
-                                        <strong class="text-purple-300">AI:</strong> ${safeText(log.aiSuggestion)}<br>
-                                        <strong class="text-amber-300">Follow-Up:</strong> ${safeText(log.followUpReminder) || 'Not set'}
-                                    </div>
-                                ` : ''}
-
-                                ${log.note ? `
-                                    <div class="mt-2 bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-slate-300">
-                                        <strong class="text-amber-400">Note:</strong> ${safeText(log.note)}
-                                    </div>
-                                ` : ''}
-                                <button onclick="deleteLead('${log.timestamp}')"
-    class="mt-2 bg-red-700 hover:bg-red-800 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
-    Delete Lead
-</button>
+                                <button onclick="setFollowUpDate('${log.timestamp}')" class="mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Set Follow-Up Date</button>
+                                ${log.followUpDate ? `<div class="mt-2 bg-orange-950/40 border border-orange-800 rounded-lg p-2 text-[10px] text-orange-200"><strong class="text-orange-300">Follow-Up Date:</strong> ${safeText(log.followUpDate)}</div>` : ''}
+                                ${log.aiSuggestion ? `<div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200"><strong class="text-purple-300">AI:</strong> ${safeText(log.aiSuggestion)}<br><strong class="text-amber-300">Follow-Up:</strong> ${safeText(log.followUpReminder) || 'Not set'}</div>` : ''}
+                                ${log.note ? `<div class="mt-2 bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-slate-300"><strong class="text-amber-400">Note:</strong> ${safeText(log.note)}</div>` : ''}
+                                <button onclick="deleteLead('${log.timestamp}')" class="mt-2 bg-red-700 hover:bg-red-800 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Delete Lead</button>
                             </div>
                         </td>
-                    </tr>
-                `;
+                    </tr>`;
             });
 
             updateActionCenter();
         }
-
         function exportInquiriesToExcel() {
-            const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            if (logs.length === 0) {
-                alert("No leads database logs ready to initialize transmission extraction sequence.");
-                return;
-            }
-
-            let csvContent = "data:text/csv;charset=utf-8,Type,Name,Phone,Location,Details/Specs,Timestamp\n";
+            const logs = window.LEAD_CACHE || [];
+            if (logs.length === 0) { alert("No Supabase CRM leads ready to export."); return; }
+            let csvContent = "data:text/csv;charset=utf-8,Type,Status,Name,Phone,Location,Details/Specs,Source,Follow Up Date,Note,Timestamp\n";
             logs.forEach(l => {
                 let carSummary = l.carBrand ? `${l.carBrand} ${l.carModel} (Year: ${l.carYear}, Color: ${l.carColor || 'N/A'})` : 'PDI Booking Entry';
-                csvContent += `"${l.submissionType}","${l.name}","${l.phone}","${l.location || 'N/A'}","${carSummary}","${l.timestamp}"\n`;
+                csvContent += `"${l.submissionType}","${l.leadStatus || 'New Lead'}","${l.name}","${l.phone}","${l.location || 'N/A'}","${carSummary}","${l.source || 'Website'}","${l.followUpDate || ''}","${l.note || ''}","${l.timestamp}"\n`;
             });
-
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `NoDealer_Leads_MasterExport.csv`);
+            link.setAttribute("download", `NoDealer_Supabase_Leads_MasterExport.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
-
-        function handlePdiSubmit(e) {
+        async function handlePdiSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('pdiSubmitBtn');
-            btn.innerText = "Processing Sequence...";
+            btn.innerText = "Saving To Cloud CRM...";
             btn.disabled = true;
-
             const payload = {
-                submissionType: "PDI Inspection Request",
-                leadStatus: "New Lead",
+                submissionType: "PDI Inspection Request", leadStatus: "New Lead",
                 name: document.getElementById('pdiName').value,
                 phone: document.getElementById('pdiPhone').value,
                 location: document.getElementById('pdiLocation').value,
-                userIp: "Client Device Network",
-                timestamp: new Date().toISOString()
+                source: "Website PDI Form", userIp: "Client Device Network", timestamp: new Date().toISOString()
             };
-
-            const currentLogs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            currentLogs.push(payload);
-            localStorage.setItem('clientInquiries', JSON.stringify(currentLogs));
-
-            fetch(MAKE_WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                alert("PDI Inspection Request uploaded cleanly!");
+            try {
+                const saved = await saveLeadToSupabase(payload); if (!saved) return;
+                fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(err => console.warn("Webhook optional sync failed:", err));
+                alert("PDI lead saved permanently in Supabase CRM!");
                 document.getElementById('pdiFormHomepage').reset();
-                loadAdminLeadsDashboard();
-            }).catch(err => {
-                console.error("Webhook submission error: ", err);
-                alert("Submission error. Cloud entry endpoint vector offline.");
-            }).finally(() => {
-                btn.innerText = "Schedule PDI Inspection Slot";
-                btn.disabled = false;
-            });
+                await loadAdminLeadsDashboard();
+            } catch (err) { console.error(err); alert("Lead save error: " + err.message); }
+            finally { btn.innerText = "Schedule PDI Inspection Slot"; btn.disabled = false; }
         }
-
-        function handleCustomerSellSubmit(e) {
+        async function handleCustomerSellSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('custSellSubmitBtn');
-            btn.innerText = "Deploying To Cloud Bridge...";
+            btn.innerText = "Saving Lead To Cloud CRM...";
             btn.disabled = true;
-
             const payload = {
-                submissionType: "Private Car Selling Listing Form",
-                leadStatus: "New Lead",
+                submissionType: "Private Car Selling Listing Form", leadStatus: "New Lead",
                 name: document.getElementById('custName').value,
                 phone: document.getElementById('custPhone').value,
                 location: document.getElementById('custLocation').value,
@@ -1271,31 +1312,19 @@ ${log.followUpDate ? `
                 carColor: document.getElementById('custColor').value,
                 attachedPhotosCount: ATTACHED_BASE64_PHOTOS.length,
                 attachedPhotosData: ATTACHED_BASE64_PHOTOS,
-                userIp: "Client Private IP",
-                timestamp: new Date().toISOString()
+                source: "Website Sell Car Form", userIp: "Client Private IP", timestamp: new Date().toISOString()
             };
-
-            const currentLogs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-            currentLogs.push(payload);
-            localStorage.setItem('clientInquiries', JSON.stringify(currentLogs));
-
-            fetch(MAKE_WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                alert("Listing submission uploaded cleanly! Your photos and data are on the way.");
+            try {
+                const saved = await saveLeadToSupabase(payload); if (!saved) return;
+                fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(err => console.warn("Webhook optional sync failed:", err));
+                alert("Seller lead saved permanently in Supabase CRM!");
                 closeSellModal();
                 document.getElementById('customerSellForm').reset();
-                loadAdminLeadsDashboard();
-            }).catch(err => {
-                console.error("Webhook submission connection layout failure: ", err);
-                alert("Submission connection error. Check file matrix parameters.");
-            }).finally(() => {
-                btn.innerText = "Submit Ownership Data";
-                btn.disabled = false;
-            });
+                await loadAdminLeadsDashboard();
+            } catch (err) { console.error(err); alert("Lead save error: " + err.message); }
+            finally { btn.innerText = "Submit Ownership Data"; btn.disabled = false; }
         }
+
 
         async function applyFilters() {
 
@@ -1550,133 +1579,68 @@ ${car.status === 'sold'
 
     return uploadedUrls;
 }
-        function addLeadNote(timestamp) {
-    const note = prompt("Enter note for this lead:");
 
-    if (!note) return;
-
-    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-
-    const updatedLogs = logs.map(log => {
-        if (log.timestamp === timestamp) {
-            return {
-                ...log,
-                note: note
-            };
+        async function updateLeadStatus(timestamp, status) {
+            if (!ensureSupabase()) return;
+            const { error } = await supabaseClient.from('leads').update({ lead_status: status }).eq('created_at', timestamp);
+            if (error) { alert("Lead status update failed: " + error.message); console.error(error); return; }
+            await loadAdminLeadsDashboard(); updateActionCenter();
         }
 
-        return log;
-    });
-
-    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
-
-    loadAdminLeadsDashboard();
-    updateActionCenter();
-}
-        function aiSuggestLeadAction(timestamp) {
-    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-
-    const updatedLogs = logs.map(log => {
-        if (log.timestamp !== timestamp) return log;
-
-        let suggestion = "Follow up on WhatsApp and ask about budget, preferred model, and buying timeline.";
-        let followUp = "Follow up within 24 hours";
-
-        const text = `${log.submissionType || ''} ${log.carBrand || ''} ${log.carModel || ''} ${log.location || ''} ${log.note || ''}`.toLowerCase();
-
-        if (text.includes("pdi")) {
-            suggestion = "High intent buyer. Call today and confirm vehicle location for PDI booking.";
-            followUp = "Call today";
-        } else if (text.includes("sell") || text.includes("listing")) {
-            suggestion = "Seller lead. Ask for RC, odometer photo, expected price, and service history.";
-            followUp = "Follow up today";
-        } else if (log.leadStatus === "Contacted") {
-            suggestion = "Already contacted. Move to negotiation if budget and car preference are clear.";
-            followUp = "Follow up tomorrow";
-        } else if (log.leadStatus === "Negotiation") {
-            suggestion = "Negotiation stage. Send final price/value comparison and push for visit or token.";
-            followUp = "Follow up within 6 hours";
-        } else if (log.leadStatus === "Closed") {
-            suggestion = "Closed lead. Keep record for future referral or resale opportunity.";
-            followUp = "No follow-up needed";
+        async function addLeadNote(timestamp) {
+            const note = prompt("Enter note for this lead:"); if (!note) return; if (!ensureSupabase()) return;
+            const { error } = await supabaseClient.from('leads').update({ note }).eq('created_at', timestamp);
+            if (error) { alert("Note save failed: " + error.message); console.error(error); return; }
+            await loadAdminLeadsDashboard(); updateActionCenter();
         }
-
-        return {
-            ...log,
-            aiSuggestion: suggestion,
-            followUpReminder: followUp
-        };
-    });
-
-    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
-    loadAdminLeadsDashboard();
-}
+        async function aiSuggestLeadAction(timestamp) {
+            const logs = window.LEAD_CACHE || [];
+            const log = logs.find(item => item.timestamp === timestamp);
+            if (!log) return;
+            let suggestion = "Follow up on WhatsApp and ask about budget, preferred model, and buying timeline.";
+            let followUp = "Follow up within 24 hours";
+            const text = `${log.submissionType || ''} ${log.carBrand || ''} ${log.carModel || ''} ${log.location || ''} ${log.note || ''}`.toLowerCase();
+            if (text.includes("pdi")) { suggestion = "High intent buyer. Call today and confirm vehicle location for PDI booking."; followUp = "Call today"; }
+            else if (text.includes("sell") || text.includes("listing")) { suggestion = "Seller lead. Ask for RC, odometer photo, expected price, and service history."; followUp = "Follow up today"; }
+            else if (log.leadStatus === "Contacted") { suggestion = "Already contacted. Move to negotiation if budget and car preference are clear."; followUp = "Follow up tomorrow"; }
+            else if (log.leadStatus === "Negotiation") { suggestion = "Negotiation stage. Send final price/value comparison and push for visit or token."; followUp = "Follow up within 6 hours"; }
+            else if (log.leadStatus === "Closed") { suggestion = "Closed lead. Keep record for future referral or resale opportunity."; followUp = "No follow-up needed"; }
+            if (!ensureSupabase()) return;
+            const { error } = await supabaseClient.from('leads').update({ ai_suggestion: suggestion, follow_up_reminder: followUp }).eq('created_at', timestamp);
+            if (error) { alert("AI suggestion save failed: " + error.message); console.error(error); return; }
+            await loadAdminLeadsDashboard();
+        }
         function updateActionCenter() {
-    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-    const cars = window.CAR_CACHE || [];
-
-    const total = logs.length;
-    const newLeads = logs.filter(l => !l.leadStatus || l.leadStatus === "New Lead").length;
-    const negotiations = logs.filter(l => l.leadStatus === "Negotiation").length;
-    const closed = logs.filter(l => l.leadStatus === "Closed").length;
-    const followUps = logs.filter(l => l.followUpDate && l.leadStatus !== "Closed").length;
-
-    const liveStock = cars.length;
-    const reservedStock = cars.filter(c => safeText(c.status) === "reserved").length;
-    const soldStock = cars.filter(c => safeText(c.status) === "sold").length;
-
-    const setText = (id, value) => {
-        const el = document.getElementById(id);
-        if (el) el.innerText = value;
-    };
-
-    setText("totalLeadsCount", total);
-    setText("newLeadsCount", newLeads);
-    setText("negotiationLeadsCount", negotiations);
-    setText("closedLeadsCount", closed);
-    setText("followUpCount", followUps);
-    setText("liveStockCount", liveStock);
-    setText("reservedStockCount", reservedStock);
-    setText("soldStockCount", soldStock);
-}
-        function setFollowUpDate(timestamp) {
-    const followUpDate = prompt("Enter follow-up date, example: 2026-05-25 or Tomorrow 4 PM");
-
-    if (!followUpDate) return;
-
-    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-
-    const updatedLogs = logs.map(log => {
-        if (log.timestamp === timestamp) {
-            return {
-                ...log,
-                followUpDate: followUpDate
-            };
+            const logs = window.LEAD_CACHE || [];
+            const cars = window.CAR_CACHE || [];
+            const total = logs.length;
+            const newLeads = logs.filter(l => !l.leadStatus || l.leadStatus === "New Lead").length;
+            const negotiations = logs.filter(l => l.leadStatus === "Negotiation").length;
+            const closed = logs.filter(l => l.leadStatus === "Closed").length;
+            const followUps = logs.filter(l => l.followUpDate && l.leadStatus !== "Closed").length;
+            const liveStock = cars.length;
+            const reservedStock = cars.filter(c => safeText(c.status) === "reserved").length;
+            const soldStock = cars.filter(c => safeText(c.status) === "sold").length;
+            const setText = (id, value) => { const el = document.getElementById(id); if (el) el.innerText = value; };
+            setText("totalLeadsCount", total); setText("newLeadsCount", newLeads); setText("negotiationLeadsCount", negotiations); setText("closedLeadsCount", closed); setText("followUpCount", followUps); setText("liveStockCount", liveStock); setText("reservedStockCount", reservedStock); setText("soldStockCount", soldStock);
+        }
+        async function setFollowUpDate(timestamp) {
+            const followUpDate = prompt("Enter follow-up date, example: 2026-05-25 or Tomorrow 4 PM"); if (!followUpDate) return; if (!ensureSupabase()) return;
+            const { error } = await supabaseClient.from('leads').update({ follow_up_date: followUpDate }).eq('created_at', timestamp);
+            if (error) { alert("Follow-up date save failed: " + error.message); console.error(error); return; }
+            await loadAdminLeadsDashboard(); updateActionCenter();
+        }
+        function setLeadFilter(status) {
+            window.ACTIVE_LEAD_FILTER = status;
+            loadAdminLeadsDashboard();
+        }
+        async function deleteLead(timestamp) {
+            if (!confirm("Delete this lead permanently from Supabase CRM?")) return; if (!ensureSupabase()) return;
+            const { error } = await supabaseClient.from('leads').delete().eq('created_at', timestamp);
+            if (error) { alert("Lead delete failed: " + error.message); console.error(error); return; }
+            await loadAdminLeadsDashboard(); updateActionCenter();
         }
 
-        return log;
-    });
-
-    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
-    loadAdminLeadsDashboard();
-    updateActionCenter();
-}
-        function setLeadFilter(status) {
-    window.ACTIVE_LEAD_FILTER = status;
-    loadAdminLeadsDashboard();
-}
-        function deleteLead(timestamp) {
-    if (!confirm("Delete this lead permanently?")) return;
-
-    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
-
-    const updatedLogs = logs.filter(log => log.timestamp !== timestamp);
-
-    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
-
-    loadAdminLeadsDashboard();
-    updateActionCenter();
-}
     </script>
 </body>
 </html>
