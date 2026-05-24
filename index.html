@@ -616,17 +616,13 @@ checkUrlRoutingHash();
             document.getElementById('loginPass').value = "";
         }
 
-        function executeAdminLogin() {
-            const enteredUser = document.getElementById('loginUser').value.trim();
-            const enteredPass = document.getElementById('loginPass').value;
+       function executeAdminLogin() {
+    document.getElementById('adminAuthView').classList.add('hidden');
+    document.getElementById('adminWorkspaceView').classList.remove('hidden');
 
-            
-
-            document.getElementById('adminAuthView').classList.add('hidden');
-            document.getElementById('adminWorkspaceView').classList.remove('hidden');
-            loadAdminInventoryDirectory();
-            loadAdminLeadsDashboard();
-        }
+    loadAdminInventoryDirectory();
+    loadAdminLeadsDashboard();
+}
 
         function openSellModal() {
             document.getElementById('sellModal').classList.remove('hidden');
