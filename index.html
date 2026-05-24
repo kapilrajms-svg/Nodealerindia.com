@@ -471,6 +471,12 @@ class="block w-full text-xs text-slate-400 file:mr-4 file:py-1.5 file:px-3 file:
                         <div>
                             <h3 class="text-lg font-black uppercase tracking-tight text-amber-500"><i class="fa-solid fa-address-book"></i> Client Portal Log & Lead Captures</h3>
                             <p class="text-xs text-slate-400 mt-0.5">Every lead, data point, customer inquiry, and photo array in one clean CRM table.</p>
+                            <input
+    id="leadSearchInput"
+    oninput="loadAdminLeadsDashboard()"
+    type="text"
+    placeholder="Search leads by name, phone, city, car, source..."
+    class="w-full mt-4 bg-slate-950 border border-slate-800 text-white rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-amber-500">
                         </div>
                         <button onclick="exportInquiriesToExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md"><i class="fa-solid fa-file-csv"></i> Export Data Logs (CSV)</button>
                     </div>
@@ -991,6 +997,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         function loadAdminLeadsDashboard() {
             const tableBody = document.getElementById('adminLeadsTableBody');
             const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+            const searchTerm = (document.getElementById('leadSearchInput')?.value || '').toLowerCase();
             tableBody.innerHTML = "";
 
             if (logs.length === 0) {
@@ -999,7 +1006,10 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 return;
             }
 
-            [...logs].reverse().forEach(log => {
+            [...logs]
+.filter(log => JSON.stringify(log).toLowerCase().includes(searchTerm))
+.reverse()
+.forEach(log => {
                 let formattedDetails = "";
                 let imageNodeOutput = `<span class="text-slate-500 text-[11px]">No Assets Attached</span>`;
                 const phoneClean = safeText(log.phone).replace(/\D/g, '');
