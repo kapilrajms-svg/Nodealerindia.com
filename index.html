@@ -360,54 +360,6 @@
         </div>
     </div>
 </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-            <h2 class="text-2xl font-black text-white uppercase">NoDealer OS</h2>
-            <p class="text-xs text-slate-400 mt-1">Your complete business control center</p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <button onclick="document.getElementById('carUploadForm').scrollIntoView({behavior:'smooth'})" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-3 rounded-xl text-xs uppercase">
-                Inventory
-            </button>
-
-            <button onclick="document.getElementById('adminLeadsTableBody').scrollIntoView({behavior:'smooth'})" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-3 rounded-xl text-xs uppercase">
-                Leads
-            </button>
-
-            <button onclick="document.getElementById('pdiFormHomepage').scrollIntoView({behavior:'smooth'})" class="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-3 rounded-xl text-xs uppercase">
-                PDI
-            </button>
-
-            <button onclick="renderCars(); loadAdminInventoryDirectory(); loadAdminLeadsDashboard();" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-4 py-3 rounded-xl text-xs uppercase">
-                Refresh
-            </button>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
-        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
-            <p class="text-[10px] uppercase text-slate-500 font-bold">Control</p>
-            <h3 class="text-lg font-black text-blue-400">Inventory</h3>
-        </div>
-
-        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
-            <p class="text-[10px] uppercase text-slate-500 font-bold">CRM</p>
-            <h3 class="text-lg font-black text-amber-400">Lead Desk</h3>
-        </div>
-
-        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
-            <p class="text-[10px] uppercase text-slate-500 font-bold">Service</p>
-            <h3 class="text-lg font-black text-green-400">PDI</h3>
-        </div>
-
-        <div class="bg-slate-950 rounded-xl p-4 border border-slate-800">
-            <p class="text-[10px] uppercase text-slate-500 font-bold">System</p>
-            <h3 class="text-lg font-black text-red-400">Live</h3>
-        </div>
-    </div>
-</div>
                 <div class="flex justify-between items-center border-b border-slate-800 pb-4">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-blue-500 flex items-center gap-2"><i class="fa-solid fa-gauge-high"></i> Master Management Console</h1>
@@ -692,6 +644,7 @@ checkUrlRoutingHash();
 
     loadAdminInventoryDirectory();
     loadAdminLeadsDashboard();
+    updateActionCenter();
 }
 
         function openSellModal() {
@@ -1042,12 +995,22 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
             if (logs.length === 0) {
                 tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No customer inquiries or forms registered yet inside framework files.</td></tr>`;
+                updateActionCenter();
                 return;
             }
 
             [...logs].reverse().forEach(log => {
                 let formattedDetails = "";
                 let imageNodeOutput = `<span class="text-slate-500 text-[11px]">No Assets Attached</span>`;
+                const phoneClean = safeText(log.phone).replace(/\D/g, '');
+                const status = log.leadStatus || 'New Lead';
+                const statusClass = status === 'Closed'
+                    ? 'bg-green-500/20 text-green-300'
+                    : status === 'Negotiation'
+                    ? 'bg-amber-500/20 text-amber-300'
+                    : status === 'Contacted'
+                    ? 'bg-blue-500/20 text-blue-300'
+                    : 'bg-red-500/20 text-red-300';
 
                 if (log.submissionType === "PDI Inspection Request") {
                     formattedDetails = `<strong>PDI Route Request</strong>`;
@@ -1072,81 +1035,57 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                         <td class="p-3">
                             <span class="block font-bold text-white text-sm">${safeText(log.name)}</span>
                             <div class="flex gap-1 mt-1 flex-wrap">
-    <span class="bg-red-500/20 text-red-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">
-    <span class="${
-    log.leadStatus === 'Closed'
-    ? 'bg-green-500/20 text-green-300'
-    : log.leadStatus === 'Negotiation'
-    ? 'bg-amber-500/20 text-amber-300'
-    : log.leadStatus === 'Contacted'
-    ? 'bg-blue-500/20 text-blue-300'
-    : 'bg-red-500/20 text-red-300'
-} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">
-    ${log.leadStatus || 'New Lead'}
-</span>
-        Hot Lead
-    </span>
-
-    <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">
-        Instagram
-    </span>
-</div>
-                            <span class="block text-slate-400 font-medium tracking-tight"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${safeText(log.phone)}</span>
+                                <span class="${statusClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${status}</span>
+                                <span class="bg-red-500/20 text-red-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">Hot Lead</span>
+                                <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">Instagram</span>
+                            </div>
+                            <span class="block text-slate-400 font-medium tracking-tight mt-1"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${safeText(log.phone)}</span>
                         </td>
                         <td class="p-3">
                             <span class="block font-medium text-slate-200"><i class="fa-solid fa-location-dot text-[10px] text-red-400 mr-0.5"></i> ${safeText(log.location) || 'N/A'}</span>
                             <div class="mt-0.5 leading-tight">${formattedDetails}</div>
                         </td>
                         <td class="p-3">
-    <div class="space-y-2">
-        ${imageNodeOutput}
+                            <div class="space-y-2">
+                                ${imageNodeOutput}
 
-        <a href="https://wa.me/${log.phone.replace(/\D/g,'')}"
-           target="_blank"
-           class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all">
-           <i class="fa-brands fa-whatsapp"></i>
-           WhatsApp Lead
-        </a>
-        <div class="flex flex-wrap gap-1 mt-2">
-    <button onclick="updateLeadStatus('${log.timestamp}', 'Contacted')" class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black">
-        Contacted
-    </button>
+                                <a href="https://wa.me/${phoneClean}"
+                                   target="_blank"
+                                   class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all">
+                                   <i class="fa-brands fa-whatsapp"></i>
+                                   WhatsApp Lead
+                                </a>
 
-    <button onclick="updateLeadStatus('${log.timestamp}', 'Negotiation')" class="bg-amber-500 text-black px-2 py-1 rounded text-[9px] font-black">
-        Negotiation
-    </button>
+                                <div class="flex flex-wrap gap-1 mt-2">
+                                    <button onclick="updateLeadStatus('${log.timestamp}', 'Contacted')" class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black">Contacted</button>
+                                    <button onclick="updateLeadStatus('${log.timestamp}', 'Negotiation')" class="bg-amber-500 text-black px-2 py-1 rounded text-[9px] font-black">Negotiation</button>
+                                    <button onclick="updateLeadStatus('${log.timestamp}', 'Closed')" class="bg-green-600 text-white px-2 py-1 rounded text-[9px] font-black">Closed</button>
+                                </div>
 
-    <button onclick="updateLeadStatus('${log.timestamp}', 'Closed')" class="bg-green-600 text-white px-2 py-1 rounded text-[9px] font-black">
-        Closed
-    </button>
-</div>
-    </div>
-    <button onclick="addLeadNote('${log.timestamp}')"
-    class="mt-2 bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
-    Add Note
-    <button onclick="aiSuggestLeadAction('${log.timestamp}')"
-    class="mt-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
-    AI Suggest
-</button>
+                                <div class="flex flex-wrap gap-1 mt-2">
+                                    <button onclick="addLeadNote('${log.timestamp}')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Add Note</button>
+                                    <button onclick="aiSuggestLeadAction('${log.timestamp}')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">AI Suggest</button>
+                                </div>
 
-${log.aiSuggestion ? `
-    <div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200">
-        <strong class="text-purple-300">AI:</strong> ${log.aiSuggestion}
-        <br>
-<strong class="text-amber-300">Follow-Up:</strong> ${log.followUpReminder || 'Not set'}
-    </div>
-` : ''}
-</button>
+                                ${log.aiSuggestion ? `
+                                    <div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200">
+                                        <strong class="text-purple-300">AI:</strong> ${safeText(log.aiSuggestion)}<br>
+                                        <strong class="text-amber-300">Follow-Up:</strong> ${safeText(log.followUpReminder) || 'Not set'}
+                                    </div>
+                                ` : ''}
 
-${log.note ? `
-    <div class="mt-2 bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-slate-300">
-        <strong class="text-amber-400">Note:</strong> ${log.note}
-    </div>
-` : ''}
-</td>
+                                ${log.note ? `
+                                    <div class="mt-2 bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-slate-300">
+                                        <strong class="text-amber-400">Note:</strong> ${safeText(log.note)}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </td>
                     </tr>
                 `;
             });
+
+            updateActionCenter();
         }
 
         function exportInquiriesToExcel() {
@@ -1526,6 +1465,7 @@ ${car.status === 'sold'
     localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
 
     loadAdminLeadsDashboard();
+    updateActionCenter();
 }
         function aiSuggestLeadAction(timestamp) {
     const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
