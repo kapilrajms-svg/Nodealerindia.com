@@ -894,7 +894,7 @@ checkUrlRoutingHash();
                 transmission: document.getElementById('carTransmission').value.trim(),
                 driven: document.getElementById('carDriven').value.trim(),
                 color: document.getElementById('carColorAdmin').value.trim(),
-                document.getElementById('carStatus').value = targetedCar.status || "available";
+                status: document.getElementById('carStatus').value,
                 images: ADMIN_UPLOADED_PHOTO_BASE64
             };
 
