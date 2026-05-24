@@ -68,94 +68,211 @@
             </div>
         </header>
 
-        <section class="bg-gradient-to-b from-white to-slate-50 pt-12 pb-20 border-b border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-red-50 text-red-600 text-xs font-bold px-3 py-1.5 rounded-full">
-                        <i class="fa-solid fa-square-check"></i> Verified Listings • Absolute Transparency
+        <section class="relative overflow-hidden bg-slate-950 text-white">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(30,136,229,0.28),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(227,30,36,0.22),transparent_35%)]"></div>
+            <div class="absolute inset-0 opacity-20 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.08)_50%,transparent_100%)]"></div>
+
+            <div class="max-w-7xl mx-auto px-4 pt-14 pb-12 relative z-10 grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7 space-y-7">
+                    <div class="inline-flex items-center gap-2 bg-white/10 border border-white/10 text-white text-xs font-black px-4 py-2 rounded-full shadow-lg backdrop-blur">
+                        <i class="fa-solid fa-bolt text-amber-400"></i> India’s Premium Direct Owner Car Marketplace
                     </div>
-                    <h1 class="text-4xl md:text-6xl font-black text-slate-900 uppercase tracking-tight leading-none">
-                        Buy or Sell Cars <br>Directly From <span class="brand-red">Owners</span>
-                    </h1>
-                    <p class="text-gray-600 font-medium text-base md:text-lg max-w-xl">
-                        Skip pushy salesmen and hidden dealer markups. Connect safely and directly with individual private car owners across India.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-4 pt-2 max-w-sm">
-                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <i class="fa-solid fa-user-shield text-green-500 text-xl mb-1"></i>
-                            <span class="block text-[11px] font-bold uppercase text-slate-700">Real Owners Only</span>
+
+                    <div>
+                        <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tight leading-[0.92]">
+                            Buy Verified Cars <br>
+                            <span class="text-blue-400">Without Dealers</span><br>
+                            <span class="text-red-500">Without Drama.</span>
+                        </h1>
+                        <p class="text-slate-300 font-semibold text-base md:text-lg max-w-2xl mt-6 leading-relaxed">
+                            Browse direct-owner cars, inspect before buying, compare confidently, and connect instantly through NoDealer’s transparent marketplace.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
+                        <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                            <p class="text-2xl font-black text-white">0%</p>
+                            <p class="text-[10px] uppercase font-bold text-slate-400">Dealer Markup</p>
                         </div>
-                        <div class="bg-white p-3 rounded-xl border border-slate-100 shadow-sm text-center">
-                            <i class="fa-solid fa-shield-virus text-amber-500 text-xl mb-1"></i>
-                            <span class="block text-[11px] font-bold uppercase text-slate-700">100% Verified</span>
+                        <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                            <p class="text-2xl font-black text-white">150+</p>
+                            <p class="text-[10px] uppercase font-bold text-slate-400">PDI Checks</p>
+                        </div>
+                        <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                            <p class="text-2xl font-black text-white">8</p>
+                            <p class="text-[10px] uppercase font-bold text-slate-400">Photos Per Car</p>
+                        </div>
+                        <div class="bg-white/10 border border-white/10 rounded-2xl p-4 backdrop-blur">
+                            <p class="text-2xl font-black text-white">AI</p>
+                            <p class="text-[10px] uppercase font-bold text-slate-400">Lead Support</p>
                         </div>
                     </div>
 
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <button onclick="scrollToInventory()" class="bg-brand-red text-white text-sm font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-500/20 hover:bg-red-700 transition-all transform active:scale-95">Browse Active Stock</button>
-                        <button onclick="openSellModal()" class="bg-white border border-slate-200 text-slate-800 text-sm font-bold px-8 py-4 rounded-xl shadow-sm hover:bg-slate-50 transition-all transform active:scale-95 flex items-center gap-2">
-                            <i class="fa-solid fa-car brand-red"></i> List Your Car
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="scrollToInventory()" class="bg-brand-red hover:bg-red-700 text-white text-sm font-black px-8 py-4 rounded-2xl shadow-xl shadow-red-500/20 transition-all active:scale-95">
+                            Browse Verified Stock
+                        </button>
+                        <button onclick="openSellModal()" class="bg-white text-slate-950 text-sm font-black px-8 py-4 rounded-2xl shadow-xl hover:bg-slate-100 transition-all active:scale-95 flex items-center gap-2">
+                            <i class="fa-solid fa-car-side text-red-600"></i> Sell Your Car
                         </button>
                     </div>
                 </div>
-                <div class="lg:col-span-5 hidden lg:block relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-red-500 rounded-2xl blur-xl opacity-10"></div>
-                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800" class="relative w-full rounded-2xl shadow-xl border border-white" alt="Premium Car Marketplace Showcase">
-                </div>
-            </div>
-        </section>
 
-        <section class="py-16 bg-white border-b border-slate-100">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center max-w-xl mx-auto mb-12">
-                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 uppercase">How No Dealer Protects You</h2>
-                    <p class="text-gray-500 text-sm mt-2">A secure, simple process built entirely for private car buying and selling.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
-                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">01</span>
-                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-filter text-blue-600 text-xl"></i>
+                <div class="lg:col-span-5">
+                    <div class="bg-white text-slate-900 rounded-[2rem] p-5 shadow-2xl border border-white/20 relative overflow-hidden">
+                        <div class="absolute top-5 right-5 bg-green-500 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase z-10">Live Marketplace</div>
+                        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=900" class="w-full h-64 object-cover rounded-3xl border" alt="Premium Car Marketplace Showcase">
+                        <div class="grid grid-cols-3 gap-3 mt-4">
+                            <div class="bg-slate-50 rounded-2xl p-3 text-center border">
+                                <i class="fa-solid fa-camera text-blue-600 text-xl"></i>
+                                <p class="text-[10px] font-black uppercase mt-1">Gallery</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-2xl p-3 text-center border">
+                                <i class="fa-solid fa-shield-halved text-green-600 text-xl"></i>
+                                <p class="text-[10px] font-black uppercase mt-1">Verified</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-2xl p-3 text-center border">
+                                <i class="fa-brands fa-whatsapp text-green-500 text-xl"></i>
+                                <p class="text-[10px] font-black uppercase mt-1">Instant</p>
+                            </div>
                         </div>
-                        <h4 class="font-bold text-base mb-1 uppercase">Filter Owner Listings</h4>
-                        <p class="text-xs text-gray-600 leading-relaxed">Browse authentic listings uploaded directly by individual owners. Sort by your exact budget, brand choice, and transmission layout.</p>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
-                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">02</span>
-                        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-magnifying-glass-chart text-amber-600 text-xl"></i>
+                        <div class="mt-5 bg-slate-950 text-white rounded-3xl p-5">
+                            <p class="text-[10px] uppercase text-slate-400 font-bold">NoDealer Promise</p>
+                            <h3 class="text-xl font-black mt-1">Direct owner cars with inspection-first buying.</h3>
                         </div>
-                        <h4 class="font-bold text-base mb-1 uppercase">Book a PDI Check</h4>
-                        <p class="text-xs text-gray-600 leading-relaxed">Don't guess vehicle health. Request an expert on-site 150+ point Pre-Delivery Inspection to scan for hidden accidents or tamper flags.</p>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 relative">
-                        <span class="absolute top-4 right-6 text-4xl font-black text-slate-200">03</span>
-                        <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-handshake text-green-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-base mb-1 uppercase">Connect & Close Safely</h4>
-                        <p class="text-xs text-gray-600 leading-relaxed">Chat directly with the vehicle owner via secure WhatsApp routing, arrange a safe public test drive, verify papers, and trade seamlessly.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 bg-slate-900 text-white relative overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.15),transparent_50%)]"></div>
+        <section class="bg-white border-b border-slate-100 py-8">
+            <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="flex items-center gap-3 bg-slate-50 border rounded-2xl p-4">
+                    <i class="fa-solid fa-user-check text-blue-600 text-2xl"></i>
+                    <div><h4 class="font-black text-sm uppercase">Owner Direct</h4><p class="text-xs text-slate-500">No middleman pressure</p></div>
+                </div>
+                <div class="flex items-center gap-3 bg-slate-50 border rounded-2xl p-4">
+                    <i class="fa-solid fa-magnifying-glass-chart text-amber-500 text-2xl"></i>
+                    <div><h4 class="font-black text-sm uppercase">PDI Ready</h4><p class="text-xs text-slate-500">Inspect before payment</p></div>
+                </div>
+                <div class="flex items-center gap-3 bg-slate-50 border rounded-2xl p-4">
+                    <i class="fa-solid fa-images text-red-500 text-2xl"></i>
+                    <div><h4 class="font-black text-sm uppercase">Real Photos</h4><p class="text-xs text-slate-500">Multiple car angles</p></div>
+                </div>
+                <div class="flex items-center gap-3 bg-slate-50 border rounded-2xl p-4">
+                    <i class="fa-solid fa-headset text-green-600 text-2xl"></i>
+                    <div><h4 class="font-black text-sm uppercase">Fast Support</h4><p class="text-xs text-slate-500">WhatsApp assistance</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-12 relative z-20">
+            <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-2xl border border-slate-100 -mt-0">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-6">
+                    <div>
+                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Smart Search</span>
+                        <h2 class="text-2xl md:text-4xl font-black uppercase text-slate-950 mt-3">Find Your Next Car</h2>
+                        <p class="text-sm text-slate-500 font-semibold mt-1">Filter by budget, brand, fuel and transmission.</p>
+                    </div>
+                    <button onclick="applyFilters()" class="bg-slate-950 text-white px-6 py-3 rounded-2xl text-xs font-black uppercase hover:bg-slate-800">
+                        Refresh Results
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase mb-1.5 text-slate-500">Max Budget</label>
+                        <select id="filterBudget" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 text-slate-900 p-3 rounded-2xl text-xs sm:text-sm font-black focus:outline-none focus:border-blue-500">
+                            <option value="">All Budgets</option>
+                            <option value="400000">Under 4 Lakh</option>
+                            <option value="500000">Under 5 Lakh</option>
+                            <option value="600000">Under 6 Lakh</option>
+                            <option value="800000">Under 8 Lakh</option>
+                            <option value="1000000">Under 10 Lakh</option>
+                            <option value="1500000">Under 15 Lakh</option>
+                            <option value="2500000">Under 25 Lakh</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase mb-1.5 text-slate-500">Brand</label>
+                        <select id="filterBrand" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 text-slate-900 p-3 rounded-2xl text-xs sm:text-sm font-black focus:outline-none focus:border-blue-500">
+                            <option value="">All Brands</option>
+                            <option value="Maruti">Maruti</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Tata">Tata</option>
+                            <option value="Mahindra">Mahindra</option>
+                            <option value="Honda">Honda</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase mb-1.5 text-slate-500">Fuel Type</label>
+                        <select id="filterFuel" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 text-slate-900 p-3 rounded-2xl text-xs sm:text-sm font-black focus:outline-none focus:border-blue-500">
+                            <option value="">All Fuel Types</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="CNG">CNG</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase mb-1.5 text-slate-500">Transmission</label>
+                        <select id="filterTransmission" onchange="applyFilters()" class="w-full bg-slate-50 border border-slate-200 text-slate-900 p-3 rounded-2xl text-xs sm:text-sm font-black focus:outline-none focus:border-blue-500">
+                            <option value="">All Transmissions</option>
+                            <option value="Manual">Manual</option>
+                            <option value="Automatic">Automatic</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 mt-5">
+                    <button onclick="document.getElementById('filterBudget').value='500000'; applyFilters();" class="bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full text-xs font-black text-slate-700">Under ₹5L</button>
+                    <button onclick="document.getElementById('filterTransmission').value='Automatic'; applyFilters();" class="bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full text-xs font-black text-slate-700">Automatic</button>
+                    <button onclick="document.getElementById('filterFuel').value='Petrol'; applyFilters();" class="bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full text-xs font-black text-slate-700">Petrol</button>
+                    <button onclick="document.getElementById('filterFuel').value='CNG'; applyFilters();" class="bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full text-xs font-black text-slate-700">CNG</button>
+                    <button onclick="document.getElementById('filterBudget').value='';document.getElementById('filterBrand').value='';document.getElementById('filterFuel').value='';document.getElementById('filterTransmission').value=''; applyFilters();" class="bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-full text-xs font-black text-blue-700">Clear Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <main class="max-w-7xl mx-auto px-4 py-12">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-7 pb-4 border-b border-slate-200">
+                <div>
+                    <span class="bg-red-50 text-red-600 text-[10px] font-black px-3 py-1 rounded-full uppercase">Live Verified Inventory</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tight mt-3">Premium Owner Stock</h2>
+                    <p class="text-sm text-slate-500 font-semibold">Click any car to open full photo slider and details.</p>
+                </div>
+                <a href="https://wa.me/917838335143" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-black text-xs px-5 py-3 rounded-2xl inline-flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> Need Help Choosing?
+                </a>
+            </div>
+            <div id="carGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            <div id="noStockMessage" class="text-center p-16 bg-white rounded-3xl shadow-sm border border-slate-100 text-gray-400 font-bold max-w-md mx-auto mt-6">
+                <i class="fa-solid fa-car-tunnel text-4xl mb-3 text-slate-300 block"></i>
+                No vehicles matching parameters found.
+            </div>
+        </main>
+
+        <section class="bg-slate-950 text-white py-16 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.22),transparent_40%)]"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-7 space-y-4">
                     <span class="bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-amber-500/20">
                         <i class="fa-solid fa-shield-halved"></i> Buyer Protection Suite
                     </span>
-                    <h2 class="text-3xl md:text-4xl font-black uppercase tracking-tight">Book a Professional 150+ Point PDI Inspection Before Buying</h2>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight">Book a 150+ Point PDI Before You Buy</h2>
                     <p class="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
-                        Never buy a used car blindly. Our mechanics run comprehensive on-site diagnostics tracking engine compression, frame structures, and registry validity.
+                        Our inspection-first flow helps you check engine, body, tyres, odometer, accident clues and ownership red flags before you commit.
                     </p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 pt-3 max-w-2xl">
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4"><p class="text-xs font-black uppercase text-slate-400">Engine</p><p class="font-bold">Health Check</p></div>
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4"><p class="text-xs font-black uppercase text-slate-400">Body</p><p class="font-bold">Accident Scan</p></div>
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4"><p class="text-xs font-black uppercase text-slate-400">Papers</p><p class="font-bold">Document Review</p></div>
+                    </div>
                 </div>
-                <div class="lg:col-span-5 bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 w-full">
-                    <h3 class="text-lg font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-amber-400">
-                        <i class="fa-solid fa-calendar-check"></i> Secure Inspection Booking
+                <div class="lg:col-span-5 bg-white p-6 rounded-[2rem] border border-white/10 w-full shadow-2xl">
+                    <h3 class="text-lg font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-slate-950">
+                        <i class="fa-solid fa-calendar-check text-amber-500"></i> Secure Inspection Booking
                     </h3>
                     <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3 text-slate-900">
                         <input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
@@ -169,67 +286,53 @@
             </div>
         </section>
 
-        <section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-16 relative z-20">
-            <div class="bg-brand-blue rounded-2xl p-6 shadow-xl text-white">
-                <h3 class="font-heading font-bold text-base sm:text-xl uppercase mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass"></i> Search Filter Active Stock
-                </h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Max Budget (INR)</label>
-                        <select id="filterBudget" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Budgets</option>
-                            <option value="400000">Under 4 Lakh</option>
-                            <option value="500000">Under 5 Lakh</option>
-                            <option value="600000">Under 6 Lakh</option>
-                            <option value="800000">Under 8 Lakh</option>
-                            <option value="1000000">Under 10 Lakh</option>
-                        </select>
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">How It Works</span>
+                    <h2 class="text-3xl md:text-4xl font-black uppercase text-slate-950 mt-4">Buy Smarter In 3 Steps</h2>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-7 bg-slate-50 rounded-3xl border border-slate-100 relative">
+                        <span class="absolute top-5 right-6 text-5xl font-black text-slate-200">01</span>
+                        <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-5"><i class="fa-solid fa-filter text-blue-600 text-2xl"></i></div>
+                        <h4 class="font-black text-lg mb-2 uppercase">Browse Owner Cars</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Search by budget, brand, fuel and transmission. Open any car to see real photos and details.</p>
                     </div>
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Make / Brand</label>
-                        <select id="filterBrand" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Brands</option>
-                            <option value="Maruti">Maruti</option>
-                            <option value="Hyundai">Hyundai</option>
-                            <option value="Tata">Tata</option>
-                            <option value="Mahindra">Mahindra</option>
-                            <option value="Honda">Honda</option>
-                        </select>
+                    <div class="p-7 bg-slate-50 rounded-3xl border border-slate-100 relative">
+                        <span class="absolute top-5 right-6 text-5xl font-black text-slate-200">02</span>
+                        <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-5"><i class="fa-solid fa-magnifying-glass-chart text-amber-600 text-2xl"></i></div>
+                        <h4 class="font-black text-lg mb-2 uppercase">Book Inspection</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Request a professional PDI before final payment so you can avoid hidden problems.</p>
                     </div>
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Fuel Type</label>
-                        <select id="filterFuel" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Fuel Types</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="CNG">CNG</option>
-                            <option value="Diesel">Diesel</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold uppercase mb-1.5 text-blue-100">Transmission</label>
-                        <select id="filterTransmission" onchange="applyFilters()" class="w-full bg-white text-slate-800 p-2.5 rounded-xl text-xs sm:text-sm font-bold focus:outline-none shadow-sm">
-                            <option value="">All Transmissions</option>
-                            <option value="Manual">Manual</option>
-                            <option value="Automatic">Automatic</option>
-                        </select>
+                    <div class="p-7 bg-slate-50 rounded-3xl border border-slate-100 relative">
+                        <span class="absolute top-5 right-6 text-5xl font-black text-slate-200">03</span>
+                        <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-5"><i class="fa-solid fa-handshake text-green-600 text-2xl"></i></div>
+                        <h4 class="font-black text-lg mb-2 uppercase">Connect Safely</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Use WhatsApp support, verify documents and close directly with transparency.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <main class="max-w-7xl mx-auto px-4 py-12">
-            <div class="flex justify-between items-center mb-6 pb-2 border-b border-slate-200">
-                <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">Verified In-Stock Marketplace</h2>
-                <span class="bg-blue-100 text-blue-700 text-xs font-extrabold px-2.5 py-1 rounded-md uppercase">Private Seller Direct</span>
+        <section class="bg-slate-100 py-16">
+            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <span class="bg-white text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Sell On NoDealer</span>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-4 leading-tight">List Your Car Directly To Real Buyers</h2>
+                    <p class="text-slate-600 font-semibold mt-4 max-w-xl">Upload car details and photos. Your inquiry goes into our admin CRM so no lead gets lost.</p>
+                    <button onclick="openSellModal()" class="mt-6 bg-brand-red hover:bg-red-700 text-white font-black text-sm px-8 py-4 rounded-2xl shadow-lg">
+                        List Your Car Now
+                    </button>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-indian-rupee-sign text-green-600 text-2xl"></i><h4 class="font-black mt-3">Better Value</h4><p class="text-xs text-slate-500 mt-1">Avoid low dealer offers.</p></div>
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-camera text-blue-600 text-2xl"></i><h4 class="font-black mt-3">8 Photos</h4><p class="text-xs text-slate-500 mt-1">Show your car clearly.</p></div>
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-users text-purple-600 text-2xl"></i><h4 class="font-black mt-3">Real Buyers</h4><p class="text-xs text-slate-500 mt-1">Direct customer leads.</p></div>
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-lock text-red-600 text-2xl"></i><h4 class="font-black mt-3">Organized CRM</h4><p class="text-xs text-slate-500 mt-1">Tracked by NoDealer OS.</p></div>
+                </div>
             </div>
-            <div id="carGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-            <div id="noStockMessage" class="text-center p-16 bg-white rounded-2xl shadow-sm border border-slate-100 text-gray-400 font-bold max-w-md mx-auto mt-6">
-                <i class="fa-solid fa-car-tunnel text-4xl mb-3 text-slate-300 block"></i>
-                No vehicles matching parameters found.
-            </div>
-        </main>
-
+        </section>
         <footer class="bg-white border-t border-slate-200 py-12 px-4">
             <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 text-xs text-gray-500">
                 <div>
@@ -1644,3 +1747,4 @@ ${car.status === 'sold'
     </script>
 </body>
 </html>
+
