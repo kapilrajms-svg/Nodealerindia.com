@@ -1130,6 +1130,10 @@ ${log.followUpDate ? `
                                         <strong class="text-amber-400">Note:</strong> ${safeText(log.note)}
                                     </div>
                                 ` : ''}
+                                <button onclick="deleteLead('${log.timestamp}')"
+    class="mt-2 bg-red-700 hover:bg-red-800 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
+    Delete Lead
+</button>
                             </div>
                         </td>
                     </tr>
@@ -1600,6 +1604,18 @@ ${car.status === 'sold'
         function setLeadFilter(status) {
     window.ACTIVE_LEAD_FILTER = status;
     loadAdminLeadsDashboard();
+}
+        function deleteLead(timestamp) {
+    if (!confirm("Delete this lead permanently?")) return;
+
+    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+
+    const updatedLogs = logs.filter(log => log.timestamp !== timestamp);
+
+    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
+
+    loadAdminLeadsDashboard();
+    updateActionCenter();
 }
     </script>
 </body>
