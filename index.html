@@ -1083,6 +1083,16 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
     </button>
 </div>
     </div>
+    <button onclick="addLeadNote('${log.timestamp}')"
+    class="mt-2 bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
+    Add Note
+</button>
+
+${log.note ? `
+    <div class="mt-2 bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-slate-300">
+        <strong class="text-amber-400">Note:</strong> ${log.note}
+    </div>
+` : ''}
 </td>
                     </tr>
                 `;
@@ -1444,6 +1454,28 @@ ${car.status === 'sold'
     }
 
     return uploadedUrls;
+}
+        function addLeadNote(timestamp) {
+    const note = prompt("Enter note for this lead:");
+
+    if (!note) return;
+
+    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+
+    const updatedLogs = logs.map(log => {
+        if (log.timestamp === timestamp) {
+            return {
+                ...log,
+                note: note
+            };
+        }
+
+        return log;
+    });
+
+    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
+
+    loadAdminLeadsDashboard();
 }
     </script>
 </body>
