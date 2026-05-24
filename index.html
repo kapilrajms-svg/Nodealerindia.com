@@ -333,7 +333,7 @@
         </button>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-4">
         <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
             <p class="text-[10px] text-slate-500 uppercase font-bold">Total Leads</p>
             <h2 id="totalLeadsCount" class="text-2xl font-black text-white mt-1">0</h2>
@@ -357,6 +357,21 @@
         <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
             <p class="text-[10px] text-slate-500 uppercase font-bold">AI Follow-Ups</p>
             <h2 id="followUpCount" class="text-2xl font-black text-purple-400 mt-1">0</h2>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">Live Stock</p>
+            <h2 id="liveStockCount" class="text-2xl font-black text-blue-400 mt-1">0</h2>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">Reserved Cars</p>
+            <h2 id="reservedStockCount" class="text-2xl font-black text-orange-400 mt-1">0</h2>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">Sold Cars</p>
+            <h2 id="soldStockCount" class="text-2xl font-black text-red-400 mt-1">0</h2>
         </div>
     </div>
 </div>
@@ -847,12 +862,19 @@ checkUrlRoutingHash();
 
             if (cars.length === 0) {
                 tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No live active stock vectors saved in directory index.</td></tr>`;
+                updateActionCenter();
                 return;
             }
 
             cars.forEach(car => {
                 const gallery = carGallery(car);
                 const thumbnail = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=100';
+                const carStatus = safeText(car.status) || 'available';
+                const statusBadgeClass = carStatus === 'sold'
+                    ? 'bg-red-500/20 text-red-300'
+                    : carStatus === 'reserved'
+                    ? 'bg-amber-500/20 text-amber-300'
+                    : 'bg-emerald-500/20 text-emerald-300';
 
                 tableBody.innerHTML += `
                     <tr class="hover:bg-slate-800/30 transition-all">
@@ -861,21 +883,50 @@ checkUrlRoutingHash();
                             <div>
                                 <span class="font-bold block text-white text-sm uppercase">${safeText(car.title)}</span>
                                 <span class="text-[10px] text-slate-400 block">${safeText(car.driven)} • ${safeText(car.fuel)} • ${safeText(car.transmission)} • ${safeText(car.color) || 'N/A'}</span>
+                                <span class="${statusBadgeClass} inline-block mt-1 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${carStatus}</span>
                             </div>
                         </td>
                         <td class="p-3 font-semibold text-slate-300">${safeText(car.year)}</td>
                         <td class="p-3 font-black text-emerald-400">₹${money(car.price)}</td>
-                        <td class="p-3 text-right space-x-1 whitespace-nowrap">
-                            <button onclick="initializeCarEdit(${car.id})" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all">
-                                <i class="fa-solid fa-pen-to-square"></i> Edit
-                            </button>
-                            <button onclick="executeCarDelete(${car.id})" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all">
-                                <i class="fa-solid fa-trash"></i> Delete
-                            </button>
+                        <td class="p-3 text-right whitespace-nowrap">
+                            <div class="flex flex-wrap justify-end gap-1">
+                                <button onclick="initializeCarEdit(${car.id})" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </button>
+                                <button onclick="executeCarDelete(${car.id})" class="bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white px-2 py-1 rounded text-[10px] font-bold uppercase transition-all">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </div>
+                            <div class="flex flex-wrap justify-end gap-1 mt-2">
+                                <button onclick="updateCarStatus(${car.id}, 'available')" class="bg-emerald-600/20 text-emerald-300 hover:bg-emerald-600 hover:text-white px-2 py-1 rounded text-[9px] font-black uppercase">Available</button>
+                                <button onclick="updateCarStatus(${car.id}, 'reserved')" class="bg-amber-500/20 text-amber-300 hover:bg-amber-500 hover:text-black px-2 py-1 rounded text-[9px] font-black uppercase">Reserved</button>
+                                <button onclick="updateCarStatus(${car.id}, 'sold')" class="bg-red-600/20 text-red-300 hover:bg-red-600 hover:text-white px-2 py-1 rounded text-[9px] font-black uppercase">Sold</button>
+                            </div>
                         </td>
                     </tr>
                 `;
             });
+
+            updateActionCenter();
+        }
+
+        async function updateCarStatus(id, status) {
+            if (!ensureSupabase()) return;
+
+            const { error } = await supabaseClient
+                .from('cars')
+                .update({ status })
+                .eq('id', Number(id));
+
+            if (error) {
+                alert("Status update failed: " + error.message);
+                console.error(error);
+                return;
+            }
+
+            await loadAdminInventoryDirectory();
+            await renderCars();
+            alert("Car status updated to " + status.toUpperCase());
         }
 
         function initializeCarEdit(id) {
@@ -1562,12 +1613,18 @@ ${car.status === 'sold'
 }
         function updateActionCenter() {
     const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+    const cars = window.CAR_CACHE || [];
 
     const total = logs.length;
     const newLeads = logs.filter(l => !l.leadStatus || l.leadStatus === "New Lead").length;
     const negotiations = logs.filter(l => l.leadStatus === "Negotiation").length;
     const closed = logs.filter(l => l.leadStatus === "Closed").length;
     const followUps = logs.filter(l => l.followUpDate && l.leadStatus !== "Closed").length;
+
+    const liveStock = cars.length;
+    const reservedStock = cars.filter(c => safeText(c.status) === "reserved").length;
+    const soldStock = cars.filter(c => safeText(c.status) === "sold").length;
+
     const setText = (id, value) => {
         const el = document.getElementById(id);
         if (el) el.innerText = value;
@@ -1578,6 +1635,9 @@ ${car.status === 'sold'
     setText("negotiationLeadsCount", negotiations);
     setText("closedLeadsCount", closed);
     setText("followUpCount", followUps);
+    setText("liveStockCount", liveStock);
+    setText("reservedStockCount", reservedStock);
+    setText("soldStockCount", soldStock);
 }
         function setFollowUpDate(timestamp) {
     const followUpDate = prompt("Enter follow-up date, example: 2026-05-25 or Tomorrow 4 PM");
