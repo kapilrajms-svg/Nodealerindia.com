@@ -1027,13 +1027,22 @@ checkUrlRoutingHash();
                 }
 
                 tableBody.innerHTML += `
-                    <tr class="hover:bg-slate-800/20 transition-all text-slate-300">
+                    <tr class="hover:bg-slate-800/20 transition-all text-slate-300 border-l-4 border-amber-500">
                         <td class="p-3">
                             <span class="block font-bold text-[11px] text-blue-400 uppercase tracking-wide">${safeText(log.submissionType)}</span>
                             <span class="text-[10px] font-mono text-slate-500">${safeText(log.timestamp).split('T')[0] || ""} @ ${(safeText(log.timestamp).split('T')[1] || "00:00").substring(0,5)}</span>
                         </td>
                         <td class="p-3">
                             <span class="block font-bold text-white text-sm">${safeText(log.name)}</span>
+                            <div class="flex gap-1 mt-1 flex-wrap">
+    <span class="bg-red-500/20 text-red-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">
+        Hot Lead
+    </span>
+
+    <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">
+        Instagram
+    </span>
+</div>
                             <span class="block text-slate-400 font-medium tracking-tight"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${safeText(log.phone)}</span>
                         </td>
                         <td class="p-3">
