@@ -1035,6 +1035,17 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                             <span class="block font-bold text-white text-sm">${safeText(log.name)}</span>
                             <div class="flex gap-1 mt-1 flex-wrap">
     <span class="bg-red-500/20 text-red-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">
+    <span class="${
+    log.leadStatus === 'Closed'
+    ? 'bg-green-500/20 text-green-300'
+    : log.leadStatus === 'Negotiation'
+    ? 'bg-amber-500/20 text-amber-300'
+    : log.leadStatus === 'Contacted'
+    ? 'bg-blue-500/20 text-blue-300'
+    : 'bg-red-500/20 text-red-300'
+} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">
+    ${log.leadStatus || 'New Lead'}
+</span>
         Hot Lead
     </span>
 
