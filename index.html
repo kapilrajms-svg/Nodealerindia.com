@@ -323,6 +323,44 @@
                     </div>
                 </div>
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h3 class="text-xl font-black uppercase text-white">Today’s Action Center</h3>
+            <p class="text-xs text-slate-400">AI sales overview for follow-ups and active deals</p>
+        </div>
+        <button onclick="updateActionCenter()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-black uppercase">
+            Refresh
+        </button>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">Total Leads</p>
+            <h2 id="totalLeadsCount" class="text-2xl font-black text-white mt-1">0</h2>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">New Leads</p>
+            <h2 id="newLeadsCount" class="text-2xl font-black text-red-400 mt-1">0</h2>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">Negotiation</p>
+            <h2 id="negotiationLeadsCount" class="text-2xl font-black text-amber-400 mt-1">0</h2>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">Closed</p>
+            <h2 id="closedLeadsCount" class="text-2xl font-black text-green-400 mt-1">0</h2>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 uppercase font-bold">AI Follow-Ups</p>
+            <h2 id="followUpCount" class="text-2xl font-black text-purple-400 mt-1">0</h2>
+        </div>
+    </div>
+</div>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
             <h2 class="text-2xl font-black text-white uppercase">NoDealer OS</h2>
@@ -1526,6 +1564,26 @@ ${car.status === 'sold'
 
     localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
     loadAdminLeadsDashboard();
+}
+        function updateActionCenter() {
+    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+
+    const total = logs.length;
+    const newLeads = logs.filter(l => !l.leadStatus || l.leadStatus === "New Lead").length;
+    const negotiations = logs.filter(l => l.leadStatus === "Negotiation").length;
+    const closed = logs.filter(l => l.leadStatus === "Closed").length;
+    const followUps = logs.filter(l => l.followUpReminder && l.followUpReminder !== "No follow-up needed").length;
+
+    const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = value;
+    };
+
+    setText("totalLeadsCount", total);
+    setText("newLeadsCount", newLeads);
+    setText("negotiationLeadsCount", negotiations);
+    setText("closedLeadsCount", closed);
+    setText("followUpCount", followUps);
 }
     </script>
 </body>
