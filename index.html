@@ -620,15 +620,7 @@ checkUrlRoutingHash();
             const enteredUser = document.getElementById('loginUser').value.trim();
             const enteredPass = document.getElementById('loginPass').value;
 
-            if(enteredUser.toLowerCase() !== "admin" || enteredPass !== "Rudraksh@2026") {
-                alert("ACCESS DENIED: Critical verification mismatch detected.");
-                return;
-            }
-
-            if (VERIFIED_DESKTOP_IP !== "182.69.176.207") {
-                alert("ACCESS ERROR: Network structure mapping mismatched. Authorization failed.");
-                return;
-            }
+            
 
             document.getElementById('adminAuthView').classList.add('hidden');
             document.getElementById('adminWorkspaceView').classList.remove('hidden');
