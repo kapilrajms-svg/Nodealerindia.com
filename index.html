@@ -477,6 +477,27 @@ class="block w-full text-xs text-slate-400 file:mr-4 file:py-1.5 file:px-3 file:
     type="text"
     placeholder="Search leads by name, phone, city, car, source..."
     class="w-full mt-4 bg-slate-950 border border-slate-800 text-white rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-amber-500">
+                            <div class="flex flex-wrap gap-2 mt-4">
+    <button onclick="setLeadFilter('all')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded-xl text-[10px] font-black uppercase">
+        All
+    </button>
+
+    <button onclick="setLeadFilter('New Lead')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl text-[10px] font-black uppercase">
+        New
+    </button>
+
+    <button onclick="setLeadFilter('Contacted')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-xl text-[10px] font-black uppercase">
+        Contacted
+    </button>
+
+    <button onclick="setLeadFilter('Negotiation')" class="bg-amber-500 hover:bg-amber-400 text-black px-3 py-2 rounded-xl text-[10px] font-black uppercase">
+        Negotiation
+    </button>
+
+    <button onclick="setLeadFilter('Closed')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-xl text-[10px] font-black uppercase">
+        Closed
+    </button>
+</div>
                         </div>
                         <button onclick="exportInquiriesToExcel()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md"><i class="fa-solid fa-file-csv"></i> Export Data Logs (CSV)</button>
                     </div>
@@ -581,6 +602,7 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
         let ADMIN_UPLOADED_PHOTO_BASE64 = [];
         let ADMIN_SELECTED_PHOTO_FILES = [];
         window.CAR_CACHE = [];
+        window.ACTIVE_LEAD_FILTER = 'all';
 
         if (!localStorage.getItem('clientInquiries')) {
             localStorage.setItem('clientInquiries', JSON.stringify([]));
@@ -1007,7 +1029,16 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             }
 
             [...logs]
-.filter(log => JSON.stringify(log).toLowerCase().includes(searchTerm))
+.filter(log => {
+    const matchesSearch = JSON.stringify(log).toLowerCase().includes(searchTerm);
+
+    const matchesStatus =
+        window.ACTIVE_LEAD_FILTER === 'all'
+        ? true
+        : (log.leadStatus || 'New Lead') === window.ACTIVE_LEAD_FILTER;
+
+    return matchesSearch && matchesStatus;
+})
 .reverse()
 .forEach(log => {
                 let formattedDetails = "";
@@ -1565,6 +1596,10 @@ ${car.status === 'sold'
     localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
     loadAdminLeadsDashboard();
     updateActionCenter();
+}
+        function setLeadFilter(status) {
+    window.ACTIVE_LEAD_FILTER = status;
+    loadAdminLeadsDashboard();
 }
     </script>
 </body>
