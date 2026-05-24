@@ -1095,6 +1095,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
             const payload = {
                 submissionType: "PDI Inspection Request",
+                leadStatus: "New Lead",
                 name: document.getElementById('pdiName').value,
                 phone: document.getElementById('pdiPhone').value,
                 location: document.getElementById('pdiLocation').value,
@@ -1131,6 +1132,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
             const payload = {
                 submissionType: "Private Car Selling Listing Form",
+                leadStatus: "New Lead",
                 name: document.getElementById('custName').value,
                 phone: document.getElementById('custPhone').value,
                 location: document.getElementById('custLocation').value,
