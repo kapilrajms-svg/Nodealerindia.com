@@ -1086,6 +1086,16 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
     <button onclick="addLeadNote('${log.timestamp}')"
     class="mt-2 bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
     Add Note
+    <button onclick="aiSuggestLeadAction('${log.timestamp}')"
+    class="mt-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">
+    AI Suggest
+</button>
+
+${log.aiSuggestion ? `
+    <div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200">
+        <strong class="text-purple-300">AI:</strong> ${log.aiSuggestion}
+    </div>
+` : ''}
 </button>
 
 ${log.note ? `
@@ -1475,6 +1485,37 @@ ${car.status === 'sold'
 
     localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
 
+    loadAdminLeadsDashboard();
+}
+        function aiSuggestLeadAction(timestamp) {
+    const logs = JSON.parse(localStorage.getItem('clientInquiries')) || [];
+
+    const updatedLogs = logs.map(log => {
+        if (log.timestamp !== timestamp) return log;
+
+        let suggestion = "Follow up on WhatsApp and ask about budget, preferred model, and buying timeline.";
+
+        const text = `${log.submissionType || ''} ${log.carBrand || ''} ${log.carModel || ''} ${log.location || ''} ${log.note || ''}`.toLowerCase();
+
+        if (text.includes("pdi")) {
+            suggestion = "High intent buyer. Call today and confirm vehicle location for PDI booking.";
+        } else if (text.includes("sell") || text.includes("listing")) {
+            suggestion = "Seller lead. Ask for RC, odometer photo, expected price, and service history.";
+        } else if (log.leadStatus === "Contacted") {
+            suggestion = "Already contacted. Move to negotiation if budget and car preference are clear.";
+        } else if (log.leadStatus === "Negotiation") {
+            suggestion = "Negotiation stage. Send final price/value comparison and push for visit or token.";
+        } else if (log.leadStatus === "Closed") {
+            suggestion = "Closed lead. Keep record for future referral or resale opportunity.";
+        }
+
+        return {
+            ...log,
+            aiSuggestion: suggestion
+        };
+    });
+
+    localStorage.setItem('clientInquiries', JSON.stringify(updatedLogs));
     loadAdminLeadsDashboard();
 }
     </script>
