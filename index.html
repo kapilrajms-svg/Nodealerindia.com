@@ -744,6 +744,14 @@ checkUrlRoutingHash();
                             </div>
                         ` : ''}
 
+                        <div class="absolute top-6 right-6 z-10">
+                            ${safeText(car.status) === 'sold'
+                                ? '<span class="bg-red-600 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Sold</span>'
+                                : safeText(car.status) === 'reserved'
+                                ? '<span class="bg-amber-500 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Reserved</span>'
+                                : '<span class="bg-green-600 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Available</span>'}
+                        </div>
+
                         <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">
                             ${safeText(car.year)} Model
                         </span>
@@ -828,7 +836,7 @@ checkUrlRoutingHash();
             document.getElementById('carTransmission').value = targetedCar.transmission || "";
             document.getElementById('carDriven').value = targetedCar.driven || "";
             document.getElementById('carColorAdmin').value = targetedCar.color || "";
-            status: document.getElementById('carStatus').value,
+            document.getElementById('carStatus').value = targetedCar.status || "available";
 
             const gallery = carGallery(targetedCar);
             if (gallery.length > 0) {
@@ -886,7 +894,7 @@ checkUrlRoutingHash();
                 transmission: document.getElementById('carTransmission').value.trim(),
                 driven: document.getElementById('carDriven').value.trim(),
                 color: document.getElementById('carColorAdmin').value.trim(),
-                status: document.getElementById('carStatus').value,
+                document.getElementById('carStatus').value = targetedCar.status || "available";
                 images: ADMIN_UPLOADED_PHOTO_BASE64
             };
 
@@ -1148,6 +1156,7 @@ checkUrlRoutingHash();
     const { data } = await query;
 
     const cars = data || [];
+    window.CAR_CACHE = cars;
 
     const grid = document.getElementById('carGrid');
     const noStock = document.getElementById('noStockMessage');
