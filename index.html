@@ -1522,8 +1522,7 @@ ${car.status === 'sold'
     const newLeads = logs.filter(l => !l.leadStatus || l.leadStatus === "New Lead").length;
     const negotiations = logs.filter(l => l.leadStatus === "Negotiation").length;
     const closed = logs.filter(l => l.leadStatus === "Closed").length;
-    const followUps = logs.filter(l => l.followUpReminder && l.followUpReminder !== "No follow-up needed").length;
-
+    const followUps = logs.filter(l => l.followUpDate && l.leadStatus !== "Closed").length;
     const setText = (id, value) => {
         const el = document.getElementById(id);
         if (el) el.innerText = value;
