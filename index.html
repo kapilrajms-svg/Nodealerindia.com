@@ -1094,6 +1094,8 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 ${log.aiSuggestion ? `
     <div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200">
         <strong class="text-purple-300">AI:</strong> ${log.aiSuggestion}
+        <br>
+<strong class="text-amber-300">Follow-Up:</strong> ${log.followUpReminder || 'Not set'}
     </div>
 ` : ''}
 </button>
@@ -1494,24 +1496,31 @@ ${car.status === 'sold'
         if (log.timestamp !== timestamp) return log;
 
         let suggestion = "Follow up on WhatsApp and ask about budget, preferred model, and buying timeline.";
+        let followUp = "Follow up within 24 hours";
 
         const text = `${log.submissionType || ''} ${log.carBrand || ''} ${log.carModel || ''} ${log.location || ''} ${log.note || ''}`.toLowerCase();
 
         if (text.includes("pdi")) {
             suggestion = "High intent buyer. Call today and confirm vehicle location for PDI booking.";
+            followUp = "Call today";
         } else if (text.includes("sell") || text.includes("listing")) {
             suggestion = "Seller lead. Ask for RC, odometer photo, expected price, and service history.";
+            followUp = "Follow up today";
         } else if (log.leadStatus === "Contacted") {
             suggestion = "Already contacted. Move to negotiation if budget and car preference are clear.";
+            followUp = "Follow up tomorrow";
         } else if (log.leadStatus === "Negotiation") {
             suggestion = "Negotiation stage. Send final price/value comparison and push for visit or token.";
+            followUp = "Follow up within 6 hours";
         } else if (log.leadStatus === "Closed") {
             suggestion = "Closed lead. Keep record for future referral or resale opportunity.";
+            followUp = "No follow-up needed";
         }
 
         return {
             ...log,
-            aiSuggestion: suggestion
+            aiSuggestion: suggestion,
+            followUpReminder: followUp
         };
     });
 
