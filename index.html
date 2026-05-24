@@ -881,7 +881,7 @@ checkUrlRoutingHash();
             if (!ensureSupabase()) return;
 
             const editIdStr = document.getElementById('editingCarId').value;
-
+const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             const carData = {
                 title: document.getElementById('carTitle').value.trim(),
                 price: document.getElementById('carPrice').value.trim(),
@@ -892,7 +892,7 @@ checkUrlRoutingHash();
                 driven: document.getElementById('carDriven').value.trim(),
                 color: document.getElementById('carColorAdmin').value.trim(),
                 status: document.getElementById('carStatus').value,
-                images: ADMIN_UPLOADED_PHOTO_BASE64
+                images: uploadedPhotoUrls
             };
 
             const btn = document.getElementById('adminSubmitBtn');
@@ -1343,6 +1343,37 @@ ${car.status === 'sold'
     brands.forEach(brand => {
         brandSelect.innerHTML += `<option value="${brand}">${brand}</option>`;
     });
+}
+        async function uploadAdminPhotosToStorage() {
+    if (!ADMIN_SELECTED_PHOTO_FILES || ADMIN_SELECTED_PHOTO_FILES.length === 0) {
+        return ADMIN_UPLOADED_PHOTO_BASE64 || [];
+    }
+
+    const uploadedUrls = [];
+
+    for (const file of ADMIN_SELECTED_PHOTO_FILES) {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+        const filePath = `inventory/${fileName}`;
+
+        const { error } = await supabaseClient.storage
+            .from('car-photos')
+            .upload(filePath, file);
+
+        if (error) {
+            alert("Photo upload failed: " + error.message);
+            console.error(error);
+            return [];
+        }
+
+        const { data } = supabaseClient.storage
+            .from('car-photos')
+            .getPublicUrl(filePath);
+
+        uploadedUrls.push(data.publicUrl);
+    }
+
+    return uploadedUrls;
 }
     </script>
 </body>
