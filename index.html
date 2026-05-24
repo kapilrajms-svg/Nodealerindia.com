@@ -1175,7 +1175,15 @@ checkUrlRoutingHash();
             <div class="relative">
                 <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50">
             </div>
-
+<div class="absolute top-6 right-6 z-10">
+    ${
+        safeText(car.status) === 'sold'
+        ? '<span class="bg-red-600 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Sold</span>'
+        : safeText(car.status) === 'reserved'
+        ? '<span class="bg-amber-500 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Reserved</span>'
+        : '<span class="bg-green-600 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Available</span>'
+    }
+</div>
             <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">
                 ${car.year} Model
             </span>
