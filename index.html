@@ -539,6 +539,7 @@ Front • Rear • Left • Right • Interior • Dashboard • RC • Odometer
 
         let ATTACHED_BASE64_PHOTOS = [];
         let ADMIN_UPLOADED_PHOTO_BASE64 = [];
+        let ADMIN_SELECTED_PHOTO_FILES = [];
         window.CAR_CACHE = [];
 
         if (!localStorage.getItem('clientInquiries')) {
@@ -660,35 +661,38 @@ checkUrlRoutingHash();
         }
 
         function handleAdminPhotoAttachmentPreview(input) {
-            const previewBox = document.getElementById('adminPhotoPreviewBox');
-            previewBox.innerHTML = "";
-            ADMIN_UPLOADED_PHOTO_BASE64 = [];
+    const previewBox = document.getElementById('adminPhotoPreviewBox');
+    previewBox.innerHTML = "";
+    ADMIN_UPLOADED_PHOTO_BASE64 = [];
+    ADMIN_SELECTED_PHOTO_FILES = [];
 
-            const files = Array.from(input.files || []);
-            if (files.length > 8) {
-                alert("Maximum 8 photos allowed.");
-                input.value = "";
-                previewBox.classList.add('hidden');
-                return;
-            }
+    const files = Array.from(input.files || []);
 
-            if (files.length === 0) {
-                previewBox.classList.add('hidden');
-                return;
-            }
+    if (files.length > 8) {
+        alert("Maximum 8 photos allowed.");
+        input.value = "";
+        previewBox.classList.add('hidden');
+        return;
+    }
 
-            previewBox.className = "mt-2 grid grid-cols-4 gap-2";
-            files.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    ADMIN_UPLOADED_PHOTO_BASE64.push(e.target.result);
-                    previewBox.innerHTML += `
-                        <img src="${e.target.result}" class="w-20 h-16 rounded object-cover border border-slate-700">
-                    `;
-                };
-                reader.readAsDataURL(file);
-            });
-        }
+    if (files.length === 0) {
+        previewBox.classList.add('hidden');
+        return;
+    }
+
+    ADMIN_SELECTED_PHOTO_FILES = files;
+    previewBox.className = "mt-2 grid grid-cols-4 gap-2";
+
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewBox.innerHTML += `
+                <img src="${e.target.result}" class="w-20 h-16 rounded object-cover border border-slate-700">
+            `;
+        };
+        reader.readAsDataURL(file);
+    });
+}
 
         async function fetchCars() {
             if (!ensureSupabase()) return [];
