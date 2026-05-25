@@ -31,7 +31,27 @@
             50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(227, 30, 36, 0.8); }
             100% { transform: scale(1); box-shadow: 0 0 25px rgba(227, 30, 36, 0.5); }
         }
+
+        .premium-fade-up { animation: premiumFadeUp 0.55s ease both; }
+        @keyframes premiumFadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .trust-glow { box-shadow: 0 20px 70px rgba(15, 23, 42, 0.10); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
+
+    <!-- NoDealer SEO + Social Preview Upgrade -->
+    <meta name="description" content="NoDealer India helps buyers browse verified direct-owner used cars, book PDI inspections, compare vehicles, calculate EMI and connect safely without dealer markup.">
+    <meta name="keywords" content="NoDealer, used cars India, direct owner cars, buy used car, sell car, PDI inspection, car marketplace India">
+    <meta name="author" content="NoDealer India">
+    <meta property="og:title" content="NoDealer India - Buy Verified Cars Directly From Owners">
+    <meta property="og:description" content="Browse direct-owner cars, book inspection, compare confidently and connect through NoDealer's transparent used-car marketplace.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="hero.jpg">
+    <meta name="theme-color" content="#0f172a">
+
 </head>
 <body class="overflow-hidden text-slate-800">
 
@@ -606,6 +626,85 @@
                 </div>
             </div>
         </section>
+
+        <section id="trust-center-section" class="py-20 bg-white border-y border-slate-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">NoDealer Trust Center</span>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-4">Built To Reduce Buyer Fear</h2>
+                    <p class="text-slate-600 font-semibold mt-4">Every important action on NoDealer is designed around transparency: direct-owner listings, PDI-first buying, CRM tracking, WhatsApp support and clear vehicle details.</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-5">
+                    <div class="bg-slate-50 border rounded-3xl p-6 trust-glow">
+                        <i class="fa-solid fa-user-shield text-blue-600 text-3xl"></i>
+                        <h3 class="font-black uppercase mt-4">Seller Verification</h3>
+                        <p class="text-xs text-slate-500 mt-2">Owner-direct badge system builds confidence before enquiry.</p>
+                    </div>
+                    <div class="bg-slate-50 border rounded-3xl p-6 trust-glow">
+                        <i class="fa-solid fa-clipboard-check text-amber-500 text-3xl"></i>
+                        <h3 class="font-black uppercase mt-4">Inspection First</h3>
+                        <p class="text-xs text-slate-500 mt-2">PDI requests capture location, slot, car details and concerns.</p>
+                    </div>
+                    <div class="bg-slate-50 border rounded-3xl p-6 trust-glow">
+                        <i class="fa-solid fa-chart-line text-green-600 text-3xl"></i>
+                        <h3 class="font-black uppercase mt-4">Smart Finance</h3>
+                        <p class="text-xs text-slate-500 mt-2">EMI estimate helps buyers decide before calling.</p>
+                    </div>
+                    <div class="bg-slate-50 border rounded-3xl p-6 trust-glow">
+                        <i class="fa-solid fa-database text-purple-600 text-3xl"></i>
+                        <h3 class="font-black uppercase mt-4">CRM Tracking</h3>
+                        <p class="text-xs text-slate-500 mt-2">Leads, notes, status, date filters and follow-ups stay organized.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq-section" class="py-20 bg-slate-950 text-white">
+            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-4">
+                    <span class="bg-white/10 text-blue-300 px-3 py-1 rounded-full text-[10px] font-black uppercase">Buyer Questions</span>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase mt-4">Quick FAQ</h2>
+                    <p class="text-slate-400 text-sm mt-4">Clear answers reduce confusion and increase customer trust.</p>
+                </div>
+                <div class="lg:col-span-8 grid md:grid-cols-2 gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                        <h3 class="font-black uppercase">Does NoDealer own the cars?</h3>
+                        <p class="text-xs text-slate-400 mt-2">No. NoDealer focuses on direct-owner discovery, inspection support and organized buyer/seller connection.</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                        <h3 class="font-black uppercase">Can I inspect before buying?</h3>
+                        <p class="text-xs text-slate-400 mt-2">Yes. The PDI system helps you request a detailed inspection before final payment.</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                        <h3 class="font-black uppercase">How do I save cars?</h3>
+                        <p class="text-xs text-slate-400 mt-2">Tap Save on any car card. Saved cars stay on your device for quick review.</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                        <h3 class="font-black uppercase">How does NoDealer follow up?</h3>
+                        <p class="text-xs text-slate-400 mt-2">Every form and enquiry is logged into the admin CRM for call, WhatsApp, status and follow-up tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="final-cta-section" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="bg-slate-950 text-white rounded-[2rem] p-8 md:p-12 grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-[10px] font-black uppercase">Ready To Start?</span>
+                        <h2 class="text-3xl md:text-5xl font-black uppercase mt-4">Buy Or Sell With More Control</h2>
+                        <p class="text-slate-400 mt-4 text-sm">Browse verified owner cars, book PDI, calculate EMI, save options and contact NoDealer support instantly.</p>
+                    </div>
+                    <div class="flex flex-wrap md:justify-end gap-3">
+                        <button onclick="scrollToInventory()" class="bg-brand-red hover:bg-red-700 text-white px-7 py-4 rounded-2xl text-xs font-black uppercase">Browse Cars</button>
+                        <button onclick="openSellModal()" class="bg-white text-slate-950 px-7 py-4 rounded-2xl text-xs font-black uppercase">Sell Car</button>
+                        <a href="https://wa.me/917838335143" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-7 py-4 rounded-2xl text-xs font-black uppercase">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer class="bg-white border-t border-slate-200 py-12 px-4">
             <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 text-xs text-gray-500">
                 <div>
@@ -825,7 +924,25 @@
         </div>
     </div>
 </div>
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+
+                <div class="grid lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                        <p class="text-[10px] text-slate-500 uppercase font-bold">AI Hot Leads</p>
+                        <h2 id="aiHotLeadCount" class="text-3xl font-black text-red-400 mt-1">0</h2>
+                        <p class="text-xs text-slate-400 mt-2">High-intent leads from PDI, car enquiry, urgent slots or strong buying signals.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                        <p class="text-[10px] text-slate-500 uppercase font-bold">Due Follow-Ups</p>
+                        <h2 id="dueFollowUpCount" class="text-3xl font-black text-amber-400 mt-1">0</h2>
+                        <p class="text-xs text-slate-400 mt-2">Open leads with follow-up dates that need attention.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                        <p class="text-[10px] text-slate-500 uppercase font-bold">Suggested Action</p>
+                        <h2 id="aiNextBestAction" class="text-lg font-black text-blue-400 mt-1">Refresh CRM</h2>
+                        <p class="text-xs text-slate-400 mt-2">Use WhatsApp, call, status and follow-up tools to move leads faster.</p>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4"
                     <div>
                         <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-blue-500 flex items-center gap-2"><i class="fa-solid fa-gauge-high"></i> Master Management Console</h1>
                         <p class="text-xs text-slate-400 mt-0.5">Secure Session Active on Desktop IP Layout Matrix</p>
@@ -1379,6 +1496,18 @@ checkUrlRoutingHash();
                             ${safeText(car.year)} Model
                         </span>
 
+                        <div class="flex flex-wrap gap-1 mb-2">
+                            <span class="bg-green-50 text-green-700 border border-green-100 text-[9px] px-2 py-1 rounded-full font-black uppercase">
+                                <i class="fa-solid fa-user-check"></i> Verified Owner
+                            </span>
+                            <span class="bg-blue-50 text-blue-700 border border-blue-100 text-[9px] px-2 py-1 rounded-full font-black uppercase">
+                                <i class="fa-solid fa-shield-halved"></i> PDI Ready
+                            </span>
+                            <span class="bg-amber-50 text-amber-700 border border-amber-100 text-[9px] px-2 py-1 rounded-full font-black uppercase">
+                                No Dealer Markup
+                            </span>
+                        </div>
+
                         <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase tracking-tight">${safeText(car.title)}</h4>
 
                         <p class="text-xs text-gray-500 font-semibold mb-2">
@@ -1763,6 +1892,27 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             }
         }
 
+
+        function getLeadTemperature(log) {
+            const text = JSON.stringify(log || {}).toLowerCase();
+            if (text.includes("urgent") || text.includes("pdi") || text.includes("interested") || text.includes("inspection") || text.includes("same day") || text.includes("car enquiry")) return "Hot";
+            if ((log.leadStatus || "") === "Negotiation" || text.includes("price") || text.includes("emi") || text.includes("sell")) return "Warm";
+            return "Cold";
+        }
+
+        function getLeadTemperatureClass(priority) {
+            if (priority === "Hot") return "bg-red-500/20 text-red-300";
+            if (priority === "Warm") return "bg-amber-500/20 text-amber-300";
+            return "bg-slate-600/40 text-slate-300";
+        }
+
+        function getSmartWhatsAppText(log) {
+            const name = safeText(log.name) || "there";
+            const type = safeText(log.submissionType) || "your enquiry";
+            const car = safeText(log.carBrand || log.carTitle || log.carModel || log.pdiCarDetails || "");
+            return `Hi ${name}, this is NoDealer India. We received your ${type}${car ? " for " + car : ""}. Can we help you with the next step?`;
+        }
+
         async function loadAdminLeadsDashboard() {
             const tableBody = document.getElementById('adminLeadsTableBody');
             const searchTerm = (document.getElementById('leadSearchInput')?.value || '').toLowerCase();
@@ -1810,6 +1960,9 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 const phoneClean = safeText(log.phone).replace(/\D/g, '');
                 const status = log.leadStatus || 'New Lead';
                 const statusClass = status === 'Closed' ? 'bg-green-500/20 text-green-300' : status === 'Negotiation' ? 'bg-amber-500/20 text-amber-300' : status === 'Contacted' ? 'bg-blue-500/20 text-blue-300' : 'bg-red-500/20 text-red-300';
+                const leadTemp = getLeadTemperature(log);
+                const leadTempClass = getLeadTemperatureClass(leadTemp);
+                const smartWhatsAppText = encodeURIComponent(getSmartWhatsAppText(log));
 
                 if (log.submissionType === "PDI Inspection Request") {
                     formattedDetails = `<strong>PDI Route Request</strong>`;
@@ -1834,7 +1987,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                             <span class="block font-bold text-white text-sm">${safeText(log.name)}</span>
                             <div class="flex gap-1 mt-1 flex-wrap">
                                 <span class="${statusClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${status}</span>
-                                <span class="bg-red-500/20 text-red-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">Hot Lead</span>
+                                <span class="${leadTempClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${leadTemp} Lead</span>
                                 <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${safeText(log.source) || 'Website'}</span>
                             </div>
                             <span class="block text-slate-400 font-medium tracking-tight mt-1"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${safeText(log.phone)}</span>
@@ -1846,7 +1999,8 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                         <td class="p-3">
                             <div class="space-y-2">
                                 ${imageNodeOutput}
-                                <a href="https://wa.me/${phoneClean}" target="_blank" class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all"><i class="fa-brands fa-whatsapp"></i> WhatsApp Lead</a>
+                                <a href="https://wa.me/${phoneClean}?text=${smartWhatsAppText}" target="_blank" class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all"><i class="fa-brands fa-whatsapp"></i> Smart WhatsApp</a>
+                                ${phoneClean ? `<a href="tel:${phoneClean}" class="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all ml-1"><i class="fa-solid fa-phone"></i> Call</a>` : ''}
                                 <div class="flex flex-wrap gap-1 mt-2">
                                     <button onclick="updateLeadStatus('${log.timestamp}', 'Contacted')" class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black">Contacted</button>
                                     <button onclick="updateLeadStatus('${log.timestamp}', 'Negotiation')" class="bg-amber-500 text-black px-2 py-1 rounded text-[9px] font-black">Negotiation</button>
@@ -2314,8 +2468,14 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             const liveStock = cars.length;
             const reservedStock = cars.filter(c => safeText(c.status) === "reserved").length;
             const soldStock = cars.filter(c => safeText(c.status) === "sold").length;
+            const hotLeads = logs.filter(l => getLeadTemperature(l) === "Hot").length;
+            const todayDate = new Date().toISOString().slice(0,10);
+            const dueFollowUps = logs.filter(l => l.followUpDate && safeText(l.followUpDate).slice(0,10) <= todayDate && l.leadStatus !== "Closed").length;
             const setText = (id, value) => { const el = document.getElementById(id); if (el) el.innerText = value; };
             setText("totalLeadsCount", total); setText("newLeadsCount", newLeads); setText("negotiationLeadsCount", negotiations); setText("closedLeadsCount", closed); setText("followUpCount", followUps); setText("liveStockCount", liveStock); setText("reservedStockCount", reservedStock); setText("soldStockCount", soldStock);
+            setText("aiHotLeadCount", hotLeads);
+            setText("dueFollowUpCount", dueFollowUps);
+            setText("aiNextBestAction", dueFollowUps > 0 ? "Call due follow-ups now" : hotLeads > 0 ? "Contact hot leads first" : "Add stock or run ads");
         }
         async function setFollowUpDate(timestamp) {
             const followUpDate = prompt("Enter follow-up date, example: 2026-05-25 or Tomorrow 4 PM"); if (!followUpDate) return; if (!ensureSupabase()) return;
