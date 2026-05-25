@@ -1935,146 +1935,254 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
         function openCarDetails(car) {
             const gallery = carGallery(car);
-            const safeGallery = gallery.length > 0 ? gallery : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1200'];
+            const safeGallery = gallery.length > 0 ? gallery : ['https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=1400'];
             const status = safeText(car.status || 'available').toLowerCase();
             const statusLabel = status === 'sold' ? 'Sold' : status === 'reserved' ? 'Reserved' : 'Available';
             const statusClass = status === 'sold'
-                ? 'bg-red-100 text-red-700'
+                ? 'bg-red-100 text-red-700 border-red-200'
                 : status === 'reserved'
-                ? 'bg-amber-100 text-amber-700'
-                : 'bg-emerald-100 text-emerald-700';
-            const approxEmi = Math.max(0, Math.round(Number(car.price || 0) / 60));
+                ? 'bg-amber-100 text-amber-700 border-amber-200'
+                : 'bg-emerald-100 text-emerald-700 border-emerald-200';
+            const price = Number(car.price || 0);
+            const approxEmi = Math.max(0, Math.round(price / 60));
+            const downPayment = Math.round(price * 0.20);
+            const loanAmount = Math.max(0, price - downPayment);
+            const similarCars = (window.CAR_CACHE || [])
+                .filter(item => Number(item.id) !== Number(car.id))
+                .filter(item => safeText(item.brand).toLowerCase() === safeText(car.brand).toLowerCase() || safeText(item.fuel).toLowerCase() === safeText(car.fuel).toLowerCase())
+                .slice(0, 4);
+
+            const featureList = [
+                { icon: 'fa-solid fa-user-check', label: 'Direct Owner', text: 'No dealer pressure' },
+                { icon: 'fa-solid fa-shield-halved', label: 'PDI Ready', text: 'Inspect before payment' },
+                { icon: 'fa-solid fa-images', label: 'Real Gallery', text: `${safeGallery.length} uploaded photo${safeGallery.length > 1 ? 's' : ''}` },
+                { icon: 'fa-solid fa-headset', label: 'Support', text: 'WhatsApp guidance' }
+            ];
+
+            const inspectionItems = [
+                'Engine health and leakage clues',
+                'Body repaint and accident signs',
+                'Odometer wear pattern review',
+                'Tyres, brakes and suspension hints',
+                'RC, insurance and ownership review',
+                'Interior electronics and feature check'
+            ];
 
             const box = document.createElement("div");
             box.id = "carDetailModal";
-            box.className = "fixed inset-0 bg-black/80 backdrop-blur-sm z-[99999] overflow-y-auto p-3 md:p-6";
+            box.className = "fixed inset-0 bg-black/85 backdrop-blur-sm z-[99999] overflow-y-auto";
 
             box.innerHTML = `
-                <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl relative">
-                    <button onclick="closeCarDetailModal()"
-                        class="absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-black/70 text-white text-2xl font-black shadow-lg hover:bg-black">
-                        ×
-                    </button>
-
-                    <div class="grid lg:grid-cols-2">
-                        <div class="bg-slate-950 p-4 md:p-6">
-                            <div class="relative">
-                                <img id="mainCarDetailImage"
-                                    src="${safeGallery[0]}"
-                                    class="w-full h-[340px] md:h-[520px] object-contain bg-black rounded-3xl border border-white/10">
-
-                                <div class="absolute left-4 top-4 ${statusClass} px-3 py-1 rounded-full text-[10px] font-black uppercase shadow">
-                                    ${statusLabel}
-                                </div>
-
-                                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white text-xs font-black px-4 py-2 rounded-full">
-                                    Premium Photo Gallery
-                                </div>
+                <div class="min-h-screen bg-slate-100 pb-28 md:pb-8">
+                    <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-sm">
+                        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+                            <button onclick="closeCarDetailModal()" class="bg-slate-950 text-white rounded-2xl px-4 py-3 text-xs font-black uppercase">
+                                <i class="fa-solid fa-arrow-left mr-1"></i> Back To Cars
+                            </button>
+                            <div class="hidden md:flex items-center gap-2 text-[10px] font-black uppercase text-slate-500">
+                                <span class="bg-slate-100 px-3 py-2 rounded-full">Gallery</span>
+                                <span class="bg-slate-100 px-3 py-2 rounded-full">Specs</span>
+                                <span class="bg-slate-100 px-3 py-2 rounded-full">PDI</span>
+                                <span class="bg-slate-100 px-3 py-2 rounded-full">Finance</span>
                             </div>
-
-                            <div class="grid grid-cols-4 gap-2 mt-4">
-                                ${safeGallery.slice(0, 8).map(photo => `
-                                    <img src="${photo}"
-                                        onclick="document.getElementById('mainCarDetailImage').src='${photo}'"
-                                        class="h-20 w-full object-cover rounded-xl border border-white/10 cursor-pointer hover:scale-95 transition-all bg-black">
-                                `).join("")}
-                            </div>
+                            <button onclick="captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Full Car Page Header WhatsApp')" class="bg-green-500 hover:bg-green-600 text-white rounded-2xl px-4 py-3 text-xs font-black uppercase">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Enquire
+                            </button>
                         </div>
+                    </div>
 
-                        <div class="p-5 md:p-8">
-                            <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-5">
-                                <div>
-                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">
-                                        Verified Owner Listing
-                                    </span>
-
-                                    <h2 class="text-3xl md:text-4xl font-black uppercase text-slate-950 mt-4 leading-tight">
-                                        ${safeText(car.title)}
-                                    </h2>
-
-                                    <p class="text-slate-500 font-semibold mt-2">
-                                        ${safeText(car.year)} Model • ${safeText(car.brand) || 'Direct Owner'}
-                                    </p>
-                                </div>
-
-                                <div class="md:text-right bg-slate-50 border rounded-2xl p-4 min-w-[180px]">
-                                    <p class="text-[10px] uppercase text-slate-400 font-black">Expected Price</p>
-                                    <h3 class="text-3xl font-black text-slate-950">₹${money(car.price)}</h3>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4 mt-7">
-                                <div class="bg-slate-50 rounded-2xl p-4 border">
-                                    <p class="text-[10px] uppercase text-slate-400 font-black">Fuel Type</p>
-                                    <h4 class="font-black text-slate-900 mt-1">${safeText(car.fuel)}</h4>
-                                </div>
-
-                                <div class="bg-slate-50 rounded-2xl p-4 border">
-                                    <p class="text-[10px] uppercase text-slate-400 font-black">Transmission</p>
-                                    <h4 class="font-black text-slate-900 mt-1">${safeText(car.transmission)}</h4>
-                                </div>
-
-                                <div class="bg-slate-50 rounded-2xl p-4 border">
-                                    <p class="text-[10px] uppercase text-slate-400 font-black">Distance Driven</p>
-                                    <h4 class="font-black text-slate-900 mt-1">${safeText(car.driven)}</h4>
-                                </div>
-
-                                <div class="bg-slate-50 rounded-2xl p-4 border">
-                                    <p class="text-[10px] uppercase text-slate-400 font-black">Color</p>
-                                    <h4 class="font-black text-slate-900 mt-1">${safeText(car.color) || 'N/A'}</h4>
-                                </div>
-                            </div>
-
-                            <div class="mt-7 bg-slate-950 rounded-3xl p-5 text-white">
-                                <div class="flex items-center gap-3 mb-4">
-                                    <i class="fa-solid fa-shield-halved text-green-400 text-2xl"></i>
-                                    <div>
-                                        <h3 class="font-black uppercase">NoDealer Inspection Support</h3>
-                                        <p class="text-xs text-slate-400">Book a professional PDI before final payment.</p>
+                    <div class="max-w-7xl mx-auto px-4 py-6 md:py-8">
+                        <div class="grid lg:grid-cols-12 gap-6 items-start">
+                            <div class="lg:col-span-8 space-y-6">
+                                <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-slate-200">
+                                    <div class="bg-slate-950 p-3 md:p-5">
+                                        <div class="relative rounded-[1.5rem] overflow-hidden bg-black border border-white/10">
+                                            <img id="mainCarDetailImage" src="${safeGallery[0]}" class="w-full h-[320px] md:h-[570px] object-contain bg-black">
+                                            <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+                                                <span class="${statusClass} border px-3 py-1 rounded-full text-[10px] font-black uppercase shadow">${statusLabel}</span>
+                                                <span class="bg-black/70 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase shadow">NoDealer Verified</span>
+                                            </div>
+                                            <div class="absolute bottom-4 left-4 bg-black/70 text-white px-4 py-2 rounded-full text-xs font-black">
+                                                ${safeGallery.length} Photo Gallery
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-4 md:grid-cols-8 gap-2 mt-4">
+                                            ${safeGallery.slice(0, 8).map((photo, index) => `
+                                                <button onclick="document.getElementById('mainCarDetailImage').src='${photo}'" class="relative group">
+                                                    <img src="${photo}" class="h-20 w-full object-cover rounded-xl border border-white/10 group-hover:scale-95 transition-all">
+                                                    ${index === 0 ? '<span class="absolute bottom-1 left-1 bg-white text-slate-950 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Main</span>' : ''}
+                                                </button>
+                                            `).join('')}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-2 gap-3 text-xs font-bold">
-                                    <div class="bg-white/5 rounded-xl p-3 border border-white/10">Engine Health</div>
-                                    <div class="bg-white/5 rounded-xl p-3 border border-white/10">Accident Scan</div>
-                                    <div class="bg-white/5 rounded-xl p-3 border border-white/10">Ownership Check</div>
-                                    <div class="bg-white/5 rounded-xl p-3 border border-white/10">Odometer Review</div>
+                                <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-sm border border-slate-200">
+                                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
+                                        <div>
+                                            <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Full Car Details</span>
+                                            <h1 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-3 leading-tight">${safeText(car.title)}</h1>
+                                            <p class="text-sm md:text-base text-slate-500 font-bold mt-2">${safeText(car.year)} • ${safeText(car.driven)} • ${safeText(car.fuel)} • ${safeText(car.transmission)} • ${safeText(car.color) || 'N/A'}</p>
+                                        </div>
+                                        <div class="bg-slate-950 text-white rounded-3xl p-5 min-w-[220px]">
+                                            <p class="text-[10px] uppercase text-slate-400 font-black">Expected Price</p>
+                                            <h2 class="text-4xl font-black mt-1">₹${money(car.price)}</h2>
+                                            <p class="text-[10px] text-slate-400 mt-1">Direct owner asking price</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-7">
+                                        ${featureList.map(item => `
+                                            <div class="bg-slate-50 border border-slate-100 rounded-3xl p-4">
+                                                <i class="${item.icon} text-blue-600 text-xl"></i>
+                                                <h4 class="font-black uppercase text-sm mt-3">${item.label}</h4>
+                                                <p class="text-xs text-slate-500 mt-1">${item.text}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-sm border border-slate-200">
+                                    <div class="flex items-end justify-between gap-4 mb-5">
+                                        <div>
+                                            <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Specifications</span>
+                                            <h2 class="text-2xl md:text-3xl font-black uppercase text-slate-950 mt-3">Car Overview</h2>
+                                        </div>
+                                        <button onclick="toggleCompareCar(${car.id})" class="bg-slate-950 text-white px-4 py-3 rounded-2xl text-xs font-black uppercase">Compare</button>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Brand</p><h4 class="font-black text-slate-950 mt-1">${safeText(car.brand) || 'N/A'}</h4></div>
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Model / Title</p><h4 class="font-black text-slate-950 mt-1">${safeText(car.title)}</h4></div>
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Year</p><h4 class="font-black text-slate-950 mt-1">${safeText(car.year) || 'N/A'}</h4></div>
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Driven</p><h4 class="font-black text-slate-950 mt-1">${safeText(car.driven) || 'N/A'}</h4></div>
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Fuel</p><h4 class="font-black text-slate-950 mt-1">${safeText(car.fuel) || 'N/A'}</h4></div>
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Transmission</p><h4 class="font-black text-slate-950 mt-1">${safeText(car.transmission) || 'N/A'}</h4></div>
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Color</p><h4 class="font-black text-slate-950 mt-1">${safeText(car.color) || 'N/A'}</h4></div>
+                                        <div class="border rounded-2xl p-4 bg-slate-50"><p class="text-[10px] uppercase text-slate-400 font-black">Availability</p><h4 class="font-black text-slate-950 mt-1">${statusLabel}</h4></div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-950 text-white rounded-[2rem] p-5 md:p-7 shadow-sm">
+                                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                                        <div>
+                                            <span class="bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-[10px] font-black uppercase">Inspection First</span>
+                                            <h2 class="text-2xl md:text-3xl font-black uppercase mt-3">PDI Highlights Before Payment</h2>
+                                            <p class="text-sm text-slate-400 mt-1">Use this checklist before you close the deal.</p>
+                                        </div>
+                                        <button onclick="prefillPdiFromCar(${car.id})" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-3 rounded-2xl text-xs font-black uppercase">Book PDI For This Car</button>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-3">
+                                        ${inspectionItems.map(item => `
+                                            <div class="bg-white/5 border border-white/10 rounded-2xl p-4 text-sm font-bold flex items-center gap-3">
+                                                <i class="fa-solid fa-circle-check text-green-400"></i> ${item}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+
+                                <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-sm border border-slate-200">
+                                    <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Finance Estimate</span>
+                                    <h2 class="text-2xl md:text-3xl font-black uppercase text-slate-950 mt-3">Plan Before You Visit</h2>
+                                    <div class="grid md:grid-cols-3 gap-4 mt-5">
+                                        <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-400 font-black">Approx EMI</p><h3 class="text-2xl font-black text-slate-950 mt-1">₹${money(approxEmi)}</h3><p class="text-xs text-slate-500 mt-1">Indicative monthly estimate</p></div>
+                                        <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-400 font-black">20% Down Payment</p><h3 class="text-2xl font-black text-slate-950 mt-1">₹${money(downPayment)}</h3><p class="text-xs text-slate-500 mt-1">Suggested planning amount</p></div>
+                                        <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-400 font-black">Loan Amount</p><h3 class="text-2xl font-black text-slate-950 mt-1">₹${money(loanAmount)}</h3><p class="text-xs text-slate-500 mt-1">After estimated down payment</p></div>
+                                    </div>
+                                    <button onclick="closeCarDetailModal(); document.getElementById('emi-section').scrollIntoView({behavior:'smooth'})" class="mt-5 bg-slate-950 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase">Open Full EMI Calculator</button>
+                                </div>
+
+                                <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-sm border border-slate-200">
+                                    <span class="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Similar Cars</span>
+                                    <h2 class="text-2xl md:text-3xl font-black uppercase text-slate-950 mt-3">You May Also Like</h2>
+                                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+                                        ${similarCars.length ? similarCars.map(similar => {
+                                            const simImg = (carGallery(similar)[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400');
+                                            return `
+                                                <div onclick="openCarDetailsById(${similar.id})" class="bg-slate-50 border rounded-3xl p-3 cursor-pointer hover:shadow-lg transition-all">
+                                                    <img src="${simImg}" class="w-full h-28 object-cover rounded-2xl mb-3">
+                                                    <h4 class="font-black text-sm uppercase text-slate-950 truncate">${safeText(similar.title)}</h4>
+                                                    <p class="text-[10px] text-slate-500 font-bold mt-1">₹${money(similar.price)} • ${safeText(similar.year)}</p>
+                                                </div>
+                                            `;
+                                        }).join('') : `
+                                            <div class="col-span-full bg-slate-50 border rounded-3xl p-5 text-sm text-slate-500 font-bold">
+                                                Similar recommendations will appear when more cars are uploaded.
+                                            </div>
+                                        `}
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="mt-7 bg-blue-50 border border-blue-100 rounded-3xl p-5">
-                                <p class="text-[10px] uppercase text-blue-700 font-black">Finance Planning</p>
-                                <h3 class="font-black text-slate-950 mt-1">Approx EMI from ₹${money(approxEmi)} / month</h3>
-                                <p class="text-xs text-slate-500 mt-1">Indicative only. Final EMI depends on bank approval, tenure and down payment.</p>
-                            </div>
+                            <aside class="lg:col-span-4 space-y-5 lg:sticky lg:top-24">
+                                <div class="bg-white rounded-[2rem] p-5 md:p-6 shadow-sm border border-slate-200">
+                                    <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Verified Listing</p>
+                                    <h3 class="text-2xl font-black text-slate-950 mt-2">₹${money(car.price)}</h3>
+                                    <p class="text-xs text-slate-500 mt-1">${safeText(car.title)} • ${safeText(car.year)}</p>
+                                    <div class="space-y-3 mt-5">
+                                        <button onclick="captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Full Car Page Main WhatsApp')" class="w-full bg-green-500 hover:bg-green-600 text-white rounded-2xl py-4 text-xs font-black uppercase shadow-lg">
+                                            <i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp Owner Support
+                                        </button>
+                                        <button onclick="prefillPdiFromCar(${car.id})" class="w-full bg-brand-red hover:bg-red-700 text-white rounded-2xl py-4 text-xs font-black uppercase shadow-lg">
+                                            <i class="fa-solid fa-shield-halved mr-1"></i> Book PDI Inspection
+                                        </button>
+                                        <button onclick="toggleSavedCar(${car.id})" class="w-full bg-red-50 hover:bg-red-100 text-red-600 rounded-2xl py-4 text-xs font-black uppercase">
+                                            <i class="fa-solid fa-heart mr-1"></i> Save This Car
+                                        </button>
+                                    </div>
+                                </div>
 
-                            <div class="grid md:grid-cols-2 gap-4 mt-7">
-                                <button onclick="captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Car Detail WhatsApp Enquiry')"
-                                    class="bg-green-500 hover:bg-green-600 text-white text-center font-black uppercase py-4 rounded-2xl shadow-lg">
-                                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Enquiry
-                                </button>
+                                <div class="bg-white rounded-[2rem] p-5 md:p-6 shadow-sm border border-slate-200">
+                                    <h3 class="font-black uppercase text-slate-950">Buyer Safety Notes</h3>
+                                    <div class="space-y-3 mt-4 text-xs font-bold text-slate-600">
+                                        <p><i class="fa-solid fa-check text-green-600 mr-2"></i> Never pay full amount before inspection.</p>
+                                        <p><i class="fa-solid fa-check text-green-600 mr-2"></i> Verify RC, insurance and ownership chain.</p>
+                                        <p><i class="fa-solid fa-check text-green-600 mr-2"></i> Match odometer with wear and service record.</p>
+                                        <p><i class="fa-solid fa-check text-green-600 mr-2"></i> Use NoDealer PDI before final payment.</p>
+                                    </div>
+                                </div>
 
-                                <button onclick="closeCarDetailModal(); document.getElementById('pdiFormHomepage').scrollIntoView({behavior:'smooth'})"
-                                    class="bg-brand-red hover:bg-red-700 text-white font-black uppercase py-4 rounded-2xl shadow-lg">
-                                    Book PDI Inspection
-                                </button>
-                            </div>
+                                <div class="bg-slate-950 text-white rounded-[2rem] p-5 md:p-6 shadow-sm">
+                                    <p class="text-[10px] uppercase text-slate-400 font-black">Trust Layer</p>
+                                    <h3 class="font-black uppercase mt-2">Why this page helps buyers</h3>
+                                    <p class="text-xs text-slate-400 mt-2 leading-relaxed">This dedicated detail experience combines gallery, specs, inspection planning, finance estimate and direct enquiry in one place.</p>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
 
-                            <button onclick="closeCarDetailModal()"
-                                class="w-full mt-4 bg-slate-100 hover:bg-slate-200 text-slate-800 font-black uppercase py-3 rounded-2xl">
-                                Continue Browsing
-                            </button>
+                    <div class="fixed md:hidden left-0 right-0 bottom-0 z-50 bg-white/95 backdrop-blur-xl border-t border-slate-200 p-3 shadow-2xl">
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="prefillPdiFromCar(${car.id})" class="bg-brand-red text-white rounded-2xl py-3 text-[10px] font-black uppercase">Book PDI</button>
+                            <button onclick="captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Full Car Page Mobile WhatsApp')" class="bg-green-500 text-white rounded-2xl py-3 text-[10px] font-black uppercase">WhatsApp</button>
                         </div>
                     </div>
                 </div>
             `;
 
             document.body.appendChild(box);
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function prefillPdiFromCar(id) {
+            const car = (window.CAR_CACHE || []).find(c => Number(c.id) === Number(id));
+            if (!car) return;
+            closeCarDetailModal();
+            const pdiCar = document.getElementById('pdiCarDetails');
+            const pdiConcern = document.getElementById('pdiConcern');
+            if (pdiCar) pdiCar.value = `${safeText(car.title)} - ${safeText(car.year)} - ₹${money(car.price)}`;
+            if (pdiConcern) pdiConcern.value = `I want to inspect ${safeText(car.title)} before final payment. Please check engine, accident signs, odometer, papers and ownership.`;
+            const pdiSection = document.getElementById('pdi-section') || document.getElementById('pdiFormHomepage');
+            if (pdiSection) pdiSection.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                const firstEmpty = ['pdiName','pdiPhone','pdiLocation','pdiCity'].map(id => document.getElementById(id)).find(el => el && !el.value);
+                if (firstEmpty) firstEmpty.focus();
+            }, 500);
         }
 
         function closeCarDetailModal() {
             const modal = document.getElementById('carDetailModal');
             if (modal) modal.remove();
+            document.body.classList.remove('overflow-hidden');
         }
         async function loadDynamicBrandFilter() {
     const brandSelect = document.getElementById('filterBrand');
