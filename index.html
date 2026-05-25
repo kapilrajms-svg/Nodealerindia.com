@@ -855,102 +855,6 @@
 
 
 
-
-
-    <!-- Customer Dashboard Lite Floating Button -->
-    <button onclick="openCustomerDashboard()" class="hidden md:flex fixed right-5 bottom-5 z-[9996] bg-blue-600 hover:bg-blue-700 text-white rounded-2xl px-5 py-4 shadow-2xl items-center gap-2 text-xs font-black uppercase active:scale-95 transition-all">
-        <i class="fa-solid fa-user-circle text-lg"></i> My Dashboard
-    </button>
-
-    <!-- Customer Dashboard Lite Modal -->
-    <div id="customerDashboardModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-        <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-            <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
-                <div>
-                    <p class="text-[10px] text-slate-400 uppercase font-black">NoDealer Customer Area</p>
-                    <h2 class="text-2xl font-black uppercase">My Dashboard</h2>
-                    <p class="text-xs text-slate-400 mt-1">Track saved cars, enquiries, PDI bookings and report status using your mobile number.</p>
-                </div>
-                <button onclick="closeCustomerDashboard()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
-            </div>
-
-            <div id="customerLoginBox" class="p-5 md:p-7 bg-slate-50 border-b border-slate-200">
-                <div class="grid md:grid-cols-12 gap-4 items-end">
-                    <div class="md:col-span-4">
-                        <label class="block text-[10px] uppercase font-black text-slate-500 mb-1">Your Name</label>
-                        <input id="customerDashName" type="text" placeholder="Enter your name" class="w-full p-3 rounded-2xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-blue-500">
-                    </div>
-                    <div class="md:col-span-4">
-                        <label class="block text-[10px] uppercase font-black text-slate-500 mb-1">Mobile Number</label>
-                        <input id="customerDashPhone" type="tel" placeholder="Enter same phone used in enquiry" class="w-full p-3 rounded-2xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-blue-500">
-                    </div>
-                    <div class="md:col-span-4 flex gap-2">
-                        <button onclick="customerDashboardLogin()" class="flex-1 bg-slate-950 hover:bg-slate-800 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase">Open Dashboard</button>
-                        <button onclick="clearCustomerDashboardLogin()" class="bg-white hover:bg-slate-100 border px-4 py-3 rounded-2xl text-xs font-black uppercase">Reset</button>
-                    </div>
-                </div>
-                <p class="text-xs text-slate-500 mt-3">This is a lightweight phone-based dashboard for customers. Full OTP login can be added later with authentication.</p>
-            </div>
-
-            <div class="p-5 md:p-7">
-                <div class="grid md:grid-cols-4 gap-4 mb-6">
-                    <div class="bg-slate-950 text-white rounded-3xl p-5">
-                        <p class="text-[10px] text-slate-400 uppercase font-black">Saved Cars</p>
-                        <h3 id="custSavedCount" class="text-3xl font-black mt-1">0</h3>
-                    </div>
-                    <div class="bg-blue-50 text-blue-900 rounded-3xl p-5 border border-blue-100">
-                        <p class="text-[10px] text-blue-500 uppercase font-black">Recent Views</p>
-                        <h3 id="custRecentCount" class="text-3xl font-black mt-1">0</h3>
-                    </div>
-                    <div class="bg-amber-50 text-amber-900 rounded-3xl p-5 border border-amber-100">
-                        <p class="text-[10px] text-amber-600 uppercase font-black">My Enquiries</p>
-                        <h3 id="custLeadCount" class="text-3xl font-black mt-1">0</h3>
-                    </div>
-                    <div class="bg-green-50 text-green-900 rounded-3xl p-5 border border-green-100">
-                        <p class="text-[10px] text-green-600 uppercase font-black">PDI Reports</p>
-                        <h3 id="custReportCount" class="text-3xl font-black mt-1">0</h3>
-                    </div>
-                </div>
-
-                <div class="grid lg:grid-cols-2 gap-6">
-                    <div class="bg-white border border-slate-200 rounded-[2rem] p-5 shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <p class="text-[10px] uppercase font-black text-slate-400">Shortlist</p>
-                                <h3 class="text-xl font-black uppercase text-slate-950">Saved & Recently Viewed Cars</h3>
-                            </div>
-                            <button onclick="openSavedCarsModal()" class="bg-red-50 text-red-600 px-4 py-2 rounded-xl text-[10px] font-black uppercase">Open Saved</button>
-                        </div>
-                        <div id="customerCarsDashboardBody" class="grid sm:grid-cols-2 gap-4"></div>
-                    </div>
-
-                    <div class="bg-white border border-slate-200 rounded-[2rem] p-5 shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
-                                <p class="text-[10px] uppercase font-black text-slate-400">CRM Status</p>
-                                <h3 class="text-xl font-black uppercase text-slate-950">My Enquiries & PDI</h3>
-                            </div>
-                            <button onclick="loadCustomerDashboardData()" class="bg-slate-950 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase">Refresh</button>
-                        </div>
-                        <div id="customerLeadsDashboardBody" class="space-y-3"></div>
-                    </div>
-                </div>
-
-                <div class="mt-6 bg-slate-950 text-white rounded-[2rem] p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <div>
-                        <p class="text-[10px] uppercase text-slate-400 font-black">Need help?</p>
-                        <h3 class="text-xl font-black uppercase">Ask NoDealer Support On WhatsApp</h3>
-                        <p class="text-xs text-slate-400 mt-1">Share your budget, saved cars, PDI request or seller query.</p>
-                    </div>
-                    <a id="customerDashboardWhatsApp" href="https://wa.me/917838335143" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-2xl text-xs font-black uppercase inline-flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Support
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <!-- Saved Cars Modal -->
     <div id="savedCarsModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
         <div class="max-w-5xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
@@ -1028,105 +932,6 @@
             </form>
         </div>
     </div>
-
-    <!-- PDI Report Builder Modal -->
-    <div id="pdiReportBuilderModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-        <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-            <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
-                <div>
-                    <p class="text-[10px] text-slate-400 uppercase font-black">NoDealer Inspection Report System</p>
-                    <h2 class="text-2xl font-black uppercase">Create PDI Report</h2>
-                    <p id="pdiReportLeadInfo" class="text-xs text-slate-400 mt-1">Build a buyer-friendly inspection summary.</p>
-                </div>
-                <button onclick="closePdiReportBuilder()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
-            </div>
-
-            <div class="p-5 md:p-7 grid lg:grid-cols-12 gap-6 text-slate-900">
-                <div class="lg:col-span-7 space-y-5">
-                    <input type="hidden" id="pdiReportLeadTimestamp">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Buyer / Client Name</label>
-                            <input id="reportBuyerName" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Customer name">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Phone</label>
-                            <input id="reportBuyerPhone" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Customer phone">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Car Details</label>
-                            <input id="reportCarDetails" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Brand / model / year">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Inspection Location</label>
-                            <input id="reportLocation" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Location">
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Engine</label>
-                            <select id="reportEngine" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Average</option><option>Needs Attention</option><option>Critical Issue</option></select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Body / Accident Signs</label>
-                            <select id="reportBody" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Minor Repaint</option><option>Panel Repair Signs</option><option>Major Accident Doubt</option></select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Tyres</label>
-                            <select id="reportTyres" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Average</option><option>Replace Soon</option><option>Poor</option></select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Interior & Electronics</label>
-                            <select id="reportInterior" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Average</option><option>Needs Cleaning/Repair</option><option>Poor</option></select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Documents</label>
-                            <select id="reportDocuments" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Looks Clear</option><option>Need RC Check</option><option>Insurance Issue</option><option>Ownership Red Flag</option></select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Odometer Confidence</label>
-                            <select id="reportOdometer" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Looks Consistent</option><option>Needs More Proof</option><option>Suspicious Wear Pattern</option><option>High Risk</option></select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Inspector Notes</label>
-                        <textarea id="reportNotes" rows="4" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium" placeholder="Write summary: major findings, negotiation points, parts to check, seller claims, etc."></textarea>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 space-y-5">
-                    <div class="bg-slate-950 text-white rounded-[2rem] p-5">
-                        <p class="text-[10px] text-slate-400 uppercase font-black">Final Buyer Verdict</p>
-                        <select id="reportVerdict" class="w-full mt-3 bg-white text-slate-950 rounded-2xl px-4 py-3 text-sm font-black">
-                            <option value="Good To Proceed">Good To Proceed</option>
-                            <option value="Proceed After Negotiation">Proceed After Negotiation</option>
-                            <option value="Caution - Need Recheck">Caution - Need Recheck</option>
-                            <option value="Avoid This Car">Avoid This Car</option>
-                        </select>
-                        <div class="grid grid-cols-3 gap-2 mt-4">
-                            <input id="reportScore" type="number" min="0" max="100" value="82" class="col-span-1 rounded-2xl px-3 py-3 text-slate-950 font-black text-center" title="Score">
-                            <div class="col-span-2 bg-white/10 rounded-2xl p-3 text-xs text-slate-300">Set an overall inspection confidence score out of 100.</div>
-                        </div>
-                    </div>
-
-                    <div class="bg-amber-50 border border-amber-100 rounded-[2rem] p-5">
-                        <h3 class="font-black uppercase text-amber-800">Report Actions</h3>
-                        <p class="text-xs text-amber-700 mt-1">Save the report to the lead. Then view/print it and choose “Save as PDF”.</p>
-                        <button onclick="savePdiReportToLead()" class="w-full mt-4 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-2xl py-4 text-xs font-black uppercase">Save Report To Lead</button>
-                        <button onclick="previewCurrentPdiReport()" class="w-full mt-2 bg-slate-950 hover:bg-slate-800 text-white rounded-2xl py-4 text-xs font-black uppercase">Preview / Print PDF</button>
-                    </div>
-
-                    <div class="bg-slate-50 border rounded-[2rem] p-5 text-xs text-slate-600">
-                        <h3 class="font-black uppercase text-slate-950 mb-2">Included In Report</h3>
-                        <p>Engine, body, tyres, interior, documents, odometer confidence, inspector notes, final verdict, score, NoDealer branding and buyer guidance.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div id="secureAdminPortal" class="fixed inset-0 bg-slate-950 z-[9999] hidden overflow-y-auto p-4 md:p-8">
         <div class="max-w-6xl mx-auto">
@@ -1272,60 +1077,7 @@
                         <p class="text-xs text-slate-400 mt-2">Use WhatsApp, call, status and follow-up tools to move leads faster.</p>
                     </div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
-                        <div>
-                            <h3 class="text-xl font-black uppercase text-white"><i class="fa-solid fa-robot text-green-400 mr-2"></i>WhatsApp + CRM Automation Desk</h3>
-                            <p class="text-xs text-slate-400 mt-1">Website-side automation: smart message templates, quick call flow, follow-up workflow and lead priority actions.</p>
-                        </div>
-                        <button onclick="loadAdminLeadsDashboard(); updateActionCenter();" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-xl text-xs font-black uppercase">
-                            Refresh Automation Desk
-                        </button>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-4 mb-5">
-                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
-                            <p class="text-[10px] uppercase text-slate-500 font-bold">Step 01</p>
-                            <h4 class="text-white font-black uppercase mt-1">Contact Hot Leads</h4>
-                            <p class="text-xs text-slate-400 mt-2">Use Smart WhatsApp first, then call if no reply. PDI and car enquiries are treated as Hot leads.</p>
-                        </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
-                            <p class="text-[10px] uppercase text-slate-500 font-bold">Step 02</p>
-                            <h4 class="text-white font-black uppercase mt-1">Set Follow-Up Date</h4>
-                            <p class="text-xs text-slate-400 mt-2">After every call, set a follow-up date so the lead appears in Due Follow-Ups.</p>
-                        </div>
-                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
-                            <p class="text-[10px] uppercase text-slate-500 font-bold">Step 03</p>
-                            <h4 class="text-white font-black uppercase mt-1">Move Pipeline</h4>
-                            <p class="text-xs text-slate-400 mt-2">New → Contacted → Negotiation → Closed. Your dashboard counts update automatically.</p>
-                        </div>
-                    </div>
-
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                        <button onclick="copyNoDealerTemplate('buyer')" class="bg-green-600 hover:bg-green-700 text-white rounded-2xl p-4 text-left">
-                            <i class="fa-brands fa-whatsapp text-2xl"></i>
-                            <h4 class="font-black uppercase mt-2 text-sm">Copy Buyer Follow-Up</h4>
-                            <p class="text-[10px] text-green-100 mt-1">For car enquiry leads.</p>
-                        </button>
-                        <button onclick="copyNoDealerTemplate('pdi')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-2xl p-4 text-left">
-                            <i class="fa-solid fa-shield-halved text-2xl"></i>
-                            <h4 class="font-black uppercase mt-2 text-sm">Copy PDI Follow-Up</h4>
-                            <p class="text-[10px] text-slate-800 mt-1">For inspection bookings.</p>
-                        </button>
-                        <button onclick="copyNoDealerTemplate('seller')" class="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl p-4 text-left">
-                            <i class="fa-solid fa-car-side text-2xl"></i>
-                            <h4 class="font-black uppercase mt-2 text-sm">Copy Seller Follow-Up</h4>
-                            <p class="text-[10px] text-blue-100 mt-1">For sell-car requests.</p>
-                        </button>
-                        <button onclick="openNoDealerOwnerWhatsApp()" class="bg-slate-700 hover:bg-slate-600 text-white rounded-2xl p-4 text-left">
-                            <i class="fa-solid fa-headset text-2xl"></i>
-                            <h4 class="font-black uppercase mt-2 text-sm">Open Owner WhatsApp</h4>
-                            <p class="text-[10px] text-slate-300 mt-1">Quick admin support chat.</p>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4"
                     <div>
                         <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-blue-500 flex items-center gap-2"><i class="fa-solid fa-gauge-high"></i> Master Management Console</h1>
                         <p class="text-xs text-slate-400 mt-0.5">Secure Session Active on Desktop IP Layout Matrix</p>
@@ -1915,6 +1667,11 @@ checkUrlRoutingHash();
                                     Compare
                                 </button>
 
+                                <button onclick="event.stopPropagation(); openReserveCarModal(${car.id})"
+                                   class="bg-amber-500 text-slate-950 text-[10px] font-black px-3 py-2 rounded-xl hover:bg-amber-400 transition-all uppercase">
+                                   Reserve
+                                </button>
+
                                 <button onclick="event.stopPropagation(); captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Inventory Card Contact')"
                                    class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl hover:bg-red-700 transition-all">
                                    Contact
@@ -2162,8 +1919,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 timestamp: row.created_at || raw.timestamp || new Date().toISOString(),
                 attachedPhotosData: raw.attachedPhotosData || [],
                 attachedPhotosCount: raw.attachedPhotosCount || 0,
-                rawData: raw,
-                pdiReport: raw.pdiReport || null
+                rawData: raw
             };
         }
 
@@ -2393,9 +2149,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                                 <div class="flex flex-wrap gap-1 mt-2">
                                     <button onclick="addLeadNote('${log.timestamp}')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Add Note</button>
                                     <button onclick="aiSuggestLeadAction('${log.timestamp}')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">AI Suggest</button>
-                                    <button onclick="openPdiReportBuilder('${log.timestamp}')" class="bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">PDI Report</button>
                                 </div>
-                                ${log.pdiReport ? `<div class="mt-2 flex flex-wrap gap-1"><button onclick="openSavedPdiReport('${log.timestamp}')" class="bg-white text-slate-950 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">View Report</button><button onclick="sharePdiReportWhatsApp('${log.timestamp}')" class="bg-green-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Share Report Msg</button></div>` : ''}
                                 <button onclick="setFollowUpDate('${log.timestamp}')" class="mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Set Follow-Up Date</button>
                                 ${log.followUpDate ? `<div class="mt-2 bg-orange-950/40 border border-orange-800 rounded-lg p-2 text-[10px] text-orange-200"><strong class="text-orange-300">Follow-Up Date:</strong> ${safeText(log.followUpDate)}</div>` : ''}
                                 ${log.aiSuggestion ? `<div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200"><strong class="text-purple-300">AI:</strong> ${safeText(log.aiSuggestion)}<br><strong class="text-amber-300">Follow-Up:</strong> ${safeText(log.followUpReminder) || 'Not set'}</div>` : ''}
@@ -2699,6 +2453,9 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                                         <button onclick="prefillPdiFromCar(${car.id})" class="w-full bg-brand-red hover:bg-red-700 text-white rounded-2xl py-4 text-xs font-black uppercase shadow-lg">
                                             <i class="fa-solid fa-shield-halved mr-1"></i> Book PDI Inspection
                                         </button>
+                                        <button onclick="openReserveCarModal(${car.id})" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-2xl py-4 text-xs font-black uppercase shadow-lg">
+                                            <i class="fa-solid fa-lock mr-1"></i> Reserve Interest
+                                        </button>
                                         <button onclick="toggleSavedCar(${car.id})" class="w-full bg-red-50 hover:bg-red-100 text-red-600 rounded-2xl py-4 text-xs font-black uppercase">
                                             <i class="fa-solid fa-heart mr-1"></i> Save This Car
                                         </button>
@@ -2727,6 +2484,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                     <div class="fixed md:hidden left-0 right-0 bottom-0 z-50 bg-white/95 backdrop-blur-xl border-t border-slate-200 p-3 shadow-2xl">
                         <div class="grid grid-cols-2 gap-2">
                             <button onclick="prefillPdiFromCar(${car.id})" class="bg-brand-red text-white rounded-2xl py-3 text-[10px] font-black uppercase">Book PDI</button>
+                            <button onclick="openReserveCarModal(${car.id})" class="bg-amber-500 text-slate-950 rounded-2xl py-3 text-[10px] font-black uppercase">Reserve</button>
                             <button onclick="captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Full Car Page Mobile WhatsApp')" class="bg-green-500 text-white rounded-2xl py-3 text-[10px] font-black uppercase">WhatsApp</button>
                         </div>
                     </div>
@@ -3399,324 +3157,80 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         }
 
 
-        function getNoDealerTemplate(type) {
-            if (type === "pdi") {
-                return "Hi, this is NoDealer India. We received your PDI inspection request. Please confirm: 1) car location, 2) preferred date/time, 3) seller availability, and 4) any concern like accident, repaint, engine noise or odometer doubt. Our team will guide you with the next step.";
-            }
-            if (type === "seller") {
-                return "Hi, this is NoDealer India. We received your sell-car request. Please share RC photo, odometer photo, insurance status, expected price, service history and 4-6 clear car photos so we can prepare your listing and connect you with serious buyers.";
-            }
-            return "Hi, this is NoDealer India. We received your car enquiry. Please confirm your budget, preferred model, city, buying timeline and whether you want PDI inspection before final payment. We will help you shortlist safely.";
+        function openReserveCarModal(carId) {
+            const car = (window.CAR_CACHE || []).find(c => Number(c.id) === Number(carId));
+            if (!car) { alert('Car not found. Please refresh and try again.'); return; }
+            document.getElementById('reserveCarId').value = carId;
+            document.getElementById('reserveCarTitle').textContent = `Reserve ${safeText(car.title)}`;
+            document.getElementById('reserveNotes').value = `Interested in ${safeText(car.title)}. Price shown: ₹${money(car.price)}. Year: ${safeText(car.year)}. Fuel: ${safeText(car.fuel)}. Transmission: ${safeText(car.transmission)}.`;
+            document.getElementById('reserveCarModal').classList.remove('hidden');
         }
 
-        async function copyNoDealerTemplate(type) {
-            const msg = getNoDealerTemplate(type);
+        function closeReserveCarModal() {
+            const modal = document.getElementById('reserveCarModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        async function handleReserveCarSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('reserveSubmitBtn');
+            const originalText = btn ? btn.textContent : '';
+            if (btn) { btn.disabled = true; btn.textContent = 'SAVING RESERVE REQUEST...'; }
+
+            const carId = Number(document.getElementById('reserveCarId')?.value || 0);
+            const car = (window.CAR_CACHE || []).find(c => Number(c.id) === carId);
+
+            const payload = {
+                submissionType: 'Reserve Car Request',
+                leadStatus: 'New Lead',
+                leadPriority: 'Hot Booking Lead',
+                name: document.getElementById('reserveBuyerName')?.value || '',
+                phone: document.getElementById('reserveBuyerPhone')?.value || '',
+                location: document.getElementById('reserveBuyerCity')?.value || '',
+                carBrand: safeText(car?.brand || 'Direct Owner'),
+                carModel: safeText(car?.title || 'Selected Car'),
+                carYear: safeText(car?.year || ''),
+                carColor: safeText(car?.color || ''),
+                bookingAmount: document.getElementById('reserveBookingAmount')?.value || '',
+                preferredVisitDate: document.getElementById('reserveVisitDate')?.value || '',
+                preferredVisitSlot: document.getElementById('reserveVisitSlot')?.value || '',
+                reserveIntentLevel: document.getElementById('reserveIntentLevel')?.value || '',
+                note: `${document.getElementById('reserveNotes')?.value || ''} Booking amount placeholder: ₹${document.getElementById('reserveBookingAmount')?.value || '0'}. Visit: ${document.getElementById('reserveVisitDate')?.value || 'Not set'} ${document.getElementById('reserveVisitSlot')?.value || ''}.`,
+                source: 'Website Reserve Car Flow Lite',
+                userIp: 'Website Customer Device',
+                timestamp: new Date().toISOString()
+            };
+
             try {
-                await navigator.clipboard.writeText(msg);
-                alert("NoDealer WhatsApp template copied. Paste it in WhatsApp follow-up.");
+                const saved = await saveLeadToSupabase(payload);
+                if (!saved) return;
+
+                fetch(MAKE_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.warn('Webhook optional sync failed:', err));
+
+                alert('Reserve request saved in CRM! Admin should call/WhatsApp customer to confirm.');
+                closeReserveCarModal();
+                document.getElementById('reserveCarForm')?.reset();
+                if (typeof loadAdminLeadsDashboard === 'function') await loadAdminLeadsDashboard();
+                if (typeof updateActionCenter === 'function') updateActionCenter();
+
+                const msg = `Hi NoDealer, I want to reserve ${safeText(car?.title || 'this car')}. My name is ${payload.name}. Preferred visit: ${payload.preferredVisitDate || 'not selected'} ${payload.preferredVisitSlot || ''}.`;
+                window.open(`https://wa.me/917838335143?text=${encodeURIComponent(msg)}`, '_blank');
             } catch (error) {
-                prompt("Copy this WhatsApp template:", msg);
+                console.error(error);
+                alert('Reserve request save error: ' + error.message);
+            } finally {
+                if (btn) { btn.disabled = false; btn.textContent = originalText || 'Save Reserve Request To CRM'; }
             }
-        }
-
-        function openNoDealerOwnerWhatsApp() {
-            const msg = encodeURIComponent("NoDealer Admin Update: I am checking CRM follow-ups and need to contact priority leads.");
-            window.open("https://wa.me/917838335143?text=" + msg, "_blank");
-        }
-
-        function getSmartWhatsAppText(log) {
-            const name = safeText(log.name) || "there";
-            const type = safeText(log.submissionType) || "your enquiry";
-            const text = JSON.stringify(log || {}).toLowerCase();
-            const car = safeText(log.carTitle || log.carBrand || log.carModel || log.pdiCarDetails || "");
-            if (text.includes("pdi") || text.includes("inspection")) {
-                return `Hi ${name}, this is NoDealer India. We received your PDI request${car ? " for " + car : ""}. Please confirm vehicle location, preferred date/time, seller availability and any concern like accident, repaint, engine noise or odometer doubt.`;
-            }
-            if (text.includes("sell") || text.includes("listing")) {
-                return `Hi ${name}, this is NoDealer India. We received your sell-car request${car ? " for " + car : ""}. Please share RC photo, odometer photo, insurance status, expected price, service history and clear car photos so we can prepare your listing.`;
-            }
-            if (text.includes("emi") || text.includes("loan") || text.includes("finance")) {
-                return `Hi ${name}, this is NoDealer India. We received your finance/EMI enquiry${car ? " for " + car : ""}. Please share your budget, down payment comfort and preferred loan tenure so we can guide you.`;
-            }
-            return `Hi ${name}, this is NoDealer India. We received your ${type}${car ? " for " + car : ""}. Please confirm your budget, city, buying timeline and whether you want PDI inspection before final payment.`;
         }
 
         window.addEventListener('load', () => {
             setTimeout(calculateEMI, 700);
             setTimeout(renderRecentlyViewedCars, 900);
         });
-
-
-        function getLeadByTimestamp(timestamp) {
-            return (window.LEAD_CACHE || []).find(l => String(l.timestamp) === String(timestamp));
-        }
-
-        function openPdiReportBuilder(timestamp) {
-            const log = getLeadByTimestamp(timestamp);
-            if (!log) { alert("Lead not found. Refresh CRM and try again."); return; }
-            const raw = log.rawData || {};
-            const existing = log.pdiReport || raw.pdiReport || {};
-
-            document.getElementById('pdiReportLeadTimestamp').value = timestamp;
-            document.getElementById('pdiReportLeadInfo').innerText = `${safeText(log.name) || 'Customer'} • ${safeText(log.phone) || 'No phone'} • ${safeText(log.submissionType)}`;
-            document.getElementById('reportBuyerName').value = existing.buyerName || log.name || '';
-            document.getElementById('reportBuyerPhone').value = existing.buyerPhone || log.phone || '';
-            document.getElementById('reportCarDetails').value = existing.carDetails || raw.carDetails || raw.pdiCarDetails || `${log.carBrand || ''} ${log.carModel || ''} ${log.carYear || ''}`.trim();
-            document.getElementById('reportLocation').value = existing.location || log.location || raw.city || '';
-            document.getElementById('reportEngine').value = existing.engine || 'Good';
-            document.getElementById('reportBody').value = existing.body || 'Good';
-            document.getElementById('reportTyres').value = existing.tyres || 'Good';
-            document.getElementById('reportInterior').value = existing.interior || 'Good';
-            document.getElementById('reportDocuments').value = existing.documents || 'Looks Clear';
-            document.getElementById('reportOdometer').value = existing.odometer || 'Looks Consistent';
-            document.getElementById('reportNotes').value = existing.notes || raw.concern || '';
-            document.getElementById('reportVerdict').value = existing.verdict || 'Good To Proceed';
-            document.getElementById('reportScore').value = existing.score || 82;
-            document.getElementById('pdiReportBuilderModal').classList.remove('hidden');
-        }
-
-        function closePdiReportBuilder() {
-            document.getElementById('pdiReportBuilderModal')?.classList.add('hidden');
-        }
-
-        function collectPdiReportForm() {
-            return {
-                reportId: 'NDR-PDI-' + Date.now(),
-                createdAt: new Date().toISOString(),
-                buyerName: document.getElementById('reportBuyerName').value.trim(),
-                buyerPhone: document.getElementById('reportBuyerPhone').value.trim(),
-                carDetails: document.getElementById('reportCarDetails').value.trim(),
-                location: document.getElementById('reportLocation').value.trim(),
-                engine: document.getElementById('reportEngine').value,
-                body: document.getElementById('reportBody').value,
-                tyres: document.getElementById('reportTyres').value,
-                interior: document.getElementById('reportInterior').value,
-                documents: document.getElementById('reportDocuments').value,
-                odometer: document.getElementById('reportOdometer').value,
-                notes: document.getElementById('reportNotes').value.trim(),
-                verdict: document.getElementById('reportVerdict').value,
-                score: document.getElementById('reportScore').value || '0'
-            };
-        }
-
-        async function savePdiReportToLead() {
-            const timestamp = document.getElementById('pdiReportLeadTimestamp').value;
-            const log = getLeadByTimestamp(timestamp);
-            if (!log || !ensureSupabase()) { alert('Lead not found.'); return; }
-            const report = collectPdiReportForm();
-            const mergedRaw = { ...(log.rawData || {}), pdiReport: report };
-            const note = `${log.note ? log.note + ' | ' : ''}PDI Report: ${report.verdict}, Score ${report.score}/100`;
-
-            const { error } = await supabaseClient
-                .from('leads')
-                .update({ raw_data: mergedRaw, note: note })
-                .eq('created_at', timestamp);
-
-            if (error) { alert('Could not save PDI report: ' + error.message); return; }
-            alert('PDI report saved to this lead.');
-            closePdiReportBuilder();
-            await loadAdminLeadsDashboard();
-            updateActionCenter();
-        }
-
-        function buildPdiReportHtml(report, log = {}) {
-            const verdictColor = report.verdict === 'Avoid This Car' ? '#dc2626' : report.verdict.includes('Caution') ? '#d97706' : '#16a34a';
-            const date = new Date(report.createdAt || Date.now()).toLocaleString();
-            const row = (label, value) => `<tr><td style="padding:12px;border:1px solid #e2e8f0;font-weight:800;background:#f8fafc;width:35%">${label}</td><td style="padding:12px;border:1px solid #e2e8f0">${value || 'N/A'}</td></tr>`;
-            return `<!DOCTYPE html><html><head><title>NoDealer PDI Report</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial,sans-serif;background:#f1f5f9;margin:0;padding:24px;color:#0f172a}.page{max-width:900px;margin:auto;background:white;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(15,23,42,.15)}.head{background:#0f172a;color:white;padding:28px}.brand{font-size:28px;font-weight:900}.badge{display:inline-block;background:${verdictColor};color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase}.content{padding:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:16px}.card h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;color:#64748b}.card p{margin:0;font-weight:900}.score{font-size:52px;font-weight:900;color:${verdictColor}}table{width:100%;border-collapse:collapse;margin-top:18px}.note{background:#fffbeb;border:1px solid #fde68a;border-radius:18px;padding:18px;margin-top:18px}.footer{padding:20px 28px;background:#f8fafc;color:#64748b;font-size:12px}@media print{body{background:white;padding:0}.page{box-shadow:none;border-radius:0}.no-print{display:none}}</style></head><body><div class="page"><div class="head"><div class="brand">NO<span style="color:#3b82f6">Dealer</span> India</div><p style="margin:8px 0 18px;color:#cbd5e1">Pre-Delivery Inspection Summary Report</p><span class="badge">${report.verdict}</span></div><div class="content"><div style="display:flex;justify-content:space-between;gap:20px;align-items:center"><div><h1 style="margin:0;font-size:28px">${report.carDetails || 'Vehicle Inspection'}</h1><p style="color:#64748b;margin:6px 0">Report ID: ${report.reportId || 'N/A'} • ${date}</p></div><div style="text-align:center"><div class="score">${report.score}</div><div style="font-size:12px;font-weight:900;color:#64748b">/100 SCORE</div></div></div><div class="grid" style="margin-top:22px"><div class="card"><h4>Buyer</h4><p>${report.buyerName || 'N/A'}</p></div><div class="card"><h4>Phone</h4><p>${report.buyerPhone || 'N/A'}</p></div><div class="card"><h4>Location</h4><p>${report.location || 'N/A'}</p></div></div><table>${row('Engine & Mechanical', report.engine)}${row('Body / Accident Signs', report.body)}${row('Tyres', report.tyres)}${row('Interior & Electronics', report.interior)}${row('Documents', report.documents)}${row('Odometer Confidence', report.odometer)}</table><div class="note"><h3 style="margin:0 0 8px">Inspector Notes</h3><p style="margin:0;line-height:1.6">${(report.notes || 'No extra notes added.').replace(/\n/g,'<br>')}</p></div><div class="note" style="background:#ecfdf5;border-color:#bbf7d0"><h3 style="margin:0 0 8px;color:#166534">NoDealer Guidance</h3><p style="margin:0;line-height:1.6">This report is a decision-support summary. Final purchase should be done only after document verification, seller identity confirmation, payment safety checks and buyer satisfaction.</p></div><button class="no-print" onclick="window.print()" style="margin-top:20px;background:#0f172a;color:white;border:0;border-radius:14px;padding:14px 20px;font-weight:900">Print / Save as PDF</button></div><div class="footer">NoDealer India • Direct-owner car marketplace • This report is generated from CRM inspection inputs.</div></div></body></html>`;
-        }
-
-        function previewCurrentPdiReport() {
-            const report = collectPdiReportForm();
-            const w = window.open('', '_blank');
-            w.document.write(buildPdiReportHtml(report));
-            w.document.close();
-        }
-
-        function openSavedPdiReport(timestamp) {
-            const log = getLeadByTimestamp(timestamp);
-            const report = log?.pdiReport || log?.rawData?.pdiReport;
-            if (!report) { alert('No report saved for this lead yet.'); return; }
-            const w = window.open('', '_blank');
-            w.document.write(buildPdiReportHtml(report, log));
-            w.document.close();
-        }
-
-        function sharePdiReportWhatsApp(timestamp) {
-            const log = getLeadByTimestamp(timestamp);
-            const report = log?.pdiReport || log?.rawData?.pdiReport;
-            if (!report) { alert('No report saved for this lead yet.'); return; }
-            const phone = safeText(log.phone).replace(/\D/g, '');
-            const msg = `Hi ${report.buyerName || 'there'}, your NoDealer PDI summary for ${report.carDetails || 'the car'} is ready. Verdict: ${report.verdict}. Score: ${report.score}/100. Please review the findings before making payment.`;
-            if (phone) window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-            else prompt('Copy this WhatsApp report message:', msg);
-        }
-
-
-        function openCustomerDashboard() {
-            const modal = document.getElementById('customerDashboardModal');
-            if (!modal) return;
-            modal.classList.remove('hidden');
-            const savedName = localStorage.getItem('noDealerCustomerName') || '';
-            const savedPhone = localStorage.getItem('noDealerCustomerPhone') || '';
-            document.getElementById('customerDashName').value = savedName;
-            document.getElementById('customerDashPhone').value = savedPhone;
-            renderCustomerCarsDashboard();
-            if (savedPhone) loadCustomerDashboardData();
-            else renderCustomerLeadEmptyState('Enter your phone number to see enquiry and PDI status.');
-        }
-
-        function closeCustomerDashboard() {
-            document.getElementById('customerDashboardModal')?.classList.add('hidden');
-        }
-
-        function customerDashboardLogin() {
-            const name = (document.getElementById('customerDashName')?.value || '').trim();
-            const phone = (document.getElementById('customerDashPhone')?.value || '').trim();
-            if (!phone || phone.replace(/\D/g,'').length < 10) {
-                alert('Please enter a valid mobile number.');
-                return;
-            }
-            localStorage.setItem('noDealerCustomerName', name || 'NoDealer Customer');
-            localStorage.setItem('noDealerCustomerPhone', phone);
-            loadCustomerDashboardData();
-        }
-
-        function clearCustomerDashboardLogin() {
-            localStorage.removeItem('noDealerCustomerName');
-            localStorage.removeItem('noDealerCustomerPhone');
-            document.getElementById('customerDashName').value = '';
-            document.getElementById('customerDashPhone').value = '';
-            renderCustomerLeadEmptyState('Dashboard reset. Enter phone number again to view your enquiries.');
-        }
-
-        function renderMiniCustomerCarCard(car, tag = 'Saved') {
-            const img = getCarImage(car);
-            const price = Number(car.price || 0).toLocaleString('en-IN');
-            return `<div class="border border-slate-200 rounded-3xl overflow-hidden bg-slate-50">
-                <img src="${img}" class="w-full h-32 object-cover" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=800';">
-                <div class="p-4">
-                    <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-[9px] font-black uppercase">${tag}</span>
-                    <h4 class="font-black text-sm uppercase mt-2 text-slate-950">${safeText(car.title || car.name || 'Car')}</h4>
-                    <p class="text-xs text-slate-500 mt-1">₹${price} • ${safeText(car.year)} • ${safeText(car.fuel)}</p>
-                    <div class="grid grid-cols-2 gap-2 mt-3">
-                        <button onclick="openCarDetailsPage(${Number(car.id)})" class="bg-slate-950 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase">View</button>
-                        <button onclick="captureCarEnquiryAndOpenWhatsApp(${Number(car.id)}, 'Customer Dashboard')" class="bg-green-500 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase">WhatsApp</button>
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderCustomerCarsDashboard() {
-            const body = document.getElementById('customerCarsDashboardBody');
-            if (!body) return;
-            const cars = window.CAR_CACHE || [];
-            const savedIds = JSON.parse(localStorage.getItem('savedNoDealerCars') || '[]').map(Number);
-            const recentIds = JSON.parse(localStorage.getItem('recentNoDealerCars') || '[]').map(Number);
-            const savedCars = cars.filter(c => savedIds.includes(Number(c.id))).slice(0, 4);
-            const recentCars = cars.filter(c => recentIds.includes(Number(c.id)) && !savedIds.includes(Number(c.id))).slice(0, 4);
-            const shown = [...savedCars.map(c => ({...c, _tag:'Saved'})), ...recentCars.map(c => ({...c, _tag:'Viewed'}))].slice(0, 6);
-
-            document.getElementById('custSavedCount').innerText = savedIds.length;
-            document.getElementById('custRecentCount').innerText = recentIds.length;
-
-            if (shown.length === 0) {
-                body.innerHTML = `<div class="sm:col-span-2 text-center bg-slate-50 border rounded-3xl p-8 text-slate-500 text-sm font-bold">No saved or recently viewed cars yet. Browse cars and tap Save to build your shortlist.</div>`;
-                return;
-            }
-            body.innerHTML = shown.map(car => renderMiniCustomerCarCard(car, car._tag)).join('');
-        }
-
-        function renderCustomerLeadEmptyState(message) {
-            const body = document.getElementById('customerLeadsDashboardBody');
-            if (!body) return;
-            document.getElementById('custLeadCount').innerText = '0';
-            document.getElementById('custReportCount').innerText = '0';
-            body.innerHTML = `<div class="text-center bg-slate-50 border rounded-3xl p-8 text-slate-500 text-sm font-bold">${message}</div>`;
-        }
-
-        function buildCustomerLeadCard(log) {
-            const status = log.leadStatus || 'New Lead';
-            const pdiReport = log.pdiReport || log.rawData?.pdiReport;
-            const phoneClean = safeText(log.phone).replace(/\D/g, '');
-            const carText = safeText(log.rawData?.carDetails || log.rawData?.pdiCarDetails || `${log.carBrand || ''} ${log.carModel || ''} ${log.carYear || ''}`.trim() || log.submissionType);
-            const dateText = log.timestamp ? new Date(log.timestamp).toLocaleString() : 'Recent';
-            const followText = log.followUpDate ? `Follow-up: ${new Date(log.followUpDate).toLocaleString()}` : 'No follow-up date set yet';
-            const reportBtn = pdiReport ? `<button onclick="openCustomerPdiReport('${String(log.timestamp).replace(/'/g,"\\'")}')" class="bg-amber-500 text-slate-950 px-4 py-2 rounded-xl text-[10px] font-black uppercase">View PDI Report</button>` : `<span class="bg-slate-100 text-slate-500 px-4 py-2 rounded-xl text-[10px] font-black uppercase">Report Pending</span>`;
-            const whatsappMsg = encodeURIComponent(`Hi NoDealer, I want an update on my enquiry: ${carText}. My phone: ${safeText(log.phone)}.`);
-            return `<div class="border border-slate-200 rounded-3xl p-4 bg-slate-50">
-                <div class="flex items-start justify-between gap-3">
-                    <div>
-                        <p class="text-[10px] uppercase font-black text-slate-400">${safeText(log.submissionType)} • ${dateText}</p>
-                        <h4 class="font-black text-slate-950 uppercase mt-1">${carText || 'NoDealer Enquiry'}</h4>
-                        <p class="text-xs text-slate-500 mt-1">Status: <b>${safeText(status)}</b> • ${safeText(followText)}</p>
-                    </div>
-                    <span class="bg-white border px-3 py-1 rounded-full text-[10px] font-black uppercase text-slate-700">${getLeadTemperature(log)}</span>
-                </div>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    ${reportBtn}
-                    <a href="https://wa.me/917838335143?text=${whatsappMsg}" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase">Ask Update</a>
-                </div>
-            </div>`;
-        }
-
-        async function loadCustomerDashboardData() {
-            renderCustomerCarsDashboard();
-            const rawPhone = (document.getElementById('customerDashPhone')?.value || localStorage.getItem('noDealerCustomerPhone') || '').trim();
-            const phoneDigits = rawPhone.replace(/\D/g, '');
-            const body = document.getElementById('customerLeadsDashboardBody');
-            if (!phoneDigits) {
-                renderCustomerLeadEmptyState('Enter your phone number to see enquiry and PDI status.');
-                return;
-            }
-            if (body) body.innerHTML = `<div class="text-center bg-slate-50 border rounded-3xl p-8 text-slate-500 text-sm font-bold">Loading your enquiry status...</div>`;
-            let logs = [];
-            try {
-                if (ensureSupabase()) {
-                    const { data, error } = await supabaseClient
-                        .from('leads')
-                        .select('*')
-                        .order('created_at', { ascending: false });
-                    if (error) throw error;
-                    logs = (data || []).map(mapLeadRowToLog).filter(log => safeText(log.phone).replace(/\D/g,'').includes(phoneDigits.slice(-10)) || phoneDigits.includes(safeText(log.phone).replace(/\D/g,'').slice(-10)));
-                }
-            } catch (err) {
-                console.error(err);
-            }
-
-            document.getElementById('custLeadCount').innerText = logs.length;
-            document.getElementById('custReportCount').innerText = logs.filter(l => l.pdiReport || l.rawData?.pdiReport).length;
-            const supportMsg = encodeURIComponent(`Hi NoDealer, I am checking my dashboard. My phone is ${rawPhone}. Please help me with my enquiry status.`);
-            document.getElementById('customerDashboardWhatsApp').href = `https://wa.me/917838335143?text=${supportMsg}`;
-
-            if (!logs.length) {
-                renderCustomerLeadEmptyState('No enquiries found for this number yet. Submit a car enquiry, PDI booking or sell-car request first.');
-                return;
-            }
-            body.innerHTML = logs.map(buildCustomerLeadCard).join('');
-        }
-
-        function openCustomerPdiReport(timestamp) {
-            let reportLog = null;
-            const rawPhone = (document.getElementById('customerDashPhone')?.value || localStorage.getItem('noDealerCustomerPhone') || '').replace(/\D/g,'');
-            (window.LEAD_CACHE || []).forEach(log => {
-                if (String(log.timestamp) === String(timestamp)) reportLog = log;
-            });
-            if (!reportLog) {
-                alert('Report loaded from CRM only after admin refresh. Open admin once or ask support if it does not show.');
-                return;
-            }
-            const report = reportLog.pdiReport || reportLog.rawData?.pdiReport;
-            if (!report) { alert('PDI report is not ready yet.'); return; }
-            const w = window.open('', '_blank');
-            w.document.write(buildPdiReportHtml(report, reportLog));
-            w.document.close();
-        }
-
-        window.addEventListener('load', () => {
-            setTimeout(renderCustomerCarsDashboard, 1200);
-        });
-
 
     </script>
 </body>
