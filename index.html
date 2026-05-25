@@ -280,6 +280,22 @@
             </div>
         </main>
 
+        <section id="recentlyViewedSection" class="hidden bg-white py-14 border-y border-slate-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
+                    <div>
+                        <span class="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Recently Viewed</span>
+                        <h2 class="text-2xl md:text-3xl font-black uppercase text-slate-950 mt-3">Continue Where You Left Off</h2>
+                        <p class="text-sm text-slate-500 font-semibold mt-1">Quickly revisit cars you opened recently on this device.</p>
+                    </div>
+                    <button onclick="clearRecentlyViewedCars()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-5 py-3 rounded-2xl text-xs font-black uppercase">
+                        Clear Viewed
+                    </button>
+                </div>
+                <div id="recentlyViewedGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
         <section class="bg-slate-950 text-white py-16 relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.22),transparent_40%)]"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-12 gap-8 items-center">
@@ -906,6 +922,7 @@ Add clear exterior, interior, dashboard and document photos for faster buyer tru
         window.ACTIVE_LEAD_FILTER = 'all';
         window.COMPARE_CARS = [];
         window.SAVED_CAR_IDS = JSON.parse(localStorage.getItem('savedNoDealerCars') || '[]');
+        window.RECENTLY_VIEWED_IDS = JSON.parse(localStorage.getItem('recentNoDealerCars') || '[]');
 
         if (!localStorage.getItem('clientInquiries')) {
             localStorage.setItem('clientInquiries', JSON.stringify([]));
@@ -1173,6 +1190,9 @@ checkUrlRoutingHash();
                     </div>
                 `;
             });
+
+            updateSavedCarsUI();
+            renderRecentlyViewedCars();
         }
 
         async function loadAdminInventoryDirectory() {
@@ -1747,7 +1767,10 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
         function openCarDetailsById(id) {
             const car = (window.CAR_CACHE || []).find(c => Number(c.id) === Number(id));
-            if (car) openCarDetails(car);
+            if (car) {
+                trackRecentlyViewedCar(id);
+                openCarDetails(car);
+            }
         }
 
         function openCarDetails(car) {
@@ -2183,6 +2206,68 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             document.body.classList.remove('overflow-hidden');
         }
 
+
+
+        function saveRecentlyViewedCarsToLocalStorage() {
+            localStorage.setItem('recentNoDealerCars', JSON.stringify(window.RECENTLY_VIEWED_IDS || []));
+        }
+
+        function trackRecentlyViewedCar(id) {
+            const numericId = Number(id);
+            const current = (window.RECENTLY_VIEWED_IDS || []).filter(viewedId => Number(viewedId) !== numericId);
+            window.RECENTLY_VIEWED_IDS = [numericId, ...current].slice(0, 8);
+            saveRecentlyViewedCarsToLocalStorage();
+            renderRecentlyViewedCars();
+        }
+
+        function clearRecentlyViewedCars() {
+            window.RECENTLY_VIEWED_IDS = [];
+            saveRecentlyViewedCarsToLocalStorage();
+            renderRecentlyViewedCars();
+        }
+
+        function renderRecentlyViewedCars() {
+            const section = document.getElementById('recentlyViewedSection');
+            const grid = document.getElementById('recentlyViewedGrid');
+            if (!section || !grid) return;
+
+            const viewedCars = (window.RECENTLY_VIEWED_IDS || [])
+                .map(id => (window.CAR_CACHE || []).find(car => Number(car.id) === Number(id)))
+                .filter(Boolean);
+
+            if (viewedCars.length === 0) {
+                section.classList.add('hidden');
+                grid.innerHTML = '';
+                return;
+            }
+
+            section.classList.remove('hidden');
+            grid.innerHTML = viewedCars.map(car => {
+                const gallery = carGallery(car);
+                const img = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+                return `
+                    <div onclick="openCarDetailsById(${car.id})" class="bg-white border border-slate-100 rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+                        <img src="${img}" class="w-full h-44 object-cover rounded-2xl border bg-slate-50">
+                        <div class="mt-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <div>
+                                    <h3 class="font-black text-slate-950 uppercase text-sm">${safeText(car.title)}</h3>
+                                    <p class="text-xs text-slate-500 font-semibold mt-1">${safeText(car.year)} • ${safeText(car.fuel)} • ${safeText(car.transmission)}</p>
+                                </div>
+                                <span class="bg-purple-50 text-purple-700 px-2 py-1 rounded-full text-[9px] font-black uppercase">Viewed</span>
+                            </div>
+                            <div class="flex items-center justify-between mt-4 pt-3 border-t border-dashed border-slate-200">
+                                <p class="text-xl font-black text-slate-950">₹${money(car.price)}</p>
+                                <button onclick="event.stopPropagation(); toggleSavedCar(${car.id})" class="bg-red-50 text-red-600 px-3 py-2 rounded-xl text-[10px] font-black uppercase">
+                                    <i class="fa-solid fa-heart"></i> Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         function toggleCompareCar(id) {
             const cars = window.CAR_CACHE || [];
             const car = cars.find(c => Number(c.id) === Number(id));
@@ -2326,6 +2411,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
         window.addEventListener('load', () => {
             setTimeout(calculateEMI, 700);
+            setTimeout(renderRecentlyViewedCars, 900);
         });
 
     </script>
