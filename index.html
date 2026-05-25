@@ -232,6 +232,31 @@
                     <button onclick="document.getElementById('filterFuel').value='CNG'; applyFilters();" class="bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full text-xs font-black text-slate-700">CNG</button>
                     <button onclick="document.getElementById('filterBudget').value='';document.getElementById('filterBrand').value='';document.getElementById('filterFuel').value='';document.getElementById('filterTransmission').value=''; applyFilters();" class="bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-full text-xs font-black text-blue-700">Clear Filters</button>
                 </div>
+
+                <div class="mt-6 bg-slate-950 rounded-3xl p-4 md:p-5 text-white">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+                        <div>
+                            <p class="text-[10px] uppercase text-slate-400 font-black">Popular Searches</p>
+                            <h3 class="text-lg font-black uppercase tracking-tight">Quickly Find Cars Buyers Usually Want</h3>
+                        </div>
+                        <button onclick="document.getElementById('filterBudget').value='';document.getElementById('filterBrand').value='';document.getElementById('filterFuel').value='';document.getElementById('filterTransmission').value=''; applyFilters();" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase">
+                            Reset
+                        </button>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setQuickSearch('brand','Maruti')" class="bg-white text-slate-950 hover:bg-slate-100 px-4 py-2 rounded-full text-xs font-black">Maruti</button>
+                        <button onclick="setQuickSearch('brand','Hyundai')" class="bg-white text-slate-950 hover:bg-slate-100 px-4 py-2 rounded-full text-xs font-black">Hyundai</button>
+                        <button onclick="setQuickSearch('brand','Tata')" class="bg-white text-slate-950 hover:bg-slate-100 px-4 py-2 rounded-full text-xs font-black">Tata</button>
+                        <button onclick="setQuickSearch('brand','Mahindra')" class="bg-white text-slate-950 hover:bg-slate-100 px-4 py-2 rounded-full text-xs font-black">Mahindra</button>
+                        <button onclick="setQuickSearch('brand','Honda')" class="bg-white text-slate-950 hover:bg-slate-100 px-4 py-2 rounded-full text-xs font-black">Honda</button>
+                        <button onclick="setQuickSearch('budget','500000')" class="bg-amber-500 text-slate-950 hover:bg-amber-400 px-4 py-2 rounded-full text-xs font-black">Under ₹5L</button>
+                        <button onclick="setQuickSearch('budget','800000')" class="bg-amber-500 text-slate-950 hover:bg-amber-400 px-4 py-2 rounded-full text-xs font-black">Under ₹8L</button>
+                        <button onclick="setQuickSearch('transmission','Automatic')" class="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-full text-xs font-black">Automatic</button>
+                        <button onclick="setQuickSearch('fuel','CNG')" class="bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded-full text-xs font-black">CNG Cars</button>
+                        <button onclick="setQuickSearch('fuel','Petrol')" class="bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded-full text-xs font-black">Petrol Cars</button>
+                    </div>
+                </div>
             </div>
         </section>
         <main class="max-w-7xl mx-auto px-4 py-12">
@@ -940,6 +965,22 @@ checkUrlRoutingHash();
             document.getElementById('photoPreviewContainer').innerHTML = "";
             document.getElementById('photoPreviewContainer').classList.add('hidden');
             ATTACHED_BASE64_PHOTOS = [];
+        }
+
+
+        function setQuickSearch(type, value) {
+            const budget = document.getElementById('filterBudget');
+            const brand = document.getElementById('filterBrand');
+            const fuel = document.getElementById('filterFuel');
+            const transmission = document.getElementById('filterTransmission');
+
+            if (type === 'brand' && brand) brand.value = value;
+            if (type === 'budget' && budget) budget.value = value;
+            if (type === 'fuel' && fuel) fuel.value = value;
+            if (type === 'transmission' && transmission) transmission.value = value;
+
+            applyFilters();
+            document.getElementById('inventory-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function scrollToInventory() {
