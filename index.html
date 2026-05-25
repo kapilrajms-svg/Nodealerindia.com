@@ -63,6 +63,9 @@
                     </div>
                 </a>
                 <div class="flex items-center space-x-2">
+                    <button onclick="openSavedCarsModal()" class="bg-slate-950 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-slate-800 flex items-center gap-1 transition-all">
+                        <i class="fa-solid fa-heart text-red-400 text-sm"></i> Saved <span id="savedCarsHeaderCount" class="bg-white text-slate-950 rounded-full px-1.5 py-0.5 text-[10px]">0</span>
+                    </button>
                     <a href="https://wa.me/917838335143" target="_blank" class="bg-green-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-green-600 flex items-center gap-1 transition-all"><i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Support</a>
                 </div>
             </div>
@@ -461,7 +464,7 @@
 
     <!-- Mobile Customer Action Bar -->
     <div id="mobileActionBar" class="md:hidden fixed bottom-0 left-0 right-0 z-[9998] bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-2xl px-3 py-3">
-        <div class="grid grid-cols-3 gap-2 max-w-md mx-auto">
+        <div class="grid grid-cols-4 gap-2 max-w-md mx-auto">
             <button onclick="scrollToInventory()" class="bg-slate-950 text-white rounded-2xl py-3 text-[10px] font-black uppercase flex flex-col items-center gap-1 active:scale-95 transition-all">
                 <i class="fa-solid fa-car text-sm"></i>
                 Cars
@@ -469,6 +472,10 @@
             <button onclick="document.getElementById('pdiFormHomepage')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 rounded-2xl py-3 text-[10px] font-black uppercase flex flex-col items-center gap-1 active:scale-95 transition-all">
                 <i class="fa-solid fa-shield-halved text-sm"></i>
                 PDI
+            </button>
+            <button onclick="openSavedCarsModal()" class="bg-red-50 text-red-600 rounded-2xl py-3 text-[10px] font-black uppercase flex flex-col items-center gap-1 active:scale-95 transition-all">
+                <i class="fa-solid fa-heart text-sm"></i>
+                Saved
             </button>
             <a href="https://wa.me/917838335143" target="_blank" class="bg-green-500 text-white rounded-2xl py-3 text-[10px] font-black uppercase flex flex-col items-center gap-1 active:scale-95 transition-all">
                 <i class="fa-brands fa-whatsapp text-sm"></i>
@@ -478,6 +485,21 @@
     </div>
 
 
+
+    <!-- Saved Cars Modal -->
+    <div id="savedCarsModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="max-w-5xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase font-black">Your Shortlist</p>
+                    <h2 class="text-2xl font-black uppercase">Saved Cars</h2>
+                    <p class="text-xs text-slate-400 mt-1">Cars saved on this device for quick review.</p>
+                </div>
+                <button onclick="closeSavedCarsModal()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+            </div>
+            <div id="savedCarsModalBody" class="p-5 grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </div>
+    </div>
 
     <!-- Compare Cars Tray -->
     <div id="compareTray" class="hidden fixed left-3 right-3 bottom-24 md:bottom-5 z-[9997] max-w-5xl mx-auto bg-slate-950 text-white border border-white/10 shadow-2xl rounded-3xl p-4">
@@ -883,6 +905,7 @@ Add clear exterior, interior, dashboard and document photos for faster buyer tru
         window.LEAD_CACHE = [];
         window.ACTIVE_LEAD_FILTER = 'all';
         window.COMPARE_CARS = [];
+        window.SAVED_CAR_IDS = JSON.parse(localStorage.getItem('savedNoDealerCars') || '[]');
 
         if (!localStorage.getItem('clientInquiries')) {
             localStorage.setItem('clientInquiries', JSON.stringify([]));
@@ -920,6 +943,7 @@ Add clear exterior, interior, dashboard and document photos for faster buyer tru
                 document.getElementById('preloader').style.display = 'none';
                 document.getElementById('main-content').className = 'opacity-100 transition-opacity duration-300';
                 renderCars();
+updateSavedCarsUI();
 loadDynamicBrandFilter();
 checkUrlRoutingHash();
             }, 400);
@@ -1018,6 +1042,8 @@ checkUrlRoutingHash();
                 };
                 reader.readAsDataURL(file);
             });
+
+            updateSavedCarsUI();
         }
 
         function handleAdminPhotoAttachmentPreview(input) {
@@ -1126,6 +1152,12 @@ checkUrlRoutingHash();
                             </div>
 
                             <div class="flex gap-2">
+                                <button onclick="event.stopPropagation(); toggleSavedCar(${car.id})"
+                                    id="saveCarBtn-${car.id}"
+                                    class="bg-red-50 text-red-600 text-[10px] font-black px-3 py-2 rounded-xl hover:bg-red-100 transition-all uppercase">
+                                    <i class="fa-solid fa-heart"></i> Save
+                                </button>
+
                                 <button onclick="event.stopPropagation(); toggleCompareCar(${car.id})"
                                     class="bg-slate-950 text-white text-[10px] font-black px-3 py-2 rounded-xl hover:bg-slate-800 transition-all uppercase">
                                     Compare
@@ -2046,6 +2078,111 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         }
 
 
+
+        function saveSavedCarsToLocalStorage() {
+            localStorage.setItem('savedNoDealerCars', JSON.stringify(window.SAVED_CAR_IDS || []));
+        }
+
+        function isCarSaved(id) {
+            return (window.SAVED_CAR_IDS || []).some(savedId => Number(savedId) === Number(id));
+        }
+
+        function toggleSavedCar(id) {
+            const numericId = Number(id);
+
+            if (isCarSaved(numericId)) {
+                window.SAVED_CAR_IDS = (window.SAVED_CAR_IDS || []).filter(savedId => Number(savedId) !== numericId);
+            } else {
+                window.SAVED_CAR_IDS = [...(window.SAVED_CAR_IDS || []), numericId];
+            }
+
+            saveSavedCarsToLocalStorage();
+            updateSavedCarsUI();
+        }
+
+        function updateSavedCarsUI() {
+            const savedIds = window.SAVED_CAR_IDS || [];
+            const headerCount = document.getElementById('savedCarsHeaderCount');
+
+            if (headerCount) {
+                headerCount.innerText = savedIds.length;
+            }
+
+            savedIds.forEach(id => {
+                const btn = document.getElementById(`saveCarBtn-${id}`);
+                if (btn) {
+                    btn.className = "bg-red-600 text-white text-[10px] font-black px-3 py-2 rounded-xl hover:bg-red-700 transition-all uppercase";
+                    btn.innerHTML = '<i class="fa-solid fa-heart"></i> Saved';
+                }
+            });
+
+            (window.CAR_CACHE || []).forEach(car => {
+                if (!isCarSaved(car.id)) {
+                    const btn = document.getElementById(`saveCarBtn-${car.id}`);
+                    if (btn) {
+                        btn.className = "bg-red-50 text-red-600 text-[10px] font-black px-3 py-2 rounded-xl hover:bg-red-100 transition-all uppercase";
+                        btn.innerHTML = '<i class="fa-solid fa-heart"></i> Save';
+                    }
+                }
+            });
+        }
+
+        function openSavedCarsModal() {
+            const modal = document.getElementById('savedCarsModal');
+            const body = document.getElementById('savedCarsModalBody');
+
+            if (!modal || !body) return;
+
+            const savedCars = (window.CAR_CACHE || []).filter(car => isCarSaved(car.id));
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+
+            if (savedCars.length === 0) {
+                body.innerHTML = `
+                    <div class="col-span-full text-center py-16">
+                        <i class="fa-solid fa-heart text-5xl text-slate-200 mb-4"></i>
+                        <h3 class="text-2xl font-black text-slate-950 uppercase">No Saved Cars Yet</h3>
+                        <p class="text-sm text-slate-500 font-semibold mt-2">Tap Save on any car card to shortlist it here.</p>
+                        <button onclick="closeSavedCarsModal(); scrollToInventory();" class="mt-5 bg-slate-950 text-white px-6 py-3 rounded-2xl text-xs font-black uppercase">
+                            Browse Cars
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            body.innerHTML = savedCars.map(car => {
+                const gallery = carGallery(car);
+                const img = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+
+                return `
+                    <div class="bg-white border border-slate-100 rounded-3xl p-4 shadow-sm">
+                        <img src="${img}" class="w-full h-44 object-cover rounded-2xl border bg-slate-50">
+                        <div class="mt-4">
+                            <h3 class="font-black text-slate-950 uppercase">${safeText(car.title)}</h3>
+                            <p class="text-xs text-slate-500 font-semibold mt-1">${safeText(car.year)} • ${safeText(car.driven)} • ${safeText(car.fuel)} • ${safeText(car.transmission)}</p>
+                            <p class="text-2xl font-black text-slate-950 mt-3">₹${money(car.price)}</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 mt-4">
+                            <button onclick="closeSavedCarsModal(); openCarDetailsById(${car.id})" class="bg-slate-950 text-white py-3 rounded-2xl text-[10px] font-black uppercase">
+                                View Details
+                            </button>
+                            <button onclick="toggleSavedCar(${car.id}); openSavedCarsModal();" class="bg-red-50 text-red-600 py-3 rounded-2xl text-[10px] font-black uppercase">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function closeSavedCarsModal() {
+            const modal = document.getElementById('savedCarsModal');
+            if (modal) modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
         function toggleCompareCar(id) {
             const cars = window.CAR_CACHE || [];
             const car = cars.find(c => Number(c.id) === Number(id));
@@ -2181,6 +2318,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
         function clearCompareCars() {
             window.COMPARE_CARS = [];
+        window.SAVED_CAR_IDS = JSON.parse(localStorage.getItem('savedNoDealerCars') || '[]');
             renderCompareTray();
             closeCompareModal();
         }
