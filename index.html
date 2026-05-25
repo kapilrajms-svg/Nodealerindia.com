@@ -1077,7 +1077,60 @@
                         <p class="text-xs text-slate-400 mt-2">Use WhatsApp, call, status and follow-up tools to move leads faster.</p>
                     </div>
                 </div>
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4"
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
+                        <div>
+                            <h3 class="text-xl font-black uppercase text-white"><i class="fa-solid fa-robot text-green-400 mr-2"></i>WhatsApp + CRM Automation Desk</h3>
+                            <p class="text-xs text-slate-400 mt-1">Website-side automation: smart message templates, quick call flow, follow-up workflow and lead priority actions.</p>
+                        </div>
+                        <button onclick="loadAdminLeadsDashboard(); updateActionCenter();" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-xl text-xs font-black uppercase">
+                            Refresh Automation Desk
+                        </button>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4 mb-5">
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+                            <p class="text-[10px] uppercase text-slate-500 font-bold">Step 01</p>
+                            <h4 class="text-white font-black uppercase mt-1">Contact Hot Leads</h4>
+                            <p class="text-xs text-slate-400 mt-2">Use Smart WhatsApp first, then call if no reply. PDI and car enquiries are treated as Hot leads.</p>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+                            <p class="text-[10px] uppercase text-slate-500 font-bold">Step 02</p>
+                            <h4 class="text-white font-black uppercase mt-1">Set Follow-Up Date</h4>
+                            <p class="text-xs text-slate-400 mt-2">After every call, set a follow-up date so the lead appears in Due Follow-Ups.</p>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
+                            <p class="text-[10px] uppercase text-slate-500 font-bold">Step 03</p>
+                            <h4 class="text-white font-black uppercase mt-1">Move Pipeline</h4>
+                            <p class="text-xs text-slate-400 mt-2">New → Contacted → Negotiation → Closed. Your dashboard counts update automatically.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <button onclick="copyNoDealerTemplate('buyer')" class="bg-green-600 hover:bg-green-700 text-white rounded-2xl p-4 text-left">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <h4 class="font-black uppercase mt-2 text-sm">Copy Buyer Follow-Up</h4>
+                            <p class="text-[10px] text-green-100 mt-1">For car enquiry leads.</p>
+                        </button>
+                        <button onclick="copyNoDealerTemplate('pdi')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-2xl p-4 text-left">
+                            <i class="fa-solid fa-shield-halved text-2xl"></i>
+                            <h4 class="font-black uppercase mt-2 text-sm">Copy PDI Follow-Up</h4>
+                            <p class="text-[10px] text-slate-800 mt-1">For inspection bookings.</p>
+                        </button>
+                        <button onclick="copyNoDealerTemplate('seller')" class="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl p-4 text-left">
+                            <i class="fa-solid fa-car-side text-2xl"></i>
+                            <h4 class="font-black uppercase mt-2 text-sm">Copy Seller Follow-Up</h4>
+                            <p class="text-[10px] text-blue-100 mt-1">For sell-car requests.</p>
+                        </button>
+                        <button onclick="openNoDealerOwnerWhatsApp()" class="bg-slate-700 hover:bg-slate-600 text-white rounded-2xl p-4 text-left">
+                            <i class="fa-solid fa-headset text-2xl"></i>
+                            <h4 class="font-black uppercase mt-2 text-sm">Open Owner WhatsApp</h4>
+                            <p class="text-[10px] text-slate-300 mt-1">Quick admin support chat.</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-blue-500 flex items-center gap-2"><i class="fa-solid fa-gauge-high"></i> Master Management Console</h1>
                         <p class="text-xs text-slate-400 mt-0.5">Secure Session Active on Desktop IP Layout Matrix</p>
@@ -3145,6 +3198,49 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             } finally {
                 if (btn) { btn.disabled = false; btn.textContent = originalText || 'Save Service Request'; }
             }
+        }
+
+
+        function getNoDealerTemplate(type) {
+            if (type === "pdi") {
+                return "Hi, this is NoDealer India. We received your PDI inspection request. Please confirm: 1) car location, 2) preferred date/time, 3) seller availability, and 4) any concern like accident, repaint, engine noise or odometer doubt. Our team will guide you with the next step.";
+            }
+            if (type === "seller") {
+                return "Hi, this is NoDealer India. We received your sell-car request. Please share RC photo, odometer photo, insurance status, expected price, service history and 4-6 clear car photos so we can prepare your listing and connect you with serious buyers.";
+            }
+            return "Hi, this is NoDealer India. We received your car enquiry. Please confirm your budget, preferred model, city, buying timeline and whether you want PDI inspection before final payment. We will help you shortlist safely.";
+        }
+
+        async function copyNoDealerTemplate(type) {
+            const msg = getNoDealerTemplate(type);
+            try {
+                await navigator.clipboard.writeText(msg);
+                alert("NoDealer WhatsApp template copied. Paste it in WhatsApp follow-up.");
+            } catch (error) {
+                prompt("Copy this WhatsApp template:", msg);
+            }
+        }
+
+        function openNoDealerOwnerWhatsApp() {
+            const msg = encodeURIComponent("NoDealer Admin Update: I am checking CRM follow-ups and need to contact priority leads.");
+            window.open("https://wa.me/917838335143?text=" + msg, "_blank");
+        }
+
+        function getSmartWhatsAppText(log) {
+            const name = safeText(log.name) || "there";
+            const type = safeText(log.submissionType) || "your enquiry";
+            const text = JSON.stringify(log || {}).toLowerCase();
+            const car = safeText(log.carTitle || log.carBrand || log.carModel || log.pdiCarDetails || "");
+            if (text.includes("pdi") || text.includes("inspection")) {
+                return `Hi ${name}, this is NoDealer India. We received your PDI request${car ? " for " + car : ""}. Please confirm vehicle location, preferred date/time, seller availability and any concern like accident, repaint, engine noise or odometer doubt.`;
+            }
+            if (text.includes("sell") || text.includes("listing")) {
+                return `Hi ${name}, this is NoDealer India. We received your sell-car request${car ? " for " + car : ""}. Please share RC photo, odometer photo, insurance status, expected price, service history and clear car photos so we can prepare your listing.`;
+            }
+            if (text.includes("emi") || text.includes("loan") || text.includes("finance")) {
+                return `Hi ${name}, this is NoDealer India. We received your finance/EMI enquiry${car ? " for " + car : ""}. Please share your budget, down payment comfort and preferred loan tenure so we can guide you.`;
+            }
+            return `Hi ${name}, this is NoDealer India. We received your ${type}${car ? " for " + car : ""}. Please confirm your budget, city, buying timeline and whether you want PDI inspection before final payment.`;
         }
 
         window.addEventListener('load', () => {
