@@ -453,6 +453,42 @@
     </div>
 
 
+
+    <!-- Compare Cars Tray -->
+    <div id="compareTray" class="hidden fixed left-3 right-3 bottom-24 md:bottom-5 z-[9997] max-w-5xl mx-auto bg-slate-950 text-white border border-white/10 shadow-2xl rounded-3xl p-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+                <p class="text-[10px] uppercase text-slate-400 font-black">Compare Cars</p>
+                <h3 id="compareTrayTitle" class="text-lg font-black uppercase">No cars selected</h3>
+                <p class="text-xs text-slate-400">Select up to 3 cars to compare price, year, fuel, transmission and kilometres.</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="openCompareModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-3 rounded-2xl text-xs font-black uppercase">
+                    Open Compare
+                </button>
+                <button onclick="clearCompareCars()" class="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase">
+                    Clear
+                </button>
+            </div>
+        </div>
+        <div id="compareTrayCars" class="flex gap-2 mt-3 overflow-x-auto"></div>
+    </div>
+
+    <!-- Compare Cars Modal -->
+    <div id="compareModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase font-black">NoDealer Smart Compare</p>
+                    <h2 class="text-2xl font-black uppercase">Compare Selected Cars</h2>
+                </div>
+                <button onclick="closeCompareModal()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+            </div>
+            <div id="compareModalBody" class="p-5 overflow-x-auto"></div>
+        </div>
+    </div>
+
+
     <div id="secureAdminPortal" class="fixed inset-0 bg-slate-950 z-[9999] hidden overflow-y-auto p-4 md:p-8">
         <div class="max-w-6xl mx-auto">
             
@@ -821,6 +857,7 @@ Add clear exterior, interior, dashboard and document photos for faster buyer tru
         window.CAR_CACHE = [];
         window.LEAD_CACHE = [];
         window.ACTIVE_LEAD_FILTER = 'all';
+        window.COMPARE_CARS = [];
 
         if (!localStorage.getItem('clientInquiries')) {
             localStorage.setItem('clientInquiries', JSON.stringify([]));
@@ -1047,11 +1084,18 @@ checkUrlRoutingHash();
                                 <span class="font-black text-slate-900 text-base">₹${money(car.price)}</span>
                             </div>
 
-                            <a onclick="event.stopPropagation()" href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20the%20${encodeURIComponent(safeText(car.title))}%20advertised%20on%20No%20Dealer."
-                               target="_blank"
-                               class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl hover:bg-red-700 transition-all">
-                               Contact
-                            </a>
+                            <div class="flex gap-2">
+                                <button onclick="event.stopPropagation(); toggleCompareCar(${car.id})"
+                                    class="bg-slate-950 text-white text-[10px] font-black px-3 py-2 rounded-xl hover:bg-slate-800 transition-all uppercase">
+                                    Compare
+                                </button>
+
+                                <a onclick="event.stopPropagation()" href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20the%20${encodeURIComponent(safeText(car.title))}%20advertised%20on%20No%20Dealer."
+                                   target="_blank"
+                                   class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl hover:bg-red-700 transition-all">
+                                   Contact
+                                </a>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -1959,6 +2003,147 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 }
             }
         }
+
+
+        function toggleCompareCar(id) {
+            const cars = window.CAR_CACHE || [];
+            const car = cars.find(c => Number(c.id) === Number(id));
+
+            if (!car) {
+                alert("Car not found. Please refresh and try again.");
+                return;
+            }
+
+            const alreadySelected = window.COMPARE_CARS.some(c => Number(c.id) === Number(id));
+
+            if (alreadySelected) {
+                window.COMPARE_CARS = window.COMPARE_CARS.filter(c => Number(c.id) !== Number(id));
+            } else {
+                if (window.COMPARE_CARS.length >= 3) {
+                    alert("You can compare maximum 3 cars at a time.");
+                    return;
+                }
+                window.COMPARE_CARS.push(car);
+            }
+
+            renderCompareTray();
+        }
+
+        function renderCompareTray() {
+            const tray = document.getElementById('compareTray');
+            const title = document.getElementById('compareTrayTitle');
+            const list = document.getElementById('compareTrayCars');
+
+            if (!tray || !title || !list) return;
+
+            if (!window.COMPARE_CARS || window.COMPARE_CARS.length === 0) {
+                tray.classList.add('hidden');
+                list.innerHTML = "";
+                title.innerText = "No cars selected";
+                return;
+            }
+
+            tray.classList.remove('hidden');
+            title.innerText = `${window.COMPARE_CARS.length} car${window.COMPARE_CARS.length > 1 ? 's' : ''} selected`;
+
+            list.innerHTML = window.COMPARE_CARS.map(car => {
+                const gallery = carGallery(car);
+                const img = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';
+
+                return `
+                    <div class="min-w-[190px] bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center gap-3">
+                        <img src="${img}" class="w-14 h-12 object-cover rounded-xl">
+                        <div class="min-w-0">
+                            <h4 class="text-xs font-black uppercase truncate">${safeText(car.title)}</h4>
+                            <p class="text-[10px] text-slate-400">₹${money(car.price)} • ${safeText(car.year)}</p>
+                        </div>
+                        <button onclick="toggleCompareCar(${car.id})" class="ml-auto text-slate-400 hover:text-white font-black">×</button>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function openCompareModal() {
+            const modal = document.getElementById('compareModal');
+            const body = document.getElementById('compareModalBody');
+
+            if (!modal || !body) return;
+
+            if (!window.COMPARE_CARS || window.COMPARE_CARS.length < 2) {
+                alert("Please select at least 2 cars to compare.");
+                return;
+            }
+
+            const rows = [
+                { label: "Price", value: car => `₹${money(car.price)}` },
+                { label: "Year", value: car => safeText(car.year) || "N/A" },
+                { label: "Driven", value: car => safeText(car.driven) || "N/A" },
+                { label: "Fuel", value: car => safeText(car.fuel) || "N/A" },
+                { label: "Transmission", value: car => safeText(car.transmission) || "N/A" },
+                { label: "Color", value: car => safeText(car.color) || "N/A" },
+                { label: "Status", value: car => safeText(car.status || "available").toUpperCase() }
+            ];
+
+            body.innerHTML = `
+                <div class="grid gap-4" style="grid-template-columns: repeat(${window.COMPARE_CARS.length}, minmax(220px, 1fr));">
+                    ${window.COMPARE_CARS.map(car => {
+                        const gallery = carGallery(car);
+                        const img = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
+
+                        return `
+                            <div class="bg-slate-50 border border-slate-100 rounded-3xl p-4">
+                                <img src="${img}" class="w-full h-40 object-cover rounded-2xl mb-4">
+                                <h3 class="font-black text-lg uppercase text-slate-950">${safeText(car.title)}</h3>
+                                <p class="text-xs text-slate-500 font-bold mt-1">${safeText(car.year)} • ${safeText(car.fuel)} • ${safeText(car.transmission)}</p>
+                                <a href="https://wa.me/917838335143?text=Hi,%20I%20want%20to%20know%20more%20about%20${encodeURIComponent(safeText(car.title))}%20from%20NoDealer."
+                                   target="_blank"
+                                   class="block text-center bg-green-500 hover:bg-green-600 text-white rounded-2xl py-3 mt-4 text-xs font-black uppercase">
+                                   WhatsApp Enquiry
+                                </a>
+                            </div>
+                        `;
+                    }).join("")}
+                </div>
+
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-sm border border-slate-200 rounded-2xl overflow-hidden">
+                        <tbody>
+                            ${rows.map(row => `
+                                <tr class="border-b border-slate-100">
+                                    <td class="bg-slate-950 text-white font-black uppercase text-xs p-4 min-w-[150px]">${row.label}</td>
+                                    ${window.COMPARE_CARS.map(car => `
+                                        <td class="p-4 font-bold text-slate-700 bg-white">${row.value(car)}</td>
+                                    `).join("")}
+                                </tr>
+                            `).join("")}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-6 bg-amber-50 border border-amber-100 rounded-3xl p-5">
+                    <h4 class="font-black uppercase text-slate-950">NoDealer Buying Tip</h4>
+                    <p class="text-sm text-slate-600 mt-1">
+                        Don’t choose only by price. Compare kilometres, year, fuel, ownership condition and always book PDI before final payment.
+                    </p>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeCompareModal() {
+            const modal = document.getElementById('compareModal');
+            if (modal) modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function clearCompareCars() {
+            window.COMPARE_CARS = [];
+            renderCompareTray();
+            closeCompareModal();
+        }
+
 
         window.addEventListener('load', () => {
             setTimeout(calculateEMI, 700);
