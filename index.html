@@ -296,35 +296,145 @@
             </div>
         </section>
 
-        <section class="bg-slate-950 text-white py-16 relative overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.22),transparent_40%)]"></div>
-            <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7 space-y-4">
-                    <span class="bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-amber-500/20">
-                        <i class="fa-solid fa-shield-halved"></i> Buyer Protection Suite
-                    </span>
-                    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight">Book a 150+ Point PDI Before You Buy</h2>
-                    <p class="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
-                        Our inspection-first flow helps you check engine, body, tyres, odometer, accident clues and ownership red flags before you commit.
-                    </p>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 pt-3 max-w-2xl">
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4"><p class="text-xs font-black uppercase text-slate-400">Engine</p><p class="font-bold">Health Check</p></div>
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4"><p class="text-xs font-black uppercase text-slate-400">Body</p><p class="font-bold">Accident Scan</p></div>
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-4"><p class="text-xs font-black uppercase text-slate-400">Papers</p><p class="font-bold">Document Review</p></div>
+        <section id="pdi-section" class="bg-slate-950 text-white py-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.26),transparent_42%),radial-gradient(circle_at_bottom_left,rgba(245,158,11,0.20),transparent_38%)]"></div>
+            <div class="max-w-7xl mx-auto px-4 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-7 space-y-7">
+                        <span class="inline-flex items-center gap-2 bg-amber-500/10 text-amber-400 text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full border border-amber-500/20">
+                            <i class="fa-solid fa-shield-halved"></i> NoDealer Buyer Protection Suite
+                        </span>
+
+                        <div>
+                            <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">
+                                Book A Detailed <span class="text-amber-400">150+ Point PDI</span> Before You Pay
+                            </h2>
+                            <p class="text-gray-300 text-sm md:text-base max-w-2xl leading-relaxed mt-5">
+                                Don’t buy only by photos. Get a structured inspection request covering engine, body, tyres, documents, accident clues, odometer signs and ownership red flags before final payment.
+                            </p>
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                                <i class="fa-solid fa-car-battery text-amber-400 text-2xl"></i>
+                                <h4 class="font-black uppercase mt-3">Engine & Mechanical</h4>
+                                <p class="text-xs text-slate-400 mt-1">Leaks, noise, pickup, smoke, clutch and basic drivability checks.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                                <i class="fa-solid fa-car-burst text-red-400 text-2xl"></i>
+                                <h4 class="font-black uppercase mt-3">Body & Accident Scan</h4>
+                                <p class="text-xs text-slate-400 mt-1">Paint mismatch, panel gaps, chassis hints and repair signs.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                                <i class="fa-solid fa-file-shield text-blue-400 text-2xl"></i>
+                                <h4 class="font-black uppercase mt-3">Paper Review</h4>
+                                <p class="text-xs text-slate-400 mt-1">RC, insurance, service history and ownership red-flag review.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                                <i class="fa-solid fa-gauge-high text-green-400 text-2xl"></i>
+                                <h4 class="font-black uppercase mt-3">Odometer Signs</h4>
+                                <p class="text-xs text-slate-400 mt-1">Wear pattern check against claimed kilometres.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                                <i class="fa-solid fa-circle-check text-purple-400 text-2xl"></i>
+                                <h4 class="font-black uppercase mt-3">Tyres & Interior</h4>
+                                <p class="text-xs text-slate-400 mt-1">Tyre life, cabin condition, electronics and feature test.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
+                                <i class="fa-brands fa-whatsapp text-green-400 text-2xl"></i>
+                                <h4 class="font-black uppercase mt-3">Report Guidance</h4>
+                                <p class="text-xs text-slate-400 mt-1">Get next-step support before you close the deal.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 border border-white/10 rounded-[2rem] p-5">
+                            <h3 class="font-black uppercase mb-4">How NoDealer PDI Works</h3>
+                            <div class="grid md:grid-cols-4 gap-3 text-xs">
+                                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                                    <p class="text-amber-400 font-black text-lg">01</p>
+                                    <p class="font-bold mt-1">Submit Vehicle Details</p>
+                                </div>
+                                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                                    <p class="text-amber-400 font-black text-lg">02</p>
+                                    <p class="font-bold mt-1">Choose Slot & Location</p>
+                                </div>
+                                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                                    <p class="text-amber-400 font-black text-lg">03</p>
+                                    <p class="font-bold mt-1">Inspection Request Logged</p>
+                                </div>
+                                <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                                    <p class="text-amber-400 font-black text-lg">04</p>
+                                    <p class="font-bold mt-1">Get Buying Guidance</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="lg:col-span-5 bg-white p-6 rounded-[2rem] border border-white/10 w-full shadow-2xl">
-                    <h3 class="text-lg font-black uppercase tracking-tight mb-4 flex items-center gap-2 text-slate-950">
-                        <i class="fa-solid fa-calendar-check text-amber-500"></i> Secure Inspection Booking
-                    </h3>
-                    <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3 text-slate-900">
-                        <input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
-                        <input type="tel" id="pdiPhone" required placeholder="Mobile Contact Number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
-                        <input type="text" id="pdiLocation" required placeholder="Vehicle Location" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none">
-                        <button type="submit" id="pdiSubmitBtn" class="w-full bg-amber-500 text-slate-950 font-black py-3.5 rounded-xl uppercase tracking-wider hover:bg-amber-400 transition-all text-xs">
-                            Schedule PDI Inspection Slot
-                        </button>
-                    </form>
+
+                    <div class="lg:col-span-5 bg-white p-6 md:p-7 rounded-[2rem] border border-white/10 w-full shadow-2xl text-slate-950">
+                        <div class="mb-5">
+                            <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Inspection Booking</span>
+                            <h3 class="text-2xl font-black uppercase tracking-tight mt-3 flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-check text-amber-500"></i> Book Your PDI
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">Detailed request goes directly to your NoDealer CRM.</p>
+                        </div>
+
+                        <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500">
+                                <input type="tel" id="pdiPhone" required placeholder="Mobile Number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <input type="text" id="pdiCarDetails" required placeholder="Car Name / Model / Variant" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500">
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="text" id="pdiLocation" required placeholder="Vehicle Exact Location" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500">
+                                <input type="text" id="pdiCity" required placeholder="City" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <select id="pdiServiceType" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+                                    <option value="Standard PDI">Standard PDI</option>
+                                    <option value="Premium PDI">Premium PDI</option>
+                                    <option value="Luxury Car PDI">Luxury Car PDI</option>
+                                    <option value="Pre-Final Payment Check">Pre-Final Payment Check</option>
+                                </select>
+
+                                <select id="pdiInspectionMode" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+                                    <option value="Doorstep Inspection">Doorstep Inspection</option>
+                                    <option value="Seller Location Inspection">Seller Location Inspection</option>
+                                    <option value="Workshop Assisted Inspection">Workshop Assisted Inspection</option>
+                                </select>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <input type="date" id="pdiPreferredDate" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+                                <select id="pdiPreferredSlot" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                    <option value="Evening">Evening</option>
+                                    <option value="Urgent Same Day">Urgent Same Day</option>
+                                </select>
+                            </div>
+
+                            <textarea id="pdiConcern" rows="3" placeholder="Any concern? Accident doubt, engine noise, repaint, seller pressure, low price, etc." class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"></textarea>
+
+                            <div class="grid grid-cols-2 gap-3 text-xs">
+                                <div class="bg-slate-50 border rounded-2xl p-3">
+                                    <p class="font-black uppercase">Report Type</p>
+                                    <p class="text-slate-500">Checklist + buying guidance</p>
+                                </div>
+                                <div class="bg-slate-50 border rounded-2xl p-3">
+                                    <p class="font-black uppercase">Lead Priority</p>
+                                    <p class="text-slate-500">Marked as PDI Hot Lead</p>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="pdiSubmitBtn" class="w-full bg-amber-500 text-slate-950 font-black py-4 rounded-xl uppercase tracking-wider hover:bg-amber-400 transition-all text-xs">
+                                Schedule PDI Inspection Slot
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -441,21 +551,58 @@
             </div>
         </section>
 
-        <section class="bg-slate-100 py-16">
-            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-8 items-center">
-                <div>
-                    <span class="bg-white text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Sell On NoDealer</span>
-                    <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-4 leading-tight">List Your Car Directly To Real Buyers</h2>
-                    <p class="text-slate-600 font-semibold mt-4 max-w-xl">Upload car details and photos. Your inquiry goes into our admin CRM so no lead gets lost.</p>
-                    <button onclick="openSellModal()" class="mt-6 bg-brand-red hover:bg-red-700 text-white font-black text-sm px-8 py-4 rounded-2xl shadow-lg">
-                        List Your Car Now
-                    </button>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-indian-rupee-sign text-green-600 text-2xl"></i><h4 class="font-black mt-3">Better Value</h4><p class="text-xs text-slate-500 mt-1">Avoid low dealer offers.</p></div>
-                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-camera text-blue-600 text-2xl"></i><h4 class="font-black mt-3">Verified Gallery</h4><p class="text-xs text-slate-500 mt-1">Premium real-owner vehicle showcase.</p></div>
-                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-users text-purple-600 text-2xl"></i><h4 class="font-black mt-3">Real Buyers</h4><p class="text-xs text-slate-500 mt-1">Direct customer leads.</p></div>
-                    <div class="bg-white rounded-3xl p-6 shadow-sm border"><i class="fa-solid fa-lock text-red-600 text-2xl"></i><h4 class="font-black mt-3">Organized CRM</h4><p class="text-xs text-slate-500 mt-1">Tracked by NoDealer OS.</p></div>
+        <section id="sell-car-section" class="bg-slate-100 py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-6">
+                        <span class="bg-white text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Sell On NoDealer</span>
+                        <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-4 leading-tight">Sell Your Car With A Proper Owner-First Flow</h2>
+                        <p class="text-slate-600 font-semibold mt-4 max-w-xl">
+                            Give buyers the details they actually need: ownership, condition, insurance, kilometres, photos and expected price. Every seller request goes into your cloud CRM.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mt-6 max-w-xl">
+                            <div class="bg-white rounded-3xl p-5 shadow-sm border">
+                                <i class="fa-solid fa-indian-rupee-sign text-green-600 text-2xl"></i>
+                                <h4 class="font-black mt-3 uppercase">Expected Price</h4>
+                                <p class="text-xs text-slate-500 mt-1">Seller can share asking range clearly.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-5 shadow-sm border">
+                                <i class="fa-solid fa-clipboard-check text-blue-600 text-2xl"></i>
+                                <h4 class="font-black mt-3 uppercase">Condition Data</h4>
+                                <p class="text-xs text-slate-500 mt-1">Fuel, ownership, insurance and kms captured.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-5 shadow-sm border">
+                                <i class="fa-solid fa-camera text-purple-600 text-2xl"></i>
+                                <h4 class="font-black mt-3 uppercase">Photo Upload</h4>
+                                <p class="text-xs text-slate-500 mt-1">Better buyer trust with clear car photos.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-5 shadow-sm border">
+                                <i class="fa-solid fa-cloud text-red-600 text-2xl"></i>
+                                <h4 class="font-black mt-3 uppercase">CRM Saved</h4>
+                                <p class="text-xs text-slate-500 mt-1">No seller lead gets lost.</p>
+                            </div>
+                        </div>
+                        <button onclick="openSellModal()" class="mt-7 bg-brand-red hover:bg-red-700 text-white font-black text-sm px-8 py-4 rounded-2xl shadow-lg">
+                            Start Detailed Sell Flow
+                        </button>
+                    </div>
+
+                    <div class="lg:col-span-6 bg-white rounded-[2rem] p-6 md:p-8 shadow-xl border border-slate-200">
+                        <h3 class="text-2xl font-black uppercase text-slate-950">What Seller Flow Captures</h3>
+                        <p class="text-sm text-slate-500 font-semibold mt-2">More details means better trust, better leads and cleaner follow-up.</p>
+
+                        <div class="grid sm:grid-cols-2 gap-3 mt-6">
+                            <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 01</p><h4 class="font-black">Owner Contact</h4><p class="text-xs text-slate-500">Name, phone and location.</p></div>
+                            <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 02</p><h4 class="font-black">Car Identity</h4><p class="text-xs text-slate-500">Brand, model, year, fuel, transmission.</p></div>
+                            <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 03</p><h4 class="font-black">Condition</h4><p class="text-xs text-slate-500">KMs, ownership, insurance and condition.</p></div>
+                            <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 04</p><h4 class="font-black">Buyer-Ready Listing</h4><p class="text-xs text-slate-500">Photos and expected price saved in CRM.</p></div>
+                        </div>
+
+                        <div class="mt-6 bg-slate-950 text-white rounded-3xl p-5">
+                            <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Seller Promise</p>
+                            <h4 class="text-xl font-black mt-1">Direct buyers, clean data, organized follow-up.</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -841,46 +988,73 @@ class="block w-full text-xs text-slate-400 file:mr-4 file:py-1.5 file:px-3 file:
 
 
     <div id="sellModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 relative max-h-[95vh] overflow-y-auto">
-            <button onclick="closeSellModal()" class="absolute top-4 right-4 text-gray-400 hover:text-slate-600 text-2xl font-bold transition-all">&times;</button>
-            <h3 class="text-xl font-black uppercase mb-1 brand-red tracking-tight"><i class="fa-solid fa-car-on"></i> List Your Private VehicleHub</h3>
-            <p class="text-gray-500 text-xs mb-4">Provide parameters to establish direct active connection channels.</p>
-            
-            <form id="customerSellForm" onsubmit="handleCustomerSellSubmit(event)" class="space-y-3">
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">1. Full Name</label>
-                    <input type="text" id="custName" required placeholder="Enter your name" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">2. Mobile Contact Number</label>
-                    <input type="tel" id="custPhone" required placeholder="Enter contact number" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">3. Current Location</label>
-                    <input type="text" id="custLocation" required placeholder="e.g. Raipur, Chhattisgarh" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                </div>
-                
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">4. Car Brand</label>
-                        <input type="text" id="custCarBrand" required placeholder="e.g. Hyundai" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">5. Car Model</label>
-                        <input type="text" id="custModel" required placeholder="e.g. i20 Elite" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">6. Registration Year</label>
-                        <input type="number" id="custYear" required placeholder="e.g. 2019" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold uppercase text-slate-500 mb-1">7. Car Color</label>
-                        <input type="text" id="custColor" required placeholder="e.g. Polar White" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+        <div class="bg-white w-full max-w-3xl rounded-[2rem] shadow-2xl p-6 md:p-8 relative max-h-[95vh] overflow-y-auto">
+            <button onclick="closeSellModal()" class="absolute top-4 right-4 text-gray-400 hover:text-slate-600 text-3xl font-bold transition-all">&times;</button>
+
+            <div class="mb-6">
+                <span class="bg-red-50 text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Detailed Seller Flow</span>
+                <h3 class="text-2xl md:text-3xl font-black uppercase mt-3 brand-red tracking-tight">
+                    <i class="fa-solid fa-car-on"></i> List Your Car On NoDealer
+                </h3>
+                <p class="text-gray-500 text-sm mt-1">Fill complete car details so we can create a trustworthy buyer-ready lead in your CRM.</p>
+            </div>
+
+            <form id="customerSellForm" onsubmit="handleCustomerSellSubmit(event)" class="space-y-5">
+                <div class="bg-slate-50 rounded-3xl p-4 border border-slate-100">
+                    <p class="text-[10px] font-black uppercase text-slate-400 mb-3">Step 1 — Owner Contact</p>
+                    <div class="grid md:grid-cols-3 gap-3">
+                        <input type="text" id="custName" required placeholder="Full Name" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <input type="tel" id="custPhone" required placeholder="Mobile Number" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <input type="text" id="custLocation" required placeholder="City / Location" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
                     </div>
                 </div>
 
-                <div class="border-2 border-dashed border-slate-200 rounded-xl p-3 bg-slate-50">
-                    <label class="block text-[10px] font-bold uppercase text-slate-600 mb-1"><i class="fa-solid fa-camera mr-1 text-red-500"></i> Add Vehicle Photos</label>
+                <div class="bg-slate-50 rounded-3xl p-4 border border-slate-100">
+                    <p class="text-[10px] font-black uppercase text-slate-400 mb-3">Step 2 — Car Identity</p>
+                    <div class="grid md:grid-cols-4 gap-3">
+                        <input type="text" id="custCarBrand" required placeholder="Brand e.g. Hyundai" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <input type="text" id="custModel" required placeholder="Model e.g. i20" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <input type="number" id="custYear" required placeholder="Year" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <input type="text" id="custColor" required placeholder="Color" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-3xl p-4 border border-slate-100">
+                    <p class="text-[10px] font-black uppercase text-slate-400 mb-3">Step 3 — Condition & Value</p>
+                    <div class="grid md:grid-cols-3 gap-3">
+                        <input type="text" id="custKms" required placeholder="KMs Driven e.g. 42,000 km" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                        <select id="custFuel" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-red-500">
+                            <option value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="CNG">CNG</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                        <select id="custTransmission" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-red-500">
+                            <option value="Manual">Manual</option>
+                            <option value="Automatic">Automatic</option>
+                        </select>
+                        <select id="custOwnership" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-red-500">
+                            <option value="1st Owner">1st Owner</option>
+                            <option value="2nd Owner">2nd Owner</option>
+                            <option value="3rd Owner">3rd Owner</option>
+                            <option value="4th Owner or More">4th Owner or More</option>
+                        </select>
+                        <select id="custInsurance" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-red-500">
+                            <option value="Valid Insurance">Valid Insurance</option>
+                            <option value="Expired Insurance">Expired Insurance</option>
+                            <option value="No Insurance Info">No Insurance Info</option>
+                        </select>
+                        <input type="number" id="custExpectedPrice" required placeholder="Expected Price ₹" class="w-full p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500">
+                    </div>
+
+                    <textarea id="custCondition" rows="3" placeholder="Tell condition: service history, accident, repaint, loan, tyre condition, issues, etc." class="w-full mt-3 p-3 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:border-red-500"></textarea>
+                </div>
+
+                <div class="border-2 border-dashed border-slate-200 rounded-3xl p-4 bg-slate-50">
+                    <label class="block text-[10px] font-black uppercase text-slate-600 mb-2">
+                        <i class="fa-solid fa-camera mr-1 text-red-500"></i> Step 4 — Add Vehicle Photos
+                    </label>
                     <input
 type="file"
 id="custPhotos"
@@ -889,14 +1063,30 @@ multiple
 onchange="handlePhotoAttachmentPreview(this)"
 class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-900 cursor-pointer"
 >
-
-<p class="text-[10px] text-slate-500 mt-2 leading-relaxed">
-Add clear exterior, interior, dashboard and document photos for faster buyer trust and better visibility.
-</p>
-                    <div id="photoPreviewContainer" class="grid grid-cols-4 gap-2 mt-2 hidden"></div>
+                    <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">
+                        Add exterior, interior, dashboard, odometer, tyre and document photos for faster buyer trust.
+                    </p>
+                    <div id="photoPreviewContainer" class="grid grid-cols-4 md:grid-cols-8 gap-2 mt-3 hidden"></div>
                 </div>
 
-                <button type="submit" id="custSellSubmitBtn" class="w-full bg-green-500 text-white font-black py-3.5 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all shadow-md mt-2">Submit Ownership Data</button>
+                <div class="grid md:grid-cols-3 gap-3">
+                    <div class="bg-green-50 border border-green-100 rounded-2xl p-4">
+                        <p class="text-[10px] uppercase text-green-700 font-black">CRM Source</p>
+                        <p class="text-sm font-black text-green-900">Website Sell Car Lead</p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4">
+                        <p class="text-[10px] uppercase text-blue-700 font-black">Priority</p>
+                        <p class="text-sm font-black text-blue-900">Seller Follow-Up</p>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4">
+                        <p class="text-[10px] uppercase text-amber-700 font-black">Next Step</p>
+                        <p class="text-sm font-black text-amber-900">Call + Verify Details</p>
+                    </div>
+                </div>
+
+                <button type="submit" id="custSellSubmitBtn" class="w-full bg-green-500 text-white font-black py-4 rounded-xl text-xs uppercase tracking-wider hover:bg-green-600 transition-all shadow-md">
+                    Submit Detailed Seller Lead
+                </button>
             </form>
         </div>
     </div>
@@ -1663,31 +1853,46 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         async function handlePdiSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('pdiSubmitBtn');
-            btn.innerText = "Saving To Cloud CRM...";
+            btn.innerText = "Saving PDI Request To CRM...";
             btn.disabled = true;
             const payload = {
-                submissionType: "PDI Inspection Request", leadStatus: "New Lead",
+                submissionType: "Detailed PDI Inspection Request",
+                leadStatus: "New Lead",
+                leadPriority: "Hot PDI Lead",
                 name: document.getElementById('pdiName').value,
                 phone: document.getElementById('pdiPhone').value,
                 location: document.getElementById('pdiLocation').value,
-                source: "Website PDI Form", userIp: "Client Device Network", timestamp: new Date().toISOString()
+                city: document.getElementById('pdiCity')?.value || "",
+                carDetails: document.getElementById('pdiCarDetails')?.value || "",
+                pdiServiceType: document.getElementById('pdiServiceType')?.value || "",
+                inspectionMode: document.getElementById('pdiInspectionMode')?.value || "",
+                preferredDate: document.getElementById('pdiPreferredDate')?.value || "",
+                preferredSlot: document.getElementById('pdiPreferredSlot')?.value || "",
+                concern: document.getElementById('pdiConcern')?.value || "",
+                source: "Website Detailed PDI Form",
+                userIp: "Client Device Network",
+                timestamp: new Date().toISOString()
             };
             try {
                 const saved = await saveLeadToSupabase(payload); if (!saved) return;
                 fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(err => console.warn("Webhook optional sync failed:", err));
-                alert("PDI lead saved permanently in Supabase CRM!");
+                alert("Detailed PDI request saved in Supabase CRM!");
                 document.getElementById('pdiFormHomepage').reset();
                 await loadAdminLeadsDashboard();
-            } catch (err) { console.error(err); alert("Lead save error: " + err.message); }
+                updateActionCenter();
+            } catch (err) { console.error(err); alert("PDI lead save error: " + err.message); }
             finally { btn.innerText = "Schedule PDI Inspection Slot"; btn.disabled = false; }
         }
+
         async function handleCustomerSellSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('custSellSubmitBtn');
-            btn.innerText = "Saving Lead To Cloud CRM...";
+            btn.innerText = "Saving Detailed Seller Lead...";
             btn.disabled = true;
             const payload = {
-                submissionType: "Private Car Selling Listing Form", leadStatus: "New Lead",
+                submissionType: "Detailed Private Car Selling Lead",
+                leadStatus: "New Lead",
+                leadPriority: "Seller Follow-Up",
                 name: document.getElementById('custName').value,
                 phone: document.getElementById('custPhone').value,
                 location: document.getElementById('custLocation').value,
@@ -1695,121 +1900,30 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 carModel: document.getElementById('custModel').value,
                 carYear: document.getElementById('custYear').value,
                 carColor: document.getElementById('custColor').value,
+                kmsDriven: document.getElementById('custKms')?.value || "",
+                fuel: document.getElementById('custFuel')?.value || "",
+                transmission: document.getElementById('custTransmission')?.value || "",
+                ownership: document.getElementById('custOwnership')?.value || "",
+                insurance: document.getElementById('custInsurance')?.value || "",
+                expectedPrice: document.getElementById('custExpectedPrice')?.value || "",
+                conditionNotes: document.getElementById('custCondition')?.value || "",
                 attachedPhotosCount: ATTACHED_BASE64_PHOTOS.length,
                 attachedPhotosData: ATTACHED_BASE64_PHOTOS,
-                source: "Website Sell Car Form", userIp: "Client Private IP", timestamp: new Date().toISOString()
+                source: "Website Detailed Sell Car Form",
+                userIp: "Client Private IP",
+                timestamp: new Date().toISOString()
             };
             try {
                 const saved = await saveLeadToSupabase(payload); if (!saved) return;
                 fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(err => console.warn("Webhook optional sync failed:", err));
-                alert("Seller lead saved permanently in Supabase CRM!");
+                alert("Detailed seller lead saved permanently in Supabase CRM!");
                 closeSellModal();
                 document.getElementById('customerSellForm').reset();
                 await loadAdminLeadsDashboard();
-            } catch (err) { console.error(err); alert("Lead save error: " + err.message); }
-            finally { btn.innerText = "Submit Ownership Data"; btn.disabled = false; }
+                updateActionCenter();
+            } catch (err) { console.error(err); alert("Seller lead save error: " + err.message); }
+            finally { btn.innerText = "Submit Detailed Seller Lead"; btn.disabled = false; }
         }
-
-
-        async function applyFilters() {
-
-    const budget = document.getElementById('filterBudget').value;
-    const brand = document.getElementById('filterBrand').value;
-    const fuel = document.getElementById('filterFuel').value;
-    const transmission = document.getElementById('filterTransmission').value;
-
-    let query = supabaseClient
-        .from('cars')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-    if (budget) {
-        query = query.lte('price', Number(budget));
-    }
-
-    if (brand) {
-        query = query.ilike('brand', `%${brand}%`);
-    }
-
-    if (fuel) {
-        query = query.ilike('fuel', `%${fuel}%`);
-    }
-
-    if (transmission) {
-        query = query.ilike('transmission', `%${transmission}%`);
-    }
-
-    const { data } = await query;
-
-    const cars = data || [];
-    window.CAR_CACHE = cars;
-
-    const grid = document.getElementById('carGrid');
-    const noStock = document.getElementById('noStockMessage');
-
-    grid.innerHTML = "";
-
-    if(cars.length === 0){
-        noStock.style.display = "block";
-        return;
-    }
-
-    noStock.style.display = "none";
-
-    cars.forEach(car => {
-
-        const gallery = Array.isArray(car.images) && car.images.length > 0
-            ? car.images
-            : (car.imageSrc ? [car.imageSrc] : []);
-
-        const img = gallery[0] || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=400';
-
-        grid.innerHTML += `
-        <div onclick="openCarDetailsById(${car.id})" class="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative group hover:shadow-md transition-all cursor-pointer">
-
-            <div class="relative">
-                <img src="${img}" class="w-full h-40 object-cover rounded-xl mb-3 border bg-slate-50">
-            </div>
-<div class="absolute top-6 right-6 z-10">
-    ${
-        safeText(car.status) === 'sold'
-        ? '<span class="bg-red-600 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Sold</span>'
-        : safeText(car.status) === 'reserved'
-        ? '<span class="bg-amber-500 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Reserved</span>'
-        : '<span class="bg-green-600 text-white px-2 py-1 rounded-full text-[9px] font-black uppercase">Available</span>'
-    }
-</div>
-            <span class="absolute top-6 left-6 bg-slate-900 text-white font-extrabold text-[10px] px-2 py-0.5 rounded uppercase tracking-wider">
-                ${car.year} Model
-            </span>
-
-            <h4 class="font-bold text-slate-900 text-sm mb-1 uppercase tracking-tight">
-                ${car.title}
-            </h4>
-
-            <p class="text-xs text-gray-500 font-semibold mb-2">
-                ${car.driven} • ${car.fuel} • ${car.transmission}
-            </p>
-
-            <div class="flex justify-between items-center pt-2 border-t border-dashed">
-                <div>
-                    <span class="text-[9px] uppercase font-bold text-gray-400 block leading-none">
-                        Price
-                    </span>
-
-                    <span class="font-black text-slate-900 text-base">
-                        ₹${Number(car.price).toLocaleString('en-IN')}
-                    </span>
-                </div>
-
-                <button class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl">
-                    View
-                </button>
-            </div>
-        </div>
-        `;
-    });
-}
 
         function openCarDetailsById(id) {
             const car = (window.CAR_CACHE || []).find(c => Number(c.id) === Number(id));
