@@ -933,6 +933,105 @@
         </div>
     </div>
 
+    <!-- PDI Report Builder Modal -->
+    <div id="pdiReportBuilderModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase font-black">NoDealer Inspection Report System</p>
+                    <h2 class="text-2xl font-black uppercase">Create PDI Report</h2>
+                    <p id="pdiReportLeadInfo" class="text-xs text-slate-400 mt-1">Build a buyer-friendly inspection summary.</p>
+                </div>
+                <button onclick="closePdiReportBuilder()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+            </div>
+
+            <div class="p-5 md:p-7 grid lg:grid-cols-12 gap-6 text-slate-900">
+                <div class="lg:col-span-7 space-y-5">
+                    <input type="hidden" id="pdiReportLeadTimestamp">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Buyer / Client Name</label>
+                            <input id="reportBuyerName" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Customer name">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Phone</label>
+                            <input id="reportBuyerPhone" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Customer phone">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Car Details</label>
+                            <input id="reportCarDetails" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Brand / model / year">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Inspection Location</label>
+                            <input id="reportLocation" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold" placeholder="Location">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Engine</label>
+                            <select id="reportEngine" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Average</option><option>Needs Attention</option><option>Critical Issue</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Body / Accident Signs</label>
+                            <select id="reportBody" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Minor Repaint</option><option>Panel Repair Signs</option><option>Major Accident Doubt</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Tyres</label>
+                            <select id="reportTyres" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Average</option><option>Replace Soon</option><option>Poor</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Interior & Electronics</label>
+                            <select id="reportInterior" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Good</option><option>Average</option><option>Needs Cleaning/Repair</option><option>Poor</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Documents</label>
+                            <select id="reportDocuments" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Looks Clear</option><option>Need RC Check</option><option>Insurance Issue</option><option>Ownership Red Flag</option></select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Odometer Confidence</label>
+                            <select id="reportOdometer" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-bold"><option>Looks Consistent</option><option>Needs More Proof</option><option>Suspicious Wear Pattern</option><option>High Risk</option></select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black uppercase text-slate-500 mb-1">Inspector Notes</label>
+                        <textarea id="reportNotes" rows="4" class="w-full border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium" placeholder="Write summary: major findings, negotiation points, parts to check, seller claims, etc."></textarea>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-5">
+                    <div class="bg-slate-950 text-white rounded-[2rem] p-5">
+                        <p class="text-[10px] text-slate-400 uppercase font-black">Final Buyer Verdict</p>
+                        <select id="reportVerdict" class="w-full mt-3 bg-white text-slate-950 rounded-2xl px-4 py-3 text-sm font-black">
+                            <option value="Good To Proceed">Good To Proceed</option>
+                            <option value="Proceed After Negotiation">Proceed After Negotiation</option>
+                            <option value="Caution - Need Recheck">Caution - Need Recheck</option>
+                            <option value="Avoid This Car">Avoid This Car</option>
+                        </select>
+                        <div class="grid grid-cols-3 gap-2 mt-4">
+                            <input id="reportScore" type="number" min="0" max="100" value="82" class="col-span-1 rounded-2xl px-3 py-3 text-slate-950 font-black text-center" title="Score">
+                            <div class="col-span-2 bg-white/10 rounded-2xl p-3 text-xs text-slate-300">Set an overall inspection confidence score out of 100.</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-100 rounded-[2rem] p-5">
+                        <h3 class="font-black uppercase text-amber-800">Report Actions</h3>
+                        <p class="text-xs text-amber-700 mt-1">Save the report to the lead. Then view/print it and choose “Save as PDF”.</p>
+                        <button onclick="savePdiReportToLead()" class="w-full mt-4 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-2xl py-4 text-xs font-black uppercase">Save Report To Lead</button>
+                        <button onclick="previewCurrentPdiReport()" class="w-full mt-2 bg-slate-950 hover:bg-slate-800 text-white rounded-2xl py-4 text-xs font-black uppercase">Preview / Print PDF</button>
+                    </div>
+
+                    <div class="bg-slate-50 border rounded-[2rem] p-5 text-xs text-slate-600">
+                        <h3 class="font-black uppercase text-slate-950 mb-2">Included In Report</h3>
+                        <p>Engine, body, tyres, interior, documents, odometer confidence, inspector notes, final verdict, score, NoDealer branding and buyer guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div id="secureAdminPortal" class="fixed inset-0 bg-slate-950 z-[9999] hidden overflow-y-auto p-4 md:p-8">
         <div class="max-w-6xl mx-auto">
             
@@ -1967,7 +2066,8 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 timestamp: row.created_at || raw.timestamp || new Date().toISOString(),
                 attachedPhotosData: raw.attachedPhotosData || [],
                 attachedPhotosCount: raw.attachedPhotosCount || 0,
-                rawData: raw
+                rawData: raw,
+                pdiReport: raw.pdiReport || null
             };
         }
 
@@ -2197,7 +2297,9 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                                 <div class="flex flex-wrap gap-1 mt-2">
                                     <button onclick="addLeadNote('${log.timestamp}')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Add Note</button>
                                     <button onclick="aiSuggestLeadAction('${log.timestamp}')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">AI Suggest</button>
+                                    <button onclick="openPdiReportBuilder('${log.timestamp}')" class="bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">PDI Report</button>
                                 </div>
+                                ${log.pdiReport ? `<div class="mt-2 flex flex-wrap gap-1"><button onclick="openSavedPdiReport('${log.timestamp}')" class="bg-white text-slate-950 px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">View Report</button><button onclick="sharePdiReportWhatsApp('${log.timestamp}')" class="bg-green-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Share Report Msg</button></div>` : ''}
                                 <button onclick="setFollowUpDate('${log.timestamp}')" class="mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Set Follow-Up Date</button>
                                 ${log.followUpDate ? `<div class="mt-2 bg-orange-950/40 border border-orange-800 rounded-lg p-2 text-[10px] text-orange-200"><strong class="text-orange-300">Follow-Up Date:</strong> ${safeText(log.followUpDate)}</div>` : ''}
                                 ${log.aiSuggestion ? `<div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200"><strong class="text-purple-300">AI:</strong> ${safeText(log.aiSuggestion)}<br><strong class="text-amber-300">Follow-Up:</strong> ${safeText(log.followUpReminder) || 'Not set'}</div>` : ''}
@@ -3247,6 +3349,112 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             setTimeout(calculateEMI, 700);
             setTimeout(renderRecentlyViewedCars, 900);
         });
+
+
+        function getLeadByTimestamp(timestamp) {
+            return (window.LEAD_CACHE || []).find(l => String(l.timestamp) === String(timestamp));
+        }
+
+        function openPdiReportBuilder(timestamp) {
+            const log = getLeadByTimestamp(timestamp);
+            if (!log) { alert("Lead not found. Refresh CRM and try again."); return; }
+            const raw = log.rawData || {};
+            const existing = log.pdiReport || raw.pdiReport || {};
+
+            document.getElementById('pdiReportLeadTimestamp').value = timestamp;
+            document.getElementById('pdiReportLeadInfo').innerText = `${safeText(log.name) || 'Customer'} • ${safeText(log.phone) || 'No phone'} • ${safeText(log.submissionType)}`;
+            document.getElementById('reportBuyerName').value = existing.buyerName || log.name || '';
+            document.getElementById('reportBuyerPhone').value = existing.buyerPhone || log.phone || '';
+            document.getElementById('reportCarDetails').value = existing.carDetails || raw.carDetails || raw.pdiCarDetails || `${log.carBrand || ''} ${log.carModel || ''} ${log.carYear || ''}`.trim();
+            document.getElementById('reportLocation').value = existing.location || log.location || raw.city || '';
+            document.getElementById('reportEngine').value = existing.engine || 'Good';
+            document.getElementById('reportBody').value = existing.body || 'Good';
+            document.getElementById('reportTyres').value = existing.tyres || 'Good';
+            document.getElementById('reportInterior').value = existing.interior || 'Good';
+            document.getElementById('reportDocuments').value = existing.documents || 'Looks Clear';
+            document.getElementById('reportOdometer').value = existing.odometer || 'Looks Consistent';
+            document.getElementById('reportNotes').value = existing.notes || raw.concern || '';
+            document.getElementById('reportVerdict').value = existing.verdict || 'Good To Proceed';
+            document.getElementById('reportScore').value = existing.score || 82;
+            document.getElementById('pdiReportBuilderModal').classList.remove('hidden');
+        }
+
+        function closePdiReportBuilder() {
+            document.getElementById('pdiReportBuilderModal')?.classList.add('hidden');
+        }
+
+        function collectPdiReportForm() {
+            return {
+                reportId: 'NDR-PDI-' + Date.now(),
+                createdAt: new Date().toISOString(),
+                buyerName: document.getElementById('reportBuyerName').value.trim(),
+                buyerPhone: document.getElementById('reportBuyerPhone').value.trim(),
+                carDetails: document.getElementById('reportCarDetails').value.trim(),
+                location: document.getElementById('reportLocation').value.trim(),
+                engine: document.getElementById('reportEngine').value,
+                body: document.getElementById('reportBody').value,
+                tyres: document.getElementById('reportTyres').value,
+                interior: document.getElementById('reportInterior').value,
+                documents: document.getElementById('reportDocuments').value,
+                odometer: document.getElementById('reportOdometer').value,
+                notes: document.getElementById('reportNotes').value.trim(),
+                verdict: document.getElementById('reportVerdict').value,
+                score: document.getElementById('reportScore').value || '0'
+            };
+        }
+
+        async function savePdiReportToLead() {
+            const timestamp = document.getElementById('pdiReportLeadTimestamp').value;
+            const log = getLeadByTimestamp(timestamp);
+            if (!log || !ensureSupabase()) { alert('Lead not found.'); return; }
+            const report = collectPdiReportForm();
+            const mergedRaw = { ...(log.rawData || {}), pdiReport: report };
+            const note = `${log.note ? log.note + ' | ' : ''}PDI Report: ${report.verdict}, Score ${report.score}/100`;
+
+            const { error } = await supabaseClient
+                .from('leads')
+                .update({ raw_data: mergedRaw, note: note })
+                .eq('created_at', timestamp);
+
+            if (error) { alert('Could not save PDI report: ' + error.message); return; }
+            alert('PDI report saved to this lead.');
+            closePdiReportBuilder();
+            await loadAdminLeadsDashboard();
+            updateActionCenter();
+        }
+
+        function buildPdiReportHtml(report, log = {}) {
+            const verdictColor = report.verdict === 'Avoid This Car' ? '#dc2626' : report.verdict.includes('Caution') ? '#d97706' : '#16a34a';
+            const date = new Date(report.createdAt || Date.now()).toLocaleString();
+            const row = (label, value) => `<tr><td style="padding:12px;border:1px solid #e2e8f0;font-weight:800;background:#f8fafc;width:35%">${label}</td><td style="padding:12px;border:1px solid #e2e8f0">${value || 'N/A'}</td></tr>`;
+            return `<!DOCTYPE html><html><head><title>NoDealer PDI Report</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial,sans-serif;background:#f1f5f9;margin:0;padding:24px;color:#0f172a}.page{max-width:900px;margin:auto;background:white;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(15,23,42,.15)}.head{background:#0f172a;color:white;padding:28px}.brand{font-size:28px;font-weight:900}.badge{display:inline-block;background:${verdictColor};color:white;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:900;text-transform:uppercase}.content{padding:28px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:16px}.card h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;color:#64748b}.card p{margin:0;font-weight:900}.score{font-size:52px;font-weight:900;color:${verdictColor}}table{width:100%;border-collapse:collapse;margin-top:18px}.note{background:#fffbeb;border:1px solid #fde68a;border-radius:18px;padding:18px;margin-top:18px}.footer{padding:20px 28px;background:#f8fafc;color:#64748b;font-size:12px}@media print{body{background:white;padding:0}.page{box-shadow:none;border-radius:0}.no-print{display:none}}</style></head><body><div class="page"><div class="head"><div class="brand">NO<span style="color:#3b82f6">Dealer</span> India</div><p style="margin:8px 0 18px;color:#cbd5e1">Pre-Delivery Inspection Summary Report</p><span class="badge">${report.verdict}</span></div><div class="content"><div style="display:flex;justify-content:space-between;gap:20px;align-items:center"><div><h1 style="margin:0;font-size:28px">${report.carDetails || 'Vehicle Inspection'}</h1><p style="color:#64748b;margin:6px 0">Report ID: ${report.reportId || 'N/A'} • ${date}</p></div><div style="text-align:center"><div class="score">${report.score}</div><div style="font-size:12px;font-weight:900;color:#64748b">/100 SCORE</div></div></div><div class="grid" style="margin-top:22px"><div class="card"><h4>Buyer</h4><p>${report.buyerName || 'N/A'}</p></div><div class="card"><h4>Phone</h4><p>${report.buyerPhone || 'N/A'}</p></div><div class="card"><h4>Location</h4><p>${report.location || 'N/A'}</p></div></div><table>${row('Engine & Mechanical', report.engine)}${row('Body / Accident Signs', report.body)}${row('Tyres', report.tyres)}${row('Interior & Electronics', report.interior)}${row('Documents', report.documents)}${row('Odometer Confidence', report.odometer)}</table><div class="note"><h3 style="margin:0 0 8px">Inspector Notes</h3><p style="margin:0;line-height:1.6">${(report.notes || 'No extra notes added.').replace(/\n/g,'<br>')}</p></div><div class="note" style="background:#ecfdf5;border-color:#bbf7d0"><h3 style="margin:0 0 8px;color:#166534">NoDealer Guidance</h3><p style="margin:0;line-height:1.6">This report is a decision-support summary. Final purchase should be done only after document verification, seller identity confirmation, payment safety checks and buyer satisfaction.</p></div><button class="no-print" onclick="window.print()" style="margin-top:20px;background:#0f172a;color:white;border:0;border-radius:14px;padding:14px 20px;font-weight:900">Print / Save as PDF</button></div><div class="footer">NoDealer India • Direct-owner car marketplace • This report is generated from CRM inspection inputs.</div></div></body></html>`;
+        }
+
+        function previewCurrentPdiReport() {
+            const report = collectPdiReportForm();
+            const w = window.open('', '_blank');
+            w.document.write(buildPdiReportHtml(report));
+            w.document.close();
+        }
+
+        function openSavedPdiReport(timestamp) {
+            const log = getLeadByTimestamp(timestamp);
+            const report = log?.pdiReport || log?.rawData?.pdiReport;
+            if (!report) { alert('No report saved for this lead yet.'); return; }
+            const w = window.open('', '_blank');
+            w.document.write(buildPdiReportHtml(report, log));
+            w.document.close();
+        }
+
+        function sharePdiReportWhatsApp(timestamp) {
+            const log = getLeadByTimestamp(timestamp);
+            const report = log?.pdiReport || log?.rawData?.pdiReport;
+            if (!report) { alert('No report saved for this lead yet.'); return; }
+            const phone = safeText(log.phone).replace(/\D/g, '');
+            const msg = `Hi ${report.buyerName || 'there'}, your NoDealer PDI summary for ${report.carDetails || 'the car'} is ready. Verdict: ${report.verdict}. Score: ${report.score}/100. Please review the findings before making payment.`;
+            if (phone) window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+            else prompt('Copy this WhatsApp report message:', msg);
+        }
 
     </script>
 </body>
