@@ -314,6 +314,64 @@
             </div>
         </section>
 
+
+        <section id="emi-section" class="py-16 bg-white border-y border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-6">
+                    <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Finance Assist</span>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-4 leading-tight">Estimate Your Monthly EMI Before You Decide</h2>
+                    <p class="text-slate-600 font-semibold mt-4 max-w-xl">Plan your budget with a simple loan estimate. This is only an indicative calculation; final finance approval depends on lender checks.</p>
+                    <div class="grid grid-cols-2 gap-4 mt-6 max-w-xl">
+                        <div class="bg-slate-50 border border-slate-100 rounded-3xl p-5">
+                            <i class="fa-solid fa-calculator text-blue-600 text-2xl"></i>
+                            <h4 class="font-black mt-3 uppercase">Budget Clarity</h4>
+                            <p class="text-xs text-slate-500 mt-1">Know approximate monthly payments.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 rounded-3xl p-5">
+                            <i class="fa-solid fa-shield-halved text-green-600 text-2xl"></i>
+                            <h4 class="font-black mt-3 uppercase">Buy Confidently</h4>
+                            <p class="text-xs text-slate-500 mt-1">Compare car value before inspection.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 bg-slate-950 text-white rounded-[2rem] p-6 md:p-8 shadow-2xl">
+                    <h3 class="text-xl font-black uppercase mb-5 flex items-center gap-2">
+                        <i class="fa-solid fa-indian-rupee-sign text-amber-400"></i> EMI Calculator
+                    </h3>
+
+                    <div class="grid grid-cols-2 gap-4 text-slate-900">
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Car Price</label>
+                            <input id="emiCarPrice" type="number" value="600000" class="w-full rounded-2xl px-4 py-3 text-sm font-bold focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Down Payment</label>
+                            <input id="emiDownPayment" type="number" value="100000" class="w-full rounded-2xl px-4 py-3 text-sm font-bold focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Interest %</label>
+                            <input id="emiInterest" type="number" value="10" class="w-full rounded-2xl px-4 py-3 text-sm font-bold focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Tenure Months</label>
+                            <input id="emiTenure" type="number" value="60" class="w-full rounded-2xl px-4 py-3 text-sm font-bold focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button onclick="calculateEMI()" class="w-full mt-5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black uppercase py-4 rounded-2xl text-xs">
+                        Calculate EMI
+                    </button>
+
+                    <div class="mt-5 bg-white/5 border border-white/10 rounded-3xl p-5">
+                        <p class="text-[10px] text-slate-400 uppercase font-black">Estimated Monthly EMI</p>
+                        <h2 id="emiResult" class="text-4xl font-black text-white mt-2">₹0</h2>
+                        <p id="emiLoanAmount" class="text-xs text-slate-400 mt-2">Loan amount will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="bg-slate-100 py-16">
             <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-8 items-center">
                 <div>
@@ -1808,6 +1866,32 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             const { error } = await supabaseClient.from('leads').delete().eq('created_at', timestamp);
             if (error) { alert("Lead delete failed: " + error.message); console.error(error); return; }
             await loadAdminLeadsDashboard(); updateActionCenter();
+        }
+
+
+        function calculateEMI() {
+            const price = Number(document.getElementById('emiCarPrice')?.value || 0);
+            const down = Number(document.getElementById('emiDownPayment')?.value || 0);
+            const annualRate = Number(document.getElementById('emiInterest')?.value || 0);
+            const months = Number(document.getElementById('emiTenure')?.value || 0);
+
+            const principal = Math.max(price - down, 0);
+            const monthlyRate = annualRate / 12 / 100;
+            let emi = 0;
+
+            if (principal > 0 && months > 0) {
+                if (monthlyRate === 0) {
+                    emi = principal / months;
+                } else {
+                    emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+                }
+            }
+
+            const resultEl = document.getElementById('emiResult');
+            const loanEl = document.getElementById('emiLoanAmount');
+
+            if (resultEl) resultEl.innerText = '₹' + Math.round(emi).toLocaleString('en-IN');
+            if (loanEl) loanEl.innerText = 'Approx loan amount: ₹' + Math.round(principal).toLocaleString('en-IN') + ' for ' + months + ' months';
         }
 
     </script>
