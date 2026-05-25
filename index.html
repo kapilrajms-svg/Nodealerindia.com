@@ -1180,11 +1180,10 @@ checkUrlRoutingHash();
                                     Compare
                                 </button>
 
-                                <a onclick="event.stopPropagation()" href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20the%20${encodeURIComponent(safeText(car.title))}%20advertised%20on%20No%20Dealer."
-                                   target="_blank"
+                                <button onclick="event.stopPropagation(); captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Inventory Card Contact')"
                                    class="bg-brand-red text-white text-xs font-bold px-3 py-2 rounded-xl hover:bg-red-700 transition-all">
                                    Contact
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1467,6 +1466,53 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
 
             return true;
         }
+
+        async function captureCarEnquiryAndOpenWhatsApp(carId, sourceLabel = "Website Car Enquiry") {
+            const car = (window.CAR_CACHE || []).find(c => Number(c.id) === Number(carId));
+
+            if (!car) {
+                window.open("https://wa.me/917838335143", "_blank");
+                return;
+            }
+
+            const buyerName = prompt("Optional: Enter your name so NoDealer can help you faster.") || "Website Visitor";
+            const buyerPhone = prompt("Optional: Enter your mobile number so NoDealer can call back for this car.") || "";
+
+            const payload = {
+                submissionType: "Website Car Interest / WhatsApp Click",
+                leadStatus: "New Lead",
+                name: buyerName,
+                phone: buyerPhone,
+                location: "",
+                carBrand: safeText(car.brand) || "Direct Owner",
+                carModel: safeText(car.title),
+                carYear: safeText(car.year),
+                carColor: safeText(car.color) || "",
+                note: `Customer clicked WhatsApp/contact for ${safeText(car.title)}. Price: ₹${money(car.price)}. Fuel: ${safeText(car.fuel)}. Transmission: ${safeText(car.transmission)}. KM: ${safeText(car.driven)}.`,
+                source: sourceLabel,
+                userIp: "Website Customer Device",
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                await saveLeadToSupabase(payload);
+                fetch(MAKE_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.warn("Webhook optional sync failed:", err));
+
+                if (typeof loadAdminLeadsDashboard === "function") {
+                    loadAdminLeadsDashboard().catch(() => {});
+                }
+            } catch (err) {
+                console.warn("Car enquiry lead capture failed, opening WhatsApp anyway:", err);
+            }
+
+            const msg = `Hi, I am interested in ${safeText(car.title)} listed on NoDealer. Price shown: ₹${money(car.price)}.`;
+            window.open(`https://wa.me/917838335143?text=${encodeURIComponent(msg)}`, "_blank");
+        }
+
 
         async function migrateLocalLeadsToSupabase() {
             if (!ensureSupabase()) return;
@@ -1889,11 +1935,10 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                             </div>
 
                             <div class="grid md:grid-cols-2 gap-4 mt-7">
-                                <a href="https://wa.me/917838335143?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(safeText(car.title))}%20listed%20on%20NoDealer."
-                                    target="_blank"
+                                <button onclick="captureCarEnquiryAndOpenWhatsApp(${car.id}, 'Website Car Detail WhatsApp Enquiry')"
                                     class="bg-green-500 hover:bg-green-600 text-white text-center font-black uppercase py-4 rounded-2xl shadow-lg">
                                     <i class="fa-brands fa-whatsapp"></i> WhatsApp Enquiry
-                                </a>
+                                </button>
 
                                 <button onclick="closeCarDetailModal(); document.getElementById('pdiFormHomepage').scrollIntoView({behavior:'smooth'})"
                                     class="bg-brand-red hover:bg-red-700 text-white font-black uppercase py-4 rounded-2xl shadow-lg">
