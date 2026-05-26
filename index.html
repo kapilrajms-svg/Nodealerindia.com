@@ -235,6 +235,7 @@ img, video, iframe { max-width: 100%; }
                     </div>
                 </a>
                 <div class="flex items-center space-x-2">
+                    <button onclick="openCustomerAccountAuth()" class="bg-blue-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-blue-700 flex items-center gap-1 transition-all"><i class="fa-solid fa-user text-sm"></i> My Account</button>
                     <button onclick="openSavedCarsModal()" class="bg-slate-950 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-slate-800 flex items-center gap-1 transition-all">
                         <i class="fa-solid fa-heart text-red-400 text-sm"></i> Saved <span id="savedCarsHeaderCount" class="bg-white text-slate-950 rounded-full px-1.5 py-0.5 text-[10px]">0</span>
                     </button>
@@ -983,6 +984,79 @@ img, video, iframe { max-width: 100%; }
     </div>
 
 
+
+    <!-- Customer Account / Real Auth Lite Modal -->
+    <div id="customerAccountModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+        <div class="max-w-5xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase font-black">NoDealer Customer Account</p>
+                    <h2 class="text-2xl font-black uppercase">My Dashboard</h2>
+                    <p class="text-xs text-slate-400 mt-1">Login by phone to view enquiries, PDI bookings, reserve requests and saved cars on this device.</p>
+                </div>
+                <button onclick="closeCustomerAccountAuth()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+            </div>
+
+            <div id="customerLoginView" class="p-6 grid lg:grid-cols-2 gap-6">
+                <div class="bg-slate-50 border rounded-3xl p-6">
+                    <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Login / Signup Lite</span>
+                    <h3 class="text-2xl font-black uppercase text-slate-950 mt-4">Enter Your Phone Number</h3>
+                    <p class="text-sm text-slate-500 font-semibold mt-2">For now this is a safe website-side customer account. Later we can connect Supabase OTP authentication.</p>
+                    <div class="space-y-3 mt-5">
+                        <input id="customerAccountName" type="text" placeholder="Your name" class="w-full p-4 rounded-2xl border border-slate-200 text-sm font-bold focus:outline-none">
+                        <input id="customerAccountPhone" type="tel" placeholder="Mobile number used in enquiry" class="w-full p-4 rounded-2xl border border-slate-200 text-sm font-bold focus:outline-none">
+                        <button onclick="customerAccountLogin()" class="w-full bg-slate-950 hover:bg-slate-800 text-white font-black uppercase py-4 rounded-2xl text-xs">
+                            Open My Dashboard
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 text-white rounded-3xl p-6">
+                    <h3 class="text-xl font-black uppercase">What This Dashboard Shows</h3>
+                    <div class="grid grid-cols-2 gap-3 mt-5 text-xs">
+                        <div class="bg-white/10 rounded-2xl p-4"><i class="fa-solid fa-heart text-red-400 text-xl"></i><p class="font-black uppercase mt-2">Saved Cars</p></div>
+                        <div class="bg-white/10 rounded-2xl p-4"><i class="fa-solid fa-phone text-green-400 text-xl"></i><p class="font-black uppercase mt-2">Enquiries</p></div>
+                        <div class="bg-white/10 rounded-2xl p-4"><i class="fa-solid fa-shield-halved text-amber-400 text-xl"></i><p class="font-black uppercase mt-2">PDI Status</p></div>
+                        <div class="bg-white/10 rounded-2xl p-4"><i class="fa-solid fa-calendar-check text-blue-400 text-xl"></i><p class="font-black uppercase mt-2">Reserve Requests</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="customerDashboardView" class="hidden p-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                    <div>
+                        <p class="text-[10px] uppercase text-slate-400 font-black">Logged In Customer</p>
+                        <h3 id="customerDashboardName" class="text-2xl font-black uppercase text-slate-950">Customer</h3>
+                        <p id="customerDashboardPhone" class="text-sm text-slate-500 font-semibold"></p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="refreshCustomerDashboard()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase">Refresh</button>
+                        <button onclick="customerAccountLogout()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 px-5 py-3 rounded-2xl text-xs font-black uppercase">Logout</button>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-500 font-black">Saved Cars</p><h2 id="customerSavedCount" class="text-3xl font-black text-slate-950">0</h2></div>
+                    <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-500 font-black">Enquiries</p><h2 id="customerLeadCount" class="text-3xl font-black text-blue-600">0</h2></div>
+                    <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-500 font-black">PDI Bookings</p><h2 id="customerPdiCount" class="text-3xl font-black text-amber-600">0</h2></div>
+                    <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-500 font-black">Reserve Requests</p><h2 id="customerReserveCount" class="text-3xl font-black text-green-600">0</h2></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-5">
+                    <div class="bg-white border rounded-3xl p-5">
+                        <h4 class="font-black uppercase text-slate-950 mb-3">My Recent Activity</h4>
+                        <div id="customerActivityList" class="space-y-3 text-sm"></div>
+                    </div>
+                    <div class="bg-white border rounded-3xl p-5">
+                        <h4 class="font-black uppercase text-slate-950 mb-3">My Saved Cars</h4>
+                        <div id="customerSavedCarsList" class="space-y-3 text-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Mobile Customer Action Bar -->
     <div id="mobileActionBar" class="md:hidden fixed bottom-0 left-0 right-0 z-[9998] bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-2xl px-3 py-3">
         <div class="grid grid-cols-4 gap-2 max-w-md mx-auto">
@@ -994,9 +1068,9 @@ img, video, iframe { max-width: 100%; }
                 <i class="fa-solid fa-shield-halved text-sm"></i>
                 PDI
             </button>
-            <button onclick="openSavedCarsModal()" class="bg-red-50 text-red-600 rounded-2xl py-3 text-[10px] font-black uppercase flex flex-col items-center gap-1 active:scale-95 transition-all">
-                <i class="fa-solid fa-heart text-sm"></i>
-                Saved
+            <button onclick="openCustomerAccountAuth()" class="bg-red-50 text-red-600 rounded-2xl py-3 text-[10px] font-black uppercase flex flex-col items-center gap-1 active:scale-95 transition-all">
+                <i class="fa-solid fa-user text-sm"></i>
+                Account
             </button>
             <a href="https://wa.me/917838335143" target="_blank" class="bg-green-500 text-white rounded-2xl py-3 text-[10px] font-black uppercase flex flex-col items-center gap-1 active:scale-95 transition-all">
                 <i class="fa-brands fa-whatsapp text-sm"></i>
@@ -3385,6 +3459,196 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         });
 
     </script>
+
+<script>
+/* =========================
+   NoDealer Customer Account Lite
+   Safe website-side dashboard; ready for future Supabase OTP upgrade
+========================= */
+let currentCustomerAccount = JSON.parse(localStorage.getItem("nodealer_customer_account") || "null");
+
+function openCustomerAccountAuth() {
+    const modal = document.getElementById("customerAccountModal");
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    if (currentCustomerAccount && currentCustomerAccount.phone) {
+        showCustomerDashboard();
+    } else {
+        document.getElementById("customerLoginView")?.classList.remove("hidden");
+        document.getElementById("customerDashboardView")?.classList.add("hidden");
+    }
+}
+
+function closeCustomerAccountAuth() {
+    document.getElementById("customerAccountModal")?.classList.add("hidden");
+}
+
+function customerAccountLogin() {
+    const name = document.getElementById("customerAccountName")?.value?.trim() || "NoDealer Customer";
+    const phone = document.getElementById("customerAccountPhone")?.value?.trim();
+
+    if (!phone || phone.length < 8) {
+        alert("Please enter a valid mobile number.");
+        return;
+    }
+
+    currentCustomerAccount = {
+        name,
+        phone,
+        loginAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("nodealer_customer_account", JSON.stringify(currentCustomerAccount));
+    showCustomerDashboard();
+}
+
+function customerAccountLogout() {
+    localStorage.removeItem("nodealer_customer_account");
+    currentCustomerAccount = null;
+    document.getElementById("customerLoginView")?.classList.remove("hidden");
+    document.getElementById("customerDashboardView")?.classList.add("hidden");
+}
+
+function showCustomerDashboard() {
+    document.getElementById("customerLoginView")?.classList.add("hidden");
+    document.getElementById("customerDashboardView")?.classList.remove("hidden");
+    refreshCustomerDashboard();
+}
+
+function normalizePhoneForMatch(value) {
+    return String(value || "").replace(/\D/g, "").slice(-10);
+}
+
+function getAllLocalLeadsForCustomer() {
+    const phone = normalizePhoneForMatch(currentCustomerAccount?.phone);
+    const possibleKeys = [
+        "nodealer_leads",
+        "nodealerInquiries",
+        "noDealerLeads",
+        "customerInquiries",
+        "crmLeads"
+    ];
+
+    let all = [];
+    possibleKeys.forEach(key => {
+        try {
+            const data = JSON.parse(localStorage.getItem(key) || "[]");
+            if (Array.isArray(data)) all = all.concat(data);
+        } catch (e) {}
+    });
+
+    // Also try global arrays if present
+    try {
+        if (Array.isArray(window.inquiries)) all = all.concat(window.inquiries);
+        if (Array.isArray(window.leads)) all = all.concat(window.leads);
+    } catch(e) {}
+
+    const unique = [];
+    const seen = new Set();
+
+    all.forEach((lead, index) => {
+        const leadPhone = normalizePhoneForMatch(lead.phone || lead.mobile || lead.contact || lead.customer_phone || lead.clientPhone);
+        if (!phone || leadPhone !== phone) return;
+        const id = lead.id || lead.created_at || lead.timestamp || JSON.stringify(lead).slice(0, 80) + index;
+        if (!seen.has(id)) {
+            seen.add(id);
+            unique.push(lead);
+        }
+    });
+
+    return unique;
+}
+
+function getSavedCarsForCustomer() {
+    const keys = ["nodealer_saved_cars", "savedCars", "noDealerSavedCars"];
+    for (const key of keys) {
+        try {
+            const data = JSON.parse(localStorage.getItem(key) || "[]");
+            if (Array.isArray(data)) return data;
+        } catch(e) {}
+    }
+    try {
+        if (Array.isArray(window.savedCars)) return window.savedCars;
+    } catch(e) {}
+    return [];
+}
+
+function refreshCustomerDashboard() {
+    if (!currentCustomerAccount) return;
+
+    const nameEl = document.getElementById("customerDashboardName");
+    const phoneEl = document.getElementById("customerDashboardPhone");
+
+    if (nameEl) nameEl.textContent = currentCustomerAccount.name || "NoDealer Customer";
+    if (phoneEl) phoneEl.textContent = currentCustomerAccount.phone || "";
+
+    const leads = getAllLocalLeadsForCustomer();
+    const saved = getSavedCarsForCustomer();
+
+    const pdi = leads.filter(l => String(l.type || l.source || l.category || "").toLowerCase().includes("pdi") || String(l.service || "").toLowerCase().includes("pdi"));
+    const reserve = leads.filter(l => String(l.type || l.source || l.category || "").toLowerCase().includes("reserve") || String(l.service || "").toLowerCase().includes("reserve"));
+
+    const savedCount = document.getElementById("customerSavedCount");
+    const leadCount = document.getElementById("customerLeadCount");
+    const pdiCount = document.getElementById("customerPdiCount");
+    const reserveCount = document.getElementById("customerReserveCount");
+
+    if (savedCount) savedCount.textContent = saved.length;
+    if (leadCount) leadCount.textContent = leads.length;
+    if (pdiCount) pdiCount.textContent = pdi.length;
+    if (reserveCount) reserveCount.textContent = reserve.length;
+
+    const activity = document.getElementById("customerActivityList");
+    if (activity) {
+        if (!leads.length) {
+            activity.innerHTML = '<div class="bg-slate-50 border rounded-2xl p-4 text-slate-500 font-semibold">No matching enquiry found on this device yet. Submit an enquiry/PDI/reserve request with this phone number.</div>';
+        } else {
+            activity.innerHTML = leads.slice(0, 8).map(lead => {
+                const type = lead.type || lead.source || lead.category || lead.service || "Customer Enquiry";
+                const status = lead.status || lead.lead_status || "New / Pending";
+                const car = lead.car || lead.carTitle || lead.vehicle || lead.model || lead.details || "No specific car";
+                const time = lead.created_at || lead.timestamp || lead.date || "";
+                return `
+                    <div class="bg-slate-50 border rounded-2xl p-4">
+                        <div class="flex items-center justify-between gap-2">
+                            <h5 class="font-black uppercase text-slate-950">${type}</h5>
+                            <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-[10px] font-black">${status}</span>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-1">${car}</p>
+                        <p class="text-[10px] text-slate-400 mt-2">${time}</p>
+                    </div>
+                `;
+            }).join("");
+        }
+    }
+
+    const savedList = document.getElementById("customerSavedCarsList");
+    if (savedList) {
+        if (!saved.length) {
+            savedList.innerHTML = '<div class="bg-slate-50 border rounded-2xl p-4 text-slate-500 font-semibold">No saved cars yet. Tap Save on any car card.</div>';
+        } else {
+            savedList.innerHTML = saved.slice(0, 8).map(car => {
+                const title = car.title || car.carTitle || car.name || car.model || "Saved Car";
+                const price = car.price || car.carPrice || "";
+                return `
+                    <div class="bg-slate-50 border rounded-2xl p-4 flex items-center justify-between gap-3">
+                        <div>
+                            <h5 class="font-black uppercase text-slate-950">${title}</h5>
+                            <p class="text-xs text-slate-500">${price}</p>
+                        </div>
+                        <button onclick="scrollToInventory(); closeCustomerAccountAuth();" class="bg-slate-950 text-white px-3 py-2 rounded-xl text-[10px] font-black uppercase">View</button>
+                    </div>
+                `;
+            }).join("");
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    currentCustomerAccount = JSON.parse(localStorage.getItem("nodealer_customer_account") || "null");
+});
+</script>
+
 </body>
 </html>
 
