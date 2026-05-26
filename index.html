@@ -192,7 +192,116 @@ img, video, iframe { max-width: 100%; }
     #mobileActionBar { display: none !important; }
 }
 
-    </style>
+    
+/* =========================
+   NoDealer Production Marketplace Polish
+   premium animations, skeletons, image zoom, toasts, quick actions
+========================= */
+:root {
+    --nd-shadow-premium: 0 24px 80px rgba(15, 23, 42, 0.16);
+    --nd-ease: cubic-bezier(.2,.8,.2,1);
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+.premium-card-hover {
+    transition: transform .28s var(--nd-ease), box-shadow .28s var(--nd-ease), border-color .28s var(--nd-ease);
+}
+
+.premium-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--nd-shadow-premium);
+    border-color: rgba(30, 136, 229, 0.28);
+}
+
+.nd-soft-pop {
+    animation: ndSoftPop .28s var(--nd-ease) both;
+}
+
+@keyframes ndSoftPop {
+    from { opacity: 0; transform: translateY(10px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.nd-skeleton {
+    position: relative;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+.nd-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+    animation: ndSkeleton 1.25s infinite;
+}
+
+@keyframes ndSkeleton {
+    100% { transform: translateX(100%); }
+}
+
+.nd-glass-action {
+    backdrop-filter: blur(16px);
+    background: rgba(15, 23, 42, 0.82);
+    border: 1px solid rgba(255,255,255,0.10);
+}
+
+#ndToastStack {
+    position: fixed;
+    top: 84px;
+    right: 18px;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.nd-toast {
+    background: #0f172a;
+    color: white;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 18px;
+    padding: 12px 14px;
+    min-width: 240px;
+    box-shadow: 0 20px 50px rgba(15,23,42,.28);
+    animation: ndToastIn .26s var(--nd-ease) both;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+@keyframes ndToastIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.nd-image-zoomable {
+    cursor: zoom-in;
+}
+
+.nd-focus-ring:focus {
+    outline: 3px solid rgba(30,136,229,.35);
+    outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    #ndToastStack {
+        top: auto;
+        bottom: 96px;
+        right: 12px;
+        left: 12px;
+    }
+    .nd-toast {
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+</style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
     <meta name="description" content="NoDealer India helps buyers browse verified direct-owner used cars, book PDI inspections, compare vehicles, calculate EMI and connect safely without dealer markup.">
@@ -210,7 +319,7 @@ img, video, iframe { max-width: 100%; }
     <div id="preloader">
         <div class="text-center p-4 max-w-sm flex flex-col items-center w-full">
             <div class="mb-6 bg-white p-2 rounded-xl shadow-2xl flex items-center justify-center w-28 h-28 overflow-hidden">
-                <img src="logo.jpg" alt="No Dealer Logo" class="max-w-full max-h-full object-contain block" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
+                <img loading="lazy" src="logo.jpg" alt="No Dealer Logo" class="max-w-full max-h-full object-contain block" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=200';">
             </div>
             <h2 class="text-white text-2xl font-extrabold tracking-tight font-heading mb-1">NO <span class="text-blue-500">Dealer</span></h2>
             <p class="text-gray-400 text-[10px] font-semibold tracking-widest uppercase mb-12">Buy Car Directly From Owner's</p>
@@ -3985,6 +4094,137 @@ function loadAdvancedAnalytics() {
         }).join("");
     }
 }
+</script>
+
+
+<script>
+/* =========================
+   NoDealer Production Polish JS
+========================= */
+
+function ndToast(message) {
+    const stack = document.getElementById("ndToastStack");
+    if (!stack) return;
+
+    const toast = document.createElement("div");
+    toast.className = "nd-toast";
+    toast.innerHTML = `<i class="fa-solid fa-circle-check text-green-400 mr-2"></i>${message}`;
+    stack.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateX(20px)";
+        toast.style.transition = "all .22s ease";
+        setTimeout(() => toast.remove(), 260);
+    }, 2600);
+}
+
+function openNdImageZoom(src) {
+    const modal = document.getElementById("ndImageZoomModal");
+    const img = document.getElementById("ndZoomImage");
+    if (!modal || !img || !src) return;
+    img.src = src;
+    modal.classList.remove("hidden");
+}
+
+function closeNdImageZoom() {
+    document.getElementById("ndImageZoomModal")?.classList.add("hidden");
+}
+
+function addProductionPolish() {
+    // Add hover classes to cards/buttons safely
+    document.querySelectorAll(
+        "#carGrid > div, #recentlyViewedGrid > div, #service-command-center button, #trust-center-section .grid > div, #sell-car-section .rounded-3xl, #pdi-section .rounded-3xl"
+    ).forEach(el => {
+        el.classList.add("premium-card-hover");
+    });
+
+    // Make images zoomable
+    document.querySelectorAll("img").forEach(img => {
+        if (img.closest("#preloader")) return;
+        img.classList.add("nd-image-zoomable");
+        if (!img.dataset.zoomReady) {
+            img.dataset.zoomReady = "true";
+            img.addEventListener("click", () => openNdImageZoom(img.currentSrc || img.src));
+        }
+    });
+
+    // Add focus ring to buttons
+    document.querySelectorAll("button, a, input, select, textarea").forEach(el => {
+        el.classList.add("nd-focus-ring");
+    });
+}
+
+function showInventorySkeletonsOnce() {
+    const grid = document.getElementById("carGrid");
+    if (!grid || grid.children.length) return;
+
+    const skeletons = Array.from({length: 4}).map(() => `
+        <div class="bg-white border border-slate-100 rounded-3xl overflow-hidden shadow-sm">
+            <div class="nd-skeleton h-44"></div>
+            <div class="p-4 space-y-3">
+                <div class="nd-skeleton h-5 rounded-xl w-3/4"></div>
+                <div class="nd-skeleton h-4 rounded-xl w-1/2"></div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="nd-skeleton h-10 rounded-2xl"></div>
+                    <div class="nd-skeleton h-10 rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+    `).join("");
+
+    grid.innerHTML = skeletons;
+    setTimeout(() => {
+        try {
+            if (typeof renderCars === "function") renderCars();
+        } catch(e) {}
+    }, 650);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    addProductionPolish();
+    setTimeout(addProductionPolish, 1000);
+    setTimeout(addProductionPolish, 2500);
+
+    // Friendly welcome toast after engine/preloader stage
+    setTimeout(() => {
+        if (!document.body.classList.contains("overflow-hidden")) {
+            ndToast("NoDealer marketplace ready");
+        }
+    }, 1800);
+});
+
+// Re-polish after dynamic renders
+["click", "change", "input"].forEach(evt => {
+    document.addEventListener(evt, () => setTimeout(addProductionPolish, 120), true);
+});
+
+// Hook into common functions without breaking existing code
+(function(){
+    const oldApply = window.applyFilters;
+    if (typeof oldApply === "function") {
+        window.applyFilters = function() {
+            const result = oldApply.apply(this, arguments);
+            setTimeout(() => {
+                addProductionPolish();
+                ndToast("Inventory results updated");
+            }, 120);
+            return result;
+        };
+    }
+
+    const oldOpenSaved = window.openSavedCarsModal;
+    if (typeof oldOpenSaved === "function") {
+        window.openSavedCarsModal = function() {
+            const result = oldOpenSaved.apply(this, arguments);
+            setTimeout(() => {
+                addProductionPolish();
+                ndToast("Saved cars opened");
+            }, 120);
+            return result;
+        };
+    }
+})();
 </script>
 
 </body>
