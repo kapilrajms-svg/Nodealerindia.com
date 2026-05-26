@@ -305,6 +305,15 @@ img, video, iframe { max-width: 100%; }
 /* Public cleanup: analytics launcher is admin-only */
 #analyticsFloatingBtn { display: none !important; }
 
+
+/* FINAL PUBLIC CLEANUP */
+#analyticsFloatingBtn,
+button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -462,7 +471,7 @@ img, video, iframe { max-width: 100%; }
                     <div>
                         <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">NoDealer Service Hub</span>
                         <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-3 leading-tight">Everything A Car Buyer Or Seller Needs</h2>
-                        <p class="text-sm md:text-base text-slate-500 font-semibold mt-2 max-w-2xl">Cars24-style service access, but in NoDealer’s premium direct-owner experience. Every action either opens the right section or saves a lead into your CRM.</p>
+                        <p class="text-sm md:text-base text-slate-500 font-semibold mt-2 max-w-2xl">Cars24-style service access, but in NoDealer’s premium direct-owner experience. Every action opens the right section and helps our team assist you faster.</p>
                     </div>
                     <button onclick="scrollToInventory()" class="bg-slate-950 text-white px-6 py-3 rounded-2xl text-xs font-black uppercase hover:bg-slate-800">Explore Cars</button>
                 </div>
@@ -526,7 +535,7 @@ img, video, iframe { max-width: 100%; }
                     <h3 class="text-2xl font-black uppercase text-slate-950 mb-4">Sell Your Car</h3>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <button onclick="openSellModal()" class="text-left bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all"><i class="fa-solid fa-handshake text-green-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Sell Your Car</h4><p class="text-xs text-slate-500 mt-1">Detailed seller lead form.</p></button>
-                        <button onclick="openServiceLeadModal('Check Car Valuation','Sell Car')" class="text-left bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all"><i class="fa-solid fa-chart-line text-blue-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Car Valuation</h4><p class="text-xs text-slate-500 mt-1">Capture estimate request in CRM.</p></button>
+                        <button onclick="openServiceLeadModal('Check Car Valuation','Sell Car')" class="text-left bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all"><i class="fa-solid fa-chart-line text-blue-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Car Valuation</h4><p class="text-xs text-slate-500 mt-1">Request a quick estimate from our team.</p></button>
                         <button onclick="openServiceLeadModal('Exchange Car Assistance','Sell Car')" class="text-left bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all"><i class="fa-solid fa-right-left text-purple-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Exchange Car</h4><p class="text-xs text-slate-500 mt-1">Match seller with buyer intent.</p></button>
                         <button onclick="openServiceLeadModal('Scrap / Old Car Help','Sell Car')" class="text-left bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all"><i class="fa-solid fa-recycle text-orange-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Old Car Help</h4><p class="text-xs text-slate-500 mt-1">For scrap/very old car cases.</p></button>
                     </div>
@@ -538,7 +547,7 @@ img, video, iframe { max-width: 100%; }
                         <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="text-left bg-slate-950 text-white rounded-3xl p-5 hover:scale-[1.01] transition-all"><i class="fa-solid fa-clipboard-check text-amber-400 text-3xl"></i><h4 class="font-black uppercase mt-4">Pre-Delivery Inspection</h4><p class="text-xs text-slate-400 mt-1">150+ point inspection request.</p></button>
                         <button onclick="openServiceLeadModal('Vehicle History Check','Car Check')" class="text-left bg-slate-50 border rounded-3xl p-5 hover:bg-white hover:shadow-xl transition-all"><i class="fa-solid fa-file-lines text-blue-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Vehicle History</h4><p class="text-xs text-slate-500 mt-1">Owner, service and accident concern lead.</p></button>
                         <button onclick="openServiceLeadModal('RTO / RC Check','Car Check')" class="text-left bg-slate-50 border rounded-3xl p-5 hover:bg-white hover:shadow-xl transition-all"><i class="fa-solid fa-id-card text-green-600 text-3xl"></i><h4 class="font-black uppercase mt-4">RTO Check</h4><p class="text-xs text-slate-500 mt-1">RC transfer and document query.</p></button>
-                        <button onclick="openServiceLeadModal('Odometer Tampering Check','Car Check')" class="text-left bg-slate-50 border rounded-3xl p-5 hover:bg-white hover:shadow-xl transition-all"><i class="fa-solid fa-gauge-high text-red-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Odometer Check</h4><p class="text-xs text-slate-500 mt-1">Capture suspicious KM cases.</p></button>
+                        <button onclick="openServiceLeadModal('Odometer Tampering Check','Car Check')" class="text-left bg-slate-50 border rounded-3xl p-5 hover:bg-white hover:shadow-xl transition-all"><i class="fa-solid fa-gauge-high text-red-600 text-3xl"></i><h4 class="font-black uppercase mt-4">Odometer Check</h4><p class="text-xs text-slate-500 mt-1">Get help checking suspicious KM cases.</p></button>
                     </div>
                 </div>
 
@@ -547,7 +556,7 @@ img, video, iframe { max-width: 100%; }
                     <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-5">
                         <div>
                             <h3 class="text-2xl md:text-3xl font-black uppercase">Manage Your Vehicle</h3>
-                            <p class="text-blue-100 text-sm font-semibold mt-1">Useful ownership services with CRM lead capture.</p>
+                            <p class="text-blue-100 text-sm font-semibold mt-1">Useful ownership services with quick NoDealer assistance.</p>
                         </div>
                         <a href="https://wa.me/917838335143" target="_blank" class="bg-white text-blue-700 px-5 py-3 rounded-2xl text-xs font-black uppercase inline-flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Ask Support</a>
                     </div>
@@ -769,7 +778,7 @@ img, video, iframe { max-width: 100%; }
                             <h3 class="text-2xl font-black uppercase tracking-tight mt-3 flex items-center gap-2">
                                 <i class="fa-solid fa-calendar-check text-amber-500"></i> Book Your PDI
                             </h3>
-                            <p class="text-xs text-slate-500 mt-1">Detailed request goes directly to your NoDealer CRM.</p>
+                            <p class="text-xs text-slate-500 mt-1">Detailed request goes directly to the NoDealer team.</p>
                         </div>
 
                         <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3">
@@ -951,7 +960,7 @@ img, video, iframe { max-width: 100%; }
                         <span class="bg-white text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Sell On NoDealer</span>
                         <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-4 leading-tight">Sell Your Car With A Proper Owner-First Flow</h2>
                         <p class="text-slate-600 font-semibold mt-4 max-w-xl">
-                            Give buyers the details they actually need: ownership, condition, insurance, kilometres, photos and expected price. Every seller request goes into your cloud CRM.
+                            Give buyers the details they actually need: ownership, condition, insurance, kilometres, photos and expected price. Your request goes directly to our NoDealer support team.
                         </p>
                         <div class="grid grid-cols-2 gap-4 mt-6 max-w-xl">
                             <div class="bg-white rounded-3xl p-5 shadow-sm border">
@@ -971,8 +980,8 @@ img, video, iframe { max-width: 100%; }
                             </div>
                             <div class="bg-white rounded-3xl p-5 shadow-sm border">
                                 <i class="fa-solid fa-cloud text-red-600 text-2xl"></i>
-                                <h4 class="font-black mt-3 uppercase">CRM Saved</h4>
-                                <p class="text-xs text-slate-500 mt-1">No seller lead gets lost.</p>
+                                <h4 class="font-black mt-3 uppercase">Team Support</h4>
+                                <p class="text-xs text-slate-500 mt-1">Your request is tracked by our support team.</p>
                             </div>
                         </div>
                         <button onclick="openSellModal()" class="mt-7 bg-brand-red hover:bg-red-700 text-white font-black text-sm px-8 py-4 rounded-2xl shadow-lg">
@@ -988,7 +997,7 @@ img, video, iframe { max-width: 100%; }
                             <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 01</p><h4 class="font-black">Owner Contact</h4><p class="text-xs text-slate-500">Name, phone and location.</p></div>
                             <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 02</p><h4 class="font-black">Car Identity</h4><p class="text-xs text-slate-500">Brand, model, year, fuel, transmission.</p></div>
                             <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 03</p><h4 class="font-black">Condition</h4><p class="text-xs text-slate-500">KMs, ownership, insurance and condition.</p></div>
-                            <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 04</p><h4 class="font-black">Buyer-Ready Listing</h4><p class="text-xs text-slate-500">Photos and expected price saved in CRM.</p></div>
+                            <div class="bg-slate-50 border rounded-2xl p-4"><p class="text-[10px] uppercase text-slate-400 font-black">Step 04</p><h4 class="font-black">Buyer-Ready Listing</h4><p class="text-xs text-slate-500">Photos and expected price saved in Support.</p></div>
                         </div>
 
                         <div class="mt-6 bg-slate-950 text-white rounded-3xl p-5">
@@ -1005,7 +1014,7 @@ img, video, iframe { max-width: 100%; }
                 <div class="text-center max-w-3xl mx-auto mb-12">
                     <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">NoDealer Trust Center</span>
                     <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-4">Built To Reduce Buyer Fear</h2>
-                    <p class="text-slate-600 font-semibold mt-4">Every important action on NoDealer is designed around transparency: direct-owner listings, PDI-first buying, CRM tracking, WhatsApp support and clear vehicle details.</p>
+                    <p class="text-slate-600 font-semibold mt-4">Every important action on NoDealer is designed around transparency: direct-owner listings, PDI-first buying, Support tracking, WhatsApp support and clear vehicle details.</p>
                 </div>
 
                 <div class="grid md:grid-cols-4 gap-5">
@@ -1026,8 +1035,8 @@ img, video, iframe { max-width: 100%; }
                     </div>
                     <div class="bg-slate-50 border rounded-3xl p-6 trust-glow">
                         <i class="fa-solid fa-database text-purple-600 text-3xl"></i>
-                        <h3 class="font-black uppercase mt-4">CRM Tracking</h3>
-                        <p class="text-xs text-slate-500 mt-2">Leads, notes, status, date filters and follow-ups stay organized.</p>
+                        <h3 class="font-black uppercase mt-4">Request Tracking</h3>
+                        <p class="text-xs text-slate-500 mt-2">Your enquiry, PDI request and follow-up status stay organized with our team.</p>
                     </div>
                 </div>
             </div>
@@ -1055,7 +1064,7 @@ img, video, iframe { max-width: 100%; }
                     </div>
                     <div class="bg-white/5 border border-white/10 rounded-3xl p-5">
                         <h3 class="font-black uppercase">How does NoDealer follow up?</h3>
-                        <p class="text-xs text-slate-400 mt-2">Every form and enquiry is logged into the admin CRM for call, WhatsApp, status and follow-up tracking.</p>
+                        <p class="text-xs text-slate-400 mt-2">Every form and enquiry is logged into the admin Support for call, WhatsApp, status and follow-up tracking.</p>
                     </div>
                 </div>
             </div>
@@ -1253,7 +1262,7 @@ img, video, iframe { max-width: 100%; }
                 <div>
                     <p class="text-[10px] text-slate-400 uppercase font-black">NoDealer Service Request</p>
                     <h2 id="serviceLeadTitle" class="text-2xl font-black uppercase">Service Request</h2>
-                    <p id="serviceLeadSub" class="text-xs text-slate-400 mt-1">This request will be saved in your CRM.</p>
+                    <p id="serviceLeadSub" class="text-xs text-slate-400 mt-1">This request will be saved in your Support.</p>
                 </div>
                 <button onclick="closeServiceLeadModal()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
             </div>
@@ -1265,7 +1274,7 @@ img, video, iframe { max-width: 100%; }
                 <input id="serviceCustomerCity" type="text" placeholder="City / location" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-blue-500">
                 <textarea id="serviceCustomerNote" rows="4" placeholder="Tell us what you need help with. Example: car model, budget, RC issue, insurance, challan, valuation, exchange etc." class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-blue-500"></textarea>
                 <div class="bg-slate-50 border rounded-2xl p-4 text-xs text-slate-600">
-                    <strong class="text-slate-950">CRM Action:</strong> This will be saved as a website service lead with Hot/Warm scoring and admin follow-up buttons.
+                    <strong class="text-slate-950">Support Action:</strong> This will be saved as a website service lead with Hot/Warm scoring and admin follow-up buttons.
                 </div>
                 <button id="serviceLeadSubmitBtn" type="submit" class="w-full bg-slate-950 hover:bg-slate-800 text-white font-black py-4 rounded-2xl uppercase text-xs">Save Service Request</button>
             </form>
@@ -1317,7 +1326,7 @@ img, video, iframe { max-width: 100%; }
                             <i class="fa-solid fa-car mr-2 text-emerald-400"></i> Inventory
                         </button>
                         <button onclick="document.getElementById('adminLeadsTableBody').scrollIntoView({behavior:'smooth'})" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-white px-4 py-3 rounded-2xl transition-all">
-                            <i class="fa-solid fa-address-book mr-2 text-amber-400"></i> Leads CRM
+                            <i class="fa-solid fa-address-book mr-2 text-amber-400"></i> Leads Support
                         </button>
                         <button onclick="loadAdminInventoryDirectory(); loadAdminLeadsDashboard(); renderCars();" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-white px-4 py-3 rounded-2xl transition-all">
                             <i class="fa-solid fa-rotate mr-2 text-sky-400"></i> Refresh Data
@@ -1412,7 +1421,7 @@ img, video, iframe { max-width: 100%; }
                     </div>
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
                         <p class="text-[10px] text-slate-500 uppercase font-bold">Suggested Action</p>
-                        <h2 id="aiNextBestAction" class="text-lg font-black text-blue-400 mt-1">Refresh CRM</h2>
+                        <h2 id="aiNextBestAction" class="text-lg font-black text-blue-400 mt-1">Refresh Support</h2>
                         <p class="text-xs text-slate-400 mt-2">Use WhatsApp, call, status and follow-up tools to move leads faster.</p>
                     </div>
                 </div>
@@ -1526,7 +1535,7 @@ class="block w-full text-xs text-slate-400 file:mr-4 file:py-1.5 file:px-3 file:
                     <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 border-b border-slate-800 pb-4 mb-5">
                         <div>
                             <h3 class="text-lg font-black uppercase tracking-tight text-amber-500"><i class="fa-solid fa-address-book"></i> Client Portal Log & Lead Captures</h3>
-                            <p class="text-xs text-slate-400 mt-0.5">Every lead, data point, customer inquiry, and photo array in one clean CRM table.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Every lead, data point, customer inquiry, and photo array in one clean Support table.</p>
                             <input
     id="leadSearchInput"
     oninput="loadAdminLeadsDashboard()"
@@ -1620,7 +1629,7 @@ class="block w-full text-xs text-slate-400 file:mr-4 file:py-1.5 file:px-3 file:
                 <h3 class="text-2xl md:text-3xl font-black uppercase mt-3 brand-red tracking-tight">
                     <i class="fa-solid fa-car-on"></i> List Your Car On NoDealer
                 </h3>
-                <p class="text-gray-500 text-sm mt-1">Fill complete car details so we can create a trustworthy buyer-ready lead in your CRM.</p>
+                <p class="text-gray-500 text-sm mt-1">Fill complete car details so we can create a trustworthy buyer-ready lead in your Support.</p>
             </div>
 
             <form id="customerSellForm" onsubmit="handleCustomerSellSubmit(event)" class="space-y-5">
@@ -1695,7 +1704,7 @@ class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:ro
 
                 <div class="grid md:grid-cols-3 gap-3">
                     <div class="bg-green-50 border border-green-100 rounded-2xl p-4">
-                        <p class="text-[10px] uppercase text-green-700 font-black">CRM Source</p>
+                        <p class="text-[10px] uppercase text-green-700 font-black">Support Source</p>
                         <p class="text-sm font-black text-green-900">Website Sell Car Lead</p>
                     </div>
                     <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4">
@@ -2395,7 +2404,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         async function loadAdminLeadsDashboard() {
             const tableBody = document.getElementById('adminLeadsTableBody');
             const searchTerm = (document.getElementById('leadSearchInput')?.value || '').toLowerCase();
-            tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">Loading cloud CRM leads...</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">Loading cloud Support leads...</td></tr>`;
 
             if (!ensureSupabase()) return;
 
@@ -2503,7 +2512,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         }
         function exportInquiriesToExcel() {
             const logs = window.LEAD_CACHE || [];
-            if (logs.length === 0) { alert("No Supabase CRM leads ready to export."); return; }
+            if (logs.length === 0) { alert("No Supabase Support leads ready to export."); return; }
             let csvContent = "data:text/csv;charset=utf-8,Type,Status,Name,Phone,Location,Details/Specs,Source,Follow Up Date,Note,Timestamp\n";
             logs.forEach(l => {
                 let carSummary = l.carBrand ? `${l.carBrand} ${l.carModel} (Year: ${l.carYear}, Color: ${l.carColor || 'N/A'})` : 'PDI Booking Entry';
@@ -2520,7 +2529,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         async function handlePdiSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('pdiSubmitBtn');
-            btn.innerText = "Saving PDI Request To CRM...";
+            btn.innerText = "Saving PDI Request To Support...";
             btn.disabled = true;
             const payload = {
                 submissionType: "Detailed PDI Inspection Request",
@@ -2543,7 +2552,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             try {
                 const saved = await saveLeadToSupabase(payload); if (!saved) return;
                 fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(err => console.warn("Webhook optional sync failed:", err));
-                alert("Detailed PDI request saved in Supabase CRM!");
+                alert("Detailed PDI request saved in Supabase Support!");
                 document.getElementById('pdiFormHomepage').reset();
                 await loadAdminLeadsDashboard();
                 updateActionCenter();
@@ -2583,7 +2592,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             try {
                 const saved = await saveLeadToSupabase(payload); if (!saved) return;
                 fetch(MAKE_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(err => console.warn("Webhook optional sync failed:", err));
-                alert("Detailed seller lead saved permanently in Supabase CRM!");
+                alert("Detailed seller lead saved permanently in Supabase Support!");
                 closeSellModal();
                 document.getElementById('customerSellForm').reset();
                 await loadAdminLeadsDashboard();
@@ -3024,7 +3033,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         }
 
         async function deleteLead(leadId, timestamp) {
-            if (!confirm("Delete this lead permanently from Supabase CRM?")) return;
+            if (!confirm("Delete this lead permanently from Supabase Support?")) return;
             if (!ensureSupabase()) return;
 
             let query = supabaseClient.from('leads').delete().select('id');
@@ -3044,7 +3053,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 alert("Delete was blocked or no matching lead was found. Please run the Supabase DELETE policy SQL once.");
                 return;
             }
-            alert("Lead deleted permanently from Supabase CRM.");
+            alert("Lead deleted permanently from Supabase Support.");
             await loadAdminLeadsDashboard();
             updateActionCenter();
         }
@@ -3431,7 +3440,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             const modal = document.getElementById('serviceLeadModal');
             if (!modal) return;
             document.getElementById('serviceLeadTitle').textContent = serviceName || 'Service Request';
-            document.getElementById('serviceLeadSub').textContent = `${serviceType || 'Website Service'} request will be saved in your NoDealer CRM.`;
+            document.getElementById('serviceLeadSub').textContent = `${serviceType || 'Website Service'} request will be saved in your NoDealer team.`;
             document.getElementById('serviceLeadType').value = serviceType || 'Website Service';
             document.getElementById('serviceLeadNameHidden').value = serviceName || 'Service Request';
             const note = document.getElementById('serviceCustomerNote');
@@ -3450,7 +3459,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
             event.preventDefault();
             const btn = document.getElementById('serviceLeadSubmitBtn');
             const originalText = btn ? btn.textContent : '';
-            if (btn) { btn.disabled = true; btn.textContent = 'SAVING TO CRM...'; }
+            if (btn) { btn.disabled = true; btn.textContent = 'SAVING TO Support...'; }
 
             const serviceName = document.getElementById('serviceLeadNameHidden')?.value || 'Service Request';
             const serviceType = document.getElementById('serviceLeadType')?.value || 'Website Service';
@@ -3483,7 +3492,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                     logs.push(payload);
                     localStorage.setItem('clientInquiries', JSON.stringify(logs));
                 }
-                alert(`${serviceName} request saved in CRM!`);
+                alert(`${serviceName} request saved in Support!`);
                 closeServiceLeadModal();
                 event.target.reset();
                 if (typeof loadAdminLeadsDashboard === 'function') loadAdminLeadsDashboard();
@@ -3550,7 +3559,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                     body: JSON.stringify(payload)
                 }).catch(err => console.warn('Webhook optional sync failed:', err));
 
-                alert('Reserve request saved in CRM! Admin should call/WhatsApp customer to confirm.');
+                alert('Reserve request saved in Support! Admin should call/WhatsApp customer to confirm.');
                 closeReserveCarModal();
                 document.getElementById('reserveCarForm')?.reset();
                 if (typeof loadAdminLeadsDashboard === 'function') await loadAdminLeadsDashboard();
@@ -3562,7 +3571,7 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
                 console.error(error);
                 alert('Reserve request save error: ' + error.message);
             } finally {
-                if (btn) { btn.disabled = false; btn.textContent = originalText || 'Save Reserve Request To CRM'; }
+                if (btn) { btn.disabled = false; btn.textContent = originalText || 'Save Reserve Request To Support'; }
             }
         }
 
@@ -3763,14 +3772,14 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-    <!-- Advanced Admin Analytics Dashboard -->
+    <!-- Advanced Analytics Dashboard -->
     <div id="advancedAnalyticsModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
         <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
             <div class="bg-slate-950 text-white p-6 flex items-center justify-between">
                 <div>
                     <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Intelligence Layer</p>
                     <h2 class="text-3xl font-black uppercase">Advanced Analytics Dashboard</h2>
-                    <p class="text-sm text-slate-400 mt-1">Live website-side business intelligence and CRM insights.</p>
+                    <p class="text-sm text-slate-400 mt-1">Live website-side business intelligence and Support insights.</p>
                 </div>
                 <button onclick="closeAdvancedAnalytics()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-2xl font-black">×</button>
             </div>
@@ -3893,7 +3902,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="bg-white border rounded-3xl p-5">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="font-black uppercase text-slate-950">Recent CRM Activity</h3>
+                            <h3 class="font-black uppercase text-slate-950">Recent Support Activity</h3>
                             <i class="fa-solid fa-clock-rotate-left text-amber-500 text-xl"></i>
                         </div>
                         <div id="recentAnalyticsActivity" class="space-y-3"></div>
@@ -4072,7 +4081,7 @@ function loadAdvancedAnalytics() {
     const recentEl = document.getElementById("recentAnalyticsActivity");
 
     if (!leads.length) {
-        recentEl.innerHTML = '<div class="bg-slate-50 border rounded-2xl p-4 text-slate-500 font-semibold">No CRM activity available yet.</div>';
+        recentEl.innerHTML = '<div class="bg-slate-50 border rounded-2xl p-4 text-slate-500 font-semibold">No Support activity available yet.</div>';
     } else {
         recentEl.innerHTML = leads.slice(0,8).reverse().map((lead, idx) => {
             const title = lead.type || lead.source || lead.category || "Customer Activity";
@@ -4248,7 +4257,7 @@ function ensureAdminOnlyAnalyticsButton() {
         }
     };
     btn.className = "fixed bottom-6 right-6 z-[10001] bg-purple-600 hover:bg-purple-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
-    btn.innerHTML = '<i class="fa-solid fa-chart-pie"></i> Admin Analytics';
+    btn.innerHTML = '<i class="fa-solid fa-chart-pie"></i> Analytics';
 
     document.body.appendChild(btn);
 }
@@ -4273,6 +4282,18 @@ document.addEventListener("DOMContentLoaded", function () {
         ensureAdminOnlyAnalyticsButton();
         removeAdminOnlyAnalyticsButtonIfPublic();
     }, 1200);
+});
+</script>
+
+
+<script>
+/* Remove public analytics launcher from customer page */
+document.addEventListener("DOMContentLoaded", function () {
+    setInterval(function () {
+        document.querySelectorAll('#analyticsFloatingBtn, button[onclick="openAdvancedAnalytics()"]').forEach(function(btn){
+            if (btn.id !== "adminOnlyAnalyticsBtn") btn.remove();
+        });
+    }, 600);
 });
 </script>
 
