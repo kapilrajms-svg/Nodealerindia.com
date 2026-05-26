@@ -301,6 +301,10 @@ img, video, iframe { max-width: 100%; }
     }
 }
 
+
+/* Public cleanup: analytics launcher is admin-only */
+#analyticsFloatingBtn { display: none !important; }
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -3900,12 +3904,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
 
-<button onclick="openAdvancedAnalytics()" id="analyticsFloatingBtn"
-class="fixed bottom-28 right-5 z-[9999] bg-slate-950 hover:bg-slate-800 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-2xl active:scale-95 transition-all">
-<i class="fa-solid fa-chart-pie"></i>
-</button>
-
-
 <script>
 /* =========================
    NoDealer Advanced Analytics
@@ -4225,6 +4223,57 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 })();
+</script>
+
+
+<script>
+/* =========================
+   NoDealer Admin-Only Analytics Visibility Fix
+   Keeps analytics hidden from public customers and shows it only inside admin OS.
+========================= */
+function ensureAdminOnlyAnalyticsButton() {
+    const adminView = document.getElementById("adminWorkspaceView");
+    if (!adminView || adminView.classList.contains("hidden")) return;
+
+    if (document.getElementById("adminOnlyAnalyticsBtn")) return;
+
+    const btn = document.createElement("button");
+    btn.id = "adminOnlyAnalyticsBtn";
+    btn.type = "button";
+    btn.onclick = function () {
+        if (typeof openAdvancedAnalytics === "function") {
+            openAdvancedAnalytics();
+        } else {
+            alert("Analytics dashboard is not available in this build.");
+        }
+    };
+    btn.className = "fixed bottom-6 right-6 z-[10001] bg-purple-600 hover:bg-purple-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
+    btn.innerHTML = '<i class="fa-solid fa-chart-pie"></i> Admin Analytics';
+
+    document.body.appendChild(btn);
+}
+
+function removeAdminOnlyAnalyticsButtonIfPublic() {
+    const adminView = document.getElementById("adminWorkspaceView");
+    const btn = document.getElementById("adminOnlyAnalyticsBtn");
+    if (btn && (!adminView || adminView.classList.contains("hidden"))) {
+        btn.remove();
+    }
+}
+
+document.addEventListener("click", function () {
+    setTimeout(function () {
+        ensureAdminOnlyAnalyticsButton();
+        removeAdminOnlyAnalyticsButtonIfPublic();
+    }, 250);
+}, true);
+
+document.addEventListener("DOMContentLoaded", function () {
+    setInterval(function () {
+        ensureAdminOnlyAnalyticsButton();
+        removeAdminOnlyAnalyticsButtonIfPublic();
+    }, 1200);
+});
 </script>
 
 </body>
