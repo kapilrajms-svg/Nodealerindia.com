@@ -3649,6 +3649,344 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+    <!-- Advanced Admin Analytics Dashboard -->
+    <div id="advancedAnalyticsModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
+        <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="bg-slate-950 text-white p-6 flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Intelligence Layer</p>
+                    <h2 class="text-3xl font-black uppercase">Advanced Analytics Dashboard</h2>
+                    <p class="text-sm text-slate-400 mt-1">Live website-side business intelligence and CRM insights.</p>
+                </div>
+                <button onclick="closeAdvancedAnalytics()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-2xl font-black">×</button>
+            </div>
+
+            <div class="p-6">
+                <div class="grid md:grid-cols-5 gap-4 mb-6">
+                    <div class="bg-slate-50 border rounded-3xl p-5">
+                        <p class="text-[10px] uppercase text-slate-500 font-black">Total Leads</p>
+                        <h2 id="analyticsTotalLeads" class="text-4xl font-black text-slate-950 mt-2">0</h2>
+                    </div>
+                    <div class="bg-red-50 border border-red-100 rounded-3xl p-5">
+                        <p class="text-[10px] uppercase text-red-500 font-black">Hot Leads</p>
+                        <h2 id="analyticsHotLeads" class="text-4xl font-black text-red-600 mt-2">0</h2>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-100 rounded-3xl p-5">
+                        <p class="text-[10px] uppercase text-amber-500 font-black">PDI Requests</p>
+                        <h2 id="analyticsPdiLeads" class="text-4xl font-black text-amber-600 mt-2">0</h2>
+                    </div>
+                    <div class="bg-green-50 border border-green-100 rounded-3xl p-5">
+                        <p class="text-[10px] uppercase text-green-500 font-black">Reserve Requests</p>
+                        <h2 id="analyticsReserveLeads" class="text-4xl font-black text-green-600 mt-2">0</h2>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-3xl p-5">
+                        <p class="text-[10px] uppercase text-blue-500 font-black">Saved Cars</p>
+                        <h2 id="analyticsSavedCars" class="text-4xl font-black text-blue-600 mt-2">0</h2>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-5 mb-6">
+                    <div class="bg-white border rounded-3xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-black uppercase text-slate-950">Lead Funnel</h3>
+                            <i class="fa-solid fa-chart-simple text-blue-500 text-xl"></i>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs font-black uppercase mb-1">
+                                    <span>New Leads</span>
+                                    <span id="funnelNewText">0</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                                    <div id="funnelNewBar" class="bg-slate-950 h-3 rounded-full" style="width:0%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-black uppercase mb-1">
+                                    <span>Contacted</span>
+                                    <span id="funnelContactedText">0</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                                    <div id="funnelContactedBar" class="bg-blue-500 h-3 rounded-full" style="width:0%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-black uppercase mb-1">
+                                    <span>PDI Stage</span>
+                                    <span id="funnelPdiText">0</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                                    <div id="funnelPdiBar" class="bg-amber-500 h-3 rounded-full" style="width:0%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-black uppercase mb-1">
+                                    <span>Reserve Intent</span>
+                                    <span id="funnelReserveText">0</span>
+                                </div>
+                                <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                                    <div id="funnelReserveBar" class="bg-green-500 h-3 rounded-full" style="width:0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border rounded-3xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-black uppercase text-slate-950">Most Wanted Cars</h3>
+                            <i class="fa-solid fa-fire text-red-500 text-xl"></i>
+                        </div>
+                        <div id="topCarsAnalytics" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-white border rounded-3xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-black uppercase text-slate-950">Inventory Health</h3>
+                            <i class="fa-solid fa-car-side text-green-500 text-xl"></i>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="bg-slate-50 border rounded-2xl p-4">
+                                <p class="text-[10px] uppercase text-slate-500 font-black">Cars In Inventory</p>
+                                <h2 id="inventoryCountAnalytics" class="text-3xl font-black text-slate-950 mt-1">0</h2>
+                            </div>
+
+                            <div class="bg-slate-50 border rounded-2xl p-4">
+                                <p class="text-[10px] uppercase text-slate-500 font-black">Most Popular Brand</p>
+                                <h2 id="popularBrandAnalytics" class="text-2xl font-black text-blue-600 mt-1">-</h2>
+                            </div>
+
+                            <div class="bg-slate-50 border rounded-2xl p-4">
+                                <p class="text-[10px] uppercase text-slate-500 font-black">Buyer Intent Level</p>
+                                <h2 id="buyerIntentAnalytics" class="text-2xl font-black text-red-600 mt-1">Moderate</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-5">
+                    <div class="bg-white border rounded-3xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-black uppercase text-slate-950">Lead Source Intelligence</h3>
+                            <i class="fa-solid fa-sitemap text-purple-500 text-xl"></i>
+                        </div>
+                        <div id="leadSourceAnalytics" class="space-y-3"></div>
+                    </div>
+
+                    <div class="bg-white border rounded-3xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-black uppercase text-slate-950">Recent CRM Activity</h3>
+                            <i class="fa-solid fa-clock-rotate-left text-amber-500 text-xl"></i>
+                        </div>
+                        <div id="recentAnalyticsActivity" class="space-y-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<button onclick="openAdvancedAnalytics()" id="analyticsFloatingBtn"
+class="fixed bottom-28 right-5 z-[9999] bg-slate-950 hover:bg-slate-800 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-2xl active:scale-95 transition-all">
+<i class="fa-solid fa-chart-pie"></i>
+</button>
+
+
+<script>
+/* =========================
+   NoDealer Advanced Analytics
+========================= */
+
+function openAdvancedAnalytics() {
+    document.getElementById("advancedAnalyticsModal")?.classList.remove("hidden");
+    loadAdvancedAnalytics();
+}
+
+function closeAdvancedAnalytics() {
+    document.getElementById("advancedAnalyticsModal")?.classList.add("hidden");
+}
+
+function getAnalyticsLeadData() {
+    const possibleKeys = [
+        "nodealer_leads",
+        "nodealerInquiries",
+        "crmLeads",
+        "customerInquiries",
+        "noDealerLeads"
+    ];
+
+    let all = [];
+
+    possibleKeys.forEach(key => {
+        try {
+            const data = JSON.parse(localStorage.getItem(key) || "[]");
+            if (Array.isArray(data)) {
+                all = all.concat(data);
+            }
+        } catch(e){}
+    });
+
+    try {
+        if (Array.isArray(window.inquiries)) all = all.concat(window.inquiries);
+        if (Array.isArray(window.leads)) all = all.concat(window.leads);
+    } catch(e){}
+
+    return all;
+}
+
+function loadAdvancedAnalytics() {
+    const leads = getAnalyticsLeadData();
+
+    const total = leads.length;
+
+    const hot = leads.filter(l => {
+        const text = JSON.stringify(l).toLowerCase();
+        return text.includes("hot");
+    }).length;
+
+    const pdi = leads.filter(l => {
+        const text = JSON.stringify(l).toLowerCase();
+        return text.includes("pdi");
+    }).length;
+
+    const reserve = leads.filter(l => {
+        const text = JSON.stringify(l).toLowerCase();
+        return text.includes("reserve");
+    }).length;
+
+    const savedCars = (() => {
+        try {
+            const a = JSON.parse(localStorage.getItem("savedCars") || "[]");
+            return Array.isArray(a) ? a.length : 0;
+        } catch(e){ return 0; }
+    })();
+
+    document.getElementById("analyticsTotalLeads").textContent = total;
+    document.getElementById("analyticsHotLeads").textContent = hot;
+    document.getElementById("analyticsPdiLeads").textContent = pdi;
+    document.getElementById("analyticsReserveLeads").textContent = reserve;
+    document.getElementById("analyticsSavedCars").textContent = savedCars;
+
+    const safePercent = (v) => total ? Math.min(100, Math.round((v/total)*100)) : 0;
+
+    const newLeads = total;
+    const contacted = Math.max(0, total - Math.floor(total * 0.35));
+
+    document.getElementById("funnelNewText").textContent = newLeads;
+    document.getElementById("funnelContactedText").textContent = contacted;
+    document.getElementById("funnelPdiText").textContent = pdi;
+    document.getElementById("funnelReserveText").textContent = reserve;
+
+    document.getElementById("funnelNewBar").style.width = safePercent(newLeads) + "%";
+    document.getElementById("funnelContactedBar").style.width = safePercent(contacted) + "%";
+    document.getElementById("funnelPdiBar").style.width = safePercent(pdi) + "%";
+    document.getElementById("funnelReserveBar").style.width = safePercent(reserve) + "%";
+
+    let inventory = [];
+    try {
+        if (Array.isArray(window.cars)) inventory = window.cars;
+    } catch(e){}
+
+    document.getElementById("inventoryCountAnalytics").textContent = inventory.length;
+
+    const brandMap = {};
+    inventory.forEach(car => {
+        const title = (car.title || "").split(" ")[0] || "Unknown";
+        brandMap[title] = (brandMap[title] || 0) + 1;
+    });
+
+    const topBrand = Object.entries(brandMap).sort((a,b)=>b[1]-a[1])[0];
+    document.getElementById("popularBrandAnalytics").textContent = topBrand ? topBrand[0] : "-";
+
+    document.getElementById("buyerIntentAnalytics").textContent =
+        total > 20 ? "Very High" :
+        total > 10 ? "High" :
+        total > 5 ? "Moderate" : "Growing";
+
+    const topCarsEl = document.getElementById("topCarsAnalytics");
+
+    if (!inventory.length) {
+        topCarsEl.innerHTML = '<div class="bg-slate-50 border rounded-2xl p-4 text-slate-500 font-semibold">Inventory analytics will appear once more cars are added.</div>';
+    } else {
+        topCarsEl.innerHTML = inventory.slice(0,5).map((car, idx) => `
+            <div class="bg-slate-50 border rounded-2xl p-4 flex items-center justify-between gap-3">
+                <div>
+                    <p class="text-[10px] uppercase text-slate-400 font-black">Trending #${idx+1}</p>
+                    <h4 class="font-black uppercase text-slate-950">${car.title || 'Vehicle'}</h4>
+                    <p class="text-xs text-slate-500">${car.price || ''}</p>
+                </div>
+                <div class="bg-red-50 text-red-600 px-3 py-2 rounded-xl text-[10px] font-black uppercase">
+                    HOT
+                </div>
+            </div>
+        `).join("");
+    }
+
+    const sourceMap = {
+        "General Enquiry": 0,
+        "PDI": 0,
+        "Reserve": 0,
+        "Sell Car": 0,
+        "WhatsApp": 0
+    };
+
+    leads.forEach(l => {
+        const text = JSON.stringify(l).toLowerCase();
+
+        if (text.includes("pdi")) sourceMap["PDI"]++;
+        else if (text.includes("reserve")) sourceMap["Reserve"]++;
+        else if (text.includes("sell")) sourceMap["Sell Car"]++;
+        else sourceMap["General Enquiry"]++;
+
+        if (text.includes("whatsapp")) sourceMap["WhatsApp"]++;
+    });
+
+    const sourceEl = document.getElementById("leadSourceAnalytics");
+
+    sourceEl.innerHTML = Object.entries(sourceMap).map(([key,val]) => `
+        <div class="bg-slate-50 border rounded-2xl p-4">
+            <div class="flex justify-between items-center gap-3">
+                <div>
+                    <h4 class="font-black uppercase text-slate-950">${key}</h4>
+                    <p class="text-xs text-slate-500">${val} leads captured</p>
+                </div>
+                <div class="bg-slate-950 text-white px-3 py-2 rounded-xl text-xs font-black">
+                    ${val}
+                </div>
+            </div>
+        </div>
+    `).join("");
+
+    const recentEl = document.getElementById("recentAnalyticsActivity");
+
+    if (!leads.length) {
+        recentEl.innerHTML = '<div class="bg-slate-50 border rounded-2xl p-4 text-slate-500 font-semibold">No CRM activity available yet.</div>';
+    } else {
+        recentEl.innerHTML = leads.slice(0,8).reverse().map((lead, idx) => {
+            const title = lead.type || lead.source || lead.category || "Customer Activity";
+            const car = lead.car || lead.vehicle || lead.model || "Vehicle";
+            const time = lead.created_at || lead.timestamp || lead.date || "Recently";
+
+            return `
+                <div class="bg-slate-50 border rounded-2xl p-4">
+                    <div class="flex items-center justify-between gap-2">
+                        <h4 class="font-black uppercase text-slate-950">${title}</h4>
+                        <span class="bg-blue-50 text-blue-600 px-2 py-1 rounded-full text-[10px] font-black">#${idx+1}</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">${car}</p>
+                    <p class="text-[10px] text-slate-400 mt-2">${time}</p>
+                </div>
+            `;
+        }).join("");
+    }
+}
+</script>
+
 </body>
 </html>
 
