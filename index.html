@@ -4733,6 +4733,102 @@ async function submitServiceLead(event) {
     alert("Service Request Submitted!");
 }
 </script>
+    <div id="manualLeadPanel"
+style="
+position:fixed;
+bottom:20px;
+left:20px;
+background:white;
+padding:20px;
+width:320px;
+z-index:999999;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.2);
+">
+
+<h3>MANUAL LEAD ENTRY</h3>
+
+<input type="text" id="manualLeadName"
+placeholder="Customer Name"
+style="width:100%;padding:10px;margin-bottom:10px;">
+
+<input type="text" id="manualLeadPhone"
+placeholder="Phone Number"
+style="width:100%;padding:10px;margin-bottom:10px;">
+
+<input type="text" id="manualLeadCar"
+placeholder="Interested Car"
+style="width:100%;padding:10px;margin-bottom:10px;">
+
+<select id="manualLeadType"
+style="width:100%;padding:10px;margin-bottom:10px;">
+<option>WhatsApp</option>
+<option>Call</option>
+<option>Walk-in</option>
+</select>
+
+<select id="manualLeadPriority"
+style="width:100%;padding:10px;margin-bottom:10px;">
+<option>Hot</option>
+<option>Warm</option>
+<option>Cold</option>
+</select>
+
+<textarea id="manualLeadNotes"
+placeholder="Notes"
+style="width:100%;padding:10px;margin-bottom:10px;"></textarea>
+
+<button onclick="submitManualLead()"
+style="
+width:100%;
+padding:12px;
+background:red;
+color:white;
+border:none;
+border-radius:10px;
+">
+SAVE LEAD
+</button>
+
+</div>
+
+<script>
+async function submitManualLead() {
+
+const data = {
+
+type: document.getElementById("manualLeadType").value,
+
+name: document.getElementById("manualLeadName").value,
+
+phone: document.getElementById("manualLeadPhone").value,
+
+car: document.getElementById("manualLeadCar").value,
+
+priority: document.getElementById("manualLeadPriority").value,
+
+notes: document.getElementById("manualLeadNotes").value,
+
+date: new Date().toLocaleString()
+
+};
+
+await fetch(
+"https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",
+{
+method:"POST",
+mode:"no-cors",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+}
+);
+
+alert("Lead Saved Successfully!");
+
+}
+</script>
 </body>
 </html>
 
