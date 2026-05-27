@@ -357,6 +357,56 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
 .nd-priority-warm { background:#ffedd5;color:#ea580c; }
 .nd-priority-cold { background:#f1f5f9;color:#475569; }
 
+
+/* =========================
+   NoDealer FINAL Admin Privacy Fix
+   Keeps CRM tools hidden from public customers
+========================= */
+#manualLeadPanel,
+#manualLeadEntry,
+.manual-lead-card {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+body.nd-admin-active #ndLeadViewerBtn,
+body.nd-admin-active #carManagerAdminBtn,
+body.nd-admin-active #inventoryAdminOsBtn,
+body.nd-admin-active #ndManualLeadBtn {
+    display: flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+body:not(.nd-admin-active) #ndLeadViewerBtn,
+body:not(.nd-admin-active) #carManagerAdminBtn,
+body:not(.nd-admin-active) #inventoryAdminOsBtn,
+body:not(.nd-admin-active) #ndManualLeadBtn {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+#ndManualLeadModal input,
+#ndManualLeadModal select,
+#ndManualLeadModal textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+}
+
+#ndManualLeadModal input:focus,
+#ndManualLeadModal select:focus,
+#ndManualLeadModal textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -4842,6 +4892,133 @@ document.addEventListener("click", function() {
         injectNdLeadViewerButton();
         removeNdLeadViewerButtonIfPublic();
     }, 250);
+}, true);
+</script>
+
+
+<script>
+/* =========================
+   NoDealer FINAL Admin CRM Privacy + Buttons
+========================= */
+const ND_FINAL_CRM_WEBHOOK = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+
+function isNoDealerAdminVisible() {
+    const adminView = document.getElementById("adminWorkspaceView");
+    const secureAdmin = document.getElementById("secureAdminPortal");
+    return !!(
+        (adminView && !adminView.classList.contains("hidden")) ||
+        (secureAdmin && !secureAdmin.classList.contains("hidden") && document.body.textContent.includes("Admin"))
+    );
+}
+
+function updateNoDealerAdminMode() {
+    if (isNoDealerAdminVisible()) document.body.classList.add("nd-admin-active");
+    else document.body.classList.remove("nd-admin-active");
+
+    const legacyManual = document.getElementById("manualLeadPanel") || document.getElementById("manualLeadEntry");
+    if (legacyManual) legacyManual.remove();
+}
+
+function openNdManualLead() {
+    updateNoDealerAdminMode();
+    if (!document.body.classList.contains("nd-admin-active")) return;
+    document.getElementById("ndManualLeadModal")?.classList.remove("hidden");
+}
+
+function closeNdManualLead() {
+    document.getElementById("ndManualLeadModal")?.classList.add("hidden");
+}
+
+async function submitNdManualLead() {
+    const name = document.getElementById("ndManualLeadName")?.value || "";
+    const phone = document.getElementById("ndManualLeadPhone")?.value || "";
+    const car = document.getElementById("ndManualLeadCar")?.value || "";
+    const type = document.getElementById("ndManualLeadType")?.value || "Manual Lead";
+    const priority = document.getElementById("ndManualLeadPriority")?.value || "Hot";
+    const notes = document.getElementById("ndManualLeadNotes")?.value || "";
+
+    if (!phone.trim()) {
+        alert("Please enter customer phone number.");
+        return;
+    }
+
+    const data = {
+        type: type,
+        source: type,
+        name: name,
+        phone: phone,
+        car: car,
+        priority: priority,
+        notes: notes,
+        status: "New Lead",
+        date: new Date().toLocaleString()
+    };
+
+    await fetch(ND_FINAL_CRM_WEBHOOK, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    ["ndManualLeadName","ndManualLeadPhone","ndManualLeadCar","ndManualLeadNotes"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+    });
+
+    alert("Lead saved successfully!");
+    closeNdManualLead();
+
+    if (typeof loadNdCrmLeads === "function") {
+        setTimeout(loadNdCrmLeads, 1200);
+    }
+}
+
+function injectNoDealerAdminCrmButtons() {
+    updateNoDealerAdminMode();
+    if (!document.body.classList.contains("nd-admin-active")) return;
+
+    if (!document.getElementById("ndManualLeadBtn")) {
+        const btn = document.createElement("button");
+        btn.id = "ndManualLeadBtn";
+        btn.onclick = openNdManualLead;
+        btn.className = "fixed bottom-6 right-6 z-[10001] bg-red-600 hover:bg-red-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
+        btn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Add Lead';
+        document.body.appendChild(btn);
+    }
+
+    const leadBtn = document.getElementById("ndLeadViewerBtn");
+    if (leadBtn) {
+        leadBtn.style.display = "flex";
+        leadBtn.style.visibility = "visible";
+        leadBtn.style.pointerEvents = "auto";
+    }
+}
+
+function removeNoDealerAdminCrmButtonsIfPublic() {
+    updateNoDealerAdminMode();
+    if (document.body.classList.contains("nd-admin-active")) return;
+
+    ["ndManualLeadBtn","ndLeadViewerBtn","inventoryAdminOsBtn","carManagerAdminBtn"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+    });
+    document.getElementById("ndManualLeadModal")?.classList.add("hidden");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateNoDealerAdminMode();
+    setInterval(function() {
+        injectNoDealerAdminCrmButtons();
+        removeNoDealerAdminCrmButtonsIfPublic();
+    }, 700);
+});
+
+document.addEventListener("click", function() {
+    setTimeout(function() {
+        injectNoDealerAdminCrmButtons();
+        removeNoDealerAdminCrmButtonsIfPublic();
+    }, 200);
 }, true);
 </script>
 
