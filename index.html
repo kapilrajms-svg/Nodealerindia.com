@@ -4636,6 +4636,102 @@ document.addEventListener("submit", function(e) {
   }
 
 });
+    
+</script>
+    <script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+
+async function sendLeadToSheet(data) {
+    try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        console.log("Lead sent successfully");
+    } catch (err) {
+        console.error("Sheet Error:", err);
+    }
+}
+
+/* PDI FORM */
+async function handlePdiSubmit(event) {
+    event.preventDefault();
+
+    const data = {
+        type: "PDI Lead",
+        name: document.getElementById("pdiName")?.value || "",
+        phone: document.getElementById("pdiPhone")?.value || "",
+        car: document.getElementById("pdiCarDetails")?.value || "",
+        city: document.getElementById("pdiCity")?.value || "",
+        location: document.getElementById("pdiLocation")?.value || "",
+        date: new Date().toLocaleString()
+    };
+
+    await sendLeadToSheet(data);
+
+    alert("PDI Lead Submitted Successfully!");
+}
+
+/* SELL CAR FORM */
+async function handleSellCarSubmit(event) {
+    event.preventDefault();
+
+    const imageInput = document.getElementById("sellCarPhotos");
+
+    let imagePreview = "";
+
+    if (imageInput && imageInput.files[0]) {
+        const file = imageInput.files[0];
+
+        imagePreview = await new Promise((resolve) => {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                resolve(e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    const data = {
+        type: "Sell Car Lead",
+        name: document.getElementById("sellName")?.value || "",
+        phone: document.getElementById("sellPhone")?.value || "",
+        car: document.getElementById("sellCarModel")?.value || "",
+        city: document.getElementById("sellCity")?.value || "",
+        price: document.getElementById("sellExpectedPrice")?.value || "",
+        image: imagePreview,
+        date: new Date().toLocaleString()
+    };
+
+    await sendLeadToSheet(data);
+
+    alert("Sell Car Lead Submitted!");
+}
+
+/* SERVICE FORM */
+async function submitServiceLead(event) {
+    event.preventDefault();
+
+    const data = {
+        type: "Service Lead",
+        name: document.getElementById("serviceLeadName")?.value || "",
+        phone: document.getElementById("serviceLeadPhone")?.value || "",
+        service: document.getElementById("serviceLeadType")?.value || "",
+        notes: document.getElementById("serviceLeadNotes")?.value || "",
+        date: new Date().toLocaleString()
+    };
+
+    await sendLeadToSheet(data);
+
+    alert("Service Request Submitted!");
+}
 </script>
 </body>
 </html>
