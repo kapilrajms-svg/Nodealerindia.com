@@ -314,6 +314,15 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
     pointer-events: none !important;
 }
 
+
+/* NoDealer Pro Inventory OS */
+.nd-inventory-toolbar{background:#0f172a;border-radius:26px;padding:16px;color:#fff;box-shadow:0 24px 70px rgba(15,23,42,.18)}
+.nd-status-badge{position:absolute;top:12px;left:12px;z-index:5;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-status-Available{background:#16a34a;color:#fff}.nd-status-Reserved{background:#f59e0b;color:#0f172a}.nd-status-Sold{background:#dc2626;color:#fff}.nd-status-PDI{background:#2563eb;color:#fff}
+.nd-featured-ribbon{position:absolute;top:12px;right:12px;z-index:5;background:#fbbf24;color:#0f172a;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-mini-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.nd-mini-badge{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:900;text-transform:uppercase}.nd-mini-badge.hot{background:#fee2e2;color:#dc2626}.nd-mini-badge.owner{background:#dbeafe;color:#2563eb}.nd-mini-badge.verified{background:#dcfce7;color:#16a34a}.nd-mini-badge.price{background:#fef3c7;color:#b45309}
+#inventoryAdminOsBtn{display:none}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -637,6 +646,25 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
                     <button onclick="document.getElementById('filterFuel').value='CNG'; applyFilters();" class="bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full text-xs font-black text-slate-700">CNG</button>
                     <button onclick="document.getElementById('filterBudget').value='';document.getElementById('filterBrand').value='';document.getElementById('filterFuel').value='';document.getElementById('filterTransmission').value=''; applyFilters();" class="bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-full text-xs font-black text-blue-700">Clear Filters</button>
                 </div>
+
+
+                <div class="nd-inventory-toolbar mt-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+                        <div><p class="text-[10px] uppercase text-slate-400 font-black">Inventory Intelligence</p><h3 class="text-lg font-black uppercase tracking-tight">Sort & View Cars Like A Premium Marketplace</h3></div>
+                        <span id="inventoryLiveCountBadge" class="bg-white text-slate-950 px-4 py-2 rounded-full text-xs font-black uppercase">Loading Cars</span>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <select id="inventorySortMode" onchange="applyProInventoryFilters()" class="w-full bg-white text-slate-950 p-3 rounded-2xl text-xs font-black focus:outline-none">
+                            <option value="featured">Featured First</option><option value="newest">Newest First</option><option value="priceLow">Price Low To High</option><option value="priceHigh">Price High To Low</option><option value="available">Available First</option>
+                        </select>
+                        <select id="inventoryStatusFilter" onchange="applyProInventoryFilters()" class="w-full bg-white text-slate-950 p-3 rounded-2xl text-xs font-black focus:outline-none">
+                            <option value="">All Status</option><option value="Available">Available</option><option value="Reserved">Reserved</option><option value="Sold">Sold</option><option value="PDI Running">PDI Running</option>
+                        </select>
+                        <button onclick="showOnlyFeaturedCars()" class="bg-amber-500 text-slate-950 px-4 py-3 rounded-2xl text-xs font-black uppercase">Featured Cars</button>
+                        <button onclick="resetProInventoryFilters()" class="bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-2xl text-xs font-black uppercase">Reset Inventory View</button>
+                    </div>
+                </div>
+
 
                 <div class="mt-6 bg-slate-950 rounded-3xl p-4 md:p-5 text-white">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
@@ -4295,6 +4323,64 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }, 600);
 });
+</script>
+
+
+<div id="proInventoryAdminModal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+ <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+  <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
+   <div><p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Inventory OS</p><h2 class="text-3xl font-black uppercase">Professional Inventory Control</h2><p class="text-sm text-slate-400 mt-1">Feature, reserve, sell and manage car visibility.</p></div>
+   <button onclick="closeProInventoryAdmin()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+  </div>
+  <div class="p-6">
+   <div class="grid md:grid-cols-5 gap-4 mb-6">
+    <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-500 font-black">Total Cars</p><h2 id="invOsTotal" class="text-3xl font-black text-slate-950">0</h2></div>
+    <div class="bg-green-50 border border-green-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-green-600 font-black">Available</p><h2 id="invOsAvailable" class="text-3xl font-black text-green-600">0</h2></div>
+    <div class="bg-amber-50 border border-amber-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-amber-600 font-black">Reserved</p><h2 id="invOsReserved" class="text-3xl font-black text-amber-600">0</h2></div>
+    <div class="bg-red-50 border border-red-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-red-600 font-black">Sold</p><h2 id="invOsSold" class="text-3xl font-black text-red-600">0</h2></div>
+    <div class="bg-blue-50 border border-blue-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-blue-600 font-black">Featured</p><h2 id="invOsFeatured" class="text-3xl font-black text-blue-600">0</h2></div>
+   </div>
+   <div class="bg-slate-50 border rounded-3xl p-4 mb-5">
+    <div class="grid md:grid-cols-4 gap-3">
+     <input id="invAdminSearch" oninput="renderProInventoryAdmin()" placeholder="Search car..." class="p-3 rounded-2xl border text-sm font-bold focus:outline-none">
+     <select id="invAdminStatus" onchange="renderProInventoryAdmin()" class="p-3 rounded-2xl border text-sm font-bold focus:outline-none"><option value="">All Status</option><option value="Available">Available</option><option value="Reserved">Reserved</option><option value="Sold">Sold</option><option value="PDI Running">PDI Running</option></select>
+     <button onclick="downloadInventorySnapshot()" class="bg-slate-950 text-white rounded-2xl px-4 py-3 text-xs font-black uppercase">Download Snapshot</button>
+     <button onclick="resetInventoryOsData()" class="bg-red-50 text-red-600 rounded-2xl px-4 py-3 text-xs font-black uppercase">Reset Status Data</button>
+    </div>
+   </div>
+   <div id="proInventoryAdminList" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+  </div>
+ </div>
+</div>
+
+
+<script>
+/* NoDealer Pro Inventory OS */
+const ND_INV_KEY="nodealer_inventory_os_v1";
+function getNdInventoryState(){try{return JSON.parse(localStorage.getItem(ND_INV_KEY)||"{}")}catch(e){return{}}}
+function saveNdInventoryState(s){localStorage.setItem(ND_INV_KEY,JSON.stringify(s||{}))}
+function getNdCarsArray(){return Array.isArray(window.cars)?window.cars:(Array.isArray(window.carInventory)?window.carInventory:[])}
+function getNdCarId(c,i){return String(c.id||c.title||c.name||c.model||("car_"+i)).replace(/\s+/g,"_")}
+function parseNdPrice(v){let s=String(v||"").toLowerCase(),n=parseFloat(s.replace(/[^0-9.]/g,""));if(!n)return 0;if(s.includes("crore"))return n*10000000;if(s.includes("lakh")||s.includes("lac"))return n*100000;return n}
+function defaultInventoryMeta(c,i){let t=String(c.title||c.name||c.model||""),p=parseNdPrice(c.price),premium=p>=1000000||/creta|seltos|city|verna|xuv|scorpio|innova|fortuner/i.test(t);return{status:"Available",featured:i<2||premium,badges:{verified:true,owner:true,hot:premium,newArrival:i<3,priceDrop:false},updatedAt:new Date().toISOString()}}
+function getCarInventoryMeta(c,i){let s=getNdInventoryState(),id=getNdCarId(c,i);return Object.assign(defaultInventoryMeta(c,i),s[id]||{})}
+function setCarInventoryMeta(c,i,patch){let s=getNdInventoryState(),id=getNdCarId(c,i);s[id]=Object.assign(getCarInventoryMeta(c,i),patch||{},{updatedAt:new Date().toISOString()});saveNdInventoryState(s);applyProInventoryFilters();renderProInventoryAdmin()}
+function buildNdStatusClass(st){return st==="PDI Running"?"nd-status-PDI":"nd-status-"+String(st||"Available").replace(/\s+/g,"")}
+function decorateInventoryCards(){let cards=document.querySelectorAll("#carGrid > div"),cars=getNdCarsArray();cards.forEach((card,i)=>{if(card.dataset.ndDecorated==="true")return;let car=cars[i];if(!car)return;let m=getCarInventoryMeta(car,i);card.style.position="relative";let s=document.createElement("div");s.className="nd-status-badge "+buildNdStatusClass(m.status);s.textContent=m.status||"Available";card.appendChild(s);if(m.featured){let r=document.createElement("div");r.className="nd-featured-ribbon";r.innerHTML='<i class="fa-solid fa-star"></i> Featured';card.appendChild(r)}let host=document.createElement("div");host.className="nd-mini-badges";let b=[];if(m.badges&&m.badges.verified)b.push('<span class="nd-mini-badge verified">Verified</span>');if(m.badges&&m.badges.owner)b.push('<span class="nd-mini-badge owner">Owner</span>');if(m.badges&&m.badges.hot)b.push('<span class="nd-mini-badge hot">Hot Deal</span>');if(m.badges&&m.badges.newArrival)b.push('<span class="nd-mini-badge">New Arrival</span>');if(m.badges&&m.badges.priceDrop)b.push('<span class="nd-mini-badge price">Price Drop</span>');host.innerHTML=b.join("");card.appendChild(host);if(m.status==="Sold"){card.style.opacity=".72";card.style.filter="grayscale(.15)"}card.dataset.ndDecorated="true"});let count=document.getElementById("inventoryLiveCountBadge");if(count)count.textContent=document.querySelectorAll("#carGrid > div").length+" Cars Showing"}
+function applyProInventoryFilters(){let f=window.renderCars||window.applyFilters;if(typeof f==="function"){try{f()}catch(e){}}setTimeout(()=>{document.querySelectorAll("#carGrid > div").forEach(c=>delete c.dataset.ndDecorated);decorateInventoryCards()},250)}
+function showOnlyFeaturedCars(){let s=document.getElementById("inventorySortMode");if(s)s.value="featured";applyProInventoryFilters();if(typeof ndToast==="function")ndToast("Featured cars shown first")}
+function resetProInventoryFilters(){let st=document.getElementById("inventoryStatusFilter"),so=document.getElementById("inventorySortMode");if(st)st.value="";if(so)so.value="featured";applyProInventoryFilters()}
+function openProInventoryAdmin(){document.getElementById("proInventoryAdminModal")?.classList.remove("hidden");renderProInventoryAdmin()}
+function closeProInventoryAdmin(){document.getElementById("proInventoryAdminModal")?.classList.add("hidden")}
+function renderProInventoryAdmin(){let list=document.getElementById("proInventoryAdminList");if(!list)return;let search=(document.getElementById("invAdminSearch")?.value||"").toLowerCase(),status=document.getElementById("invAdminStatus")?.value||"",cars=getNdCarsArray();let total=0,av=0,re=0,so=0,fe=0;cars.forEach((c,i)=>{let m=getCarInventoryMeta(c,i);total++;if(m.status==="Available")av++;if(m.status==="Reserved")re++;if(m.status==="Sold")so++;if(m.featured)fe++});[["invOsTotal",total],["invOsAvailable",av],["invOsReserved",re],["invOsSold",so],["invOsFeatured",fe]].forEach(([id,v])=>{let e=document.getElementById(id);if(e)e.textContent=v});let rows=cars.map((car,index)=>({car,index,meta:getCarInventoryMeta(car,index)})).filter(x=>(!search||JSON.stringify(x.car).toLowerCase().includes(search))&&(!status||x.meta.status===status));if(!rows.length){list.innerHTML='<div class="bg-slate-50 border rounded-3xl p-6 text-slate-500 font-bold">No cars match your admin filter.</div>';return}list.innerHTML=rows.map(({car,index,meta})=>{let title=car.title||car.name||car.model||"Vehicle",price=car.price||"",img=car.image||car.img||car.photo||(car.photos&&car.photos[0])||"hero.jpg";return `<div class="bg-white border rounded-3xl p-4 shadow-sm"><div class="relative h-40 bg-slate-100 rounded-2xl overflow-hidden mb-4"><img src="${img}" class="w-full h-full object-cover" onerror="this.src='hero.jpg'"><span class="nd-status-badge ${buildNdStatusClass(meta.status)}">${meta.status}</span>${meta.featured?'<span class="nd-featured-ribbon">Featured</span>':""}</div><h3 class="font-black uppercase text-slate-950">${title}</h3><p class="text-sm text-slate-500 font-bold">${price}</p><div class="grid grid-cols-2 gap-2 mt-4"><button onclick="setCarInventoryMeta(getNdCarsArray()[${index}],${index},{status:'Available'})" class="bg-green-50 text-green-700 px-3 py-2 rounded-xl text-[10px] font-black uppercase">Available</button><button onclick="setCarInventoryMeta(getNdCarsArray()[${index}],${index},{status:'Reserved'})" class="bg-amber-50 text-amber-700 px-3 py-2 rounded-xl text-[10px] font-black uppercase">Reserve</button><button onclick="setCarInventoryMeta(getNdCarsArray()[${index}],${index},{status:'Sold'})" class="bg-red-50 text-red-700 px-3 py-2 rounded-xl text-[10px] font-black uppercase">Sold</button><button onclick="setCarInventoryMeta(getNdCarsArray()[${index}],${index},{status:'PDI Running'})" class="bg-blue-50 text-blue-700 px-3 py-2 rounded-xl text-[10px] font-black uppercase">PDI</button><button onclick="toggleInventoryFeatured(${index})" class="bg-slate-950 text-white px-3 py-2 rounded-xl text-[10px] font-black uppercase col-span-2">${meta.featured?"Remove Featured":"Make Featured"}</button><button onclick="toggleInventoryBadge(${index},'hot')" class="bg-red-600 text-white px-3 py-2 rounded-xl text-[10px] font-black uppercase">Hot Deal</button><button onclick="toggleInventoryBadge(${index},'priceDrop')" class="bg-amber-500 text-slate-950 px-3 py-2 rounded-xl text-[10px] font-black uppercase">Price Drop</button></div></div>`}).join("")}
+function toggleInventoryFeatured(i){let c=getNdCarsArray()[i],m=getCarInventoryMeta(c,i);setCarInventoryMeta(c,i,{featured:!m.featured})}
+function toggleInventoryBadge(i,b){let c=getNdCarsArray()[i],m=getCarInventoryMeta(c,i),badges=Object.assign({},m.badges||{});badges[b]=!badges[b];setCarInventoryMeta(c,i,{badges})}
+function downloadInventorySnapshot(){let data=getNdCarsArray().map((c,i)=>({title:c.title||c.name||c.model||"",price:c.price||"",status:getCarInventoryMeta(c,i).status,featured:getCarInventoryMeta(c,i).featured}));let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="nodealer_inventory_snapshot.json";a.click();URL.revokeObjectURL(url)}
+function resetInventoryOsData(){if(!confirm("Reset inventory status/featured data saved on this device?"))return;localStorage.removeItem(ND_INV_KEY);renderProInventoryAdmin();applyProInventoryFilters()}
+function injectInventoryAdminButton(){let admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");if(!admin||admin.classList.contains("hidden"))return;if(document.getElementById("inventoryAdminOsBtn"))return;let btn=document.createElement("button");btn.id="inventoryAdminOsBtn";btn.onclick=openProInventoryAdmin;btn.className="fixed bottom-6 left-6 z-[10001] bg-slate-950 hover:bg-slate-800 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.innerHTML='<i class="fa-solid fa-warehouse"></i> Inventory OS';document.body.appendChild(btn)}
+function removeInventoryAdminButtonIfPublic(){let admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal"),btn=document.getElementById("inventoryAdminOsBtn");if(btn&&(!admin||admin.classList.contains("hidden")))btn.remove()}
+document.addEventListener("DOMContentLoaded",()=>{setTimeout(decorateInventoryCards,700);setInterval(()=>{decorateInventoryCards();injectInventoryAdminButton();removeInventoryAdminButtonIfPublic()},1200)});
+document.addEventListener("click",()=>setTimeout(()=>{decorateInventoryCards();injectInventoryAdminButton();removeInventoryAdminButtonIfPublic()},250),true);
 </script>
 
 </body>
