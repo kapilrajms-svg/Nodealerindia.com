@@ -4504,7 +4504,139 @@ function removeRealCarManagerButtonIfPublic(){let admin=document.getElementById(
 document.addEventListener("DOMContentLoaded",function(){ndRebuildLiveInventory();setInterval(function(){injectRealCarManagerButton();removeRealCarManagerButtonIfPublic()},1000)});
 document.addEventListener("click",function(){setTimeout(function(){injectRealCarManagerButton();removeRealCarManagerButtonIfPublic();renderRealCarManagerList()},250)},true);
 </script>
+<script>
+/* =========================
+   NODEALER GOOGLE SHEET CRM
+========================= */
 
+const NODEALER_CRM_WEBHOOK =
+"https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+
+async function sendLeadToCRM(data) {
+
+  try {
+
+    await fetch(NODEALER_CRM_WEBHOOK, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    console.log("Lead saved to CRM");
+
+  } catch (error) {
+
+    console.error("CRM Error:", error);
+
+  }
+
+}
+
+/* =========================
+   AUTO LEAD CAPTURE
+========================= */
+
+function captureNoDealerLead(formType, customerName, phone, interestedCar, notes = "") {
+
+  const leadData = {
+
+    name: customerName || "Unknown",
+
+    phone: phone || "Not Provided",
+
+    source: formType || "Website",
+
+    car: interestedCar || "General Enquiry",
+
+    status: "New Lead",
+
+    notes: notes
+
+  };
+
+  sendLeadToCRM(leadData);
+
+}
+
+/* =========================
+   WEBSITE FORM CONNECTORS
+========================= */
+
+document.addEventListener("submit", function(e) {
+
+  const form = e.target;
+
+  /* PDI FORM */
+  if (form.id === "pdiBookingForm") {
+
+    const customerName =
+      form.querySelector('input[name="name"]')?.value || "";
+
+    const phone =
+      form.querySelector('input[name="phone"]')?.value || "";
+
+    const car =
+      form.querySelector('input[name="car"]')?.value || "";
+
+    captureNoDealerLead(
+      "PDI Request",
+      customerName,
+      phone,
+      car,
+      "Customer submitted PDI request"
+    );
+
+  }
+
+  /* RESERVE FORM */
+  if (form.id === "reserveForm") {
+
+    const customerName =
+      form.querySelector('input[name="name"]')?.value || "";
+
+    const phone =
+      form.querySelector('input[name="phone"]')?.value || "";
+
+    const car =
+      form.querySelector('input[name="car"]')?.value || "";
+
+    captureNoDealerLead(
+      "Reserve Request",
+      customerName,
+      phone,
+      car,
+      "Customer submitted reserve request"
+    );
+
+  }
+
+  /* SELL CAR FORM */
+  if (form.id === "sellCarForm") {
+
+    const customerName =
+      form.querySelector('input[name="name"]')?.value || "";
+
+    const phone =
+      form.querySelector('input[name="phone"]')?.value || "";
+
+    const car =
+      form.querySelector('input[name="carModel"]')?.value || "";
+
+    captureNoDealerLead(
+      "Sell Car",
+      customerName,
+      phone,
+      car,
+      "Customer wants to sell vehicle"
+    );
+
+  }
+
+});
+</script>
 </body>
 </html>
 
