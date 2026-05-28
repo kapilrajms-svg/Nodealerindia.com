@@ -388,18 +388,6 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
     box-shadow: 0 0 0 3px rgba(22,163,74,.12);
 }
 
-
-/* =========================
-   NODEALER ADMIN LOGIN CREDENTIAL FIX
-========================= */
-#manualLeadPanel,
-#manualLeadPanel *,
-#ndLeadViewerBtn {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -1437,7 +1425,7 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
                         <i class="fa-solid fa-fingerprint"></i>
                     </div>
                     <h2 class="text-2xl font-black uppercase tracking-tight">NoDealer Control Core</h2>
-                    <p class="text-xs text-slate-400 mt-1">Identity & Secure IP Access Verification Pipeline</p>
+                    <p class="text-xs text-slate-400 mt-1">Identity & Secure IP Access Verification Pipeline</p><p class="text-[10px] text-green-400 font-bold mt-2">Use: nodealer / NoDealer@2026</p>
                 </div>
                 <div class="space-y-4">
                     <div>
@@ -1880,8 +1868,8 @@ class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:ro
         const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
         const VERIFIED_DESKTOP_IP = "182.69.176.207";
-        const MASTER_USER = "admin";
-        const MASTER_PASS = "Rudraksh@2026";
+        const MASTER_USER = "nodealer";
+        const MASTER_PASS = "NoDealer@2026";
         const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts";
 
         let ATTACHED_BASE64_PHOTOS = [];
@@ -5052,142 +5040,7 @@ function openNdAdminLeadViewerFromTools() {
 }
 </script>
 <!-- NoDealer Premium CRM + Public Safety Upgrade
-     Paste this block just before 
-<script>
-/* =========================
-   NODEALER ADMIN LOGIN CREDENTIAL FIX
-   New login:
-   Username: nodealer
-   Password: NoDealer@2026
-========================= */
-const NODEALER_ADMIN_USERNAME_FINAL = "nodealer";
-const NODEALER_ADMIN_PASSWORD_FINAL = "NoDealer@2026";
-
-function ndFindAdminInput(type) {
-    const inputs = Array.from(document.querySelectorAll("input"));
-    if (type === "password") return inputs.find(i => i.type === "password");
-
-    return inputs.find(i => {
-        const text = ((i.id || "") + " " + (i.name || "") + " " + (i.placeholder || "")).toLowerCase();
-        return i.type !== "password" && (
-            text.includes("user") ||
-            text.includes("admin") ||
-            text.includes("email") ||
-            text.includes("login")
-        );
-    });
-}
-
-function ndOpenAdminWorkspaceFinal() {
-    const portal = document.getElementById("secureAdminPortal");
-    const workspace = document.getElementById("adminWorkspaceView");
-    const preloader = document.getElementById("preloader");
-    const main = document.getElementById("main-content");
-
-    if (preloader) preloader.style.display = "none";
-    if (main) {
-        main.classList.remove("opacity-0");
-        main.style.opacity = "1";
-    }
-
-    document.body.classList.remove("overflow-hidden");
-    document.body.style.overflow = "auto";
-
-    if (portal) portal.classList.add("hidden");
-    if (workspace) workspace.classList.remove("hidden");
-
-    if (typeof injectNdAdminCrmToolsButtonFinal === "function") {
-        setTimeout(injectNdAdminCrmToolsButtonFinal, 200);
-    }
-    if (typeof injectRealCarManagerButton === "function") {
-        setTimeout(injectRealCarManagerButton, 300);
-    }
-}
-
-function ndShowAdminLoginFinal() {
-    const portal = document.getElementById("secureAdminPortal");
-    const preloader = document.getElementById("preloader");
-    const main = document.getElementById("main-content");
-
-    if (preloader) preloader.style.display = "none";
-    if (main) {
-        main.classList.remove("opacity-0");
-        main.style.opacity = "1";
-    }
-
-    document.body.classList.remove("overflow-hidden");
-    document.body.style.overflow = "auto";
-    if (portal) portal.classList.remove("hidden");
-}
-
-function ndTryAdminLoginFinal(event) {
-    if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-
-    const userInput = ndFindAdminInput("username");
-    const passInput = ndFindAdminInput("password");
-
-    const username = (userInput?.value || "").trim();
-    const password = (passInput?.value || "").trim();
-
-    if (username === NODEALER_ADMIN_USERNAME_FINAL && password === NODEALER_ADMIN_PASSWORD_FINAL) {
-        localStorage.setItem("nodealer_admin_logged_in", "true");
-        ndOpenAdminWorkspaceFinal();
-        return true;
-    }
-
-    alert("Invalid admin credentials. Use username: nodealer and password: NoDealer@2026");
-    return false;
-}
-
-function ndAttachAdminLoginFixFinal() {
-    const portal = document.getElementById("secureAdminPortal");
-    if (!portal || portal.dataset.ndLoginFixed === "true") return;
-
-    portal.dataset.ndLoginFixed = "true";
-
-    const forms = portal.querySelectorAll("form");
-    forms.forEach(form => {
-        form.addEventListener("submit", ndTryAdminLoginFinal, true);
-        form.onsubmit = ndTryAdminLoginFinal;
-    });
-
-    const buttons = Array.from(portal.querySelectorAll("button"));
-    buttons.forEach(btn => {
-        const text = (btn.textContent || "").toLowerCase();
-        if (text.includes("login") || text.includes("admin") || text.includes("sign")) {
-            btn.addEventListener("click", ndTryAdminLoginFinal, true);
-            btn.onclick = ndTryAdminLoginFinal;
-        }
-    });
-
-    const passInput = ndFindAdminInput("password");
-    if (passInput) {
-        passInput.addEventListener("keydown", function(e) {
-            if (e.key === "Enter") ndTryAdminLoginFinal(e);
-        }, true);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    ndAttachAdminLoginFixFinal();
-
-    if (window.location.hash.toLowerCase() === "#admin") {
-        ndShowAdminLoginFinal();
-        setTimeout(ndAttachAdminLoginFixFinal, 300);
-    }
-
-    setInterval(ndAttachAdminLoginFixFinal, 1000);
-});
-
-document.addEventListener("click", function() {
-    setTimeout(ndAttachAdminLoginFixFinal, 200);
-}, true);
-</script>
-
-</body>. It hardens admin visibility,
+     Paste this block just before </body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
 
@@ -5366,13 +5219,18 @@ document.addEventListener("click", function() {
   }
 
   window.executeAdminLogin = async function () {
-    const user = $("loginUser")?.value || "";
-    const pass = $("loginPass")?.value || "";
-    const masterUser = window.MASTER_USER || "admin";
-    const masterPass = window.MASTER_PASS || "";
+    const user = ($("loginUser")?.value || "").trim();
+    const pass = ($("loginPass")?.value || "").trim();
 
-    if (user !== masterUser || pass !== masterPass) {
-      alert("Invalid admin credentials.");
+    const allowedLogins = [
+      { user: "nodealer", pass: "NoDealer@2026" },
+      { user: "admin", pass: "Rudraksh@2026" }
+    ];
+
+    const ok = allowedLogins.some(item => item.user === user && item.pass === pass);
+
+    if (!ok) {
+      alert("Invalid admin credentials. Use Username: nodealer and Password: NoDealer@2026");
       return;
     }
 
