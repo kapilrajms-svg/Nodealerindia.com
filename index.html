@@ -412,6 +412,21 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 .nd-admin-crm-input:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
 @media(max-width:768px){.nd-launch-cta-sticky{left:10px;right:10px;bottom:10px;flex-direction:row}.nd-launch-cta-sticky a{flex:1;justify-content:center;padding:14px 10px;font-size:11px}.nd-launch-detail-grid{grid-template-columns:1fr}.nd-launch-detail-hero{min-height:260px}.nd-launch-spec-grid{grid-template-columns:1fr 1fr}}
 
+
+/* NODEALER ADVANCED PDI TRUST UPGRADE */
+#pdi-section-old-hidden{display:none!important}
+.nd-pdi-hero{background:radial-gradient(circle at top left,rgba(37,99,235,.30),transparent 34%),radial-gradient(circle at bottom right,rgba(245,158,11,.18),transparent 38%),#020617;color:#fff;position:relative;overflow:hidden}
+.nd-pdi-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:20px;backdrop-filter:blur(14px)}
+.nd-pdi-white-card{background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:22px;box-shadow:0 18px 50px rgba(15,23,42,.08)}
+.nd-pdi-check-pill{border:1px solid #e2e8f0;background:#f8fafc;border-radius:999px;padding:10px 12px;font-size:11px;font-weight:900;text-transform:uppercase;color:#334155;display:inline-flex;align-items:center;gap:7px}
+.nd-pdi-report-preview{background:linear-gradient(180deg,#eff6ff,#fff);border:1px solid #bfdbfe;border-radius:30px;overflow:hidden;box-shadow:0 25px 70px rgba(37,99,235,.12)}
+.nd-pdi-report-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid #e2e8f0;font-size:12px;font-weight:800}
+.nd-pdi-good{color:#16a34a}.nd-pdi-bad{color:#dc2626}
+.nd-pdi-package{border:1px solid #e2e8f0;background:#fff;border-radius:28px;padding:22px}.nd-pdi-package.featured{border-color:#f59e0b;box-shadow:0 18px 60px rgba(245,158,11,.18)}
+.nd-pdi-step{background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:18px}
+.nd-pdi-floating-badge{position:absolute;top:16px;right:16px;background:#f59e0b;color:#0f172a;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:900;text-transform:uppercase}
+@media(max-width:768px){.nd-pdi-report-row{grid-template-columns:1fr;gap:4px}.nd-pdi-floating-badge{position:static;display:inline-flex;margin-bottom:12px}}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -888,7 +903,100 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
   </div>
 </section>
 
-<section id="pdi-section" class="bg-slate-950 text-white py-20 relative overflow-hidden">
+
+<!-- NODEALER ADVANCED PDI SECTION -->
+<section id="pdi-section" class="nd-pdi-hero py-20">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-7 space-y-7">
+        <span class="inline-flex items-center gap-2 bg-amber-500/10 text-amber-300 text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full border border-amber-500/20"><i class="fa-solid fa-shield-halved"></i> NoDealer Advanced PDI</span>
+        <div>
+          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">Don’t Buy Blind. Get A <span class="text-amber-400">Report-Style PDI</span> Before Payment.</h2>
+          <p class="text-slate-300 text-sm md:text-base max-w-2xl leading-relaxed mt-5 font-semibold">Book an inspection request for used or new cars. Our PDI format covers ownership, legal, exterior, tyres, engine, transmission, electricals, interiors, AC, suspension, brakes and estimated repair red flags.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="nd-pdi-card"><p class="text-3xl font-black">300+</p><p class="text-[10px] uppercase font-black text-slate-400">Report Format Checks</p></div>
+          <div class="nd-pdi-card"><p class="text-3xl font-black">45 Min</p><p class="text-[10px] uppercase font-black text-slate-400">Typical On-site Review</p></div>
+          <div class="nd-pdi-card"><p class="text-3xl font-black">30 Min</p><p class="text-[10px] uppercase font-black text-slate-400">Digital Summary Target</p></div>
+          <div class="nd-pdi-card"><p class="text-3xl font-black">6 Core</p><p class="text-[10px] uppercase font-black text-slate-400">Inspection Areas</p></div>
+        </div>
+        <div class="nd-pdi-card">
+          <h3 class="text-2xl font-black uppercase mb-4">What We Check</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-id-card text-blue-600"></i> Ownership & Fitness</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-gavel text-red-600"></i> Challan / Legal Red Flags</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-car-burst text-orange-600"></i> Accident / Repaint Signs</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-car-battery text-green-600"></i> Engine & Transmission</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-tire text-slate-700"></i> Exterior & Tyres</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-bolt text-yellow-600"></i> Electricals & Interiors</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-fan text-blue-500"></i> Air Conditioning</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-road text-purple-600"></i> Suspension & Brakes</span>
+            <span class="nd-pdi-check-pill"><i class="fa-solid fa-tags text-amber-600"></i> Fair Value Estimate</span>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="nd-pdi-step"><p class="text-blue-600 text-3xl font-black">01</p><h4 class="font-black uppercase mt-2 text-slate-950">Book Inspection</h4><p class="text-xs text-slate-500 font-semibold mt-1">Share car details, location and preferred slot.</p></div>
+          <div class="nd-pdi-step"><p class="text-amber-600 text-3xl font-black">02</p><h4 class="font-black uppercase mt-2 text-slate-950">Car Gets Checked</h4><p class="text-xs text-slate-500 font-semibold mt-1">Checklist covers physical + document points.</p></div>
+          <div class="nd-pdi-step"><p class="text-green-600 text-3xl font-black">03</p><h4 class="font-black uppercase mt-2 text-slate-950">Get Report Summary</h4><p class="text-xs text-slate-500 font-semibold mt-1">You receive findings and buying guidance.</p></div>
+        </div>
+      </div>
+      <div class="lg:col-span-5 space-y-5">
+        <div class="nd-pdi-report-preview">
+          <div class="bg-blue-600 text-white p-5 relative"><span class="nd-pdi-floating-badge">Sample Report Preview</span><p class="text-[10px] uppercase text-blue-100 font-black">NoDealer Car Truth Layer</p><h3 class="text-2xl font-black uppercase mt-1">Inspection Report Format</h3><p class="text-xs text-blue-100 font-semibold mt-1">Transparent category-wise report style for buyer confidence.</p></div>
+          <div class="p-5 bg-white text-slate-950">
+            <div class="grid grid-cols-3 gap-3 mb-4">
+              <div class="bg-green-50 border border-green-100 rounded-2xl p-3 text-center"><p class="text-2xl font-black text-green-700">4.2/5</p><p class="text-[10px] font-black uppercase text-green-700">Health</p></div>
+              <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3 text-center"><p class="text-2xl font-black text-blue-700">2</p><p class="text-[10px] font-black uppercase text-blue-700">Owners</p></div>
+              <div class="bg-red-50 border border-red-100 rounded-2xl p-3 text-center"><p class="text-2xl font-black text-red-700">4</p><p class="text-[10px] font-black uppercase text-red-700">Alerts</p></div>
+            </div>
+            <div class="nd-pdi-report-row"><span>Exterior & Tyres</span><span class="nd-pdi-good">26 Perfect</span><span class="nd-pdi-bad">25 Issues</span></div>
+            <div class="nd-pdi-report-row"><span>Engine & Transmission</span><span class="nd-pdi-good">11 Perfect</span><span class="nd-pdi-bad">1 Issue</span></div>
+            <div class="nd-pdi-report-row"><span>Electricals & Interiors</span><span class="nd-pdi-good">10 Perfect</span><span class="nd-pdi-bad">0 Issues</span></div>
+            <div class="nd-pdi-report-row"><span>Steering, Suspension & Brakes</span><span class="nd-pdi-good">2 Perfect</span><span class="nd-pdi-bad">1 Issue</span></div>
+            <div class="nd-pdi-report-row"><span>AC & Comfort</span><span class="nd-pdi-good">3 Perfect</span><span class="nd-pdi-bad">0 Issues</span></div>
+            <button onclick="openPdiSampleReportModal()" class="mt-5 w-full bg-slate-950 text-white rounded-2xl py-4 text-xs font-black uppercase">View Sample Report Sections</button>
+          </div>
+        </div>
+        <div class="bg-white p-6 md:p-7 rounded-[2rem] border border-white/10 w-full shadow-2xl text-slate-950">
+          <div class="mb-5"><span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Inspection Booking</span><h3 class="text-2xl font-black uppercase tracking-tight mt-3 flex items-center gap-2"><i class="fa-solid fa-calendar-check text-amber-500"></i> Book Your PDI</h3><p class="text-xs text-slate-500 mt-1">Request goes directly to NoDealer CRM + Google Sheet.</p></div>
+          <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3"><input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"><input type="tel" id="pdiPhone" required placeholder="Mobile Number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"></div>
+            <input type="text" id="pdiCarDetails" required placeholder="Car Name / Model / Variant" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500">
+            <div class="grid grid-cols-2 gap-3"><input type="text" id="pdiCity" required placeholder="City" value="Gurugram" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"><input type="text" id="pdiLocation" required placeholder="Car Location / Area" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"></div>
+            <div class="grid grid-cols-2 gap-3"><select id="pdiType" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500"><option>Used Car PDI</option><option>New Car Delivery PDI</option><option>Document + Physical PDI</option></select><select id="pdiPackage" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500"><option>Essential</option><option>Advanced Report</option><option>Premium + Photos</option></select></div>
+            <textarea id="pdiNotes" placeholder="Any concern? Accident, repaint, engine noise, loan, challan, ownership, etc." class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"></textarea>
+            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-4 rounded-2xl shadow-lg uppercase text-sm">Submit PDI Request</button>
+            <div class="grid grid-cols-2 gap-3"><a href="tel:+917838335143" class="bg-slate-950 text-white text-center rounded-2xl py-3 text-xs font-black uppercase"><i class="fa-solid fa-phone"></i> Call PDI Team</a><a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20book%20a%20PDI." target="_blank" class="bg-green-600 text-white text-center rounded-2xl py-3 text-xs font-black uppercase"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="mt-10 grid md:grid-cols-3 gap-4 text-slate-950">
+      <div class="nd-pdi-package"><h3 class="font-black text-xl uppercase">Essential PDI</h3><p class="text-xs text-slate-500 font-semibold mt-1">Physical condition + buyer risk summary.</p><ul class="text-sm font-bold text-slate-600 mt-4 space-y-2"><li>✓ Exterior & tyres</li><li>✓ Engine basic check</li><li>✓ Interior & AC</li><li>✓ Photo notes</li></ul></div>
+      <div class="nd-pdi-package featured"><span class="bg-amber-500 text-slate-950 px-3 py-1 rounded-full text-[10px] font-black uppercase">Recommended</span><h3 class="font-black text-xl uppercase mt-3">Advanced Report</h3><p class="text-xs text-slate-500 font-semibold mt-1">Best for serious buyers before token/payment.</p><ul class="text-sm font-bold text-slate-600 mt-4 space-y-2"><li>✓ 300+ format checklist</li><li>✓ Ownership & fitness points</li><li>✓ Legal / challan alert notes</li><li>✓ Repair estimate notes</li></ul></div>
+      <div class="nd-pdi-package"><h3 class="font-black text-xl uppercase">Premium + Guidance</h3><p class="text-xs text-slate-500 font-semibold mt-1">Inspection + negotiation and deal guidance.</p><ul class="text-sm font-bold text-slate-600 mt-4 space-y-2"><li>✓ Advanced report</li><li>✓ Market value note</li><li>✓ Buying decision call</li><li>✓ Document transfer guidance</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<div id="pdiSampleReportModal" class="hidden fixed inset-0 z-[100004] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4"><div><p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Transparency Preview</p><h2 class="text-3xl font-black uppercase">Sample PDI Report Sections</h2><p class="text-sm text-slate-400 mt-1">Sections a buyer should expect in a serious inspection report.</p></div><button onclick="closePdiSampleReportModal()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button></div>
+    <div class="p-6 grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-slate-950">
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-car text-blue-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Vehicle Health Summary</h3><p class="text-xs text-slate-500 font-semibold mt-2">Overall rating, odometer, estimated value, ownership and fitness validity.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-scale-balanced text-red-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Legal & Challan History</h3><p class="text-xs text-slate-500 font-semibold mt-2">Pending challans, legal cases and red flags.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-images text-purple-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Vehicle Images</h3><p class="text-xs text-slate-500 font-semibold mt-2">Front, rear, side, engine bay, tyres, odometer, interior and boot images.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-car-burst text-amber-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Exterior & Tyres</h3><p class="text-xs text-slate-500 font-semibold mt-2">Dents, scratches, repaint, panel damage and tyre life.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-gears text-green-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Engine & Transmission</h3><p class="text-xs text-slate-500 font-semibold mt-2">Engine sound, smoke, clutch, gear shifting, fluids and battery.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-bolt text-yellow-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Electricals & Interiors</h3><p class="text-xs text-slate-500 font-semibold mt-2">Windows, airbags, music system, seats, sensors and camera.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-road text-slate-700 text-3xl"></i><h3 class="font-black uppercase mt-3">Suspension & Brakes</h3><p class="text-xs text-slate-500 font-semibold mt-2">Steering, suspension, brake response and repair notes.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-fan text-cyan-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Air Conditioning</h3><p class="text-xs text-slate-500 font-semibold mt-2">Cooling, heater and climate control check.</p></div>
+      <div class="nd-pdi-white-card"><i class="fa-solid fa-car-side text-indigo-600 text-3xl"></i><h3 class="font-black uppercase mt-3">OEM Specs & Features</h3><p class="text-xs text-slate-500 font-semibold mt-2">Infotainment, dimensions, comfort and feature availability.</p></div>
+    </div>
+  </div>
+</div>
+
+<section id="pdi-section-old-hidden" class="hidden" class="bg-slate-950 text-white py-20 relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.26),transparent_42%),radial-gradient(circle_at_bottom_left,rgba(245,158,11,0.20),transparent_38%)]"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="grid lg:grid-cols-12 gap-8 items-start">
@@ -5169,6 +5277,30 @@ document.addEventListener("DOMContentLoaded",function(){
   setInterval(function(){ndFinalHidePublicAdminLeaks();injectNdAdminCrmToolsButtonFinal();ndImproveCarButtons();},1000);
 });
 document.addEventListener("click",function(){setTimeout(function(){injectNdAdminCrmToolsButtonFinal();ndImproveCarButtons();},250);},true);
+</script>
+
+
+<script>
+/* NODEALER ADVANCED PDI SECTION SCRIPT */
+function openPdiSampleReportModal(){document.getElementById("pdiSampleReportModal")?.classList.remove("hidden");}
+function closePdiSampleReportModal(){document.getElementById("pdiSampleReportModal")?.classList.add("hidden");}
+(function(){
+  const originalHandlePdiSubmit=window.handlePdiSubmit;
+  window.handlePdiSubmit=async function(event){
+    const pdiType=document.getElementById("pdiType")?.value||"";
+    const pdiPackage=document.getElementById("pdiPackage")?.value||"";
+    const pdiNotes=document.getElementById("pdiNotes")?.value||"";
+    if(typeof originalHandlePdiSubmit==="function"){
+      const notesField=document.getElementById("pdiNotes");
+      if(notesField) notesField.value=[pdiType,pdiPackage,pdiNotes].filter(Boolean).join(" | ");
+      return originalHandlePdiSubmit(event);
+    }
+    event.preventDefault();
+    const data={type:"PDI Request",name:document.getElementById("pdiName")?.value||"",phone:document.getElementById("pdiPhone")?.value||"",car:document.getElementById("pdiCarDetails")?.value||"",city:document.getElementById("pdiCity")?.value||"",location:document.getElementById("pdiLocation")?.value||"",notes:[pdiType,pdiPackage,pdiNotes].filter(Boolean).join(" | "),source:"Advanced PDI Section",status:"New Lead",date:new Date().toLocaleString()};
+    await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+    alert("PDI request submitted successfully. Our team will contact you.");
+  };
+})();
 </script>
 
 </body>. It hardens admin visibility,
