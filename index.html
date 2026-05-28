@@ -1425,7 +1425,7 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
                         <i class="fa-solid fa-fingerprint"></i>
                     </div>
                     <h2 class="text-2xl font-black uppercase tracking-tight">NoDealer Control Core</h2>
-                    <p class="text-xs text-slate-400 mt-1">Identity & Secure IP Access Verification Pipeline</p><p class="text-[10px] text-green-400 font-bold mt-2">Use: nodealer / NoDealer@2026</p>
+                    <p class="text-xs text-slate-400 mt-1">Identity & Secure IP Access Verification Pipeline</p>
                 </div>
                 <div class="space-y-4">
                     <div>
@@ -1869,7 +1869,9 @@ class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:ro
 
         const VERIFIED_DESKTOP_IP = "182.69.176.207";
         const MASTER_USER = "nodealer";
+        window.MASTER_USER = "nodealer";
         const MASTER_PASS = "NoDealer@2026";
+        window.MASTER_PASS = "NoDealer@2026";
         const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts";
 
         let ATTACHED_BASE64_PHOTOS = [];
@@ -5040,7 +5042,43 @@ function openNdAdminLeadViewerFromTools() {
 }
 </script>
 <!-- NoDealer Premium CRM + Public Safety Upgrade
-     Paste this block just before </body>. It hardens admin visibility,
+     Paste this block just before 
+<script>
+/* ABSOLUTE FINAL ADMIN LOGIN FIX */
+window.MASTER_USER = "nodealer";
+window.MASTER_PASS = "NoDealer@2026";
+window.executeAdminLogin = async function () {
+  const user = (document.getElementById("loginUser")?.value || "").trim();
+  const pass = (document.getElementById("loginPass")?.value || "").trim();
+
+  const ok =
+    (user === "nodealer" && pass === "NoDealer@2026") ||
+    (user === "admin" && pass === "Rudraksh@2026");
+
+  if (!ok) {
+    alert("Invalid admin credentials. Use Username: nodealer and Password: NoDealer@2026");
+    return;
+  }
+
+  try {
+    sessionStorage.setItem("nodealer_admin_session_v2", JSON.stringify({ ok: true, at: Date.now() }));
+  } catch(e) {}
+
+  document.getElementById("adminAuthView")?.classList.add("hidden");
+  document.getElementById("adminWorkspaceView")?.classList.remove("hidden");
+  document.body.classList.remove("overflow-hidden");
+  document.body.style.overflow = "auto";
+
+  if (typeof setAdminUnlocked === "function") setAdminUnlocked(true);
+  if (typeof migrateLocalLeadsToSupabase === "function") await migrateLocalLeadsToSupabase();
+  if (typeof loadAdminInventoryDirectory === "function") await loadAdminInventoryDirectory();
+  if (typeof loadAdminLeadsDashboard === "function") await loadAdminLeadsDashboard();
+  if (typeof updateActionCenter === "function") updateActionCenter();
+  if (typeof injectNdAdminCrmToolsButtonFinal === "function") setTimeout(injectNdAdminCrmToolsButtonFinal, 300);
+};
+</script>
+
+</body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
 
@@ -5222,12 +5260,9 @@ function openNdAdminLeadViewerFromTools() {
     const user = ($("loginUser")?.value || "").trim();
     const pass = ($("loginPass")?.value || "").trim();
 
-    const allowedLogins = [
-      { user: "nodealer", pass: "NoDealer@2026" },
-      { user: "admin", pass: "Rudraksh@2026" }
-    ];
-
-    const ok = allowedLogins.some(item => item.user === user && item.pass === pass);
+    const ok =
+      (user === "nodealer" && pass === "NoDealer@2026") ||
+      (user === "admin" && pass === "Rudraksh@2026");
 
     if (!ok) {
       alert("Invalid admin credentials. Use Username: nodealer and Password: NoDealer@2026");
