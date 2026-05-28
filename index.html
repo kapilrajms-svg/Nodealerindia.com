@@ -388,6 +388,30 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
     box-shadow: 0 0 0 3px rgba(22,163,74,.12);
 }
 
+
+/* NODEALER JUNE 1 LAUNCH POLISH */
+#manualLeadPanel,#manualLeadPanel *,#ndLeadViewerBtn,#analyticsFloatingBtn{
+display:none!important;visibility:hidden!important;pointer-events:none!important}
+.nd-launch-trust-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:16px;display:flex;gap:12px;align-items:flex-start;transition:.25s}
+.nd-launch-trust-card:hover{background:#fff;transform:translateY(-2px);box-shadow:0 16px 40px rgba(15,23,42,.08)}
+.nd-launch-cta-sticky{position:fixed;right:18px;bottom:18px;z-index:99990;display:flex;flex-direction:column;gap:10px}
+.nd-launch-cta-sticky a{border-radius:999px;padding:13px 16px;color:#fff;font-size:12px;font-weight:900;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;box-shadow:0 18px 45px rgba(15,23,42,.22)}
+.nd-launch-whatsapp{background:#16a34a}.nd-launch-call{background:#0f172a}
+.nd-launch-process{background:#020617;color:white;padding:70px 0;position:relative;overflow:hidden}
+.nd-launch-process:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(37,99,235,.28),transparent 35%),radial-gradient(circle at bottom left,rgba(229,57,53,.20),transparent 35%)}
+.nd-launch-step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:22px;position:relative;z-index:1}
+.nd-launch-detail-modal{position:fixed;inset:0;z-index:100003;background:rgba(2,6,23,.82);backdrop-filter:blur(10px);padding:18px;overflow-y:auto}
+.nd-launch-detail-card{max-width:1100px;margin:0 auto;background:#fff;border-radius:32px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.35)}
+.nd-launch-detail-grid{display:grid;grid-template-columns:1.1fr .9fr}
+.nd-launch-detail-hero{min-height:420px;background:#f1f5f9;object-fit:cover;width:100%;height:100%}
+.nd-launch-spec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.nd-launch-spec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:12px}
+.nd-launch-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+#ndAdminCrmToolsBtn{display:none}
+.nd-admin-crm-input{width:100%;padding:13px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
+.nd-admin-crm-input:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+@media(max-width:768px){.nd-launch-cta-sticky{left:10px;right:10px;bottom:10px;flex-direction:row}.nd-launch-cta-sticky a{flex:1;justify-content:center;padding:14px 10px;font-size:11px}.nd-launch-detail-grid{grid-template-columns:1fr}.nd-launch-detail-hero{min-height:260px}.nd-launch-spec-grid{grid-template-columns:1fr 1fr}}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -581,7 +605,20 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
         </section>
 
 
-        <section id="service-command-center" class="bg-white py-14 border-b border-slate-100">
+        
+<!-- NODEALER LAUNCH TRUST STRIP -->
+<section id="ndLaunchTrustStrip" class="py-10 bg-white border-y border-slate-200">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="nd-launch-trust-card"><i class="fa-solid fa-user-shield text-blue-600 text-2xl"></i><div><h3 class="font-black text-sm uppercase">Verified Owner Flow</h3><p class="text-xs text-slate-500 font-semibold mt-1">Deal directly with owner, with NoDealer support.</p></div></div>
+      <div class="nd-launch-trust-card"><i class="fa-solid fa-clipboard-check text-green-600 text-2xl"></i><div><h3 class="font-black text-sm uppercase">Inspection First</h3><p class="text-xs text-slate-500 font-semibold mt-1">Book PDI before payment and reduce buying risk.</p></div></div>
+      <div class="nd-launch-trust-card"><i class="fa-solid fa-file-shield text-amber-600 text-2xl"></i><div><h3 class="font-black text-sm uppercase">RC & Insurance Help</h3><p class="text-xs text-slate-500 font-semibold mt-1">Document guidance before final deal closure.</p></div></div>
+      <div class="nd-launch-trust-card"><i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i><div><h3 class="font-black text-sm uppercase">Fast Human Support</h3><p class="text-xs text-slate-500 font-semibold mt-1">Call or WhatsApp for quick help choosing a car.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="service-command-center" class="bg-white py-14 border-b border-slate-100">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
                     <div>
@@ -833,7 +870,25 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
             </div>
         </section>
 
-        <section id="pdi-section" class="bg-slate-950 text-white py-20 relative overflow-hidden">
+        
+<!-- NODEALER LAUNCH CUSTOMER FLOW -->
+<section id="ndLaunchCustomerFlow" class="nd-launch-process">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <span class="bg-white/10 text-blue-200 px-4 py-2 rounded-full text-[10px] font-black uppercase">How Buying Works</span>
+      <h2 class="text-3xl md:text-5xl font-black uppercase mt-4">Simple Cars24-Style Flow, But Direct Owner Deals</h2>
+      <p class="text-slate-300 font-semibold mt-3">Browse, verify, inspect, negotiate and close confidently with NoDealer support.</p>
+    </div>
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="nd-launch-step"><p class="text-blue-400 text-3xl font-black">01</p><h3 class="font-black uppercase mt-3">Browse Cars</h3><p class="text-xs text-slate-400 mt-2 font-semibold">Use filters for budget, brand, fuel and transmission.</p></div>
+      <div class="nd-launch-step"><p class="text-green-400 text-3xl font-black">02</p><h3 class="font-black uppercase mt-3">Talk To Us</h3><p class="text-xs text-slate-400 mt-2 font-semibold">WhatsApp or call for car availability and owner details.</p></div>
+      <div class="nd-launch-step"><p class="text-amber-400 text-3xl font-black">03</p><h3 class="font-black uppercase mt-3">Book PDI</h3><p class="text-xs text-slate-400 mt-2 font-semibold">Inspect engine, body, tyres, papers and accident signs.</p></div>
+      <div class="nd-launch-step"><p class="text-red-400 text-3xl font-black">04</p><h3 class="font-black uppercase mt-3">Close Safely</h3><p class="text-xs text-slate-400 mt-2 font-semibold">Negotiate directly and get document-transfer guidance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pdi-section" class="bg-slate-950 text-white py-20 relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.26),transparent_42%),radial-gradient(circle_at_bottom_left,rgba(245,158,11,0.20),transparent_38%)]"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="grid lg:grid-cols-12 gap-8 items-start">
@@ -5043,39 +5098,77 @@ function openNdAdminLeadViewerFromTools() {
 </script>
 <!-- NoDealer Premium CRM + Public Safety Upgrade
      Paste this block just before 
+
+
+
+<!-- NODEALER LAUNCH STICKY CUSTOMER ACTIONS -->
+<div id="ndLaunchStickyActions" class="nd-launch-cta-sticky">
+  <a class="nd-launch-whatsapp" href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20know%20about%20available%20cars." target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+  <a class="nd-launch-call" href="tel:+917838335143"><i class="fa-solid fa-phone"></i> Call Now</a>
+</div>
+
+
 <script>
-/* ABSOLUTE FINAL ADMIN LOGIN FIX */
-window.MASTER_USER = "nodealer";
-window.MASTER_PASS = "NoDealer@2026";
-window.executeAdminLogin = async function () {
-  const user = (document.getElementById("loginUser")?.value || "").trim();
-  const pass = (document.getElementById("loginPass")?.value || "").trim();
+/* NODEALER JUNE 1 FINAL LAUNCH SCRIPT */
+window.MASTER_USER="nodealer";
+window.MASTER_PASS="NoDealer@2026";
+const ND_ADMIN_CRM_WEBHOOK_FINAL="https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
 
-  const ok =
-    (user === "nodealer" && pass === "NoDealer@2026") ||
-    (user === "admin" && pass === "Rudraksh@2026");
-
-  if (!ok) {
-    alert("Invalid admin credentials. Use Username: nodealer and Password: NoDealer@2026");
-    return;
-  }
-
-  try {
-    sessionStorage.setItem("nodealer_admin_session_v2", JSON.stringify({ ok: true, at: Date.now() }));
-  } catch(e) {}
-
+window.executeAdminLogin=async function(){
+  const user=(document.getElementById("loginUser")?.value||"").trim();
+  const pass=(document.getElementById("loginPass")?.value||"").trim();
+  if(user!=="nodealer"||pass!=="NoDealer@2026"){alert("Invalid admin credentials. Use Username: nodealer and Password: NoDealer@2026");return;}
+  try{sessionStorage.setItem("nodealer_admin_session_v2",JSON.stringify({ok:true,at:Date.now()}));}catch(e){}
   document.getElementById("adminAuthView")?.classList.add("hidden");
   document.getElementById("adminWorkspaceView")?.classList.remove("hidden");
   document.body.classList.remove("overflow-hidden");
-  document.body.style.overflow = "auto";
-
-  if (typeof setAdminUnlocked === "function") setAdminUnlocked(true);
-  if (typeof migrateLocalLeadsToSupabase === "function") await migrateLocalLeadsToSupabase();
-  if (typeof loadAdminInventoryDirectory === "function") await loadAdminInventoryDirectory();
-  if (typeof loadAdminLeadsDashboard === "function") await loadAdminLeadsDashboard();
-  if (typeof updateActionCenter === "function") updateActionCenter();
-  if (typeof injectNdAdminCrmToolsButtonFinal === "function") setTimeout(injectNdAdminCrmToolsButtonFinal, 300);
+  document.body.style.overflow="auto";
+  if(typeof setAdminUnlocked==="function")setAdminUnlocked(true);
+  if(typeof migrateLocalLeadsToSupabase==="function")await migrateLocalLeadsToSupabase();
+  if(typeof loadAdminInventoryDirectory==="function")await loadAdminInventoryDirectory();
+  if(typeof loadAdminLeadsDashboard==="function")await loadAdminLeadsDashboard();
+  if(typeof updateActionCenter==="function")updateActionCenter();
+  if(typeof injectNdAdminCrmToolsButtonFinal==="function")setTimeout(injectNdAdminCrmToolsButtonFinal,300);
 };
+
+function ndFinalHidePublicAdminLeaks(){
+  const oldPanel=document.getElementById("manualLeadPanel");if(oldPanel){oldPanel.style.display="none";oldPanel.style.visibility="hidden";oldPanel.style.pointerEvents="none";}
+  const oldLeadBtn=document.getElementById("ndLeadViewerBtn");if(oldLeadBtn)oldLeadBtn.style.display="none";
+}
+function ndFinalIsAdminVisible(){const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");return !!(admin&&!admin.classList.contains("hidden"));}
+function openNdAdminCrmTools(){document.getElementById("ndAdminCrmToolsModal")?.classList.remove("hidden");}
+function closeNdAdminCrmTools(){document.getElementById("ndAdminCrmToolsModal")?.classList.add("hidden");}
+function openNdAdminLeadViewerFromTools(){const tools=document.getElementById("ndAdminCrmToolsModal");if(tools)tools.classList.add("hidden");setTimeout(function(){if(typeof openNdLeadViewer==="function")openNdLeadViewer();else alert("Lead Viewer is still loading. Refresh once and try again.");},180);}
+async function submitNdAdminManualLead(){
+  const data={type:document.getElementById("ndManualLeadType")?.value||"Manual Lead",name:document.getElementById("ndManualLeadName")?.value||"",phone:document.getElementById("ndManualLeadPhone")?.value||"",car:document.getElementById("ndManualLeadCar")?.value||"",priority:document.getElementById("ndManualLeadPriority")?.value||"Hot",notes:document.getElementById("ndManualLeadNotes")?.value||"",source:"Admin Manual Entry",status:"New Lead",date:new Date().toLocaleString()};
+  if(!data.phone&&!data.name){alert("Please enter at least customer name or phone number.");return;}
+  await fetch(ND_ADMIN_CRM_WEBHOOK_FINAL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+  ["ndManualLeadName","ndManualLeadPhone","ndManualLeadCar","ndManualLeadNotes"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
+  alert("Lead saved successfully to CRM!");
+  if(typeof loadNdCrmLeads==="function")setTimeout(loadNdCrmLeads,1200);
+}
+function injectNdAdminCrmToolsButtonFinal(){
+  ndFinalHidePublicAdminLeaks();
+  const existing=document.getElementById("ndAdminCrmToolsBtn");
+  if(!ndFinalIsAdminVisible()){if(existing)existing.remove();return;}
+  if(existing)return;
+  const btn=document.createElement("button");btn.id="ndAdminCrmToolsBtn";btn.onclick=openNdAdminCrmTools;btn.className="fixed bottom-40 left-6 z-[10001] bg-green-600 hover:bg-green-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.innerHTML='<i class="fa-solid fa-address-book"></i> CRM Tools';document.body.appendChild(btn);
+}
+function ndImproveCarButtons(){
+  Array.from(document.querySelectorAll("#carGrid > *")).forEach(card=>{
+    if(card.dataset.ndLaunchImproved==="true")return;card.dataset.ndLaunchImproved="true";
+    const title=card.querySelector("h3,h2,h4")?.textContent?.trim()||"this car";
+    const actions=document.createElement("div");actions.className="grid grid-cols-2 gap-2 mt-3 nd-launch-added-actions";
+    actions.innerHTML='<a href="https://wa.me/917838335143?text='+encodeURIComponent("Hi NoDealer, I am interested in "+title)+'" target="_blank" class="bg-green-600 text-white text-center rounded-xl px-3 py-3 text-[10px] font-black uppercase"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><a href="tel:+917838335143" class="bg-slate-950 text-white text-center rounded-xl px-3 py-3 text-[10px] font-black uppercase"><i class="fa-solid fa-phone"></i> Call</a>';
+    if(!card.querySelector(".nd-launch-added-actions"))card.appendChild(actions);
+  });
+}
+document.addEventListener("DOMContentLoaded",function(){
+  ndFinalHidePublicAdminLeaks();
+  if(window.location.hash.toLowerCase()==="#admin"){const preloader=document.getElementById("preloader");const main=document.getElementById("main-content");if(preloader)preloader.style.display="none";if(main){main.classList.remove("opacity-0");main.style.opacity="1";}document.body.classList.remove("overflow-hidden");document.body.style.overflow="auto";document.getElementById("secureAdminPortal")?.classList.remove("hidden");}
+  setInterval(function(){ndFinalHidePublicAdminLeaks();injectNdAdminCrmToolsButtonFinal();ndImproveCarButtons();},1000);
+});
+document.addEventListener("click",function(){setTimeout(function(){injectNdAdminCrmToolsButtonFinal();ndImproveCarButtons();},250);},true);
 </script>
 
 </body>. It hardens admin visibility,
