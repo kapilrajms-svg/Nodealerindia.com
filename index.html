@@ -427,6 +427,78 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 .nd-pdi-floating-badge{position:absolute;top:16px;right:16px;background:#f59e0b;color:#0f172a;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:900;text-transform:uppercase}
 @media(max-width:768px){.nd-pdi-report-row{grid-template-columns:1fr;gap:4px}.nd-pdi-floating-badge{position:static;display:inline-flex;margin-bottom:12px}}
 
+
+/* =========================
+   NODEALER PDI PHASE 2 REPORT BUILDER
+========================= */
+#ndPdiReportBuilderBtn { display:none; }
+.nd-pdi-builder-input {
+    width:100%;
+    padding:12px;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    font-size:13px;
+    font-weight:700;
+    outline:none;
+}
+.nd-pdi-builder-input:focus {
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+.nd-pdi-report-paper {
+    width: 210mm;
+    max-width: 100%;
+    margin: 0 auto;
+    background: white;
+    color:#0f172a;
+    box-shadow: 0 20px 80px rgba(15,23,42,.18);
+}
+.nd-pdi-report-section {
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+    padding:14px;
+    background:#fff;
+}
+.nd-pdi-report-table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:12px;
+}
+.nd-pdi-report-table th {
+    background:#eff6ff;
+    color:#0f172a;
+    text-align:left;
+    padding:10px;
+    font-weight:900;
+    border-bottom:1px solid #dbeafe;
+}
+.nd-pdi-report-table td {
+    padding:9px 10px;
+    border-bottom:1px solid #f1f5f9;
+    font-weight:700;
+}
+.nd-pdi-ok { color:#16a34a; font-weight:900; }
+.nd-pdi-issue { color:#dc2626; font-weight:900; }
+.nd-pdi-warn { color:#f59e0b; font-weight:900; }
+@media print {
+    body * { visibility: hidden !important; }
+    #ndPdiPrintableReport, #ndPdiPrintableReport * { visibility: visible !important; }
+    #ndPdiPrintableReport {
+        position:absolute !important;
+        left:0 !important;
+        top:0 !important;
+        width:100% !important;
+        background:white !important;
+        padding:0 !important;
+    }
+    .nd-no-print { display:none !important; }
+    .nd-pdi-report-paper {
+        width:100% !important;
+        box-shadow:none !important;
+        margin:0 !important;
+    }
+}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -5301,6 +5373,235 @@ function closePdiSampleReportModal(){document.getElementById("pdiSampleReportMod
     alert("PDI request submitted successfully. Our team will contact you.");
   };
 })();
+</script>
+
+
+<!-- NODEALER PDI PHASE 2 REPORT BUILDER -->
+<div id="ndPdiReportBuilderModal" class="hidden fixed inset-0 z-[100006] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl nd-no-print">
+    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
+      <div>
+        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer PDI Phase 2</p>
+        <h2 class="text-3xl font-black uppercase">Inspection Report Builder</h2>
+        <p class="text-sm text-slate-400 mt-1">Create branded PDI reports and print/save as PDF.</p>
+      </div>
+      <button onclick="closeNdPdiReportBuilder()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+    </div>
+
+    <div class="p-6 grid lg:grid-cols-2 gap-6">
+      <div class="bg-slate-50 border rounded-[2rem] p-5">
+        <h3 class="text-xl font-black uppercase text-slate-950 mb-4">Vehicle & Customer Details</h3>
+        <div class="grid md:grid-cols-2 gap-3">
+          <input id="pdiReportCustomer" class="nd-pdi-builder-input" placeholder="Customer Name">
+          <input id="pdiReportPhone" class="nd-pdi-builder-input" placeholder="Customer Phone">
+          <input id="pdiReportCar" class="nd-pdi-builder-input" placeholder="Car Name / Model">
+          <input id="pdiReportVariant" class="nd-pdi-builder-input" placeholder="Variant">
+          <input id="pdiReportYear" class="nd-pdi-builder-input" placeholder="Year">
+          <input id="pdiReportFuel" class="nd-pdi-builder-input" placeholder="Fuel">
+          <input id="pdiReportTransmission" class="nd-pdi-builder-input" placeholder="Transmission">
+          <input id="pdiReportKm" class="nd-pdi-builder-input" placeholder="KM Driven">
+          <input id="pdiReportOwner" class="nd-pdi-builder-input" placeholder="Ownership No.">
+          <input id="pdiReportReg" class="nd-pdi-builder-input" placeholder="Registration No.">
+          <input id="pdiReportLocation" class="nd-pdi-builder-input" placeholder="Inspection Location">
+          <input id="pdiReportDate" class="nd-pdi-builder-input" placeholder="Inspection Date">
+          <input id="pdiReportValue" class="nd-pdi-builder-input" placeholder="Estimated Value">
+          <input id="pdiReportRating" class="nd-pdi-builder-input" placeholder="Overall Rating e.g. 4.2/5">
+        </div>
+      </div>
+
+      <div class="bg-white border rounded-[2rem] p-5">
+        <h3 class="text-xl font-black uppercase text-slate-950 mb-4">Report Findings</h3>
+        <div class="grid md:grid-cols-2 gap-3">
+          <select id="pdiExteriorStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
+          <input id="pdiExteriorCost" class="nd-pdi-builder-input" placeholder="Exterior Repair Estimate">
+          <select id="pdiEngineStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
+          <input id="pdiEngineCost" class="nd-pdi-builder-input" placeholder="Engine Repair Estimate">
+          <select id="pdiElectricalStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
+          <input id="pdiElectricalCost" class="nd-pdi-builder-input" placeholder="Electrical Repair Estimate">
+          <select id="pdiSuspensionStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
+          <input id="pdiSuspensionCost" class="nd-pdi-builder-input" placeholder="Suspension/Brake Estimate">
+          <select id="pdiACStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
+          <input id="pdiACCost" class="nd-pdi-builder-input" placeholder="AC Repair Estimate">
+          <select id="pdiLegalStatus" class="nd-pdi-builder-input"><option>No Major Red Flag</option><option>Check Required</option><option>Issue Found</option></select>
+          <input id="pdiChallan" class="nd-pdi-builder-input" placeholder="Challan / Legal Notes">
+        </div>
+        <textarea id="pdiReportSummary" class="nd-pdi-builder-input mt-3" rows="4" placeholder="Final Summary / Buying Recommendation"></textarea>
+        <textarea id="pdiReportPhotoNotes" class="nd-pdi-builder-input mt-3" rows="3" placeholder="Photo notes / panels / tyres / scratches / repaint notes"></textarea>
+        <div class="grid md:grid-cols-3 gap-3 mt-4">
+          <button onclick="generateNdPdiReport()" class="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl py-4 text-xs font-black uppercase">Generate Report</button>
+          <button onclick="window.print()" class="bg-slate-950 hover:bg-slate-800 text-white rounded-2xl py-4 text-xs font-black uppercase">Print / Save PDF</button>
+          <button onclick="saveNdPdiReportLead()" class="bg-green-600 hover:bg-green-700 text-white rounded-2xl py-4 text-xs font-black uppercase">Save To CRM</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ndPdiPrintableReport" class="mt-6 mb-10">
+    <div class="nd-pdi-report-paper rounded-[2rem] overflow-hidden">
+      <div class="bg-blue-50 p-8 grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <p class="text-[11px] uppercase font-black text-blue-700">NoDealer Car Truth Report</p>
+          <h1 class="text-4xl font-black uppercase text-slate-950 mt-2">Comprehensive Car Inspection Report</h1>
+          <div class="mt-5 space-y-2 text-sm font-bold text-slate-600">
+            <p><i class="fa-solid fa-car text-blue-600"></i> 300+ quality check format</p>
+            <p><i class="fa-solid fa-user-check text-green-600"></i> Technician-style inspection summary</p>
+            <p><i class="fa-solid fa-shield-halved text-amber-600"></i> Buyer risk and repair estimate notes</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-[2rem] p-6 border text-center">
+          <img src="logo.jpg" class="w-24 h-24 object-contain mx-auto" alt="NoDealer">
+          <h2 id="rpCarTitle" class="text-2xl font-black uppercase text-slate-950 mt-4">Vehicle Name</h2>
+          <p id="rpCarSub" class="text-sm font-bold text-slate-500">Variant | Year | Fuel</p>
+          <p id="rpCustomerLine" class="text-xs font-bold text-slate-400 mt-3">Prepared for customer</p>
+        </div>
+      </div>
+
+      <div class="p-8 space-y-6">
+        <div class="grid md:grid-cols-4 gap-3">
+          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Overall Rating</p><h3 id="rpRating" class="text-3xl font-black text-green-600">--</h3></div>
+          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Odometer</p><h3 id="rpKm" class="text-xl font-black">--</h3></div>
+          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Owners</p><h3 id="rpOwner" class="text-xl font-black">--</h3></div>
+          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Estimated Value</p><h3 id="rpValue" class="text-xl font-black">--</h3></div>
+        </div>
+
+        <div class="nd-pdi-report-section">
+          <h3 class="text-xl font-black uppercase mb-3">Vehicle & Inspection Details</h3>
+          <table class="nd-pdi-report-table">
+            <tbody>
+              <tr><td>Registration No.</td><td id="rpReg">--</td><td>Inspection Location</td><td id="rpLocation">--</td></tr>
+              <tr><td>Inspection Date</td><td id="rpDate">--</td><td>Transmission</td><td id="rpTransmission">--</td></tr>
+              <tr><td>Fuel Type</td><td id="rpFuel">--</td><td>Customer Phone</td><td id="rpPhone">--</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="nd-pdi-report-section">
+          <h3 class="text-xl font-black uppercase mb-3">Health Report Summary</h3>
+          <p id="rpSummary" class="text-sm font-semibold text-slate-600 leading-relaxed">Generate report to see summary.</p>
+        </div>
+
+        <div class="nd-pdi-report-section">
+          <h3 class="text-xl font-black uppercase mb-3">Category-Wise Inspection</h3>
+          <table class="nd-pdi-report-table">
+            <thead><tr><th>Category</th><th>Status</th><th>Estimated Repair Cost</th></tr></thead>
+            <tbody>
+              <tr><td>Exterior & Tyres</td><td id="rpExteriorStatus">--</td><td id="rpExteriorCost">--</td></tr>
+              <tr><td>Engine & Transmission</td><td id="rpEngineStatus">--</td><td id="rpEngineCost">--</td></tr>
+              <tr><td>Electricals & Interiors</td><td id="rpElectricalStatus">--</td><td id="rpElectricalCost">--</td></tr>
+              <tr><td>Steering, Suspension & Brakes</td><td id="rpSuspensionStatus">--</td><td id="rpSuspensionCost">--</td></tr>
+              <tr><td>Air Conditioning</td><td id="rpACStatus">--</td><td id="rpACCost">--</td></tr>
+              <tr><td>Legal / Challan / Document Notes</td><td id="rpLegalStatus">--</td><td id="rpChallan">--</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="nd-pdi-report-section">
+          <h3 class="text-xl font-black uppercase mb-3">Vehicle Images & Physical Notes</h3>
+          <p id="rpPhotoNotes" class="text-sm font-semibold text-slate-600 leading-relaxed">Add photo notes in builder.</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Front</div>
+            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Rear</div>
+            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Engine Bay</div>
+            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Interior</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 text-white rounded-[2rem] p-6">
+          <h3 class="text-2xl font-black uppercase">Final Buying Guidance</h3>
+          <p class="text-sm text-slate-300 font-semibold mt-2">This report is an inspection support document. Final buying decision, price negotiation, documents, RC transfer and payment safety should be verified before deal closure.</p>
+          <p class="text-xs text-slate-400 mt-5">NoDealer India • Shop No.2 Near Madhav Bhawan Sector 12 Sheetla Mata Mandir Road, Gurugram 122001 (HR) • +91 7838335143</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* NODEALER PDI PHASE 2 REPORT BUILDER SCRIPT */
+function openNdPdiReportBuilder(){document.getElementById("ndPdiReportBuilderModal")?.classList.remove("hidden");}
+function closeNdPdiReportBuilder(){document.getElementById("ndPdiReportBuilderModal")?.classList.add("hidden");}
+
+function ndVal(id){return document.getElementById(id)?.value || "";}
+function ndSet(id, value){const el=document.getElementById(id); if(el) el.textContent=value || "--";}
+function ndStatusClass(status){
+    const s=String(status||"").toLowerCase();
+    if(s.includes("issue")) return "nd-pdi-issue";
+    if(s.includes("average") || s.includes("check")) return "nd-pdi-warn";
+    return "nd-pdi-ok";
+}
+function ndSetStatus(id, value){
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.textContent=value || "--";
+    el.className=ndStatusClass(value);
+}
+function generateNdPdiReport(){
+    const car=ndVal("pdiReportCar") || "Vehicle Name";
+    const variant=ndVal("pdiReportVariant");
+    const year=ndVal("pdiReportYear");
+    const fuel=ndVal("pdiReportFuel");
+    ndSet("rpCarTitle", car);
+    ndSet("rpCarSub", [variant, year, fuel].filter(Boolean).join(" | "));
+    ndSet("rpCustomerLine", "Prepared for: " + (ndVal("pdiReportCustomer") || "Customer"));
+    ndSet("rpRating", ndVal("pdiReportRating") || "Pending");
+    ndSet("rpKm", ndVal("pdiReportKm"));
+    ndSet("rpOwner", ndVal("pdiReportOwner"));
+    ndSet("rpValue", ndVal("pdiReportValue"));
+    ndSet("rpReg", ndVal("pdiReportReg"));
+    ndSet("rpLocation", ndVal("pdiReportLocation"));
+    ndSet("rpDate", ndVal("pdiReportDate") || new Date().toLocaleDateString());
+    ndSet("rpTransmission", ndVal("pdiReportTransmission"));
+    ndSet("rpFuel", ndVal("pdiReportFuel"));
+    ndSet("rpPhone", ndVal("pdiReportPhone"));
+    ndSet("rpSummary", ndVal("pdiReportSummary") || "Car inspected across major physical and document checkpoints. Review category-wise findings before payment or token.");
+    ndSet("rpPhotoNotes", ndVal("pdiReportPhotoNotes") || "Photo notes can be added after physical inspection.");
+
+    ndSetStatus("rpExteriorStatus", ndVal("pdiExteriorStatus")); ndSet("rpExteriorCost", ndVal("pdiExteriorCost") || "₹0");
+    ndSetStatus("rpEngineStatus", ndVal("pdiEngineStatus")); ndSet("rpEngineCost", ndVal("pdiEngineCost") || "₹0");
+    ndSetStatus("rpElectricalStatus", ndVal("pdiElectricalStatus")); ndSet("rpElectricalCost", ndVal("pdiElectricalCost") || "₹0");
+    ndSetStatus("rpSuspensionStatus", ndVal("pdiSuspensionStatus")); ndSet("rpSuspensionCost", ndVal("pdiSuspensionCost") || "₹0");
+    ndSetStatus("rpACStatus", ndVal("pdiACStatus")); ndSet("rpACCost", ndVal("pdiACCost") || "₹0");
+    ndSetStatus("rpLegalStatus", ndVal("pdiLegalStatus")); ndSet("rpChallan", ndVal("pdiChallan") || "No notes added");
+    alert("Report generated. Click Print / Save PDF to download as PDF.");
+}
+async function saveNdPdiReportLead(){
+    const data={
+        type:"PDI Report Created",
+        name:ndVal("pdiReportCustomer"),
+        phone:ndVal("pdiReportPhone"),
+        car:ndVal("pdiReportCar"),
+        priority:"Hot",
+        source:"Admin PDI Report Builder",
+        status:"Report Created",
+        notes:[
+            "Rating: "+ndVal("pdiReportRating"),
+            "Reg: "+ndVal("pdiReportReg"),
+            "Location: "+ndVal("pdiReportLocation"),
+            "Summary: "+ndVal("pdiReportSummary")
+        ].join(" | "),
+        date:new Date().toLocaleString()
+    };
+    await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{
+        method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)
+    });
+    alert("PDI report record saved to CRM.");
+}
+function injectNdPdiReportBuilderButton(){
+    const admin=document.getElementById("adminWorkspaceView") || document.getElementById("secureAdminPortal");
+    const visible=admin && !admin.classList.contains("hidden");
+    const existing=document.getElementById("ndPdiReportBuilderBtn");
+    if(!visible){ if(existing) existing.remove(); return; }
+    if(existing) return;
+    const btn=document.createElement("button");
+    btn.id="ndPdiReportBuilderBtn";
+    btn.onclick=openNdPdiReportBuilder;
+    btn.className="fixed bottom-60 left-6 z-[10001] bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
+    btn.innerHTML='<i class="fa-solid fa-file-medical"></i> PDI Report';
+    document.body.appendChild(btn);
+}
+document.addEventListener("DOMContentLoaded",function(){setInterval(injectNdPdiReportBuilderButton,900);});
+document.addEventListener("click",function(){setTimeout(injectNdPdiReportBuilderButton,250);},true);
 </script>
 
 </body>. It hardens admin visibility,
