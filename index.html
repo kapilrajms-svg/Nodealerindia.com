@@ -1560,7 +1560,7 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
                         <p class="text-xs text-slate-400 mt-2">Use WhatsApp, call, status and follow-up tools to move leads faster.</p>
                     </div>
                 </div>
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4"
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight text-blue-500 flex items-center gap-2"><i class="fa-solid fa-gauge-high"></i> Master Management Console</h1>
                         <p class="text-xs text-slate-400 mt-0.5">Secure Session Active on Desktop IP Layout Matrix</p>
@@ -5038,6 +5038,367 @@ function openNdAdminLeadViewerFromTools() {
         }
     }, 150);
 }
+</script>
+<!-- NoDealer Premium CRM + Public Safety Upgrade
+     Paste this block just before </body>. It hardens admin visibility,
+     fixes missing filter/reserve flows, improves CRM cards/follow-ups,
+     and keeps legacy admin launchers off customer pages. -->
+
+<style>
+  :root {
+    --nd-ink: #0f172a;
+    --nd-line: #e2e8f0;
+    --nd-blue: #2563eb;
+    --nd-red: #e31e24;
+    --nd-green: #16a34a;
+    --nd-amber: #f59e0b;
+  }
+
+  .nd-admin-only,
+  #adminOnlyAnalyticsBtn,
+  #inventoryAdminOsBtn,
+  #carManagerAdminBtn,
+  #ndLeadViewerBtn,
+  #ndAdminCrmToolsBtn {
+    display: none;
+  }
+
+  body.nd-admin-unlocked .nd-admin-only,
+  body.nd-admin-unlocked #adminOnlyAnalyticsBtn,
+  body.nd-admin-unlocked #inventoryAdminOsBtn,
+  body.nd-admin-unlocked #carManagerAdminBtn,
+  body.nd-admin-unlocked #ndLeadViewerBtn,
+  body.nd-admin-unlocked #ndAdminCrmToolsBtn {
+    display: inline-flex;
+  }
+
+  .nd-lead-card-pro {
+    border: 1px solid var(--nd-line);
+    border-radius: 22px;
+    background: #fff;
+    padding: 16px;
+    box-shadow: 0 16px 42px rgba(15, 23, 42, .08);
+  }
+
+  .nd-lead-meta-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 6px 9px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .nd-chip-hot { background: #fee2e2; color: #dc2626; }
+  .nd-chip-warm { background: #ffedd5; color: #ea580c; }
+  .nd-chip-cold { background: #f1f5f9; color: #475569; }
+  .nd-chip-due { background: #fef3c7; color: #b45309; }
+  .nd-chip-done { background: #dcfce7; color: #15803d; }
+
+  .nd-mobile-sheet {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 100001;
+    background: #fff;
+    border-radius: 26px 26px 0 0;
+    border: 1px solid var(--nd-line);
+    box-shadow: 0 -18px 60px rgba(15, 23, 42, .22);
+    padding: 18px;
+  }
+
+  @media (max-width: 768px) {
+    #secureAdminPortal {
+      padding: 10px !important;
+    }
+
+    #adminWorkspaceView {
+      padding-left: 0 !important;
+    }
+
+    #adminWorkspaceView .grid,
+    #ndAdminCrmToolsModal .grid,
+    #ndLeadViewerModal .grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    #ndLeadViewerList {
+      grid-template-columns: 1fr !important;
+    }
+
+    .nd-lead-card-pro {
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .nd-admin-floating {
+      left: 10px !important;
+      right: 10px !important;
+      bottom: 86px !important;
+      justify-content: center;
+      width: auto;
+    }
+  }
+</style>
+
+<!-- Missing reserve modal used by existing Reserve buttons -->
+<div id="reserveCarModal" class="hidden fixed inset-0 z-[100000] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="max-w-md mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+    <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
+      <div>
+        <p class="text-[10px] text-slate-400 uppercase font-black">NoDealer Reserve Flow</p>
+        <h2 id="reserveCarTitle" class="text-2xl font-black uppercase">Reserve Car</h2>
+      </div>
+      <button type="button" onclick="closeReserveCarModal()" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">x</button>
+    </div>
+    <form id="reserveCarForm" onsubmit="handleReserveCarSubmit(event)" class="p-5 space-y-3">
+      <input type="hidden" id="reserveCarId">
+      <input id="reserveBuyerName" required type="text" placeholder="Your full name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+      <input id="reserveBuyerPhone" required type="tel" placeholder="Mobile number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+      <input id="reserveBuyerCity" type="text" placeholder="City / location" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+      <div class="grid grid-cols-2 gap-3">
+        <input id="reserveBookingAmount" type="number" placeholder="Token amount" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+        <input id="reserveVisitDate" type="date" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <select id="reserveVisitSlot" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+          <option>Morning</option>
+          <option>Afternoon</option>
+          <option>Evening</option>
+        </select>
+        <select id="reserveIntentLevel" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500">
+          <option>High Intent</option>
+          <option>Need PDI First</option>
+          <option>Need Finance</option>
+        </select>
+      </div>
+      <textarea id="reserveNotes" rows="4" placeholder="Notes" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500"></textarea>
+      <button id="reserveSubmitBtn" type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-4 rounded-2xl uppercase text-xs">Save Reserve Request To Support</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const ADMIN_SESSION_KEY = "nodealer_admin_session_v2";
+  const ADMIN_ALLOWED_MS = 1000 * 60 * 60 * 8;
+
+  function $(id) { return document.getElementById(id); }
+  function cleanPhone(value) { return String(value || "").replace(/\D/g, "").slice(-10); }
+  function text(value) { return value == null ? "" : String(value); }
+
+  function isAdminSessionValid() {
+    try {
+      const session = JSON.parse(sessionStorage.getItem(ADMIN_SESSION_KEY) || "null");
+      return !!(session && session.ok && Date.now() - Number(session.at || 0) < ADMIN_ALLOWED_MS);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function setAdminUnlocked(unlocked) {
+    document.body.classList.toggle("nd-admin-unlocked", !!unlocked);
+    document.querySelectorAll(
+      "#adminOnlyAnalyticsBtn,#inventoryAdminOsBtn,#carManagerAdminBtn,#ndLeadViewerBtn,#ndAdminCrmToolsBtn"
+    ).forEach(btn => {
+      btn.classList.add("nd-admin-only", "nd-admin-floating");
+      btn.style.display = unlocked ? "inline-flex" : "none";
+    });
+  }
+
+  function protectAdminButtons() {
+    setAdminUnlocked(isAdminSessionValid());
+    if (!isAdminSessionValid()) {
+      document.querySelectorAll(
+        "#adminOnlyAnalyticsBtn,#inventoryAdminOsBtn,#carManagerAdminBtn,#ndLeadViewerBtn,#ndAdminCrmToolsBtn"
+      ).forEach(btn => btn.remove());
+    }
+  }
+
+  window.executeAdminLogin = async function () {
+    const user = $("loginUser")?.value || "";
+    const pass = $("loginPass")?.value || "";
+    const masterUser = window.MASTER_USER || "admin";
+    const masterPass = window.MASTER_PASS || "";
+
+    if (user !== masterUser || pass !== masterPass) {
+      alert("Invalid admin credentials.");
+      return;
+    }
+
+    sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ ok: true, at: Date.now() }));
+    $("adminAuthView")?.classList.add("hidden");
+    $("adminWorkspaceView")?.classList.remove("hidden");
+    setAdminUnlocked(true);
+
+    if (typeof migrateLocalLeadsToSupabase === "function") await migrateLocalLeadsToSupabase();
+    if (typeof loadAdminInventoryDirectory === "function") await loadAdminInventoryDirectory();
+    if (typeof loadAdminLeadsDashboard === "function") await loadAdminLeadsDashboard();
+    if (typeof updateActionCenter === "function") updateActionCenter();
+  };
+
+  const oldExitAdminPortal = window.exitAdminPortal;
+  window.exitAdminPortal = function () {
+    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    setAdminUnlocked(false);
+    if (typeof oldExitAdminPortal === "function") oldExitAdminPortal();
+  };
+
+  const oldCheckUrlRoutingHash = window.checkUrlRoutingHash;
+  window.checkUrlRoutingHash = function () {
+    if (typeof oldCheckUrlRoutingHash === "function") oldCheckUrlRoutingHash();
+    if (location.hash === "#admin") {
+      if (isAdminSessionValid()) {
+        $("adminAuthView")?.classList.add("hidden");
+        $("adminWorkspaceView")?.classList.remove("hidden");
+      } else {
+        $("adminAuthView")?.classList.remove("hidden");
+        $("adminWorkspaceView")?.classList.add("hidden");
+      }
+    }
+    protectAdminButtons();
+  };
+
+  window.applyFilters = async function () {
+    const grid = $("carGrid");
+    const noStock = $("noStockMessage");
+    if (!grid) return;
+
+    const cars = window.CAR_CACHE && window.CAR_CACHE.length
+      ? window.CAR_CACHE
+      : (typeof fetchCars === "function" ? await fetchCars() : []);
+
+    const budget = Number($("filterBudget")?.value || 0);
+    const brand = text($("filterBrand")?.value).toLowerCase();
+    const fuel = text($("filterFuel")?.value).toLowerCase();
+    const transmission = text($("filterTransmission")?.value).toLowerCase();
+    const statusFilter = text($("inventoryStatusFilter")?.value).toLowerCase();
+    const sort = $("inventorySortMode")?.value || "featured";
+
+    let filtered = cars.filter(car => {
+      const priceOk = !budget || Number(car.price || 0) <= budget;
+      const brandOk = !brand || text(car.brand).toLowerCase() === brand;
+      const fuelOk = !fuel || text(car.fuel).toLowerCase() === fuel;
+      const transOk = !transmission || text(car.transmission).toLowerCase() === transmission;
+      const carStatus = text(car.status || "available").toLowerCase();
+      const statusOk = !statusFilter || carStatus === statusFilter || (statusFilter === "pdi running" && carStatus === "pdi");
+      return priceOk && brandOk && fuelOk && transOk && statusOk;
+    });
+
+    filtered.sort((a, b) => {
+      if (sort === "priceLow") return Number(a.price || 0) - Number(b.price || 0);
+      if (sort === "priceHigh") return Number(b.price || 0) - Number(a.price || 0);
+      if (sort === "available") return text(a.status).localeCompare(text(b.status));
+      return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+    });
+
+    const previous = window.CAR_CACHE;
+    window.CAR_CACHE = filtered;
+    if (typeof renderCars === "function") await renderCars();
+    window.CAR_CACHE = previous;
+
+    if (noStock) noStock.style.display = filtered.length ? "none" : "block";
+    const badge = $("inventoryLiveCountBadge");
+    if (badge) badge.textContent = filtered.length + " Cars Showing";
+  };
+
+  function getLeadPriority(lead) {
+    const joined = JSON.stringify(lead || {}).toLowerCase();
+    if (joined.includes("urgent") || joined.includes("pdi") || joined.includes("reserve") || joined.includes("same day")) return "Hot";
+    if (joined.includes("sell") || joined.includes("price") || joined.includes("emi") || joined.includes("valuation")) return "Warm";
+    return "Cold";
+  }
+
+  function followUpState(lead) {
+    const raw = lead.followUpDate || lead.followup || lead.nextFollowup || "";
+    if (!raw) return { label: "No Follow-Up", cls: "nd-chip-cold" };
+    const d = new Date(raw);
+    if (!Number.isNaN(d.getTime()) && d <= new Date() && lead.leadStatus !== "Closed" && lead.status !== "Closed") {
+      return { label: "Due Now", cls: "nd-chip-due" };
+    }
+    return { label: "Follow-Up Set", cls: "nd-chip-done" };
+  }
+
+  window.renderPremiumLeadCards = function (leads, targetId) {
+    const list = $(targetId || "ndLeadViewerList");
+    if (!list) return;
+    if (!leads || !leads.length) {
+      list.innerHTML = '<div class="bg-slate-50 border rounded-3xl p-6 text-slate-500 font-bold">No leads found for this filter.</div>';
+      return;
+    }
+
+    list.innerHTML = leads.map(lead => {
+      const priority = lead.priority || getLeadPriority(lead);
+      const priorityClass = priority === "Hot" ? "nd-chip-hot" : priority === "Warm" ? "nd-chip-warm" : "nd-chip-cold";
+      const follow = followUpState(lead);
+      const phone = cleanPhone(lead.phone);
+      const waText = encodeURIComponent(`Hi ${lead.name || "there"}, this is NoDealer India. We received your enquiry for ${lead.car || lead.carModel || lead.carBrand || "a car"}. Can we help with the next step?`);
+      const waLink = phone ? `https://wa.me/91${phone}?text=${waText}` : "#";
+
+      return `
+        <article class="nd-lead-card-pro">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="text-[10px] uppercase text-slate-400 font-black">${lead.leadType || lead.submissionType || lead.source || "Website Lead"}</p>
+              <h3 class="font-black uppercase text-slate-950">${lead.name || "Unknown Customer"}</h3>
+              <p class="text-xs text-slate-500 font-bold mt-1">${lead.car || lead.carModel || lead.carBrand || "General enquiry"}</p>
+            </div>
+            <span class="nd-lead-meta-chip ${priorityClass}">${priority}</span>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <span class="nd-lead-meta-chip nd-chip-cold">${lead.status || lead.leadStatus || "New Lead"}</span>
+            <span class="nd-lead-meta-chip ${follow.cls}">${follow.label}</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 mt-4 text-xs font-bold text-slate-600">
+            <p><i class="fa-solid fa-phone text-green-600"></i> ${lead.phone || "No phone"}</p>
+            <p><i class="fa-solid fa-location-dot text-red-600"></i> ${lead.location || lead.city || "N/A"}</p>
+            <p><i class="fa-solid fa-calendar text-amber-600"></i> ${lead.date || text(lead.timestamp || lead.created_at).slice(0, 10) || "N/A"}</p>
+            <p><i class="fa-solid fa-clock text-blue-600"></i> ${lead.followUpDate || lead.nextFollowup || "Not set"}</p>
+          </div>
+          <div class="bg-slate-50 border rounded-2xl p-3 text-xs text-slate-500 font-semibold mt-4 min-h-[48px]">
+            ${lead.notes || lead.note || lead.aiSuggestion || "No notes added yet."}
+          </div>
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <a href="${waLink}" target="_blank" class="bg-green-500 text-white text-center px-3 py-3 rounded-xl text-[10px] font-black uppercase">WhatsApp</a>
+            <a href="${phone ? "tel:" + phone : "#"}" class="bg-slate-950 text-white text-center px-3 py-3 rounded-xl text-[10px] font-black uppercase">Call</a>
+          </div>
+        </article>
+      `;
+    }).join("");
+  };
+
+  const oldRenderNdLeadCards = window.renderNdLeadCards;
+  window.renderNdLeadCards = function () {
+    if (Array.isArray(window.ndCrmLeads)) {
+      const search = ($("ndLeadSearch")?.value || "").toLowerCase();
+      const priority = $("ndLeadPriorityFilter")?.value || "";
+      const type = $("ndLeadTypeFilter")?.value || "";
+      const filtered = window.ndCrmLeads.filter(lead => {
+        const all = JSON.stringify(lead).toLowerCase();
+        return (!search || all.includes(search))
+          && (!priority || text(lead.priority).toLowerCase().includes(priority.toLowerCase()))
+          && (!type || text((lead.leadType || "") + " " + (lead.source || "")).toLowerCase().includes(type.toLowerCase()));
+      });
+      if (typeof window.renderNdLeadStats === "function") window.renderNdLeadStats();
+      window.renderPremiumLeadCards(filtered, "ndLeadViewerList");
+      return;
+    }
+    if (typeof oldRenderNdLeadCards === "function") oldRenderNdLeadCards();
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    protectAdminButtons();
+    window.checkUrlRoutingHash && window.checkUrlRoutingHash();
+    setInterval(protectAdminButtons, 700);
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(protectAdminButtons, 100);
+  }, true);
+})();
 </script>
 
 </body>
