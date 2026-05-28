@@ -388,6 +388,34 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
     box-shadow: 0 0 0 3px rgba(22,163,74,.12);
 }
 
+
+/* =========================
+   NODEALER FINAL ADMIN ROUTE + PRIVACY FIX
+========================= */
+#manualLeadPanel,
+#manualLeadPanel *,
+#ndLeadViewerBtn {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+#ndAdminCrmToolsBtn { display: none; }
+
+.nd-admin-crm-input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+}
+.nd-admin-crm-input:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22,163,74,.12);
+}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -5040,7 +5068,140 @@ function openNdAdminLeadViewerFromTools() {
 }
 </script>
 <!-- NoDealer Premium CRM + Public Safety Upgrade
-     Paste this block just before </body>. It hardens admin visibility,
+     Paste this block just before 
+<script>
+/* =========================
+   NODEALER FINAL ADMIN ROUTE + CRM TOOLS FIX
+========================= */
+const ND_ADMIN_CRM_WEBHOOK_FINAL = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+
+function ndFinalIsAdminRoute() {
+    return window.location.pathname.replace(/\/$/, "").toLowerCase() === "/admin" ||
+           window.location.pathname.toLowerCase().endsWith("/admin.html") ||
+           window.location.hash.toLowerCase() === "#admin";
+}
+
+function ndFinalIsAdminVisible() {
+    const admin = document.getElementById("adminWorkspaceView") || document.getElementById("secureAdminPortal");
+    return !!(admin && !admin.classList.contains("hidden"));
+}
+
+function ndFinalHidePublicAdminLeaks() {
+    const oldPanel = document.getElementById("manualLeadPanel");
+    if (oldPanel) {
+        oldPanel.style.display = "none";
+        oldPanel.style.visibility = "hidden";
+        oldPanel.style.pointerEvents = "none";
+    }
+    const oldLeadBtn = document.getElementById("ndLeadViewerBtn");
+    if (oldLeadBtn) oldLeadBtn.style.display = "none";
+}
+
+function openNdAdminCrmTools() {
+    document.getElementById("ndAdminCrmToolsModal")?.classList.remove("hidden");
+}
+
+function closeNdAdminCrmTools() {
+    document.getElementById("ndAdminCrmToolsModal")?.classList.add("hidden");
+}
+
+function openNdAdminLeadViewerFromTools() {
+    const tools = document.getElementById("ndAdminCrmToolsModal");
+    if (tools) tools.classList.add("hidden");
+    setTimeout(function() {
+        if (typeof openNdLeadViewer === "function") openNdLeadViewer();
+        else alert("Lead Viewer is still loading. Refresh once and try again.");
+    }, 180);
+}
+
+async function submitNdAdminManualLead() {
+    const data = {
+        type: document.getElementById("ndManualLeadType")?.value || "Manual Lead",
+        name: document.getElementById("ndManualLeadName")?.value || "",
+        phone: document.getElementById("ndManualLeadPhone")?.value || "",
+        car: document.getElementById("ndManualLeadCar")?.value || "",
+        priority: document.getElementById("ndManualLeadPriority")?.value || "Hot",
+        notes: document.getElementById("ndManualLeadNotes")?.value || "",
+        source: "Admin Manual Entry",
+        status: "New Lead",
+        date: new Date().toLocaleString()
+    };
+
+    if (!data.phone && !data.name) {
+        alert("Please enter at least customer name or phone number.");
+        return;
+    }
+
+    await fetch(ND_ADMIN_CRM_WEBHOOK_FINAL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    ["ndManualLeadName","ndManualLeadPhone","ndManualLeadCar","ndManualLeadNotes"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+    });
+
+    alert("Lead saved successfully to CRM!");
+    if (typeof loadNdCrmLeads === "function") setTimeout(loadNdCrmLeads, 1200);
+}
+
+function injectNdAdminCrmToolsButtonFinal() {
+    ndFinalHidePublicAdminLeaks();
+    const existing = document.getElementById("ndAdminCrmToolsBtn");
+
+    if (!ndFinalIsAdminVisible()) {
+        if (existing) existing.remove();
+        return;
+    }
+    if (existing) return;
+
+    const btn = document.createElement("button");
+    btn.id = "ndAdminCrmToolsBtn";
+    btn.onclick = openNdAdminCrmTools;
+    btn.className = "fixed bottom-40 left-6 z-[10001] bg-green-600 hover:bg-green-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
+    btn.innerHTML = '<i class="fa-solid fa-address-book"></i> CRM Tools';
+    document.body.appendChild(btn);
+}
+
+function ndAutoOpenAdminForAdminHtml() {
+    if (!ndFinalIsAdminRoute()) return;
+
+    const preloader = document.getElementById("preloader");
+    const main = document.getElementById("main-content");
+    if (preloader) preloader.style.display = "none";
+    if (main) {
+        main.classList.remove("opacity-0");
+        main.style.opacity = "1";
+    }
+    document.body.classList.remove("overflow-hidden");
+    document.body.style.overflow = "auto";
+
+    setTimeout(function() {
+        if (typeof openAdminPortal === "function") { try { openAdminPortal(); } catch(e) {} }
+        if (typeof openAdminPanel === "function") { try { openAdminPanel(); } catch(e) {} }
+        if (typeof showAdminLogin === "function") { try { showAdminLogin(); } catch(e) {} }
+
+        const adminLogin = document.getElementById("secureAdminPortal");
+        if (adminLogin) adminLogin.classList.remove("hidden");
+
+        injectNdAdminCrmToolsButtonFinal();
+    }, 500);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    ndFinalHidePublicAdminLeaks();
+    ndAutoOpenAdminForAdminHtml();
+    setInterval(injectNdAdminCrmToolsButtonFinal, 800);
+});
+document.addEventListener("click", function() {
+    setTimeout(injectNdAdminCrmToolsButtonFinal, 200);
+}, true);
+</script>
+
+</body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
 
