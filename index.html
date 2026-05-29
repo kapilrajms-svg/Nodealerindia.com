@@ -512,6 +512,7 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 .nd-simple-section-title{font-size:clamp(28px,4vw,48px);line-height:1;font-weight:900;text-transform:uppercase;letter-spacing:-1px}
 @media(max-width:768px){.nd-simple-home{padding-top:34px!important}.nd-simple-action-card{min-height:185px;padding:20px;border-radius:24px}.nd-simple-action-icon{width:54px;height:54px;border-radius:18px;font-size:22px}}
 
+/* NODEALER PDI FULL BOOKING FLOW */#pdi-section-old-hidden{display:none!important}.nd-pdi-flow-shell{background:radial-gradient(circle at top left,rgba(37,99,235,.32),transparent 35%),radial-gradient(circle at bottom right,rgba(245,158,11,.22),transparent 38%),#020617;color:white;padding:70px 0;position:relative;overflow:hidden}.nd-pdi-flow-card{background:#fff;color:#0f172a;border-radius:32px;padding:24px;box-shadow:0 25px 80px rgba(15,23,42,.28)}.nd-pdi-flow-input{width:100%;padding:14px;border:1px solid #e2e8f0;border-radius:16px;font-size:14px;font-weight:800;outline:none;text-transform:uppercase}.nd-pdi-flow-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}.nd-pdi-flow-tab{border:1px solid #e2e8f0;background:#f8fafc;border-radius:22px;padding:16px;text-align:left;font-weight:900;transition:.2s}.nd-pdi-flow-tab.active,.nd-pdi-flow-tab:hover{background:#0f172a;color:white;border-color:#0f172a}.nd-pdi-package-card{border:1px solid #e2e8f0;background:#fff;border-radius:24px;padding:18px;cursor:pointer;transition:.2s}.nd-pdi-package-card.active,.nd-pdi-package-card:hover{border-color:#f59e0b;box-shadow:0 18px 50px rgba(245,158,11,.16)}.nd-pdi-step-dot{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;background:#e2e8f0;color:#334155}.nd-pdi-step-dot.active{background:#2563eb;color:white}.nd-pdi-mini-check{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:14px}
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -1064,7 +1065,59 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 
 
 <!-- NODEALER ADVANCED PDI SECTION -->
-<section id="pdi-section" class="nd-pdi-hero py-20">
+
+<!-- NODEALER PDI FULL BOOKING FLOW -->
+<section id="pdi-section" class="nd-pdi-flow-shell">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      <div class="lg:col-span-5 space-y-6">
+        <span class="inline-flex items-center gap-2 bg-amber-500/10 text-amber-300 text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full border border-amber-500/20"><i class="fa-solid fa-clipboard-check"></i> NoDealer PDI</span>
+        <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">Book Inspection In 3 Simple Steps</h2>
+        <p class="text-slate-300 font-semibold leading-relaxed">Enter registration number + mobile, choose your PDI need, select package and book. Works for selling car, buying used car and new car delivery inspection.</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">300+</p><p class="text-[10px] uppercase text-slate-400 font-black">Check Format</p></div>
+          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">PDF</p><p class="text-[10px] uppercase text-slate-400 font-black">Report Ready</p></div>
+          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">3</p><p class="text-[10px] uppercase text-slate-400 font-black">Use Cases</p></div>
+          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">CRM</p><p class="text-[10px] uppercase text-slate-400 font-black">Lead Saved</p></div>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="nd-pdi-flow-card">
+          <div class="flex items-center gap-3 mb-5"><div id="pdiDot1" class="nd-pdi-step-dot active">1</div><div class="h-1 flex-1 bg-slate-200 rounded"></div><div id="pdiDot2" class="nd-pdi-step-dot">2</div><div class="h-1 flex-1 bg-slate-200 rounded"></div><div id="pdiDot3" class="nd-pdi-step-dot">3</div></div>
+          <div id="pdiFlowStep1">
+            <h3 class="text-2xl font-black uppercase">Start With Vehicle Number</h3>
+            <p class="text-sm text-slate-500 font-semibold mt-1">For now we save RC manually. After VAHAN API, this step will auto-fetch vehicle details.</p>
+            <div class="grid md:grid-cols-2 gap-3 mt-5"><input id="pdiFlowReg" class="nd-pdi-flow-input" placeholder="Vehicle No. e.g. HR26AB1234"><input id="pdiFlowPhone" class="nd-pdi-flow-input" placeholder="Mobile Number"></div>
+            <button onclick="pdiFlowGoStep(2)" class="mt-4 w-full bg-blue-600 text-white rounded-2xl py-4 text-xs font-black uppercase">Check Vehicle</button>
+          </div>
+          <div id="pdiFlowStep2" class="hidden">
+            <h3 class="text-2xl font-black uppercase">What PDI Do You Need?</h3>
+            <div class="grid md:grid-cols-3 gap-3 mt-5">
+              <button onclick="selectPdiUseCase('Selling My Car')" class="nd-pdi-flow-tab" data-pdi-use="Selling My Car"><i class="fa-solid fa-key text-green-500 text-xl"></i><br>Selling My Car</button>
+              <button onclick="selectPdiUseCase('Buying Used Car')" class="nd-pdi-flow-tab" data-pdi-use="Buying Used Car"><i class="fa-solid fa-car-side text-blue-500 text-xl"></i><br>Buying Used Car</button>
+              <button onclick="selectPdiUseCase('New Car Delivery')" class="nd-pdi-flow-tab" data-pdi-use="New Car Delivery"><i class="fa-solid fa-gift text-amber-500 text-xl"></i><br>New Car Delivery</button>
+            </div>
+            <div class="grid md:grid-cols-2 gap-3 mt-5"><input id="pdiFlowCar" class="nd-pdi-flow-input" placeholder="Car Model / Variant"><input id="pdiFlowCity" class="nd-pdi-flow-input" placeholder="City" value="Gurugram"><input id="pdiFlowLocation" class="nd-pdi-flow-input" placeholder="Inspection Location"><input id="pdiFlowDate" class="nd-pdi-flow-input" placeholder="Preferred Date"></div>
+            <div class="grid grid-cols-2 gap-3 mt-4"><button onclick="pdiFlowGoStep(1)" class="bg-slate-100 text-slate-700 rounded-2xl py-4 text-xs font-black uppercase">Back</button><button onclick="pdiFlowGoStep(3)" class="bg-blue-600 text-white rounded-2xl py-4 text-xs font-black uppercase">Next</button></div>
+          </div>
+          <div id="pdiFlowStep3" class="hidden">
+            <h3 class="text-2xl font-black uppercase">Choose Inspection Package</h3>
+            <div class="grid md:grid-cols-3 gap-3 mt-5">
+              <button onclick="selectPdiPackage('Essential')" class="nd-pdi-package-card" data-pdi-package="Essential"><h4 class="font-black uppercase">Essential</h4><p class="text-xs text-slate-500 mt-2">Exterior, tyres, interior, basic mechanical.</p></button>
+              <button onclick="selectPdiPackage('Advanced Report')" class="nd-pdi-package-card active" data-pdi-package="Advanced Report"><h4 class="font-black uppercase">Advanced</h4><p class="text-xs text-slate-500 mt-2">300+ format, accident, documents, estimate.</p></button>
+              <button onclick="selectPdiPackage('Premium + Guidance')" class="nd-pdi-package-card" data-pdi-package="Premium + Guidance"><h4 class="font-black uppercase">Premium</h4><p class="text-xs text-slate-500 mt-2">Report + value note + buying guidance.</p></button>
+            </div>
+            <textarea id="pdiFlowNotes" class="nd-pdi-flow-input mt-4 normal-case" rows="3" placeholder="Any concern? Accident, repaint, engine noise, dealer delivery, loan, challan, seller phone, etc."></textarea>
+            <div class="grid grid-cols-2 gap-3 mt-4"><button onclick="pdiFlowGoStep(2)" class="bg-slate-100 text-slate-700 rounded-2xl py-4 text-xs font-black uppercase">Back</button><button onclick="submitPdiFlowBooking()" class="bg-amber-500 text-slate-950 rounded-2xl py-4 text-xs font-black uppercase">Book Inspection</button></div>
+            <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20book%20a%20PDI." target="_blank" class="block text-center mt-3 bg-green-600 text-white rounded-2xl py-4 text-xs font-black uppercase"><i class="fa-brands fa-whatsapp"></i> Ask On WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pdi-section-old-hidden" class="hidden" class="nd-pdi-hero py-20">
   <div class="max-w-7xl mx-auto px-4 relative z-10">
     <div class="grid lg:grid-cols-12 gap-8 items-start">
       <div class="lg:col-span-7 space-y-7">
@@ -5702,6 +5755,17 @@ document.addEventListener("DOMContentLoaded",function(){
     if(hash==="#pdi")document.getElementById("pdi-section")?.scrollIntoView({behavior:"smooth"});
   },700);
 });
+</script>
+
+
+<script>
+/* NODEALER PDI FULL BOOKING FLOW SCRIPT */
+let selectedPdiUseCase="Buying Used Car",selectedPdiPackage="Advanced Report";
+function pdiFlowGoStep(step){[1,2,3].forEach(n=>{document.getElementById("pdiFlowStep"+n)?.classList.add("hidden");document.getElementById("pdiDot"+n)?.classList.remove("active")});document.getElementById("pdiFlowStep"+step)?.classList.remove("hidden");document.getElementById("pdiDot"+step)?.classList.add("active")}
+function selectPdiUseCase(value){selectedPdiUseCase=value;document.querySelectorAll("[data-pdi-use]").forEach(btn=>btn.classList.toggle("active",btn.dataset.pdiUse===value))}
+function selectPdiPackage(value){selectedPdiPackage=value;document.querySelectorAll("[data-pdi-package]").forEach(btn=>btn.classList.toggle("active",btn.dataset.pdiPackage===value))}
+async function submitPdiFlowBooking(){const data={type:"PDI Booking",name:"PDI Customer",phone:document.getElementById("pdiFlowPhone")?.value||"",car:document.getElementById("pdiFlowCar")?.value||"",priority:"Hot",source:"PDI Booking Flow",status:"New PDI Booking",notes:["Reg No: "+(document.getElementById("pdiFlowReg")?.value||""),"Use Case: "+selectedPdiUseCase,"Package: "+selectedPdiPackage,"City: "+(document.getElementById("pdiFlowCity")?.value||""),"Location: "+(document.getElementById("pdiFlowLocation")?.value||""),"Preferred Date: "+(document.getElementById("pdiFlowDate")?.value||""),"Extra Notes: "+(document.getElementById("pdiFlowNotes")?.value||"")].join(" | "),date:new Date().toLocaleString()};if(!data.phone){alert("Please enter mobile number.");return}await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});alert("PDI booking saved. NoDealer team will contact you.")}
+document.addEventListener("DOMContentLoaded",function(){selectPdiUseCase(selectedPdiUseCase);selectPdiPackage(selectedPdiPackage)});
 </script>
 
 </body>. It hardens admin visibility,
