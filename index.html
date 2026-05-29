@@ -499,6 +499,19 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
     }
 }
 
+
+/* NODEALER SIMPLE CUSTOMER-FIRST HOMEPAGE */
+#service-command-center,#ndLaunchTrustStrip{display:none!important}
+.nd-simple-home{background:radial-gradient(circle at top left,rgba(37,99,235,.28),transparent 34%),radial-gradient(circle at bottom right,rgba(227,30,36,.22),transparent 35%),#020617;color:white;overflow:hidden;position:relative}
+.nd-simple-action-card{background:white;color:#0f172a;border-radius:30px;padding:26px;border:1px solid rgba(255,255,255,.18);box-shadow:0 25px 70px rgba(15,23,42,.22);transition:.25s ease;cursor:pointer;min-height:230px;display:flex;flex-direction:column;justify-content:space-between}
+.nd-simple-action-card:hover{transform:translateY(-5px);box-shadow:0 35px 90px rgba(15,23,42,.30)}
+.nd-simple-action-icon{width:64px;height:64px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:26px}
+.nd-simple-trust-mini{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:16px}
+.nd-simple-quick-strip{background:white;border-bottom:1px solid #e2e8f0}
+.nd-simple-quick-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:16px;display:flex;align-items:center;gap:12px}
+.nd-simple-section-title{font-size:clamp(28px,4vw,48px);line-height:1;font-weight:900;text-transform:uppercase;letter-spacing:-1px}
+@media(max-width:768px){.nd-simple-home{padding-top:34px!important}.nd-simple-action-card{min-height:185px;padding:20px;border-radius:24px}.nd-simple-action-icon{width:54px;height:54px;border-radius:18px;font-size:22px}}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -583,6 +596,13 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
                         <span class="text-[9px] uppercase font-bold tracking-tight text-gray-500 block mt-1">100% Peer-to-Peer Car Marketplace</span>
                     </div>
                 </a>
+                
+<div class="hidden md:flex items-center gap-2">
+  <button onclick="scrollToInventory()" class="bg-blue-600 text-white text-xs font-black px-4 py-2.5 rounded-lg shadow hover:bg-blue-700">Buy</button>
+  <button onclick="openSellModal()" class="bg-red-600 text-white text-xs font-black px-4 py-2.5 rounded-lg shadow hover:bg-red-700">Sell</button>
+  <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 text-xs font-black px-4 py-2.5 rounded-lg shadow hover:bg-amber-400">PDI</button>
+</div>
+
                 <div class="flex items-center space-x-2">
                     <button onclick="openCustomerAccountAuth()" class="bg-blue-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-blue-700 flex items-center gap-1 transition-all"><i class="fa-solid fa-user text-sm"></i> My Account</button>
                     <button onclick="openSavedCarsModal()" class="bg-slate-950 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-slate-800 flex items-center gap-1 transition-all">
@@ -593,7 +613,57 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
             </div>
         </header>
 
-        <section class="relative overflow-hidden bg-slate-950 text-white">
+        
+<!-- NODEALER SIMPLE CUSTOMER-FIRST HOMEPAGE -->
+<section id="ndSimpleHome" class="nd-simple-home py-16 md:py-20">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <div class="grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-5">
+        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/10 text-white text-xs font-black px-4 py-2 rounded-full shadow-lg backdrop-blur mb-5">
+          <i class="fa-solid fa-bolt text-amber-400"></i> Direct Owner Used Car Marketplace
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-[0.92]">What do you want to do today?</h1>
+        <p class="text-slate-300 font-semibold text-base md:text-lg mt-5 leading-relaxed">Buy a verified car, sell your car, or book a professional PDI inspection — everything starts from here.</p>
+        <div class="grid grid-cols-3 gap-3 mt-7">
+          <div class="nd-simple-trust-mini"><p class="text-2xl font-black">0%</p><p class="text-[10px] uppercase text-slate-400 font-black">Dealer Markup</p></div>
+          <div class="nd-simple-trust-mini"><p class="text-2xl font-black">PDI</p><p class="text-[10px] uppercase text-slate-400 font-black">Inspection First</p></div>
+          <div class="nd-simple-trust-mini"><p class="text-2xl font-black">CRM</p><p class="text-[10px] uppercase text-slate-400 font-black">Fast Follow-up</p></div>
+        </div>
+        <div class="flex flex-wrap gap-3 mt-7">
+          <a href="tel:+917838335143" class="bg-white text-slate-950 px-6 py-4 rounded-2xl text-xs font-black uppercase inline-flex items-center gap-2"><i class="fa-solid fa-phone text-red-600"></i> Call Now</a>
+          <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20need%20help." target="_blank" class="bg-green-600 text-white px-6 py-4 rounded-2xl text-xs font-black uppercase inline-flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="grid md:grid-cols-3 gap-5">
+          <button onclick="scrollToInventory()" class="nd-simple-action-card text-left">
+            <div><div class="nd-simple-action-icon bg-blue-50 text-blue-600"><i class="fa-solid fa-car-side"></i></div><h2 class="text-2xl font-black uppercase mt-5">Buy Car</h2><p class="text-sm text-slate-500 font-semibold mt-2">Browse direct-owner inventory, filter by budget, compare and contact instantly.</p></div>
+            <div class="mt-5 bg-blue-600 text-white rounded-2xl py-3 text-center text-xs font-black uppercase">Browse Cars</div>
+          </button>
+          <button onclick="openSellModal()" class="nd-simple-action-card text-left">
+            <div><div class="nd-simple-action-icon bg-red-50 text-red-600"><i class="fa-solid fa-key"></i></div><h2 class="text-2xl font-black uppercase mt-5">Sell Car</h2><p class="text-sm text-slate-500 font-semibold mt-2">Submit your car details and let NoDealer help you find serious buyers.</p></div>
+            <div class="mt-5 bg-red-600 text-white rounded-2xl py-3 text-center text-xs font-black uppercase">Sell My Car</div>
+          </button>
+          <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="nd-simple-action-card text-left">
+            <div><div class="nd-simple-action-icon bg-amber-50 text-amber-600"><i class="fa-solid fa-clipboard-check"></i></div><h2 class="text-2xl font-black uppercase mt-5">PDI</h2><p class="text-sm text-slate-500 font-semibold mt-2">Book inspection, view report-style checks and reduce buying risk.</p></div>
+            <div class="mt-5 bg-amber-500 text-slate-950 rounded-2xl py-3 text-center text-xs font-black uppercase">Book PDI</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="ndSimpleTrustStrip" class="nd-simple-quick-strip py-7">
+  <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-4">
+    <div class="nd-simple-quick-item"><i class="fa-solid fa-user-check text-blue-600 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Owner Direct</h4><p class="text-xs text-slate-500">No middleman pressure</p></div></div>
+    <div class="nd-simple-quick-item"><i class="fa-solid fa-magnifying-glass-chart text-amber-500 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Inspection First</h4><p class="text-xs text-slate-500">Book PDI before payment</p></div></div>
+    <div class="nd-simple-quick-item"><i class="fa-solid fa-file-shield text-green-600 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Document Help</h4><p class="text-xs text-slate-500">RC & transfer support</p></div></div>
+    <div class="nd-simple-quick-item"><i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Fast Support</h4><p class="text-xs text-slate-500">WhatsApp and call assist</p></div></div>
+  </div>
+</section>
+
+
+<section id="oldLongHeroHidden" class="hidden relative overflow-hidden bg-slate-950 text-white">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(30,136,229,0.28),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(227,30,36,0.22),transparent_35%)]"></div>
             <div class="absolute inset-0 opacity-20 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.08)_50%,transparent_100%)]"></div>
 
@@ -811,7 +881,24 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
             </div>
         </section>
 
-        <section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-12 relative z-20">
+        
+<!-- NODEALER SIMPLE HOW IT WORKS -->
+<section id="ndSimpleHowItWorks" class="bg-white py-12 border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
+      <div><span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Simple Flow</span><h2 class="nd-simple-section-title text-slate-950 mt-3">How NoDealer Works</h2></div>
+      <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20need%20help." target="_blank" class="bg-green-600 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase inline-flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Ask Support</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-slate-50 border rounded-3xl p-6"><p class="text-blue-600 text-3xl font-black">01</p><h3 class="font-black uppercase mt-3">Choose Action</h3><p class="text-sm text-slate-500 font-semibold mt-2">Buy car, sell car, or book PDI directly from the top of the page.</p></div>
+      <div class="bg-slate-50 border rounded-3xl p-6"><p class="text-red-600 text-3xl font-black">02</p><h3 class="font-black uppercase mt-3">Submit Details</h3><p class="text-sm text-slate-500 font-semibold mt-2">Your enquiry is saved in NoDealer CRM so our team can follow up fast.</p></div>
+      <div class="bg-slate-50 border rounded-3xl p-6"><p class="text-green-600 text-3xl font-black">03</p><h3 class="font-black uppercase mt-3">Get Human Support</h3><p class="text-sm text-slate-500 font-semibold mt-2">We help with inspection, owner connect, documents and next steps.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-12 relative z-20">
             <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-2xl border border-slate-100 -mt-0">
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-6">
                     <div>
@@ -5602,6 +5689,19 @@ function injectNdPdiReportBuilderButton(){
 }
 document.addEventListener("DOMContentLoaded",function(){setInterval(injectNdPdiReportBuilderButton,900);});
 document.addEventListener("click",function(){setTimeout(injectNdPdiReportBuilderButton,250);},true);
+</script>
+
+
+<script>
+/* NODEALER SIMPLE HOMEPAGE NAVIGATION */
+document.addEventListener("DOMContentLoaded",function(){
+  const hash=window.location.hash.toLowerCase();
+  setTimeout(function(){
+    if(hash==="#buy"&&typeof scrollToInventory==="function")scrollToInventory();
+    if(hash==="#sell"&&typeof openSellModal==="function")openSellModal();
+    if(hash==="#pdi")document.getElementById("pdi-section")?.scrollIntoView({behavior:"smooth"});
+  },700);
+});
 </script>
 
 </body>. It hardens admin visibility,
