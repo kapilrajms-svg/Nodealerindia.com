@@ -513,6 +513,18 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 @media(max-width:768px){.nd-simple-home{padding-top:34px!important}.nd-simple-action-card{min-height:185px;padding:20px;border-radius:24px}.nd-simple-action-icon{width:54px;height:54px;border-radius:18px;font-size:22px}}
 
 /* NODEALER PDI FULL BOOKING FLOW */#pdi-section-old-hidden{display:none!important}.nd-pdi-flow-shell{background:radial-gradient(circle at top left,rgba(37,99,235,.32),transparent 35%),radial-gradient(circle at bottom right,rgba(245,158,11,.22),transparent 38%),#020617;color:white;padding:70px 0;position:relative;overflow:hidden}.nd-pdi-flow-card{background:#fff;color:#0f172a;border-radius:32px;padding:24px;box-shadow:0 25px 80px rgba(15,23,42,.28)}.nd-pdi-flow-input{width:100%;padding:14px;border:1px solid #e2e8f0;border-radius:16px;font-size:14px;font-weight:800;outline:none;text-transform:uppercase}.nd-pdi-flow-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}.nd-pdi-flow-tab{border:1px solid #e2e8f0;background:#f8fafc;border-radius:22px;padding:16px;text-align:left;font-weight:900;transition:.2s}.nd-pdi-flow-tab.active,.nd-pdi-flow-tab:hover{background:#0f172a;color:white;border-color:#0f172a}.nd-pdi-package-card{border:1px solid #e2e8f0;background:#fff;border-radius:24px;padding:18px;cursor:pointer;transition:.2s}.nd-pdi-package-card.active,.nd-pdi-package-card:hover{border-color:#f59e0b;box-shadow:0 18px 50px rgba(245,158,11,.16)}.nd-pdi-step-dot{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;background:#e2e8f0;color:#334155}.nd-pdi-step-dot.active{background:#2563eb;color:white}.nd-pdi-mini-check{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:14px}
+
+/* NODEALER VALUATION + PDI CRM DASHBOARD */
+.nd-valuation-card{background:#fff;border:1px solid #e2e8f0;border-radius:30px;padding:24px;box-shadow:0 20px 60px rgba(15,23,42,.08)}
+.nd-valuation-input{width:100%;padding:13px;border:1px solid #e2e8f0;border-radius:16px;font-size:13px;font-weight:800;outline:none}
+.nd-valuation-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.nd-value-result{background:linear-gradient(135deg,#0f172a,#1e293b);color:white;border-radius:26px;padding:22px}
+#ndPdiBookingsBtn{display:none}
+.nd-pdi-booking-card{border:1px solid #e2e8f0;border-radius:22px;padding:16px;background:#fff;box-shadow:0 12px 35px rgba(15,23,42,.08)}
+.nd-pdi-status-pending{background:#fef3c7;color:#b45309}
+.nd-pdi-status-assigned{background:#dbeafe;color:#2563eb}
+.nd-pdi-status-completed{background:#dcfce7;color:#16a34a}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -1067,6 +1079,54 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 <!-- NODEALER ADVANCED PDI SECTION -->
 
 <!-- NODEALER PDI FULL BOOKING FLOW -->
+
+<!-- NODEALER CAR VALUE ESTIMATOR -->
+<section id="ndCarValueEstimator" class="bg-slate-50 py-14 border-y border-slate-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid lg:grid-cols-12 gap-7 items-start">
+      <div class="lg:col-span-5">
+        <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Free Estimate Tool</span>
+        <h2 class="nd-simple-section-title text-slate-950 mt-3">Know Your Car Value</h2>
+        <p class="text-sm text-slate-500 font-semibold mt-3 leading-relaxed">Get a quick NoDealer estimated range using car model, year, fuel, ownership and kilometres. Final price depends on condition, documents and PDI.</p>
+        <div class="bg-white border rounded-3xl p-5 mt-5">
+          <h3 class="font-black uppercase text-slate-950">Why this helps?</h3>
+          <p class="text-xs text-slate-500 font-semibold mt-2">This creates a quick selling lead and helps customers understand whether their expected price is realistic.</p>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="nd-valuation-card">
+          <div class="grid md:grid-cols-2 gap-3">
+            <input id="valRegNo" class="nd-valuation-input uppercase" placeholder="Vehicle No. Optional e.g. HR26AB1234">
+            <select id="valBrand" class="nd-valuation-input">
+              <option value="">Brand</option><option>Maruti</option><option>Hyundai</option><option>Tata</option><option>Mahindra</option><option>Honda</option><option>Toyota</option><option>Kia</option><option>Renault</option><option>Skoda</option><option>Volkswagen</option>
+            </select>
+            <input id="valModel" class="nd-valuation-input" placeholder="Model e.g. Creta / Swift / Nexon">
+            <select id="valYear" class="nd-valuation-input">
+              <option value="">Year</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option><option>2018</option><option>2017</option><option>2016</option><option>2015</option><option>2014</option>
+            </select>
+            <select id="valFuel" class="nd-valuation-input"><option value="">Fuel</option><option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select>
+            <select id="valTransmission" class="nd-valuation-input"><option value="">Transmission</option><option>Manual</option><option>Automatic</option></select>
+            <input id="valKm" class="nd-valuation-input" placeholder="KM Driven e.g. 45000">
+            <select id="valOwner" class="nd-valuation-input"><option value="">Ownership</option><option value="1">1st Owner</option><option value="2">2nd Owner</option><option value="3">3rd Owner+</option></select>
+            <input id="valPhone" class="nd-valuation-input md:col-span-2" placeholder="Mobile number to save estimate lead">
+          </div>
+          <button onclick="calculateNoDealerValue()" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white rounded-2xl py-4 text-xs font-black uppercase">Get Estimated Value</button>
+          <div id="ndValuationResult" class="hidden nd-value-result mt-5">
+            <p class="text-[10px] uppercase text-slate-400 font-black">Estimated Market Range</p>
+            <h3 id="ndValueRange" class="text-4xl font-black mt-1">₹ --</h3>
+            <p id="ndValueNote" class="text-sm text-slate-300 font-semibold mt-2">Final value depends on PDI, condition, documents and market demand.</p>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+              <button onclick="saveValuationLead()" class="bg-white text-slate-950 rounded-2xl py-3 text-xs font-black uppercase">Save Lead</button>
+              <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 rounded-2xl py-3 text-xs font-black uppercase">Book PDI</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <section id="pdi-section" class="nd-pdi-flow-shell">
   <div class="max-w-7xl mx-auto px-4 relative z-10">
     <div class="grid lg:grid-cols-12 gap-8 items-start">
@@ -5766,6 +5826,135 @@ function selectPdiUseCase(value){selectedPdiUseCase=value;document.querySelector
 function selectPdiPackage(value){selectedPdiPackage=value;document.querySelectorAll("[data-pdi-package]").forEach(btn=>btn.classList.toggle("active",btn.dataset.pdiPackage===value))}
 async function submitPdiFlowBooking(){const data={type:"PDI Booking",name:"PDI Customer",phone:document.getElementById("pdiFlowPhone")?.value||"",car:document.getElementById("pdiFlowCar")?.value||"",priority:"Hot",source:"PDI Booking Flow",status:"New PDI Booking",notes:["Reg No: "+(document.getElementById("pdiFlowReg")?.value||""),"Use Case: "+selectedPdiUseCase,"Package: "+selectedPdiPackage,"City: "+(document.getElementById("pdiFlowCity")?.value||""),"Location: "+(document.getElementById("pdiFlowLocation")?.value||""),"Preferred Date: "+(document.getElementById("pdiFlowDate")?.value||""),"Extra Notes: "+(document.getElementById("pdiFlowNotes")?.value||"")].join(" | "),date:new Date().toLocaleString()};if(!data.phone){alert("Please enter mobile number.");return}await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});alert("PDI booking saved. NoDealer team will contact you.")}
 document.addEventListener("DOMContentLoaded",function(){selectPdiUseCase(selectedPdiUseCase);selectPdiPackage(selectedPdiPackage)});
+</script>
+
+
+<!-- NODEALER PDI BOOKINGS DASHBOARD -->
+<div id="ndPdiBookingsModal" class="hidden fixed inset-0 z-[100007] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
+      <div>
+        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin</p>
+        <h2 class="text-3xl font-black uppercase">PDI Bookings Dashboard</h2>
+        <p class="text-sm text-slate-400 mt-1">Track Pending, Assigned and Completed PDI bookings from Google Sheet CRM.</p>
+      </div>
+      <button onclick="closeNdPdiBookings()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+    </div>
+    <div class="p-6">
+      <div class="grid md:grid-cols-4 gap-4 mb-5">
+        <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-500 font-black">Total PDI</p><h2 id="pdiDashTotal" class="text-3xl font-black">0</h2></div>
+        <div class="bg-amber-50 border border-amber-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-amber-700 font-black">Pending</p><h2 id="pdiDashPending" class="text-3xl font-black text-amber-700">0</h2></div>
+        <div class="bg-blue-50 border border-blue-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-blue-700 font-black">Assigned</p><h2 id="pdiDashAssigned" class="text-3xl font-black text-blue-700">0</h2></div>
+        <div class="bg-green-50 border border-green-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-green-700 font-black">Completed</p><h2 id="pdiDashCompleted" class="text-3xl font-black text-green-700">0</h2></div>
+      </div>
+      <div class="bg-slate-50 border rounded-3xl p-4 mb-5 grid md:grid-cols-4 gap-3">
+        <input id="pdiDashSearch" oninput="renderNdPdiBookings()" class="nd-valuation-input" placeholder="Search reg, phone, car, notes">
+        <select id="pdiDashFilter" onchange="renderNdPdiBookings()" class="nd-valuation-input"><option value="">All Status</option><option>Pending</option><option>Assigned</option><option>Completed</option></select>
+        <button onclick="loadNdPdiBookings()" class="bg-slate-950 text-white rounded-2xl py-3 text-xs font-black uppercase">Refresh</button>
+        <button onclick="openNdPdiReportBuilder && openNdPdiReportBuilder()" class="bg-amber-500 text-slate-950 rounded-2xl py-3 text-xs font-black uppercase">Create Report</button>
+      </div>
+      <div id="ndPdiBookingsList" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* NODEALER VALUATION + PDI DASHBOARD SCRIPT */
+let ndLastValuation = null;
+const ND_PDI_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
+const ND_CRM_WEBHOOK_VALUE = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+
+function ndNum(v){return Number(String(v||"").replace(/[^0-9]/g,""))||0}
+function ndInr(n){return "₹"+Math.round(n).toLocaleString("en-IN")}
+function calculateNoDealerValue(){
+  const brand=document.getElementById("valBrand")?.value||"";
+  const model=document.getElementById("valModel")?.value||"";
+  const year=ndNum(document.getElementById("valYear")?.value);
+  const fuel=document.getElementById("valFuel")?.value||"";
+  const trans=document.getElementById("valTransmission")?.value||"";
+  const km=ndNum(document.getElementById("valKm")?.value);
+  const owner=ndNum(document.getElementById("valOwner")?.value)||1;
+  const age=Math.max(0,new Date().getFullYear()-year);
+  if(!brand||!model||!year||!fuel||!km){alert("Please fill brand, model, year, fuel and KM.");return}
+  let base=600000;
+  const b=brand.toLowerCase(), m=model.toLowerCase();
+  if(b.includes("maruti")) base=520000;
+  if(b.includes("hyundai")) base=680000;
+  if(b.includes("tata")) base=650000;
+  if(b.includes("mahindra")) base=900000;
+  if(b.includes("honda")) base=720000;
+  if(b.includes("toyota")) base=1100000;
+  if(b.includes("kia")) base=950000;
+  if(m.includes("creta")||m.includes("seltos")) base=1150000;
+  if(m.includes("swift")||m.includes("baleno")||m.includes("i20")) base=650000;
+  if(m.includes("nexon")||m.includes("brezza")||m.includes("venue")) base=850000;
+  if(m.includes("fortuner")) base=3200000;
+  if(m.includes("scorpio")||m.includes("thar")) base=1600000;
+  if(fuel==="Diesel") base*=1.08;
+  if(fuel==="CNG") base*=1.05;
+  if(trans==="Automatic") base*=1.07;
+  let value=base*Math.pow(0.88,age);
+  value-=Math.max(0,km-25000)*2.8;
+  if(owner===2)value*=0.92;
+  if(owner>=3)value*=0.84;
+  value=Math.max(value,120000);
+  const low=value*0.92, high=value*1.08;
+  ndLastValuation={brand,model,year,fuel,trans,km,owner,low,high,reg:document.getElementById("valRegNo")?.value||"",phone:document.getElementById("valPhone")?.value||""};
+  document.getElementById("ndValueRange").textContent=ndInr(low)+" - "+ndInr(high);
+  document.getElementById("ndValueNote").textContent=`${brand} ${model} ${year} ${fuel} estimated using NoDealer rough formula. Final price after PDI.`;
+  document.getElementById("ndValuationResult")?.classList.remove("hidden");
+}
+async function saveValuationLead(){
+  if(!ndLastValuation){calculateNoDealerValue(); if(!ndLastValuation)return;}
+  const data={type:"Car Value Estimate",name:"Valuation Customer",phone:ndLastValuation.phone,car:[ndLastValuation.brand,ndLastValuation.model,ndLastValuation.year].join(" "),priority:"Warm",source:"Website Valuation Tool",status:"Value Estimate Given",notes:`Reg: ${ndLastValuation.reg} | Fuel: ${ndLastValuation.fuel} | KM: ${ndLastValuation.km} | Owner: ${ndLastValuation.owner} | Estimate: ${ndInr(ndLastValuation.low)} - ${ndInr(ndLastValuation.high)}`,date:new Date().toLocaleString()};
+  await fetch(ND_CRM_WEBHOOK_VALUE,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+  alert("Valuation lead saved to CRM.");
+}
+function openNdPdiBookings(){document.getElementById("ndPdiBookingsModal")?.classList.remove("hidden");loadNdPdiBookings();}
+function closeNdPdiBookings(){document.getElementById("ndPdiBookingsModal")?.classList.add("hidden");}
+let ndPdiBookingRows=[];
+function parseCsvSimple(text){
+  const rows=[];let row=[],cell="",q=false;
+  for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}
+  if(cell||row.length){row.push(cell);rows.push(row);}return rows;
+}
+async function loadNdPdiBookings(){
+  const list=document.getElementById("ndPdiBookingsList"); if(list)list.innerHTML='<div class="text-slate-500 font-bold">Loading PDI bookings...</div>';
+  const res=await fetch(ND_PDI_CSV_URL+"&pdiCache="+Date.now()); const text=await res.text();
+  const rows=parseCsvSimple(text).filter(r=>r.some(c=>String(c||"").trim())); const headers=rows.shift()||[];
+  ndPdiBookingRows=rows.map(r=>{const o={};headers.forEach((h,i)=>o[String(h||"").trim()]=r[i]||"");return o;})
+    .filter(o=>JSON.stringify(o).toLowerCase().includes("pdi")).reverse();
+  renderNdPdiBookings();
+}
+function renderNdPdiBookings(){
+  const search=(document.getElementById("pdiDashSearch")?.value||"").toLowerCase();
+  const filter=(document.getElementById("pdiDashFilter")?.value||"").toLowerCase();
+  let rows=ndPdiBookingRows.filter(o=>JSON.stringify(o).toLowerCase().includes(search));
+  if(filter) rows=rows.filter(o=>JSON.stringify(o).toLowerCase().includes(filter));
+  const total=ndPdiBookingRows.length;
+  const pending=ndPdiBookingRows.filter(o=>!/completed/i.test(JSON.stringify(o))&&!/assigned/i.test(JSON.stringify(o))).length;
+  const assigned=ndPdiBookingRows.filter(o=>/assigned/i.test(JSON.stringify(o))).length;
+  const completed=ndPdiBookingRows.filter(o=>/completed/i.test(JSON.stringify(o))).length;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  set("pdiDashTotal",total);set("pdiDashPending",pending);set("pdiDashAssigned",assigned);set("pdiDashCompleted",completed);
+  const list=document.getElementById("ndPdiBookingsList"); if(!list)return;
+  if(!rows.length){list.innerHTML='<div class="text-slate-500 font-bold bg-slate-50 border rounded-3xl p-6">No PDI bookings found.</div>';return;}
+  list.innerHTML=rows.map(o=>{
+    const txt=JSON.stringify(o); const phone=(o.Phone||o.Mobile||o.phone||"").replace(/[^0-9]/g,"");
+    let status=/completed/i.test(txt)?"Completed":/assigned/i.test(txt)?"Assigned":"Pending";
+    let cls=status==="Completed"?"nd-pdi-status-completed":status==="Assigned"?"nd-pdi-status-assigned":"nd-pdi-status-pending";
+    return `<div class="nd-pdi-booking-card"><div class="flex justify-between gap-3"><h3 class="font-black uppercase text-slate-950">${o["Customer Name"]||o.Name||o.name||"PDI Customer"}</h3><span class="${cls} px-3 py-1 rounded-full text-[10px] font-black uppercase">${status}</span></div><p class="text-xs font-bold text-slate-500 mt-2">${o.Phone||o.Mobile||""}</p><p class="text-sm font-black text-slate-800 mt-2">${o.Car||o["Interested Car"]||"PDI Booking"}</p><p class="text-xs text-slate-500 font-semibold mt-2">${o.Notes||o.notes||txt.slice(0,220)}</p><div class="grid grid-cols-2 gap-2 mt-4"><a href="https://wa.me/91${phone.replace(/^91/,'')}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a><a href="tel:${phone}" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a></div></div>`;
+  }).join("");
+}
+function injectNdPdiBookingsButton(){
+ const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");
+ const visible=admin&&!admin.classList.contains("hidden"); const existing=document.getElementById("ndPdiBookingsBtn");
+ if(!visible){if(existing)existing.remove();return;} if(existing)return;
+ const btn=document.createElement("button");btn.id="ndPdiBookingsBtn";btn.onclick=openNdPdiBookings;btn.className="fixed bottom-80 left-6 z-[10001] bg-blue-600 hover:bg-blue-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.innerHTML='<i class="fa-solid fa-clipboard-list"></i> PDI Bookings';document.body.appendChild(btn);
+}
+document.addEventListener("DOMContentLoaded",function(){setInterval(injectNdPdiBookingsButton,900);});
+document.addEventListener("click",function(){setTimeout(injectNdPdiBookingsButton,250);},true);
 </script>
 
 </body>. It hardens admin visibility,
