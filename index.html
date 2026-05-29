@@ -525,6 +525,15 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 .nd-pdi-status-assigned{background:#dbeafe;color:#2563eb}
 .nd-pdi-status-completed{background:#dcfce7;color:#16a34a}
 
+
+/* NODEALER FOLLOWUP FEATURED FINAL */
+#ndLeadStatusBtn{display:none}
+.nd-follow-input{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
+.nd-follow-card{background:white;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
+.nd-status-pill{border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-featured-clean-card{background:white;border:1px solid #e2e8f0;border-radius:28px;overflow:hidden;box-shadow:0 18px 50px rgba(15,23,42,.08)}
+.nd-featured-clean-img{height:180px;width:100%;object-fit:cover;background:#f1f5f9}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -910,6 +919,18 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
   </div>
 </section>
 
+
+
+<!-- NODEALER FEATURED CARS QUICK SECTION -->
+<section id="ndFeaturedCarsQuick" class="bg-white py-14 border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
+      <div><span class="bg-red-50 text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Featured Stock</span><h2 class="nd-simple-section-title text-slate-950 mt-3">Cars Buyers Should See First</h2><p class="text-sm text-slate-500 font-semibold mt-2">Top listings with fast WhatsApp, call and PDI action buttons.</p></div>
+      <button onclick="scrollToInventory()" class="bg-slate-950 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase">View All Cars</button>
+    </div>
+    <div id="ndFeaturedCarsQuickGrid" class="grid md:grid-cols-3 gap-5"></div>
+  </div>
+</section>
 
 <section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-12 relative z-20">
             <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-2xl border border-slate-100 -mt-0">
@@ -5955,6 +5976,44 @@ function injectNdPdiBookingsButton(){
 }
 document.addEventListener("DOMContentLoaded",function(){setInterval(injectNdPdiBookingsButton,900);});
 document.addEventListener("click",function(){setTimeout(injectNdPdiBookingsButton,250);},true);
+</script>
+
+
+<!-- NODEALER LEAD STATUS DASHBOARD -->
+<div id="ndLeadStatusModal" class="hidden fixed inset-0 z-[100008] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
+      <div><p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin</p><h2 class="text-3xl font-black uppercase">Lead Status & Follow-ups</h2><p class="text-sm text-slate-400 mt-1">Track calls, WhatsApp leads, PDI bookings and next follow-up dates.</p></div>
+      <button onclick="closeNdLeadStatus()" class="w-12 h-12 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
+    </div>
+    <div class="p-6">
+      <div class="grid md:grid-cols-4 gap-3 mb-5">
+        <input id="leadStatusSearch" oninput="renderNdLeadStatusDashboard()" class="nd-follow-input" placeholder="Search lead">
+        <select id="leadStatusFilter" onchange="renderNdLeadStatusDashboard()" class="nd-follow-input"><option value="">All Status</option><option>New Lead</option><option>Called</option><option>Interested</option><option>PDI Booked</option><option>Won</option><option>Lost</option><option>Follow-up Later</option></select>
+        <input id="leadFollowDate" type="date" class="nd-follow-input">
+        <button onclick="loadNdLeadStatusDashboard()" class="bg-slate-950 text-white rounded-2xl py-3 text-xs font-black uppercase">Refresh</button>
+      </div>
+      <div id="ndLeadStatusList" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* NODEALER FOLLOWUP FEATURED FINAL SCRIPT */
+const ND_CSV_FOLLOW="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
+const ND_WEBHOOK_FOLLOW="https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+function ndParseCsvF(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows;}
+let ndFollowRows=[];
+function openNdLeadStatus(){document.getElementById("ndLeadStatusModal")?.classList.remove("hidden");loadNdLeadStatusDashboard();}
+function closeNdLeadStatus(){document.getElementById("ndLeadStatusModal")?.classList.add("hidden");}
+async function loadNdLeadStatusDashboard(){const list=document.getElementById("ndLeadStatusList");if(list)list.innerHTML='<div class="text-slate-500 font-bold">Loading leads...</div>';try{const res=await fetch(ND_CSV_FOLLOW+"&c="+Date.now());const text=await res.text();const rows=ndParseCsvF(text).filter(r=>r.some(c=>String(c||"").trim()));const headers=rows.shift()||[];ndFollowRows=rows.map(r=>{const o={};headers.forEach((h,i)=>o[String(h||"").trim()]=r[i]||"");return o;}).reverse();}catch(e){ndFollowRows=[];}renderNdLeadStatusDashboard();}
+function renderNdLeadStatusDashboard(){const search=(document.getElementById("leadStatusSearch")?.value||"").toLowerCase();const filter=(document.getElementById("leadStatusFilter")?.value||"").toLowerCase();let rows=ndFollowRows.filter(o=>JSON.stringify(o).toLowerCase().includes(search));if(filter)rows=rows.filter(o=>JSON.stringify(o).toLowerCase().includes(filter));const list=document.getElementById("ndLeadStatusList");if(!list)return;if(!rows.length){list.innerHTML='<div class="bg-slate-50 border rounded-3xl p-6 text-slate-500 font-bold">No leads found.</div>';return;}list.innerHTML=rows.map((o,idx)=>{const raw=JSON.stringify(o);const phone=(o.Phone||o.Mobile||o.phone||"").replace(/[^0-9]/g,"");const name=o["Customer Name"]||o.Name||o.name||"Customer";const car=o.Car||o["Interested Car"]||o.car||"Lead";const status=o.Status||o.status||(/pdi/i.test(raw)?"PDI Booked":"New Lead");return `<div class="nd-follow-card"><div class="flex justify-between gap-3"><h3 class="font-black uppercase text-slate-950">${name}</h3><span class="nd-status-pill bg-blue-50 text-blue-700">${status}</span></div><p class="text-xs font-bold text-slate-500 mt-2">${phone||"No phone"}</p><p class="text-sm font-black text-slate-800 mt-2">${car}</p><p class="text-xs text-slate-500 font-semibold mt-2">${o.Notes||o.notes||raw.slice(0,220)}</p><div class="grid grid-cols-2 gap-2 mt-4"><select id="statusSelect${idx}" class="nd-follow-input text-xs"><option>New Lead</option><option>Called</option><option>Interested</option><option>PDI Booked</option><option>Negotiation</option><option>Won</option><option>Lost</option><option>Follow-up Later</option></select><button onclick="saveLeadStatusUpdate(${idx})" class="bg-blue-600 text-white rounded-xl py-3 text-[10px] font-black uppercase">Save Status</button><a href="https://wa.me/91${phone.replace(/^91/,'')}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a><a href="tel:${phone}" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a></div></div>`}).join("");}
+async function saveLeadStatusUpdate(idx){const lead=ndFollowRows[idx]||{};const status=document.getElementById("statusSelect"+idx)?.value||"Follow-up Later";const followDate=document.getElementById("leadFollowDate")?.value||"";const data={type:"Lead Status Update",name:lead["Customer Name"]||lead.Name||"Customer",phone:lead.Phone||lead.Mobile||"",car:lead.Car||lead["Interested Car"]||"",priority:"Hot",source:"Admin Follow-up Dashboard",status,notes:`Status updated to ${status} | Follow-up: ${followDate} | Previous: ${JSON.stringify(lead).slice(0,300)}`,date:new Date().toLocaleString()};await fetch(ND_WEBHOOK_FOLLOW,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});alert("Status/follow-up saved to CRM.");setTimeout(loadNdLeadStatusDashboard,1200);}
+function injectNdLeadStatusButton(){const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");const visible=admin&&!admin.classList.contains("hidden");const existing=document.getElementById("ndLeadStatusBtn");if(!visible){if(existing)existing.remove();return;}if(existing)return;const btn=document.createElement("button");btn.id="ndLeadStatusBtn";btn.onclick=openNdLeadStatus;btn.className="fixed bottom-[26rem] left-6 z-[10001] bg-purple-600 hover:bg-purple-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.innerHTML='<i class="fa-solid fa-phone-volume"></i> Lead Follow-up';document.body.appendChild(btn);}
+function buildNdFeaturedCars(){const grid=document.getElementById("ndFeaturedCarsQuickGrid");if(!grid)return;let cards=Array.from(document.querySelectorAll("#carGrid > *")).slice(0,3);if(cards.length){grid.innerHTML=cards.map((card,i)=>{const title=card.querySelector("h3,h2,h4")?.textContent?.trim()||"Featured Car";const img=card.querySelector("img")?.src||"hero.jpg";return `<div class="nd-featured-clean-card"><img src="${img}" class="nd-featured-clean-img"><div class="p-5"><span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Featured</span><h3 class="text-xl font-black uppercase mt-3">${title}</h3><p class="text-xs text-slate-500 font-semibold mt-2">Direct-owner car with PDI support available.</p><div class="grid grid-cols-3 gap-2 mt-4"><a href="https://wa.me/917838335143?text=${encodeURIComponent("Hi NoDealer, I am interested in "+title)}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WA</a><a href="tel:+917838335143" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a><button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 rounded-xl py-3 text-[10px] font-black uppercase">PDI</button></div></div></div>`}).join("");}}
+document.addEventListener("DOMContentLoaded",function(){setInterval(function(){injectNdLeadStatusButton();buildNdFeaturedCars();},1200);});
+document.addEventListener("click",function(){setTimeout(function(){injectNdLeadStatusButton();buildNdFeaturedCars();},300);},true);
 </script>
 
 </body>. It hardens admin visibility,
