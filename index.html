@@ -534,6 +534,20 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 .nd-featured-clean-card{background:white;border:1px solid #e2e8f0;border-radius:28px;overflow:hidden;box-shadow:0 18px 50px rgba(15,23,42,.08)}
 .nd-featured-clean-img{height:180px;width:100%;object-fit:cover;background:#f1f5f9}
 
+
+/* NODEALER VEHICLE DETAIL PAGE + PDI PDF UPGRADE */
+.nd-car-detail-modal{position:fixed;inset:0;z-index:100010;background:rgba(2,6,23,.86);backdrop-filter:blur(10px);padding:16px;overflow-y:auto}
+.nd-car-detail-shell{max-width:1180px;margin:0 auto;background:white;border-radius:34px;overflow:hidden;box-shadow:0 35px 100px rgba(0,0,0,.35)}
+.nd-car-detail-grid{display:grid;grid-template-columns:1.1fr .9fr}
+.nd-car-detail-img{height:520px;width:100%;object-fit:cover;background:#f1f5f9}
+.nd-car-thumb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.nd-car-thumb{height:78px;border-radius:16px;object-fit:cover;background:#f1f5f9;border:2px solid transparent;cursor:pointer}
+.nd-car-spec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:13px}
+.nd-car-badge{display:inline-flex;gap:6px;align-items:center;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-detail-action{border-radius:18px;padding:14px;text-align:center;font-size:11px;font-weight:900;text-transform:uppercase}
+.nd-pdi-photo-preview{height:92px;border-radius:16px;background:#f1f5f9;object-fit:cover;width:100%;border:1px solid #e2e8f0}
+@media(max-width:768px){.nd-car-detail-grid{grid-template-columns:1fr}.nd-car-detail-img{height:280px}.nd-car-thumb{height:58px}.nd-car-detail-shell{border-radius:24px}}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -6014,6 +6028,107 @@ function injectNdLeadStatusButton(){const admin=document.getElementById("adminWo
 function buildNdFeaturedCars(){const grid=document.getElementById("ndFeaturedCarsQuickGrid");if(!grid)return;let cards=Array.from(document.querySelectorAll("#carGrid > *")).slice(0,3);if(cards.length){grid.innerHTML=cards.map((card,i)=>{const title=card.querySelector("h3,h2,h4")?.textContent?.trim()||"Featured Car";const img=card.querySelector("img")?.src||"hero.jpg";return `<div class="nd-featured-clean-card"><img src="${img}" class="nd-featured-clean-img"><div class="p-5"><span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Featured</span><h3 class="text-xl font-black uppercase mt-3">${title}</h3><p class="text-xs text-slate-500 font-semibold mt-2">Direct-owner car with PDI support available.</p><div class="grid grid-cols-3 gap-2 mt-4"><a href="https://wa.me/917838335143?text=${encodeURIComponent("Hi NoDealer, I am interested in "+title)}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WA</a><a href="tel:+917838335143" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a><button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 rounded-xl py-3 text-[10px] font-black uppercase">PDI</button></div></div></div>`}).join("");}}
 document.addEventListener("DOMContentLoaded",function(){setInterval(function(){injectNdLeadStatusButton();buildNdFeaturedCars();},1200);});
 document.addEventListener("click",function(){setTimeout(function(){injectNdLeadStatusButton();buildNdFeaturedCars();},300);},true);
+</script>
+
+
+<!-- NODEALER VEHICLE DETAIL PAGE MODAL -->
+<div id="ndVehicleDetailModal" class="nd-car-detail-modal hidden">
+  <div class="nd-car-detail-shell">
+    <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
+      <div><p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Verified Listing</p><h2 id="ndDetailCarName" class="text-2xl md:text-3xl font-black uppercase">Vehicle Details</h2></div>
+      <button onclick="closeNdVehicleDetail()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+    </div>
+    <div class="nd-car-detail-grid">
+      <div class="p-5 bg-slate-50">
+        <img id="ndDetailMainImg" src="hero.jpg" class="nd-car-detail-img rounded-[2rem]" alt="Car detail">
+        <div id="ndDetailThumbs" class="nd-car-thumb-grid"></div>
+      </div>
+      <div class="p-6">
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="nd-car-badge bg-green-50 text-green-700"><i class="fa-solid fa-user-check"></i> Owner Direct</span>
+          <span class="nd-car-badge bg-blue-50 text-blue-700"><i class="fa-solid fa-shield-check"></i> Verified</span>
+          <span class="nd-car-badge bg-amber-50 text-amber-700"><i class="fa-solid fa-clipboard-check"></i> PDI Available</span>
+        </div>
+        <h3 id="ndDetailPrice" class="text-4xl font-black text-slate-950">Price On Request</h3>
+        <p id="ndDetailMeta" class="text-sm text-slate-500 font-bold mt-1">Direct-owner car with NoDealer support</p>
+        <div class="grid grid-cols-2 gap-3 mt-5">
+          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Year</p><h4 id="ndDetailYear" class="font-black">--</h4></div>
+          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">KM Driven</p><h4 id="ndDetailKm" class="font-black">--</h4></div>
+          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Fuel</p><h4 id="ndDetailFuel" class="font-black">--</h4></div>
+          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Transmission</p><h4 id="ndDetailTrans" class="font-black">--</h4></div>
+          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Ownership</p><h4 id="ndDetailOwner" class="font-black">Owner Direct</h4></div>
+          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Location</p><h4 id="ndDetailLocation" class="font-black">Gurugram</h4></div>
+        </div>
+        <div class="bg-slate-50 border rounded-[2rem] p-5 mt-5">
+          <h4 class="font-black uppercase text-slate-950">Why book PDI for this car?</h4>
+          <p class="text-xs text-slate-500 font-semibold mt-2">NoDealer recommends inspection before token/payment to verify engine, paint, tyres, documents, odometer clues and accidental signs.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-3 mt-5">
+          <a id="ndDetailWhatsapp" href="https://wa.me/917838335143" target="_blank" class="nd-detail-action bg-green-600 text-white"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+          <a href="tel:+917838335143" class="nd-detail-action bg-slate-950 text-white"><i class="fa-solid fa-phone"></i> Call Now</a>
+          <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'});closeNdVehicleDetail();" class="nd-detail-action bg-amber-500 text-slate-950">Book PDI</button>
+          <button onclick="saveNdVehicleInterest()" class="nd-detail-action bg-red-600 text-white">Save Interest</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* NODEALER VEHICLE DETAIL PAGE + PDI PDF UPGRADE SCRIPT */
+let ndCurrentDetailCar={title:"Vehicle Details",phone:"917838335143"};
+function closeNdVehicleDetail(){document.getElementById("ndVehicleDetailModal")?.classList.add("hidden");}
+function ndCleanText(txt){return String(txt||"").replace(/\s+/g," ").trim();}
+function ndExtractPrice(txt){const m=String(txt||"").match(/₹\s?[0-9.,]+\s?(Lakh|Lakhs|Cr|Crore|K|k)?|[0-9.]+\s?Lakh/i);return m?m[0]:"Price On Request";}
+function ndFindSpec(text,patterns,fallback="--"){for(const p of patterns){const m=text.match(p);if(m)return ndCleanText(m[1]||m[0]);}return fallback;}
+function openNdVehicleDetailFromCard(card){
+ if(!card)return;
+ const title=ndCleanText(card.querySelector("h3,h2,h4")?.textContent)||"Verified Car";
+ const allText=ndCleanText(card.textContent);
+ const price=ndExtractPrice(allText);
+ const img=card.querySelector("img")?.src||"hero.jpg";
+ const imgs=Array.from(card.querySelectorAll("img")).map(i=>i.src).filter(Boolean);
+ const gallery=imgs.length?imgs:[img,img,img,img];
+ ndCurrentDetailCar={title,price,img,text:allText,phone:"917838335143"};
+ const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val||"--";};
+ set("ndDetailCarName",title);set("ndDetailPrice",price);set("ndDetailMeta","Verified direct-owner listing • PDI available");
+ set("ndDetailYear",ndFindSpec(allText,[/(20\d{2})/]));
+ set("ndDetailKm",ndFindSpec(allText,[/(\d+[,.]?\d*\s?km)/i,/(\d+[,.]?\d*\s?KM)/]));
+ set("ndDetailFuel",ndFindSpec(allText,[/(Petrol|Diesel|CNG|Electric|Hybrid)/i]));
+ set("ndDetailTrans",ndFindSpec(allText,[/(Manual|Automatic|AMT|CVT|DCT)/i]));
+ set("ndDetailOwner",ndFindSpec(allText,[/(1st Owner|2nd Owner|3rd Owner|First Owner|Second Owner)/i],"Owner Direct"));
+ set("ndDetailLocation",ndFindSpec(allText,[/(Gurugram|Delhi|Noida|Faridabad|Ghaziabad|Mumbai|Pune|Bangalore|Hyderabad)/i],"Gurugram"));
+ const main=document.getElementById("ndDetailMainImg");if(main)main.src=img;
+ const thumbs=document.getElementById("ndDetailThumbs");if(thumbs){thumbs.innerHTML=gallery.slice(0,8).map(src=>`<img src="${src}" class="nd-car-thumb" onclick="document.getElementById('ndDetailMainImg').src='${src}'">`).join("");}
+ const wa=document.getElementById("ndDetailWhatsapp");if(wa)wa.href="https://wa.me/917838335143?text="+encodeURIComponent("Hi NoDealer, I am interested in "+title+". Please share details.");
+ document.getElementById("ndVehicleDetailModal")?.classList.remove("hidden");
+}
+async function saveNdVehicleInterest(){
+ const data={type:"Vehicle Detail Interest",name:"Website Visitor",phone:"",car:ndCurrentDetailCar.title,priority:"Hot",source:"Vehicle Detail Page",status:"New Lead",notes:"Customer clicked Save Interest from detail page for "+ndCurrentDetailCar.title,date:new Date().toLocaleString()};
+ await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+ alert("Interest saved.");
+}
+function injectNdVehicleDetailButtons(){
+ Array.from(document.querySelectorAll("#carGrid > *")).forEach(card=>{
+  if(card.dataset.ndDetailReady==="true")return;card.dataset.ndDetailReady="true";
+  const btn=document.createElement("button");btn.className="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl py-3 text-[10px] font-black uppercase nd-detail-view-btn";
+  btn.innerHTML='<i class="fa-solid fa-circle-info"></i> View Full Details';
+  btn.onclick=function(e){e.preventDefault();e.stopPropagation();openNdVehicleDetailFromCard(card);};
+  card.appendChild(btn);
+ });
+}
+function enhanceNdPdiReportPdf(){Array.from(document.querySelectorAll("button")).filter(b=>/print|save pdf|download/i.test(b.textContent||"")).forEach(btn=>{if(btn.dataset.ndPdfEnhanced==="true")return;btn.dataset.ndPdfEnhanced="true";btn.title="This opens browser print. Select Save as PDF.";});}
+function addNdPdiPhotoInputs(){
+ const builder=document.getElementById("ndPdiReportBuilderModal");if(!builder||document.getElementById("ndPdiPhotoUploadBox"))return;
+ const target=builder.querySelector(".p-6.grid")||builder.querySelector(".p-6");if(!target)return;
+ const box=document.createElement("div");box.id="ndPdiPhotoUploadBox";box.className="bg-white border rounded-[2rem] p-5 lg:col-span-2";
+ box.innerHTML='<h3 class="text-xl font-black uppercase text-slate-950 mb-3">Inspection Photos</h3><p class="text-xs text-slate-500 font-semibold mb-3">Upload front/rear/interior/engine photos for report preview.</p><input type="file" id="ndPdiPhotoFiles" multiple accept="image/*" class="nd-pdi-builder-input"><div id="ndPdiPhotoPreviewGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3"></div>';
+ target.appendChild(box);
+ document.getElementById("ndPdiPhotoFiles")?.addEventListener("change",function(e){const grid=document.getElementById("ndPdiPhotoPreviewGrid");if(!grid)return;grid.innerHTML="";Array.from(e.target.files||[]).slice(0,8).forEach(file=>{const reader=new FileReader();reader.onload=()=>{grid.insertAdjacentHTML("beforeend",`<img src="${reader.result}" class="nd-pdi-photo-preview">`);};reader.readAsDataURL(file);});});
+}
+document.addEventListener("DOMContentLoaded",function(){setInterval(function(){injectNdVehicleDetailButtons();enhanceNdPdiReportPdf();addNdPdiPhotoInputs();},1200);});
+document.addEventListener("click",function(){setTimeout(function(){injectNdVehicleDetailButtons();enhanceNdPdiReportPdf();addNdPdiPhotoInputs();},300);},true);
 </script>
 
 </body>. It hardens admin visibility,
