@@ -618,6 +618,22 @@ body{background:#f8fafc;color:#0f172a}
   header button{font-size:10px!important;padding:9px 10px!important}
 }
 
+
+/* =========================================================
+   NODEALER FINAL PUBLIC CUSTOMER CLEANUP + ADMIN PRIVACY
+========================================================= */
+#secureAdminPortal,#adminWorkspaceView,#manualLeadPanel,#analyticsFloatingBtn,#ndLeadViewerBtn,#ndAdminCrmToolsBtn,#ndFinalAdminCenterBtn,#inventoryAdminOsBtn,#carManagerAdminBtn,
+#secureAdminPortal *,#adminWorkspaceView *,#manualLeadPanel *{
+  display:none!important;visibility:hidden!important;pointer-events:none!important;
+}
+#service-command-center,#ndLaunchTrustStrip,#oldLongHeroHidden{display:none!important}
+.nd-public-hide{display:none!important}
+.nd-customer-bottom-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;display:none;grid-template-columns:repeat(4,1fr);gap:8px}
+.nd-customer-bottom-bar a,.nd-customer-bottom-bar button{border-radius:18px;padding:10px 6px;font-size:10px;font-weight:900;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 14px 35px rgba(15,23,42,.25)}
+.nd-lead-saving{opacity:.55!important;pointer-events:none!important}
+.nd-lead-saved-pill{position:fixed;right:14px;bottom:92px;background:#16a34a;color:white;border-radius:999px;padding:9px 13px;font-size:10px;font-weight:900;z-index:100000;display:none;box-shadow:0 14px 35px rgba(15,23,42,.25)}
+@media(max-width:768px){.nd-customer-bottom-bar{display:grid}body{padding-bottom:90px!important}}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -6298,198 +6314,173 @@ document.addEventListener("click",function(){setTimeout(function(){injectNdVehic
 </div>
 
 
+
+
+
+<!-- NODEALER FINAL CUSTOMER MOBILE BAR -->
+<div id="ndCustomerBottomBar" class="nd-customer-bottom-bar">
+  <button onclick="scrollToInventory && scrollToInventory()" class="bg-blue-600 text-white"><i class="fa-solid fa-car-side"></i><span>Buy</span></button>
+  <button onclick="openSellModal && openSellModal()" class="bg-red-600 text-white"><i class="fa-solid fa-key"></i><span>Sell</span></button>
+  <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950"><i class="fa-solid fa-clipboard-check"></i><span>PDI</span></button>
+  <a href="tel:+917838335143" class="bg-slate-950 text-white"><i class="fa-solid fa-phone"></i><span>Call</span></a>
+</div>
+
+
 <script>
 /* =========================================================
-   NODEALER FINAL STABILITY SCRIPT
-   Clean public page + duplicate-proof lead capture + admin privacy
+   NODEALER FINAL PUBLIC LEAD ENGINE
+   1 click = 1 lead, all Buy/Sell/PDI/Valuation/WhatsApp leads saved
 ========================================================= */
-const ND_FINAL_WEBHOOK = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
-let ndLeadSubmitLock = false;
-let ndLastLeadKey = "";
-let ndLastLeadTime = 0;
+(function(){
+  const WEBHOOK = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+  const DEDUPE_MS = 20000;
+  let lastKey = "";
+  let lastTime = 0;
+  let hardLock = false;
 
-function ndVal(id){return (document.getElementById(id)?.value || "").trim();}
-function ndNorm(v){return String(v||"").toLowerCase().replace(/\s+/g," ").trim();}
-function ndLeadKey(data){
-  return [data.type||"",data.phone||"",data.car||"",data.regNo||"",data.useCase||"",data.package||""].map(ndNorm).join("|");
-}
-function ndShowSavedPill(msg="Lead Saved"){
-  let pill=document.getElementById("ndLeadSavedPill");
-  if(!pill){pill=document.createElement("div");pill.id="ndLeadSavedPill";pill.className="nd-lead-debug-pill";document.body.appendChild(pill);}
-  pill.textContent=msg; pill.style.display="block"; setTimeout(()=>pill.style.display="none",2200);
-}
-async function ndFinalSaveLead(payload){
-  const data={
-    date:new Date().toLocaleString(),
-    timestamp:new Date().toISOString(),
-    type:payload.type||"Website Lead",
-    name:payload.name||payload.customerName||"Website Visitor",
-    phone:payload.phone||payload.mobile||"",
-    source:payload.source||"NoDealer Website",
-    car:payload.car||payload.vehicle||payload.model||"",
-    status:payload.status||"New Lead",
-    priority:payload.priority||"Hot",
-    notes:payload.notes||"",
-    regNo:payload.regNo||payload.registration||"",
-    city:payload.city||"",
-    location:payload.location||"",
-    package:payload.package||"",
-    useCase:payload.useCase||""
+  function clean(v){ return String(v||"").trim(); }
+  function val(id){ return clean(document.getElementById(id)?.value); }
+  function norm(v){ return clean(v).toLowerCase().replace(/\s+/g," "); }
+  function keyOf(d){ return [d.type,d.phone,d.car,d.regNo,d.useCase,d.package].map(norm).join("|"); }
+  function showPill(text){
+    let p = document.getElementById("ndLeadSavedFinalPill");
+    if(!p){ p=document.createElement("div"); p.id="ndLeadSavedFinalPill"; p.className="nd-lead-saved-pill"; document.body.appendChild(p); }
+    p.textContent=text||"Lead Saved"; p.style.display="block"; setTimeout(()=>p.style.display="none",2200);
+  }
+
+  async function saveLead(payload){
+    const data = {
+      date: new Date().toLocaleString(),
+      timestamp: new Date().toISOString(),
+      type: payload.type || "Website Lead",
+      name: payload.name || "Website Visitor",
+      phone: payload.phone || "",
+      car: payload.car || "",
+      source: payload.source || "NoDealer Website",
+      status: payload.status || "New Lead",
+      priority: payload.priority || "Hot",
+      notes: payload.notes || "",
+      regNo: payload.regNo || "",
+      city: payload.city || "",
+      location: payload.location || "",
+      package: payload.package || "",
+      useCase: payload.useCase || ""
+    };
+    const k = keyOf(data), now = Date.now();
+    if((hardLock && k === lastKey) || (k === lastKey && now-lastTime < DEDUPE_MS)){
+      showPill("Already Saved");
+      return false;
+    }
+    hardLock = true; lastKey = k; lastTime = now;
+    try{
+      await originalFetch(WEBHOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+      sessionStorage.setItem("nd_last_saved_lead", JSON.stringify(data));
+      showPill("Lead Saved");
+      return true;
+    }catch(err){
+      console.error("NoDealer lead save failed", err);
+      alert("Lead save failed. Please check internet.");
+      return false;
+    }finally{
+      setTimeout(()=>{hardLock=false;},3500);
+    }
+  }
+
+  /* Dedupe ANY old direct fetch calls to the Apps Script too */
+  const originalFetch = window.fetch.bind(window);
+  window.fetch = function(input, init){
+    const url = String(typeof input === "string" ? input : (input && input.url) || "");
+    const method = String((init && init.method) || "GET").toUpperCase();
+    if(url.includes("script.google.com/macros/s/") && method === "POST"){
+      let body = "";
+      try{ body = typeof init.body === "string" ? init.body : JSON.stringify(init.body || {}); }catch(e){}
+      const k = norm(body).slice(0,500);
+      const now = Date.now();
+      if(k && k === lastKey && now-lastTime < DEDUPE_MS){
+        showPill("Already Saved");
+        return Promise.resolve(new Response("", {status:200}));
+      }
+      lastKey = k; lastTime = now;
+    }
+    return originalFetch(input, init);
   };
-  const key=ndLeadKey(data), now=Date.now();
 
-  if(ndLeadSubmitLock && key===ndLastLeadKey) return false;
-  if(key===ndLastLeadKey && (now-ndLastLeadTime)<15000){
-    ndShowSavedPill("Already Saved");
-    return false;
+  window.ndUniversalSaveLead = saveLead;
+  window.ndFinalSaveLead = saveLead;
+
+  window.submitPdiFlowBooking = async function(){
+    const btn = event?.target; if(btn) btn.classList.add("nd-lead-saving");
+    const phone = val("pdiFlowPhone") || val("pdiPhone");
+    if(!phone){ alert("Please enter mobile number."); if(btn)btn.classList.remove("nd-lead-saving"); return; }
+    const reg = val("pdiFlowReg");
+    const useCase = window.selectedPdiUseCase || "PDI Booking";
+    const pkg = window.selectedPdiPackage || "Advanced Report";
+    const ok = await saveLead({
+      type:"PDI Booking", name:"PDI Customer", phone,
+      car:val("pdiFlowCar") || val("pdiCarDetails"), regNo:reg,
+      city:val("pdiFlowCity") || val("pdiCity"),
+      location:val("pdiFlowLocation") || val("pdiLocation"),
+      package:pkg, useCase,
+      source:"PDI Booking Flow", status:"New PDI Booking", priority:"Hot",
+      notes:["Reg No: "+reg,"Use Case: "+useCase,"Package: "+pkg,"Preferred Date: "+val("pdiFlowDate"),"Notes: "+(val("pdiFlowNotes")||val("pdiNotes"))].join(" | ")
+    });
+    if(btn) setTimeout(()=>btn.classList.remove("nd-lead-saving"),900);
+    if(ok) alert("PDI booking saved to CRM.");
+  };
+
+  window.handlePdiSubmit = function(e){ if(e)e.preventDefault(); return window.submitPdiFlowBooking(); };
+
+  window.saveValuationLead = async function(){
+    const phone = val("valPhone");
+    if(!phone){ alert("Please enter mobile number."); return; }
+    const car = [val("valBrand"),val("valModel"),val("valYear")].filter(Boolean).join(" ");
+    const range = document.getElementById("ndValueRange")?.textContent || "";
+    const ok = await saveLead({
+      type:"Car Value Estimate", name:"Valuation Customer", phone, car, regNo:val("valRegNo"),
+      source:"Website Valuation Tool", status:"Value Estimate Given", priority:"Warm",
+      notes:"Estimate: "+range+" | Fuel: "+val("valFuel")+" | KM: "+val("valKm")+" | Owner: "+val("valOwner")
+    });
+    if(ok) alert("Valuation lead saved to CRM.");
+  };
+
+  window.saveNdVehicleInterest = async function(){
+    const title = (window.ndCurrentDetailCar && window.ndCurrentDetailCar.title) || document.getElementById("ndDetailCarName")?.textContent || "Vehicle";
+    const ok = await saveLead({type:"Buy Car Lead",name:"Buyer",phone:"",car:title,source:"Vehicle Detail Page",status:"New Buy Lead",priority:"Hot",notes:"Customer clicked vehicle interest for "+title});
+    if(ok) alert("Vehicle interest saved to CRM.");
+  };
+
+  document.addEventListener("submit", async function(e){
+    const form = e.target;
+    if(!form || form.dataset.ndSubmitting === "true") return;
+    const txt = (form.id+" "+form.className+" "+(form.innerText||"")).toLowerCase();
+    const isSell = txt.includes("sell") || form.querySelector("#sellerPhone,#sellPhone,#sellerName,#sellName");
+    if(!isSell) return;
+    e.preventDefault();
+    form.dataset.ndSubmitting = "true"; setTimeout(()=>form.dataset.ndSubmitting="false",4500);
+    const phone = val("sellerPhone") || val("sellPhone") || form.querySelector("input[type='tel']")?.value || "";
+    const name = val("sellerName") || val("sellName") || form.querySelector("input[placeholder*='Name'],input[placeholder*='name']")?.value || "Seller";
+    const car = val("sellerCar") || val("carModel") || val("sellCarModel") || form.querySelector("input[placeholder*='Car'],input[placeholder*='Model'],input[placeholder*='car'],input[placeholder*='model']")?.value || "";
+    const ok = await saveLead({type:"Sell Car Lead",name,phone,car,source:"Sell Car Form",status:"New Sell Lead",priority:"Hot",notes:"Customer submitted sell car enquiry."});
+    if(ok) alert("Sell car enquiry saved to CRM.");
+  }, true);
+
+  document.addEventListener("click", function(e){
+    const wa = e.target.closest && e.target.closest("a[href*='wa.me'],a[href*='api.whatsapp']");
+    if(!wa) return;
+    let car = "";
+    const card = wa.closest("#carGrid > *") || wa.closest(".nd-featured-clean-card") || wa.closest(".nd-car-detail-shell");
+    if(card) car = card.querySelector("h3,h2,h4")?.textContent || "";
+    if(!car) car = document.getElementById("ndDetailCarName")?.textContent || "WhatsApp Enquiry";
+    saveLead({type:"WhatsApp Lead",name:"WhatsApp Customer",phone:"",car,source:"WhatsApp Button",status:"New WhatsApp Lead",priority:"Hot",notes:"Customer clicked WhatsApp for "+car});
+  }, true);
+
+  function hidePublicAdmin(){
+    ["secureAdminPortal","adminWorkspaceView","manualLeadPanel","analyticsFloatingBtn","ndLeadViewerBtn","ndAdminCrmToolsBtn","ndFinalAdminCenterBtn","inventoryAdminOsBtn","carManagerAdminBtn"].forEach(id=>{
+      const el=document.getElementById(id); if(el){ el.style.display="none"; el.style.visibility="hidden"; }
+    });
   }
-
-  ndLeadSubmitLock=true; ndLastLeadKey=key; ndLastLeadTime=now;
-  try{
-    await fetch(ND_FINAL_WEBHOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-    sessionStorage.setItem("nd_last_saved_lead",JSON.stringify(data));
-    ndShowSavedPill("Lead Saved");
-    return true;
-  }catch(e){
-    console.error("Lead save failed",e);
-    alert("Lead save failed. Check internet or Apps Script.");
-    return false;
-  }finally{
-    setTimeout(()=>{ndLeadSubmitLock=false;},3500);
-  }
-}
-window.ndUniversalSaveLead = ndFinalSaveLead;
-
-/* Clean public page: show only customer-important direct sections */
-function ndFinalCleanPublicSections(){
-  const allowed=new Set(["ndFinalHome","ndFinalTrustStrip","ndFinalFlow","ndFeaturedCarsQuick","inventory-section","ndCarValueEstimator","pdi-section","trust-center-section","faq-section"]);
-  const main=document.getElementById("main-content");
-  if(!main)return;
-  Array.from(main.children).forEach(el=>{
-    if(el.tagName==="SECTION"){
-      const id=el.id||"";
-      if(!allowed.has(id)) el.classList.add("nd-final-hidden-public");
-    }
-  });
-  ["manualLeadPanel","analyticsFloatingBtn","ndLeadViewerBtn"].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display="none";});
-}
-
-/* PDI booking final one-click save */
-window.submitPdiFlowBooking = async function(){
-  const btn=event?.target; if(btn) btn.classList.add("nd-submit-loading");
-  const phone=ndVal("pdiFlowPhone"), reg=ndVal("pdiFlowReg"), car=ndVal("pdiFlowCar");
-  if(!phone){alert("Please enter mobile number."); if(btn)btn.classList.remove("nd-submit-loading"); return;}
-  const useCase=window.selectedPdiUseCase || "Buying Used Car";
-  const pkg=window.selectedPdiPackage || "Advanced Report";
-  const ok=await ndFinalSaveLead({
-    type:"PDI Booking",
-    name:"PDI Customer",
-    phone,car,regNo:reg,
-    city:ndVal("pdiFlowCity"),
-    location:ndVal("pdiFlowLocation"),
-    package:pkg,
-    useCase,
-    priority:"Hot",
-    source:"PDI Booking Flow",
-    status:"New PDI Booking",
-    notes:[
-      "Reg No: "+reg,
-      "Use Case: "+useCase,
-      "Package: "+pkg,
-      "City: "+ndVal("pdiFlowCity"),
-      "Location: "+ndVal("pdiFlowLocation"),
-      "Preferred Date: "+ndVal("pdiFlowDate"),
-      "Extra Notes: "+ndVal("pdiFlowNotes")
-    ].join(" | ")
-  });
-  if(btn) setTimeout(()=>btn.classList.remove("nd-submit-loading"),1200);
-  if(ok) alert("PDI booking saved to CRM. NoDealer team will contact you.");
-};
-
-/* Generic form handling for Sell/PDI without duplicates */
-document.addEventListener("submit",async function(e){
-  const form=e.target;
-  if(!form || form.dataset.ndFinalHandled==="true") return;
-  const text=(form.id+" "+form.className+" "+(form.innerText||"")).toLowerCase();
-  const isSell=text.includes("sell") || form.querySelector("#sellerPhone,#sellPhone,#sellerName,#sellName");
-  const isPdi=text.includes("pdi") || form.querySelector("#pdiPhone,#pdiName,#pdiCarDetails");
-  if(!isSell && !isPdi) return;
-  e.preventDefault();
-  form.dataset.ndFinalHandled="true";
-  setTimeout(()=>{form.dataset.ndFinalHandled="false";},4000);
-
-  if(isSell){
-    const phone=ndVal("sellerPhone")||ndVal("sellPhone")||form.querySelector("input[type='tel']")?.value||"";
-    const name=ndVal("sellerName")||ndVal("sellName")||form.querySelector("input[placeholder*='Name'],input[placeholder*='name']")?.value||"Seller";
-    const car=ndVal("sellerCar")||ndVal("carModel")||ndVal("sellCarModel")||form.querySelector("input[placeholder*='Car'],input[placeholder*='Model'],input[placeholder*='car'],input[placeholder*='model']")?.value||"";
-    if(phone||car){
-      const ok=await ndFinalSaveLead({type:"Sell Car Lead",name,phone,car,source:"Sell Car Form",status:"New Sell Lead",priority:"Hot",notes:"Customer submitted sell car enquiry."});
-      if(ok) alert("Sell car enquiry saved to CRM.");
-    }
-  }else if(isPdi && typeof window.submitPdiFlowBooking!=="function"){
-    const ok=await ndFinalSaveLead({type:"PDI Booking",name:ndVal("pdiName")||"PDI Customer",phone:ndVal("pdiPhone"),car:ndVal("pdiCarDetails"),city:ndVal("pdiCity"),location:ndVal("pdiLocation"),source:"PDI Form",status:"New PDI Booking",priority:"Hot",notes:ndVal("pdiNotes")});
-    if(ok) alert("PDI request saved to CRM.");
-  }
-},true);
-
-/* Valuation lead */
-window.saveValuationLead = async function(){
-  const phone=ndVal("valPhone");
-  if(!phone){alert("Please enter mobile number to save valuation lead.");return;}
-  const car=[ndVal("valBrand"),ndVal("valModel"),ndVal("valYear")].filter(Boolean).join(" ");
-  const value=document.getElementById("ndValueRange")?.textContent||"";
-  const ok=await ndFinalSaveLead({type:"Car Value Estimate",name:"Valuation Customer",phone,car,regNo:ndVal("valRegNo"),source:"Website Valuation Tool",status:"Value Estimate Given",priority:"Warm",notes:"Estimate: "+value+" | Fuel: "+ndVal("valFuel")+" | KM: "+ndVal("valKm")+" | Owner: "+ndVal("valOwner")});
-  if(ok) alert("Valuation lead saved to CRM.");
-};
-
-/* Buy / detail interest */
-window.saveNdVehicleInterest = async function(){
-  const title=(window.ndCurrentDetailCar&&window.ndCurrentDetailCar.title)||document.getElementById("ndDetailCarName")?.textContent||"Vehicle";
-  const ok=await ndFinalSaveLead({type:"Buy Car Lead",name:"Buyer",phone:"",car:title,source:"Vehicle Detail Page",status:"New Buy Lead",priority:"Hot",notes:"Customer clicked Save Interest for "+title});
-  if(ok) alert("Vehicle interest saved to CRM.");
-};
-
-/* WhatsApp clicks save once */
-document.addEventListener("click",function(e){
-  const link=e.target.closest&&e.target.closest("a[href*='wa.me'],a[href*='api.whatsapp']");
-  if(!link)return;
-  let carTitle="";
-  const card=link.closest("#carGrid > *")||link.closest(".nd-featured-clean-card")||link.closest(".nd-car-detail-shell");
-  if(card)carTitle=card.querySelector("h3,h2,h4")?.textContent||"";
-  if(!carTitle)carTitle=document.getElementById("ndDetailCarName")?.textContent||"WhatsApp Enquiry";
-  ndFinalSaveLead({type:"WhatsApp Lead",name:"WhatsApp Customer",phone:"",car:carTitle,source:"WhatsApp Button",status:"New WhatsApp Lead",priority:"Hot",notes:"Customer clicked WhatsApp for: "+carTitle});
-},true);
-
-/* Admin command center */
-function openNdFinalAdminCenter(){document.getElementById("ndFinalAdminCenterModal")?.classList.remove("hidden");}
-function closeNdFinalAdminCenter(){document.getElementById("ndFinalAdminCenterModal")?.classList.add("hidden");}
-function ndAdminVisible(){
-  const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");
-  return !!(admin && !admin.classList.contains("hidden"));
-}
-function injectNdFinalAdminButton(){
-  const existing=document.getElementById("ndFinalAdminCenterBtn");
-  if(!ndAdminVisible()){if(existing)existing.remove();return;}
-  if(existing)return;
-  const btn=document.createElement("button");
-  btn.id="ndFinalAdminCenterBtn";
-  btn.onclick=openNdFinalAdminCenter;
-  btn.className="nd-final-admin-btn fixed bottom-5 right-5 z-[10001] bg-slate-950 hover:bg-slate-800 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
-  btn.style.display="flex";
-  btn.innerHTML='<i class="fa-solid fa-gauge-high"></i> Admin Center';
-  document.body.appendChild(btn);
-}
-
-window.testNoDealerLeadSave = async function(){
-  const ok=await ndFinalSaveLead({type:"Test Lead",name:"NoDealer Test",phone:"9999999999",car:"Test Car",source:"Admin Test",status:"New Lead",priority:"Hot",notes:"CRM test lead"});
-  if(ok) alert("Test lead sent. Check Sheet / Lead Viewer after 10-20 seconds.");
-};
-
-document.addEventListener("DOMContentLoaded",function(){
-  ndFinalCleanPublicSections();
-  setInterval(function(){ndFinalCleanPublicSections();injectNdFinalAdminButton();},1200);
-});
-document.addEventListener("click",function(){setTimeout(function(){ndFinalCleanPublicSections();injectNdFinalAdminButton();},250);},true);
+  document.addEventListener("DOMContentLoaded",()=>setInterval(hidePublicAdmin,1000));
+})();
 </script>
 
 </body>. It hardens admin visibility,
