@@ -417,25 +417,43 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
 }
 
 
-/* NODEALER ADMIN PHOTO VIEWER FIX */
-.nd-photo-viewer-btn{background:#2563eb;color:white;border-radius:12px;padding:9px 11px;font-size:10px;font-weight:900;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
-.nd-photo-thumb{width:100%;height:120px;object-fit:cover;border-radius:16px;border:1px solid #e2e8f0;background:#f1f5f9;cursor:pointer}
-.nd-photo-detail-card{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
-.nd-photo-detail-input{width:100%;padding:11px 12px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
-
-
-/* NODEALER ADMIN PHOTO CLICK STAY-IN-PAGE FIX */
-.nd-admin-photo-overlay{position:fixed;inset:0;z-index:200000;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:18px}
-.nd-admin-photo-overlay.active{display:flex}
-.nd-admin-photo-box{width:min(1100px,100%);max-height:94vh;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.45)}
-.nd-admin-photo-head{background:#020617;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.nd-admin-photo-body{padding:14px;background:#0f172a}
-.nd-admin-photo-body img{width:100%;max-height:74vh;object-fit:contain;border-radius:18px;background:#111827}
-.nd-admin-photo-actions{padding:12px 16px;background:#fff;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.nd-admin-detail-wide{max-width:1280px!important;width:96vw!important}
-.nd-admin-photo-btn{background:#2563eb;color:#fff;border-radius:12px;padding:10px 12px;font-size:10px;font-weight:900;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
-.nd-admin-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-.nd-admin-photo-grid img{height:145px;width:100%;object-fit:cover;border-radius:16px;border:1px solid #e2e8f0;background:#f1f5f9;cursor:pointer}
+/* =========================================================
+   NODEALER ADMIN PRO LEADS + PHOTO GALLERY
+   Big lead section inside admin, photos open in same page
+========================================================= */
+.nd-pro-leads-panel{
+  background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:28px;
+  padding:22px;margin:28px auto;max-width:1180px;color:#fff;box-shadow:0 24px 80px rgba(0,0,0,.28)
+}
+.nd-pro-leads-header{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.nd-pro-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.12);color:white;border-radius:14px;padding:12px;font-size:13px;font-weight:800;outline:none}
+.nd-pro-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.18)}
+.nd-pro-lead-card{background:#020617;border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:18px;display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-bottom:14px}
+.nd-pro-lead-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.nd-pro-info-box{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px}
+.nd-pro-info-box p{font-size:9px;text-transform:uppercase;color:#94a3b8;font-weight:900;margin-bottom:3px}
+.nd-pro-info-box h4{font-size:13px;color:#fff;font-weight:900;word-break:break-word}
+.nd-pro-pill{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-pro-buy{background:#1d4ed8;color:white}.nd-pro-sell{background:#dc2626;color:white}.nd-pro-pdi{background:#f59e0b;color:#111827}.nd-pro-wa{background:#16a34a;color:white}.nd-pro-other{background:#334155;color:white}
+.nd-pro-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.nd-pro-photo-tile{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:7px}
+.nd-pro-photo-tile img{width:100%;height:112px;object-fit:cover;border-radius:12px;background:#1e293b;cursor:pointer}
+.nd-pro-photo-tile button{width:100%;margin-top:7px;background:#2563eb;color:white;border-radius:10px;padding:8px;font-size:9px;font-weight:900;text-transform:uppercase}
+.nd-pro-empty-photo{background:#0f172a;border:1px dashed rgba(255,255,255,.18);border-radius:18px;padding:20px;text-align:center;color:#94a3b8;font-size:12px;font-weight:800}
+.nd-pro-action-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.nd-pro-action-grid a,.nd-pro-action-grid button{border-radius:12px;padding:10px;text-align:center;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-pro-photo-modal{position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:18px}
+.nd-pro-photo-modal.active{display:flex}
+.nd-pro-photo-modal-box{width:min(1200px,100%);background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:28px;overflow:hidden;box-shadow:0 35px 120px rgba(0,0,0,.55)}
+.nd-pro-photo-modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 20px;color:white;background:#0f172a}
+.nd-pro-photo-modal-body{padding:16px;background:#020617}
+.nd-pro-photo-modal-body img{width:100%;max-height:78vh;object-fit:contain;border-radius:18px;background:#111827}
+.nd-pro-photo-modal-actions{padding:14px 18px;background:#0f172a;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+@media(max-width:900px){
+  .nd-pro-lead-card{grid-template-columns:1fr}
+  .nd-pro-lead-info{grid-template-columns:1fr}
+  .nd-pro-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 
 </style>
 
@@ -5223,336 +5241,224 @@ document.addEventListener("click", function() {
 </script>
 
 
-<!-- NODEALER ADMIN INQUIRY PHOTO VIEWER -->
-<div id="ndInquiryDetailModal" class="hidden fixed inset-0 z-[100090] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-    <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
-      <div>
-        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin</p>
-        <h2 id="ndInquiryTitle" class="text-2xl md:text-3xl font-black uppercase">Inquiry Details</h2>
-        <p id="ndInquirySub" class="text-sm text-slate-400 mt-1">Customer inquiry with photos and details</p>
-      </div>
-      <button onclick="closeNdInquiryDetail()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+<!-- NODEALER ADMIN PRO LEADS + PHOTO GALLERY SECTION -->
+<section id="ndProLeadsPanel" class="nd-pro-leads-panel">
+  <div class="nd-pro-leads-header">
+    <div>
+      <p class="text-[10px] uppercase text-amber-400 font-black">NoDealer Control Center</p>
+      <h2 class="text-2xl md:text-3xl font-black uppercase">Lead Details & Photos</h2>
+      <p class="text-xs text-slate-400 font-bold mt-1">Clear large view of customer enquiries, car details and uploaded photos inside admin only.</p>
     </div>
-    <div class="p-5 grid lg:grid-cols-12 gap-5">
-      <div class="lg:col-span-5">
-        <div class="nd-photo-detail-card">
-          <h3 class="font-black uppercase text-xl mb-3">Customer Details</h3>
-          <div id="ndInquiryInfo" class="space-y-2 text-sm font-semibold text-slate-700"></div>
-          <div class="grid grid-cols-2 gap-2 mt-4">
-            <a id="ndInquiryCall" href="#" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a>
-            <a id="ndInquiryWhatsapp" href="#" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a>
-          </div>
-        </div>
-      </div>
-      <div class="lg:col-span-7">
-        <div class="nd-photo-detail-card">
-          <div class="flex items-center justify-between gap-3 mb-3">
-            <h3 class="font-black uppercase text-xl">Uploaded Photos</h3>
-            <span id="ndPhotoCount" class="bg-blue-50 text-blue-700 rounded-full px-3 py-1 text-[10px] font-black uppercase">0 Photos</span>
-          </div>
-          <div id="ndInquiryPhotos" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
-          <p id="ndNoPhotosMsg" class="hidden text-sm text-slate-500 font-bold bg-slate-50 border rounded-2xl p-4">No image links found in this inquiry.</p>
-        </div>
-      </div>
-    </div>
+    <button onclick="ndProLoadLeads()" class="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">
+      <i class="fa-solid fa-rotate"></i> Refresh Leads
+    </button>
   </div>
-</div>
+  <div class="grid md:grid-cols-4 gap-3 mb-5">
+    <input id="ndProLeadSearch" oninput="ndProRenderLeads()" class="nd-pro-input md:col-span-2" placeholder="Search name, phone, car, reg no, notes">
+    <select id="ndProLeadType" onchange="ndProRenderLeads()" class="nd-pro-input">
+      <option value="">All Lead Types</option>
+      <option>Buy</option>
+      <option>Sell</option>
+      <option>PDI</option>
+      <option>WhatsApp</option>
+      <option>Valuation</option>
+    </select>
+    <select id="ndProLeadPhotoFilter" onchange="ndProRenderLeads()" class="nd-pro-input">
+      <option value="">All Leads</option>
+      <option value="photos">Only With Photos</option>
+    </select>
+  </div>
+  <div id="ndProLeadsList"></div>
+</section>
 
-<div id="ndLargePhotoModal" class="hidden fixed inset-0 z-[100091] bg-black/95 p-4 flex items-center justify-center">
-  <button onclick="closeNdLargePhoto()" class="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
-  <div class="max-w-5xl w-full">
-    <img id="ndLargePhotoImg" src="" class="max-h-[82vh] w-full object-contain rounded-2xl bg-white/5">
-    <div class="text-center mt-4">
-      <a id="ndLargePhotoOpen" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase inline-flex items-center gap-2">
-        <i class="fa-solid fa-up-right-from-square"></i> Open Original
-      </a>
+<!-- NODEALER PRO PHOTO MODAL -->
+<div id="ndProPhotoModal" class="nd-pro-photo-modal">
+  <div class="nd-pro-photo-modal-box">
+    <div class="nd-pro-photo-modal-head">
+      <div>
+        <p class="text-[10px] uppercase text-slate-400 font-black">Inquiry Photo Preview</p>
+        <h3 id="ndProPhotoTitle" class="text-xl font-black uppercase">Uploaded Photo</h3>
+      </div>
+      <button onclick="ndProClosePhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
+    </div>
+    <div class="nd-pro-photo-modal-body">
+      <img id="ndProPhotoImg" src="">
+    </div>
+    <div class="nd-pro-photo-modal-actions">
+      <a id="ndProPhotoOriginal" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original Backup</a>
+      <button onclick="ndProClosePhoto()" class="bg-blue-600 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button>
     </div>
   </div>
 </div>
 
 
 <script>
-/* NODEALER ADMIN PHOTO VIEWER FIX SCRIPT */
-let ndAdminLeadCacheForPhotos = [];
+/* =========================================================
+   NODEALER ADMIN PRO LEADS + PHOTO GALLERY SCRIPT
+========================================================= */
+const ND_PRO_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
+let ndProLeads = [];
 
-function ndPick(o,names){
-  for(const n of names){
-    if(o && o[n] !== undefined && String(o[n]).trim()) return String(o[n]).trim();
+function ndProParseCsv(text){
+  const rows=[];let row=[],cell="",q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i],n=text[i+1];
+    if(c=='"'&&q&&n=='"'){cell+='"';i++;}
+    else if(c=='"'){q=!q;}
+    else if(c==","&&!q){row.push(cell);cell="";}
+    else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";} if(c=="\r"&&n=="\n")i++;}
+    else cell+=c;
   }
+  if(cell||row.length){row.push(cell);rows.push(row);}
+  return rows;
+}
+function ndProPick(o,names){
+  for(const n of names){ if(o && o[n]!==undefined && String(o[n]).trim()) return String(o[n]).trim(); }
   return "";
 }
-function ndNormalizeDriveImageUrl(url){
-  url = String(url || "").trim();
-  if(!url) return "";
-  // Google Drive share links -> direct thumbnail preview
-  const driveMatch = url.match(/\/file\/d\/([^/]+)/) || url.match(/[?&]id=([^&]+)/);
-  if(driveMatch && driveMatch[1]){
-    return "https://drive.google.com/thumbnail?id=" + driveMatch[1] + "&sz=w1000";
-  }
+function ndProType(o){
+  const txt=JSON.stringify(o||{}).toLowerCase();
+  if(txt.includes("pdi")) return "PDI";
+  if(txt.includes("sell")) return "Sell";
+  if(txt.includes("whatsapp")) return "WhatsApp";
+  if(txt.includes("valuation") || txt.includes("value estimate")) return "Valuation";
+  return "Buy";
+}
+function ndProClass(t){
+  if(t==="PDI")return"nd-pro-pdi";
+  if(t==="Sell")return"nd-pro-sell";
+  if(t==="WhatsApp")return"nd-pro-wa";
+  if(t==="Buy")return"nd-pro-buy";
+  return"nd-pro-other";
+}
+function ndProIsPhotoUrl(url){
+  url=String(url||"").toLowerCase();
+  return url.includes("drive.google.com") || url.includes("googleusercontent.com") || url.includes("uc?id=") || /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(url);
+}
+function ndProNormalizePhoto(url){
+  url=String(url||"").trim();
+  const driveMatch=url.match(/\/file\/d\/([^/]+)/)||url.match(/[?&]id=([^&]+)/);
+  if(driveMatch && driveMatch[1]) return "https://drive.google.com/thumbnail?id="+driveMatch[1]+"&sz=w1600";
   return url;
 }
-function ndExtractPhotoLinksFromLead(lead){
-  const text = JSON.stringify(lead || {});
-  const links = [];
-  const urlRegex = /(https?:\/\/[^\s"',<>]+)/g;
+function ndProPhotoLinks(o){
+  const text=JSON.stringify(o||{});
+  const links=[];
+  const regex=/(https?:\/\/[^\s"',<>]+)/g;
   let m;
-  while((m = urlRegex.exec(text)) !== null){
-    let u = m[1].replace(/[)\].,;]+$/g,"");
-    const low = u.toLowerCase();
-    if(
-      low.match(/\.(jpg|jpeg|png|webp|gif)(\?|$)/) ||
-      low.includes("drive.google.com") ||
-      low.includes("googleusercontent.com") ||
-      low.includes("uc?id=")
-    ){
-      if(!links.includes(u)) links.push(u);
-    }
+  while((m=regex.exec(text))!==null){
+    let u=m[1].replace(/[)\].,;]+$/g,"");
+    if(ndProIsPhotoUrl(u) && !links.includes(u)) links.push(u);
   }
   return links;
 }
-function openNdInquiryDetail(lead){
-  if(typeof lead === "number") lead = ndAdminLeadCacheForPhotos[lead] || {};
-  const name = ndPick(lead,["name","Name","Customer Name"]) || "Customer Inquiry";
-  const phone = ndPick(lead,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,"");
-  const car = ndPick(lead,["car","Car","Vehicle","vehicle","model","Model","Interested Car"]) || "Not specified";
-  const status = ndPick(lead,["status","Status"]) || "New Lead";
-  const notes = ndPick(lead,["notes","Notes"]) || JSON.stringify(lead).slice(0,700);
-  const reg = ndPick(lead,["regNo","Reg No","Registration","registration"]);
-  const source = ndPick(lead,["source","Source"]);
-  const date = ndPick(lead,["date","Date","timestamp","Timestamp"]);
-
-  document.getElementById("ndInquiryTitle").textContent = name;
-  document.getElementById("ndInquirySub").textContent = car + (phone ? " • " + phone : "");
-
-  document.getElementById("ndInquiryInfo").innerHTML = `
-    <div class="bg-slate-50 border rounded-2xl p-3"><b>Phone:</b> ${phone || "No phone"}</div>
-    <div class="bg-slate-50 border rounded-2xl p-3"><b>Car:</b> ${car}</div>
-    ${reg ? `<div class="bg-slate-50 border rounded-2xl p-3"><b>Reg No:</b> ${reg}</div>` : ""}
-    <div class="bg-slate-50 border rounded-2xl p-3"><b>Status:</b> ${status}</div>
-    ${source ? `<div class="bg-slate-50 border rounded-2xl p-3"><b>Source:</b> ${source}</div>` : ""}
-    ${date ? `<div class="bg-slate-50 border rounded-2xl p-3"><b>Date:</b> ${date}</div>` : ""}
-    <div class="bg-slate-50 border rounded-2xl p-3"><b>Notes:</b><br>${notes}</div>
-  `;
-
-  const callPhone = phone ? (phone.startsWith("91") ? phone : "91" + phone) : "";
-  document.getElementById("ndInquiryCall").href = callPhone ? "tel:+" + callPhone : "#";
-  document.getElementById("ndInquiryWhatsapp").href = callPhone ? "https://wa.me/" + callPhone : "#";
-
-  const photos = ndExtractPhotoLinksFromLead(lead);
-  document.getElementById("ndPhotoCount").textContent = photos.length + " Photos";
-  const grid = document.getElementById("ndInquiryPhotos");
-  const noMsg = document.getElementById("ndNoPhotosMsg");
-
-  if(!photos.length){
-    grid.innerHTML = "";
-    noMsg.classList.remove("hidden");
-  } else {
-    noMsg.classList.add("hidden");
-    grid.innerHTML = photos.map((u,i)=>{
-      const img = ndNormalizeDriveImageUrl(u);
-      return `<div class="bg-slate-50 border rounded-2xl p-2">
-        <img src="${img}" class="nd-photo-thumb" onclick="openNdLargePhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}')" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
-        <button class="hidden w-full bg-slate-200 text-slate-700 rounded-xl py-4 text-xs font-black" onclick="openNdLargePhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}')">Open Photo Link</button>
-        <a href="${u}" target="_blank" class="block text-center bg-white border mt-2 rounded-xl py-2 text-[10px] font-black uppercase">Open Original</a>
-      </div>`;
-    }).join("");
-  }
-
-  document.getElementById("ndInquiryDetailModal").classList.remove("hidden");
-}
-function closeNdInquiryDetail(){document.getElementById("ndInquiryDetailModal")?.classList.add("hidden");}
-function openNdLargePhoto(img, original){
-  document.getElementById("ndLargePhotoImg").src = img;
-  document.getElementById("ndLargePhotoOpen").href = original || img;
-  document.getElementById("ndLargePhotoModal").classList.remove("hidden");
-}
-function closeNdLargePhoto(){document.getElementById("ndLargePhotoModal")?.classList.add("hidden");}
-
-/* Add View Details/Photos buttons automatically to lead cards/tables */
-function ndEnhanceAdminLeadPhotoButtons(){
-  // If existing lead cache variables exist, copy them
+async function ndProLoadLeads(){
+  const list=document.getElementById("ndProLeadsList");
+  if(list) list.innerHTML='<div class="nd-pro-empty-photo">Loading leads...</div>';
   try{
-    if(Array.isArray(window.ndRestoredLeads)) ndAdminLeadCacheForPhotos = window.ndRestoredLeads;
-    if(Array.isArray(window.allLeads)) ndAdminLeadCacheForPhotos = window.allLeads;
-    if(Array.isArray(window.ndLeadStatusRows)) ndAdminLeadCacheForPhotos = window.ndLeadStatusRows;
-    if(Array.isArray(window.leads)) ndAdminLeadCacheForPhotos = window.leads;
-  }catch(e){}
-
-  const cards = Array.from(document.querySelectorAll(".nd-lead-card,.nd-restored-admin-card,.lead-card,.nd-follow-card,.nd-pdi-booking-card"));
-  cards.forEach((card,idx)=>{
-    if(card.dataset.ndPhotoEnhanced === "true") return;
-    const cardText = (card.innerText || "").toLowerCase();
-    if(!cardText.includes("lead") && !cardText.includes("pdi") && !cardText.includes("customer") && !cardText.includes("phone") && !cardText.includes("whatsapp")) return;
-    card.dataset.ndPhotoEnhanced = "true";
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "nd-photo-viewer-btn mt-3";
-    btn.innerHTML = '<i class="fa-solid fa-images"></i> View Details / Photos';
-    btn.onclick = function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      const lead = ndAdminLeadCacheForPhotos[idx] || {Notes: card.innerText, name: card.querySelector("h3")?.textContent || "Customer"};
-      openNdInquiryDetail(lead);
-    };
-    card.appendChild(btn);
-  });
+    const res=await fetch(ND_PRO_CSV_URL+"&cache="+Date.now());
+    const text=await res.text();
+    const rows=ndProParseCsv(text).filter(r=>r.some(c=>String(c||"").trim()));
+    const headers=(rows.shift()||[]).map(h=>String(h||"").trim());
+    ndProLeads=rows.map(r=>{const o={};headers.forEach((h,i)=>o[h]=r[i]||"");return o;}).reverse();
+  }catch(e){
+    console.error(e);ndProLeads=[];
+  }
+  ndProRenderLeads();
 }
-document.addEventListener("DOMContentLoaded",function(){
-  setInterval(ndEnhanceAdminLeadPhotoButtons,1000);
-});
-document.addEventListener("click",function(){
-  setTimeout(ndEnhanceAdminLeadPhotoButtons,300);
-},true);
-</script>
+function ndProRenderLeads(){
+  const search=(document.getElementById("ndProLeadSearch")?.value||"").toLowerCase();
+  const typeFilter=document.getElementById("ndProLeadType")?.value||"";
+  const photoFilter=document.getElementById("ndProLeadPhotoFilter")?.value||"";
+  let rows=ndProLeads.filter(o=>JSON.stringify(o).toLowerCase().includes(search));
+  if(typeFilter) rows=rows.filter(o=>ndProType(o)===typeFilter);
+  if(photoFilter==="photos") rows=rows.filter(o=>ndProPhotoLinks(o).length>0);
 
+  const list=document.getElementById("ndProLeadsList");
+  if(!list)return;
+  if(!rows.length){list.innerHTML='<div class="nd-pro-empty-photo">No matching leads found. Click Refresh Leads.</div>';return;}
 
-<!-- NODEALER ADMIN STAY-IN-PAGE PHOTO OVERLAY -->
-<div id="ndAdminStayPhotoOverlay" class="nd-admin-photo-overlay">
-  <div class="nd-admin-photo-box">
-    <div class="nd-admin-photo-head">
+  list.innerHTML=rows.slice(0,80).map((o,idx)=>{
+    const type=ndProType(o);
+    const name=ndProPick(o,["name","Name","Customer Name"])||"Customer";
+    const phone=ndProPick(o,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,"");
+    const car=ndProPick(o,["car","Car","Vehicle","vehicle","model","Model","Interested Car"])||"Not specified";
+    const status=ndProPick(o,["status","Status"])||"New Lead";
+    const source=ndProPick(o,["source","Source"])||type+" Lead";
+    const date=ndProPick(o,["date","Date","timestamp","Timestamp"]);
+    const reg=ndProPick(o,["regNo","Reg No","Registration","registration"]);
+    const city=ndProPick(o,["city","City","location","Location"]);
+    const notes=ndProPick(o,["notes","Notes"])||JSON.stringify(o).slice(0,700);
+    const photos=ndProPhotoLinks(o);
+    const callPhone=phone?(phone.startsWith("91")?phone:"91"+phone):"";
+    return `<div class="nd-pro-lead-card">
       <div>
-        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin Photo Preview</p>
-        <h3 id="ndAdminStayPhotoTitle" class="text-xl font-black uppercase">Uploaded Photo</h3>
+        <div class="flex items-center justify-between gap-3 flex-wrap">
+          <h3 class="text-xl font-black uppercase">${name}</h3>
+          <span class="nd-pro-pill ${ndProClass(type)}">${type}</span>
+        </div>
+        <div class="nd-pro-lead-info">
+          <div class="nd-pro-info-box"><p>Phone</p><h4>${phone||"No phone"}</h4></div>
+          <div class="nd-pro-info-box"><p>Car / Requirement</p><h4>${car}</h4></div>
+          <div class="nd-pro-info-box"><p>Status</p><h4>${status}</h4></div>
+          <div class="nd-pro-info-box"><p>Source</p><h4>${source}</h4></div>
+          ${reg?`<div class="nd-pro-info-box"><p>Reg No</p><h4>${reg}</h4></div>`:""}
+          ${city?`<div class="nd-pro-info-box"><p>City / Location</p><h4>${city}</h4></div>`:""}
+          ${date?`<div class="nd-pro-info-box"><p>Date</p><h4>${date}</h4></div>`:""}
+        </div>
+        <div class="nd-pro-info-box mt-3"><p>Full Notes</p><h4>${notes}</h4></div>
+        <div class="nd-pro-action-grid">
+          <a href="tel:+${callPhone}" class="bg-blue-600 text-white">Call</a>
+          <a href="https://wa.me/${callPhone}" target="_blank" class="bg-green-600 text-white">WhatsApp</a>
+          <button onclick="ndProCopyLead(${idx})" class="bg-slate-700 text-white">Copy Details</button>
+        </div>
       </div>
-      <button onclick="closeNdAdminStayPhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
-    </div>
-    <div class="nd-admin-photo-body">
-      <img id="ndAdminStayPhotoImg" src="">
-    </div>
-    <div class="nd-admin-photo-actions">
-      <a id="ndAdminStayPhotoOriginal" href="#" target="_blank" class="bg-slate-950 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original</a>
-      <button onclick="closeNdAdminStayPhoto()" class="bg-slate-100 text-slate-800 rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button>
-    </div>
-  </div>
-</div>
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="font-black uppercase">Photos</h4>
+          <span class="nd-pro-pill nd-pro-other">${photos.length} Photos</span>
+        </div>
+        ${photos.length?`<div class="nd-pro-photo-grid">${photos.slice(0,12).map((u,i)=>{
+          const img=ndProNormalizePhoto(u);
+          return `<div class="nd-pro-photo-tile">
+            <img src="${img}" onclick="ndProOpenPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','${name.replace(/'/g,"")} Photo ${i+1}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <button style="display:none" onclick="ndProOpenPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','${name.replace(/'/g,"")} Photo ${i+1}')">View Photo</button>
+          </div>`;
+        }).join("")}</div>`:`<div class="nd-pro-empty-photo">No photo uploaded for this lead.</div>`}
+      </div>
+    </div>`;
+  }).join("");
+}
+function ndProOpenPhoto(img, original, title){
+  const modal=document.getElementById("ndProPhotoModal");
+  document.getElementById("ndProPhotoImg").src=img;
+  document.getElementById("ndProPhotoOriginal").href=original||img;
+  document.getElementById("ndProPhotoTitle").textContent=title||"Uploaded Photo";
+  modal.classList.add("active");
+}
+function ndProClosePhoto(){document.getElementById("ndProPhotoModal")?.classList.remove("active");}
+function ndProCopyLead(idx){
+  const o=ndProLeads[idx]||{};
+  navigator.clipboard?.writeText(JSON.stringify(o,null,2));
+  alert("Lead details copied.");
+}
 
-
-<script>
-/* NODEALER ADMIN PHOTO STAY-IN-PAGE FIX SCRIPT */
-(function(){
-  function isPhotoUrl(url){
-    url = String(url || "").toLowerCase();
-    return url.includes("drive.google.com") ||
-           url.includes("googleusercontent.com") ||
-           url.includes("uc?id=") ||
-           /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(url);
+/* Block photo links opening new blank tabs anywhere in admin */
+document.addEventListener("click",function(e){
+  const a=e.target.closest && e.target.closest("a[href]");
+  if(!a)return;
+  const href=a.getAttribute("href")||"";
+  if(ndProIsPhotoUrl(href)){
+    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+    ndProOpenPhoto(ndProNormalizePhoto(href),href,"Inquiry Photo");
+    return false;
   }
+},true);
 
-  function normalizePhotoUrl(url){
-    url = String(url || "").trim();
-    const driveMatch = url.match(/\/file\/d\/([^/]+)/) || url.match(/[?&]id=([^&]+)/);
-    if(driveMatch && driveMatch[1]){
-      return "https://drive.google.com/thumbnail?id=" + driveMatch[1] + "&sz=w1600";
-    }
-    return url;
-  }
-
-  window.openNdAdminStayPhoto = function(photoUrl, originalUrl, title){
-    const imgUrl = normalizePhotoUrl(photoUrl || originalUrl);
-    const original = originalUrl || photoUrl;
-    const overlay = document.getElementById("ndAdminStayPhotoOverlay");
-    const img = document.getElementById("ndAdminStayPhotoImg");
-    const link = document.getElementById("ndAdminStayPhotoOriginal");
-    const titleEl = document.getElementById("ndAdminStayPhotoTitle");
-    if(!overlay || !img) return;
-    img.src = imgUrl;
-    if(link) link.href = original || imgUrl;
-    if(titleEl) titleEl.textContent = title || "Uploaded Photo";
-    overlay.classList.add("active");
-  };
-
-  window.closeNdAdminStayPhoto = function(){
-    const overlay = document.getElementById("ndAdminStayPhotoOverlay");
-    if(overlay) overlay.classList.remove("active");
-  };
-
-  function extractLinksFromText(text){
-    const links = [];
-    const regex = /(https?:\/\/[^\s"',<>]+)/g;
-    let m;
-    while((m = regex.exec(text || "")) !== null){
-      let u = m[1].replace(/[)\].,;]+$/g,"");
-      if(isPhotoUrl(u) && !links.includes(u)) links.push(u);
-    }
-    return links;
-  }
-
-  function enhanceInquiryPanels(){
-    // Make existing inquiry/detail modal wider if present
-    ["ndInquiryDetailModal","ndLeadViewerModal","ndRestoredAdminCrmModal","ndLeadStatusModal"].forEach(id=>{
-      const modal = document.getElementById(id);
-      if(modal){
-        const panel = modal.querySelector(".max-w-6xl,.max-w-7xl,.max-w-5xl");
-        if(panel) panel.classList.add("nd-admin-detail-wide");
-      }
-    });
-
-    // Add photo preview grids to cards which have photo links in text
-    const cards = Array.from(document.querySelectorAll(".nd-lead-card,.nd-restored-admin-card,.lead-card,.nd-follow-card,.nd-pdi-booking-card,tr,td"));
-    cards.forEach((card, idx)=>{
-      if(card.dataset.ndStayPhotoEnhanced === "true") return;
-      const text = card.innerText || "";
-      const links = extractLinksFromText(text);
-      if(!links.length) return;
-
-      card.dataset.ndStayPhotoEnhanced = "true";
-      const wrap = document.createElement("div");
-      wrap.className = "nd-admin-photo-grid mt-3";
-      wrap.innerHTML = links.slice(0,8).map((u,i)=>{
-        const img = normalizePhotoUrl(u);
-        return `<div>
-          <img src="${img}" onclick="openNdAdminStayPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','Inquiry Photo ${i+1}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-          <button type="button" style="display:none" class="nd-admin-photo-btn w-full justify-center" onclick="openNdAdminStayPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','Inquiry Photo ${i+1}')">View Photo</button>
-        </div>`;
-      }).join("");
-      card.appendChild(wrap);
-    });
-  }
-
-  // IMPORTANT: intercept photo links before browser opens new tab/about:blank
-  document.addEventListener("click", function(e){
-    const target = e.target;
-    const link = target && target.closest ? target.closest("a[href]") : null;
-    if(!link) return;
-
-    const href = link.getAttribute("href") || "";
-    if(isPhotoUrl(href)){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      openNdAdminStayPhoto(href, href, "Inquiry Photo");
-      return false;
-    }
-  }, true);
-
-  // Also intercept image clicks if parent anchor exists
-  document.addEventListener("click", function(e){
-    const img = e.target && e.target.tagName === "IMG" ? e.target : null;
-    if(!img) return;
-    const src = img.getAttribute("src") || "";
-    const parentLink = img.closest && img.closest("a[href]");
-    const href = parentLink ? parentLink.getAttribute("href") : "";
-    if(isPhotoUrl(src) || isPhotoUrl(href)){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      openNdAdminStayPhoto(src || href, href || src, "Inquiry Photo");
-      return false;
-    }
-  }, true);
-
-  document.addEventListener("keydown", function(e){
-    if(e.key === "Escape") closeNdAdminStayPhoto();
-  });
-
-  document.addEventListener("DOMContentLoaded", function(){
-    setInterval(enhanceInquiryPanels, 800);
-  });
-  document.addEventListener("click", function(){
-    setTimeout(enhanceInquiryPanels, 250);
-  }, true);
-})();
+document.addEventListener("keydown",function(e){if(e.key==="Escape")ndProClosePhoto();});
+document.addEventListener("DOMContentLoaded",function(){
+  setTimeout(ndProLoadLeads,1200);
+});
 </script>
 
 </body>. It hardens admin visibility,
