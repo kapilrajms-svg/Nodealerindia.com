@@ -389,168 +389,62 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
 }
 
 
-/* NODEALER JUNE 1 LAUNCH POLISH */
-#manualLeadPanel,#manualLeadPanel *,#ndLeadViewerBtn,#analyticsFloatingBtn{
-display:none!important;visibility:hidden!important;pointer-events:none!important}
-.nd-launch-trust-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:16px;display:flex;gap:12px;align-items:flex-start;transition:.25s}
-.nd-launch-trust-card:hover{background:#fff;transform:translateY(-2px);box-shadow:0 16px 40px rgba(15,23,42,.08)}
-.nd-launch-cta-sticky{position:fixed;right:18px;bottom:18px;z-index:99990;display:flex;flex-direction:column;gap:10px}
-.nd-launch-cta-sticky a{border-radius:999px;padding:13px 16px;color:#fff;font-size:12px;font-weight:900;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;box-shadow:0 18px 45px rgba(15,23,42,.22)}
-.nd-launch-whatsapp{background:#16a34a}.nd-launch-call{background:#0f172a}
-.nd-launch-process{background:#020617;color:white;padding:70px 0;position:relative;overflow:hidden}
-.nd-launch-process:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(37,99,235,.28),transparent 35%),radial-gradient(circle at bottom left,rgba(229,57,53,.20),transparent 35%)}
-.nd-launch-step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:22px;position:relative;z-index:1}
-.nd-launch-detail-modal{position:fixed;inset:0;z-index:100003;background:rgba(2,6,23,.82);backdrop-filter:blur(10px);padding:18px;overflow-y:auto}
-.nd-launch-detail-card{max-width:1100px;margin:0 auto;background:#fff;border-radius:32px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.35)}
-.nd-launch-detail-grid{display:grid;grid-template-columns:1.1fr .9fr}
-.nd-launch-detail-hero{min-height:420px;background:#f1f5f9;object-fit:cover;width:100%;height:100%}
-.nd-launch-spec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.nd-launch-spec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:12px}
-.nd-launch-badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
-#ndAdminCrmToolsBtn{display:none}
-.nd-admin-crm-input{width:100%;padding:13px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
-.nd-admin-crm-input:focus{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
-@media(max-width:768px){.nd-launch-cta-sticky{left:10px;right:10px;bottom:10px;flex-direction:row}.nd-launch-cta-sticky a{flex:1;justify-content:center;padding:14px 10px;font-size:11px}.nd-launch-detail-grid{grid-template-columns:1fr}.nd-launch-detail-hero{min-height:260px}.nd-launch-spec-grid{grid-template-columns:1fr 1fr}}
-
-
-/* NODEALER ADVANCED PDI TRUST UPGRADE */
-#pdi-section-old-hidden{display:none!important}
-.nd-pdi-hero{background:radial-gradient(circle at top left,rgba(37,99,235,.30),transparent 34%),radial-gradient(circle at bottom right,rgba(245,158,11,.18),transparent 38%),#020617;color:#fff;position:relative;overflow:hidden}
-.nd-pdi-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:20px;backdrop-filter:blur(14px)}
-.nd-pdi-white-card{background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:22px;box-shadow:0 18px 50px rgba(15,23,42,.08)}
-.nd-pdi-check-pill{border:1px solid #e2e8f0;background:#f8fafc;border-radius:999px;padding:10px 12px;font-size:11px;font-weight:900;text-transform:uppercase;color:#334155;display:inline-flex;align-items:center;gap:7px}
-.nd-pdi-report-preview{background:linear-gradient(180deg,#eff6ff,#fff);border:1px solid #bfdbfe;border-radius:30px;overflow:hidden;box-shadow:0 25px 70px rgba(37,99,235,.12)}
-.nd-pdi-report-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid #e2e8f0;font-size:12px;font-weight:800}
-.nd-pdi-good{color:#16a34a}.nd-pdi-bad{color:#dc2626}
-.nd-pdi-package{border:1px solid #e2e8f0;background:#fff;border-radius:28px;padding:22px}.nd-pdi-package.featured{border-color:#f59e0b;box-shadow:0 18px 60px rgba(245,158,11,.18)}
-.nd-pdi-step{background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:18px}
-.nd-pdi-floating-badge{position:absolute;top:16px;right:16px;background:#f59e0b;color:#0f172a;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:900;text-transform:uppercase}
-@media(max-width:768px){.nd-pdi-report-row{grid-template-columns:1fr;gap:4px}.nd-pdi-floating-badge{position:static;display:inline-flex;margin-bottom:12px}}
-
-
 /* =========================
-   NODEALER PDI PHASE 2 REPORT BUILDER
+   NODEALER FINAL ADMIN ROUTE + PRIVACY FIX
 ========================= */
-#ndPdiReportBuilderBtn { display:none; }
-.nd-pdi-builder-input {
-    width:100%;
-    padding:12px;
-    border:1px solid #e2e8f0;
-    border-radius:14px;
-    font-size:13px;
-    font-weight:700;
-    outline:none;
+#manualLeadPanel,
+#manualLeadPanel *,
+#ndLeadViewerBtn {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
-.nd-pdi-builder-input:focus {
-    border-color:#2563eb;
-    box-shadow:0 0 0 3px rgba(37,99,235,.12);
+
+#ndAdminCrmToolsBtn { display: none; }
+
+.nd-admin-crm-input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
 }
-.nd-pdi-report-paper {
-    width: 210mm;
-    max-width: 100%;
-    margin: 0 auto;
-    background: white;
-    color:#0f172a;
-    box-shadow: 0 20px 80px rgba(15,23,42,.18);
-}
-.nd-pdi-report-section {
-    border:1px solid #e2e8f0;
-    border-radius:18px;
-    padding:14px;
-    background:#fff;
-}
-.nd-pdi-report-table {
-    width:100%;
-    border-collapse:collapse;
-    font-size:12px;
-}
-.nd-pdi-report-table th {
-    background:#eff6ff;
-    color:#0f172a;
-    text-align:left;
-    padding:10px;
-    font-weight:900;
-    border-bottom:1px solid #dbeafe;
-}
-.nd-pdi-report-table td {
-    padding:9px 10px;
-    border-bottom:1px solid #f1f5f9;
-    font-weight:700;
-}
-.nd-pdi-ok { color:#16a34a; font-weight:900; }
-.nd-pdi-issue { color:#dc2626; font-weight:900; }
-.nd-pdi-warn { color:#f59e0b; font-weight:900; }
-@media print {
-    body * { visibility: hidden !important; }
-    #ndPdiPrintableReport, #ndPdiPrintableReport * { visibility: visible !important; }
-    #ndPdiPrintableReport {
-        position:absolute !important;
-        left:0 !important;
-        top:0 !important;
-        width:100% !important;
-        background:white !important;
-        padding:0 !important;
-    }
-    .nd-no-print { display:none !important; }
-    .nd-pdi-report-paper {
-        width:100% !important;
-        box-shadow:none !important;
-        margin:0 !important;
-    }
+.nd-admin-crm-input:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22,163,74,.12);
 }
 
 
-/* NODEALER SIMPLE CUSTOMER-FIRST HOMEPAGE */
-#service-command-center,#ndLaunchTrustStrip{display:none!important}
-.nd-simple-home{background:radial-gradient(circle at top left,rgba(37,99,235,.28),transparent 34%),radial-gradient(circle at bottom right,rgba(227,30,36,.22),transparent 35%),#020617;color:white;overflow:hidden;position:relative}
-.nd-simple-action-card{background:white;color:#0f172a;border-radius:30px;padding:26px;border:1px solid rgba(255,255,255,.18);box-shadow:0 25px 70px rgba(15,23,42,.22);transition:.25s ease;cursor:pointer;min-height:230px;display:flex;flex-direction:column;justify-content:space-between}
-.nd-simple-action-card:hover{transform:translateY(-5px);box-shadow:0 35px 90px rgba(15,23,42,.30)}
-.nd-simple-action-icon{width:64px;height:64px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:26px}
-.nd-simple-trust-mini{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:16px}
-.nd-simple-quick-strip{background:white;border-bottom:1px solid #e2e8f0}
-.nd-simple-quick-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:16px;display:flex;align-items:center;gap:12px}
-.nd-simple-section-title{font-size:clamp(28px,4vw,48px);line-height:1;font-weight:900;text-transform:uppercase;letter-spacing:-1px}
-@media(max-width:768px){.nd-simple-home{padding-top:34px!important}.nd-simple-action-card{min-height:185px;padding:20px;border-radius:24px}.nd-simple-action-icon{width:54px;height:54px;border-radius:18px;font-size:22px}}
-
-/* NODEALER PDI FULL BOOKING FLOW */#pdi-section-old-hidden{display:none!important}.nd-pdi-flow-shell{background:radial-gradient(circle at top left,rgba(37,99,235,.32),transparent 35%),radial-gradient(circle at bottom right,rgba(245,158,11,.22),transparent 38%),#020617;color:white;padding:70px 0;position:relative;overflow:hidden}.nd-pdi-flow-card{background:#fff;color:#0f172a;border-radius:32px;padding:24px;box-shadow:0 25px 80px rgba(15,23,42,.28)}.nd-pdi-flow-input{width:100%;padding:14px;border:1px solid #e2e8f0;border-radius:16px;font-size:14px;font-weight:800;outline:none;text-transform:uppercase}.nd-pdi-flow-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}.nd-pdi-flow-tab{border:1px solid #e2e8f0;background:#f8fafc;border-radius:22px;padding:16px;text-align:left;font-weight:900;transition:.2s}.nd-pdi-flow-tab.active,.nd-pdi-flow-tab:hover{background:#0f172a;color:white;border-color:#0f172a}.nd-pdi-package-card{border:1px solid #e2e8f0;background:#fff;border-radius:24px;padding:18px;cursor:pointer;transition:.2s}.nd-pdi-package-card.active,.nd-pdi-package-card:hover{border-color:#f59e0b;box-shadow:0 18px 50px rgba(245,158,11,.16)}.nd-pdi-step-dot{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;background:#e2e8f0;color:#334155}.nd-pdi-step-dot.active{background:#2563eb;color:white}.nd-pdi-mini-check{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:14px}
-
-/* NODEALER VALUATION + PDI CRM DASHBOARD */
-.nd-valuation-card{background:#fff;border:1px solid #e2e8f0;border-radius:30px;padding:24px;box-shadow:0 20px 60px rgba(15,23,42,.08)}
-.nd-valuation-input{width:100%;padding:13px;border:1px solid #e2e8f0;border-radius:16px;font-size:13px;font-weight:800;outline:none}
-.nd-valuation-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-.nd-value-result{background:linear-gradient(135deg,#0f172a,#1e293b);color:white;border-radius:26px;padding:22px}
-#ndPdiBookingsBtn{display:none}
-.nd-pdi-booking-card{border:1px solid #e2e8f0;border-radius:22px;padding:16px;background:#fff;box-shadow:0 12px 35px rgba(15,23,42,.08)}
-.nd-pdi-status-pending{background:#fef3c7;color:#b45309}
-.nd-pdi-status-assigned{background:#dbeafe;color:#2563eb}
-.nd-pdi-status-completed{background:#dcfce7;color:#16a34a}
-
-
-/* NODEALER FOLLOWUP FEATURED FINAL */
-#ndLeadStatusBtn{display:none}
-.nd-follow-input{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
-.nd-follow-card{background:white;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
-.nd-status-pill{border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-featured-clean-card{background:white;border:1px solid #e2e8f0;border-radius:28px;overflow:hidden;box-shadow:0 18px 50px rgba(15,23,42,.08)}
-.nd-featured-clean-img{height:180px;width:100%;object-fit:cover;background:#f1f5f9}
-
-
-/* NODEALER VEHICLE DETAIL PAGE + PDI PDF UPGRADE */
-.nd-car-detail-modal{position:fixed;inset:0;z-index:100010;background:rgba(2,6,23,.86);backdrop-filter:blur(10px);padding:16px;overflow-y:auto}
-.nd-car-detail-shell{max-width:1180px;margin:0 auto;background:white;border-radius:34px;overflow:hidden;box-shadow:0 35px 100px rgba(0,0,0,.35)}
-.nd-car-detail-grid{display:grid;grid-template-columns:1.1fr .9fr}
-.nd-car-detail-img{height:520px;width:100%;object-fit:cover;background:#f1f5f9}
-.nd-car-thumb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.nd-car-thumb{height:78px;border-radius:16px;object-fit:cover;background:#f1f5f9;border:2px solid transparent;cursor:pointer}
-.nd-car-spec{background:#f8fafc;border:1px solid #e2e8f0;border-radius:18px;padding:13px}
-.nd-car-badge{display:inline-flex;gap:6px;align-items:center;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-detail-action{border-radius:18px;padding:14px;text-align:center;font-size:11px;font-weight:900;text-transform:uppercase}
-.nd-pdi-photo-preview{height:92px;border-radius:16px;background:#f1f5f9;object-fit:cover;width:100%;border:1px solid #e2e8f0}
-@media(max-width:768px){.nd-car-detail-grid{grid-template-columns:1fr}.nd-car-detail-img{height:280px}.nd-car-thumb{height:58px}.nd-car-detail-shell{border-radius:24px}}
-
-
-/* NODEALER UNIVERSAL LEAD CAPTURE FIX */
-.nd-lead-debug-pill{position:fixed;right:12px;bottom:92px;z-index:99999;background:#16a34a;color:#fff;border-radius:999px;padding:9px 12px;font-size:10px;font-weight:900;text-transform:uppercase;box-shadow:0 12px 30px rgba(15,23,42,.25);display:none}
+/* =========================================================
+   NODEALER REAL REARRANGED ADMIN DASHBOARD
+   Direct organised dashboard, keeps existing upload/inventory functions
+========================================================= */
+#ndOrganizedAdminApp{position:fixed;inset:0;z-index:999990;background:#020617;color:white;display:none;overflow:hidden}
+#ndOrganizedAdminApp.active{display:grid;grid-template-columns:260px 1fr}
+.nd-org-side{background:#0f172a;border-right:1px solid rgba(255,255,255,.08);padding:18px;overflow-y:auto}
+.nd-org-main{overflow-y:auto;padding:22px}
+.nd-org-tab{width:100%;text-align:left;background:#020617;color:#cbd5e1;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:13px 14px;font-size:12px;font-weight:900;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:10px}
+.nd-org-tab.active,.nd-org-tab:hover{background:#2563eb;color:white}
+.nd-org-card{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:18px;box-shadow:0 16px 60px rgba(0,0,0,.22)}
+.nd-org-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.12);color:white;border-radius:14px;padding:12px 13px;font-size:13px;font-weight:800;outline:none}
+.nd-org-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.18)}
+.nd-org-stat{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:18px}.nd-org-stat p{font-size:10px;text-transform:uppercase;color:#94a3b8;font-weight:900}.nd-org-stat h3{font-size:30px;font-weight:900;margin-top:4px}
+.nd-org-lead{background:#020617;border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:18px;display:grid;grid-template-columns:1.35fr .85fr;gap:18px;margin-bottom:14px}
+.nd-org-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.nd-org-info{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px}.nd-org-info p{font-size:9px;text-transform:uppercase;color:#94a3b8;font-weight:900;margin-bottom:3px}.nd-org-info h4{font-size:13px;color:white;font-weight:900;word-break:break-word}
+.nd-org-notes{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin-top:10px;font-size:12px;color:#cbd5e1;font-weight:700;line-height:1.45;word-break:break-word}
+.nd-org-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-org-buy{background:#1d4ed8;color:white}.nd-org-sell{background:#dc2626;color:white}.nd-org-pdi{background:#f59e0b;color:#111827}.nd-org-wa{background:#16a34a;color:white}.nd-org-value{background:#7c3aed;color:white}.nd-org-other{background:#334155;color:white}
+.nd-org-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.nd-org-photo-card{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:7px}.nd-org-photo-card img{width:100%;height:120px;object-fit:cover;border-radius:12px;background:#1e293b;cursor:pointer}.nd-org-photo-card button{width:100%;margin-top:7px;background:#2563eb;color:white;border-radius:10px;padding:8px;font-size:9px;font-weight:900;text-transform:uppercase}
+.nd-org-empty{background:#111827;border:1px dashed rgba(255,255,255,.18);border-radius:18px;padding:22px;text-align:center;color:#94a3b8;font-size:12px;font-weight:800}
+.nd-org-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}.nd-org-actions a,.nd-org-actions button{border-radius:12px;padding:10px;text-align:center;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-org-view{display:none}.nd-org-view.active{display:block}
+.nd-org-photo-modal{position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;padding:18px}.nd-org-photo-modal.active{display:flex}.nd-org-photo-box{width:min(1250px,100%);background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:28px;overflow:hidden}.nd-org-photo-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#111827;color:white}.nd-org-photo-body{padding:16px;background:#020617}.nd-org-photo-body img{width:100%;max-height:78vh;object-fit:contain;border-radius:18px;background:#111827}.nd-org-photo-foot{padding:14px;background:#111827;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+#ndStockUploadMount *{max-width:100%}
+#ndStockUploadMount input,#ndStockUploadMount select,#ndStockUploadMount textarea{color:white!important}
+@media(max-width:900px){#ndOrganizedAdminApp.active{grid-template-columns:1fr}.nd-org-side{position:sticky;top:0;z-index:2}.nd-org-main{padding:12px}.nd-org-lead{grid-template-columns:1fr}.nd-org-info-grid{grid-template-columns:1fr}.nd-org-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nd-org-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 </style>
 
@@ -636,13 +530,6 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
                         <span class="text-[9px] uppercase font-bold tracking-tight text-gray-500 block mt-1">100% Peer-to-Peer Car Marketplace</span>
                     </div>
                 </a>
-                
-<div class="hidden md:flex items-center gap-2">
-  <button onclick="scrollToInventory()" class="bg-blue-600 text-white text-xs font-black px-4 py-2.5 rounded-lg shadow hover:bg-blue-700">Buy</button>
-  <button onclick="openSellModal()" class="bg-red-600 text-white text-xs font-black px-4 py-2.5 rounded-lg shadow hover:bg-red-700">Sell</button>
-  <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 text-xs font-black px-4 py-2.5 rounded-lg shadow hover:bg-amber-400">PDI</button>
-</div>
-
                 <div class="flex items-center space-x-2">
                     <button onclick="openCustomerAccountAuth()" class="bg-blue-600 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-blue-700 flex items-center gap-1 transition-all"><i class="fa-solid fa-user text-sm"></i> My Account</button>
                     <button onclick="openSavedCarsModal()" class="bg-slate-950 text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow hover:bg-slate-800 flex items-center gap-1 transition-all">
@@ -653,57 +540,7 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
             </div>
         </header>
 
-        
-<!-- NODEALER SIMPLE CUSTOMER-FIRST HOMEPAGE -->
-<section id="ndSimpleHome" class="nd-simple-home py-16 md:py-20">
-  <div class="max-w-7xl mx-auto px-4 relative z-10">
-    <div class="grid lg:grid-cols-12 gap-10 items-center">
-      <div class="lg:col-span-5">
-        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/10 text-white text-xs font-black px-4 py-2 rounded-full shadow-lg backdrop-blur mb-5">
-          <i class="fa-solid fa-bolt text-amber-400"></i> Direct Owner Used Car Marketplace
-        </div>
-        <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-[0.92]">What do you want to do today?</h1>
-        <p class="text-slate-300 font-semibold text-base md:text-lg mt-5 leading-relaxed">Buy a verified car, sell your car, or book a professional PDI inspection — everything starts from here.</p>
-        <div class="grid grid-cols-3 gap-3 mt-7">
-          <div class="nd-simple-trust-mini"><p class="text-2xl font-black">0%</p><p class="text-[10px] uppercase text-slate-400 font-black">Dealer Markup</p></div>
-          <div class="nd-simple-trust-mini"><p class="text-2xl font-black">PDI</p><p class="text-[10px] uppercase text-slate-400 font-black">Inspection First</p></div>
-          <div class="nd-simple-trust-mini"><p class="text-2xl font-black">CRM</p><p class="text-[10px] uppercase text-slate-400 font-black">Fast Follow-up</p></div>
-        </div>
-        <div class="flex flex-wrap gap-3 mt-7">
-          <a href="tel:+917838335143" class="bg-white text-slate-950 px-6 py-4 rounded-2xl text-xs font-black uppercase inline-flex items-center gap-2"><i class="fa-solid fa-phone text-red-600"></i> Call Now</a>
-          <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20need%20help." target="_blank" class="bg-green-600 text-white px-6 py-4 rounded-2xl text-xs font-black uppercase inline-flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        </div>
-      </div>
-      <div class="lg:col-span-7">
-        <div class="grid md:grid-cols-3 gap-5">
-          <button onclick="scrollToInventory()" class="nd-simple-action-card text-left">
-            <div><div class="nd-simple-action-icon bg-blue-50 text-blue-600"><i class="fa-solid fa-car-side"></i></div><h2 class="text-2xl font-black uppercase mt-5">Buy Car</h2><p class="text-sm text-slate-500 font-semibold mt-2">Browse direct-owner inventory, filter by budget, compare and contact instantly.</p></div>
-            <div class="mt-5 bg-blue-600 text-white rounded-2xl py-3 text-center text-xs font-black uppercase">Browse Cars</div>
-          </button>
-          <button onclick="openSellModal()" class="nd-simple-action-card text-left">
-            <div><div class="nd-simple-action-icon bg-red-50 text-red-600"><i class="fa-solid fa-key"></i></div><h2 class="text-2xl font-black uppercase mt-5">Sell Car</h2><p class="text-sm text-slate-500 font-semibold mt-2">Submit your car details and let NoDealer help you find serious buyers.</p></div>
-            <div class="mt-5 bg-red-600 text-white rounded-2xl py-3 text-center text-xs font-black uppercase">Sell My Car</div>
-          </button>
-          <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="nd-simple-action-card text-left">
-            <div><div class="nd-simple-action-icon bg-amber-50 text-amber-600"><i class="fa-solid fa-clipboard-check"></i></div><h2 class="text-2xl font-black uppercase mt-5">PDI</h2><p class="text-sm text-slate-500 font-semibold mt-2">Book inspection, view report-style checks and reduce buying risk.</p></div>
-            <div class="mt-5 bg-amber-500 text-slate-950 rounded-2xl py-3 text-center text-xs font-black uppercase">Book PDI</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="ndSimpleTrustStrip" class="nd-simple-quick-strip py-7">
-  <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-4">
-    <div class="nd-simple-quick-item"><i class="fa-solid fa-user-check text-blue-600 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Owner Direct</h4><p class="text-xs text-slate-500">No middleman pressure</p></div></div>
-    <div class="nd-simple-quick-item"><i class="fa-solid fa-magnifying-glass-chart text-amber-500 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Inspection First</h4><p class="text-xs text-slate-500">Book PDI before payment</p></div></div>
-    <div class="nd-simple-quick-item"><i class="fa-solid fa-file-shield text-green-600 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Document Help</h4><p class="text-xs text-slate-500">RC & transfer support</p></div></div>
-    <div class="nd-simple-quick-item"><i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i><div><h4 class="font-black text-sm uppercase">Fast Support</h4><p class="text-xs text-slate-500">WhatsApp and call assist</p></div></div>
-  </div>
-</section>
-
-
-<section id="oldLongHeroHidden" class="hidden relative overflow-hidden bg-slate-950 text-white">
+        <section class="relative overflow-hidden bg-slate-950 text-white">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(30,136,229,0.28),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(227,30,36,0.22),transparent_35%)]"></div>
             <div class="absolute inset-0 opacity-20 bg-[linear-gradient(120deg,transparent_0%,rgba(255,255,255,0.08)_50%,transparent_100%)]"></div>
 
@@ -802,26 +639,13 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
         </section>
 
 
-        
-<!-- NODEALER LAUNCH TRUST STRIP -->
-<section id="ndLaunchTrustStrip" class="py-10 bg-white border-y border-slate-200">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="grid md:grid-cols-4 gap-4">
-      <div class="nd-launch-trust-card"><i class="fa-solid fa-user-shield text-blue-600 text-2xl"></i><div><h3 class="font-black text-sm uppercase">Verified Owner Flow</h3><p class="text-xs text-slate-500 font-semibold mt-1">Deal directly with owner, with NoDealer support.</p></div></div>
-      <div class="nd-launch-trust-card"><i class="fa-solid fa-clipboard-check text-green-600 text-2xl"></i><div><h3 class="font-black text-sm uppercase">Inspection First</h3><p class="text-xs text-slate-500 font-semibold mt-1">Book PDI before payment and reduce buying risk.</p></div></div>
-      <div class="nd-launch-trust-card"><i class="fa-solid fa-file-shield text-amber-600 text-2xl"></i><div><h3 class="font-black text-sm uppercase">RC & Insurance Help</h3><p class="text-xs text-slate-500 font-semibold mt-1">Document guidance before final deal closure.</p></div></div>
-      <div class="nd-launch-trust-card"><i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i><div><h3 class="font-black text-sm uppercase">Fast Human Support</h3><p class="text-xs text-slate-500 font-semibold mt-1">Call or WhatsApp for quick help choosing a car.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="service-command-center" class="bg-white py-14 border-b border-slate-100">
+        <section id="service-command-center" class="bg-white py-14 border-b border-slate-100">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
                     <div>
                         <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">NoDealer Service Hub</span>
                         <h2 class="text-3xl md:text-5xl font-black uppercase text-slate-950 mt-3 leading-tight">Everything A Car Buyer Or Seller Needs</h2>
-                        <p class="text-sm md:text-base text-slate-500 font-semibold mt-2 max-w-2xl">NoDealer-style service access, but in NoDealer’s premium direct-owner experience. Every action opens the right section and helps our team assist you faster.</p>
+                        <p class="text-sm md:text-base text-slate-500 font-semibold mt-2 max-w-2xl">Cars24-style service access, but in NoDealer’s premium direct-owner experience. Every action opens the right section and helps our team assist you faster.</p>
                     </div>
                     <button onclick="scrollToInventory()" class="bg-slate-950 text-white px-6 py-3 rounded-2xl text-xs font-black uppercase hover:bg-slate-800">Explore Cars</button>
                 </div>
@@ -921,36 +745,7 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
             </div>
         </section>
 
-        
-<!-- NODEALER SIMPLE HOW IT WORKS -->
-<section id="ndSimpleHowItWorks" class="bg-white py-12 border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
-      <div><span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Simple Flow</span><h2 class="nd-simple-section-title text-slate-950 mt-3">How NoDealer Works</h2></div>
-      <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20need%20help." target="_blank" class="bg-green-600 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase inline-flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Ask Support</a>
-    </div>
-    <div class="grid md:grid-cols-3 gap-4">
-      <div class="bg-slate-50 border rounded-3xl p-6"><p class="text-blue-600 text-3xl font-black">01</p><h3 class="font-black uppercase mt-3">Choose Action</h3><p class="text-sm text-slate-500 font-semibold mt-2">Buy car, sell car, or book PDI directly from the top of the page.</p></div>
-      <div class="bg-slate-50 border rounded-3xl p-6"><p class="text-red-600 text-3xl font-black">02</p><h3 class="font-black uppercase mt-3">Submit Details</h3><p class="text-sm text-slate-500 font-semibold mt-2">Your enquiry is saved in NoDealer CRM so our team can follow up fast.</p></div>
-      <div class="bg-slate-50 border rounded-3xl p-6"><p class="text-green-600 text-3xl font-black">03</p><h3 class="font-black uppercase mt-3">Get Human Support</h3><p class="text-sm text-slate-500 font-semibold mt-2">We help with inspection, owner connect, documents and next steps.</p></div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- NODEALER FEATURED CARS QUICK SECTION -->
-<section id="ndFeaturedCarsQuick" class="bg-white py-14 border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
-      <div><span class="bg-red-50 text-red-600 px-3 py-1 rounded-full text-[10px] font-black uppercase">Featured Stock</span><h2 class="nd-simple-section-title text-slate-950 mt-3">Cars Buyers Should See First</h2><p class="text-sm text-slate-500 font-semibold mt-2">Top listings with fast WhatsApp, call and PDI action buttons.</p></div>
-      <button onclick="scrollToInventory()" class="bg-slate-950 text-white px-5 py-3 rounded-2xl text-xs font-black uppercase">View All Cars</button>
-    </div>
-    <div id="ndFeaturedCarsQuickGrid" class="grid md:grid-cols-3 gap-5"></div>
-  </div>
-</section>
-
-<section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-12 relative z-20">
+        <section id="inventory-section" class="max-w-7xl mx-auto px-4 pt-12 relative z-20">
             <div class="bg-white rounded-[2rem] p-5 md:p-7 shadow-2xl border border-slate-100 -mt-0">
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-6">
                     <div>
@@ -1096,218 +891,7 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
             </div>
         </section>
 
-        
-<!-- NODEALER LAUNCH CUSTOMER FLOW -->
-<section id="ndLaunchCustomerFlow" class="nd-launch-process">
-  <div class="max-w-7xl mx-auto px-4 relative z-10">
-    <div class="text-center max-w-3xl mx-auto mb-10">
-      <span class="bg-white/10 text-blue-200 px-4 py-2 rounded-full text-[10px] font-black uppercase">How Buying Works</span>
-      <h2 class="text-3xl md:text-5xl font-black uppercase mt-4">Simple NoDealer-Style Flow, But Direct Owner Deals</h2>
-      <p class="text-slate-300 font-semibold mt-3">Browse, verify, inspect, negotiate and close confidently with NoDealer support.</p>
-    </div>
-    <div class="grid md:grid-cols-4 gap-4">
-      <div class="nd-launch-step"><p class="text-blue-400 text-3xl font-black">01</p><h3 class="font-black uppercase mt-3">Browse Cars</h3><p class="text-xs text-slate-400 mt-2 font-semibold">Use filters for budget, brand, fuel and transmission.</p></div>
-      <div class="nd-launch-step"><p class="text-green-400 text-3xl font-black">02</p><h3 class="font-black uppercase mt-3">Talk To Us</h3><p class="text-xs text-slate-400 mt-2 font-semibold">WhatsApp or call for car availability and owner details.</p></div>
-      <div class="nd-launch-step"><p class="text-amber-400 text-3xl font-black">03</p><h3 class="font-black uppercase mt-3">Book PDI</h3><p class="text-xs text-slate-400 mt-2 font-semibold">Inspect engine, body, tyres, papers and accident signs.</p></div>
-      <div class="nd-launch-step"><p class="text-red-400 text-3xl font-black">04</p><h3 class="font-black uppercase mt-3">Close Safely</h3><p class="text-xs text-slate-400 mt-2 font-semibold">Negotiate directly and get document-transfer guidance.</p></div>
-    </div>
-  </div>
-</section>
-
-
-<!-- NODEALER ADVANCED PDI SECTION -->
-
-<!-- NODEALER PDI FULL BOOKING FLOW -->
-
-<!-- NODEALER CAR VALUE ESTIMATOR -->
-<section id="ndCarValueEstimator" class="bg-slate-50 py-14 border-y border-slate-100">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="grid lg:grid-cols-12 gap-7 items-start">
-      <div class="lg:col-span-5">
-        <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Free Estimate Tool</span>
-        <h2 class="nd-simple-section-title text-slate-950 mt-3">Know Your Car Value</h2>
-        <p class="text-sm text-slate-500 font-semibold mt-3 leading-relaxed">Get a quick NoDealer estimated range using car model, year, fuel, ownership and kilometres. Final price depends on condition, documents and PDI.</p>
-        <div class="bg-white border rounded-3xl p-5 mt-5">
-          <h3 class="font-black uppercase text-slate-950">Why this helps?</h3>
-          <p class="text-xs text-slate-500 font-semibold mt-2">This creates a quick selling lead and helps customers understand whether their expected price is realistic.</p>
-        </div>
-      </div>
-      <div class="lg:col-span-7">
-        <div class="nd-valuation-card">
-          <div class="grid md:grid-cols-2 gap-3">
-            <input id="valRegNo" class="nd-valuation-input uppercase" placeholder="Vehicle No. Optional e.g. HR26AB1234">
-            <select id="valBrand" class="nd-valuation-input">
-              <option value="">Brand</option><option>Maruti</option><option>Hyundai</option><option>Tata</option><option>Mahindra</option><option>Honda</option><option>Toyota</option><option>Kia</option><option>Renault</option><option>Skoda</option><option>Volkswagen</option>
-            </select>
-            <input id="valModel" class="nd-valuation-input" placeholder="Model e.g. Creta / Swift / Nexon">
-            <select id="valYear" class="nd-valuation-input">
-              <option value="">Year</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option><option>2018</option><option>2017</option><option>2016</option><option>2015</option><option>2014</option>
-            </select>
-            <select id="valFuel" class="nd-valuation-input"><option value="">Fuel</option><option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select>
-            <select id="valTransmission" class="nd-valuation-input"><option value="">Transmission</option><option>Manual</option><option>Automatic</option></select>
-            <input id="valKm" class="nd-valuation-input" placeholder="KM Driven e.g. 45000">
-            <select id="valOwner" class="nd-valuation-input"><option value="">Ownership</option><option value="1">1st Owner</option><option value="2">2nd Owner</option><option value="3">3rd Owner+</option></select>
-            <input id="valPhone" class="nd-valuation-input md:col-span-2" placeholder="Mobile number to save estimate lead">
-          </div>
-          <button onclick="calculateNoDealerValue()" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white rounded-2xl py-4 text-xs font-black uppercase">Get Estimated Value</button>
-          <div id="ndValuationResult" class="hidden nd-value-result mt-5">
-            <p class="text-[10px] uppercase text-slate-400 font-black">Estimated Market Range</p>
-            <h3 id="ndValueRange" class="text-4xl font-black mt-1">₹ --</h3>
-            <p id="ndValueNote" class="text-sm text-slate-300 font-semibold mt-2">Final value depends on PDI, condition, documents and market demand.</p>
-            <div class="grid grid-cols-2 gap-3 mt-4">
-              <button onclick="saveValuationLead()" class="bg-white text-slate-950 rounded-2xl py-3 text-xs font-black uppercase">Save Lead</button>
-              <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 rounded-2xl py-3 text-xs font-black uppercase">Book PDI</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="pdi-section" class="nd-pdi-flow-shell">
-  <div class="max-w-7xl mx-auto px-4 relative z-10">
-    <div class="grid lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-5 space-y-6">
-        <span class="inline-flex items-center gap-2 bg-amber-500/10 text-amber-300 text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full border border-amber-500/20"><i class="fa-solid fa-clipboard-check"></i> NoDealer PDI</span>
-        <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">Book Inspection In 3 Simple Steps</h2>
-        <p class="text-slate-300 font-semibold leading-relaxed">Enter registration number + mobile, choose your PDI need, select package and book. Works for selling car, buying used car and new car delivery inspection.</p>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">300+</p><p class="text-[10px] uppercase text-slate-400 font-black">Check Format</p></div>
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">PDF</p><p class="text-[10px] uppercase text-slate-400 font-black">Report Ready</p></div>
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">3</p><p class="text-[10px] uppercase text-slate-400 font-black">Use Cases</p></div>
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">CRM</p><p class="text-[10px] uppercase text-slate-400 font-black">Lead Saved</p></div>
-        </div>
-      </div>
-      <div class="lg:col-span-7">
-        <div class="nd-pdi-flow-card">
-          <div class="flex items-center gap-3 mb-5"><div id="pdiDot1" class="nd-pdi-step-dot active">1</div><div class="h-1 flex-1 bg-slate-200 rounded"></div><div id="pdiDot2" class="nd-pdi-step-dot">2</div><div class="h-1 flex-1 bg-slate-200 rounded"></div><div id="pdiDot3" class="nd-pdi-step-dot">3</div></div>
-          <div id="pdiFlowStep1">
-            <h3 class="text-2xl font-black uppercase">Start With Vehicle Number</h3>
-            <p class="text-sm text-slate-500 font-semibold mt-1">For now we save RC manually. After VAHAN API, this step will auto-fetch vehicle details.</p>
-            <div class="grid md:grid-cols-2 gap-3 mt-5"><input id="pdiFlowReg" class="nd-pdi-flow-input" placeholder="Vehicle No. e.g. HR26AB1234"><input id="pdiFlowPhone" class="nd-pdi-flow-input" placeholder="Mobile Number"></div>
-            <button onclick="pdiFlowGoStep(2)" class="mt-4 w-full bg-blue-600 text-white rounded-2xl py-4 text-xs font-black uppercase">Check Vehicle</button>
-          </div>
-          <div id="pdiFlowStep2" class="hidden">
-            <h3 class="text-2xl font-black uppercase">What PDI Do You Need?</h3>
-            <div class="grid md:grid-cols-3 gap-3 mt-5">
-              <button onclick="selectPdiUseCase('Selling My Car')" class="nd-pdi-flow-tab" data-pdi-use="Selling My Car"><i class="fa-solid fa-key text-green-500 text-xl"></i><br>Selling My Car</button>
-              <button onclick="selectPdiUseCase('Buying Used Car')" class="nd-pdi-flow-tab" data-pdi-use="Buying Used Car"><i class="fa-solid fa-car-side text-blue-500 text-xl"></i><br>Buying Used Car</button>
-              <button onclick="selectPdiUseCase('New Car Delivery')" class="nd-pdi-flow-tab" data-pdi-use="New Car Delivery"><i class="fa-solid fa-gift text-amber-500 text-xl"></i><br>New Car Delivery</button>
-            </div>
-            <div class="grid md:grid-cols-2 gap-3 mt-5"><input id="pdiFlowCar" class="nd-pdi-flow-input" placeholder="Car Model / Variant"><input id="pdiFlowCity" class="nd-pdi-flow-input" placeholder="City" value="Gurugram"><input id="pdiFlowLocation" class="nd-pdi-flow-input" placeholder="Inspection Location"><input id="pdiFlowDate" class="nd-pdi-flow-input" placeholder="Preferred Date"></div>
-            <div class="grid grid-cols-2 gap-3 mt-4"><button onclick="pdiFlowGoStep(1)" class="bg-slate-100 text-slate-700 rounded-2xl py-4 text-xs font-black uppercase">Back</button><button onclick="pdiFlowGoStep(3)" class="bg-blue-600 text-white rounded-2xl py-4 text-xs font-black uppercase">Next</button></div>
-          </div>
-          <div id="pdiFlowStep3" class="hidden">
-            <h3 class="text-2xl font-black uppercase">Choose Inspection Package</h3>
-            <div class="grid md:grid-cols-3 gap-3 mt-5">
-              <button onclick="selectPdiPackage('Essential')" class="nd-pdi-package-card" data-pdi-package="Essential"><h4 class="font-black uppercase">Essential</h4><p class="text-xs text-slate-500 mt-2">Exterior, tyres, interior, basic mechanical.</p></button>
-              <button onclick="selectPdiPackage('Advanced Report')" class="nd-pdi-package-card active" data-pdi-package="Advanced Report"><h4 class="font-black uppercase">Advanced</h4><p class="text-xs text-slate-500 mt-2">300+ format, accident, documents, estimate.</p></button>
-              <button onclick="selectPdiPackage('Premium + Guidance')" class="nd-pdi-package-card" data-pdi-package="Premium + Guidance"><h4 class="font-black uppercase">Premium</h4><p class="text-xs text-slate-500 mt-2">Report + value note + buying guidance.</p></button>
-            </div>
-            <textarea id="pdiFlowNotes" class="nd-pdi-flow-input mt-4 normal-case" rows="3" placeholder="Any concern? Accident, repaint, engine noise, dealer delivery, loan, challan, seller phone, etc."></textarea>
-            <div class="grid grid-cols-2 gap-3 mt-4"><button onclick="pdiFlowGoStep(2)" class="bg-slate-100 text-slate-700 rounded-2xl py-4 text-xs font-black uppercase">Back</button><button onclick="submitPdiFlowBooking()" class="bg-amber-500 text-slate-950 rounded-2xl py-4 text-xs font-black uppercase">Book Inspection</button></div>
-            <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20book%20a%20PDI." target="_blank" class="block text-center mt-3 bg-green-600 text-white rounded-2xl py-4 text-xs font-black uppercase"><i class="fa-brands fa-whatsapp"></i> Ask On WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pdi-section-old-hidden" class="hidden" class="nd-pdi-hero py-20">
-  <div class="max-w-7xl mx-auto px-4 relative z-10">
-    <div class="grid lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-7 space-y-7">
-        <span class="inline-flex items-center gap-2 bg-amber-500/10 text-amber-300 text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full border border-amber-500/20"><i class="fa-solid fa-shield-halved"></i> NoDealer Advanced PDI</span>
-        <div>
-          <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">Don’t Buy Blind. Get A <span class="text-amber-400">Report-Style PDI</span> Before Payment.</h2>
-          <p class="text-slate-300 text-sm md:text-base max-w-2xl leading-relaxed mt-5 font-semibold">Book an inspection request for used or new cars. Our PDI format covers ownership, legal, exterior, tyres, engine, transmission, electricals, interiors, AC, suspension, brakes and estimated repair red flags.</p>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div class="nd-pdi-card"><p class="text-3xl font-black">300+</p><p class="text-[10px] uppercase font-black text-slate-400">Report Format Checks</p></div>
-          <div class="nd-pdi-card"><p class="text-3xl font-black">45 Min</p><p class="text-[10px] uppercase font-black text-slate-400">Typical On-site Review</p></div>
-          <div class="nd-pdi-card"><p class="text-3xl font-black">30 Min</p><p class="text-[10px] uppercase font-black text-slate-400">Digital Summary Target</p></div>
-          <div class="nd-pdi-card"><p class="text-3xl font-black">6 Core</p><p class="text-[10px] uppercase font-black text-slate-400">Inspection Areas</p></div>
-        </div>
-        <div class="nd-pdi-card">
-          <h3 class="text-2xl font-black uppercase mb-4">What We Check</h3>
-          <div class="flex flex-wrap gap-2">
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-id-card text-blue-600"></i> Ownership & Fitness</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-gavel text-red-600"></i> Challan / Legal Red Flags</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-car-burst text-orange-600"></i> Accident / Repaint Signs</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-car-battery text-green-600"></i> Engine & Transmission</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-tire text-slate-700"></i> Exterior & Tyres</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-bolt text-yellow-600"></i> Electricals & Interiors</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-fan text-blue-500"></i> Air Conditioning</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-road text-purple-600"></i> Suspension & Brakes</span>
-            <span class="nd-pdi-check-pill"><i class="fa-solid fa-tags text-amber-600"></i> Fair Value Estimate</span>
-          </div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div class="nd-pdi-step"><p class="text-blue-600 text-3xl font-black">01</p><h4 class="font-black uppercase mt-2 text-slate-950">Book Inspection</h4><p class="text-xs text-slate-500 font-semibold mt-1">Share car details, location and preferred slot.</p></div>
-          <div class="nd-pdi-step"><p class="text-amber-600 text-3xl font-black">02</p><h4 class="font-black uppercase mt-2 text-slate-950">Car Gets Checked</h4><p class="text-xs text-slate-500 font-semibold mt-1">Checklist covers physical + document points.</p></div>
-          <div class="nd-pdi-step"><p class="text-green-600 text-3xl font-black">03</p><h4 class="font-black uppercase mt-2 text-slate-950">Get Report Summary</h4><p class="text-xs text-slate-500 font-semibold mt-1">You receive findings and buying guidance.</p></div>
-        </div>
-      </div>
-      <div class="lg:col-span-5 space-y-5">
-        <div class="nd-pdi-report-preview">
-          <div class="bg-blue-600 text-white p-5 relative"><span class="nd-pdi-floating-badge">Sample Report Preview</span><p class="text-[10px] uppercase text-blue-100 font-black">NoDealer Car Truth Layer</p><h3 class="text-2xl font-black uppercase mt-1">Inspection Report Format</h3><p class="text-xs text-blue-100 font-semibold mt-1">Transparent category-wise report style for buyer confidence.</p></div>
-          <div class="p-5 bg-white text-slate-950">
-            <div class="grid grid-cols-3 gap-3 mb-4">
-              <div class="bg-green-50 border border-green-100 rounded-2xl p-3 text-center"><p class="text-2xl font-black text-green-700">4.2/5</p><p class="text-[10px] font-black uppercase text-green-700">Health</p></div>
-              <div class="bg-blue-50 border border-blue-100 rounded-2xl p-3 text-center"><p class="text-2xl font-black text-blue-700">2</p><p class="text-[10px] font-black uppercase text-blue-700">Owners</p></div>
-              <div class="bg-red-50 border border-red-100 rounded-2xl p-3 text-center"><p class="text-2xl font-black text-red-700">4</p><p class="text-[10px] font-black uppercase text-red-700">Alerts</p></div>
-            </div>
-            <div class="nd-pdi-report-row"><span>Exterior & Tyres</span><span class="nd-pdi-good">26 Perfect</span><span class="nd-pdi-bad">25 Issues</span></div>
-            <div class="nd-pdi-report-row"><span>Engine & Transmission</span><span class="nd-pdi-good">11 Perfect</span><span class="nd-pdi-bad">1 Issue</span></div>
-            <div class="nd-pdi-report-row"><span>Electricals & Interiors</span><span class="nd-pdi-good">10 Perfect</span><span class="nd-pdi-bad">0 Issues</span></div>
-            <div class="nd-pdi-report-row"><span>Steering, Suspension & Brakes</span><span class="nd-pdi-good">2 Perfect</span><span class="nd-pdi-bad">1 Issue</span></div>
-            <div class="nd-pdi-report-row"><span>AC & Comfort</span><span class="nd-pdi-good">3 Perfect</span><span class="nd-pdi-bad">0 Issues</span></div>
-            <button onclick="openPdiSampleReportModal()" class="mt-5 w-full bg-slate-950 text-white rounded-2xl py-4 text-xs font-black uppercase">View Sample Report Sections</button>
-          </div>
-        </div>
-        <div class="bg-white p-6 md:p-7 rounded-[2rem] border border-white/10 w-full shadow-2xl text-slate-950">
-          <div class="mb-5"><span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Inspection Booking</span><h3 class="text-2xl font-black uppercase tracking-tight mt-3 flex items-center gap-2"><i class="fa-solid fa-calendar-check text-amber-500"></i> Book Your PDI</h3><p class="text-xs text-slate-500 mt-1">Request goes directly to NoDealer CRM + Google Sheet.</p></div>
-          <form id="pdiFormHomepage" onsubmit="handlePdiSubmit(event)" class="space-y-3">
-            <div class="grid grid-cols-2 gap-3"><input type="text" id="pdiName" required placeholder="Your Full Name" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"><input type="tel" id="pdiPhone" required placeholder="Mobile Number" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"></div>
-            <input type="text" id="pdiCarDetails" required placeholder="Car Name / Model / Variant" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500">
-            <div class="grid grid-cols-2 gap-3"><input type="text" id="pdiCity" required placeholder="City" value="Gurugram" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"><input type="text" id="pdiLocation" required placeholder="Car Location / Area" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"></div>
-            <div class="grid grid-cols-2 gap-3"><select id="pdiType" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500"><option>Used Car PDI</option><option>New Car Delivery PDI</option><option>Document + Physical PDI</option></select><select id="pdiPackage" class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold focus:outline-none focus:border-amber-500"><option>Essential</option><option>Advanced Report</option><option>Premium + Photos</option></select></div>
-            <textarea id="pdiNotes" placeholder="Any concern? Accident, repaint, engine noise, loan, challan, ownership, etc." class="w-full p-3 rounded-xl border border-slate-200 text-sm font-medium focus:outline-none focus:border-amber-500"></textarea>
-            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-4 rounded-2xl shadow-lg uppercase text-sm">Submit PDI Request</button>
-            <div class="grid grid-cols-2 gap-3"><a href="tel:+917838335143" class="bg-slate-950 text-white text-center rounded-2xl py-3 text-xs font-black uppercase"><i class="fa-solid fa-phone"></i> Call PDI Team</a><a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20book%20a%20PDI." target="_blank" class="bg-green-600 text-white text-center rounded-2xl py-3 text-xs font-black uppercase"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="mt-10 grid md:grid-cols-3 gap-4 text-slate-950">
-      <div class="nd-pdi-package"><h3 class="font-black text-xl uppercase">Essential PDI</h3><p class="text-xs text-slate-500 font-semibold mt-1">Physical condition + buyer risk summary.</p><ul class="text-sm font-bold text-slate-600 mt-4 space-y-2"><li>✓ Exterior & tyres</li><li>✓ Engine basic check</li><li>✓ Interior & AC</li><li>✓ Photo notes</li></ul></div>
-      <div class="nd-pdi-package featured"><span class="bg-amber-500 text-slate-950 px-3 py-1 rounded-full text-[10px] font-black uppercase">Recommended</span><h3 class="font-black text-xl uppercase mt-3">Advanced Report</h3><p class="text-xs text-slate-500 font-semibold mt-1">Best for serious buyers before token/payment.</p><ul class="text-sm font-bold text-slate-600 mt-4 space-y-2"><li>✓ 300+ format checklist</li><li>✓ Ownership & fitness points</li><li>✓ Legal / challan alert notes</li><li>✓ Repair estimate notes</li></ul></div>
-      <div class="nd-pdi-package"><h3 class="font-black text-xl uppercase">Premium + Guidance</h3><p class="text-xs text-slate-500 font-semibold mt-1">Inspection + negotiation and deal guidance.</p><ul class="text-sm font-bold text-slate-600 mt-4 space-y-2"><li>✓ Advanced report</li><li>✓ Market value note</li><li>✓ Buying decision call</li><li>✓ Document transfer guidance</li></ul></div>
-    </div>
-  </div>
-</section>
-
-<div id="pdiSampleReportModal" class="hidden fixed inset-0 z-[100004] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4"><div><p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Transparency Preview</p><h2 class="text-3xl font-black uppercase">Sample PDI Report Sections</h2><p class="text-sm text-slate-400 mt-1">Sections a buyer should expect in a serious inspection report.</p></div><button onclick="closePdiSampleReportModal()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button></div>
-    <div class="p-6 grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-slate-950">
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-car text-blue-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Vehicle Health Summary</h3><p class="text-xs text-slate-500 font-semibold mt-2">Overall rating, odometer, estimated value, ownership and fitness validity.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-scale-balanced text-red-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Legal & Challan History</h3><p class="text-xs text-slate-500 font-semibold mt-2">Pending challans, legal cases and red flags.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-images text-purple-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Vehicle Images</h3><p class="text-xs text-slate-500 font-semibold mt-2">Front, rear, side, engine bay, tyres, odometer, interior and boot images.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-car-burst text-amber-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Exterior & Tyres</h3><p class="text-xs text-slate-500 font-semibold mt-2">Dents, scratches, repaint, panel damage and tyre life.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-gears text-green-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Engine & Transmission</h3><p class="text-xs text-slate-500 font-semibold mt-2">Engine sound, smoke, clutch, gear shifting, fluids and battery.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-bolt text-yellow-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Electricals & Interiors</h3><p class="text-xs text-slate-500 font-semibold mt-2">Windows, airbags, music system, seats, sensors and camera.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-road text-slate-700 text-3xl"></i><h3 class="font-black uppercase mt-3">Suspension & Brakes</h3><p class="text-xs text-slate-500 font-semibold mt-2">Steering, suspension, brake response and repair notes.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-fan text-cyan-600 text-3xl"></i><h3 class="font-black uppercase mt-3">Air Conditioning</h3><p class="text-xs text-slate-500 font-semibold mt-2">Cooling, heater and climate control check.</p></div>
-      <div class="nd-pdi-white-card"><i class="fa-solid fa-car-side text-indigo-600 text-3xl"></i><h3 class="font-black uppercase mt-3">OEM Specs & Features</h3><p class="text-xs text-slate-500 font-semibold mt-2">Infotainment, dimensions, comfort and feature availability.</p></div>
-    </div>
-  </div>
-</div>
-
-<section id="pdi-section-old-hidden" class="hidden" class="bg-slate-950 text-white py-20 relative overflow-hidden">
+        <section id="pdi-section" class="bg-slate-950 text-white py-20 relative overflow-hidden">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(30,136,229,0.26),transparent_42%),radial-gradient(circle_at_bottom_left,rgba(245,158,11,0.20),transparent_38%)]"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="grid lg:grid-cols-12 gap-8 items-start">
@@ -2342,10 +1926,8 @@ class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:ro
         const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
         const VERIFIED_DESKTOP_IP = "182.69.176.207";
-        const MASTER_USER = "nodealer";
-        window.MASTER_USER = "nodealer";
-        const MASTER_PASS = "NoDealer@2026";
-        window.MASTER_PASS = "NoDealer@2026";
+        const MASTER_USER = "admin";
+        const MASTER_PASS = "Rudraksh@2026";
         const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/76om5hajdd8557xo4quq6x72rfv785ts";
 
         let ATTACHED_BASE64_PHOTOS = [];
@@ -5517,885 +5099,290 @@ function openNdAdminLeadViewerFromTools() {
 </script>
 <!-- NoDealer Premium CRM + Public Safety Upgrade
      Paste this block just before 
-
-
-
-<!-- NODEALER LAUNCH STICKY CUSTOMER ACTIONS -->
-<div id="ndLaunchStickyActions" class="nd-launch-cta-sticky">
-  <a class="nd-launch-whatsapp" href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20know%20about%20available%20cars." target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-  <a class="nd-launch-call" href="tel:+917838335143"><i class="fa-solid fa-phone"></i> Call Now</a>
-</div>
-
-
 <script>
-/* NODEALER JUNE 1 FINAL LAUNCH SCRIPT */
-window.MASTER_USER="nodealer";
-window.MASTER_PASS="NoDealer@2026";
-const ND_ADMIN_CRM_WEBHOOK_FINAL="https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
+/* =========================
+   NODEALER FINAL ADMIN ROUTE + CRM TOOLS FIX
+========================= */
+const ND_ADMIN_CRM_WEBHOOK_FINAL = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
 
-window.executeAdminLogin=async function(){
-  const user=(document.getElementById("loginUser")?.value||"").trim();
-  const pass=(document.getElementById("loginPass")?.value||"").trim();
-  if(user!=="nodealer"||pass!=="NoDealer@2026"){alert("Invalid admin credentials. Use Username: nodealer and Password: NoDealer@2026");return;}
-  try{sessionStorage.setItem("nodealer_admin_session_v2",JSON.stringify({ok:true,at:Date.now()}));}catch(e){}
-  document.getElementById("adminAuthView")?.classList.add("hidden");
-  document.getElementById("adminWorkspaceView")?.classList.remove("hidden");
-  document.body.classList.remove("overflow-hidden");
-  document.body.style.overflow="auto";
-  if(typeof setAdminUnlocked==="function")setAdminUnlocked(true);
-  if(typeof migrateLocalLeadsToSupabase==="function")await migrateLocalLeadsToSupabase();
-  if(typeof loadAdminInventoryDirectory==="function")await loadAdminInventoryDirectory();
-  if(typeof loadAdminLeadsDashboard==="function")await loadAdminLeadsDashboard();
-  if(typeof updateActionCenter==="function")updateActionCenter();
-  if(typeof injectNdAdminCrmToolsButtonFinal==="function")setTimeout(injectNdAdminCrmToolsButtonFinal,300);
-};
+function ndFinalIsAdminRoute() {
+    return window.location.pathname.replace(/\/$/, "").toLowerCase() === "/admin" ||
+           window.location.pathname.toLowerCase().endsWith("/admin.html") ||
+           window.location.hash.toLowerCase() === "#admin";
+}
 
-function ndFinalHidePublicAdminLeaks(){
-  const oldPanel=document.getElementById("manualLeadPanel");if(oldPanel){oldPanel.style.display="none";oldPanel.style.visibility="hidden";oldPanel.style.pointerEvents="none";}
-  const oldLeadBtn=document.getElementById("ndLeadViewerBtn");if(oldLeadBtn)oldLeadBtn.style.display="none";
+function ndFinalIsAdminVisible() {
+    const admin = document.getElementById("adminWorkspaceView") || document.getElementById("secureAdminPortal");
+    return !!(admin && !admin.classList.contains("hidden"));
 }
-function ndFinalIsAdminVisible(){const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");return !!(admin&&!admin.classList.contains("hidden"));}
-function openNdAdminCrmTools(){document.getElementById("ndAdminCrmToolsModal")?.classList.remove("hidden");}
-function closeNdAdminCrmTools(){document.getElementById("ndAdminCrmToolsModal")?.classList.add("hidden");}
-function openNdAdminLeadViewerFromTools(){const tools=document.getElementById("ndAdminCrmToolsModal");if(tools)tools.classList.add("hidden");setTimeout(function(){if(typeof openNdLeadViewer==="function")openNdLeadViewer();else alert("Lead Viewer is still loading. Refresh once and try again.");},180);}
-async function submitNdAdminManualLead(){
-  const data={type:document.getElementById("ndManualLeadType")?.value||"Manual Lead",name:document.getElementById("ndManualLeadName")?.value||"",phone:document.getElementById("ndManualLeadPhone")?.value||"",car:document.getElementById("ndManualLeadCar")?.value||"",priority:document.getElementById("ndManualLeadPriority")?.value||"Hot",notes:document.getElementById("ndManualLeadNotes")?.value||"",source:"Admin Manual Entry",status:"New Lead",date:new Date().toLocaleString()};
-  if(!data.phone&&!data.name){alert("Please enter at least customer name or phone number.");return;}
-  await fetch(ND_ADMIN_CRM_WEBHOOK_FINAL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-  ["ndManualLeadName","ndManualLeadPhone","ndManualLeadCar","ndManualLeadNotes"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
-  alert("Lead saved successfully to CRM!");
-  if(typeof loadNdCrmLeads==="function")setTimeout(loadNdCrmLeads,1200);
+
+function ndFinalHidePublicAdminLeaks() {
+    const oldPanel = document.getElementById("manualLeadPanel");
+    if (oldPanel) {
+        oldPanel.style.display = "none";
+        oldPanel.style.visibility = "hidden";
+        oldPanel.style.pointerEvents = "none";
+    }
+    const oldLeadBtn = document.getElementById("ndLeadViewerBtn");
+    if (oldLeadBtn) oldLeadBtn.style.display = "none";
 }
-function injectNdAdminCrmToolsButtonFinal(){
-  ndFinalHidePublicAdminLeaks();
-  const existing=document.getElementById("ndAdminCrmToolsBtn");
-  if(!ndFinalIsAdminVisible()){if(existing)existing.remove();return;}
-  if(existing)return;
-  const btn=document.createElement("button");btn.id="ndAdminCrmToolsBtn";btn.onclick=openNdAdminCrmTools;btn.className="fixed bottom-40 left-6 z-[10001] bg-green-600 hover:bg-green-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.innerHTML='<i class="fa-solid fa-address-book"></i> CRM Tools';document.body.appendChild(btn);
+
+function openNdAdminCrmTools() {
+    document.getElementById("ndAdminCrmToolsModal")?.classList.remove("hidden");
 }
-function ndImproveCarButtons(){
-  Array.from(document.querySelectorAll("#carGrid > *")).forEach(card=>{
-    if(card.dataset.ndLaunchImproved==="true")return;card.dataset.ndLaunchImproved="true";
-    const title=card.querySelector("h3,h2,h4")?.textContent?.trim()||"this car";
-    const actions=document.createElement("div");actions.className="grid grid-cols-2 gap-2 mt-3 nd-launch-added-actions";
-    actions.innerHTML='<a href="https://wa.me/917838335143?text='+encodeURIComponent("Hi NoDealer, I am interested in "+title)+'" target="_blank" class="bg-green-600 text-white text-center rounded-xl px-3 py-3 text-[10px] font-black uppercase"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><a href="tel:+917838335143" class="bg-slate-950 text-white text-center rounded-xl px-3 py-3 text-[10px] font-black uppercase"><i class="fa-solid fa-phone"></i> Call</a>';
-    if(!card.querySelector(".nd-launch-added-actions"))card.appendChild(actions);
-  });
+
+function closeNdAdminCrmTools() {
+    document.getElementById("ndAdminCrmToolsModal")?.classList.add("hidden");
 }
-document.addEventListener("DOMContentLoaded",function(){
-  ndFinalHidePublicAdminLeaks();
-  if(window.location.hash.toLowerCase()==="#admin"){const preloader=document.getElementById("preloader");const main=document.getElementById("main-content");if(preloader)preloader.style.display="none";if(main){main.classList.remove("opacity-0");main.style.opacity="1";}document.body.classList.remove("overflow-hidden");document.body.style.overflow="auto";document.getElementById("secureAdminPortal")?.classList.remove("hidden");}
-  setInterval(function(){ndFinalHidePublicAdminLeaks();injectNdAdminCrmToolsButtonFinal();ndImproveCarButtons();},1000);
+
+function openNdAdminLeadViewerFromTools() {
+    const tools = document.getElementById("ndAdminCrmToolsModal");
+    if (tools) tools.classList.add("hidden");
+    setTimeout(function() {
+        if (typeof openNdLeadViewer === "function") openNdLeadViewer();
+        else alert("Lead Viewer is still loading. Refresh once and try again.");
+    }, 180);
+}
+
+async function submitNdAdminManualLead() {
+    const data = {
+        type: document.getElementById("ndManualLeadType")?.value || "Manual Lead",
+        name: document.getElementById("ndManualLeadName")?.value || "",
+        phone: document.getElementById("ndManualLeadPhone")?.value || "",
+        car: document.getElementById("ndManualLeadCar")?.value || "",
+        priority: document.getElementById("ndManualLeadPriority")?.value || "Hot",
+        notes: document.getElementById("ndManualLeadNotes")?.value || "",
+        source: "Admin Manual Entry",
+        status: "New Lead",
+        date: new Date().toLocaleString()
+    };
+
+    if (!data.phone && !data.name) {
+        alert("Please enter at least customer name or phone number.");
+        return;
+    }
+
+    await fetch(ND_ADMIN_CRM_WEBHOOK_FINAL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    ["ndManualLeadName","ndManualLeadPhone","ndManualLeadCar","ndManualLeadNotes"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+    });
+
+    alert("Lead saved successfully to CRM!");
+    if (typeof loadNdCrmLeads === "function") setTimeout(loadNdCrmLeads, 1200);
+}
+
+function injectNdAdminCrmToolsButtonFinal() {
+    ndFinalHidePublicAdminLeaks();
+    const existing = document.getElementById("ndAdminCrmToolsBtn");
+
+    if (!ndFinalIsAdminVisible()) {
+        if (existing) existing.remove();
+        return;
+    }
+    if (existing) return;
+
+    const btn = document.createElement("button");
+    btn.id = "ndAdminCrmToolsBtn";
+    btn.onclick = openNdAdminCrmTools;
+    btn.className = "fixed bottom-40 left-6 z-[10001] bg-green-600 hover:bg-green-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
+    btn.innerHTML = '<i class="fa-solid fa-address-book"></i> CRM Tools';
+    document.body.appendChild(btn);
+}
+
+function ndAutoOpenAdminForAdminHtml() {
+    if (!ndFinalIsAdminRoute()) return;
+
+    const preloader = document.getElementById("preloader");
+    const main = document.getElementById("main-content");
+    if (preloader) preloader.style.display = "none";
+    if (main) {
+        main.classList.remove("opacity-0");
+        main.style.opacity = "1";
+    }
+    document.body.classList.remove("overflow-hidden");
+    document.body.style.overflow = "auto";
+
+    setTimeout(function() {
+        if (typeof openAdminPortal === "function") { try { openAdminPortal(); } catch(e) {} }
+        if (typeof openAdminPanel === "function") { try { openAdminPanel(); } catch(e) {} }
+        if (typeof showAdminLogin === "function") { try { showAdminLogin(); } catch(e) {} }
+
+        const adminLogin = document.getElementById("secureAdminPortal");
+        if (adminLogin) adminLogin.classList.remove("hidden");
+
+        injectNdAdminCrmToolsButtonFinal();
+    }, 500);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    ndFinalHidePublicAdminLeaks();
+    ndAutoOpenAdminForAdminHtml();
+    setInterval(injectNdAdminCrmToolsButtonFinal, 800);
 });
-document.addEventListener("click",function(){setTimeout(function(){injectNdAdminCrmToolsButtonFinal();ndImproveCarButtons();},250);},true);
+document.addEventListener("click", function() {
+    setTimeout(injectNdAdminCrmToolsButtonFinal, 200);
+}, true);
 </script>
 
 
+<!-- NODEALER REAL REARRANGED ADMIN DASHBOARD -->
+<div id="ndOrganizedAdminApp">
+  <aside class="nd-org-side">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center"><i class="fa-solid fa-gauge-high"></i></div>
+      <div><h2 class="font-black uppercase leading-tight">NoDealer OS</h2><p class="text-[10px] text-slate-400 font-black uppercase">Organized Admin</p></div>
+    </div>
+    <button class="nd-org-tab active" data-org-tab="dashboard" onclick="ndOrgShowTab('dashboard')"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+    <button class="nd-org-tab" data-org-tab="leads" onclick="ndOrgShowTab('leads')"><i class="fa-solid fa-address-card"></i> Leads & Photos</button>
+    <button class="nd-org-tab" data-org-tab="stock" onclick="ndOrgShowTab('stock')"><i class="fa-solid fa-cloud-arrow-up"></i> Stock Upload</button>
+    <button class="nd-org-tab" data-org-tab="inventory" onclick="ndOrgShowTab('inventory')"><i class="fa-solid fa-warehouse"></i> Inventory Tools</button>
+    <button class="nd-org-tab" data-org-tab="reports" onclick="ndOrgShowTab('reports')"><i class="fa-solid fa-file-medical"></i> PDI / Reports</button>
+    <button onclick="ndOrgCloseAdmin()" class="mt-5 w-full bg-slate-700 hover:bg-slate-600 text-white rounded-2xl py-3 text-xs font-black uppercase">Show Original Admin</button>
+    <a href="index.html" class="mt-2 block text-center bg-red-600 hover:bg-red-700 text-white rounded-2xl py-3 text-xs font-black uppercase">Public Website</a>
+  </aside>
+
+  <main class="nd-org-main">
+    <section id="ndOrgDashboard" class="nd-org-view active">
+      <div class="flex items-center justify-between gap-4 flex-wrap mb-5">
+        <div><p class="text-[10px] uppercase text-blue-400 font-black">Control Center</p><h1 class="text-4xl font-black uppercase">Admin Dashboard</h1><p class="text-sm text-slate-400 font-bold mt-1">All important admin actions arranged in one place.</p></div>
+        <button onclick="ndOrgLoadLeads()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Refresh CRM</button>
+      </div>
+      <div class="grid md:grid-cols-5 gap-4 mb-5">
+        <div class="nd-org-stat"><p>Total Leads</p><h3 id="ndOrgStatTotal">0</h3></div>
+        <div class="nd-org-stat"><p>Buy</p><h3 id="ndOrgStatBuy">0</h3></div>
+        <div class="nd-org-stat"><p>Sell</p><h3 id="ndOrgStatSell">0</h3></div>
+        <div class="nd-org-stat"><p>PDI</p><h3 id="ndOrgStatPdi">0</h3></div>
+        <div class="nd-org-stat"><p>Photos</p><h3 id="ndOrgStatPhotos">0</h3></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <button onclick="ndOrgShowTab('leads')" class="nd-org-card text-left"><i class="fa-solid fa-address-card text-blue-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">View Leads</h3><p class="text-sm text-slate-400 font-bold mt-2">Full details and photos.</p></button>
+        <button onclick="ndOrgShowTab('stock')" class="nd-org-card text-left"><i class="fa-solid fa-cloud-arrow-up text-green-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">Upload Stock</h3><p class="text-sm text-slate-400 font-bold mt-2">Your existing stock upload form.</p></button>
+        <button onclick="ndOrgShowTab('inventory')" class="nd-org-card text-left"><i class="fa-solid fa-warehouse text-amber-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">Inventory Tools</h3><p class="text-sm text-slate-400 font-bold mt-2">Manage, mark sold, feature cars.</p></button>
+      </div>
+    </section>
+
+    <section id="ndOrgLeads" class="nd-org-view">
+      <div class="flex items-center justify-between gap-4 flex-wrap mb-5">
+        <div><p class="text-[10px] uppercase text-blue-400 font-black">CRM</p><h1 class="text-4xl font-black uppercase">Leads & Photos</h1></div>
+        <div class="flex gap-2 flex-wrap"><button onclick="ndOrgLoadLeads()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Refresh</button><button onclick="ndOrgDownloadCsv()" class="bg-green-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Download Excel</button></div>
+      </div>
+      <div class="grid md:grid-cols-5 gap-3 mb-5"><input id="ndOrgLeadSearch" oninput="ndOrgRenderLeads()" class="nd-org-input md:col-span-2" placeholder="Search name, phone, car, reg no, notes"><select id="ndOrgLeadTypeFilter" onchange="ndOrgRenderLeads()" class="nd-org-input"><option value="">All Types</option><option>Buy</option><option>Sell</option><option>PDI</option><option>WhatsApp</option><option>Valuation</option></select><select id="ndOrgPhotoFilter" onchange="ndOrgRenderLeads()" class="nd-org-input"><option value="">All Leads</option><option value="photos">Only With Photos</option></select><select id="ndOrgSortFilter" onchange="ndOrgRenderLeads()" class="nd-org-input"><option value="newest">Newest First</option><option value="oldest">Oldest First</option></select></div>
+      <div id="ndOrgLeadsList"></div>
+    </section>
+
+    <section id="ndOrgStock" class="nd-org-view">
+      <div class="mb-5"><p class="text-[10px] uppercase text-green-400 font-black">Inventory</p><h1 class="text-4xl font-black uppercase">Stock Upload</h1><p class="text-sm text-slate-400 font-bold mt-1">Your existing deploy live stock form is moved here.</p></div>
+      <div id="ndStockUploadMount" class="nd-org-card"><div class="nd-org-empty">Loading existing stock upload form...</div></div>
+    </section>
+
+    <section id="ndOrgInventory" class="nd-org-view">
+      <div class="mb-5"><p class="text-[10px] uppercase text-amber-400 font-black">Inventory</p><h1 class="text-4xl font-black uppercase">Inventory Tools</h1></div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <button onclick="openRealCarManager && openRealCarManager()" class="nd-org-card text-left"><i class="fa-solid fa-circle-plus text-blue-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Add / Edit Cars</h3><p class="text-sm text-slate-400 font-bold mt-2">Open car manager.</p></button>
+        <button onclick="openProInventoryAdmin && openProInventoryAdmin()" class="nd-org-card text-left"><i class="fa-solid fa-warehouse text-amber-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Inventory OS</h3><p class="text-sm text-slate-400 font-bold mt-2">Status, featured, sold.</p></button>
+        <button onclick="downloadInventorySnapshot && downloadInventorySnapshot()" class="nd-org-card text-left"><i class="fa-solid fa-download text-green-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Download Inventory</h3><p class="text-sm text-slate-400 font-bold mt-2">Export stock data.</p></button>
+      </div>
+    </section>
+
+    <section id="ndOrgReports" class="nd-org-view">
+      <div class="mb-5"><p class="text-[10px] uppercase text-purple-400 font-black">Reports</p><h1 class="text-4xl font-black uppercase">PDI / Reports</h1></div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <button onclick="openNdPdiBookings && openNdPdiBookings()" class="nd-org-card text-left"><i class="fa-solid fa-clipboard-list text-blue-400 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Bookings</h3></button>
+        <button onclick="openNdPdiReportBuilder && openNdPdiReportBuilder()" class="nd-org-card text-left"><i class="fa-solid fa-file-medical text-amber-400 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Report</h3></button>
+        <button onclick="openAdvancedAnalytics && openAdvancedAnalytics()" class="nd-org-card text-left"><i class="fa-solid fa-chart-pie text-green-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Analytics</h3></button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="ndOrgPhotoModal" class="nd-org-photo-modal"><div class="nd-org-photo-box"><div class="nd-org-photo-head"><div><p class="text-[10px] uppercase text-slate-400 font-black">Uploaded Photo</p><h3 id="ndOrgPhotoTitle" class="text-xl font-black uppercase">Lead Photo</h3></div><button onclick="ndOrgClosePhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button></div><div class="nd-org-photo-body"><img id="ndOrgPhotoImg" src=""></div><div class="nd-org-photo-foot"><a id="ndOrgPhotoOriginal" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original Backup</a><button onclick="ndOrgClosePhoto()" class="bg-blue-600 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button></div></div></div>
+
+
 <script>
-/* NODEALER ADVANCED PDI SECTION SCRIPT */
-function openPdiSampleReportModal(){document.getElementById("pdiSampleReportModal")?.classList.remove("hidden");}
-function closePdiSampleReportModal(){document.getElementById("pdiSampleReportModal")?.classList.add("hidden");}
+/* NODEALER REAL REARRANGED ADMIN DASHBOARD SCRIPT */
 (function(){
-  const originalHandlePdiSubmit=window.handlePdiSubmit;
-  window.handlePdiSubmit=async function(event){
-    const pdiType=document.getElementById("pdiType")?.value||"";
-    const pdiPackage=document.getElementById("pdiPackage")?.value||"";
-    const pdiNotes=document.getElementById("pdiNotes")?.value||"";
-    if(typeof originalHandlePdiSubmit==="function"){
-      const notesField=document.getElementById("pdiNotes");
-      if(notesField) notesField.value=[pdiType,pdiPackage,pdiNotes].filter(Boolean).join(" | ");
-      return originalHandlePdiSubmit(event);
-    }
-    event.preventDefault();
-    const data={type:"PDI Request",name:document.getElementById("pdiName")?.value||"",phone:document.getElementById("pdiPhone")?.value||"",car:document.getElementById("pdiCarDetails")?.value||"",city:document.getElementById("pdiCity")?.value||"",location:document.getElementById("pdiLocation")?.value||"",notes:[pdiType,pdiPackage,pdiNotes].filter(Boolean).join(" | "),source:"Advanced PDI Section",status:"New Lead",date:new Date().toLocaleString()};
-    await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-    alert("PDI request submitted successfully. Our team will contact you.");
-  };
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";let leads=[];let movedUpload=false;
+function parseCsv(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows}
+function pick(o,names){for(const n of names){if(o&&o[n]!==undefined&&String(o[n]).trim())return String(o[n]).trim();}return""}
+function typeOf(o){const txt=JSON.stringify(o||{}).toLowerCase();if(txt.includes("pdi"))return"PDI";if(txt.includes("sell"))return"Sell";if(txt.includes("whatsapp"))return"WhatsApp";if(txt.includes("valuation")||txt.includes("value estimate"))return"Valuation";return"Buy"}
+function cls(t){if(t==="PDI")return"nd-org-pdi";if(t==="Sell")return"nd-org-sell";if(t==="WhatsApp")return"nd-org-wa";if(t==="Valuation")return"nd-org-value";if(t==="Buy")return"nd-org-buy";return"nd-org-other"}
+function isPhotoUrl(url){url=String(url||"").toLowerCase();return url.includes("drive.google.com")||url.includes("googleusercontent.com")||url.includes("uc?id=")||/\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(url)}
+function normalizePhoto(url){url=String(url||"").trim();const m=url.match(/\/file\/d\/([^/]+)/)||url.match(/[?&]id=([^&]+)/);if(m&&m[1])return"https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1800";return url}
+function photoLinks(o){const text=JSON.stringify(o||{}),links=[],regex=/(https?:\/\/[^\s"',<>]+)/g;let m;while((m=regex.exec(text))!==null){let u=m[1].replace(/[)\].,;]+$/g,"");if(isPhotoUrl(u)&&!links.includes(u))links.push(u)}return links}
+window.ndOrgShowTab=function(tab){document.querySelectorAll(".nd-org-tab").forEach(b=>b.classList.toggle("active",b.dataset.orgTab===tab));document.querySelectorAll(".nd-org-view").forEach(v=>v.classList.remove("active"));document.getElementById("ndOrg"+tab.charAt(0).toUpperCase()+tab.slice(1))?.classList.add("active");if(tab==="stock")moveStockUpload();if(tab==="leads")ndOrgLoadLeads()}
+window.ndOrgCloseAdmin=function(){document.getElementById("ndOrganizedAdminApp")?.classList.remove("active")}
+function showAppIfAdmin(){const app=document.getElementById("ndOrganizedAdminApp");const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");const visible=location.pathname.toLowerCase().includes("admin") || (admin&&!admin.classList.contains("hidden"));if(app&&visible&&!app.classList.contains("active")){app.classList.add("active");ndOrgLoadLeads();setTimeout(moveStockUpload,1200)}}
+function moveStockUpload(){if(movedUpload)return;const submit=document.getElementById("adminSubmitBtn");const mount=document.getElementById("ndStockUploadMount");if(!submit||!mount)return;let card=submit.closest("form")||submit.parentElement;for(let i=0;i<4&&card&&card.parentElement;i++){if((card.innerText||"").toLowerCase().includes("deploy live stock"))break;card=card.parentElement}if(card){mount.innerHTML="";mount.appendChild(card);movedUpload=true;}}
+window.ndOrgLoadLeads=async function(){const list=document.getElementById("ndOrgLeadsList");if(list)list.innerHTML='<div class="nd-org-empty">Loading CRM leads...</div>';try{const res=await fetch(CSV_URL+"&cache="+Date.now());const text=await res.text();const rows=parseCsv(text).filter(r=>r.some(c=>String(c||"").trim()));const headers=(rows.shift()||[]).map(h=>String(h||"").trim());leads=rows.map((r,idx)=>{const o={_idx:idx};headers.forEach((h,i)=>o[h]=r[i]||"");return o}).reverse()}catch(e){console.error(e);leads=[]}ndOrgRenderLeads()}
+window.ndOrgRenderLeads=function(){const search=(document.getElementById("ndOrgLeadSearch")?.value||"").toLowerCase(),typeFilter=document.getElementById("ndOrgLeadTypeFilter")?.value||"",photoFilter=document.getElementById("ndOrgPhotoFilter")?.value||"",sort=document.getElementById("ndOrgSortFilter")?.value||"newest";let rows=leads.filter(o=>JSON.stringify(o).toLowerCase().includes(search));if(typeFilter)rows=rows.filter(o=>typeOf(o)===typeFilter);if(photoFilter==="photos")rows=rows.filter(o=>photoLinks(o).length>0);if(sort==="oldest")rows=[...rows].reverse();const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};set("ndOrgStatTotal",leads.length);set("ndOrgStatBuy",leads.filter(o=>typeOf(o)==="Buy").length);set("ndOrgStatSell",leads.filter(o=>typeOf(o)==="Sell").length);set("ndOrgStatPdi",leads.filter(o=>typeOf(o)==="PDI").length);set("ndOrgStatPhotos",leads.filter(o=>photoLinks(o).length>0).length);const list=document.getElementById("ndOrgLeadsList");if(!list)return;if(!rows.length){list.innerHTML='<div class="nd-org-empty">No matching leads found.</div>';return}list.innerHTML=rows.slice(0,150).map((o,idx)=>{const t=typeOf(o),name=pick(o,["name","Name","Customer Name"])||"Customer",phone=pick(o,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,""),car=pick(o,["car","Car","Vehicle","vehicle","model","Model","Interested Car"])||"Not specified",status=pick(o,["status","Status"])||"New Lead",source=pick(o,["source","Source"])||t+" Lead",date=pick(o,["date","Date","timestamp","Timestamp"]),reg=pick(o,["regNo","Reg No","Registration","registration"]),city=pick(o,["city","City","location","Location"]),pkg=pick(o,["package","Package"]),useCase=pick(o,["useCase","Use Case"]),notes=pick(o,["notes","Notes"])||JSON.stringify(o).slice(0,900),photos=photoLinks(o),callPhone=phone?(phone.startsWith("91")?phone:"91"+phone):"";return `<div class="nd-org-lead"><div><div class="flex items-center justify-between gap-3 flex-wrap"><h3 class="text-xl font-black uppercase">${name}</h3><span class="nd-org-pill ${cls(t)}">${t}</span></div><div class="nd-org-info-grid"><div class="nd-org-info"><p>Phone</p><h4>${phone||"No phone"}</h4></div><div class="nd-org-info"><p>Car / Requirement</p><h4>${car}</h4></div><div class="nd-org-info"><p>Status</p><h4>${status}</h4></div><div class="nd-org-info"><p>Source</p><h4>${source}</h4></div>${reg?`<div class="nd-org-info"><p>Reg No</p><h4>${reg}</h4></div>`:""}${city?`<div class="nd-org-info"><p>City / Location</p><h4>${city}</h4></div>`:""}${pkg?`<div class="nd-org-info"><p>Package</p><h4>${pkg}</h4></div>`:""}${useCase?`<div class="nd-org-info"><p>Use Case</p><h4>${useCase}</h4></div>`:""}${date?`<div class="nd-org-info"><p>Date</p><h4>${date}</h4></div>`:""}</div><div class="nd-org-notes"><b>Full Notes:</b><br>${notes}</div><div class="nd-org-actions"><a href="tel:+${callPhone}" class="bg-blue-600 text-white">Call</a><a href="https://wa.me/${callPhone}" target="_blank" class="bg-green-600 text-white">WhatsApp</a><button onclick="ndOrgCopyLead(${idx})" class="bg-slate-700 text-white">Copy</button><button onclick="ndOrgDownloadSingleLead(${idx})" class="bg-amber-500 text-slate-950">Export</button></div></div><div><div class="flex items-center justify-between mb-3"><h4 class="font-black uppercase">Uploaded Photos</h4><span class="nd-org-pill nd-org-other">${photos.length} Photos</span></div>${photos.length?`<div class="nd-org-photo-grid">${photos.slice(0,12).map((u,i)=>{const img=normalizePhoto(u);return `<div class="nd-org-photo-card"><img src="${img}" onclick="ndOrgOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><button style="display:none" onclick="ndOrgOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')">View Photo</button></div>`}).join("")}</div>`:`<div class="nd-org-empty">No photo uploaded for this lead.</div>`}</div></div>`}).join("")}
+window.ndOrgOpenPhoto=function(img,original,title){img=decodeURIComponent(img||"");original=decodeURIComponent(original||img);title=decodeURIComponent(title||"Lead Photo");document.getElementById("ndOrgPhotoImg").src=img;document.getElementById("ndOrgPhotoOriginal").href=original||img;document.getElementById("ndOrgPhotoTitle").textContent=title;document.getElementById("ndOrgPhotoModal")?.classList.add("active")}
+window.ndOrgClosePhoto=function(){document.getElementById("ndOrgPhotoModal")?.classList.remove("active")}
+window.ndOrgCopyLead=function(idx){navigator.clipboard?.writeText(JSON.stringify(leads[idx]||{},null,2));alert("Lead details copied.")}
+function csvEscape(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}function downloadCsv(rows,filename){if(!rows.length)return;const headers=Array.from(new Set(rows.flatMap(o=>Object.keys(o))));const csv=[headers.join(","),...rows.map(o=>headers.map(h=>csvEscape(o[h])).join(","))].join("\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+window.ndOrgDownloadSingleLead=function(idx){downloadCsv([leads[idx]||{}],"nodealer-lead.csv")}
+window.ndOrgDownloadCsv=function(){downloadCsv(leads,"nodealer-crm-leads.csv")}
+document.addEventListener("click",function(e){const a=e.target.closest&&e.target.closest("a[href]"),img=e.target&&e.target.tagName==="IMG"?e.target:null;if(a){const href=a.getAttribute("href")||"";if(isPhotoUrl(href)||href==="about:blank"){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndOrgOpenPhoto(encodeURIComponent(normalizePhoto(href)),encodeURIComponent(href),encodeURIComponent("Lead Photo"));return false}}if(img){const src=img.getAttribute("src")||"";if(isPhotoUrl(src)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndOrgOpenPhoto(encodeURIComponent(normalizePhoto(src)),encodeURIComponent(src),encodeURIComponent("Lead Photo"));return false}}},true)
+const oldOpen=window.open;window.open=function(url,name,features){if(isPhotoUrl(url)){ndOrgOpenPhoto(encodeURIComponent(normalizePhoto(url)),encodeURIComponent(url),encodeURIComponent("Lead Photo"));return null}return oldOpen.call(window,url,name,features)}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")ndOrgClosePhoto()})
+document.addEventListener("DOMContentLoaded",function(){setInterval(showAppIfAdmin,800)})
 })();
 </script>
 
 
-<!-- NODEALER PDI PHASE 2 REPORT BUILDER -->
-<div id="ndPdiReportBuilderModal" class="hidden fixed inset-0 z-[100006] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl nd-no-print">
-    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
-      <div>
-        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer PDI Phase 2</p>
-        <h2 class="text-3xl font-black uppercase">Inspection Report Builder</h2>
-        <p class="text-sm text-slate-400 mt-1">Create branded PDI reports and print/save as PDF.</p>
-      </div>
-      <button onclick="closeNdPdiReportBuilder()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
-    </div>
-
-    <div class="p-6 grid lg:grid-cols-2 gap-6">
-      <div class="bg-slate-50 border rounded-[2rem] p-5">
-        <h3 class="text-xl font-black uppercase text-slate-950 mb-4">Vehicle & Customer Details</h3>
-        <div class="grid md:grid-cols-2 gap-3">
-          <input id="pdiReportCustomer" class="nd-pdi-builder-input" placeholder="Customer Name">
-          <input id="pdiReportPhone" class="nd-pdi-builder-input" placeholder="Customer Phone">
-          <input id="pdiReportCar" class="nd-pdi-builder-input" placeholder="Car Name / Model">
-          <input id="pdiReportVariant" class="nd-pdi-builder-input" placeholder="Variant">
-          <input id="pdiReportYear" class="nd-pdi-builder-input" placeholder="Year">
-          <input id="pdiReportFuel" class="nd-pdi-builder-input" placeholder="Fuel">
-          <input id="pdiReportTransmission" class="nd-pdi-builder-input" placeholder="Transmission">
-          <input id="pdiReportKm" class="nd-pdi-builder-input" placeholder="KM Driven">
-          <input id="pdiReportOwner" class="nd-pdi-builder-input" placeholder="Ownership No.">
-          <input id="pdiReportReg" class="nd-pdi-builder-input" placeholder="Registration No.">
-          <input id="pdiReportLocation" class="nd-pdi-builder-input" placeholder="Inspection Location">
-          <input id="pdiReportDate" class="nd-pdi-builder-input" placeholder="Inspection Date">
-          <input id="pdiReportValue" class="nd-pdi-builder-input" placeholder="Estimated Value">
-          <input id="pdiReportRating" class="nd-pdi-builder-input" placeholder="Overall Rating e.g. 4.2/5">
-        </div>
-      </div>
-
-      <div class="bg-white border rounded-[2rem] p-5">
-        <h3 class="text-xl font-black uppercase text-slate-950 mb-4">Report Findings</h3>
-        <div class="grid md:grid-cols-2 gap-3">
-          <select id="pdiExteriorStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
-          <input id="pdiExteriorCost" class="nd-pdi-builder-input" placeholder="Exterior Repair Estimate">
-          <select id="pdiEngineStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
-          <input id="pdiEngineCost" class="nd-pdi-builder-input" placeholder="Engine Repair Estimate">
-          <select id="pdiElectricalStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
-          <input id="pdiElectricalCost" class="nd-pdi-builder-input" placeholder="Electrical Repair Estimate">
-          <select id="pdiSuspensionStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
-          <input id="pdiSuspensionCost" class="nd-pdi-builder-input" placeholder="Suspension/Brake Estimate">
-          <select id="pdiACStatus" class="nd-pdi-builder-input"><option>Good</option><option>Average</option><option>Issue Found</option></select>
-          <input id="pdiACCost" class="nd-pdi-builder-input" placeholder="AC Repair Estimate">
-          <select id="pdiLegalStatus" class="nd-pdi-builder-input"><option>No Major Red Flag</option><option>Check Required</option><option>Issue Found</option></select>
-          <input id="pdiChallan" class="nd-pdi-builder-input" placeholder="Challan / Legal Notes">
-        </div>
-        <textarea id="pdiReportSummary" class="nd-pdi-builder-input mt-3" rows="4" placeholder="Final Summary / Buying Recommendation"></textarea>
-        <textarea id="pdiReportPhotoNotes" class="nd-pdi-builder-input mt-3" rows="3" placeholder="Photo notes / panels / tyres / scratches / repaint notes"></textarea>
-        <div class="grid md:grid-cols-3 gap-3 mt-4">
-          <button onclick="generateNdPdiReport()" class="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl py-4 text-xs font-black uppercase">Generate Report</button>
-          <button onclick="window.print()" class="bg-slate-950 hover:bg-slate-800 text-white rounded-2xl py-4 text-xs font-black uppercase">Print / Save PDF</button>
-          <button onclick="saveNdPdiReportLead()" class="bg-green-600 hover:bg-green-700 text-white rounded-2xl py-4 text-xs font-black uppercase">Save To CRM</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="ndPdiPrintableReport" class="mt-6 mb-10">
-    <div class="nd-pdi-report-paper rounded-[2rem] overflow-hidden">
-      <div class="bg-blue-50 p-8 grid md:grid-cols-2 gap-6 items-center">
-        <div>
-          <p class="text-[11px] uppercase font-black text-blue-700">NoDealer Car Truth Report</p>
-          <h1 class="text-4xl font-black uppercase text-slate-950 mt-2">Comprehensive Car Inspection Report</h1>
-          <div class="mt-5 space-y-2 text-sm font-bold text-slate-600">
-            <p><i class="fa-solid fa-car text-blue-600"></i> 300+ quality check format</p>
-            <p><i class="fa-solid fa-user-check text-green-600"></i> Technician-style inspection summary</p>
-            <p><i class="fa-solid fa-shield-halved text-amber-600"></i> Buyer risk and repair estimate notes</p>
-          </div>
-        </div>
-        <div class="bg-white rounded-[2rem] p-6 border text-center">
-          <img src="logo.jpg" class="w-24 h-24 object-contain mx-auto" alt="NoDealer">
-          <h2 id="rpCarTitle" class="text-2xl font-black uppercase text-slate-950 mt-4">Vehicle Name</h2>
-          <p id="rpCarSub" class="text-sm font-bold text-slate-500">Variant | Year | Fuel</p>
-          <p id="rpCustomerLine" class="text-xs font-bold text-slate-400 mt-3">Prepared for customer</p>
-        </div>
-      </div>
-
-      <div class="p-8 space-y-6">
-        <div class="grid md:grid-cols-4 gap-3">
-          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Overall Rating</p><h3 id="rpRating" class="text-3xl font-black text-green-600">--</h3></div>
-          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Odometer</p><h3 id="rpKm" class="text-xl font-black">--</h3></div>
-          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Owners</p><h3 id="rpOwner" class="text-xl font-black">--</h3></div>
-          <div class="nd-pdi-report-section text-center"><p class="text-[10px] uppercase text-slate-400 font-black">Estimated Value</p><h3 id="rpValue" class="text-xl font-black">--</h3></div>
-        </div>
-
-        <div class="nd-pdi-report-section">
-          <h3 class="text-xl font-black uppercase mb-3">Vehicle & Inspection Details</h3>
-          <table class="nd-pdi-report-table">
-            <tbody>
-              <tr><td>Registration No.</td><td id="rpReg">--</td><td>Inspection Location</td><td id="rpLocation">--</td></tr>
-              <tr><td>Inspection Date</td><td id="rpDate">--</td><td>Transmission</td><td id="rpTransmission">--</td></tr>
-              <tr><td>Fuel Type</td><td id="rpFuel">--</td><td>Customer Phone</td><td id="rpPhone">--</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="nd-pdi-report-section">
-          <h3 class="text-xl font-black uppercase mb-3">Health Report Summary</h3>
-          <p id="rpSummary" class="text-sm font-semibold text-slate-600 leading-relaxed">Generate report to see summary.</p>
-        </div>
-
-        <div class="nd-pdi-report-section">
-          <h3 class="text-xl font-black uppercase mb-3">Category-Wise Inspection</h3>
-          <table class="nd-pdi-report-table">
-            <thead><tr><th>Category</th><th>Status</th><th>Estimated Repair Cost</th></tr></thead>
-            <tbody>
-              <tr><td>Exterior & Tyres</td><td id="rpExteriorStatus">--</td><td id="rpExteriorCost">--</td></tr>
-              <tr><td>Engine & Transmission</td><td id="rpEngineStatus">--</td><td id="rpEngineCost">--</td></tr>
-              <tr><td>Electricals & Interiors</td><td id="rpElectricalStatus">--</td><td id="rpElectricalCost">--</td></tr>
-              <tr><td>Steering, Suspension & Brakes</td><td id="rpSuspensionStatus">--</td><td id="rpSuspensionCost">--</td></tr>
-              <tr><td>Air Conditioning</td><td id="rpACStatus">--</td><td id="rpACCost">--</td></tr>
-              <tr><td>Legal / Challan / Document Notes</td><td id="rpLegalStatus">--</td><td id="rpChallan">--</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="nd-pdi-report-section">
-          <h3 class="text-xl font-black uppercase mb-3">Vehicle Images & Physical Notes</h3>
-          <p id="rpPhotoNotes" class="text-sm font-semibold text-slate-600 leading-relaxed">Add photo notes in builder.</p>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Front</div>
-            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Rear</div>
-            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Engine Bay</div>
-            <div class="bg-slate-100 rounded-2xl h-24 flex items-center justify-center text-xs font-black text-slate-400">Interior</div>
-          </div>
-        </div>
-
-        <div class="bg-slate-950 text-white rounded-[2rem] p-6">
-          <h3 class="text-2xl font-black uppercase">Final Buying Guidance</h3>
-          <p class="text-sm text-slate-300 font-semibold mt-2">This report is an inspection support document. Final buying decision, price negotiation, documents, RC transfer and payment safety should be verified before deal closure.</p>
-          <p class="text-xs text-slate-400 mt-5">NoDealer India • Shop No.2 Near Madhav Bhawan Sector 12 Sheetla Mata Mandir Road, Gurugram 122001 (HR) • +91 7838335143</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 <script>
-/* NODEALER PDI PHASE 2 REPORT BUILDER SCRIPT */
-function openNdPdiReportBuilder(){document.getElementById("ndPdiReportBuilderModal")?.classList.remove("hidden");}
-function closeNdPdiReportBuilder(){document.getElementById("ndPdiReportBuilderModal")?.classList.add("hidden");}
+/* NODEALER ADMIN CLEAN LEAD PARSER + #ADMIN FIX */
+(function(){
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
+let leads=[];
 
-function ndVal(id){return document.getElementById(id)?.value || "";}
-function ndSet(id, value){const el=document.getElementById(id); if(el) el.textContent=value || "--";}
-function ndStatusClass(status){
-    const s=String(status||"").toLowerCase();
-    if(s.includes("issue")) return "nd-pdi-issue";
-    if(s.includes("average") || s.includes("check")) return "nd-pdi-warn";
-    return "nd-pdi-ok";
+function parseCsv(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows}
+function c(v){return String(v??"").trim()}
+function pick(o,arr){for(const k of arr){if(o&&o[k]!==undefined&&c(o[k]))return c(o[k]);}return""}
+function rawObj(v){try{return c(v).startsWith("{")?JSON.parse(v):{}}catch(e){return{}}}
+function ex(s,k){s=c(s);let m=s.match(new RegExp(k+"\\s*[:=]\\s*([^|,;\\n]+)","i"));return m?c(m[1]):""}
+function photoUrl(u){u=String(u||"").toLowerCase();return u.includes("drive.google.com")||u.includes("googleusercontent.com")||u.includes("uc?id=")||/\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(u)}
+function photoDirect(u){u=c(u);const m=u.match(/\/file\/d\/([^/]+)/)||u.match(/[?&]id=([^&]+)/);return m&&m[1]?"https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1800":u}
+function photos(o){const txt=JSON.stringify(o.raw||o),out=[],r=/(https?:\/\/[^\s"',<>]+)/g;let m;while((m=r.exec(txt))){let u=m[1].replace(/[)\].,;]+$/g,"");if(photoUrl(u)&&!out.includes(u))out.push(u)}return out}
+function norm(o){
+ const rawNotes=pick(o,["notes","Notes","H","M","N","O"]); const emb=rawObj(rawNotes); const x={...emb,...o};
+ let notes=pick(x,["notes","Notes","H","M","N","O"])||rawNotes;
+ let typeText=(JSON.stringify(x)+" "+notes).toLowerCase();
+ let type=typeText.includes("pdi")?"PDI":typeText.includes("sell")?"Sell":typeText.includes("whatsapp")?"WhatsApp":(typeText.includes("valuation")||typeText.includes("value estimate"))?"Valuation":"Buy";
+ let phone=pick(x,["phone","Phone","Mobile","mobile","D","C"]).replace(/[^0-9]/g,""); if(phone.length>10&&phone.startsWith("91"))phone=phone.slice(-10);
+ let name=pick(x,["name","Name","Customer Name","customerName","B","C"]);
+ if(!name||/^\d+$/.test(name)||/whatsapp customer|pdi customer|buyer/i.test(name)){name=type==="PDI"?"PDI Customer":type==="WhatsApp"?"WhatsApp Customer":"Customer";}
+ let car=pick(x,["car","Car","Vehicle","vehicle","model","Model","Interested Car","F","E"])||ex(notes,"Car")||ex(notes,"Vehicle")||"Not specified";
+ let status=pick(x,["status","Status","G","F"])|| (type==="PDI"?"New PDI Booking":"New Lead");
+ let source=pick(x,["source","Source","Lead Type","type","Type","E","D"])||type+" Lead";
+ let regNo=pick(x,["regNo","Reg No","Registration","registration"])||ex(notes,"Reg No")||ex(notes,"Registration");
+ let city=pick(x,["city","City"])||ex(notes,"City"), location=pick(x,["location","Location"])||ex(notes,"Location");
+ let pkg=pick(x,["package","Package"])||ex(notes,"Package"), useCase=pick(x,["useCase","Use Case"])||ex(notes,"Use Case");
+ let date=pick(x,["date","Date","timestamp","Timestamp","A"]);
+ if(notes.trim().startsWith("{")){let parts=[]; if(regNo)parts.push("Reg No: "+regNo); if(useCase)parts.push("Use Case: "+useCase); if(pkg)parts.push("Package: "+pkg); if(city)parts.push("City: "+city); if(location)parts.push("Location: "+location); if(car&&car!="Not specified")parts.push("Car: "+car); notes=parts.length?parts.join(" | "):"Lead received from website."}
+ return {raw:x,date,name,phone,source,car,status,notes,regNo,city,location,package:pkg,useCase,type};
 }
-function ndSetStatus(id, value){
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.textContent=value || "--";
-    el.className=ndStatusClass(value);
-}
-function generateNdPdiReport(){
-    const car=ndVal("pdiReportCar") || "Vehicle Name";
-    const variant=ndVal("pdiReportVariant");
-    const year=ndVal("pdiReportYear");
-    const fuel=ndVal("pdiReportFuel");
-    ndSet("rpCarTitle", car);
-    ndSet("rpCarSub", [variant, year, fuel].filter(Boolean).join(" | "));
-    ndSet("rpCustomerLine", "Prepared for: " + (ndVal("pdiReportCustomer") || "Customer"));
-    ndSet("rpRating", ndVal("pdiReportRating") || "Pending");
-    ndSet("rpKm", ndVal("pdiReportKm"));
-    ndSet("rpOwner", ndVal("pdiReportOwner"));
-    ndSet("rpValue", ndVal("pdiReportValue"));
-    ndSet("rpReg", ndVal("pdiReportReg"));
-    ndSet("rpLocation", ndVal("pdiReportLocation"));
-    ndSet("rpDate", ndVal("pdiReportDate") || new Date().toLocaleDateString());
-    ndSet("rpTransmission", ndVal("pdiReportTransmission"));
-    ndSet("rpFuel", ndVal("pdiReportFuel"));
-    ndSet("rpPhone", ndVal("pdiReportPhone"));
-    ndSet("rpSummary", ndVal("pdiReportSummary") || "Car inspected across major physical and document checkpoints. Review category-wise findings before payment or token.");
-    ndSet("rpPhotoNotes", ndVal("pdiReportPhotoNotes") || "Photo notes can be added after physical inspection.");
-
-    ndSetStatus("rpExteriorStatus", ndVal("pdiExteriorStatus")); ndSet("rpExteriorCost", ndVal("pdiExteriorCost") || "₹0");
-    ndSetStatus("rpEngineStatus", ndVal("pdiEngineStatus")); ndSet("rpEngineCost", ndVal("pdiEngineCost") || "₹0");
-    ndSetStatus("rpElectricalStatus", ndVal("pdiElectricalStatus")); ndSet("rpElectricalCost", ndVal("pdiElectricalCost") || "₹0");
-    ndSetStatus("rpSuspensionStatus", ndVal("pdiSuspensionStatus")); ndSet("rpSuspensionCost", ndVal("pdiSuspensionCost") || "₹0");
-    ndSetStatus("rpACStatus", ndVal("pdiACStatus")); ndSet("rpACCost", ndVal("pdiACCost") || "₹0");
-    ndSetStatus("rpLegalStatus", ndVal("pdiLegalStatus")); ndSet("rpChallan", ndVal("pdiChallan") || "No notes added");
-    alert("Report generated. Click Print / Save PDF to download as PDF.");
-}
-async function saveNdPdiReportLead(){
-    const data={
-        type:"PDI Report Created",
-        name:ndVal("pdiReportCustomer"),
-        phone:ndVal("pdiReportPhone"),
-        car:ndVal("pdiReportCar"),
-        priority:"Hot",
-        source:"Admin PDI Report Builder",
-        status:"Report Created",
-        notes:[
-            "Rating: "+ndVal("pdiReportRating"),
-            "Reg: "+ndVal("pdiReportReg"),
-            "Location: "+ndVal("pdiReportLocation"),
-            "Summary: "+ndVal("pdiReportSummary")
-        ].join(" | "),
-        date:new Date().toLocaleString()
-    };
-    await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{
-        method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)
-    });
-    alert("PDI report record saved to CRM.");
-}
-function injectNdPdiReportBuilderButton(){
-    const admin=document.getElementById("adminWorkspaceView") || document.getElementById("secureAdminPortal");
-    const visible=admin && !admin.classList.contains("hidden");
-    const existing=document.getElementById("ndPdiReportBuilderBtn");
-    if(!visible){ if(existing) existing.remove(); return; }
-    if(existing) return;
-    const btn=document.createElement("button");
-    btn.id="ndPdiReportBuilderBtn";
-    btn.onclick=openNdPdiReportBuilder;
-    btn.className="fixed bottom-60 left-6 z-[10001] bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";
-    btn.innerHTML='<i class="fa-solid fa-file-medical"></i> PDI Report';
-    document.body.appendChild(btn);
-}
-document.addEventListener("DOMContentLoaded",function(){setInterval(injectNdPdiReportBuilderButton,900);});
-document.addEventListener("click",function(){setTimeout(injectNdPdiReportBuilderButton,250);},true);
-</script>
-
-
-<script>
-/* NODEALER SIMPLE HOMEPAGE NAVIGATION */
-document.addEventListener("DOMContentLoaded",function(){
-  const hash=window.location.hash.toLowerCase();
-  setTimeout(function(){
-    if(hash==="#buy"&&typeof scrollToInventory==="function")scrollToInventory();
-    if(hash==="#sell"&&typeof openSellModal==="function")openSellModal();
-    if(hash==="#pdi")document.getElementById("pdi-section")?.scrollIntoView({behavior:"smooth"});
-  },700);
-});
-</script>
-
-
-<script>
-/* NODEALER PDI FULL BOOKING FLOW SCRIPT */
-let selectedPdiUseCase="Buying Used Car",selectedPdiPackage="Advanced Report";
-function pdiFlowGoStep(step){[1,2,3].forEach(n=>{document.getElementById("pdiFlowStep"+n)?.classList.add("hidden");document.getElementById("pdiDot"+n)?.classList.remove("active")});document.getElementById("pdiFlowStep"+step)?.classList.remove("hidden");document.getElementById("pdiDot"+step)?.classList.add("active")}
-function selectPdiUseCase(value){selectedPdiUseCase=value;document.querySelectorAll("[data-pdi-use]").forEach(btn=>btn.classList.toggle("active",btn.dataset.pdiUse===value))}
-function selectPdiPackage(value){selectedPdiPackage=value;document.querySelectorAll("[data-pdi-package]").forEach(btn=>btn.classList.toggle("active",btn.dataset.pdiPackage===value))}
-async function submitPdiFlowBooking(){const data={type:"PDI Booking",name:"PDI Customer",phone:document.getElementById("pdiFlowPhone")?.value||"",car:document.getElementById("pdiFlowCar")?.value||"",priority:"Hot",source:"PDI Booking Flow",status:"New PDI Booking",notes:["Reg No: "+(document.getElementById("pdiFlowReg")?.value||""),"Use Case: "+selectedPdiUseCase,"Package: "+selectedPdiPackage,"City: "+(document.getElementById("pdiFlowCity")?.value||""),"Location: "+(document.getElementById("pdiFlowLocation")?.value||""),"Preferred Date: "+(document.getElementById("pdiFlowDate")?.value||""),"Extra Notes: "+(document.getElementById("pdiFlowNotes")?.value||"")].join(" | "),date:new Date().toLocaleString()};if(!data.phone){alert("Please enter mobile number.");return}await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});alert("PDI booking saved. NoDealer team will contact you.")}
-document.addEventListener("DOMContentLoaded",function(){selectPdiUseCase(selectedPdiUseCase);selectPdiPackage(selectedPdiPackage)});
-</script>
-
-
-<!-- NODEALER PDI BOOKINGS DASHBOARD -->
-<div id="ndPdiBookingsModal" class="hidden fixed inset-0 z-[100007] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
-      <div>
-        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin</p>
-        <h2 class="text-3xl font-black uppercase">PDI Bookings Dashboard</h2>
-        <p class="text-sm text-slate-400 mt-1">Track Pending, Assigned and Completed PDI bookings from Google Sheet CRM.</p>
-      </div>
-      <button onclick="closeNdPdiBookings()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
-    </div>
-    <div class="p-6">
-      <div class="grid md:grid-cols-4 gap-4 mb-5">
-        <div class="bg-slate-50 border rounded-3xl p-5"><p class="text-[10px] uppercase text-slate-500 font-black">Total PDI</p><h2 id="pdiDashTotal" class="text-3xl font-black">0</h2></div>
-        <div class="bg-amber-50 border border-amber-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-amber-700 font-black">Pending</p><h2 id="pdiDashPending" class="text-3xl font-black text-amber-700">0</h2></div>
-        <div class="bg-blue-50 border border-blue-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-blue-700 font-black">Assigned</p><h2 id="pdiDashAssigned" class="text-3xl font-black text-blue-700">0</h2></div>
-        <div class="bg-green-50 border border-green-100 rounded-3xl p-5"><p class="text-[10px] uppercase text-green-700 font-black">Completed</p><h2 id="pdiDashCompleted" class="text-3xl font-black text-green-700">0</h2></div>
-      </div>
-      <div class="bg-slate-50 border rounded-3xl p-4 mb-5 grid md:grid-cols-4 gap-3">
-        <input id="pdiDashSearch" oninput="renderNdPdiBookings()" class="nd-valuation-input" placeholder="Search reg, phone, car, notes">
-        <select id="pdiDashFilter" onchange="renderNdPdiBookings()" class="nd-valuation-input"><option value="">All Status</option><option>Pending</option><option>Assigned</option><option>Completed</option></select>
-        <button onclick="loadNdPdiBookings()" class="bg-slate-950 text-white rounded-2xl py-3 text-xs font-black uppercase">Refresh</button>
-        <button onclick="openNdPdiReportBuilder && openNdPdiReportBuilder()" class="bg-amber-500 text-slate-950 rounded-2xl py-3 text-xs font-black uppercase">Create Report</button>
-      </div>
-      <div id="ndPdiBookingsList" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
-    </div>
-  </div>
-</div>
-
-
-<script>
-/* NODEALER VALUATION + PDI DASHBOARD SCRIPT */
-let ndLastValuation = null;
-const ND_PDI_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
-const ND_CRM_WEBHOOK_VALUE = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
-
-function ndNum(v){return Number(String(v||"").replace(/[^0-9]/g,""))||0}
-function ndInr(n){return "₹"+Math.round(n).toLocaleString("en-IN")}
-function calculateNoDealerValue(){
-  const brand=document.getElementById("valBrand")?.value||"";
-  const model=document.getElementById("valModel")?.value||"";
-  const year=ndNum(document.getElementById("valYear")?.value);
-  const fuel=document.getElementById("valFuel")?.value||"";
-  const trans=document.getElementById("valTransmission")?.value||"";
-  const km=ndNum(document.getElementById("valKm")?.value);
-  const owner=ndNum(document.getElementById("valOwner")?.value)||1;
-  const age=Math.max(0,new Date().getFullYear()-year);
-  if(!brand||!model||!year||!fuel||!km){alert("Please fill brand, model, year, fuel and KM.");return}
-  let base=600000;
-  const b=brand.toLowerCase(), m=model.toLowerCase();
-  if(b.includes("maruti")) base=520000;
-  if(b.includes("hyundai")) base=680000;
-  if(b.includes("tata")) base=650000;
-  if(b.includes("mahindra")) base=900000;
-  if(b.includes("honda")) base=720000;
-  if(b.includes("toyota")) base=1100000;
-  if(b.includes("kia")) base=950000;
-  if(m.includes("creta")||m.includes("seltos")) base=1150000;
-  if(m.includes("swift")||m.includes("baleno")||m.includes("i20")) base=650000;
-  if(m.includes("nexon")||m.includes("brezza")||m.includes("venue")) base=850000;
-  if(m.includes("fortuner")) base=3200000;
-  if(m.includes("scorpio")||m.includes("thar")) base=1600000;
-  if(fuel==="Diesel") base*=1.08;
-  if(fuel==="CNG") base*=1.05;
-  if(trans==="Automatic") base*=1.07;
-  let value=base*Math.pow(0.88,age);
-  value-=Math.max(0,km-25000)*2.8;
-  if(owner===2)value*=0.92;
-  if(owner>=3)value*=0.84;
-  value=Math.max(value,120000);
-  const low=value*0.92, high=value*1.08;
-  ndLastValuation={brand,model,year,fuel,trans,km,owner,low,high,reg:document.getElementById("valRegNo")?.value||"",phone:document.getElementById("valPhone")?.value||""};
-  document.getElementById("ndValueRange").textContent=ndInr(low)+" - "+ndInr(high);
-  document.getElementById("ndValueNote").textContent=`${brand} ${model} ${year} ${fuel} estimated using NoDealer rough formula. Final price after PDI.`;
-  document.getElementById("ndValuationResult")?.classList.remove("hidden");
-}
-async function saveValuationLead(){
-  if(!ndLastValuation){calculateNoDealerValue(); if(!ndLastValuation)return;}
-  const data={type:"Car Value Estimate",name:"Valuation Customer",phone:ndLastValuation.phone,car:[ndLastValuation.brand,ndLastValuation.model,ndLastValuation.year].join(" "),priority:"Warm",source:"Website Valuation Tool",status:"Value Estimate Given",notes:`Reg: ${ndLastValuation.reg} | Fuel: ${ndLastValuation.fuel} | KM: ${ndLastValuation.km} | Owner: ${ndLastValuation.owner} | Estimate: ${ndInr(ndLastValuation.low)} - ${ndInr(ndLastValuation.high)}`,date:new Date().toLocaleString()};
-  await fetch(ND_CRM_WEBHOOK_VALUE,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-  alert("Valuation lead saved to CRM.");
-}
-function openNdPdiBookings(){document.getElementById("ndPdiBookingsModal")?.classList.remove("hidden");loadNdPdiBookings();}
-function closeNdPdiBookings(){document.getElementById("ndPdiBookingsModal")?.classList.add("hidden");}
-let ndPdiBookingRows=[];
-function parseCsvSimple(text){
-  const rows=[];let row=[],cell="",q=false;
-  for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}
-  if(cell||row.length){row.push(cell);rows.push(row);}return rows;
-}
-async function loadNdPdiBookings(){
-  const list=document.getElementById("ndPdiBookingsList"); if(list)list.innerHTML='<div class="text-slate-500 font-bold">Loading PDI bookings...</div>';
-  const res=await fetch(ND_PDI_CSV_URL+"&pdiCache="+Date.now()); const text=await res.text();
-  const rows=parseCsvSimple(text).filter(r=>r.some(c=>String(c||"").trim())); const headers=rows.shift()||[];
-  ndPdiBookingRows=rows.map(r=>{const o={};headers.forEach((h,i)=>o[String(h||"").trim()]=r[i]||"");return o;})
-    .filter(o=>JSON.stringify(o).toLowerCase().includes("pdi")).reverse();
-  renderNdPdiBookings();
-}
-function renderNdPdiBookings(){
-  const search=(document.getElementById("pdiDashSearch")?.value||"").toLowerCase();
-  const filter=(document.getElementById("pdiDashFilter")?.value||"").toLowerCase();
-  let rows=ndPdiBookingRows.filter(o=>JSON.stringify(o).toLowerCase().includes(search));
-  if(filter) rows=rows.filter(o=>JSON.stringify(o).toLowerCase().includes(filter));
-  const total=ndPdiBookingRows.length;
-  const pending=ndPdiBookingRows.filter(o=>!/completed/i.test(JSON.stringify(o))&&!/assigned/i.test(JSON.stringify(o))).length;
-  const assigned=ndPdiBookingRows.filter(o=>/assigned/i.test(JSON.stringify(o))).length;
-  const completed=ndPdiBookingRows.filter(o=>/completed/i.test(JSON.stringify(o))).length;
-  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
-  set("pdiDashTotal",total);set("pdiDashPending",pending);set("pdiDashAssigned",assigned);set("pdiDashCompleted",completed);
-  const list=document.getElementById("ndPdiBookingsList"); if(!list)return;
-  if(!rows.length){list.innerHTML='<div class="text-slate-500 font-bold bg-slate-50 border rounded-3xl p-6">No PDI bookings found.</div>';return;}
-  list.innerHTML=rows.map(o=>{
-    const txt=JSON.stringify(o); const phone=(o.Phone||o.Mobile||o.phone||"").replace(/[^0-9]/g,"");
-    let status=/completed/i.test(txt)?"Completed":/assigned/i.test(txt)?"Assigned":"Pending";
-    let cls=status==="Completed"?"nd-pdi-status-completed":status==="Assigned"?"nd-pdi-status-assigned":"nd-pdi-status-pending";
-    return `<div class="nd-pdi-booking-card"><div class="flex justify-between gap-3"><h3 class="font-black uppercase text-slate-950">${o["Customer Name"]||o.Name||o.name||"PDI Customer"}</h3><span class="${cls} px-3 py-1 rounded-full text-[10px] font-black uppercase">${status}</span></div><p class="text-xs font-bold text-slate-500 mt-2">${o.Phone||o.Mobile||""}</p><p class="text-sm font-black text-slate-800 mt-2">${o.Car||o["Interested Car"]||"PDI Booking"}</p><p class="text-xs text-slate-500 font-semibold mt-2">${o.Notes||o.notes||txt.slice(0,220)}</p><div class="grid grid-cols-2 gap-2 mt-4"><a href="https://wa.me/91${phone.replace(/^91/,'')}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a><a href="tel:${phone}" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a></div></div>`;
-  }).join("");
-}
-function injectNdPdiBookingsButton(){
- const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");
- const visible=admin&&!admin.classList.contains("hidden"); const existing=document.getElementById("ndPdiBookingsBtn");
- if(!visible){if(existing)existing.remove();return;} if(existing)return;
- const btn=document.createElement("button");btn.id="ndPdiBookingsBtn";btn.onclick=openNdPdiBookings;btn.className="fixed bottom-80 left-6 z-[10001] bg-blue-600 hover:bg-blue-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.innerHTML='<i class="fa-solid fa-clipboard-list"></i> PDI Bookings';document.body.appendChild(btn);
-}
-document.addEventListener("DOMContentLoaded",function(){setInterval(injectNdPdiBookingsButton,900);});
-document.addEventListener("click",function(){setTimeout(injectNdPdiBookingsButton,250);},true);
-</script>
-
-
-<!-- NODEALER LEAD STATUS DASHBOARD -->
-<div id="ndLeadStatusModal" class="hidden fixed inset-0 z-[100008] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
-      <div><p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin</p><h2 class="text-3xl font-black uppercase">Lead Status & Follow-ups</h2><p class="text-sm text-slate-400 mt-1">Track calls, WhatsApp leads, PDI bookings and next follow-up dates.</p></div>
-      <button onclick="closeNdLeadStatus()" class="w-12 h-12 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
-    </div>
-    <div class="p-6">
-      <div class="grid md:grid-cols-4 gap-3 mb-5">
-        <input id="leadStatusSearch" oninput="renderNdLeadStatusDashboard()" class="nd-follow-input" placeholder="Search lead">
-        <select id="leadStatusFilter" onchange="renderNdLeadStatusDashboard()" class="nd-follow-input"><option value="">All Status</option><option>New Lead</option><option>Called</option><option>Interested</option><option>PDI Booked</option><option>Won</option><option>Lost</option><option>Follow-up Later</option></select>
-        <input id="leadFollowDate" type="date" class="nd-follow-input">
-        <button onclick="loadNdLeadStatusDashboard()" class="bg-slate-950 text-white rounded-2xl py-3 text-xs font-black uppercase">Refresh</button>
-      </div>
-      <div id="ndLeadStatusList" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
-    </div>
-  </div>
-</div>
-
-
-<script>
-/* NODEALER FOLLOWUP FEATURED FINAL SCRIPT */
-const ND_CSV_FOLLOW="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
-const ND_WEBHOOK_FOLLOW="https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
-function ndParseCsvF(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows;}
-let ndFollowRows=[];
-function openNdLeadStatus(){document.getElementById("ndLeadStatusModal")?.classList.remove("hidden");loadNdLeadStatusDashboard();}
-function closeNdLeadStatus(){document.getElementById("ndLeadStatusModal")?.classList.add("hidden");}
-async function loadNdLeadStatusDashboard(){const list=document.getElementById("ndLeadStatusList");if(list)list.innerHTML='<div class="text-slate-500 font-bold">Loading leads...</div>';try{const res=await fetch(ND_CSV_FOLLOW+"&c="+Date.now());const text=await res.text();const rows=ndParseCsvF(text).filter(r=>r.some(c=>String(c||"").trim()));const headers=rows.shift()||[];ndFollowRows=rows.map(r=>{const o={};headers.forEach((h,i)=>o[String(h||"").trim()]=r[i]||"");return o;}).reverse();}catch(e){ndFollowRows=[];}renderNdLeadStatusDashboard();}
-function renderNdLeadStatusDashboard(){const search=(document.getElementById("leadStatusSearch")?.value||"").toLowerCase();const filter=(document.getElementById("leadStatusFilter")?.value||"").toLowerCase();let rows=ndFollowRows.filter(o=>JSON.stringify(o).toLowerCase().includes(search));if(filter)rows=rows.filter(o=>JSON.stringify(o).toLowerCase().includes(filter));const list=document.getElementById("ndLeadStatusList");if(!list)return;if(!rows.length){list.innerHTML='<div class="bg-slate-50 border rounded-3xl p-6 text-slate-500 font-bold">No leads found.</div>';return;}list.innerHTML=rows.map((o,idx)=>{const raw=JSON.stringify(o);const phone=(o.Phone||o.Mobile||o.phone||"").replace(/[^0-9]/g,"");const name=o["Customer Name"]||o.Name||o.name||"Customer";const car=o.Car||o["Interested Car"]||o.car||"Lead";const status=o.Status||o.status||(/pdi/i.test(raw)?"PDI Booked":"New Lead");return `<div class="nd-follow-card"><div class="flex justify-between gap-3"><h3 class="font-black uppercase text-slate-950">${name}</h3><span class="nd-status-pill bg-blue-50 text-blue-700">${status}</span></div><p class="text-xs font-bold text-slate-500 mt-2">${phone||"No phone"}</p><p class="text-sm font-black text-slate-800 mt-2">${car}</p><p class="text-xs text-slate-500 font-semibold mt-2">${o.Notes||o.notes||raw.slice(0,220)}</p><div class="grid grid-cols-2 gap-2 mt-4"><select id="statusSelect${idx}" class="nd-follow-input text-xs"><option>New Lead</option><option>Called</option><option>Interested</option><option>PDI Booked</option><option>Negotiation</option><option>Won</option><option>Lost</option><option>Follow-up Later</option></select><button onclick="saveLeadStatusUpdate(${idx})" class="bg-blue-600 text-white rounded-xl py-3 text-[10px] font-black uppercase">Save Status</button><a href="https://wa.me/91${phone.replace(/^91/,'')}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a><a href="tel:${phone}" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a></div></div>`}).join("");}
-async function saveLeadStatusUpdate(idx){const lead=ndFollowRows[idx]||{};const status=document.getElementById("statusSelect"+idx)?.value||"Follow-up Later";const followDate=document.getElementById("leadFollowDate")?.value||"";const data={type:"Lead Status Update",name:lead["Customer Name"]||lead.Name||"Customer",phone:lead.Phone||lead.Mobile||"",car:lead.Car||lead["Interested Car"]||"",priority:"Hot",source:"Admin Follow-up Dashboard",status,notes:`Status updated to ${status} | Follow-up: ${followDate} | Previous: ${JSON.stringify(lead).slice(0,300)}`,date:new Date().toLocaleString()};await fetch(ND_WEBHOOK_FOLLOW,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});alert("Status/follow-up saved to CRM.");setTimeout(loadNdLeadStatusDashboard,1200);}
-function injectNdLeadStatusButton(){const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");const visible=admin&&!admin.classList.contains("hidden");const existing=document.getElementById("ndLeadStatusBtn");if(!visible){if(existing)existing.remove();return;}if(existing)return;const btn=document.createElement("button");btn.id="ndLeadStatusBtn";btn.onclick=openNdLeadStatus;btn.className="fixed bottom-[26rem] left-6 z-[10001] bg-purple-600 hover:bg-purple-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.innerHTML='<i class="fa-solid fa-phone-volume"></i> Lead Follow-up';document.body.appendChild(btn);}
-function buildNdFeaturedCars(){const grid=document.getElementById("ndFeaturedCarsQuickGrid");if(!grid)return;let cards=Array.from(document.querySelectorAll("#carGrid > *")).slice(0,3);if(cards.length){grid.innerHTML=cards.map((card,i)=>{const title=card.querySelector("h3,h2,h4")?.textContent?.trim()||"Featured Car";const img=card.querySelector("img")?.src||"hero.jpg";return `<div class="nd-featured-clean-card"><img src="${img}" class="nd-featured-clean-img"><div class="p-5"><span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase">Featured</span><h3 class="text-xl font-black uppercase mt-3">${title}</h3><p class="text-xs text-slate-500 font-semibold mt-2">Direct-owner car with PDI support available.</p><div class="grid grid-cols-3 gap-2 mt-4"><a href="https://wa.me/917838335143?text=${encodeURIComponent("Hi NoDealer, I am interested in "+title)}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WA</a><a href="tel:+917838335143" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a><button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950 rounded-xl py-3 text-[10px] font-black uppercase">PDI</button></div></div></div>`}).join("");}}
-document.addEventListener("DOMContentLoaded",function(){setInterval(function(){injectNdLeadStatusButton();buildNdFeaturedCars();},1200);});
-document.addEventListener("click",function(){setTimeout(function(){injectNdLeadStatusButton();buildNdFeaturedCars();},300);},true);
-</script>
-
-
-<!-- NODEALER VEHICLE DETAIL PAGE MODAL -->
-<div id="ndVehicleDetailModal" class="nd-car-detail-modal hidden">
-  <div class="nd-car-detail-shell">
-    <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
-      <div><p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Verified Listing</p><h2 id="ndDetailCarName" class="text-2xl md:text-3xl font-black uppercase">Vehicle Details</h2></div>
-      <button onclick="closeNdVehicleDetail()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
-    </div>
-    <div class="nd-car-detail-grid">
-      <div class="p-5 bg-slate-50">
-        <img id="ndDetailMainImg" src="hero.jpg" class="nd-car-detail-img rounded-[2rem]" alt="Car detail">
-        <div id="ndDetailThumbs" class="nd-car-thumb-grid"></div>
-      </div>
-      <div class="p-6">
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="nd-car-badge bg-green-50 text-green-700"><i class="fa-solid fa-user-check"></i> Owner Direct</span>
-          <span class="nd-car-badge bg-blue-50 text-blue-700"><i class="fa-solid fa-shield-check"></i> Verified</span>
-          <span class="nd-car-badge bg-amber-50 text-amber-700"><i class="fa-solid fa-clipboard-check"></i> PDI Available</span>
-        </div>
-        <h3 id="ndDetailPrice" class="text-4xl font-black text-slate-950">Price On Request</h3>
-        <p id="ndDetailMeta" class="text-sm text-slate-500 font-bold mt-1">Direct-owner car with NoDealer support</p>
-        <div class="grid grid-cols-2 gap-3 mt-5">
-          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Year</p><h4 id="ndDetailYear" class="font-black">--</h4></div>
-          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">KM Driven</p><h4 id="ndDetailKm" class="font-black">--</h4></div>
-          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Fuel</p><h4 id="ndDetailFuel" class="font-black">--</h4></div>
-          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Transmission</p><h4 id="ndDetailTrans" class="font-black">--</h4></div>
-          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Ownership</p><h4 id="ndDetailOwner" class="font-black">Owner Direct</h4></div>
-          <div class="nd-car-spec"><p class="text-[10px] uppercase text-slate-400 font-black">Location</p><h4 id="ndDetailLocation" class="font-black">Gurugram</h4></div>
-        </div>
-        <div class="bg-slate-50 border rounded-[2rem] p-5 mt-5">
-          <h4 class="font-black uppercase text-slate-950">Why book PDI for this car?</h4>
-          <p class="text-xs text-slate-500 font-semibold mt-2">NoDealer recommends inspection before token/payment to verify engine, paint, tyres, documents, odometer clues and accidental signs.</p>
-        </div>
-        <div class="grid grid-cols-2 gap-3 mt-5">
-          <a id="ndDetailWhatsapp" href="https://wa.me/917838335143" target="_blank" class="nd-detail-action bg-green-600 text-white"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-          <a href="tel:+917838335143" class="nd-detail-action bg-slate-950 text-white"><i class="fa-solid fa-phone"></i> Call Now</a>
-          <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'});closeNdVehicleDetail();" class="nd-detail-action bg-amber-500 text-slate-950">Book PDI</button>
-          <button onclick="saveNdVehicleInterest()" class="nd-detail-action bg-red-600 text-white">Save Interest</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script>
-/* NODEALER VEHICLE DETAIL PAGE + PDI PDF UPGRADE SCRIPT */
-let ndCurrentDetailCar={title:"Vehicle Details",phone:"917838335143"};
-function closeNdVehicleDetail(){document.getElementById("ndVehicleDetailModal")?.classList.add("hidden");}
-function ndCleanText(txt){return String(txt||"").replace(/\s+/g," ").trim();}
-function ndExtractPrice(txt){const m=String(txt||"").match(/₹\s?[0-9.,]+\s?(Lakh|Lakhs|Cr|Crore|K|k)?|[0-9.]+\s?Lakh/i);return m?m[0]:"Price On Request";}
-function ndFindSpec(text,patterns,fallback="--"){for(const p of patterns){const m=text.match(p);if(m)return ndCleanText(m[1]||m[0]);}return fallback;}
-function openNdVehicleDetailFromCard(card){
- if(!card)return;
- const title=ndCleanText(card.querySelector("h3,h2,h4")?.textContent)||"Verified Car";
- const allText=ndCleanText(card.textContent);
- const price=ndExtractPrice(allText);
- const img=card.querySelector("img")?.src||"hero.jpg";
- const imgs=Array.from(card.querySelectorAll("img")).map(i=>i.src).filter(Boolean);
- const gallery=imgs.length?imgs:[img,img,img,img];
- ndCurrentDetailCar={title,price,img,text:allText,phone:"917838335143"};
- const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val||"--";};
- set("ndDetailCarName",title);set("ndDetailPrice",price);set("ndDetailMeta","Verified direct-owner listing • PDI available");
- set("ndDetailYear",ndFindSpec(allText,[/(20\d{2})/]));
- set("ndDetailKm",ndFindSpec(allText,[/(\d+[,.]?\d*\s?km)/i,/(\d+[,.]?\d*\s?KM)/]));
- set("ndDetailFuel",ndFindSpec(allText,[/(Petrol|Diesel|CNG|Electric|Hybrid)/i]));
- set("ndDetailTrans",ndFindSpec(allText,[/(Manual|Automatic|AMT|CVT|DCT)/i]));
- set("ndDetailOwner",ndFindSpec(allText,[/(1st Owner|2nd Owner|3rd Owner|First Owner|Second Owner)/i],"Owner Direct"));
- set("ndDetailLocation",ndFindSpec(allText,[/(Gurugram|Delhi|Noida|Faridabad|Ghaziabad|Mumbai|Pune|Bangalore|Hyderabad)/i],"Gurugram"));
- const main=document.getElementById("ndDetailMainImg");if(main)main.src=img;
- const thumbs=document.getElementById("ndDetailThumbs");if(thumbs){thumbs.innerHTML=gallery.slice(0,8).map(src=>`<img src="${src}" class="nd-car-thumb" onclick="document.getElementById('ndDetailMainImg').src='${src}'">`).join("");}
- const wa=document.getElementById("ndDetailWhatsapp");if(wa)wa.href="https://wa.me/917838335143?text="+encodeURIComponent("Hi NoDealer, I am interested in "+title+". Please share details.");
- document.getElementById("ndVehicleDetailModal")?.classList.remove("hidden");
-}
-async function saveNdVehicleInterest(){
- const data={type:"Vehicle Detail Interest",name:"Website Visitor",phone:"",car:ndCurrentDetailCar.title,priority:"Hot",source:"Vehicle Detail Page",status:"New Lead",notes:"Customer clicked Save Interest from detail page for "+ndCurrentDetailCar.title,date:new Date().toLocaleString()};
- await fetch("https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
- alert("Interest saved.");
-}
-function injectNdVehicleDetailButtons(){
- Array.from(document.querySelectorAll("#carGrid > *")).forEach(card=>{
-  if(card.dataset.ndDetailReady==="true")return;card.dataset.ndDetailReady="true";
-  const btn=document.createElement("button");btn.className="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl py-3 text-[10px] font-black uppercase nd-detail-view-btn";
-  btn.innerHTML='<i class="fa-solid fa-circle-info"></i> View Full Details';
-  btn.onclick=function(e){e.preventDefault();e.stopPropagation();openNdVehicleDetailFromCard(card);};
-  card.appendChild(btn);
- });
-}
-function enhanceNdPdiReportPdf(){Array.from(document.querySelectorAll("button")).filter(b=>/print|save pdf|download/i.test(b.textContent||"")).forEach(btn=>{if(btn.dataset.ndPdfEnhanced==="true")return;btn.dataset.ndPdfEnhanced="true";btn.title="This opens browser print. Select Save as PDF.";});}
-function addNdPdiPhotoInputs(){
- const builder=document.getElementById("ndPdiReportBuilderModal");if(!builder||document.getElementById("ndPdiPhotoUploadBox"))return;
- const target=builder.querySelector(".p-6.grid")||builder.querySelector(".p-6");if(!target)return;
- const box=document.createElement("div");box.id="ndPdiPhotoUploadBox";box.className="bg-white border rounded-[2rem] p-5 lg:col-span-2";
- box.innerHTML='<h3 class="text-xl font-black uppercase text-slate-950 mb-3">Inspection Photos</h3><p class="text-xs text-slate-500 font-semibold mb-3">Upload front/rear/interior/engine photos for report preview.</p><input type="file" id="ndPdiPhotoFiles" multiple accept="image/*" class="nd-pdi-builder-input"><div id="ndPdiPhotoPreviewGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3"></div>';
- target.appendChild(box);
- document.getElementById("ndPdiPhotoFiles")?.addEventListener("change",function(e){const grid=document.getElementById("ndPdiPhotoPreviewGrid");if(!grid)return;grid.innerHTML="";Array.from(e.target.files||[]).slice(0,8).forEach(file=>{const reader=new FileReader();reader.onload=()=>{grid.insertAdjacentHTML("beforeend",`<img src="${reader.result}" class="nd-pdi-photo-preview">`);};reader.readAsDataURL(file);});});
-}
-document.addEventListener("DOMContentLoaded",function(){setInterval(function(){injectNdVehicleDetailButtons();enhanceNdPdiReportPdf();addNdPdiPhotoInputs();},1200);});
-document.addEventListener("click",function(){setTimeout(function(){injectNdVehicleDetailButtons();enhanceNdPdiReportPdf();addNdPdiPhotoInputs();},300);},true);
-</script>
-
-
-<script>
-/* NODEALER UNIVERSAL LEAD CAPTURE FIX
-   This makes Buy / Sell / PDI / Valuation leads save to Google Sheet CRM.
-*/
-const ND_UNIVERSAL_LEAD_WEBHOOK = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
-
-function ndLeadVal(id){ return (document.getElementById(id)?.value || "").trim(); }
-
-async function ndUniversalSaveLead(payload){
-    const clean = {
-        date: new Date().toLocaleString(),
-        timestamp: new Date().toISOString(),
-        type: payload.type || "Website Lead",
-        name: payload.name || payload.customerName || "Website Visitor",
-        phone: payload.phone || payload.mobile || "",
-        car: payload.car || payload.vehicle || payload.model || "",
-        priority: payload.priority || "Hot",
-        source: payload.source || "NoDealer Website",
-        status: payload.status || "New Lead",
-        notes: payload.notes || "",
-        regNo: payload.regNo || payload.registration || "",
-        city: payload.city || "",
-        location: payload.location || "",
-        package: payload.package || "",
-        useCase: payload.useCase || ""
-    };
-
-    try {
-        await fetch(ND_UNIVERSAL_LEAD_WEBHOOK, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(clean)
-        });
-
-        sessionStorage.setItem("nd_last_lead_saved", JSON.stringify(clean));
-        showNdLeadSavedPill();
-        return true;
-    } catch(e) {
-        console.error("NoDealer lead save failed", e);
-        alert("Lead save failed. Please check internet / Apps Script webhook.");
-        return false;
-    }
-}
-
-function showNdLeadSavedPill(){
-    let pill = document.getElementById("ndLeadSavedPill");
-    if(!pill){
-        pill = document.createElement("div");
-        pill.id = "ndLeadSavedPill";
-        pill.className = "nd-lead-debug-pill";
-        pill.textContent = "Lead Saved";
-        document.body.appendChild(pill);
-    }
-    pill.style.display = "block";
-    setTimeout(()=>pill.style.display="none", 2400);
-}
-
-/* Fix PDI booking flow */
-window.submitPdiFlowBooking = async function(){
-    const phone = ndLeadVal("pdiFlowPhone");
-    const reg = ndLeadVal("pdiFlowReg");
-    const car = ndLeadVal("pdiFlowCar");
-    const city = ndLeadVal("pdiFlowCity");
-    const location = ndLeadVal("pdiFlowLocation");
-    const preferredDate = ndLeadVal("pdiFlowDate");
-    const notes = ndLeadVal("pdiFlowNotes");
-
-    if(!phone){
-        alert("Please enter mobile number.");
-        return;
-    }
-
-    const useCase = window.selectedPdiUseCase || selectedPdiUseCase || "Buying Used Car";
-    const pkg = window.selectedPdiPackage || selectedPdiPackage || "Advanced Report";
-
-    const ok = await ndUniversalSaveLead({
-        type: "PDI Booking",
-        name: "PDI Customer",
-        phone,
-        car,
-        regNo: reg,
-        city,
-        location,
-        package: pkg,
-        useCase,
-        priority: "Hot",
-        source: "PDI Booking Flow",
-        status: "New PDI Booking",
-        notes: [
-            "Registration No: " + reg,
-            "PDI Type: " + useCase,
-            "Package: " + pkg,
-            "City: " + city,
-            "Location: " + location,
-            "Preferred Date: " + preferredDate,
-            "Extra Notes: " + notes
-        ].join(" | ")
-    });
-
-    if(ok) alert("PDI booking saved to CRM. NoDealer team will contact you.");
-};
-
-/* Fix old PDI form if present */
-window.handlePdiSubmit = async function(event){
-    if(event) event.preventDefault();
-
-    const phone = ndLeadVal("pdiPhone") || ndLeadVal("pdiFlowPhone");
-    const name = ndLeadVal("pdiName") || "PDI Customer";
-    const car = ndLeadVal("pdiCarDetails") || ndLeadVal("pdiFlowCar");
-    const city = ndLeadVal("pdiCity") || ndLeadVal("pdiFlowCity");
-    const location = ndLeadVal("pdiLocation") || ndLeadVal("pdiFlowLocation");
-    const pdiType = ndLeadVal("pdiType") || window.selectedPdiUseCase || "PDI Request";
-    const pdiPackage = ndLeadVal("pdiPackage") || window.selectedPdiPackage || "Advanced Report";
-    const notes = ndLeadVal("pdiNotes") || ndLeadVal("pdiFlowNotes");
-
-    if(!phone){
-        alert("Please enter mobile number.");
-        return;
-    }
-
-    const ok = await ndUniversalSaveLead({
-        type: "PDI Booking",
-        name,
-        phone,
-        car,
-        city,
-        location,
-        package: pdiPackage,
-        useCase: pdiType,
-        priority: "Hot",
-        source: "PDI Form",
-        status: "New PDI Booking",
-        notes: "PDI Type: " + pdiType + " | Package: " + pdiPackage + " | " + notes
-    });
-
-    if(ok) alert("PDI request saved to CRM.");
-};
-
-/* Fix valuation lead */
-window.saveValuationLead = async function(){
-    const phone = ndLeadVal("valPhone");
-    const brand = ndLeadVal("valBrand");
-    const model = ndLeadVal("valModel");
-    const year = ndLeadVal("valYear");
-    const reg = ndLeadVal("valRegNo");
-    const valueRange = document.getElementById("ndValueRange")?.textContent || "";
-
-    if(!phone){
-        alert("Please enter mobile number to save valuation lead.");
-        return;
-    }
-
-    const ok = await ndUniversalSaveLead({
-        type: "Car Value Estimate",
-        name: "Valuation Customer",
-        phone,
-        car: [brand, model, year].filter(Boolean).join(" "),
-        regNo: reg,
-        priority: "Warm",
-        source: "Website Valuation Tool",
-        status: "Value Estimate Given",
-        notes: "Estimated Value: " + valueRange + " | Fuel: " + ndLeadVal("valFuel") + " | KM: " + ndLeadVal("valKm") + " | Owner: " + ndLeadVal("valOwner")
-    });
-
-    if(ok) alert("Valuation lead saved to CRM.");
-};
-
-/* Fix Sell car form submissions by detecting sell form fields */
-document.addEventListener("submit", async function(e){
-    const form = e.target;
-    if(!form || !form.tagName || form.tagName.toLowerCase() !== "form") return;
-
-    const formText = (form.innerText || form.id || form.className || "").toLowerCase();
-    const hasSellFields = form.querySelector("#sellerName,#sellerPhone,#sellName,#sellPhone,#carMake,#carModel,#sellerCar");
-    const isSellForm = formText.includes("sell") || hasSellFields;
-
-    if(isSellForm){
-        e.preventDefault();
-
-        const phone = ndLeadVal("sellerPhone") || ndLeadVal("sellPhone") || form.querySelector("input[type='tel']")?.value || "";
-        const name = ndLeadVal("sellerName") || ndLeadVal("sellName") || form.querySelector("input[placeholder*='Name'],input[placeholder*='name']")?.value || "Seller";
-        const car = ndLeadVal("sellerCar") || ndLeadVal("carModel") || ndLeadVal("sellCarModel") || form.querySelector("input[placeholder*='Car'],input[placeholder*='Model'],input[placeholder*='car'],input[placeholder*='model']")?.value || "";
-
-        if(!phone && !car){
-            return;
-        }
-
-        await ndUniversalSaveLead({
-            type: "Sell Car Lead",
-            name,
-            phone,
-            car,
-            priority: "Hot",
-            source: "Sell Car Form",
-            status: "New Sell Lead",
-            notes: "Sell car enquiry submitted from website."
-        });
-
-        alert("Sell car enquiry saved to CRM.");
-    }
-}, true);
-
-/* Fix Buy buttons / WhatsApp / detail interest */
-async function ndSaveBuyLead(carTitle, phone){
-    return ndUniversalSaveLead({
-        type: "Buy Car Lead",
-        name: "Buyer",
-        phone: phone || "",
-        car: carTitle || "Car Enquiry",
-        priority: "Hot",
-        source: "Buy Car / Vehicle Detail",
-        status: "New Buy Lead",
-        notes: "Buyer showed interest in " + (carTitle || "car")
-    });
-}
-
-/* Override detail interest */
-window.saveNdVehicleInterest = async function(){
-    const title = (window.ndCurrentDetailCar && window.ndCurrentDetailCar.title) || document.getElementById("ndDetailCarName")?.textContent || "Vehicle";
-    await ndSaveBuyLead(title, "");
-    alert("Vehicle interest saved to CRM.");
-};
-
-/* Add lead save before WhatsApp clicks on car cards */
-document.addEventListener("click", function(e){
-    const link = e.target.closest && e.target.closest("a[href*='wa.me'],a[href*='api.whatsapp']");
-    if(!link) return;
-
-    let carTitle = "";
-    const card = link.closest("#carGrid > *") || link.closest(".nd-featured-clean-card") || link.closest(".nd-car-detail-shell");
-    if(card) carTitle = card.querySelector("h3,h2,h4")?.textContent || "";
-    if(!carTitle) carTitle = document.getElementById("ndDetailCarName")?.textContent || "WhatsApp Enquiry";
-
-    ndUniversalSaveLead({
-        type: "WhatsApp Lead",
-        name: "WhatsApp Customer",
-        phone: "",
-        car: carTitle,
-        priority: "Hot",
-        source: "WhatsApp Button",
-        status: "New WhatsApp Lead",
-        notes: "Customer clicked WhatsApp for: " + carTitle
-    });
-}, true);
-
-/* Add visible test function for admin */
-window.testNoDealerLeadSave = async function(){
-    await ndUniversalSaveLead({
-        type: "Test Lead",
-        name: "NoDealer Test",
-        phone: "9999999999",
-        car: "Test Car",
-        priority: "Hot",
-        source: "Console Test",
-        status: "New Lead",
-        notes: "This is a CRM test lead."
-    });
-    alert("Test lead sent. Check Google Sheet / CRM Lead Viewer after 10-20 seconds.");
-};
+function cls(t){return t==="PDI"?"nd-real-pdi":t==="Sell"?"nd-real-sell":t==="WhatsApp"?"nd-real-wa":t==="Valuation"?"nd-real-value":t==="Buy"?"nd-real-buy":"nd-real-other"}
+function activeAdmin(){return location.pathname.toLowerCase().includes("admin")||location.hash.toLowerCase().includes("admin")}
+function ensureAdmin(){if(!activeAdmin())return;document.body.classList.add("nd-admin-mode");document.body.classList.remove("overflow-hidden");document.getElementById("main-content")?.classList.remove("opacity-0");document.getElementById("preloader")?.remove();ndRealLoadLeads();}
+window.ndRealLoadLeads=async function(){const list=document.getElementById("ndRealLeadsList");if(list)list.innerHTML='<div class="nd-real-empty">Loading CRM leads...</div>';try{const res=await fetch(CSV_URL+"&cache="+Date.now());const txt=await res.text();let rows=parseCsv(txt).filter(r=>r.some(v=>c(v)));let headers=(rows.shift()||[]).map(c);let ok=headers.some(h=>/date|time|name|phone|source|status|notes|car/i.test(h));if(!ok){rows.unshift(headers);headers=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"]}leads=rows.map(r=>{let o={};headers.forEach((h,i)=>o[h||("C"+i)]=r[i]||"");return norm(o)}).reverse()}catch(e){console.error(e);leads=[]}ndRealRenderLeads()}
+window.ndRealRenderLeads=function(){let q=(document.getElementById("ndRealLeadSearch")?.value||"").toLowerCase(),tf=document.getElementById("ndRealLeadTypeFilter")?.value||"",pf=document.getElementById("ndRealPhotoFilter")?.value||"",sf=document.getElementById("ndRealSortFilter")?.value||"newest";let rows=leads.filter(o=>JSON.stringify(o).toLowerCase().includes(q));if(tf)rows=rows.filter(o=>o.type===tf);if(pf==="photos")rows=rows.filter(o=>photos(o).length);if(sf==="oldest")rows=[...rows].reverse();const set=(id,v)=>{let e=document.getElementById(id);if(e)e.textContent=v};set("ndRealStatTotal",leads.length);set("ndRealStatBuy",leads.filter(o=>o.type==="Buy").length);set("ndRealStatSell",leads.filter(o=>o.type==="Sell").length);set("ndRealStatPdi",leads.filter(o=>o.type==="PDI").length);set("ndRealStatPhotos",leads.filter(o=>photos(o).length).length);let list=document.getElementById("ndRealLeadsList");if(!list)return;if(!rows.length){list.innerHTML='<div class="nd-real-empty">No matching leads found.</div>';return}list.innerHTML=rows.slice(0,160).map((o,i)=>{let ps=photos(o),ph=o.phone?(o.phone.startsWith("91")?o.phone:"91"+o.phone):"";return `<div class="nd-real-lead"><div><div class="flex items-center justify-between gap-3 flex-wrap"><h3 class="text-xl font-black uppercase">${o.name}</h3><span class="nd-real-pill ${cls(o.type)}">${o.type}</span></div><div class="nd-real-info-grid"><div class="nd-real-info"><p>Phone</p><h4>${o.phone||"No phone"}</h4></div><div class="nd-real-info"><p>Car / Requirement</p><h4>${o.car}</h4></div><div class="nd-real-info"><p>Status</p><h4>${o.status}</h4></div><div class="nd-real-info"><p>Source</p><h4>${o.source}</h4></div>${o.regNo?`<div class="nd-real-info"><p>Reg No</p><h4>${o.regNo}</h4></div>`:""}${o.city||o.location?`<div class="nd-real-info"><p>City / Location</p><h4>${[o.city,o.location].filter(Boolean).join(" / ")}</h4></div>`:""}${o.package?`<div class="nd-real-info"><p>Package</p><h4>${o.package}</h4></div>`:""}${o.useCase?`<div class="nd-real-info"><p>Use Case</p><h4>${o.useCase}</h4></div>`:""}${o.date?`<div class="nd-real-info"><p>Date</p><h4>${o.date}</h4></div>`:""}</div><div class="nd-real-notes"><b>Full Notes:</b><br>${o.notes}</div><div class="nd-real-actions"><a href="tel:+${ph}" class="bg-blue-600 text-white">Call</a><a href="https://wa.me/${ph}" target="_blank" class="bg-green-600 text-white">WhatsApp</a><button onclick="ndRealCopyLead(${i})" class="bg-slate-700 text-white">Copy</button><button onclick="ndRealDownloadSingleLead(${i})" class="bg-amber-500 text-slate-950">Export</button></div></div><div><div class="flex items-center justify-between mb-3"><h4 class="font-black uppercase">Uploaded Photos</h4><span class="nd-real-pill nd-real-other">${ps.length} Photos</span></div>${ps.length?`<div class="nd-real-photo-grid">${ps.slice(0,12).map((u,j)=>{let img=photoDirect(u);return `<div class="nd-real-photo-card"><img src="${img}" onclick="ndRealOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(o.name+" Photo "+(j+1))}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><button style="display:none" onclick="ndRealOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(o.name+" Photo "+(j+1))}')">View Photo</button></div>`}).join("")}</div>`:`<div class="nd-real-empty">No photo uploaded for this lead.</div>`}</div></div>`}).join("")}
+window.ndRealOpenPhoto=function(img,orig,title){img=decodeURIComponent(img||"");orig=decodeURIComponent(orig||img);title=decodeURIComponent(title||"Lead Photo");document.getElementById("ndRealPhotoImg").src=img;document.getElementById("ndRealPhotoOriginal").href=orig;document.getElementById("ndRealPhotoTitle").textContent=title;document.getElementById("ndRealPhotoModal")?.classList.add("active")}
+window.ndRealClosePhoto=function(){document.getElementById("ndRealPhotoModal")?.classList.remove("active")}
+window.ndRealCopyLead=function(i){navigator.clipboard?.writeText(JSON.stringify(leads[i]||{},null,2));alert("Lead details copied.")}
+function esc(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}function dl(rows,name){let flat=rows.map(({raw,...o})=>o);let heads=Array.from(new Set(flat.flatMap(o=>Object.keys(o))));let csv=[heads.join(","),...flat.map(o=>heads.map(h=>esc(o[h])).join(","))].join("\n");let b=new Blob([csv],{type:"text/csv"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
+window.ndRealDownloadSingleLead=function(i){dl([leads[i]||{}],"nodealer-lead.csv")}
+window.ndRealDownloadCsv=function(){dl(leads,"nodealer-crm-leads.csv")}
+window.ndRealShowTab=window.ndRealShowTab||function(tab){document.querySelectorAll(".nd-real-tab").forEach(b=>b.classList.toggle("active",b.dataset.realTab===tab));document.querySelectorAll(".nd-real-view").forEach(v=>v.classList.remove("active"));document.getElementById("ndReal"+tab.charAt(0).toUpperCase()+tab.slice(1))?.classList.add("active");if(tab==="leads")ndRealLoadLeads();}
+document.addEventListener("click",function(e){let a=e.target.closest&&e.target.closest("a[href]"),im=e.target&&e.target.tagName==="IMG"?e.target:null;if(a&&photoUrl(a.href)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndRealOpenPhoto(encodeURIComponent(photoDirect(a.href)),encodeURIComponent(a.href),encodeURIComponent("Lead Photo"));return false}if(im&&photoUrl(im.src)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndRealOpenPhoto(encodeURIComponent(photoDirect(im.src)),encodeURIComponent(im.src),encodeURIComponent("Lead Photo"));return false}},true)
+document.addEventListener("DOMContentLoaded",ensureAdmin);setTimeout(ensureAdmin,300);setTimeout(ensureAdmin,1200);window.addEventListener("hashchange",ensureAdmin);
+})();
 </script>
 
 </body>. It hardens admin visibility,
@@ -6577,15 +5564,13 @@ window.testNoDealerLeadSave = async function(){
   }
 
   window.executeAdminLogin = async function () {
-    const user = ($("loginUser")?.value || "").trim();
-    const pass = ($("loginPass")?.value || "").trim();
+    const user = $("loginUser")?.value || "";
+    const pass = $("loginPass")?.value || "";
+    const masterUser = window.MASTER_USER || "admin";
+    const masterPass = window.MASTER_PASS || "";
 
-    const ok =
-      (user === "nodealer" && pass === "NoDealer@2026") ||
-      (user === "admin" && pass === "Rudraksh@2026");
-
-    if (!ok) {
-      alert("Invalid admin credentials. Use Username: nodealer and Password: NoDealer@2026");
+    if (user !== masterUser || pass !== masterPass) {
+      alert("Invalid admin credentials.");
       return;
     }
 
