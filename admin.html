@@ -417,67 +417,34 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
 }
 
 
-
 /* =========================================================
-   NODEALER REAL ADMIN REARRANGE FINAL
-   Actual full-screen arranged admin workspace
+   NODEALER REAL REARRANGED ADMIN DASHBOARD
+   Direct organised dashboard, keeps existing upload/inventory functions
 ========================================================= */
-body.nd-admin-mode{overflow:hidden!important;background:#020617!important}
-body.nd-admin-mode #main-content{opacity:1!important}
-body.nd-admin-mode #main-content > *:not(#ndRealAdminApp){display:none!important}
-body.nd-admin-mode #preloader{display:none!important}
-
-#ndRealAdminApp{
-  position:fixed;inset:0;z-index:2147483000;background:#020617;color:white;
-  display:none;grid-template-columns:270px 1fr;font-family:'Open Sans',sans-serif;
-}
-body.nd-admin-mode #ndRealAdminApp{display:grid!important}
-.nd-real-side{background:#0f172a;border-right:1px solid rgba(255,255,255,.08);padding:18px;overflow-y:auto}
-.nd-real-main{overflow-y:auto;padding:22px}
-.nd-real-logo{display:flex;align-items:center;gap:12px;margin-bottom:24px}
-.nd-real-logo-badge{width:52px;height:52px;border-radius:18px;background:#2563eb;display:flex;align-items:center;justify-content:center;font-size:22px}
-.nd-real-tab{width:100%;text-align:left;background:#020617;color:#cbd5e1;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:14px;font-size:12px;font-weight:900;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:10px}
-.nd-real-tab.active,.nd-real-tab:hover{background:#2563eb;color:white}
-.nd-real-view{display:none}.nd-real-view.active{display:block}
-.nd-real-card{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:18px;box-shadow:0 16px 60px rgba(0,0,0,.22)}
-.nd-real-stat{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:18px}
-.nd-real-stat p{font-size:10px;text-transform:uppercase;color:#94a3b8;font-weight:900}
-.nd-real-stat h3{font-size:31px;font-weight:900;margin-top:4px}
-.nd-real-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.12);color:white;border-radius:14px;padding:12px 13px;font-size:13px;font-weight:800;outline:none}
-.nd-real-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.18)}
-.nd-real-lead{background:#020617;border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:18px;display:grid;grid-template-columns:1.35fr .85fr;gap:18px;margin-bottom:14px}
-.nd-real-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
-.nd-real-info{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px}
-.nd-real-info p{font-size:9px;text-transform:uppercase;color:#94a3b8;font-weight:900;margin-bottom:3px}
-.nd-real-info h4{font-size:13px;color:white;font-weight:900;word-break:break-word}
-.nd-real-notes{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin-top:10px;font-size:12px;color:#cbd5e1;font-weight:700;line-height:1.45;word-break:break-word;max-height:160px;overflow-y:auto}
-.nd-real-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-real-buy{background:#1d4ed8;color:white}.nd-real-sell{background:#dc2626;color:white}.nd-real-pdi{background:#f59e0b;color:#111827}.nd-real-wa{background:#16a34a;color:white}.nd-real-value{background:#7c3aed;color:white}.nd-real-other{background:#334155;color:white}
-.nd-real-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.nd-real-photo-card{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:7px}
-.nd-real-photo-card img{width:100%;height:120px;object-fit:cover;border-radius:12px;background:#1e293b;cursor:pointer}
-.nd-real-photo-card button{width:100%;margin-top:7px;background:#2563eb;color:white;border-radius:10px;padding:8px;font-size:9px;font-weight:900;text-transform:uppercase}
-.nd-real-empty{background:#111827;border:1px dashed rgba(255,255,255,.18);border-radius:18px;padding:22px;text-align:center;color:#94a3b8;font-size:12px;font-weight:800}
-.nd-real-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
-.nd-real-actions a,.nd-real-actions button{border-radius:12px;padding:10px;text-align:center;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-real-stock-grid{display:grid;grid-template-columns:420px 1fr;gap:20px}
-.nd-real-stock-form input,.nd-real-stock-form select,.nd-real-stock-form textarea{width:100%;background:#020617!important;border:1px solid rgba(255,255,255,.12)!important;color:white!important;border-radius:14px!important;padding:12px!important;font-size:13px!important;font-weight:800!important;outline:none!important}
-.nd-real-photo-modal{position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;padding:18px}
-.nd-real-photo-modal.active{display:flex}
-.nd-real-photo-box{width:min(1250px,100%);background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:28px;overflow:hidden}
-.nd-real-photo-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#111827;color:white}
-.nd-real-photo-body{padding:16px;background:#020617}
-.nd-real-photo-body img{width:100%;max-height:78vh;object-fit:contain;border-radius:18px;background:#111827}
-.nd-real-photo-foot{padding:14px;background:#111827;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-@media(max-width:900px){
-  #ndRealAdminApp{grid-template-columns:1fr}
-  .nd-real-side{position:sticky;top:0;z-index:2}
-  .nd-real-main{padding:12px}
-  .nd-real-lead,.nd-real-stock-grid{grid-template-columns:1fr}
-  .nd-real-info-grid{grid-template-columns:1fr}
-  .nd-real-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .nd-real-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
+#ndOrganizedAdminApp{position:fixed;inset:0;z-index:999990;background:#020617;color:white;display:none;overflow:hidden}
+#ndOrganizedAdminApp.active{display:grid;grid-template-columns:260px 1fr}
+.nd-org-side{background:#0f172a;border-right:1px solid rgba(255,255,255,.08);padding:18px;overflow-y:auto}
+.nd-org-main{overflow-y:auto;padding:22px}
+.nd-org-tab{width:100%;text-align:left;background:#020617;color:#cbd5e1;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:13px 14px;font-size:12px;font-weight:900;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:10px}
+.nd-org-tab.active,.nd-org-tab:hover{background:#2563eb;color:white}
+.nd-org-card{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:18px;box-shadow:0 16px 60px rgba(0,0,0,.22)}
+.nd-org-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.12);color:white;border-radius:14px;padding:12px 13px;font-size:13px;font-weight:800;outline:none}
+.nd-org-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.18)}
+.nd-org-stat{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:18px}.nd-org-stat p{font-size:10px;text-transform:uppercase;color:#94a3b8;font-weight:900}.nd-org-stat h3{font-size:30px;font-weight:900;margin-top:4px}
+.nd-org-lead{background:#020617;border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:18px;display:grid;grid-template-columns:1.35fr .85fr;gap:18px;margin-bottom:14px}
+.nd-org-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.nd-org-info{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px}.nd-org-info p{font-size:9px;text-transform:uppercase;color:#94a3b8;font-weight:900;margin-bottom:3px}.nd-org-info h4{font-size:13px;color:white;font-weight:900;word-break:break-word}
+.nd-org-notes{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin-top:10px;font-size:12px;color:#cbd5e1;font-weight:700;line-height:1.45;word-break:break-word}
+.nd-org-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-org-buy{background:#1d4ed8;color:white}.nd-org-sell{background:#dc2626;color:white}.nd-org-pdi{background:#f59e0b;color:#111827}.nd-org-wa{background:#16a34a;color:white}.nd-org-value{background:#7c3aed;color:white}.nd-org-other{background:#334155;color:white}
+.nd-org-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.nd-org-photo-card{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:7px}.nd-org-photo-card img{width:100%;height:120px;object-fit:cover;border-radius:12px;background:#1e293b;cursor:pointer}.nd-org-photo-card button{width:100%;margin-top:7px;background:#2563eb;color:white;border-radius:10px;padding:8px;font-size:9px;font-weight:900;text-transform:uppercase}
+.nd-org-empty{background:#111827;border:1px dashed rgba(255,255,255,.18);border-radius:18px;padding:22px;text-align:center;color:#94a3b8;font-size:12px;font-weight:800}
+.nd-org-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}.nd-org-actions a,.nd-org-actions button{border-radius:12px;padding:10px;text-align:center;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-org-view{display:none}.nd-org-view.active{display:block}
+.nd-org-photo-modal{position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;padding:18px}.nd-org-photo-modal.active{display:flex}.nd-org-photo-box{width:min(1250px,100%);background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:28px;overflow:hidden}.nd-org-photo-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#111827;color:white}.nd-org-photo-body{padding:16px;background:#020617}.nd-org-photo-body img{width:100%;max-height:78vh;object-fit:contain;border-radius:18px;background:#111827}.nd-org-photo-foot{padding:14px;background:#111827;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+#ndStockUploadMount *{max-width:100%}
+#ndStockUploadMount input,#ndStockUploadMount select,#ndStockUploadMount textarea{color:white!important}
+@media(max-width:900px){#ndOrganizedAdminApp.active{grid-template-columns:1fr}.nd-org-side{position:sticky;top:0;z-index:2}.nd-org-main{padding:12px}.nd-org-lead{grid-template-columns:1fr}.nd-org-info-grid{grid-template-columns:1fr}.nd-org-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nd-org-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 </style>
 
@@ -5265,128 +5232,156 @@ document.addEventListener("click", function() {
 </script>
 
 
-
-
-
-<!-- NODEALER REAL ADMIN REARRANGED APP - FINAL -->
-<div id="ndRealAdminApp">
-  <aside class="nd-real-side">
-    <div class="nd-real-logo">
-      <div class="nd-real-logo-badge"><i class="fa-solid fa-gauge-high"></i></div>
-      <div>
-        <h2 class="font-black uppercase leading-tight">NoDealer OS</h2>
-        <p class="text-[10px] text-slate-400 font-black uppercase">Real Admin Workspace</p>
-      </div>
+<!-- NODEALER REAL REARRANGED ADMIN DASHBOARD -->
+<div id="ndOrganizedAdminApp">
+  <aside class="nd-org-side">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center"><i class="fa-solid fa-gauge-high"></i></div>
+      <div><h2 class="font-black uppercase leading-tight">NoDealer OS</h2><p class="text-[10px] text-slate-400 font-black uppercase">Organized Admin</p></div>
     </div>
-    <button class="nd-real-tab active" data-real-tab="dashboard" onclick="ndRealShowTab('dashboard')"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
-    <button class="nd-real-tab" data-real-tab="leads" onclick="ndRealShowTab('leads')"><i class="fa-solid fa-address-card"></i> Leads & Photos</button>
-    <button class="nd-real-tab" data-real-tab="stock" onclick="ndRealShowTab('stock')"><i class="fa-solid fa-cloud-arrow-up"></i> Stock Upload</button>
-    <button class="nd-real-tab" data-real-tab="inventory" onclick="ndRealShowTab('inventory')"><i class="fa-solid fa-warehouse"></i> Inventory Tools</button>
-    <button class="nd-real-tab" data-real-tab="pdi" onclick="ndRealShowTab('pdi')"><i class="fa-solid fa-clipboard-check"></i> PDI / Reports</button>
-    <button onclick="ndRealShowOriginalAdmin()" class="mt-5 w-full bg-slate-700 hover:bg-slate-600 text-white rounded-2xl py-3 text-xs font-black uppercase">Show Original Admin</button>
+    <button class="nd-org-tab active" data-org-tab="dashboard" onclick="ndOrgShowTab('dashboard')"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+    <button class="nd-org-tab" data-org-tab="leads" onclick="ndOrgShowTab('leads')"><i class="fa-solid fa-address-card"></i> Leads & Photos</button>
+    <button class="nd-org-tab" data-org-tab="stock" onclick="ndOrgShowTab('stock')"><i class="fa-solid fa-cloud-arrow-up"></i> Stock Upload</button>
+    <button class="nd-org-tab" data-org-tab="inventory" onclick="ndOrgShowTab('inventory')"><i class="fa-solid fa-warehouse"></i> Inventory Tools</button>
+    <button class="nd-org-tab" data-org-tab="reports" onclick="ndOrgShowTab('reports')"><i class="fa-solid fa-file-medical"></i> PDI / Reports</button>
+    <button onclick="ndOrgCloseAdmin()" class="mt-5 w-full bg-slate-700 hover:bg-slate-600 text-white rounded-2xl py-3 text-xs font-black uppercase">Show Original Admin</button>
     <a href="index.html" class="mt-2 block text-center bg-red-600 hover:bg-red-700 text-white rounded-2xl py-3 text-xs font-black uppercase">Public Website</a>
   </aside>
 
-  <main class="nd-real-main">
-    <section id="ndRealDashboard" class="nd-real-view active">
+  <main class="nd-org-main">
+    <section id="ndOrgDashboard" class="nd-org-view active">
       <div class="flex items-center justify-between gap-4 flex-wrap mb-5">
-        <div>
-          <p class="text-[10px] uppercase text-blue-400 font-black">Control Center</p>
-          <h1 class="text-4xl font-black uppercase">Admin Dashboard</h1>
-          <p class="text-sm text-slate-400 font-bold mt-1">Clean overview of leads, stock upload, inventory and PDI tools.</p>
-        </div>
-        <button onclick="ndRealLoadLeads()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Refresh CRM</button>
+        <div><p class="text-[10px] uppercase text-blue-400 font-black">Control Center</p><h1 class="text-4xl font-black uppercase">Admin Dashboard</h1><p class="text-sm text-slate-400 font-bold mt-1">All important admin actions arranged in one place.</p></div>
+        <button onclick="ndOrgLoadLeads()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Refresh CRM</button>
       </div>
       <div class="grid md:grid-cols-5 gap-4 mb-5">
-        <div class="nd-real-stat"><p>Total Leads</p><h3 id="ndRealStatTotal">0</h3></div>
-        <div class="nd-real-stat"><p>Buy Leads</p><h3 id="ndRealStatBuy">0</h3></div>
-        <div class="nd-real-stat"><p>Sell Leads</p><h3 id="ndRealStatSell">0</h3></div>
-        <div class="nd-real-stat"><p>PDI Leads</p><h3 id="ndRealStatPdi">0</h3></div>
-        <div class="nd-real-stat"><p>With Photos</p><h3 id="ndRealStatPhotos">0</h3></div>
+        <div class="nd-org-stat"><p>Total Leads</p><h3 id="ndOrgStatTotal">0</h3></div>
+        <div class="nd-org-stat"><p>Buy</p><h3 id="ndOrgStatBuy">0</h3></div>
+        <div class="nd-org-stat"><p>Sell</p><h3 id="ndOrgStatSell">0</h3></div>
+        <div class="nd-org-stat"><p>PDI</p><h3 id="ndOrgStatPdi">0</h3></div>
+        <div class="nd-org-stat"><p>Photos</p><h3 id="ndOrgStatPhotos">0</h3></div>
       </div>
       <div class="grid md:grid-cols-3 gap-4">
-        <button onclick="ndRealShowTab('leads')" class="nd-real-card text-left"><i class="fa-solid fa-address-card text-blue-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">Leads & Photos</h3><p class="text-sm text-slate-400 font-bold mt-2">Full details and image popup.</p></button>
-        <button onclick="ndRealShowTab('stock')" class="nd-real-card text-left"><i class="fa-solid fa-cloud-arrow-up text-green-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">Upload Stock</h3><p class="text-sm text-slate-400 font-bold mt-2">Add new car inventory.</p></button>
-        <button onclick="ndRealShowTab('inventory')" class="nd-real-card text-left"><i class="fa-solid fa-warehouse text-amber-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">Inventory Tools</h3><p class="text-sm text-slate-400 font-bold mt-2">Manage stock tools.</p></button>
+        <button onclick="ndOrgShowTab('leads')" class="nd-org-card text-left"><i class="fa-solid fa-address-card text-blue-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">View Leads</h3><p class="text-sm text-slate-400 font-bold mt-2">Full details and photos.</p></button>
+        <button onclick="ndOrgShowTab('stock')" class="nd-org-card text-left"><i class="fa-solid fa-cloud-arrow-up text-green-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">Upload Stock</h3><p class="text-sm text-slate-400 font-bold mt-2">Your existing stock upload form.</p></button>
+        <button onclick="ndOrgShowTab('inventory')" class="nd-org-card text-left"><i class="fa-solid fa-warehouse text-amber-400 text-3xl"></i><h3 class="font-black uppercase text-xl mt-4">Inventory Tools</h3><p class="text-sm text-slate-400 font-bold mt-2">Manage, mark sold, feature cars.</p></button>
       </div>
     </section>
 
-    <section id="ndRealLeads" class="nd-real-view">
+    <section id="ndOrgLeads" class="nd-org-view">
       <div class="flex items-center justify-between gap-4 flex-wrap mb-5">
         <div><p class="text-[10px] uppercase text-blue-400 font-black">CRM</p><h1 class="text-4xl font-black uppercase">Leads & Photos</h1></div>
-        <div class="flex gap-2 flex-wrap"><button onclick="ndRealLoadLeads()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Refresh</button><button onclick="ndRealDownloadCsv()" class="bg-green-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Download Excel</button></div>
+        <div class="flex gap-2 flex-wrap"><button onclick="ndOrgLoadLeads()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Refresh</button><button onclick="ndOrgDownloadCsv()" class="bg-green-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Download Excel</button></div>
       </div>
-      <div class="grid md:grid-cols-5 gap-3 mb-5">
-        <input id="ndRealLeadSearch" oninput="ndRealRenderLeads()" class="nd-real-input md:col-span-2" placeholder="Search name, phone, car, reg no, notes">
-        <select id="ndRealLeadTypeFilter" onchange="ndRealRenderLeads()" class="nd-real-input"><option value="">All Types</option><option>Buy</option><option>Sell</option><option>PDI</option><option>WhatsApp</option><option>Valuation</option></select>
-        <select id="ndRealPhotoFilter" onchange="ndRealRenderLeads()" class="nd-real-input"><option value="">All Leads</option><option value="photos">Only With Photos</option></select>
-        <select id="ndRealSortFilter" onchange="ndRealRenderLeads()" class="nd-real-input"><option value="newest">Newest First</option><option value="oldest">Oldest First</option></select>
-      </div>
-      <div id="ndRealLeadsList"></div>
+      <div class="grid md:grid-cols-5 gap-3 mb-5"><input id="ndOrgLeadSearch" oninput="ndOrgRenderLeads()" class="nd-org-input md:col-span-2" placeholder="Search name, phone, car, reg no, notes"><select id="ndOrgLeadTypeFilter" onchange="ndOrgRenderLeads()" class="nd-org-input"><option value="">All Types</option><option>Buy</option><option>Sell</option><option>PDI</option><option>WhatsApp</option><option>Valuation</option></select><select id="ndOrgPhotoFilter" onchange="ndOrgRenderLeads()" class="nd-org-input"><option value="">All Leads</option><option value="photos">Only With Photos</option></select><select id="ndOrgSortFilter" onchange="ndOrgRenderLeads()" class="nd-org-input"><option value="newest">Newest First</option><option value="oldest">Oldest First</option></select></div>
+      <div id="ndOrgLeadsList"></div>
     </section>
 
-    <section id="ndRealStock" class="nd-real-view">
-      <div class="mb-5"><p class="text-[10px] uppercase text-green-400 font-black">Inventory</p><h1 class="text-4xl font-black uppercase">Stock Upload</h1><p class="text-sm text-slate-400 font-bold mt-1">Same working upload fields, placed in a clean panel.</p></div>
-      <div class="nd-real-stock-grid">
-        <div id="ndRealStockUploadMount" class="nd-real-card nd-real-stock-form"><div class="nd-real-empty">Loading stock upload form...</div></div>
-        <div class="nd-real-card">
-          <h3 class="text-2xl font-black uppercase mb-3">Stock Tips</h3>
-          <p class="text-sm text-slate-400 font-bold">Upload car image, brand, model, year, price, fuel, transmission and status. Use Inventory Tools for extra controls.</p>
-        </div>
-      </div>
+    <section id="ndOrgStock" class="nd-org-view">
+      <div class="mb-5"><p class="text-[10px] uppercase text-green-400 font-black">Inventory</p><h1 class="text-4xl font-black uppercase">Stock Upload</h1><p class="text-sm text-slate-400 font-bold mt-1">Your existing deploy live stock form is moved here.</p></div>
+      <div id="ndStockUploadMount" class="nd-org-card"><div class="nd-org-empty">Loading existing stock upload form...</div></div>
     </section>
 
-    <section id="ndRealInventory" class="nd-real-view">
+    <section id="ndOrgInventory" class="nd-org-view">
       <div class="mb-5"><p class="text-[10px] uppercase text-amber-400 font-black">Inventory</p><h1 class="text-4xl font-black uppercase">Inventory Tools</h1></div>
       <div class="grid md:grid-cols-3 gap-4">
-        <button onclick="openRealCarManager && openRealCarManager()" class="nd-real-card text-left"><i class="fa-solid fa-circle-plus text-blue-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Add / Edit Cars</h3></button>
-        <button onclick="openProInventoryAdmin && openProInventoryAdmin()" class="nd-real-card text-left"><i class="fa-solid fa-warehouse text-amber-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Inventory OS</h3></button>
-        <button onclick="downloadInventorySnapshot && downloadInventorySnapshot()" class="nd-real-card text-left"><i class="fa-solid fa-download text-green-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Download Inventory</h3></button>
+        <button onclick="openRealCarManager && openRealCarManager()" class="nd-org-card text-left"><i class="fa-solid fa-circle-plus text-blue-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Add / Edit Cars</h3><p class="text-sm text-slate-400 font-bold mt-2">Open car manager.</p></button>
+        <button onclick="openProInventoryAdmin && openProInventoryAdmin()" class="nd-org-card text-left"><i class="fa-solid fa-warehouse text-amber-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Inventory OS</h3><p class="text-sm text-slate-400 font-bold mt-2">Status, featured, sold.</p></button>
+        <button onclick="downloadInventorySnapshot && downloadInventorySnapshot()" class="nd-org-card text-left"><i class="fa-solid fa-download text-green-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Download Inventory</h3><p class="text-sm text-slate-400 font-bold mt-2">Export stock data.</p></button>
       </div>
     </section>
 
-    <section id="ndRealPdi" class="nd-real-view">
+    <section id="ndOrgReports" class="nd-org-view">
       <div class="mb-5"><p class="text-[10px] uppercase text-purple-400 font-black">Reports</p><h1 class="text-4xl font-black uppercase">PDI / Reports</h1></div>
       <div class="grid md:grid-cols-3 gap-4">
-        <button onclick="openNdPdiBookings && openNdPdiBookings()" class="nd-real-card text-left"><i class="fa-solid fa-clipboard-list text-blue-400 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Bookings</h3></button>
-        <button onclick="openNdPdiReportBuilder && openNdPdiReportBuilder()" class="nd-real-card text-left"><i class="fa-solid fa-file-medical text-amber-400 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Report Builder</h3></button>
-        <button onclick="openAdvancedAnalytics && openAdvancedAnalytics()" class="nd-real-card text-left"><i class="fa-solid fa-chart-pie text-green-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Analytics</h3></button>
+        <button onclick="openNdPdiBookings && openNdPdiBookings()" class="nd-org-card text-left"><i class="fa-solid fa-clipboard-list text-blue-400 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Bookings</h3></button>
+        <button onclick="openNdPdiReportBuilder && openNdPdiReportBuilder()" class="nd-org-card text-left"><i class="fa-solid fa-file-medical text-amber-400 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Report</h3></button>
+        <button onclick="openAdvancedAnalytics && openAdvancedAnalytics()" class="nd-org-card text-left"><i class="fa-solid fa-chart-pie text-green-400 text-3xl"></i><h3 class="font-black uppercase mt-4">Analytics</h3></button>
       </div>
     </section>
   </main>
 </div>
 
-<div id="ndRealPhotoModal" class="nd-real-photo-modal"><div class="nd-real-photo-box"><div class="nd-real-photo-head"><div><p class="text-[10px] uppercase text-slate-400 font-black">Uploaded Photo</p><h3 id="ndRealPhotoTitle" class="text-xl font-black uppercase">Lead Photo</h3></div><button onclick="ndRealClosePhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button></div><div class="nd-real-photo-body"><img id="ndRealPhotoImg" src=""></div><div class="nd-real-photo-foot"><a id="ndRealPhotoOriginal" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original Backup</a><button onclick="ndRealClosePhoto()" class="bg-blue-600 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button></div></div></div>
+<div id="ndOrgPhotoModal" class="nd-org-photo-modal"><div class="nd-org-photo-box"><div class="nd-org-photo-head"><div><p class="text-[10px] uppercase text-slate-400 font-black">Uploaded Photo</p><h3 id="ndOrgPhotoTitle" class="text-xl font-black uppercase">Lead Photo</h3></div><button onclick="ndOrgClosePhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button></div><div class="nd-org-photo-body"><img id="ndOrgPhotoImg" src=""></div><div class="nd-org-photo-foot"><a id="ndOrgPhotoOriginal" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original Backup</a><button onclick="ndOrgClosePhoto()" class="bg-blue-600 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button></div></div></div>
 
 
 <script>
-/* NODEALER REAL ADMIN REARRANGE FINAL SCRIPT */
+/* NODEALER REAL REARRANGED ADMIN DASHBOARD SCRIPT */
 (function(){
 const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";let leads=[];let movedUpload=false;
 function parseCsv(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows}
 function pick(o,names){for(const n of names){if(o&&o[n]!==undefined&&String(o[n]).trim())return String(o[n]).trim();}return""}
 function typeOf(o){const txt=JSON.stringify(o||{}).toLowerCase();if(txt.includes("pdi"))return"PDI";if(txt.includes("sell"))return"Sell";if(txt.includes("whatsapp"))return"WhatsApp";if(txt.includes("valuation")||txt.includes("value estimate"))return"Valuation";return"Buy"}
-function cls(t){if(t==="PDI")return"nd-real-pdi";if(t==="Sell")return"nd-real-sell";if(t==="WhatsApp")return"nd-real-wa";if(t==="Valuation")return"nd-real-value";if(t==="Buy")return"nd-real-buy";return"nd-real-other"}
+function cls(t){if(t==="PDI")return"nd-org-pdi";if(t==="Sell")return"nd-org-sell";if(t==="WhatsApp")return"nd-org-wa";if(t==="Valuation")return"nd-org-value";if(t==="Buy")return"nd-org-buy";return"nd-org-other"}
 function isPhotoUrl(url){url=String(url||"").toLowerCase();return url.includes("drive.google.com")||url.includes("googleusercontent.com")||url.includes("uc?id=")||/\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(url)}
 function normalizePhoto(url){url=String(url||"").trim();const m=url.match(/\/file\/d\/([^/]+)/)||url.match(/[?&]id=([^&]+)/);if(m&&m[1])return"https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1800";return url}
 function photoLinks(o){const text=JSON.stringify(o||{}),links=[],regex=/(https?:\/\/[^\s"',<>]+)/g;let m;while((m=regex.exec(text))!==null){let u=m[1].replace(/[)\].,;]+$/g,"");if(isPhotoUrl(u)&&!links.includes(u))links.push(u)}return links}
-function isAdminRoute(){return location.pathname.toLowerCase().includes("admin")||location.hash.toLowerCase().includes("admin")}
-function activateAdmin(){if(!isAdminRoute())return;document.body.classList.add("nd-admin-mode");document.body.classList.remove("overflow-hidden");document.getElementById("main-content")?.classList.remove("opacity-0");document.getElementById("preloader")?.remove();ndRealLoadLeads();setTimeout(moveStockUpload,500)}
-window.ndRealShowTab=function(tab){document.querySelectorAll(".nd-real-tab").forEach(b=>b.classList.toggle("active",b.dataset.realTab===tab));document.querySelectorAll(".nd-real-view").forEach(v=>v.classList.remove("active"));document.getElementById("ndReal"+tab.charAt(0).toUpperCase()+tab.slice(1))?.classList.add("active");if(tab==="stock")moveStockUpload();if(tab==="leads")ndRealLoadLeads()}
-window.ndRealShowOriginalAdmin=function(){document.body.classList.remove("nd-admin-mode")}
-function moveStockUpload(){if(movedUpload)return;const mount=document.getElementById("ndRealStockUploadMount");if(!mount)return;let submit=document.getElementById("adminSubmitBtn")||Array.from(document.querySelectorAll("button")).find(b=>(b.innerText||"").toLowerCase().includes("deploy live stock"));if(!submit){mount.innerHTML='<div class="nd-real-empty">Stock upload form not found. Use Show Original Admin to access it.</div>';return}let card=submit.closest("form")||submit.parentElement;for(let i=0;i<6&&card&&card.parentElement;i++){if((card.innerText||"").toLowerCase().includes("deploy live stock"))break;card=card.parentElement}if(card){mount.innerHTML="";mount.appendChild(card);movedUpload=true}}
-window.ndRealLoadLeads=async function(){const list=document.getElementById("ndRealLeadsList");if(list)list.innerHTML='<div class="nd-real-empty">Loading CRM leads...</div>';try{const res=await fetch(CSV_URL+"&cache="+Date.now());const text=await res.text();const rows=parseCsv(text).filter(r=>r.some(c=>String(c||"").trim()));const headers=(rows.shift()||[]).map(h=>String(h||"").trim());leads=rows.map((r,idx)=>{const o={_idx:idx};headers.forEach((h,i)=>o[h]=r[i]||"");return o}).reverse()}catch(e){console.error(e);leads=[]}ndRealRenderLeads()}
-window.ndRealRenderLeads=function(){const search=(document.getElementById("ndRealLeadSearch")?.value||"").toLowerCase(),typeFilter=document.getElementById("ndRealLeadTypeFilter")?.value||"",photoFilter=document.getElementById("ndRealPhotoFilter")?.value||"",sort=document.getElementById("ndRealSortFilter")?.value||"newest";let rows=leads.filter(o=>JSON.stringify(o).toLowerCase().includes(search));if(typeFilter)rows=rows.filter(o=>typeOf(o)===typeFilter);if(photoFilter==="photos")rows=rows.filter(o=>photoLinks(o).length>0);if(sort==="oldest")rows=[...rows].reverse();const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};set("ndRealStatTotal",leads.length);set("ndRealStatBuy",leads.filter(o=>typeOf(o)==="Buy").length);set("ndRealStatSell",leads.filter(o=>typeOf(o)==="Sell").length);set("ndRealStatPdi",leads.filter(o=>typeOf(o)==="PDI").length);set("ndRealStatPhotos",leads.filter(o=>photoLinks(o).length>0).length);const list=document.getElementById("ndRealLeadsList");if(!list)return;if(!rows.length){list.innerHTML='<div class="nd-real-empty">No matching leads found.</div>';return}list.innerHTML=rows.slice(0,150).map((o,idx)=>{const t=typeOf(o),name=pick(o,["name","Name","Customer Name"])||"Customer",phone=pick(o,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,""),car=pick(o,["car","Car","Vehicle","vehicle","model","Model","Interested Car"])||"Not specified",status=pick(o,["status","Status"])||"New Lead",source=pick(o,["source","Source"])||t+" Lead",date=pick(o,["date","Date","timestamp","Timestamp"]),reg=pick(o,["regNo","Reg No","Registration","registration"]),city=pick(o,["city","City","location","Location"]),pkg=pick(o,["package","Package"]),useCase=pick(o,["useCase","Use Case"]),notes=pick(o,["notes","Notes"])||JSON.stringify(o).slice(0,900),photos=photoLinks(o),callPhone=phone?(phone.startsWith("91")?phone:"91"+phone):"";return `<div class="nd-real-lead"><div><div class="flex items-center justify-between gap-3 flex-wrap"><h3 class="text-xl font-black uppercase">${name}</h3><span class="nd-real-pill ${cls(t)}">${t}</span></div><div class="nd-real-info-grid"><div class="nd-real-info"><p>Phone</p><h4>${phone||"No phone"}</h4></div><div class="nd-real-info"><p>Car / Requirement</p><h4>${car}</h4></div><div class="nd-real-info"><p>Status</p><h4>${status}</h4></div><div class="nd-real-info"><p>Source</p><h4>${source}</h4></div>${reg?`<div class="nd-real-info"><p>Reg No</p><h4>${reg}</h4></div>`:""}${city?`<div class="nd-real-info"><p>City / Location</p><h4>${city}</h4></div>`:""}${pkg?`<div class="nd-real-info"><p>Package</p><h4>${pkg}</h4></div>`:""}${useCase?`<div class="nd-real-info"><p>Use Case</p><h4>${useCase}</h4></div>`:""}${date?`<div class="nd-real-info"><p>Date</p><h4>${date}</h4></div>`:""}</div><div class="nd-real-notes"><b>Full Notes:</b><br>${notes}</div><div class="nd-real-actions"><a href="tel:+${callPhone}" class="bg-blue-600 text-white">Call</a><a href="https://wa.me/${callPhone}" target="_blank" class="bg-green-600 text-white">WhatsApp</a><button onclick="ndRealCopyLead(${idx})" class="bg-slate-700 text-white">Copy</button><button onclick="ndRealDownloadSingleLead(${idx})" class="bg-amber-500 text-slate-950">Export</button></div></div><div><div class="flex items-center justify-between mb-3"><h4 class="font-black uppercase">Uploaded Photos</h4><span class="nd-real-pill nd-real-other">${photos.length} Photos</span></div>${photos.length?`<div class="nd-real-photo-grid">${photos.slice(0,12).map((u,i)=>{const img=normalizePhoto(u);return `<div class="nd-real-photo-card"><img src="${img}" onclick="ndRealOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><button style="display:none" onclick="ndRealOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')">View Photo</button></div>`}).join("")}</div>`:`<div class="nd-real-empty">No photo uploaded for this lead.</div>`}</div></div>`}).join("")}
-window.ndRealOpenPhoto=function(img,original,title){img=decodeURIComponent(img||"");original=decodeURIComponent(original||img);title=decodeURIComponent(title||"Lead Photo");document.getElementById("ndRealPhotoImg").src=img;document.getElementById("ndRealPhotoOriginal").href=original||img;document.getElementById("ndRealPhotoTitle").textContent=title;document.getElementById("ndRealPhotoModal")?.classList.add("active")}
-window.ndRealClosePhoto=function(){document.getElementById("ndRealPhotoModal")?.classList.remove("active")}
-window.ndRealCopyLead=function(idx){navigator.clipboard?.writeText(JSON.stringify(leads[idx]||{},null,2));alert("Lead details copied.")}
+window.ndOrgShowTab=function(tab){document.querySelectorAll(".nd-org-tab").forEach(b=>b.classList.toggle("active",b.dataset.orgTab===tab));document.querySelectorAll(".nd-org-view").forEach(v=>v.classList.remove("active"));document.getElementById("ndOrg"+tab.charAt(0).toUpperCase()+tab.slice(1))?.classList.add("active");if(tab==="stock")moveStockUpload();if(tab==="leads")ndOrgLoadLeads()}
+window.ndOrgCloseAdmin=function(){document.getElementById("ndOrganizedAdminApp")?.classList.remove("active")}
+function showAppIfAdmin(){const app=document.getElementById("ndOrganizedAdminApp");const admin=document.getElementById("adminWorkspaceView")||document.getElementById("secureAdminPortal");const visible=location.pathname.toLowerCase().includes("admin") || (admin&&!admin.classList.contains("hidden"));if(app&&visible&&!app.classList.contains("active")){app.classList.add("active");ndOrgLoadLeads();setTimeout(moveStockUpload,1200)}}
+function moveStockUpload(){if(movedUpload)return;const submit=document.getElementById("adminSubmitBtn");const mount=document.getElementById("ndStockUploadMount");if(!submit||!mount)return;let card=submit.closest("form")||submit.parentElement;for(let i=0;i<4&&card&&card.parentElement;i++){if((card.innerText||"").toLowerCase().includes("deploy live stock"))break;card=card.parentElement}if(card){mount.innerHTML="";mount.appendChild(card);movedUpload=true;}}
+window.ndOrgLoadLeads=async function(){const list=document.getElementById("ndOrgLeadsList");if(list)list.innerHTML='<div class="nd-org-empty">Loading CRM leads...</div>';try{const res=await fetch(CSV_URL+"&cache="+Date.now());const text=await res.text();const rows=parseCsv(text).filter(r=>r.some(c=>String(c||"").trim()));const headers=(rows.shift()||[]).map(h=>String(h||"").trim());leads=rows.map((r,idx)=>{const o={_idx:idx};headers.forEach((h,i)=>o[h]=r[i]||"");return o}).reverse()}catch(e){console.error(e);leads=[]}ndOrgRenderLeads()}
+window.ndOrgRenderLeads=function(){const search=(document.getElementById("ndOrgLeadSearch")?.value||"").toLowerCase(),typeFilter=document.getElementById("ndOrgLeadTypeFilter")?.value||"",photoFilter=document.getElementById("ndOrgPhotoFilter")?.value||"",sort=document.getElementById("ndOrgSortFilter")?.value||"newest";let rows=leads.filter(o=>JSON.stringify(o).toLowerCase().includes(search));if(typeFilter)rows=rows.filter(o=>typeOf(o)===typeFilter);if(photoFilter==="photos")rows=rows.filter(o=>photoLinks(o).length>0);if(sort==="oldest")rows=[...rows].reverse();const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};set("ndOrgStatTotal",leads.length);set("ndOrgStatBuy",leads.filter(o=>typeOf(o)==="Buy").length);set("ndOrgStatSell",leads.filter(o=>typeOf(o)==="Sell").length);set("ndOrgStatPdi",leads.filter(o=>typeOf(o)==="PDI").length);set("ndOrgStatPhotos",leads.filter(o=>photoLinks(o).length>0).length);const list=document.getElementById("ndOrgLeadsList");if(!list)return;if(!rows.length){list.innerHTML='<div class="nd-org-empty">No matching leads found.</div>';return}list.innerHTML=rows.slice(0,150).map((o,idx)=>{const t=typeOf(o),name=pick(o,["name","Name","Customer Name"])||"Customer",phone=pick(o,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,""),car=pick(o,["car","Car","Vehicle","vehicle","model","Model","Interested Car"])||"Not specified",status=pick(o,["status","Status"])||"New Lead",source=pick(o,["source","Source"])||t+" Lead",date=pick(o,["date","Date","timestamp","Timestamp"]),reg=pick(o,["regNo","Reg No","Registration","registration"]),city=pick(o,["city","City","location","Location"]),pkg=pick(o,["package","Package"]),useCase=pick(o,["useCase","Use Case"]),notes=pick(o,["notes","Notes"])||JSON.stringify(o).slice(0,900),photos=photoLinks(o),callPhone=phone?(phone.startsWith("91")?phone:"91"+phone):"";return `<div class="nd-org-lead"><div><div class="flex items-center justify-between gap-3 flex-wrap"><h3 class="text-xl font-black uppercase">${name}</h3><span class="nd-org-pill ${cls(t)}">${t}</span></div><div class="nd-org-info-grid"><div class="nd-org-info"><p>Phone</p><h4>${phone||"No phone"}</h4></div><div class="nd-org-info"><p>Car / Requirement</p><h4>${car}</h4></div><div class="nd-org-info"><p>Status</p><h4>${status}</h4></div><div class="nd-org-info"><p>Source</p><h4>${source}</h4></div>${reg?`<div class="nd-org-info"><p>Reg No</p><h4>${reg}</h4></div>`:""}${city?`<div class="nd-org-info"><p>City / Location</p><h4>${city}</h4></div>`:""}${pkg?`<div class="nd-org-info"><p>Package</p><h4>${pkg}</h4></div>`:""}${useCase?`<div class="nd-org-info"><p>Use Case</p><h4>${useCase}</h4></div>`:""}${date?`<div class="nd-org-info"><p>Date</p><h4>${date}</h4></div>`:""}</div><div class="nd-org-notes"><b>Full Notes:</b><br>${notes}</div><div class="nd-org-actions"><a href="tel:+${callPhone}" class="bg-blue-600 text-white">Call</a><a href="https://wa.me/${callPhone}" target="_blank" class="bg-green-600 text-white">WhatsApp</a><button onclick="ndOrgCopyLead(${idx})" class="bg-slate-700 text-white">Copy</button><button onclick="ndOrgDownloadSingleLead(${idx})" class="bg-amber-500 text-slate-950">Export</button></div></div><div><div class="flex items-center justify-between mb-3"><h4 class="font-black uppercase">Uploaded Photos</h4><span class="nd-org-pill nd-org-other">${photos.length} Photos</span></div>${photos.length?`<div class="nd-org-photo-grid">${photos.slice(0,12).map((u,i)=>{const img=normalizePhoto(u);return `<div class="nd-org-photo-card"><img src="${img}" onclick="ndOrgOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><button style="display:none" onclick="ndOrgOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')">View Photo</button></div>`}).join("")}</div>`:`<div class="nd-org-empty">No photo uploaded for this lead.</div>`}</div></div>`}).join("")}
+window.ndOrgOpenPhoto=function(img,original,title){img=decodeURIComponent(img||"");original=decodeURIComponent(original||img);title=decodeURIComponent(title||"Lead Photo");document.getElementById("ndOrgPhotoImg").src=img;document.getElementById("ndOrgPhotoOriginal").href=original||img;document.getElementById("ndOrgPhotoTitle").textContent=title;document.getElementById("ndOrgPhotoModal")?.classList.add("active")}
+window.ndOrgClosePhoto=function(){document.getElementById("ndOrgPhotoModal")?.classList.remove("active")}
+window.ndOrgCopyLead=function(idx){navigator.clipboard?.writeText(JSON.stringify(leads[idx]||{},null,2));alert("Lead details copied.")}
 function csvEscape(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}function downloadCsv(rows,filename){if(!rows.length)return;const headers=Array.from(new Set(rows.flatMap(o=>Object.keys(o))));const csv=[headers.join(","),...rows.map(o=>headers.map(h=>csvEscape(o[h])).join(","))].join("\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
-window.ndRealDownloadSingleLead=function(idx){downloadCsv([leads[idx]||{}],"nodealer-lead.csv")}
-window.ndRealDownloadCsv=function(){downloadCsv(leads,"nodealer-crm-leads.csv")}
-document.addEventListener("click",function(e){const a=e.target.closest&&e.target.closest("a[href]"),img=e.target&&e.target.tagName==="IMG"?e.target:null;if(a){const href=a.getAttribute("href")||"";if(isPhotoUrl(href)||href==="about:blank"){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndRealOpenPhoto(encodeURIComponent(normalizePhoto(href)),encodeURIComponent(href),encodeURIComponent("Lead Photo"));return false}}if(img){const src=img.getAttribute("src")||"";if(isPhotoUrl(src)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndRealOpenPhoto(encodeURIComponent(normalizePhoto(src)),encodeURIComponent(src),encodeURIComponent("Lead Photo"));return false}}},true)
-const oldOpen=window.open;window.open=function(url,name,features){if(isPhotoUrl(url)){ndRealOpenPhoto(encodeURIComponent(normalizePhoto(url)),encodeURIComponent(url),encodeURIComponent("Lead Photo"));return null}return oldOpen.call(window,url,name,features)}
-document.addEventListener("keydown",function(e){if(e.key==="Escape")ndRealClosePhoto()})
-document.addEventListener("DOMContentLoaded",activateAdmin);setTimeout(activateAdmin,300);setTimeout(activateAdmin,1200);window.addEventListener("hashchange",activateAdmin);
+window.ndOrgDownloadSingleLead=function(idx){downloadCsv([leads[idx]||{}],"nodealer-lead.csv")}
+window.ndOrgDownloadCsv=function(){downloadCsv(leads,"nodealer-crm-leads.csv")}
+document.addEventListener("click",function(e){const a=e.target.closest&&e.target.closest("a[href]"),img=e.target&&e.target.tagName==="IMG"?e.target:null;if(a){const href=a.getAttribute("href")||"";if(isPhotoUrl(href)||href==="about:blank"){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndOrgOpenPhoto(encodeURIComponent(normalizePhoto(href)),encodeURIComponent(href),encodeURIComponent("Lead Photo"));return false}}if(img){const src=img.getAttribute("src")||"";if(isPhotoUrl(src)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndOrgOpenPhoto(encodeURIComponent(normalizePhoto(src)),encodeURIComponent(src),encodeURIComponent("Lead Photo"));return false}}},true)
+const oldOpen=window.open;window.open=function(url,name,features){if(isPhotoUrl(url)){ndOrgOpenPhoto(encodeURIComponent(normalizePhoto(url)),encodeURIComponent(url),encodeURIComponent("Lead Photo"));return null}return oldOpen.call(window,url,name,features)}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")ndOrgClosePhoto()})
+document.addEventListener("DOMContentLoaded",function(){setInterval(showAppIfAdmin,800)})
+})();
+</script>
+
+
+<script>
+/* NODEALER ADMIN CLEAN LEAD PARSER + #ADMIN FIX */
+(function(){
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
+let leads=[];
+
+function parseCsv(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows}
+function c(v){return String(v??"").trim()}
+function pick(o,arr){for(const k of arr){if(o&&o[k]!==undefined&&c(o[k]))return c(o[k]);}return""}
+function rawObj(v){try{return c(v).startsWith("{")?JSON.parse(v):{}}catch(e){return{}}}
+function ex(s,k){s=c(s);let m=s.match(new RegExp(k+"\\s*[:=]\\s*([^|,;\\n]+)","i"));return m?c(m[1]):""}
+function photoUrl(u){u=String(u||"").toLowerCase();return u.includes("drive.google.com")||u.includes("googleusercontent.com")||u.includes("uc?id=")||/\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(u)}
+function photoDirect(u){u=c(u);const m=u.match(/\/file\/d\/([^/]+)/)||u.match(/[?&]id=([^&]+)/);return m&&m[1]?"https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1800":u}
+function photos(o){const txt=JSON.stringify(o.raw||o),out=[],r=/(https?:\/\/[^\s"',<>]+)/g;let m;while((m=r.exec(txt))){let u=m[1].replace(/[)\].,;]+$/g,"");if(photoUrl(u)&&!out.includes(u))out.push(u)}return out}
+function norm(o){
+ const rawNotes=pick(o,["notes","Notes","H","M","N","O"]); const emb=rawObj(rawNotes); const x={...emb,...o};
+ let notes=pick(x,["notes","Notes","H","M","N","O"])||rawNotes;
+ let typeText=(JSON.stringify(x)+" "+notes).toLowerCase();
+ let type=typeText.includes("pdi")?"PDI":typeText.includes("sell")?"Sell":typeText.includes("whatsapp")?"WhatsApp":(typeText.includes("valuation")||typeText.includes("value estimate"))?"Valuation":"Buy";
+ let phone=pick(x,["phone","Phone","Mobile","mobile","D","C"]).replace(/[^0-9]/g,""); if(phone.length>10&&phone.startsWith("91"))phone=phone.slice(-10);
+ let name=pick(x,["name","Name","Customer Name","customerName","B","C"]);
+ if(!name||/^\d+$/.test(name)||/whatsapp customer|pdi customer|buyer/i.test(name)){name=type==="PDI"?"PDI Customer":type==="WhatsApp"?"WhatsApp Customer":"Customer";}
+ let car=pick(x,["car","Car","Vehicle","vehicle","model","Model","Interested Car","F","E"])||ex(notes,"Car")||ex(notes,"Vehicle")||"Not specified";
+ let status=pick(x,["status","Status","G","F"])|| (type==="PDI"?"New PDI Booking":"New Lead");
+ let source=pick(x,["source","Source","Lead Type","type","Type","E","D"])||type+" Lead";
+ let regNo=pick(x,["regNo","Reg No","Registration","registration"])||ex(notes,"Reg No")||ex(notes,"Registration");
+ let city=pick(x,["city","City"])||ex(notes,"City"), location=pick(x,["location","Location"])||ex(notes,"Location");
+ let pkg=pick(x,["package","Package"])||ex(notes,"Package"), useCase=pick(x,["useCase","Use Case"])||ex(notes,"Use Case");
+ let date=pick(x,["date","Date","timestamp","Timestamp","A"]);
+ if(notes.trim().startsWith("{")){let parts=[]; if(regNo)parts.push("Reg No: "+regNo); if(useCase)parts.push("Use Case: "+useCase); if(pkg)parts.push("Package: "+pkg); if(city)parts.push("City: "+city); if(location)parts.push("Location: "+location); if(car&&car!="Not specified")parts.push("Car: "+car); notes=parts.length?parts.join(" | "):"Lead received from website."}
+ return {raw:x,date,name,phone,source,car,status,notes,regNo,city,location,package:pkg,useCase,type};
+}
+function cls(t){return t==="PDI"?"nd-real-pdi":t==="Sell"?"nd-real-sell":t==="WhatsApp"?"nd-real-wa":t==="Valuation"?"nd-real-value":t==="Buy"?"nd-real-buy":"nd-real-other"}
+function activeAdmin(){return location.pathname.toLowerCase().includes("admin")||location.hash.toLowerCase().includes("admin")}
+function ensureAdmin(){if(!activeAdmin())return;document.body.classList.add("nd-admin-mode");document.body.classList.remove("overflow-hidden");document.getElementById("main-content")?.classList.remove("opacity-0");document.getElementById("preloader")?.remove();ndRealLoadLeads();}
+window.ndRealLoadLeads=async function(){const list=document.getElementById("ndRealLeadsList");if(list)list.innerHTML='<div class="nd-real-empty">Loading CRM leads...</div>';try{const res=await fetch(CSV_URL+"&cache="+Date.now());const txt=await res.text();let rows=parseCsv(txt).filter(r=>r.some(v=>c(v)));let headers=(rows.shift()||[]).map(c);let ok=headers.some(h=>/date|time|name|phone|source|status|notes|car/i.test(h));if(!ok){rows.unshift(headers);headers=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"]}leads=rows.map(r=>{let o={};headers.forEach((h,i)=>o[h||("C"+i)]=r[i]||"");return norm(o)}).reverse()}catch(e){console.error(e);leads=[]}ndRealRenderLeads()}
+window.ndRealRenderLeads=function(){let q=(document.getElementById("ndRealLeadSearch")?.value||"").toLowerCase(),tf=document.getElementById("ndRealLeadTypeFilter")?.value||"",pf=document.getElementById("ndRealPhotoFilter")?.value||"",sf=document.getElementById("ndRealSortFilter")?.value||"newest";let rows=leads.filter(o=>JSON.stringify(o).toLowerCase().includes(q));if(tf)rows=rows.filter(o=>o.type===tf);if(pf==="photos")rows=rows.filter(o=>photos(o).length);if(sf==="oldest")rows=[...rows].reverse();const set=(id,v)=>{let e=document.getElementById(id);if(e)e.textContent=v};set("ndRealStatTotal",leads.length);set("ndRealStatBuy",leads.filter(o=>o.type==="Buy").length);set("ndRealStatSell",leads.filter(o=>o.type==="Sell").length);set("ndRealStatPdi",leads.filter(o=>o.type==="PDI").length);set("ndRealStatPhotos",leads.filter(o=>photos(o).length).length);let list=document.getElementById("ndRealLeadsList");if(!list)return;if(!rows.length){list.innerHTML='<div class="nd-real-empty">No matching leads found.</div>';return}list.innerHTML=rows.slice(0,160).map((o,i)=>{let ps=photos(o),ph=o.phone?(o.phone.startsWith("91")?o.phone:"91"+o.phone):"";return `<div class="nd-real-lead"><div><div class="flex items-center justify-between gap-3 flex-wrap"><h3 class="text-xl font-black uppercase">${o.name}</h3><span class="nd-real-pill ${cls(o.type)}">${o.type}</span></div><div class="nd-real-info-grid"><div class="nd-real-info"><p>Phone</p><h4>${o.phone||"No phone"}</h4></div><div class="nd-real-info"><p>Car / Requirement</p><h4>${o.car}</h4></div><div class="nd-real-info"><p>Status</p><h4>${o.status}</h4></div><div class="nd-real-info"><p>Source</p><h4>${o.source}</h4></div>${o.regNo?`<div class="nd-real-info"><p>Reg No</p><h4>${o.regNo}</h4></div>`:""}${o.city||o.location?`<div class="nd-real-info"><p>City / Location</p><h4>${[o.city,o.location].filter(Boolean).join(" / ")}</h4></div>`:""}${o.package?`<div class="nd-real-info"><p>Package</p><h4>${o.package}</h4></div>`:""}${o.useCase?`<div class="nd-real-info"><p>Use Case</p><h4>${o.useCase}</h4></div>`:""}${o.date?`<div class="nd-real-info"><p>Date</p><h4>${o.date}</h4></div>`:""}</div><div class="nd-real-notes"><b>Full Notes:</b><br>${o.notes}</div><div class="nd-real-actions"><a href="tel:+${ph}" class="bg-blue-600 text-white">Call</a><a href="https://wa.me/${ph}" target="_blank" class="bg-green-600 text-white">WhatsApp</a><button onclick="ndRealCopyLead(${i})" class="bg-slate-700 text-white">Copy</button><button onclick="ndRealDownloadSingleLead(${i})" class="bg-amber-500 text-slate-950">Export</button></div></div><div><div class="flex items-center justify-between mb-3"><h4 class="font-black uppercase">Uploaded Photos</h4><span class="nd-real-pill nd-real-other">${ps.length} Photos</span></div>${ps.length?`<div class="nd-real-photo-grid">${ps.slice(0,12).map((u,j)=>{let img=photoDirect(u);return `<div class="nd-real-photo-card"><img src="${img}" onclick="ndRealOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(o.name+" Photo "+(j+1))}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><button style="display:none" onclick="ndRealOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(o.name+" Photo "+(j+1))}')">View Photo</button></div>`}).join("")}</div>`:`<div class="nd-real-empty">No photo uploaded for this lead.</div>`}</div></div>`}).join("")}
+window.ndRealOpenPhoto=function(img,orig,title){img=decodeURIComponent(img||"");orig=decodeURIComponent(orig||img);title=decodeURIComponent(title||"Lead Photo");document.getElementById("ndRealPhotoImg").src=img;document.getElementById("ndRealPhotoOriginal").href=orig;document.getElementById("ndRealPhotoTitle").textContent=title;document.getElementById("ndRealPhotoModal")?.classList.add("active")}
+window.ndRealClosePhoto=function(){document.getElementById("ndRealPhotoModal")?.classList.remove("active")}
+window.ndRealCopyLead=function(i){navigator.clipboard?.writeText(JSON.stringify(leads[i]||{},null,2));alert("Lead details copied.")}
+function esc(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}function dl(rows,name){let flat=rows.map(({raw,...o})=>o);let heads=Array.from(new Set(flat.flatMap(o=>Object.keys(o))));let csv=[heads.join(","),...flat.map(o=>heads.map(h=>esc(o[h])).join(","))].join("\n");let b=new Blob([csv],{type:"text/csv"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
+window.ndRealDownloadSingleLead=function(i){dl([leads[i]||{}],"nodealer-lead.csv")}
+window.ndRealDownloadCsv=function(){dl(leads,"nodealer-crm-leads.csv")}
+window.ndRealShowTab=window.ndRealShowTab||function(tab){document.querySelectorAll(".nd-real-tab").forEach(b=>b.classList.toggle("active",b.dataset.realTab===tab));document.querySelectorAll(".nd-real-view").forEach(v=>v.classList.remove("active"));document.getElementById("ndReal"+tab.charAt(0).toUpperCase()+tab.slice(1))?.classList.add("active");if(tab==="leads")ndRealLoadLeads();}
+document.addEventListener("click",function(e){let a=e.target.closest&&e.target.closest("a[href]"),im=e.target&&e.target.tagName==="IMG"?e.target:null;if(a&&photoUrl(a.href)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndRealOpenPhoto(encodeURIComponent(photoDirect(a.href)),encodeURIComponent(a.href),encodeURIComponent("Lead Photo"));return false}if(im&&photoUrl(im.src)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndRealOpenPhoto(encodeURIComponent(photoDirect(im.src)),encodeURIComponent(im.src),encodeURIComponent("Lead Photo"));return false}},true)
+document.addEventListener("DOMContentLoaded",ensureAdmin);setTimeout(ensureAdmin,300);setTimeout(ensureAdmin,1200);window.addEventListener("hashchange",ensureAdmin);
 })();
 </script>
 
