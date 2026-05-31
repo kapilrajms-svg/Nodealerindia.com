@@ -423,6 +423,20 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
 .nd-photo-detail-card{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
 .nd-photo-detail-input{width:100%;padding:11px 12px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
 
+
+/* NODEALER ADMIN PHOTO CLICK STAY-IN-PAGE FIX */
+.nd-admin-photo-overlay{position:fixed;inset:0;z-index:200000;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:18px}
+.nd-admin-photo-overlay.active{display:flex}
+.nd-admin-photo-box{width:min(1100px,100%);max-height:94vh;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.45)}
+.nd-admin-photo-head{background:#020617;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.nd-admin-photo-body{padding:14px;background:#0f172a}
+.nd-admin-photo-body img{width:100%;max-height:74vh;object-fit:contain;border-radius:18px;background:#111827}
+.nd-admin-photo-actions{padding:12px 16px;background:#fff;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.nd-admin-detail-wide{max-width:1280px!important;width:96vw!important}
+.nd-admin-photo-btn{background:#2563eb;color:#fff;border-radius:12px;padding:10px 12px;font-size:10px;font-weight:900;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+.nd-admin-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.nd-admin-photo-grid img{height:145px;width:100%;object-fit:cover;border-radius:16px;border:1px solid #e2e8f0;background:#f1f5f9;cursor:pointer}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -5390,6 +5404,155 @@ document.addEventListener("DOMContentLoaded",function(){
 document.addEventListener("click",function(){
   setTimeout(ndEnhanceAdminLeadPhotoButtons,300);
 },true);
+</script>
+
+
+<!-- NODEALER ADMIN STAY-IN-PAGE PHOTO OVERLAY -->
+<div id="ndAdminStayPhotoOverlay" class="nd-admin-photo-overlay">
+  <div class="nd-admin-photo-box">
+    <div class="nd-admin-photo-head">
+      <div>
+        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin Photo Preview</p>
+        <h3 id="ndAdminStayPhotoTitle" class="text-xl font-black uppercase">Uploaded Photo</h3>
+      </div>
+      <button onclick="closeNdAdminStayPhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
+    </div>
+    <div class="nd-admin-photo-body">
+      <img id="ndAdminStayPhotoImg" src="">
+    </div>
+    <div class="nd-admin-photo-actions">
+      <a id="ndAdminStayPhotoOriginal" href="#" target="_blank" class="bg-slate-950 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original</a>
+      <button onclick="closeNdAdminStayPhoto()" class="bg-slate-100 text-slate-800 rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* NODEALER ADMIN PHOTO STAY-IN-PAGE FIX SCRIPT */
+(function(){
+  function isPhotoUrl(url){
+    url = String(url || "").toLowerCase();
+    return url.includes("drive.google.com") ||
+           url.includes("googleusercontent.com") ||
+           url.includes("uc?id=") ||
+           /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(url);
+  }
+
+  function normalizePhotoUrl(url){
+    url = String(url || "").trim();
+    const driveMatch = url.match(/\/file\/d\/([^/]+)/) || url.match(/[?&]id=([^&]+)/);
+    if(driveMatch && driveMatch[1]){
+      return "https://drive.google.com/thumbnail?id=" + driveMatch[1] + "&sz=w1600";
+    }
+    return url;
+  }
+
+  window.openNdAdminStayPhoto = function(photoUrl, originalUrl, title){
+    const imgUrl = normalizePhotoUrl(photoUrl || originalUrl);
+    const original = originalUrl || photoUrl;
+    const overlay = document.getElementById("ndAdminStayPhotoOverlay");
+    const img = document.getElementById("ndAdminStayPhotoImg");
+    const link = document.getElementById("ndAdminStayPhotoOriginal");
+    const titleEl = document.getElementById("ndAdminStayPhotoTitle");
+    if(!overlay || !img) return;
+    img.src = imgUrl;
+    if(link) link.href = original || imgUrl;
+    if(titleEl) titleEl.textContent = title || "Uploaded Photo";
+    overlay.classList.add("active");
+  };
+
+  window.closeNdAdminStayPhoto = function(){
+    const overlay = document.getElementById("ndAdminStayPhotoOverlay");
+    if(overlay) overlay.classList.remove("active");
+  };
+
+  function extractLinksFromText(text){
+    const links = [];
+    const regex = /(https?:\/\/[^\s"',<>]+)/g;
+    let m;
+    while((m = regex.exec(text || "")) !== null){
+      let u = m[1].replace(/[)\].,;]+$/g,"");
+      if(isPhotoUrl(u) && !links.includes(u)) links.push(u);
+    }
+    return links;
+  }
+
+  function enhanceInquiryPanels(){
+    // Make existing inquiry/detail modal wider if present
+    ["ndInquiryDetailModal","ndLeadViewerModal","ndRestoredAdminCrmModal","ndLeadStatusModal"].forEach(id=>{
+      const modal = document.getElementById(id);
+      if(modal){
+        const panel = modal.querySelector(".max-w-6xl,.max-w-7xl,.max-w-5xl");
+        if(panel) panel.classList.add("nd-admin-detail-wide");
+      }
+    });
+
+    // Add photo preview grids to cards which have photo links in text
+    const cards = Array.from(document.querySelectorAll(".nd-lead-card,.nd-restored-admin-card,.lead-card,.nd-follow-card,.nd-pdi-booking-card,tr,td"));
+    cards.forEach((card, idx)=>{
+      if(card.dataset.ndStayPhotoEnhanced === "true") return;
+      const text = card.innerText || "";
+      const links = extractLinksFromText(text);
+      if(!links.length) return;
+
+      card.dataset.ndStayPhotoEnhanced = "true";
+      const wrap = document.createElement("div");
+      wrap.className = "nd-admin-photo-grid mt-3";
+      wrap.innerHTML = links.slice(0,8).map((u,i)=>{
+        const img = normalizePhotoUrl(u);
+        return `<div>
+          <img src="${img}" onclick="openNdAdminStayPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','Inquiry Photo ${i+1}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+          <button type="button" style="display:none" class="nd-admin-photo-btn w-full justify-center" onclick="openNdAdminStayPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','Inquiry Photo ${i+1}')">View Photo</button>
+        </div>`;
+      }).join("");
+      card.appendChild(wrap);
+    });
+  }
+
+  // IMPORTANT: intercept photo links before browser opens new tab/about:blank
+  document.addEventListener("click", function(e){
+    const target = e.target;
+    const link = target && target.closest ? target.closest("a[href]") : null;
+    if(!link) return;
+
+    const href = link.getAttribute("href") || "";
+    if(isPhotoUrl(href)){
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      openNdAdminStayPhoto(href, href, "Inquiry Photo");
+      return false;
+    }
+  }, true);
+
+  // Also intercept image clicks if parent anchor exists
+  document.addEventListener("click", function(e){
+    const img = e.target && e.target.tagName === "IMG" ? e.target : null;
+    if(!img) return;
+    const src = img.getAttribute("src") || "";
+    const parentLink = img.closest && img.closest("a[href]");
+    const href = parentLink ? parentLink.getAttribute("href") : "";
+    if(isPhotoUrl(src) || isPhotoUrl(href)){
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      openNdAdminStayPhoto(src || href, href || src, "Inquiry Photo");
+      return false;
+    }
+  }, true);
+
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") closeNdAdminStayPhoto();
+  });
+
+  document.addEventListener("DOMContentLoaded", function(){
+    setInterval(enhanceInquiryPanels, 800);
+  });
+  document.addEventListener("click", function(){
+    setTimeout(enhanceInquiryPanels, 250);
+  }, true);
+})();
 </script>
 
 </body>. It hardens admin visibility,
