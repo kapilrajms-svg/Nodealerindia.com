@@ -416,14 +416,6 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
     box-shadow: 0 0 0 3px rgba(22,163,74,.12);
 }
 
-
-/* NODEALER RESTORED ADMIN CRM - STOCK UPLOAD KEPT */
-#ndRestoredAdminCrmBtn{display:none}
-.nd-restored-admin-card{background:white;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
-.nd-restored-admin-input{width:100%;padding:12px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
-.nd-restored-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-restored-buy{background:#dbeafe;color:#2563eb}.nd-restored-sell{background:#fee2e2;color:#dc2626}.nd-restored-pdi{background:#fef3c7;color:#b45309}.nd-restored-wa{background:#dcfce7;color:#15803d}.nd-restored-other{background:#f1f5f9;color:#475569}
-
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -5207,52 +5199,6 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("click", function() {
     setTimeout(injectNdAdminCrmToolsButtonFinal, 200);
 }, true);
-</script>
-
-
-<!-- NODEALER RESTORED ADMIN CRM DASHBOARD - STOCK UPLOAD KEPT -->
-<div id="ndRestoredAdminCrmModal" class="hidden fixed inset-0 z-[100050] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
-      <div>
-        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin</p>
-        <h2 class="text-3xl font-black uppercase">CRM Lead Dashboard</h2>
-        <p class="text-sm text-slate-400 mt-1">Stock upload/manager tools are still available in your original admin panel.</p>
-      </div>
-      <button onclick="closeNdRestoredAdminCrm()" class="w-12 h-12 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
-    </div>
-    <div class="p-6">
-      <div class="grid md:grid-cols-5 gap-4 mb-5">
-        <div class="nd-restored-admin-card"><p class="text-[10px] uppercase text-slate-500 font-black">Total</p><h2 id="restoredTotalLeads" class="text-3xl font-black">0</h2></div>
-        <div class="nd-restored-admin-card"><p class="text-[10px] uppercase text-blue-600 font-black">Buy</p><h2 id="restoredBuyLeads" class="text-3xl font-black text-blue-600">0</h2></div>
-        <div class="nd-restored-admin-card"><p class="text-[10px] uppercase text-red-600 font-black">Sell</p><h2 id="restoredSellLeads" class="text-3xl font-black text-red-600">0</h2></div>
-        <div class="nd-restored-admin-card"><p class="text-[10px] uppercase text-amber-600 font-black">PDI</p><h2 id="restoredPdiLeads" class="text-3xl font-black text-amber-600">0</h2></div>
-        <div class="nd-restored-admin-card"><p class="text-[10px] uppercase text-green-600 font-black">WhatsApp</p><h2 id="restoredWaLeads" class="text-3xl font-black text-green-600">0</h2></div>
-      </div>
-      <div class="bg-slate-50 border rounded-3xl p-4 mb-5 grid md:grid-cols-4 gap-3">
-        <input id="restoredLeadSearch" oninput="renderNdRestoredLeads()" class="nd-restored-admin-input md:col-span-2" placeholder="Search lead, phone, car, notes">
-        <select id="restoredLeadTypeFilter" onchange="renderNdRestoredLeads()" class="nd-restored-admin-input"><option value="">All Types</option><option>Buy</option><option>Sell</option><option>PDI</option><option>WhatsApp</option><option>Valuation</option></select>
-        <button onclick="loadNdRestoredLeads()" class="bg-slate-950 text-white rounded-2xl text-xs font-black uppercase">Refresh</button>
-      </div>
-      <div id="ndRestoredLeadList" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
-    </div>
-  </div>
-</div>
-
-<script>
-/* NODEALER RESTORED ADMIN CRM SCRIPT */
-const ND_RESTORED_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
-let ndRestoredLeads = [];
-function openNdRestoredAdminCrm(){document.getElementById("ndRestoredAdminCrmModal")?.classList.remove("hidden");loadNdRestoredLeads();}
-function closeNdRestoredAdminCrm(){document.getElementById("ndRestoredAdminCrmModal")?.classList.add("hidden");}
-function parseNdRestoredCsv(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows;}
-function pickNdRestored(o,names){for(const n of names){if(o[n]!==undefined&&String(o[n]).trim())return String(o[n]).trim();}return "";}
-function ndRestoredType(o){const txt=JSON.stringify(o).toLowerCase();if(txt.includes("pdi"))return"PDI";if(txt.includes("sell"))return"Sell";if(txt.includes("whatsapp"))return"WhatsApp";if(txt.includes("valuation")||txt.includes("value estimate"))return"Valuation";return"Buy";}
-function ndRestoredClass(t){if(t==="PDI")return"nd-restored-pdi";if(t==="Sell")return"nd-restored-sell";if(t==="WhatsApp")return"nd-restored-wa";if(t==="Buy")return"nd-restored-buy";return"nd-restored-other";}
-async function loadNdRestoredLeads(){const list=document.getElementById("ndRestoredLeadList");if(list)list.innerHTML='<div class="text-slate-500 font-bold">Loading leads...</div>';try{const res=await fetch(ND_RESTORED_CSV_URL+"&cache="+Date.now());const text=await res.text();const rows=parseNdRestoredCsv(text).filter(r=>r.some(c=>String(c||"").trim()));const headers=(rows.shift()||[]).map(h=>String(h||"").trim());ndRestoredLeads=rows.map(r=>{const o={};headers.forEach((h,i)=>o[h]=r[i]||"");return o;}).reverse();}catch(e){console.error(e);ndRestoredLeads=[];}renderNdRestoredLeads();}
-function renderNdRestoredLeads(){const search=(document.getElementById("restoredLeadSearch")?.value||"").toLowerCase();const filter=document.getElementById("restoredLeadTypeFilter")?.value||"";let rows=ndRestoredLeads.filter(o=>JSON.stringify(o).toLowerCase().includes(search));if(filter)rows=rows.filter(o=>ndRestoredType(o)===filter);const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};set("restoredTotalLeads",ndRestoredLeads.length);set("restoredBuyLeads",ndRestoredLeads.filter(o=>ndRestoredType(o)==="Buy").length);set("restoredSellLeads",ndRestoredLeads.filter(o=>ndRestoredType(o)==="Sell").length);set("restoredPdiLeads",ndRestoredLeads.filter(o=>ndRestoredType(o)==="PDI").length);set("restoredWaLeads",ndRestoredLeads.filter(o=>ndRestoredType(o)==="WhatsApp").length);const list=document.getElementById("ndRestoredLeadList");if(!list)return;if(!rows.length){list.innerHTML='<div class="nd-restored-admin-card text-slate-500 font-bold">No leads found.</div>';return;}list.innerHTML=rows.slice(0,120).map(o=>{const type=ndRestoredType(o);const name=pickNdRestored(o,["name","Name","Customer Name"])||"Customer";const phone=pickNdRestored(o,["phone","Phone","mobile","Mobile"]).replace(/[^0-9]/g,"");const car=pickNdRestored(o,["car","Car","Vehicle","vehicle","model","Model","Interested Car"])||"Not specified";const status=pickNdRestored(o,["status","Status"])||"New Lead";const notes=pickNdRestored(o,["notes","Notes"])||JSON.stringify(o).slice(0,220);const callPhone=phone?(phone.startsWith("91")?phone:"91"+phone):"";return `<div class="nd-restored-admin-card"><div class="flex justify-between gap-3"><h3 class="font-black uppercase text-slate-950">${name}</h3><span class="nd-restored-pill ${ndRestoredClass(type)}">${type}</span></div><p class="text-xs text-slate-500 font-bold mt-2">${phone||"No phone"}</p><p class="text-sm font-black text-slate-800 mt-2">${car}</p><p class="text-xs text-slate-500 font-semibold mt-2">${notes}</p><span class="nd-restored-pill nd-restored-other mt-3">${status}</span><div class="grid grid-cols-2 gap-2 mt-4"><a href="tel:+${callPhone}" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a><a href="https://wa.me/${callPhone}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a></div></div>`}).join("");}
-function injectNdRestoredCrmButton(){const existing=document.getElementById("ndRestoredAdminCrmBtn");if(existing)return;const btn=document.createElement("button");btn.id="ndRestoredAdminCrmBtn";btn.onclick=openNdRestoredAdminCrm;btn.className="fixed bottom-5 right-5 z-[10001] bg-purple-600 hover:bg-purple-700 text-white px-5 py-4 rounded-2xl shadow-2xl text-xs font-black uppercase flex items-center gap-2";btn.style.display="flex";btn.innerHTML='<i class="fa-solid fa-address-book"></i> CRM Leads';document.body.appendChild(btn);}
-document.addEventListener("DOMContentLoaded",function(){setTimeout(injectNdRestoredCrmButton,500);setInterval(injectNdRestoredCrmButton,1200);});
 </script>
 
 </body>. It hardens admin visibility,
