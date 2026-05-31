@@ -417,43 +417,26 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
 }
 
 
-/* =========================================================
-   NODEALER ADMIN PRO LEADS + PHOTO GALLERY
-   Big lead section inside admin, photos open in same page
-========================================================= */
-.nd-pro-leads-panel{
-  background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:28px;
-  padding:22px;margin:28px auto;max-width:1180px;color:#fff;box-shadow:0 24px 80px rgba(0,0,0,.28)
-}
-.nd-pro-leads-header{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px}
-.nd-pro-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.12);color:white;border-radius:14px;padding:12px;font-size:13px;font-weight:800;outline:none}
-.nd-pro-input:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.18)}
-.nd-pro-lead-card{background:#020617;border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:18px;display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-bottom:14px}
-.nd-pro-lead-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-.nd-pro-info-box{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px}
-.nd-pro-info-box p{font-size:9px;text-transform:uppercase;color:#94a3b8;font-weight:900;margin-bottom:3px}
-.nd-pro-info-box h4{font-size:13px;color:#fff;font-weight:900;word-break:break-word}
-.nd-pro-pill{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-pro-buy{background:#1d4ed8;color:white}.nd-pro-sell{background:#dc2626;color:white}.nd-pro-pdi{background:#f59e0b;color:#111827}.nd-pro-wa{background:#16a34a;color:white}.nd-pro-other{background:#334155;color:white}
-.nd-pro-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.nd-pro-photo-tile{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:7px}
-.nd-pro-photo-tile img{width:100%;height:112px;object-fit:cover;border-radius:12px;background:#1e293b;cursor:pointer}
-.nd-pro-photo-tile button{width:100%;margin-top:7px;background:#2563eb;color:white;border-radius:10px;padding:8px;font-size:9px;font-weight:900;text-transform:uppercase}
-.nd-pro-empty-photo{background:#0f172a;border:1px dashed rgba(255,255,255,.18);border-radius:18px;padding:20px;text-align:center;color:#94a3b8;font-size:12px;font-weight:800}
-.nd-pro-action-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
-.nd-pro-action-grid a,.nd-pro-action-grid button{border-radius:12px;padding:10px;text-align:center;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-pro-photo-modal{position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:18px}
-.nd-pro-photo-modal.active{display:flex}
-.nd-pro-photo-modal-box{width:min(1200px,100%);background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:28px;overflow:hidden;box-shadow:0 35px 120px rgba(0,0,0,.55)}
-.nd-pro-photo-modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 20px;color:white;background:#0f172a}
-.nd-pro-photo-modal-body{padding:16px;background:#020617}
-.nd-pro-photo-modal-body img{width:100%;max-height:78vh;object-fit:contain;border-radius:18px;background:#111827}
-.nd-pro-photo-modal-actions{padding:14px 18px;background:#0f172a;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-@media(max-width:900px){
-  .nd-pro-lead-card{grid-template-columns:1fr}
-  .nd-pro-lead-info{grid-template-columns:1fr}
-  .nd-pro-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
+/* NODEALER FINAL ORGANISED LEADS PHOTOS PANEL */
+.nd-final-admin-launcher{position:fixed;left:18px;bottom:112px;z-index:999990;background:#2563eb;color:white;border-radius:16px;padding:13px 16px;font-size:11px;font-weight:900;text-transform:uppercase;box-shadow:0 18px 50px rgba(37,99,235,.35);display:flex;align-items:center;gap:8px}
+.nd-final-admin-overlay{position:fixed;inset:0;z-index:999991;background:rgba(2,6,23,.92);backdrop-filter:blur(12px);display:none;overflow-y:auto;padding:18px}
+.nd-final-admin-overlay.active{display:block}
+.nd-final-admin-shell{max-width:1380px;margin:0 auto;background:#0f172a;border:1px solid rgba(255,255,255,.10);border-radius:32px;overflow:hidden;box-shadow:0 40px 140px rgba(0,0,0,.55);color:white}
+.nd-final-admin-head{background:#020617;padding:22px;display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+.nd-final-admin-body{padding:22px}
+.nd-final-stat{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:18px}.nd-final-stat p{font-size:10px;text-transform:uppercase;color:#94a3b8;font-weight:900}.nd-final-stat h3{font-size:30px;font-weight:900;margin-top:4px}
+.nd-final-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.12);color:white;border-radius:14px;padding:12px 13px;font-size:13px;font-weight:800;outline:none}
+.nd-final-lead-row{background:#020617;border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:18px;display:grid;grid-template-columns:1.35fr .85fr;gap:18px;margin-bottom:14px}
+.nd-final-info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.nd-final-info{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px}.nd-final-info p{font-size:9px;text-transform:uppercase;color:#94a3b8;font-weight:900;margin-bottom:3px}.nd-final-info h4{font-size:13px;color:white;font-weight:900;word-break:break-word}
+.nd-final-notes{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin-top:10px;font-size:12px;color:#cbd5e1;font-weight:700;line-height:1.45;word-break:break-word}
+.nd-final-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-final-buy{background:#1d4ed8;color:white}.nd-final-sell{background:#dc2626;color:white}.nd-final-pdi{background:#f59e0b;color:#111827}.nd-final-wa{background:#16a34a;color:white}.nd-final-value{background:#7c3aed;color:white}.nd-final-other{background:#334155;color:white}
+.nd-final-photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.nd-final-photo-card{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:7px}.nd-final-photo-card img{width:100%;height:120px;object-fit:cover;border-radius:12px;background:#1e293b;cursor:pointer}.nd-final-photo-card button{width:100%;margin-top:7px;background:#2563eb;color:white;border-radius:10px;padding:8px;font-size:9px;font-weight:900;text-transform:uppercase}
+.nd-final-empty{background:#111827;border:1px dashed rgba(255,255,255,.18);border-radius:18px;padding:22px;text-align:center;color:#94a3b8;font-size:12px;font-weight:800}
+.nd-final-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}.nd-final-actions a,.nd-final-actions button{border-radius:12px;padding:10px;text-align:center;font-size:10px;font-weight:900;text-transform:uppercase}
+.nd-final-photo-modal{position:fixed;inset:0;z-index:1000000;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;padding:18px}.nd-final-photo-modal.active{display:flex}.nd-final-photo-box{width:min(1250px,100%);background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:28px;overflow:hidden}.nd-final-photo-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#111827;color:white}.nd-final-photo-body{padding:16px;background:#020617}.nd-final-photo-body img{width:100%;max-height:78vh;object-fit:contain;border-radius:18px;background:#111827}.nd-final-photo-foot{padding:14px;background:#111827;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+@media(max-width:900px){.nd-final-admin-overlay{padding:8px}.nd-final-lead-row{grid-template-columns:1fr}.nd-final-info-grid{grid-template-columns:1fr}.nd-final-photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nd-final-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 </style>
 
@@ -5241,224 +5224,49 @@ document.addEventListener("click", function() {
 </script>
 
 
-<!-- NODEALER ADMIN PRO LEADS + PHOTO GALLERY SECTION -->
-<section id="ndProLeadsPanel" class="nd-pro-leads-panel">
-  <div class="nd-pro-leads-header">
-    <div>
-      <p class="text-[10px] uppercase text-amber-400 font-black">NoDealer Control Center</p>
-      <h2 class="text-2xl md:text-3xl font-black uppercase">Lead Details & Photos</h2>
-      <p class="text-xs text-slate-400 font-bold mt-1">Clear large view of customer enquiries, car details and uploaded photos inside admin only.</p>
+<!-- NODEALER FINAL ORGANISED LEADS PHOTOS PANEL -->
+<button id="ndFinalAdminLeadsLauncher" class="nd-final-admin-launcher" onclick="ndFinalOpenAdminLeads()"><i class="fa-solid fa-address-card"></i> Leads & Photos</button>
+<div id="ndFinalAdminLeadsOverlay" class="nd-final-admin-overlay">
+  <div class="nd-final-admin-shell">
+    <div class="nd-final-admin-head">
+      <div><p class="text-[10px] uppercase text-blue-400 font-black">NoDealer Admin Workspace</p><h2 class="text-2xl md:text-4xl font-black uppercase">Leads & Photo Gallery</h2><p class="text-xs text-slate-400 font-bold mt-1">Full customer details, uploaded assets, call/WhatsApp, and Excel download in one clean panel.</p></div>
+      <div class="flex gap-2 flex-wrap"><button onclick="ndFinalLoadAdminLeads()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Refresh</button><button onclick="ndFinalDownloadCsv()" class="bg-green-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Download Excel</button><button onclick="ndFinalCloseAdminLeads()" class="bg-white/10 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">Close</button></div>
     </div>
-    <button onclick="ndProLoadLeads()" class="bg-blue-600 hover:bg-blue-700 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase">
-      <i class="fa-solid fa-rotate"></i> Refresh Leads
-    </button>
-  </div>
-  <div class="grid md:grid-cols-4 gap-3 mb-5">
-    <input id="ndProLeadSearch" oninput="ndProRenderLeads()" class="nd-pro-input md:col-span-2" placeholder="Search name, phone, car, reg no, notes">
-    <select id="ndProLeadType" onchange="ndProRenderLeads()" class="nd-pro-input">
-      <option value="">All Lead Types</option>
-      <option>Buy</option>
-      <option>Sell</option>
-      <option>PDI</option>
-      <option>WhatsApp</option>
-      <option>Valuation</option>
-    </select>
-    <select id="ndProLeadPhotoFilter" onchange="ndProRenderLeads()" class="nd-pro-input">
-      <option value="">All Leads</option>
-      <option value="photos">Only With Photos</option>
-    </select>
-  </div>
-  <div id="ndProLeadsList"></div>
-</section>
-
-<!-- NODEALER PRO PHOTO MODAL -->
-<div id="ndProPhotoModal" class="nd-pro-photo-modal">
-  <div class="nd-pro-photo-modal-box">
-    <div class="nd-pro-photo-modal-head">
-      <div>
-        <p class="text-[10px] uppercase text-slate-400 font-black">Inquiry Photo Preview</p>
-        <h3 id="ndProPhotoTitle" class="text-xl font-black uppercase">Uploaded Photo</h3>
-      </div>
-      <button onclick="ndProClosePhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
-    </div>
-    <div class="nd-pro-photo-modal-body">
-      <img id="ndProPhotoImg" src="">
-    </div>
-    <div class="nd-pro-photo-modal-actions">
-      <a id="ndProPhotoOriginal" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original Backup</a>
-      <button onclick="ndProClosePhoto()" class="bg-blue-600 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button>
+    <div class="nd-final-admin-body">
+      <div class="grid md:grid-cols-5 gap-4 mb-5"><div class="nd-final-stat"><p>Total Leads</p><h3 id="ndFinalStatTotal">0</h3></div><div class="nd-final-stat"><p>Buy Leads</p><h3 id="ndFinalStatBuy">0</h3></div><div class="nd-final-stat"><p>Sell Leads</p><h3 id="ndFinalStatSell">0</h3></div><div class="nd-final-stat"><p>PDI Leads</p><h3 id="ndFinalStatPdi">0</h3></div><div class="nd-final-stat"><p>With Photos</p><h3 id="ndFinalStatPhotos">0</h3></div></div>
+      <div class="grid md:grid-cols-5 gap-3 mb-5"><input id="ndFinalLeadSearch" oninput="ndFinalRenderAdminLeads()" class="nd-final-input md:col-span-2" placeholder="Search name, phone, car, reg no, city, notes"><select id="ndFinalLeadTypeFilter" onchange="ndFinalRenderAdminLeads()" class="nd-final-input"><option value="">All Types</option><option>Buy</option><option>Sell</option><option>PDI</option><option>WhatsApp</option><option>Valuation</option></select><select id="ndFinalPhotoFilter" onchange="ndFinalRenderAdminLeads()" class="nd-final-input"><option value="">All Leads</option><option value="photos">Only With Photos</option></select><select id="ndFinalSortFilter" onchange="ndFinalRenderAdminLeads()" class="nd-final-input"><option value="newest">Newest First</option><option value="oldest">Oldest First</option></select></div>
+      <div id="ndFinalAdminLeadsList"></div>
     </div>
   </div>
 </div>
+<div id="ndFinalPhotoModal" class="nd-final-photo-modal"><div class="nd-final-photo-box"><div class="nd-final-photo-head"><div><p class="text-[10px] uppercase text-slate-400 font-black">Uploaded Asset Preview</p><h3 id="ndFinalPhotoTitle" class="text-xl font-black uppercase">Lead Photo</h3></div><button onclick="ndFinalClosePhoto()" class="w-11 h-11 rounded-full bg-white/10 text-white text-2xl font-black">×</button></div><div class="nd-final-photo-body"><img id="ndFinalPhotoImg" src=""></div><div class="nd-final-photo-foot"><a id="ndFinalPhotoOriginal" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase">Open Original Backup</a><button onclick="ndFinalClosePhoto()" class="bg-blue-600 text-white rounded-xl px-5 py-3 text-xs font-black uppercase">Back To Admin</button></div></div></div>
 
 
 <script>
-/* =========================================================
-   NODEALER ADMIN PRO LEADS + PHOTO GALLERY SCRIPT
-========================================================= */
-const ND_PRO_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";
-let ndProLeads = [];
-
-function ndProParseCsv(text){
-  const rows=[];let row=[],cell="",q=false;
-  for(let i=0;i<text.length;i++){
-    const c=text[i],n=text[i+1];
-    if(c=='"'&&q&&n=='"'){cell+='"';i++;}
-    else if(c=='"'){q=!q;}
-    else if(c==","&&!q){row.push(cell);cell="";}
-    else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";} if(c=="\r"&&n=="\n")i++;}
-    else cell+=c;
-  }
-  if(cell||row.length){row.push(cell);rows.push(row);}
-  return rows;
-}
-function ndProPick(o,names){
-  for(const n of names){ if(o && o[n]!==undefined && String(o[n]).trim()) return String(o[n]).trim(); }
-  return "";
-}
-function ndProType(o){
-  const txt=JSON.stringify(o||{}).toLowerCase();
-  if(txt.includes("pdi")) return "PDI";
-  if(txt.includes("sell")) return "Sell";
-  if(txt.includes("whatsapp")) return "WhatsApp";
-  if(txt.includes("valuation") || txt.includes("value estimate")) return "Valuation";
-  return "Buy";
-}
-function ndProClass(t){
-  if(t==="PDI")return"nd-pro-pdi";
-  if(t==="Sell")return"nd-pro-sell";
-  if(t==="WhatsApp")return"nd-pro-wa";
-  if(t==="Buy")return"nd-pro-buy";
-  return"nd-pro-other";
-}
-function ndProIsPhotoUrl(url){
-  url=String(url||"").toLowerCase();
-  return url.includes("drive.google.com") || url.includes("googleusercontent.com") || url.includes("uc?id=") || /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(url);
-}
-function ndProNormalizePhoto(url){
-  url=String(url||"").trim();
-  const driveMatch=url.match(/\/file\/d\/([^/]+)/)||url.match(/[?&]id=([^&]+)/);
-  if(driveMatch && driveMatch[1]) return "https://drive.google.com/thumbnail?id="+driveMatch[1]+"&sz=w1600";
-  return url;
-}
-function ndProPhotoLinks(o){
-  const text=JSON.stringify(o||{});
-  const links=[];
-  const regex=/(https?:\/\/[^\s"',<>]+)/g;
-  let m;
-  while((m=regex.exec(text))!==null){
-    let u=m[1].replace(/[)\].,;]+$/g,"");
-    if(ndProIsPhotoUrl(u) && !links.includes(u)) links.push(u);
-  }
-  return links;
-}
-async function ndProLoadLeads(){
-  const list=document.getElementById("ndProLeadsList");
-  if(list) list.innerHTML='<div class="nd-pro-empty-photo">Loading leads...</div>';
-  try{
-    const res=await fetch(ND_PRO_CSV_URL+"&cache="+Date.now());
-    const text=await res.text();
-    const rows=ndProParseCsv(text).filter(r=>r.some(c=>String(c||"").trim()));
-    const headers=(rows.shift()||[]).map(h=>String(h||"").trim());
-    ndProLeads=rows.map(r=>{const o={};headers.forEach((h,i)=>o[h]=r[i]||"");return o;}).reverse();
-  }catch(e){
-    console.error(e);ndProLeads=[];
-  }
-  ndProRenderLeads();
-}
-function ndProRenderLeads(){
-  const search=(document.getElementById("ndProLeadSearch")?.value||"").toLowerCase();
-  const typeFilter=document.getElementById("ndProLeadType")?.value||"";
-  const photoFilter=document.getElementById("ndProLeadPhotoFilter")?.value||"";
-  let rows=ndProLeads.filter(o=>JSON.stringify(o).toLowerCase().includes(search));
-  if(typeFilter) rows=rows.filter(o=>ndProType(o)===typeFilter);
-  if(photoFilter==="photos") rows=rows.filter(o=>ndProPhotoLinks(o).length>0);
-
-  const list=document.getElementById("ndProLeadsList");
-  if(!list)return;
-  if(!rows.length){list.innerHTML='<div class="nd-pro-empty-photo">No matching leads found. Click Refresh Leads.</div>';return;}
-
-  list.innerHTML=rows.slice(0,80).map((o,idx)=>{
-    const type=ndProType(o);
-    const name=ndProPick(o,["name","Name","Customer Name"])||"Customer";
-    const phone=ndProPick(o,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,"");
-    const car=ndProPick(o,["car","Car","Vehicle","vehicle","model","Model","Interested Car"])||"Not specified";
-    const status=ndProPick(o,["status","Status"])||"New Lead";
-    const source=ndProPick(o,["source","Source"])||type+" Lead";
-    const date=ndProPick(o,["date","Date","timestamp","Timestamp"]);
-    const reg=ndProPick(o,["regNo","Reg No","Registration","registration"]);
-    const city=ndProPick(o,["city","City","location","Location"]);
-    const notes=ndProPick(o,["notes","Notes"])||JSON.stringify(o).slice(0,700);
-    const photos=ndProPhotoLinks(o);
-    const callPhone=phone?(phone.startsWith("91")?phone:"91"+phone):"";
-    return `<div class="nd-pro-lead-card">
-      <div>
-        <div class="flex items-center justify-between gap-3 flex-wrap">
-          <h3 class="text-xl font-black uppercase">${name}</h3>
-          <span class="nd-pro-pill ${ndProClass(type)}">${type}</span>
-        </div>
-        <div class="nd-pro-lead-info">
-          <div class="nd-pro-info-box"><p>Phone</p><h4>${phone||"No phone"}</h4></div>
-          <div class="nd-pro-info-box"><p>Car / Requirement</p><h4>${car}</h4></div>
-          <div class="nd-pro-info-box"><p>Status</p><h4>${status}</h4></div>
-          <div class="nd-pro-info-box"><p>Source</p><h4>${source}</h4></div>
-          ${reg?`<div class="nd-pro-info-box"><p>Reg No</p><h4>${reg}</h4></div>`:""}
-          ${city?`<div class="nd-pro-info-box"><p>City / Location</p><h4>${city}</h4></div>`:""}
-          ${date?`<div class="nd-pro-info-box"><p>Date</p><h4>${date}</h4></div>`:""}
-        </div>
-        <div class="nd-pro-info-box mt-3"><p>Full Notes</p><h4>${notes}</h4></div>
-        <div class="nd-pro-action-grid">
-          <a href="tel:+${callPhone}" class="bg-blue-600 text-white">Call</a>
-          <a href="https://wa.me/${callPhone}" target="_blank" class="bg-green-600 text-white">WhatsApp</a>
-          <button onclick="ndProCopyLead(${idx})" class="bg-slate-700 text-white">Copy Details</button>
-        </div>
-      </div>
-      <div>
-        <div class="flex items-center justify-between mb-3">
-          <h4 class="font-black uppercase">Photos</h4>
-          <span class="nd-pro-pill nd-pro-other">${photos.length} Photos</span>
-        </div>
-        ${photos.length?`<div class="nd-pro-photo-grid">${photos.slice(0,12).map((u,i)=>{
-          const img=ndProNormalizePhoto(u);
-          return `<div class="nd-pro-photo-tile">
-            <img src="${img}" onclick="ndProOpenPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','${name.replace(/'/g,"")} Photo ${i+1}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-            <button style="display:none" onclick="ndProOpenPhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}','${name.replace(/'/g,"")} Photo ${i+1}')">View Photo</button>
-          </div>`;
-        }).join("")}</div>`:`<div class="nd-pro-empty-photo">No photo uploaded for this lead.</div>`}
-      </div>
-    </div>`;
-  }).join("");
-}
-function ndProOpenPhoto(img, original, title){
-  const modal=document.getElementById("ndProPhotoModal");
-  document.getElementById("ndProPhotoImg").src=img;
-  document.getElementById("ndProPhotoOriginal").href=original||img;
-  document.getElementById("ndProPhotoTitle").textContent=title||"Uploaded Photo";
-  modal.classList.add("active");
-}
-function ndProClosePhoto(){document.getElementById("ndProPhotoModal")?.classList.remove("active");}
-function ndProCopyLead(idx){
-  const o=ndProLeads[idx]||{};
-  navigator.clipboard?.writeText(JSON.stringify(o,null,2));
-  alert("Lead details copied.");
-}
-
-/* Block photo links opening new blank tabs anywhere in admin */
-document.addEventListener("click",function(e){
-  const a=e.target.closest && e.target.closest("a[href]");
-  if(!a)return;
-  const href=a.getAttribute("href")||"";
-  if(ndProIsPhotoUrl(href)){
-    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-    ndProOpenPhoto(ndProNormalizePhoto(href),href,"Inquiry Photo");
-    return false;
-  }
-},true);
-
-document.addEventListener("keydown",function(e){if(e.key==="Escape")ndProClosePhoto();});
-document.addEventListener("DOMContentLoaded",function(){
-  setTimeout(ndProLoadLeads,1200);
-});
+/* NODEALER FINAL ORGANISED LEADS PHOTOS PANEL SCRIPT */
+(function(){
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_s1g-yXRQIiblZvga8BmpVXbkPi6B5y5LQk6i6PR-hlUEz0N7-L3yi8nk8CzHml5LYHU876BVTMBZ/pub?output=csv";let leads=[];
+function parseCsv(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c=='"'&&q&&n=='"'){cell+='"';i++;}else if(c=='"'){q=!q;}else if(c==","&&!q){row.push(cell);cell="";}else if((c=="\n"||c=="\r")&&!q){if(cell||row.length){row.push(cell);rows.push(row);row=[];cell="";}if(c=="\r"&&n=="\n")i++;}else cell+=c;}if(cell||row.length){row.push(cell);rows.push(row);}return rows;}
+function pick(o,names){for(const n of names){if(o&&o[n]!==undefined&&String(o[n]).trim())return String(o[n]).trim();}return""}
+function typeOf(o){const txt=JSON.stringify(o||{}).toLowerCase();if(txt.includes("pdi"))return"PDI";if(txt.includes("sell"))return"Sell";if(txt.includes("whatsapp"))return"WhatsApp";if(txt.includes("valuation")||txt.includes("value estimate"))return"Valuation";return"Buy"}
+function cls(t){if(t==="PDI")return"nd-final-pdi";if(t==="Sell")return"nd-final-sell";if(t==="WhatsApp")return"nd-final-wa";if(t==="Valuation")return"nd-final-value";if(t==="Buy")return"nd-final-buy";return"nd-final-other"}
+function isPhotoUrl(url){url=String(url||"").toLowerCase();return url.includes("drive.google.com")||url.includes("googleusercontent.com")||url.includes("uc?id=")||/\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(url)}
+function normalizePhoto(url){url=String(url||"").trim();const m=url.match(/\/file\/d\/([^/]+)/)||url.match(/[?&]id=([^&]+)/);if(m&&m[1])return"https://drive.google.com/thumbnail?id="+m[1]+"&sz=w1800";return url}
+function photoLinks(o){const text=JSON.stringify(o||{}),links=[],regex=/(https?:\/\/[^\s"',<>]+)/g;let m;while((m=regex.exec(text))!==null){let u=m[1].replace(/[)\].,;]+$/g,"");if(isPhotoUrl(u)&&!links.includes(u))links.push(u)}return links}
+window.ndFinalOpenAdminLeads=function(){document.getElementById("ndFinalAdminLeadsOverlay")?.classList.add("active");ndFinalLoadAdminLeads()}
+window.ndFinalCloseAdminLeads=function(){document.getElementById("ndFinalAdminLeadsOverlay")?.classList.remove("active")}
+window.ndFinalLoadAdminLeads=async function(){const list=document.getElementById("ndFinalAdminLeadsList");if(list)list.innerHTML='<div class="nd-final-empty">Loading CRM leads...</div>';try{const res=await fetch(CSV_URL+"&cache="+Date.now());const text=await res.text();const rows=parseCsv(text).filter(r=>r.some(c=>String(c||"").trim()));const headers=(rows.shift()||[]).map(h=>String(h||"").trim());leads=rows.map((r,idx)=>{const o={_idx:idx};headers.forEach((h,i)=>o[h]=r[i]||"");return o}).reverse()}catch(e){console.error(e);leads=[]}ndFinalRenderAdminLeads()}
+window.ndFinalRenderAdminLeads=function(){const search=(document.getElementById("ndFinalLeadSearch")?.value||"").toLowerCase(),typeFilter=document.getElementById("ndFinalLeadTypeFilter")?.value||"",photoFilter=document.getElementById("ndFinalPhotoFilter")?.value||"",sort=document.getElementById("ndFinalSortFilter")?.value||"newest";let rows=leads.filter(o=>JSON.stringify(o).toLowerCase().includes(search));if(typeFilter)rows=rows.filter(o=>typeOf(o)===typeFilter);if(photoFilter==="photos")rows=rows.filter(o=>photoLinks(o).length>0);if(sort==="oldest")rows=[...rows].reverse();const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};set("ndFinalStatTotal",leads.length);set("ndFinalStatBuy",leads.filter(o=>typeOf(o)==="Buy").length);set("ndFinalStatSell",leads.filter(o=>typeOf(o)==="Sell").length);set("ndFinalStatPdi",leads.filter(o=>typeOf(o)==="PDI").length);set("ndFinalStatPhotos",leads.filter(o=>photoLinks(o).length>0).length);const list=document.getElementById("ndFinalAdminLeadsList");if(!list)return;if(!rows.length){list.innerHTML='<div class="nd-final-empty">No matching leads found.</div>';return}list.innerHTML=rows.slice(0,150).map((o,idx)=>{const t=typeOf(o),name=pick(o,["name","Name","Customer Name"])||"Customer",phone=pick(o,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,""),car=pick(o,["car","Car","Vehicle","vehicle","model","Model","Interested Car"])||"Not specified",status=pick(o,["status","Status"])||"New Lead",source=pick(o,["source","Source"])||t+" Lead",date=pick(o,["date","Date","timestamp","Timestamp"]),reg=pick(o,["regNo","Reg No","Registration","registration"]),city=pick(o,["city","City","location","Location"]),pkg=pick(o,["package","Package"]),useCase=pick(o,["useCase","Use Case"]),notes=pick(o,["notes","Notes"])||JSON.stringify(o).slice(0,900),photos=photoLinks(o),callPhone=phone?(phone.startsWith("91")?phone:"91"+phone):"";return `<div class="nd-final-lead-row"><div><div class="flex items-center justify-between gap-3 flex-wrap"><h3 class="text-xl font-black uppercase">${name}</h3><span class="nd-final-pill ${cls(t)}">${t}</span></div><div class="nd-final-info-grid"><div class="nd-final-info"><p>Phone</p><h4>${phone||"No phone"}</h4></div><div class="nd-final-info"><p>Car / Requirement</p><h4>${car}</h4></div><div class="nd-final-info"><p>Status</p><h4>${status}</h4></div><div class="nd-final-info"><p>Source</p><h4>${source}</h4></div>${reg?`<div class="nd-final-info"><p>Reg No</p><h4>${reg}</h4></div>`:""}${city?`<div class="nd-final-info"><p>City / Location</p><h4>${city}</h4></div>`:""}${pkg?`<div class="nd-final-info"><p>Package</p><h4>${pkg}</h4></div>`:""}${useCase?`<div class="nd-final-info"><p>Use Case</p><h4>${useCase}</h4></div>`:""}${date?`<div class="nd-final-info"><p>Date</p><h4>${date}</h4></div>`:""}</div><div class="nd-final-notes"><b>Full Notes:</b><br>${notes}</div><div class="nd-final-actions"><a href="tel:+${callPhone}" class="bg-blue-600 text-white">Call</a><a href="https://wa.me/${callPhone}" target="_blank" class="bg-green-600 text-white">WhatsApp</a><button onclick="ndFinalCopyLead(${idx})" class="bg-slate-700 text-white">Copy</button><button onclick="ndFinalDownloadSingleLead(${idx})" class="bg-amber-500 text-slate-950">Export</button></div></div><div><div class="flex items-center justify-between mb-3"><h4 class="font-black uppercase">Uploaded Photos</h4><span class="nd-final-pill nd-final-other">${photos.length} Photos</span></div>${photos.length?`<div class="nd-final-photo-grid">${photos.slice(0,12).map((u,i)=>{const img=normalizePhoto(u);return `<div class="nd-final-photo-card"><img src="${img}" onclick="ndFinalOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><button style="display:none" onclick="ndFinalOpenPhoto('${encodeURIComponent(img)}','${encodeURIComponent(u)}','${encodeURIComponent(name+" Photo "+(i+1))}')">View Photo</button></div>`}).join("")}</div>`:`<div class="nd-final-empty">No photo uploaded for this lead.</div>`}</div></div>`}).join("")}
+window.ndFinalOpenPhoto=function(img,original,title){img=decodeURIComponent(img||"");original=decodeURIComponent(original||img);title=decodeURIComponent(title||"Lead Photo");document.getElementById("ndFinalPhotoImg").src=img;document.getElementById("ndFinalPhotoOriginal").href=original||img;document.getElementById("ndFinalPhotoTitle").textContent=title;document.getElementById("ndFinalPhotoModal")?.classList.add("active")}
+window.ndFinalClosePhoto=function(){document.getElementById("ndFinalPhotoModal")?.classList.remove("active")}
+window.ndFinalCopyLead=function(idx){const o=leads[idx]||{};navigator.clipboard?.writeText(JSON.stringify(o,null,2));alert("Lead details copied.")}
+function csvEscape(v){return '"'+String(v??"").replace(/"/g,'""')+'"'}function downloadCsv(rows,filename){if(!rows.length)return;const headers=Array.from(new Set(rows.flatMap(o=>Object.keys(o))));const csv=[headers.join(","),...rows.map(o=>headers.map(h=>csvEscape(o[h])).join(","))].join("\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+window.ndFinalDownloadSingleLead=function(idx){downloadCsv([leads[idx]||{}],"nodealer-lead.csv")}
+window.ndFinalDownloadCsv=function(){let rows=leads;downloadCsv(rows,"nodealer-crm-leads.csv")}
+document.addEventListener("click",function(e){const a=e.target.closest&&e.target.closest("a[href]"),img=e.target&&e.target.tagName==="IMG"?e.target:null;if(a){const href=a.getAttribute("href")||"";if(isPhotoUrl(href)||href==="about:blank"){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndFinalOpenPhoto(encodeURIComponent(normalizePhoto(href)),encodeURIComponent(href),encodeURIComponent("Lead Photo"));return false}}if(img){const src=img.getAttribute("src")||"";if(isPhotoUrl(src)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();ndFinalOpenPhoto(encodeURIComponent(normalizePhoto(src)),encodeURIComponent(src),encodeURIComponent("Lead Photo"));return false}}},true)
+const oldOpen=window.open;window.open=function(url,name,features){if(isPhotoUrl(url)){ndFinalOpenPhoto(encodeURIComponent(normalizePhoto(url)),encodeURIComponent(url),encodeURIComponent("Lead Photo"));return null}return oldOpen.call(window,url,name,features)}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){ndFinalClosePhoto();ndFinalCloseAdminLeads()}})
+})();
 </script>
 
 </body>. It hardens admin visibility,
