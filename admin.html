@@ -416,6 +416,13 @@ button[onclick="openAdvancedAnalytics()"]:not(#adminOnlyAnalyticsBtn) {
     box-shadow: 0 0 0 3px rgba(22,163,74,.12);
 }
 
+
+/* NODEALER ADMIN PHOTO VIEWER FIX */
+.nd-photo-viewer-btn{background:#2563eb;color:white;border-radius:12px;padding:9px 11px;font-size:10px;font-weight:900;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px}
+.nd-photo-thumb{width:100%;height:120px;object-fit:cover;border-radius:16px;border:1px solid #e2e8f0;background:#f1f5f9;cursor:pointer}
+.nd-photo-detail-card{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 35px rgba(15,23,42,.08)}
+.nd-photo-detail-input{width:100%;padding:11px 12px;border:1px solid #e2e8f0;border-radius:14px;font-size:13px;font-weight:700;outline:none}
+
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -5199,6 +5206,190 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("click", function() {
     setTimeout(injectNdAdminCrmToolsButtonFinal, 200);
 }, true);
+</script>
+
+
+<!-- NODEALER ADMIN INQUIRY PHOTO VIEWER -->
+<div id="ndInquiryDetailModal" class="hidden fixed inset-0 z-[100090] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="max-w-6xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
+    <div class="bg-slate-950 text-white p-5 flex items-center justify-between gap-4">
+      <div>
+        <p class="text-[10px] uppercase text-slate-400 font-black">NoDealer Admin</p>
+        <h2 id="ndInquiryTitle" class="text-2xl md:text-3xl font-black uppercase">Inquiry Details</h2>
+        <p id="ndInquirySub" class="text-sm text-slate-400 mt-1">Customer inquiry with photos and details</p>
+      </div>
+      <button onclick="closeNdInquiryDetail()" class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl font-black">×</button>
+    </div>
+    <div class="p-5 grid lg:grid-cols-12 gap-5">
+      <div class="lg:col-span-5">
+        <div class="nd-photo-detail-card">
+          <h3 class="font-black uppercase text-xl mb-3">Customer Details</h3>
+          <div id="ndInquiryInfo" class="space-y-2 text-sm font-semibold text-slate-700"></div>
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <a id="ndInquiryCall" href="#" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a>
+            <a id="ndInquiryWhatsapp" href="#" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="nd-photo-detail-card">
+          <div class="flex items-center justify-between gap-3 mb-3">
+            <h3 class="font-black uppercase text-xl">Uploaded Photos</h3>
+            <span id="ndPhotoCount" class="bg-blue-50 text-blue-700 rounded-full px-3 py-1 text-[10px] font-black uppercase">0 Photos</span>
+          </div>
+          <div id="ndInquiryPhotos" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+          <p id="ndNoPhotosMsg" class="hidden text-sm text-slate-500 font-bold bg-slate-50 border rounded-2xl p-4">No image links found in this inquiry.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="ndLargePhotoModal" class="hidden fixed inset-0 z-[100091] bg-black/95 p-4 flex items-center justify-center">
+  <button onclick="closeNdLargePhoto()" class="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
+  <div class="max-w-5xl w-full">
+    <img id="ndLargePhotoImg" src="" class="max-h-[82vh] w-full object-contain rounded-2xl bg-white/5">
+    <div class="text-center mt-4">
+      <a id="ndLargePhotoOpen" href="#" target="_blank" class="bg-white text-slate-950 rounded-xl px-5 py-3 text-xs font-black uppercase inline-flex items-center gap-2">
+        <i class="fa-solid fa-up-right-from-square"></i> Open Original
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* NODEALER ADMIN PHOTO VIEWER FIX SCRIPT */
+let ndAdminLeadCacheForPhotos = [];
+
+function ndPick(o,names){
+  for(const n of names){
+    if(o && o[n] !== undefined && String(o[n]).trim()) return String(o[n]).trim();
+  }
+  return "";
+}
+function ndNormalizeDriveImageUrl(url){
+  url = String(url || "").trim();
+  if(!url) return "";
+  // Google Drive share links -> direct thumbnail preview
+  const driveMatch = url.match(/\/file\/d\/([^/]+)/) || url.match(/[?&]id=([^&]+)/);
+  if(driveMatch && driveMatch[1]){
+    return "https://drive.google.com/thumbnail?id=" + driveMatch[1] + "&sz=w1000";
+  }
+  return url;
+}
+function ndExtractPhotoLinksFromLead(lead){
+  const text = JSON.stringify(lead || {});
+  const links = [];
+  const urlRegex = /(https?:\/\/[^\s"',<>]+)/g;
+  let m;
+  while((m = urlRegex.exec(text)) !== null){
+    let u = m[1].replace(/[)\].,;]+$/g,"");
+    const low = u.toLowerCase();
+    if(
+      low.match(/\.(jpg|jpeg|png|webp|gif)(\?|$)/) ||
+      low.includes("drive.google.com") ||
+      low.includes("googleusercontent.com") ||
+      low.includes("uc?id=")
+    ){
+      if(!links.includes(u)) links.push(u);
+    }
+  }
+  return links;
+}
+function openNdInquiryDetail(lead){
+  if(typeof lead === "number") lead = ndAdminLeadCacheForPhotos[lead] || {};
+  const name = ndPick(lead,["name","Name","Customer Name"]) || "Customer Inquiry";
+  const phone = ndPick(lead,["phone","Phone","Mobile","mobile"]).replace(/[^0-9]/g,"");
+  const car = ndPick(lead,["car","Car","Vehicle","vehicle","model","Model","Interested Car"]) || "Not specified";
+  const status = ndPick(lead,["status","Status"]) || "New Lead";
+  const notes = ndPick(lead,["notes","Notes"]) || JSON.stringify(lead).slice(0,700);
+  const reg = ndPick(lead,["regNo","Reg No","Registration","registration"]);
+  const source = ndPick(lead,["source","Source"]);
+  const date = ndPick(lead,["date","Date","timestamp","Timestamp"]);
+
+  document.getElementById("ndInquiryTitle").textContent = name;
+  document.getElementById("ndInquirySub").textContent = car + (phone ? " • " + phone : "");
+
+  document.getElementById("ndInquiryInfo").innerHTML = `
+    <div class="bg-slate-50 border rounded-2xl p-3"><b>Phone:</b> ${phone || "No phone"}</div>
+    <div class="bg-slate-50 border rounded-2xl p-3"><b>Car:</b> ${car}</div>
+    ${reg ? `<div class="bg-slate-50 border rounded-2xl p-3"><b>Reg No:</b> ${reg}</div>` : ""}
+    <div class="bg-slate-50 border rounded-2xl p-3"><b>Status:</b> ${status}</div>
+    ${source ? `<div class="bg-slate-50 border rounded-2xl p-3"><b>Source:</b> ${source}</div>` : ""}
+    ${date ? `<div class="bg-slate-50 border rounded-2xl p-3"><b>Date:</b> ${date}</div>` : ""}
+    <div class="bg-slate-50 border rounded-2xl p-3"><b>Notes:</b><br>${notes}</div>
+  `;
+
+  const callPhone = phone ? (phone.startsWith("91") ? phone : "91" + phone) : "";
+  document.getElementById("ndInquiryCall").href = callPhone ? "tel:+" + callPhone : "#";
+  document.getElementById("ndInquiryWhatsapp").href = callPhone ? "https://wa.me/" + callPhone : "#";
+
+  const photos = ndExtractPhotoLinksFromLead(lead);
+  document.getElementById("ndPhotoCount").textContent = photos.length + " Photos";
+  const grid = document.getElementById("ndInquiryPhotos");
+  const noMsg = document.getElementById("ndNoPhotosMsg");
+
+  if(!photos.length){
+    grid.innerHTML = "";
+    noMsg.classList.remove("hidden");
+  } else {
+    noMsg.classList.add("hidden");
+    grid.innerHTML = photos.map((u,i)=>{
+      const img = ndNormalizeDriveImageUrl(u);
+      return `<div class="bg-slate-50 border rounded-2xl p-2">
+        <img src="${img}" class="nd-photo-thumb" onclick="openNdLargePhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}')" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden');">
+        <button class="hidden w-full bg-slate-200 text-slate-700 rounded-xl py-4 text-xs font-black" onclick="openNdLargePhoto('${img.replace(/'/g,"%27")}','${u.replace(/'/g,"%27")}')">Open Photo Link</button>
+        <a href="${u}" target="_blank" class="block text-center bg-white border mt-2 rounded-xl py-2 text-[10px] font-black uppercase">Open Original</a>
+      </div>`;
+    }).join("");
+  }
+
+  document.getElementById("ndInquiryDetailModal").classList.remove("hidden");
+}
+function closeNdInquiryDetail(){document.getElementById("ndInquiryDetailModal")?.classList.add("hidden");}
+function openNdLargePhoto(img, original){
+  document.getElementById("ndLargePhotoImg").src = img;
+  document.getElementById("ndLargePhotoOpen").href = original || img;
+  document.getElementById("ndLargePhotoModal").classList.remove("hidden");
+}
+function closeNdLargePhoto(){document.getElementById("ndLargePhotoModal")?.classList.add("hidden");}
+
+/* Add View Details/Photos buttons automatically to lead cards/tables */
+function ndEnhanceAdminLeadPhotoButtons(){
+  // If existing lead cache variables exist, copy them
+  try{
+    if(Array.isArray(window.ndRestoredLeads)) ndAdminLeadCacheForPhotos = window.ndRestoredLeads;
+    if(Array.isArray(window.allLeads)) ndAdminLeadCacheForPhotos = window.allLeads;
+    if(Array.isArray(window.ndLeadStatusRows)) ndAdminLeadCacheForPhotos = window.ndLeadStatusRows;
+    if(Array.isArray(window.leads)) ndAdminLeadCacheForPhotos = window.leads;
+  }catch(e){}
+
+  const cards = Array.from(document.querySelectorAll(".nd-lead-card,.nd-restored-admin-card,.lead-card,.nd-follow-card,.nd-pdi-booking-card"));
+  cards.forEach((card,idx)=>{
+    if(card.dataset.ndPhotoEnhanced === "true") return;
+    const cardText = (card.innerText || "").toLowerCase();
+    if(!cardText.includes("lead") && !cardText.includes("pdi") && !cardText.includes("customer") && !cardText.includes("phone") && !cardText.includes("whatsapp")) return;
+    card.dataset.ndPhotoEnhanced = "true";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "nd-photo-viewer-btn mt-3";
+    btn.innerHTML = '<i class="fa-solid fa-images"></i> View Details / Photos';
+    btn.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      const lead = ndAdminLeadCacheForPhotos[idx] || {Notes: card.innerText, name: card.querySelector("h3")?.textContent || "Customer"};
+      openNdInquiryDetail(lead);
+    };
+    card.appendChild(btn);
+  });
+}
+document.addEventListener("DOMContentLoaded",function(){
+  setInterval(ndEnhanceAdminLeadPhotoButtons,1000);
+});
+document.addEventListener("click",function(){
+  setTimeout(ndEnhanceAdminLeadPhotoButtons,300);
+},true);
 </script>
 
 </body>. It hardens admin visibility,
