@@ -552,88 +552,6 @@ display:none!important;visibility:hidden!important;pointer-events:none!important
 /* NODEALER UNIVERSAL LEAD CAPTURE FIX */
 .nd-lead-debug-pill{position:fixed;right:12px;bottom:92px;z-index:99999;background:#16a34a;color:#fff;border-radius:999px;padding:9px 12px;font-size:10px;font-weight:900;text-transform:uppercase;box-shadow:0 12px 30px rgba(15,23,42,.25);display:none}
 
-
-/* =========================================================
-   NODEALER FINAL CUSTOMER-FIRST LAUNCH CLEANUP
-   Clean public website + safe CRM + private admin
-========================================================= */
-:root{
-  --nd-red:#E31E24;
-  --nd-blue:#1E88E5;
-  --nd-dark:#020617;
-  --nd-soft:#f8fafc;
-}
-html,body{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
-body{background:#f8fafc;color:#0f172a}
-#manualLeadPanel,#manualLeadPanel *,#analyticsFloatingBtn,#ndLeadViewerBtn{display:none!important;visibility:hidden!important;pointer-events:none!important}
-#oldLongHeroHidden,#service-command-center,#ndLaunchTrustStrip{display:none!important}
-.nd-final-hidden-public{display:none!important}
-.nd-final-home{
-  background:
-    radial-gradient(circle at top left,rgba(30,136,229,.34),transparent 35%),
-    radial-gradient(circle at bottom right,rgba(227,30,36,.25),transparent 35%),
-    #020617;
-  color:white;
-  position:relative;
-  overflow:hidden;
-}
-.nd-final-action-card{
-  background:#fff;color:#0f172a;border-radius:32px;padding:26px;
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow:0 24px 80px rgba(2,6,23,.22);
-  min-height:230px;display:flex;flex-direction:column;justify-content:space-between;
-  transition:.25s ease;text-align:left;width:100%;
-}
-.nd-final-action-card:hover{transform:translateY(-5px);box-shadow:0 34px 95px rgba(2,6,23,.32)}
-.nd-final-icon{
-  width:64px;height:64px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:28px
-}
-.nd-final-pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:900;text-transform:uppercase}
-.nd-final-trust-card{
-  background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:18px;display:flex;gap:13px;align-items:flex-start;
-  box-shadow:0 14px 42px rgba(15,23,42,.06)
-}
-.nd-final-section-title{font-size:clamp(30px,4vw,54px);font-weight:900;line-height:.98;text-transform:uppercase;letter-spacing:-1px}
-.nd-final-cta{border-radius:18px;padding:14px 18px;font-size:12px;font-weight:900;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.nd-final-sticky{
-  position:fixed;left:14px;right:14px;bottom:12px;z-index:99990;display:none;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px
-}
-.nd-final-sticky a,.nd-final-sticky button{
-  border-radius:18px;padding:11px 6px;font-size:10px;font-weight:900;text-transform:uppercase;box-shadow:0 14px 36px rgba(15,23,42,.24);display:flex;flex-direction:column;align-items:center;gap:4px
-}
-.nd-final-admin-btn{display:none}
-.nd-final-admin-card{background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:18px;box-shadow:0 14px 42px rgba(15,23,42,.08)}
-.nd-lead-debug-pill{position:fixed;right:12px;bottom:92px;z-index:99999;background:#16a34a;color:#fff;border-radius:999px;padding:9px 12px;font-size:10px;font-weight:900;text-transform:uppercase;box-shadow:0 12px 30px rgba(15,23,42,.25);display:none}
-.nd-submit-loading{opacity:.62!important;pointer-events:none!important}
-@media(max-width:768px){
-  body{padding-bottom:88px}
-  .nd-final-home{padding-top:38px!important;padding-bottom:42px!important}
-  .nd-final-action-card{min-height:172px;border-radius:24px;padding:19px}
-  .nd-final-icon{width:52px;height:52px;border-radius:18px;font-size:22px}
-  .nd-final-sticky{display:grid}
-  .nd-final-section-title{font-size:30px}
-  header .hidden.md\:flex{display:none!important}
-  header a[href*="wa.me"]{display:none!important}
-  header .max-w-7xl{padding-left:12px!important;padding-right:12px!important}
-  header button{font-size:10px!important;padding:9px 10px!important}
-}
-
-
-/* =========================================================
-   NODEALER FINAL PUBLIC CUSTOMER CLEANUP + ADMIN PRIVACY
-========================================================= */
-#secureAdminPortal,#adminWorkspaceView,#manualLeadPanel,#analyticsFloatingBtn,#ndLeadViewerBtn,#ndAdminCrmToolsBtn,#ndFinalAdminCenterBtn,#inventoryAdminOsBtn,#carManagerAdminBtn,
-#secureAdminPortal *,#adminWorkspaceView *,#manualLeadPanel *{
-  display:none!important;visibility:hidden!important;pointer-events:none!important;
-}
-#service-command-center,#ndLaunchTrustStrip,#oldLongHeroHidden{display:none!important}
-.nd-public-hide{display:none!important}
-.nd-customer-bottom-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;display:none;grid-template-columns:repeat(4,1fr);gap:8px}
-.nd-customer-bottom-bar a,.nd-customer-bottom-bar button{border-radius:18px;padding:10px 6px;font-size:10px;font-weight:900;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:4px;box-shadow:0 14px 35px rgba(15,23,42,.25)}
-.nd-lead-saving{opacity:.55!important;pointer-events:none!important}
-.nd-lead-saved-pill{position:fixed;right:14px;bottom:92px;background:#16a34a;color:white;border-radius:999px;padding:9px 13px;font-size:10px;font-weight:900;z-index:100000;display:none;box-shadow:0 14px 35px rgba(15,23,42,.25)}
-@media(max-width:768px){.nd-customer-bottom-bar{display:grid}body{padding-bottom:90px!important}}
-
 </style>
 
     <!-- NoDealer SEO + Social Preview Upgrade -->
@@ -737,70 +655,7 @@ body{background:#f8fafc;color:#0f172a}
 
         
 <!-- NODEALER SIMPLE CUSTOMER-FIRST HOMEPAGE -->
-
-<!-- NODEALER FINAL CUSTOMER-FIRST HOMEPAGE -->
-<section id="ndFinalHome" class="nd-final-home py-16 md:py-20">
-  <div class="max-w-7xl mx-auto px-4 relative z-10">
-    <div class="grid lg:grid-cols-12 gap-9 items-center">
-      <div class="lg:col-span-5">
-        <span class="nd-final-pill bg-white/10 text-white border border-white/10"><i class="fa-solid fa-shield-halved text-amber-400"></i> Trusted Direct Owner Car Help</span>
-        <h1 class="text-4xl md:text-6xl font-black uppercase leading-[.92] mt-5">Buy, Sell Or Inspect A Car Without Confusion.</h1>
-        <p class="text-slate-300 font-semibold mt-5 leading-relaxed">NoDealer helps you connect with direct-owner cars, book PDI inspections, estimate value, and get human support before you pay or sell.</p>
-        <div class="grid grid-cols-3 gap-3 mt-7">
-          <div class="bg-white/10 border border-white/10 rounded-2xl p-4"><p class="text-2xl font-black">0%</p><p class="text-[10px] uppercase text-slate-400 font-black">Dealer Markup</p></div>
-          <div class="bg-white/10 border border-white/10 rounded-2xl p-4"><p class="text-2xl font-black">PDI</p><p class="text-[10px] uppercase text-slate-400 font-black">Before Payment</p></div>
-          <div class="bg-white/10 border border-white/10 rounded-2xl p-4"><p class="text-2xl font-black">CRM</p><p class="text-[10px] uppercase text-slate-400 font-black">Fast Follow-up</p></div>
-        </div>
-      </div>
-      <div class="lg:col-span-7">
-        <div class="grid md:grid-cols-3 gap-5">
-          <button onclick="scrollToInventory()" class="nd-final-action-card">
-            <div><div class="nd-final-icon bg-blue-50 text-blue-600"><i class="fa-solid fa-car-side"></i></div><h2 class="text-2xl font-black uppercase mt-5">Buy Car</h2><p class="text-sm text-slate-500 font-semibold mt-2">Browse stock, open full details, call or WhatsApp instantly.</p></div>
-            <div class="bg-blue-600 text-white rounded-2xl py-3 text-center text-xs font-black uppercase mt-5">Browse Cars</div>
-          </button>
-          <button onclick="openSellModal()" class="nd-final-action-card">
-            <div><div class="nd-final-icon bg-red-50 text-red-600"><i class="fa-solid fa-key"></i></div><h2 class="text-2xl font-black uppercase mt-5">Sell Car</h2><p class="text-sm text-slate-500 font-semibold mt-2">Submit details and get connected with serious buyers.</p></div>
-            <div class="bg-red-600 text-white rounded-2xl py-3 text-center text-xs font-black uppercase mt-5">Sell My Car</div>
-          </button>
-          <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="nd-final-action-card">
-            <div><div class="nd-final-icon bg-amber-50 text-amber-600"><i class="fa-solid fa-clipboard-check"></i></div><h2 class="text-2xl font-black uppercase mt-5">PDI</h2><p class="text-sm text-slate-500 font-semibold mt-2">Book inspection for selling, buying used, or new car delivery.</p></div>
-            <div class="bg-amber-500 text-slate-950 rounded-2xl py-3 text-center text-xs font-black uppercase mt-5">Book PDI</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NODEALER FINAL TRUST STRIP -->
-<section id="ndFinalTrustStrip" class="bg-white py-8 border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-4">
-    <div class="nd-final-trust-card"><i class="fa-solid fa-user-check text-blue-600 text-2xl"></i><div><h3 class="font-black uppercase text-sm">Owner Direct</h3><p class="text-xs text-slate-500 font-semibold">No middleman pressure.</p></div></div>
-    <div class="nd-final-trust-card"><i class="fa-solid fa-clipboard-check text-amber-500 text-2xl"></i><div><h3 class="font-black uppercase text-sm">Inspection First</h3><p class="text-xs text-slate-500 font-semibold">Reduce risk before token/payment.</p></div></div>
-    <div class="nd-final-trust-card"><i class="fa-solid fa-file-shield text-green-600 text-2xl"></i><div><h3 class="font-black uppercase text-sm">Document Help</h3><p class="text-xs text-slate-500 font-semibold">RC, transfer and ownership guidance.</p></div></div>
-    <div class="nd-final-trust-card"><i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i><div><h3 class="font-black uppercase text-sm">Human Support</h3><p class="text-xs text-slate-500 font-semibold">Fast call and WhatsApp support.</p></div></div>
-  </div>
-</section>
-
-<!-- NODEALER FINAL CUSTOMER FLOW -->
-<section id="ndFinalFlow" class="bg-slate-50 py-12 border-b border-slate-100">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-7">
-      <div>
-        <span class="nd-final-pill bg-blue-50 text-blue-700">Simple Customer Flow</span>
-        <h2 class="nd-final-section-title text-slate-950 mt-3">Clear Steps. No Confusion.</h2>
-      </div>
-      <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20need%20help." target="_blank" class="nd-final-cta bg-green-600 text-white"><i class="fa-brands fa-whatsapp"></i> Ask Support</a>
-    </div>
-    <div class="grid md:grid-cols-3 gap-4">
-      <div class="bg-white border rounded-3xl p-6"><p class="text-blue-600 text-3xl font-black">01</p><h3 class="font-black uppercase mt-3">Choose Service</h3><p class="text-sm text-slate-500 font-semibold mt-2">Buy, sell, inspect, or estimate value from the main page.</p></div>
-      <div class="bg-white border rounded-3xl p-6"><p class="text-red-600 text-3xl font-black">02</p><h3 class="font-black uppercase mt-3">Submit Details</h3><p class="text-sm text-slate-500 font-semibold mt-2">Your enquiry is saved in CRM only once with duplicate protection.</p></div>
-      <div class="bg-white border rounded-3xl p-6"><p class="text-green-600 text-3xl font-black">03</p><h3 class="font-black uppercase mt-3">Get Follow-up</h3><p class="text-sm text-slate-500 font-semibold mt-2">NoDealer team calls or WhatsApps you with the next step.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="ndSimpleHome" class="nd-final-hidden-public" class="nd-simple-home py-16 md:py-20">
+<section id="ndSimpleHome" class="nd-simple-home py-16 md:py-20">
   <div class="max-w-7xl mx-auto px-4 relative z-10">
     <div class="grid lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-5">
@@ -6281,206 +6136,266 @@ document.addEventListener("click",function(){setTimeout(function(){injectNdVehic
 </script>
 
 
-
-
-
-<!-- NODEALER FINAL MOBILE ACTION BAR -->
-<div id="ndFinalMobileActions" class="nd-final-sticky">
-  <button onclick="scrollToInventory()" class="bg-blue-600 text-white"><i class="fa-solid fa-car-side"></i><span>Buy</span></button>
-  <button onclick="openSellModal()" class="bg-red-600 text-white"><i class="fa-solid fa-key"></i><span>Sell</span></button>
-  <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950"><i class="fa-solid fa-clipboard-check"></i><span>PDI</span></button>
-  <a href="tel:+917838335143" class="bg-slate-950 text-white"><i class="fa-solid fa-phone"></i><span>Call</span></a>
-</div>
-
-
-<!-- NODEALER FINAL PRIVATE ADMIN COMMAND CENTER -->
-<div id="ndFinalAdminCenterModal" class="hidden fixed inset-0 z-[100020] bg-black/85 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl">
-    <div class="bg-slate-950 text-white p-6 flex items-center justify-between gap-4">
-      <div><p class="text-[10px] uppercase text-slate-400 font-black">Private Admin Only</p><h2 class="text-3xl font-black uppercase">NoDealer Control Center</h2><p class="text-sm text-slate-400 mt-1">Everything important for leads, PDI, inventory and follow-ups in one place.</p></div>
-      <button onclick="closeNdFinalAdminCenter()" class="w-12 h-12 rounded-full bg-white/10 text-white text-2xl font-black">×</button>
-    </div>
-    <div class="p-6 grid md:grid-cols-2 xl:grid-cols-4 gap-4">
-      <button onclick="openNdLeadStatus && openNdLeadStatus()" class="nd-final-admin-card text-left"><i class="fa-solid fa-phone-volume text-purple-600 text-3xl"></i><h3 class="font-black uppercase mt-4">Lead Follow-up</h3><p class="text-xs text-slate-500 font-semibold mt-1">Track call/WhatsApp leads and status.</p></button>
-      <button onclick="openNdPdiBookings && openNdPdiBookings()" class="nd-final-admin-card text-left"><i class="fa-solid fa-clipboard-list text-blue-600 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Bookings</h3><p class="text-xs text-slate-500 font-semibold mt-1">Pending, assigned and completed PDI.</p></button>
-      <button onclick="openNdAdminCrmTools && openNdAdminCrmTools()" class="nd-final-admin-card text-left"><i class="fa-solid fa-address-book text-green-600 text-3xl"></i><h3 class="font-black uppercase mt-4">CRM Tools</h3><p class="text-xs text-slate-500 font-semibold mt-1">Manual entry and CRM viewer.</p></button>
-      <button onclick="openNdPdiReportBuilder && openNdPdiReportBuilder()" class="nd-final-admin-card text-left"><i class="fa-solid fa-file-medical text-amber-500 text-3xl"></i><h3 class="font-black uppercase mt-4">PDI Report</h3><p class="text-xs text-slate-500 font-semibold mt-1">Create report and save PDF.</p></button>
-      <button onclick="scrollToInventory()" class="nd-final-admin-card text-left"><i class="fa-solid fa-car text-slate-800 text-3xl"></i><h3 class="font-black uppercase mt-4">Inventory</h3><p class="text-xs text-slate-500 font-semibold mt-1">Check visible stock and car cards.</p></button>
-      <a href="https://docs.google.com/spreadsheets/d/1r-3jS0AX8yNaOBd9dG3mSCuAkCpiC6T8KcdUm320lz0/edit?usp=sharing" target="_blank" class="nd-final-admin-card text-left block"><i class="fa-solid fa-table text-emerald-600 text-3xl"></i><h3 class="font-black uppercase mt-4">Google Sheet</h3><p class="text-xs text-slate-500 font-semibold mt-1">Open raw CRM sheet.</p></a>
-      <button onclick="testNoDealerLeadSave && testNoDealerLeadSave()" class="nd-final-admin-card text-left"><i class="fa-solid fa-vial text-red-600 text-3xl"></i><h3 class="font-black uppercase mt-4">Test Lead</h3><p class="text-xs text-slate-500 font-semibold mt-1">Send one test lead to CRM.</p></button>
-      <button onclick="location.href='/'" class="nd-final-admin-card text-left"><i class="fa-solid fa-house text-blue-500 text-3xl"></i><h3 class="font-black uppercase mt-4">Public Site</h3><p class="text-xs text-slate-500 font-semibold mt-1">Return to customer website.</p></button>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-<!-- NODEALER FINAL CUSTOMER MOBILE BAR -->
-<div id="ndCustomerBottomBar" class="nd-customer-bottom-bar">
-  <button onclick="scrollToInventory && scrollToInventory()" class="bg-blue-600 text-white"><i class="fa-solid fa-car-side"></i><span>Buy</span></button>
-  <button onclick="openSellModal && openSellModal()" class="bg-red-600 text-white"><i class="fa-solid fa-key"></i><span>Sell</span></button>
-  <button onclick="document.getElementById('pdi-section')?.scrollIntoView({behavior:'smooth'})" class="bg-amber-500 text-slate-950"><i class="fa-solid fa-clipboard-check"></i><span>PDI</span></button>
-  <a href="tel:+917838335143" class="bg-slate-950 text-white"><i class="fa-solid fa-phone"></i><span>Call</span></a>
-</div>
-
-
 <script>
-/* =========================================================
-   NODEALER FINAL PUBLIC LEAD ENGINE
-   1 click = 1 lead, all Buy/Sell/PDI/Valuation/WhatsApp leads saved
-========================================================= */
-(function(){
-  const WEBHOOK = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
-  const DEDUPE_MS = 20000;
-  let lastKey = "";
-  let lastTime = 0;
-  let hardLock = false;
+/* NODEALER UNIVERSAL LEAD CAPTURE FIX
+   This makes Buy / Sell / PDI / Valuation leads save to Google Sheet CRM.
+*/
+const ND_UNIVERSAL_LEAD_WEBHOOK = "https://script.google.com/macros/s/AKfycbxjbFxbHP8KSbIvgXT809hep7k-xpFjwTUc_bH6hl6DYolrt6qqZ_-M0J6AhLV0igZrDg/exec";
 
-  function clean(v){ return String(v||"").trim(); }
-  function val(id){ return clean(document.getElementById(id)?.value); }
-  function norm(v){ return clean(v).toLowerCase().replace(/\s+/g," "); }
-  function keyOf(d){ return [d.type,d.phone,d.car,d.regNo,d.useCase,d.package].map(norm).join("|"); }
-  function showPill(text){
-    let p = document.getElementById("ndLeadSavedFinalPill");
-    if(!p){ p=document.createElement("div"); p.id="ndLeadSavedFinalPill"; p.className="nd-lead-saved-pill"; document.body.appendChild(p); }
-    p.textContent=text||"Lead Saved"; p.style.display="block"; setTimeout(()=>p.style.display="none",2200);
-  }
+function ndLeadVal(id){ return (document.getElementById(id)?.value || "").trim(); }
 
-  async function saveLead(payload){
-    const data = {
-      date: new Date().toLocaleString(),
-      timestamp: new Date().toISOString(),
-      type: payload.type || "Website Lead",
-      name: payload.name || "Website Visitor",
-      phone: payload.phone || "",
-      car: payload.car || "",
-      source: payload.source || "NoDealer Website",
-      status: payload.status || "New Lead",
-      priority: payload.priority || "Hot",
-      notes: payload.notes || "",
-      regNo: payload.regNo || "",
-      city: payload.city || "",
-      location: payload.location || "",
-      package: payload.package || "",
-      useCase: payload.useCase || ""
+async function ndUniversalSaveLead(payload){
+    const clean = {
+        date: new Date().toLocaleString(),
+        timestamp: new Date().toISOString(),
+        type: payload.type || "Website Lead",
+        name: payload.name || payload.customerName || "Website Visitor",
+        phone: payload.phone || payload.mobile || "",
+        car: payload.car || payload.vehicle || payload.model || "",
+        priority: payload.priority || "Hot",
+        source: payload.source || "NoDealer Website",
+        status: payload.status || "New Lead",
+        notes: payload.notes || "",
+        regNo: payload.regNo || payload.registration || "",
+        city: payload.city || "",
+        location: payload.location || "",
+        package: payload.package || "",
+        useCase: payload.useCase || ""
     };
-    const k = keyOf(data), now = Date.now();
-    if((hardLock && k === lastKey) || (k === lastKey && now-lastTime < DEDUPE_MS)){
-      showPill("Already Saved");
-      return false;
-    }
-    hardLock = true; lastKey = k; lastTime = now;
-    try{
-      await originalFetch(WEBHOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-      sessionStorage.setItem("nd_last_saved_lead", JSON.stringify(data));
-      showPill("Lead Saved");
-      return true;
-    }catch(err){
-      console.error("NoDealer lead save failed", err);
-      alert("Lead save failed. Please check internet.");
-      return false;
-    }finally{
-      setTimeout(()=>{hardLock=false;},3500);
-    }
-  }
 
-  /* Dedupe ANY old direct fetch calls to the Apps Script too */
-  const originalFetch = window.fetch.bind(window);
-  window.fetch = function(input, init){
-    const url = String(typeof input === "string" ? input : (input && input.url) || "");
-    const method = String((init && init.method) || "GET").toUpperCase();
-    if(url.includes("script.google.com/macros/s/") && method === "POST"){
-      let body = "";
-      try{ body = typeof init.body === "string" ? init.body : JSON.stringify(init.body || {}); }catch(e){}
-      const k = norm(body).slice(0,500);
-      const now = Date.now();
-      if(k && k === lastKey && now-lastTime < DEDUPE_MS){
-        showPill("Already Saved");
-        return Promise.resolve(new Response("", {status:200}));
-      }
-      lastKey = k; lastTime = now;
+    try {
+        await fetch(ND_UNIVERSAL_LEAD_WEBHOOK, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(clean)
+        });
+
+        sessionStorage.setItem("nd_last_lead_saved", JSON.stringify(clean));
+        showNdLeadSavedPill();
+        return true;
+    } catch(e) {
+        console.error("NoDealer lead save failed", e);
+        alert("Lead save failed. Please check internet / Apps Script webhook.");
+        return false;
     }
-    return originalFetch(input, init);
-  };
+}
 
-  window.ndUniversalSaveLead = saveLead;
-  window.ndFinalSaveLead = saveLead;
+function showNdLeadSavedPill(){
+    let pill = document.getElementById("ndLeadSavedPill");
+    if(!pill){
+        pill = document.createElement("div");
+        pill.id = "ndLeadSavedPill";
+        pill.className = "nd-lead-debug-pill";
+        pill.textContent = "Lead Saved";
+        document.body.appendChild(pill);
+    }
+    pill.style.display = "block";
+    setTimeout(()=>pill.style.display="none", 2400);
+}
 
-  window.submitPdiFlowBooking = async function(){
-    const btn = event?.target; if(btn) btn.classList.add("nd-lead-saving");
-    const phone = val("pdiFlowPhone") || val("pdiPhone");
-    if(!phone){ alert("Please enter mobile number."); if(btn)btn.classList.remove("nd-lead-saving"); return; }
-    const reg = val("pdiFlowReg");
-    const useCase = window.selectedPdiUseCase || "PDI Booking";
-    const pkg = window.selectedPdiPackage || "Advanced Report";
-    const ok = await saveLead({
-      type:"PDI Booking", name:"PDI Customer", phone,
-      car:val("pdiFlowCar") || val("pdiCarDetails"), regNo:reg,
-      city:val("pdiFlowCity") || val("pdiCity"),
-      location:val("pdiFlowLocation") || val("pdiLocation"),
-      package:pkg, useCase,
-      source:"PDI Booking Flow", status:"New PDI Booking", priority:"Hot",
-      notes:["Reg No: "+reg,"Use Case: "+useCase,"Package: "+pkg,"Preferred Date: "+val("pdiFlowDate"),"Notes: "+(val("pdiFlowNotes")||val("pdiNotes"))].join(" | ")
+/* Fix PDI booking flow */
+window.submitPdiFlowBooking = async function(){
+    const phone = ndLeadVal("pdiFlowPhone");
+    const reg = ndLeadVal("pdiFlowReg");
+    const car = ndLeadVal("pdiFlowCar");
+    const city = ndLeadVal("pdiFlowCity");
+    const location = ndLeadVal("pdiFlowLocation");
+    const preferredDate = ndLeadVal("pdiFlowDate");
+    const notes = ndLeadVal("pdiFlowNotes");
+
+    if(!phone){
+        alert("Please enter mobile number.");
+        return;
+    }
+
+    const useCase = window.selectedPdiUseCase || selectedPdiUseCase || "Buying Used Car";
+    const pkg = window.selectedPdiPackage || selectedPdiPackage || "Advanced Report";
+
+    const ok = await ndUniversalSaveLead({
+        type: "PDI Booking",
+        name: "PDI Customer",
+        phone,
+        car,
+        regNo: reg,
+        city,
+        location,
+        package: pkg,
+        useCase,
+        priority: "Hot",
+        source: "PDI Booking Flow",
+        status: "New PDI Booking",
+        notes: [
+            "Registration No: " + reg,
+            "PDI Type: " + useCase,
+            "Package: " + pkg,
+            "City: " + city,
+            "Location: " + location,
+            "Preferred Date: " + preferredDate,
+            "Extra Notes: " + notes
+        ].join(" | ")
     });
-    if(btn) setTimeout(()=>btn.classList.remove("nd-lead-saving"),900);
-    if(ok) alert("PDI booking saved to CRM.");
-  };
 
-  window.handlePdiSubmit = function(e){ if(e)e.preventDefault(); return window.submitPdiFlowBooking(); };
+    if(ok) alert("PDI booking saved to CRM. NoDealer team will contact you.");
+};
 
-  window.saveValuationLead = async function(){
-    const phone = val("valPhone");
-    if(!phone){ alert("Please enter mobile number."); return; }
-    const car = [val("valBrand"),val("valModel"),val("valYear")].filter(Boolean).join(" ");
-    const range = document.getElementById("ndValueRange")?.textContent || "";
-    const ok = await saveLead({
-      type:"Car Value Estimate", name:"Valuation Customer", phone, car, regNo:val("valRegNo"),
-      source:"Website Valuation Tool", status:"Value Estimate Given", priority:"Warm",
-      notes:"Estimate: "+range+" | Fuel: "+val("valFuel")+" | KM: "+val("valKm")+" | Owner: "+val("valOwner")
+/* Fix old PDI form if present */
+window.handlePdiSubmit = async function(event){
+    if(event) event.preventDefault();
+
+    const phone = ndLeadVal("pdiPhone") || ndLeadVal("pdiFlowPhone");
+    const name = ndLeadVal("pdiName") || "PDI Customer";
+    const car = ndLeadVal("pdiCarDetails") || ndLeadVal("pdiFlowCar");
+    const city = ndLeadVal("pdiCity") || ndLeadVal("pdiFlowCity");
+    const location = ndLeadVal("pdiLocation") || ndLeadVal("pdiFlowLocation");
+    const pdiType = ndLeadVal("pdiType") || window.selectedPdiUseCase || "PDI Request";
+    const pdiPackage = ndLeadVal("pdiPackage") || window.selectedPdiPackage || "Advanced Report";
+    const notes = ndLeadVal("pdiNotes") || ndLeadVal("pdiFlowNotes");
+
+    if(!phone){
+        alert("Please enter mobile number.");
+        return;
+    }
+
+    const ok = await ndUniversalSaveLead({
+        type: "PDI Booking",
+        name,
+        phone,
+        car,
+        city,
+        location,
+        package: pdiPackage,
+        useCase: pdiType,
+        priority: "Hot",
+        source: "PDI Form",
+        status: "New PDI Booking",
+        notes: "PDI Type: " + pdiType + " | Package: " + pdiPackage + " | " + notes
     });
+
+    if(ok) alert("PDI request saved to CRM.");
+};
+
+/* Fix valuation lead */
+window.saveValuationLead = async function(){
+    const phone = ndLeadVal("valPhone");
+    const brand = ndLeadVal("valBrand");
+    const model = ndLeadVal("valModel");
+    const year = ndLeadVal("valYear");
+    const reg = ndLeadVal("valRegNo");
+    const valueRange = document.getElementById("ndValueRange")?.textContent || "";
+
+    if(!phone){
+        alert("Please enter mobile number to save valuation lead.");
+        return;
+    }
+
+    const ok = await ndUniversalSaveLead({
+        type: "Car Value Estimate",
+        name: "Valuation Customer",
+        phone,
+        car: [brand, model, year].filter(Boolean).join(" "),
+        regNo: reg,
+        priority: "Warm",
+        source: "Website Valuation Tool",
+        status: "Value Estimate Given",
+        notes: "Estimated Value: " + valueRange + " | Fuel: " + ndLeadVal("valFuel") + " | KM: " + ndLeadVal("valKm") + " | Owner: " + ndLeadVal("valOwner")
+    });
+
     if(ok) alert("Valuation lead saved to CRM.");
-  };
+};
 
-  window.saveNdVehicleInterest = async function(){
-    const title = (window.ndCurrentDetailCar && window.ndCurrentDetailCar.title) || document.getElementById("ndDetailCarName")?.textContent || "Vehicle";
-    const ok = await saveLead({type:"Buy Car Lead",name:"Buyer",phone:"",car:title,source:"Vehicle Detail Page",status:"New Buy Lead",priority:"Hot",notes:"Customer clicked vehicle interest for "+title});
-    if(ok) alert("Vehicle interest saved to CRM.");
-  };
-
-  document.addEventListener("submit", async function(e){
+/* Fix Sell car form submissions by detecting sell form fields */
+document.addEventListener("submit", async function(e){
     const form = e.target;
-    if(!form || form.dataset.ndSubmitting === "true") return;
-    const txt = (form.id+" "+form.className+" "+(form.innerText||"")).toLowerCase();
-    const isSell = txt.includes("sell") || form.querySelector("#sellerPhone,#sellPhone,#sellerName,#sellName");
-    if(!isSell) return;
-    e.preventDefault();
-    form.dataset.ndSubmitting = "true"; setTimeout(()=>form.dataset.ndSubmitting="false",4500);
-    const phone = val("sellerPhone") || val("sellPhone") || form.querySelector("input[type='tel']")?.value || "";
-    const name = val("sellerName") || val("sellName") || form.querySelector("input[placeholder*='Name'],input[placeholder*='name']")?.value || "Seller";
-    const car = val("sellerCar") || val("carModel") || val("sellCarModel") || form.querySelector("input[placeholder*='Car'],input[placeholder*='Model'],input[placeholder*='car'],input[placeholder*='model']")?.value || "";
-    const ok = await saveLead({type:"Sell Car Lead",name,phone,car,source:"Sell Car Form",status:"New Sell Lead",priority:"Hot",notes:"Customer submitted sell car enquiry."});
-    if(ok) alert("Sell car enquiry saved to CRM.");
-  }, true);
+    if(!form || !form.tagName || form.tagName.toLowerCase() !== "form") return;
 
-  document.addEventListener("click", function(e){
-    const wa = e.target.closest && e.target.closest("a[href*='wa.me'],a[href*='api.whatsapp']");
-    if(!wa) return;
-    let car = "";
-    const card = wa.closest("#carGrid > *") || wa.closest(".nd-featured-clean-card") || wa.closest(".nd-car-detail-shell");
-    if(card) car = card.querySelector("h3,h2,h4")?.textContent || "";
-    if(!car) car = document.getElementById("ndDetailCarName")?.textContent || "WhatsApp Enquiry";
-    saveLead({type:"WhatsApp Lead",name:"WhatsApp Customer",phone:"",car,source:"WhatsApp Button",status:"New WhatsApp Lead",priority:"Hot",notes:"Customer clicked WhatsApp for "+car});
-  }, true);
+    const formText = (form.innerText || form.id || form.className || "").toLowerCase();
+    const hasSellFields = form.querySelector("#sellerName,#sellerPhone,#sellName,#sellPhone,#carMake,#carModel,#sellerCar");
+    const isSellForm = formText.includes("sell") || hasSellFields;
 
-  function hidePublicAdmin(){
-    ["secureAdminPortal","adminWorkspaceView","manualLeadPanel","analyticsFloatingBtn","ndLeadViewerBtn","ndAdminCrmToolsBtn","ndFinalAdminCenterBtn","inventoryAdminOsBtn","carManagerAdminBtn"].forEach(id=>{
-      const el=document.getElementById(id); if(el){ el.style.display="none"; el.style.visibility="hidden"; }
+    if(isSellForm){
+        e.preventDefault();
+
+        const phone = ndLeadVal("sellerPhone") || ndLeadVal("sellPhone") || form.querySelector("input[type='tel']")?.value || "";
+        const name = ndLeadVal("sellerName") || ndLeadVal("sellName") || form.querySelector("input[placeholder*='Name'],input[placeholder*='name']")?.value || "Seller";
+        const car = ndLeadVal("sellerCar") || ndLeadVal("carModel") || ndLeadVal("sellCarModel") || form.querySelector("input[placeholder*='Car'],input[placeholder*='Model'],input[placeholder*='car'],input[placeholder*='model']")?.value || "";
+
+        if(!phone && !car){
+            return;
+        }
+
+        await ndUniversalSaveLead({
+            type: "Sell Car Lead",
+            name,
+            phone,
+            car,
+            priority: "Hot",
+            source: "Sell Car Form",
+            status: "New Sell Lead",
+            notes: "Sell car enquiry submitted from website."
+        });
+
+        alert("Sell car enquiry saved to CRM.");
+    }
+}, true);
+
+/* Fix Buy buttons / WhatsApp / detail interest */
+async function ndSaveBuyLead(carTitle, phone){
+    return ndUniversalSaveLead({
+        type: "Buy Car Lead",
+        name: "Buyer",
+        phone: phone || "",
+        car: carTitle || "Car Enquiry",
+        priority: "Hot",
+        source: "Buy Car / Vehicle Detail",
+        status: "New Buy Lead",
+        notes: "Buyer showed interest in " + (carTitle || "car")
     });
-  }
-  document.addEventListener("DOMContentLoaded",()=>setInterval(hidePublicAdmin,1000));
-})();
+}
+
+/* Override detail interest */
+window.saveNdVehicleInterest = async function(){
+    const title = (window.ndCurrentDetailCar && window.ndCurrentDetailCar.title) || document.getElementById("ndDetailCarName")?.textContent || "Vehicle";
+    await ndSaveBuyLead(title, "");
+    alert("Vehicle interest saved to CRM.");
+};
+
+/* Add lead save before WhatsApp clicks on car cards */
+document.addEventListener("click", function(e){
+    const link = e.target.closest && e.target.closest("a[href*='wa.me'],a[href*='api.whatsapp']");
+    if(!link) return;
+
+    let carTitle = "";
+    const card = link.closest("#carGrid > *") || link.closest(".nd-featured-clean-card") || link.closest(".nd-car-detail-shell");
+    if(card) carTitle = card.querySelector("h3,h2,h4")?.textContent || "";
+    if(!carTitle) carTitle = document.getElementById("ndDetailCarName")?.textContent || "WhatsApp Enquiry";
+
+    ndUniversalSaveLead({
+        type: "WhatsApp Lead",
+        name: "WhatsApp Customer",
+        phone: "",
+        car: carTitle,
+        priority: "Hot",
+        source: "WhatsApp Button",
+        status: "New WhatsApp Lead",
+        notes: "Customer clicked WhatsApp for: " + carTitle
+    });
+}, true);
+
+/* Add visible test function for admin */
+window.testNoDealerLeadSave = async function(){
+    await ndUniversalSaveLead({
+        type: "Test Lead",
+        name: "NoDealer Test",
+        phone: "9999999999",
+        car: "Test Car",
+        priority: "Hot",
+        source: "Console Test",
+        status: "New Lead",
+        notes: "This is a CRM test lead."
+    });
+    alert("Test lead sent. Check Google Sheet / CRM Lead Viewer after 10-20 seconds.");
+};
 </script>
 
 </body>. It hardens admin visibility,
