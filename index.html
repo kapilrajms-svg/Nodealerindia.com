@@ -6846,6 +6846,335 @@ body.nd-admin-route #adminWorkspaceView input[type="time"] {
 })();
 </script>
 
+
+<!-- NODEALER ADMIN HEAVEN UPGRADE - SAFE SKIN ONLY -->
+<style id="ndAdminHeavenStyle">
+body.nd-admin-route {
+  background:
+    radial-gradient(circle at 10% 5%, rgba(37,99,235,.24), transparent 34%),
+    radial-gradient(circle at 88% 14%, rgba(236,72,153,.16), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(245,158,11,.14), transparent 35%),
+    #020617 !important;
+}
+body.nd-admin-route #secureAdminPortal {
+  background: transparent !important;
+  padding: 18px !important;
+}
+body.nd-admin-route #adminWorkspaceView {
+  color: #fff !important;
+  gap: 22px !important;
+}
+body.nd-admin-route #adminWorkspaceView aside {
+  background: rgba(15,23,42,.78) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(22px) !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,.34) !important;
+}
+body.nd-admin-route #adminWorkspaceView aside::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 35%, rgba(59,130,246,.12));
+}
+body.nd-admin-route .nd-admin-tab-btn,
+body.nd-admin-route #adminWorkspaceView aside nav button {
+  position: relative;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  background: rgba(2,6,23,.62) !important;
+  color: #cbd5e1 !important;
+  border-radius: 18px !important;
+  padding: 14px 14px !important;
+  margin-bottom: 9px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .4px !important;
+  transition: .22s ease !important;
+}
+body.nd-admin-route .nd-admin-tab-btn:hover,
+body.nd-admin-route .nd-admin-tab-btn.active,
+body.nd-admin-route #adminWorkspaceView aside nav button:hover,
+body.nd-admin-route #adminWorkspaceView aside nav button.active {
+  background: linear-gradient(135deg, #ffffff, #dbeafe) !important;
+  color: #020617 !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 18px 48px rgba(37,99,235,.18) !important;
+}
+#ndAdminHeavenHeader {
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.04)),
+    rgba(15,23,42,.74);
+  backdrop-filter: blur(24px);
+  border-radius: 34px;
+  padding: 24px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.25);
+  overflow: hidden;
+  position: relative;
+}
+#ndAdminHeavenHeader::after {
+  content: "";
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  right: -80px;
+  top: -90px;
+  background: radial-gradient(circle, rgba(59,130,246,.34), transparent 60%);
+  pointer-events: none;
+}
+.nd-heaven-title {
+  font-size: clamp(28px, 4vw, 50px);
+  line-height: .92;
+  font-weight: 950;
+  letter-spacing: -1.7px;
+  text-transform: uppercase;
+}
+.nd-heaven-subtitle { color: #94a3b8; font-size: 13px; font-weight: 800; margin-top: 8px; max-width: 720px; }
+.nd-heaven-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 10px;
+  font-weight: 950;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.08);
+  color: #dbeafe;
+}
+.nd-heaven-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+.nd-heaven-action {
+  min-height: 120px;
+  text-align: left;
+  border-radius: 24px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(2,6,23,.48);
+  color: white;
+  transition: .22s ease;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.nd-heaven-action:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.10);
+  box-shadow: 0 24px 65px rgba(0,0,0,.22);
+}
+.nd-heaven-action i { font-size: 23px; margin-bottom: 12px; }
+.nd-heaven-action h3 { font-size: 13px; font-weight: 950; text-transform: uppercase; }
+.nd-heaven-action p { font-size: 11px; color: #94a3b8; font-weight: 700; margin-top: 4px; line-height: 1.35; }
+.nd-heaven-floating-search {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+}
+.nd-heaven-floating-search input {
+  width: 100%;
+  background: rgba(2,6,23,.62);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 14px 15px;
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  outline: none;
+}
+.nd-heaven-floating-search button {
+  border-radius: 18px;
+  padding: 13px 16px;
+  font-size: 11px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+body.nd-admin-route #adminWorkspaceView .bg-slate-900,
+body.nd-admin-route #adminWorkspaceView .bg-slate-950 {
+  border-color: rgba(255,255,255,.10) !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,.19) !important;
+}
+body.nd-admin-route #adminWorkspaceView input,
+body.nd-admin-route #adminWorkspaceView select,
+body.nd-admin-route #adminWorkspaceView textarea {
+  border-color: rgba(255,255,255,.12) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03) !important;
+}
+.nd-admin-panel-active { animation: ndAdminHeavenIn .28s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes ndAdminHeavenIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+#ndAdminHeavenDock {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 100020;
+  display: none;
+  gap: 10px;
+}
+body.nd-admin-route #ndAdminHeavenDock { display: flex; }
+#ndAdminHeavenDock button,
+#ndAdminHeavenDock a {
+  border-radius: 999px;
+  padding: 13px 16px;
+  font-size: 11px;
+  font-weight: 950;
+  text-transform: uppercase;
+  color: white;
+  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+@media(max-width: 1024px) {
+  .nd-heaven-actions { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .nd-heaven-floating-search { grid-template-columns: 1fr; }
+  body.nd-admin-route #adminWorkspaceView { padding-left: 0 !important; }
+}
+@media(max-width: 640px) {
+  #ndAdminHeavenHeader { border-radius: 24px; padding: 18px; }
+  .nd-heaven-actions { grid-template-columns: 1fr; }
+  #ndAdminHeavenDock { left: 10px; right: 10px; bottom: 10px; display: grid; grid-template-columns: repeat(2, 1fr); }
+  #ndAdminHeavenDock button, #ndAdminHeavenDock a { text-align: center; justify-content: center; padding: 12px 8px; }
+}
+</style>
+
+<div id="ndAdminHeavenDock">
+  <button onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('leads'):document.getElementById('adminLeadsTableBody')?.scrollIntoView({behavior:'smooth'})" style="background:#f59e0b;color:#020617"><i class="fa-solid fa-address-book"></i> Leads</button>
+  <button onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('inventory'):document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})" style="background:#2563eb"><i class="fa-solid fa-car"></i> Stock</button>
+  <a href="https://wa.me/917838335143" target="_blank" style="background:#16a34a"><i class="fa-brands fa-whatsapp"></i> Support</a>
+</div>
+
+<script id="ndAdminHeavenScript">
+(function(){
+  function isAdminRoute(){
+    const h=(location.hash||'').toLowerCase();
+    const p=(location.pathname||'').toLowerCase();
+    return h==='#admin' || p.endsWith('/admin.html') || p.endsWith('/admin');
+  }
+
+  function callIfExists(name){
+    if(typeof window[name] === 'function') return window[name]();
+    return false;
+  }
+
+  function heavenRefresh(){
+    ['loadAdminInventoryDirectory','loadAdminLeadsDashboard','renderCars','updateActionCenter','renderNdLeadStats','renderNdLeadCards'].forEach(fn=>{
+      try{ if(typeof window[fn]==='function') window[fn](); }catch(e){}
+    });
+  }
+
+  window.ndAdminSmartSearch = function(){
+    const q=(document.getElementById('ndAdminHeavenSearch')?.value||'').trim().toLowerCase();
+    if(!q) return;
+    if(/lead|phone|call|customer|whatsapp|name/.test(q)){
+      if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('leads');
+      setTimeout(()=>{
+        const s=document.getElementById('leadSearchInput')||document.getElementById('ndLeadSearch')||document.querySelector('#ndLeadViewerModal input[type="text"]');
+        if(s){s.value=q;s.dispatchEvent(new Event('input',{bubbles:true}));}
+      },250);
+      return;
+    }
+    if(/stock|car|inventory|upload|photo|price|model/.test(q)){
+      if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('inventory');
+      setTimeout(()=>document.getElementById('carTitle')?.focus(),250);
+      return;
+    }
+    if(/pdi|inspection|report/.test(q)){
+      if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('pdi');
+      return;
+    }
+    if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('dashboard');
+  };
+
+  function addHeader(){
+    if(!isAdminRoute()) return;
+    const workspace=document.getElementById('adminWorkspaceView');
+    if(!workspace || workspace.classList.contains('hidden')) return;
+    if(document.getElementById('ndAdminHeavenHeader')) return;
+
+    const header=document.createElement('div');
+    header.id='ndAdminHeavenHeader';
+    header.innerHTML=`
+      <div class="relative z-10">
+        <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-5">
+          <div>
+            <span class="nd-heaven-pill"><i class="fa-solid fa-sparkles text-amber-300"></i> Premium Admin Experience</span>
+            <h1 class="nd-heaven-title mt-4">Welcome back to your NoDealer command room.</h1>
+            <p class="nd-heaven-subtitle">Everything is still connected to your original leads, stock upload, inventory and PDI tools. This is only a beautiful control layer on top.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-2 min-w-[260px]">
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-3"><p class="text-[10px] uppercase text-slate-400 font-black">Today</p><h3 class="text-lg font-black" id="ndHeavenDate">Live</h3></div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-3"><p class="text-[10px] uppercase text-slate-400 font-black">Mode</p><h3 class="text-lg font-black text-green-300">Secure</h3></div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-3"><p class="text-[10px] uppercase text-slate-400 font-black">Data</p><h3 class="text-lg font-black text-blue-300">Synced</h3></div>
+          </div>
+        </div>
+        <div class="nd-heaven-actions">
+          <button class="nd-heaven-action" onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('leads'):document.getElementById('adminLeadsTableBody')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-address-book text-amber-300"></i><h3>Leads Room</h3><p>Open customer enquiries, follow-ups, calls and WhatsApp actions.</p></button>
+          <button class="nd-heaven-action" onclick="typeof openNdLeadViewer==='function'?openNdLeadViewer():(typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('leads'):null)"><i class="fa-solid fa-users-viewfinder text-green-300"></i><h3>CRM Viewer</h3><p>Open your full existing lead viewer without losing any data.</p></button>
+          <button class="nd-heaven-action" onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('inventory'):document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-warehouse text-blue-300"></i><h3>Inventory</h3><p>See stock and upload/edit cars from your original stock form.</p></button>
+          <button class="nd-heaven-action" onclick="typeof openRealCarManager==='function'?openRealCarManager():document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-circle-plus text-red-300"></i><h3>Add Car</h3><p>Jump directly to the car upload and manager tools.</p></button>
+          <button class="nd-heaven-action" onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('pdi'):(typeof openNdPdiBookings==='function'?openNdPdiBookings():null)"><i class="fa-solid fa-clipboard-check text-orange-300"></i><h3>PDI Desk</h3><p>Open PDI booking, report and inspection tools.</p></button>
+        </div>
+        <div class="nd-heaven-floating-search">
+          <input id="ndAdminHeavenSearch" placeholder="Search action: type leads, stock, upload, PDI, phone, customer..." onkeydown="if(event.key==='Enter')ndAdminSmartSearch()">
+          <button onclick="ndAdminSmartSearch()" class="bg-white text-slate-950">Open</button>
+          <button onclick="heavenRefreshPublic()" class="bg-blue-600 text-white">Refresh</button>
+        </div>
+      </div>`;
+    workspace.insertBefore(header, workspace.firstElementChild?.nextSibling || workspace.firstChild);
+    const dateEl=document.getElementById('ndHeavenDate');
+    if(dateEl) dateEl.textContent=new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short'});
+  }
+
+  window.heavenRefreshPublic=function(){
+    heavenRefresh();
+    const btn=document.querySelector('#ndAdminHeavenHeader button[onclick="heavenRefreshPublic()"]');
+    if(btn){const old=btn.textContent;btn.textContent='Done';setTimeout(()=>btn.textContent=old,900);}
+  };
+
+  function improveNav(){
+    const sidebar=document.querySelector('#adminWorkspaceView aside');
+    const nav=sidebar?.querySelector('nav');
+    if(!nav || nav.dataset.heaven==='yes') return;
+    nav.innerHTML=`
+      <button class="nd-admin-tab-btn active" data-panel="dashboard" onclick="ndSwitchAdminPanel?.('dashboard')"><i class="fa-solid fa-house text-blue-400"></i> Dashboard</button>
+      <button class="nd-admin-tab-btn" data-panel="leads" onclick="ndSwitchAdminPanel?.('leads')"><i class="fa-solid fa-address-book text-amber-400"></i> Leads Room</button>
+      <button class="nd-admin-tab-btn" onclick="typeof openNdLeadViewer==='function'?openNdLeadViewer():ndSwitchAdminPanel?.('leads')"><i class="fa-solid fa-users-viewfinder text-green-400"></i> CRM Viewer</button>
+      <button class="nd-admin-tab-btn" data-panel="inventory" onclick="ndSwitchAdminPanel?.('inventory')"><i class="fa-solid fa-car text-emerald-400"></i> Inventory + Upload</button>
+      <button class="nd-admin-tab-btn" onclick="typeof openRealCarManager==='function'?openRealCarManager():document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-circle-plus text-red-400"></i> Add / Edit Stock</button>
+      <button class="nd-admin-tab-btn" data-panel="direct" onclick="ndSwitchAdminPanel?.('direct')"><i class="fa-solid fa-user-lock text-purple-400"></i> Direct Party</button>
+      <button class="nd-admin-tab-btn" data-panel="pdi" onclick="ndSwitchAdminPanel?.('pdi')"><i class="fa-solid fa-clipboard-check text-orange-400"></i> PDI Desk</button>
+      <button class="nd-admin-tab-btn" onclick="heavenRefreshPublic()"><i class="fa-solid fa-rotate text-sky-400"></i> Refresh Everything</button>
+    `;
+    nav.dataset.heaven='yes';
+  }
+
+  function keepLeadsSafe(){
+    // Never replace lead tables/cards. Only refresh existing functions.
+    if(typeof loadAdminLeadsDashboard==='function'){
+      try{loadAdminLeadsDashboard();}catch(e){}
+    }
+  }
+
+  function boot(){
+    if(!isAdminRoute()) return;
+    document.body.classList.add('nd-admin-route');
+    addHeader();
+    improveNav();
+    keepLeadsSafe();
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,900));
+  window.addEventListener('hashchange',()=>setTimeout(boot,500));
+  setInterval(boot,1600);
+})();
+</script>
+
 </body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
@@ -7635,6 +7964,335 @@ body.nd-admin-route #adminWorkspaceView input[type="time"] {
   document.addEventListener("DOMContentLoaded", openAdminRoute);
   window.addEventListener("hashchange", openAdminRoute);
   setTimeout(openAdminRoute, 700);
+})();
+</script>
+
+
+<!-- NODEALER ADMIN HEAVEN UPGRADE - SAFE SKIN ONLY -->
+<style id="ndAdminHeavenStyle">
+body.nd-admin-route {
+  background:
+    radial-gradient(circle at 10% 5%, rgba(37,99,235,.24), transparent 34%),
+    radial-gradient(circle at 88% 14%, rgba(236,72,153,.16), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(245,158,11,.14), transparent 35%),
+    #020617 !important;
+}
+body.nd-admin-route #secureAdminPortal {
+  background: transparent !important;
+  padding: 18px !important;
+}
+body.nd-admin-route #adminWorkspaceView {
+  color: #fff !important;
+  gap: 22px !important;
+}
+body.nd-admin-route #adminWorkspaceView aside {
+  background: rgba(15,23,42,.78) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(22px) !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,.34) !important;
+}
+body.nd-admin-route #adminWorkspaceView aside::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 35%, rgba(59,130,246,.12));
+}
+body.nd-admin-route .nd-admin-tab-btn,
+body.nd-admin-route #adminWorkspaceView aside nav button {
+  position: relative;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+  background: rgba(2,6,23,.62) !important;
+  color: #cbd5e1 !important;
+  border-radius: 18px !important;
+  padding: 14px 14px !important;
+  margin-bottom: 9px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .4px !important;
+  transition: .22s ease !important;
+}
+body.nd-admin-route .nd-admin-tab-btn:hover,
+body.nd-admin-route .nd-admin-tab-btn.active,
+body.nd-admin-route #adminWorkspaceView aside nav button:hover,
+body.nd-admin-route #adminWorkspaceView aside nav button.active {
+  background: linear-gradient(135deg, #ffffff, #dbeafe) !important;
+  color: #020617 !important;
+  transform: translateX(4px) !important;
+  box-shadow: 0 18px 48px rgba(37,99,235,.18) !important;
+}
+#ndAdminHeavenHeader {
+  border: 1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.04)),
+    rgba(15,23,42,.74);
+  backdrop-filter: blur(24px);
+  border-radius: 34px;
+  padding: 24px;
+  box-shadow: 0 30px 90px rgba(0,0,0,.25);
+  overflow: hidden;
+  position: relative;
+}
+#ndAdminHeavenHeader::after {
+  content: "";
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  right: -80px;
+  top: -90px;
+  background: radial-gradient(circle, rgba(59,130,246,.34), transparent 60%);
+  pointer-events: none;
+}
+.nd-heaven-title {
+  font-size: clamp(28px, 4vw, 50px);
+  line-height: .92;
+  font-weight: 950;
+  letter-spacing: -1.7px;
+  text-transform: uppercase;
+}
+.nd-heaven-subtitle { color: #94a3b8; font-size: 13px; font-weight: 800; margin-top: 8px; max-width: 720px; }
+.nd-heaven-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 10px;
+  font-weight: 950;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.08);
+  color: #dbeafe;
+}
+.nd-heaven-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+.nd-heaven-action {
+  min-height: 120px;
+  text-align: left;
+  border-radius: 24px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(2,6,23,.48);
+  color: white;
+  transition: .22s ease;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+.nd-heaven-action:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.10);
+  box-shadow: 0 24px 65px rgba(0,0,0,.22);
+}
+.nd-heaven-action i { font-size: 23px; margin-bottom: 12px; }
+.nd-heaven-action h3 { font-size: 13px; font-weight: 950; text-transform: uppercase; }
+.nd-heaven-action p { font-size: 11px; color: #94a3b8; font-weight: 700; margin-top: 4px; line-height: 1.35; }
+.nd-heaven-floating-search {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+}
+.nd-heaven-floating-search input {
+  width: 100%;
+  background: rgba(2,6,23,.62);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 14px 15px;
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  outline: none;
+}
+.nd-heaven-floating-search button {
+  border-radius: 18px;
+  padding: 13px 16px;
+  font-size: 11px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+body.nd-admin-route #adminWorkspaceView .bg-slate-900,
+body.nd-admin-route #adminWorkspaceView .bg-slate-950 {
+  border-color: rgba(255,255,255,.10) !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,.19) !important;
+}
+body.nd-admin-route #adminWorkspaceView input,
+body.nd-admin-route #adminWorkspaceView select,
+body.nd-admin-route #adminWorkspaceView textarea {
+  border-color: rgba(255,255,255,.12) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03) !important;
+}
+.nd-admin-panel-active { animation: ndAdminHeavenIn .28s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes ndAdminHeavenIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+#ndAdminHeavenDock {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 100020;
+  display: none;
+  gap: 10px;
+}
+body.nd-admin-route #ndAdminHeavenDock { display: flex; }
+#ndAdminHeavenDock button,
+#ndAdminHeavenDock a {
+  border-radius: 999px;
+  padding: 13px 16px;
+  font-size: 11px;
+  font-weight: 950;
+  text-transform: uppercase;
+  color: white;
+  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+}
+@media(max-width: 1024px) {
+  .nd-heaven-actions { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .nd-heaven-floating-search { grid-template-columns: 1fr; }
+  body.nd-admin-route #adminWorkspaceView { padding-left: 0 !important; }
+}
+@media(max-width: 640px) {
+  #ndAdminHeavenHeader { border-radius: 24px; padding: 18px; }
+  .nd-heaven-actions { grid-template-columns: 1fr; }
+  #ndAdminHeavenDock { left: 10px; right: 10px; bottom: 10px; display: grid; grid-template-columns: repeat(2, 1fr); }
+  #ndAdminHeavenDock button, #ndAdminHeavenDock a { text-align: center; justify-content: center; padding: 12px 8px; }
+}
+</style>
+
+<div id="ndAdminHeavenDock">
+  <button onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('leads'):document.getElementById('adminLeadsTableBody')?.scrollIntoView({behavior:'smooth'})" style="background:#f59e0b;color:#020617"><i class="fa-solid fa-address-book"></i> Leads</button>
+  <button onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('inventory'):document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})" style="background:#2563eb"><i class="fa-solid fa-car"></i> Stock</button>
+  <a href="https://wa.me/917838335143" target="_blank" style="background:#16a34a"><i class="fa-brands fa-whatsapp"></i> Support</a>
+</div>
+
+<script id="ndAdminHeavenScript">
+(function(){
+  function isAdminRoute(){
+    const h=(location.hash||'').toLowerCase();
+    const p=(location.pathname||'').toLowerCase();
+    return h==='#admin' || p.endsWith('/admin.html') || p.endsWith('/admin');
+  }
+
+  function callIfExists(name){
+    if(typeof window[name] === 'function') return window[name]();
+    return false;
+  }
+
+  function heavenRefresh(){
+    ['loadAdminInventoryDirectory','loadAdminLeadsDashboard','renderCars','updateActionCenter','renderNdLeadStats','renderNdLeadCards'].forEach(fn=>{
+      try{ if(typeof window[fn]==='function') window[fn](); }catch(e){}
+    });
+  }
+
+  window.ndAdminSmartSearch = function(){
+    const q=(document.getElementById('ndAdminHeavenSearch')?.value||'').trim().toLowerCase();
+    if(!q) return;
+    if(/lead|phone|call|customer|whatsapp|name/.test(q)){
+      if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('leads');
+      setTimeout(()=>{
+        const s=document.getElementById('leadSearchInput')||document.getElementById('ndLeadSearch')||document.querySelector('#ndLeadViewerModal input[type="text"]');
+        if(s){s.value=q;s.dispatchEvent(new Event('input',{bubbles:true}));}
+      },250);
+      return;
+    }
+    if(/stock|car|inventory|upload|photo|price|model/.test(q)){
+      if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('inventory');
+      setTimeout(()=>document.getElementById('carTitle')?.focus(),250);
+      return;
+    }
+    if(/pdi|inspection|report/.test(q)){
+      if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('pdi');
+      return;
+    }
+    if(typeof ndSwitchAdminPanel==='function') ndSwitchAdminPanel('dashboard');
+  };
+
+  function addHeader(){
+    if(!isAdminRoute()) return;
+    const workspace=document.getElementById('adminWorkspaceView');
+    if(!workspace || workspace.classList.contains('hidden')) return;
+    if(document.getElementById('ndAdminHeavenHeader')) return;
+
+    const header=document.createElement('div');
+    header.id='ndAdminHeavenHeader';
+    header.innerHTML=`
+      <div class="relative z-10">
+        <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-5">
+          <div>
+            <span class="nd-heaven-pill"><i class="fa-solid fa-sparkles text-amber-300"></i> Premium Admin Experience</span>
+            <h1 class="nd-heaven-title mt-4">Welcome back to your NoDealer command room.</h1>
+            <p class="nd-heaven-subtitle">Everything is still connected to your original leads, stock upload, inventory and PDI tools. This is only a beautiful control layer on top.</p>
+          </div>
+          <div class="grid grid-cols-3 gap-2 min-w-[260px]">
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-3"><p class="text-[10px] uppercase text-slate-400 font-black">Today</p><h3 class="text-lg font-black" id="ndHeavenDate">Live</h3></div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-3"><p class="text-[10px] uppercase text-slate-400 font-black">Mode</p><h3 class="text-lg font-black text-green-300">Secure</h3></div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-3"><p class="text-[10px] uppercase text-slate-400 font-black">Data</p><h3 class="text-lg font-black text-blue-300">Synced</h3></div>
+          </div>
+        </div>
+        <div class="nd-heaven-actions">
+          <button class="nd-heaven-action" onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('leads'):document.getElementById('adminLeadsTableBody')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-address-book text-amber-300"></i><h3>Leads Room</h3><p>Open customer enquiries, follow-ups, calls and WhatsApp actions.</p></button>
+          <button class="nd-heaven-action" onclick="typeof openNdLeadViewer==='function'?openNdLeadViewer():(typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('leads'):null)"><i class="fa-solid fa-users-viewfinder text-green-300"></i><h3>CRM Viewer</h3><p>Open your full existing lead viewer without losing any data.</p></button>
+          <button class="nd-heaven-action" onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('inventory'):document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-warehouse text-blue-300"></i><h3>Inventory</h3><p>See stock and upload/edit cars from your original stock form.</p></button>
+          <button class="nd-heaven-action" onclick="typeof openRealCarManager==='function'?openRealCarManager():document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-circle-plus text-red-300"></i><h3>Add Car</h3><p>Jump directly to the car upload and manager tools.</p></button>
+          <button class="nd-heaven-action" onclick="typeof ndSwitchAdminPanel==='function'?ndSwitchAdminPanel('pdi'):(typeof openNdPdiBookings==='function'?openNdPdiBookings():null)"><i class="fa-solid fa-clipboard-check text-orange-300"></i><h3>PDI Desk</h3><p>Open PDI booking, report and inspection tools.</p></button>
+        </div>
+        <div class="nd-heaven-floating-search">
+          <input id="ndAdminHeavenSearch" placeholder="Search action: type leads, stock, upload, PDI, phone, customer..." onkeydown="if(event.key==='Enter')ndAdminSmartSearch()">
+          <button onclick="ndAdminSmartSearch()" class="bg-white text-slate-950">Open</button>
+          <button onclick="heavenRefreshPublic()" class="bg-blue-600 text-white">Refresh</button>
+        </div>
+      </div>`;
+    workspace.insertBefore(header, workspace.firstElementChild?.nextSibling || workspace.firstChild);
+    const dateEl=document.getElementById('ndHeavenDate');
+    if(dateEl) dateEl.textContent=new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short'});
+  }
+
+  window.heavenRefreshPublic=function(){
+    heavenRefresh();
+    const btn=document.querySelector('#ndAdminHeavenHeader button[onclick="heavenRefreshPublic()"]');
+    if(btn){const old=btn.textContent;btn.textContent='Done';setTimeout(()=>btn.textContent=old,900);}
+  };
+
+  function improveNav(){
+    const sidebar=document.querySelector('#adminWorkspaceView aside');
+    const nav=sidebar?.querySelector('nav');
+    if(!nav || nav.dataset.heaven==='yes') return;
+    nav.innerHTML=`
+      <button class="nd-admin-tab-btn active" data-panel="dashboard" onclick="ndSwitchAdminPanel?.('dashboard')"><i class="fa-solid fa-house text-blue-400"></i> Dashboard</button>
+      <button class="nd-admin-tab-btn" data-panel="leads" onclick="ndSwitchAdminPanel?.('leads')"><i class="fa-solid fa-address-book text-amber-400"></i> Leads Room</button>
+      <button class="nd-admin-tab-btn" onclick="typeof openNdLeadViewer==='function'?openNdLeadViewer():ndSwitchAdminPanel?.('leads')"><i class="fa-solid fa-users-viewfinder text-green-400"></i> CRM Viewer</button>
+      <button class="nd-admin-tab-btn" data-panel="inventory" onclick="ndSwitchAdminPanel?.('inventory')"><i class="fa-solid fa-car text-emerald-400"></i> Inventory + Upload</button>
+      <button class="nd-admin-tab-btn" onclick="typeof openRealCarManager==='function'?openRealCarManager():document.getElementById('carUploadForm')?.scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-circle-plus text-red-400"></i> Add / Edit Stock</button>
+      <button class="nd-admin-tab-btn" data-panel="direct" onclick="ndSwitchAdminPanel?.('direct')"><i class="fa-solid fa-user-lock text-purple-400"></i> Direct Party</button>
+      <button class="nd-admin-tab-btn" data-panel="pdi" onclick="ndSwitchAdminPanel?.('pdi')"><i class="fa-solid fa-clipboard-check text-orange-400"></i> PDI Desk</button>
+      <button class="nd-admin-tab-btn" onclick="heavenRefreshPublic()"><i class="fa-solid fa-rotate text-sky-400"></i> Refresh Everything</button>
+    `;
+    nav.dataset.heaven='yes';
+  }
+
+  function keepLeadsSafe(){
+    // Never replace lead tables/cards. Only refresh existing functions.
+    if(typeof loadAdminLeadsDashboard==='function'){
+      try{loadAdminLeadsDashboard();}catch(e){}
+    }
+  }
+
+  function boot(){
+    if(!isAdminRoute()) return;
+    document.body.classList.add('nd-admin-route');
+    addHeader();
+    improveNav();
+    keepLeadsSafe();
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,900));
+  window.addEventListener('hashchange',()=>setTimeout(boot,500));
+  setInterval(boot,1600);
 })();
 </script>
 
