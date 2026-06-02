@@ -8634,6 +8634,90 @@ async function loadAdminLeadsDashboard() {
   if (typeof updateActionCenter === "function") updateActionCenter();
 }
 </script>
+    <script>
+/* NODEALER FINAL FORCE LEAD FIX */
+(function () {
+  let leadLoading = false;
+
+  async function forceFastLeads() {
+    const tableBody = document.getElementById("adminLeadsTableBody");
+    if (!tableBody || leadLoading) return;
+
+    leadLoading = true;
+
+    try {
+      if (typeof ensureSupabase !== "function" || !ensureSupabase()) {
+        leadLoading = false;
+        return;
+      }
+
+      tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-blue-300 font-bold">Loading latest leads safely...</td></tr>`;
+
+      const { data, error } = await supabaseClient
+        .from("leads")
+        .select("id,created_at,name,phone,city,car_brand,car_model,submission_type,lead_status,message")
+        .order("created_at", { ascending: false })
+        .limit(25);
+
+      if (error) throw error;
+
+      const logs = data || [];
+      window.LEAD_CACHE = logs;
+
+      if (!logs.length) {
+        tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 font-bold">No leads found.</td></tr>`;
+        leadLoading = false;
+        return;
+      }
+
+      tableBody.innerHTML = "";
+
+      logs.forEach(log => {
+        const phone = String(log.phone || "").replace(/\D/g, "");
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td class="p-4 align-top">
+            <b class="text-amber-300">${log.submission_type || "Lead"}</b><br>
+            <span class="text-xs text-slate-400">${log.created_at || ""}</span>
+          </td>
+          <td class="p-4 align-top">
+            <b class="text-white">${log.name || "No Name"}</b><br>
+            <span class="text-xs text-slate-300">${log.phone || ""}</span><br>
+            <span class="text-xs text-slate-400">${log.city || ""}</span>
+          </td>
+          <td class="p-4 align-top">
+            <b class="text-blue-300">${log.car_brand || ""} ${log.car_model || ""}</b><br>
+            <span class="text-xs text-slate-400">${log.message || ""}</span>
+          </td>
+          <td class="p-4 align-top">
+            ${phone ? `<a href="https://wa.me/91${phone}" target="_blank" class="bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-black">WHATSAPP</a>` : ""}
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+    } catch (e) {
+      console.error("Fast lead loader failed:", e);
+    }
+
+    leadLoading = false;
+  }
+
+  window.loadAdminLeadsDashboard = forceFastLeads;
+
+  setInterval(() => {
+    const body = document.getElementById("adminLeadsTableBody");
+    if (!body) return;
+
+    if (body.innerText.includes("Could not load Supabase leads") || body.innerText.includes("statement timeout")) {
+      forceFastLeads();
+    }
+  }, 500);
+
+  document.addEventListener("DOMContentLoaded", () => setTimeout(forceFastLeads, 1200));
+  window.addEventListener("load", () => setTimeout(forceFastLeads, 1200));
+})();
+</script>
 </body>
 </html>
 
