@@ -1311,50 +1311,98 @@ body{background:#f8fafc;color:#0f172a}
 </section>
 
 
-<section id="pdi-section" class="nd-pdi-flow-shell">
+
+<!-- NODEALER PDI PHASE 1 PREMIUM BOOKING SYSTEM -->
+<section id="pdi-section" class="ndp1-shell">
+  <div class="ndp1-bg-dot ndp1-dot-a"></div>
+  <div class="ndp1-bg-dot ndp1-dot-b"></div>
   <div class="max-w-7xl mx-auto px-4 relative z-10">
     <div class="grid lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-5 space-y-6">
-        <span class="inline-flex items-center gap-2 bg-amber-500/10 text-amber-300 text-xs font-black uppercase tracking-wider px-4 py-2 rounded-full border border-amber-500/20"><i class="fa-solid fa-clipboard-check"></i> NoDealer PDI</span>
-        <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">Book Inspection In 3 Simple Steps</h2>
-        <p class="text-slate-300 font-semibold leading-relaxed">Enter registration number + mobile, choose your PDI need, select package and book. Works for selling car, buying used car and new car delivery inspection.</p>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">300+</p><p class="text-[10px] uppercase text-slate-400 font-black">Check Format</p></div>
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">PDF</p><p class="text-[10px] uppercase text-slate-400 font-black">Report Ready</p></div>
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">3</p><p class="text-[10px] uppercase text-slate-400 font-black">Use Cases</p></div>
-          <div class="nd-pdi-mini-check"><p class="text-3xl font-black">CRM</p><p class="text-[10px] uppercase text-slate-400 font-black">Lead Saved</p></div>
+      <div class="lg:col-span-5 text-white">
+        <span class="ndp1-pill ndp1-pill-dark"><i class="fa-solid fa-shield-halved text-amber-300"></i> NoDealer Inspection Desk</span>
+        <h2 class="text-4xl md:text-6xl font-black uppercase leading-[.95] mt-5">Book PDI Before You Pay, Sell Or Take Delivery.</h2>
+        <p class="text-slate-300 font-semibold mt-5 leading-relaxed">Choose the exact inspection journey: buying a used car, selling your own car with trust, or checking a new car before showroom delivery.</p>
+
+        <div class="grid grid-cols-3 gap-3 mt-7">
+          <div class="ndp1-trust"><h3>150+</h3><p>Point Format</p></div>
+          <div class="ndp1-trust"><h3>CRM</h3><p>Lead Saved</p></div>
+          <div class="ndp1-trust"><h3>WA</h3><p>Fast Confirm</p></div>
+        </div>
+
+        <div class="ndp1-mini-report mt-7">
+          <p class="text-[10px] uppercase text-amber-300 font-black">Report Preview</p>
+          <h3 class="text-2xl font-black uppercase mt-1">What we check</h3>
+          <div class="grid grid-cols-2 gap-2 mt-4">
+            <span><i class="fa-solid fa-check text-green-400"></i> Engine & leaks</span>
+            <span><i class="fa-solid fa-check text-green-400"></i> Paint mismatch</span>
+            <span><i class="fa-solid fa-check text-green-400"></i> Tyres & battery</span>
+            <span><i class="fa-solid fa-check text-green-400"></i> Odometer signs</span>
+            <span><i class="fa-solid fa-check text-green-400"></i> RC / documents</span>
+            <span><i class="fa-solid fa-check text-green-400"></i> Delivery defects</span>
+          </div>
         </div>
       </div>
+
       <div class="lg:col-span-7">
-        <div class="nd-pdi-flow-card">
-          <div class="flex items-center gap-3 mb-5"><div id="pdiDot1" class="nd-pdi-step-dot active">1</div><div class="h-1 flex-1 bg-slate-200 rounded"></div><div id="pdiDot2" class="nd-pdi-step-dot">2</div><div class="h-1 flex-1 bg-slate-200 rounded"></div><div id="pdiDot3" class="nd-pdi-step-dot">3</div></div>
-          <div id="pdiFlowStep1">
-            <h3 class="text-2xl font-black uppercase">Start With Vehicle Number</h3>
-            <p class="text-sm text-slate-500 font-semibold mt-1">For now we save RC manually. After VAHAN API, this step will auto-fetch vehicle details.</p>
-            <div class="grid md:grid-cols-2 gap-3 mt-5"><input id="pdiFlowReg" class="nd-pdi-flow-input" placeholder="Vehicle No. e.g. HR26AB1234"><input id="pdiFlowPhone" class="nd-pdi-flow-input" placeholder="Mobile Number"></div>
-            <button onclick="pdiFlowGoStep(2)" class="mt-4 w-full bg-blue-600 text-white rounded-2xl py-4 text-xs font-black uppercase">Check Vehicle</button>
-          </div>
-          <div id="pdiFlowStep2" class="hidden">
-            <h3 class="text-2xl font-black uppercase">What PDI Do You Need?</h3>
-            <div class="grid md:grid-cols-3 gap-3 mt-5">
-              <button onclick="selectPdiUseCase('Selling My Car')" class="nd-pdi-flow-tab" data-pdi-use="Selling My Car"><i class="fa-solid fa-key text-green-500 text-xl"></i><br>Selling My Car</button>
-              <button onclick="selectPdiUseCase('Buying Used Car')" class="nd-pdi-flow-tab" data-pdi-use="Buying Used Car"><i class="fa-solid fa-car-side text-blue-500 text-xl"></i><br>Buying Used Car</button>
-              <button onclick="selectPdiUseCase('New Car Delivery')" class="nd-pdi-flow-tab" data-pdi-use="New Car Delivery"><i class="fa-solid fa-gift text-amber-500 text-xl"></i><br>New Car Delivery</button>
+        <div class="ndp1-card">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
+            <div>
+              <span class="ndp1-pill bg-amber-50 text-amber-700">Phase 1 Live Booking</span>
+              <h3 class="text-3xl font-black uppercase text-slate-950 mt-2">Select PDI Type</h3>
             </div>
-            <div class="grid md:grid-cols-2 gap-3 mt-5"><input id="pdiFlowCar" class="nd-pdi-flow-input" placeholder="Car Model / Variant"><input id="pdiFlowCity" class="nd-pdi-flow-input" placeholder="City" value="Gurugram"><input id="pdiFlowLocation" class="nd-pdi-flow-input" placeholder="Inspection Location"><input id="pdiFlowDate" class="nd-pdi-flow-input" placeholder="Preferred Date"></div>
-            <div class="grid grid-cols-2 gap-3 mt-4"><button onclick="pdiFlowGoStep(1)" class="bg-slate-100 text-slate-700 rounded-2xl py-4 text-xs font-black uppercase">Back</button><button onclick="pdiFlowGoStep(3)" class="bg-blue-600 text-white rounded-2xl py-4 text-xs font-black uppercase">Next</button></div>
+            <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20book%20a%20PDI." target="_blank" class="ndp1-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
           </div>
-          <div id="pdiFlowStep3" class="hidden">
-            <h3 class="text-2xl font-black uppercase">Choose Inspection Package</h3>
-            <div class="grid md:grid-cols-3 gap-3 mt-5">
-              <button onclick="selectPdiPackage('Essential')" class="nd-pdi-package-card" data-pdi-package="Essential"><h4 class="font-black uppercase">Essential</h4><p class="text-xs text-slate-500 mt-2">Exterior, tyres, interior, basic mechanical.</p></button>
-              <button onclick="selectPdiPackage('Advanced Report')" class="nd-pdi-package-card active" data-pdi-package="Advanced Report"><h4 class="font-black uppercase">Advanced</h4><p class="text-xs text-slate-500 mt-2">300+ format, accident, documents, estimate.</p></button>
-              <button onclick="selectPdiPackage('Premium + Guidance')" class="nd-pdi-package-card" data-pdi-package="Premium + Guidance"><h4 class="font-black uppercase">Premium</h4><p class="text-xs text-slate-500 mt-2">Report + value note + buying guidance.</p></button>
+
+          <div class="grid md:grid-cols-3 gap-3 mb-5" id="ndp1TypeCards">
+            <button type="button" onclick="ndp1SelectType('buyer')" class="ndp1-type active" data-type="buyer"><i class="fa-solid fa-car-side text-blue-600"></i><h4>Used Car Buyer</h4><p>Inspect before token/payment.</p></button>
+            <button type="button" onclick="ndp1SelectType('seller')" class="ndp1-type" data-type="seller"><i class="fa-solid fa-key text-red-600"></i><h4>Seller PDI</h4><p>Create trust before listing.</p></button>
+            <button type="button" onclick="ndp1SelectType('newcar')" class="ndp1-type" data-type="newcar"><i class="fa-solid fa-award text-amber-600"></i><h4>New Car Delivery</h4><p>Check before delivery sign-off.</p></button>
+          </div>
+
+          <div class="ndp1-selected-box mb-5">
+            <div><p class="text-[10px] uppercase text-slate-500 font-black">Selected Journey</p><h4 id="ndp1SelectedTitle" class="text-xl font-black uppercase text-slate-950">Used Car Buyer PDI</h4></div>
+            <span id="ndp1SelectedBadge" class="ndp1-status-badge">New Request</span>
+          </div>
+
+          <form id="ndp1BookingForm" onsubmit="ndp1SubmitBooking(event)" class="space-y-4">
+            <input type="hidden" id="ndp1Type" value="buyer">
+            <div class="grid md:grid-cols-2 gap-3">
+              <input id="ndp1Name" class="ndp1-input" placeholder="Your Name" required>
+              <input id="ndp1Phone" class="ndp1-input" placeholder="Mobile Number" required>
             </div>
-            <textarea id="pdiFlowNotes" class="nd-pdi-flow-input mt-4 normal-case" rows="3" placeholder="Any concern? Accident, repaint, engine noise, dealer delivery, loan, challan, seller phone, etc."></textarea>
-            <div class="grid grid-cols-2 gap-3 mt-4"><button onclick="pdiFlowGoStep(2)" class="bg-slate-100 text-slate-700 rounded-2xl py-4 text-xs font-black uppercase">Back</button><button onclick="submitPdiFlowBooking()" class="bg-amber-500 text-slate-950 rounded-2xl py-4 text-xs font-black uppercase">Book Inspection</button></div>
-            <a href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20want%20to%20book%20a%20PDI." target="_blank" class="block text-center mt-3 bg-green-600 text-white rounded-2xl py-4 text-xs font-black uppercase"><i class="fa-brands fa-whatsapp"></i> Ask On WhatsApp</a>
-          </div>
+            <div class="grid md:grid-cols-3 gap-3">
+              <input id="ndp1City" class="ndp1-input" placeholder="City / Area" required>
+              <input id="ndp1Vehicle" class="ndp1-input" placeholder="Car Brand + Model" required>
+              <input id="ndp1Reg" class="ndp1-input" placeholder="Car Number / Reg. No.">
+            </div>
+            <div class="grid md:grid-cols-2 gap-3">
+              <input id="ndp1SellerName" class="ndp1-input" placeholder="Seller / Showroom Name">
+              <input id="ndp1SellerPhone" class="ndp1-input" placeholder="Seller / Showroom Phone">
+            </div>
+            <div class="grid md:grid-cols-3 gap-3">
+              <select id="ndp1Package" class="ndp1-input">
+                <option>Essential PDI</option>
+                <option>Advanced Report PDI</option>
+                <option>Premium Photos + Report</option>
+              </select>
+              <input id="ndp1Date" type="date" class="ndp1-input">
+              <input id="ndp1Time" type="time" class="ndp1-input">
+            </div>
+            <textarea id="ndp1Address" class="ndp1-input min-h-[84px]" placeholder="Inspection address / pickup point / showroom address"></textarea>
+            <textarea id="ndp1Notes" class="ndp1-input min-h-[84px]" placeholder="Any concern? Accident doubt, repaint, engine noise, delivery issue, document doubt etc."></textarea>
+            <div class="ndp1-upload-row">
+              <div>
+                <p class="font-black uppercase text-sm text-slate-950">Optional Car Photos</p>
+                <p class="text-xs text-slate-500 font-semibold">Photos are counted in CRM. Full photo upload can be connected later with Supabase storage.</p>
+              </div>
+              <input id="ndp1Photos" type="file" accept="image/*" multiple class="text-xs font-bold">
+            </div>
+            <div class="grid md:grid-cols-2 gap-3">
+              <button id="ndp1SubmitBtn" type="submit" class="bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-2xl py-4 text-xs font-black uppercase shadow-lg"><i class="fa-solid fa-calendar-check"></i> Save PDI Booking</button>
+              <a href="tel:+917838335143" class="bg-slate-950 hover:bg-slate-800 text-white rounded-2xl py-4 text-xs font-black uppercase text-center"><i class="fa-solid fa-phone"></i> Call PDI Team</a>
+            </div>
+            <p class="text-[11px] text-slate-500 font-semibold text-center">Your PDI request will be saved in NoDealer CRM and WhatsApp confirmation will open automatically.</p>
+          </form>
         </div>
       </div>
     </div>
@@ -8293,6 +8341,165 @@ body.nd-admin-route #ndAdminHeavenDock { display: flex; }
   document.addEventListener('DOMContentLoaded',()=>setTimeout(boot,900));
   window.addEventListener('hashchange',()=>setTimeout(boot,500));
   setInterval(boot,1600);
+})();
+</script>
+
+
+
+<!-- NODEALER PDI PHASE 1 CSS + CRM LOGIC -->
+<style>
+.ndp1-shell{background:radial-gradient(circle at top left,rgba(37,99,235,.34),transparent 34%),radial-gradient(circle at bottom right,rgba(245,158,11,.24),transparent 38%),#020617;color:white;padding:76px 0;position:relative;overflow:hidden}.ndp1-bg-dot{position:absolute;border-radius:999px;filter:blur(12px);opacity:.24}.ndp1-dot-a{width:220px;height:220px;background:#1e88e5;top:8%;right:9%}.ndp1-dot-b{width:180px;height:180px;background:#e31e24;bottom:8%;left:8%}.ndp1-pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 12px;font-size:10px;font-weight:900;text-transform:uppercase}.ndp1-pill-dark{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff}.ndp1-trust{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:16px}.ndp1-trust h3{font-size:25px;font-weight:900}.ndp1-trust p{font-size:10px;text-transform:uppercase;color:#cbd5e1;font-weight:900}.ndp1-mini-report{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:22px;backdrop-filter:blur(14px)}.ndp1-mini-report span{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:10px;font-size:12px;font-weight:800;color:#e2e8f0}.ndp1-card{background:#fff;color:#0f172a;border:1px solid #e2e8f0;border-radius:34px;padding:24px;box-shadow:0 28px 90px rgba(0,0,0,.30)}.ndp1-whatsapp{background:#16a34a;color:#fff;border-radius:16px;padding:12px 16px;font-size:12px;font-weight:900;text-transform:uppercase}.ndp1-type{background:#f8fafc;border:1px solid #e2e8f0;border-radius:24px;padding:18px;text-align:left;transition:.22s ease;min-height:150px}.ndp1-type:hover,.ndp1-type.active{background:#0f172a;color:#fff;border-color:#0f172a;transform:translateY(-2px);box-shadow:0 18px 45px rgba(15,23,42,.18)}.ndp1-type i{font-size:28px}.ndp1-type h4{font-size:15px;font-weight:900;text-transform:uppercase;margin-top:14px}.ndp1-type p{font-size:12px;color:#64748b;font-weight:700;margin-top:4px}.ndp1-type.active p,.ndp1-type:hover p{color:#cbd5e1}.ndp1-selected-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:22px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}.ndp1-status-badge{background:#fef3c7;color:#b45309;border-radius:999px;padding:8px 11px;font-size:10px;font-weight:900;text-transform:uppercase;white-space:nowrap}.ndp1-input{width:100%;padding:14px;border:1px solid #e2e8f0;border-radius:16px;background:#fff;color:#0f172a;font-size:13px;font-weight:800;outline:none}.ndp1-input:focus{border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.14)}.ndp1-upload-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:20px;padding:16px}.ndp1-admin-launch{position:fixed;right:18px;bottom:18px;z-index:100200;background:#f59e0b;color:#020617;border-radius:999px;padding:13px 16px;font-size:12px;font-weight:900;text-transform:uppercase;box-shadow:0 18px 48px rgba(15,23,42,.28);display:none}.ndp1-admin-modal{position:fixed;inset:0;background:rgba(2,6,23,.88);z-index:100250;display:none;padding:18px;overflow-y:auto}.ndp1-admin-modal.active{display:block}.ndp1-admin-shell{max-width:1180px;margin:0 auto;background:#f8fafc;color:#0f172a;border-radius:32px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.35)}.ndp1-admin-head{background:#020617;color:#fff;padding:22px;display:flex;justify-content:space-between;align-items:center;gap:14px}.ndp1-admin-body{padding:20px}.ndp1-admin-card{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 34px rgba(15,23,42,.08)}.ndp1-admin-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.ndp1-admin-booking{background:#fff;border:1px solid #e2e8f0;border-radius:22px;padding:16px;box-shadow:0 12px 34px rgba(15,23,42,.08)}.ndp1-admin-booking h4{font-size:17px;font-weight:900;text-transform:uppercase}.ndp1-admin-booking p{font-size:12px;color:#475569;font-weight:700;margin-top:4px}.ndp1-admin-pill{display:inline-flex;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}.ndp1-status-new{background:#fef3c7;color:#b45309}.ndp1-status-assigned{background:#dbeafe;color:#2563eb}.ndp1-status-completed{background:#dcfce7;color:#16a34a}@media(max-width:768px){.ndp1-shell{padding:50px 0}.ndp1-card{padding:18px;border-radius:26px}.ndp1-selected-box,.ndp1-upload-row{flex-direction:column;align-items:flex-start}.ndp1-admin-grid{grid-template-columns:1fr}.ndp1-admin-head{flex-direction:column;align-items:flex-start}.ndp1-admin-launch{left:12px;right:12px;text-align:center}}
+</style>
+
+<button id="ndp1AdminLaunch" class="ndp1-admin-launch" onclick="ndp1OpenAdminBookings()"><i class="fa-solid fa-clipboard-check"></i> PDI Bookings</button>
+<div id="ndp1AdminModal" class="ndp1-admin-modal">
+  <div class="ndp1-admin-shell">
+    <div class="ndp1-admin-head">
+      <div><p class="text-[10px] uppercase text-amber-300 font-black">NoDealer PDI CRM</p><h2 class="text-3xl font-black uppercase">PDI Bookings</h2></div>
+      <div class="flex gap-2"><button onclick="ndp1LoadAdminBookings()" class="bg-white/10 hover:bg-white/20 text-white rounded-2xl px-4 py-3 text-xs font-black uppercase">Refresh</button><button onclick="ndp1CloseAdminBookings()" class="bg-red-600 text-white rounded-2xl px-4 py-3 text-xs font-black uppercase">Close</button></div>
+    </div>
+    <div class="ndp1-admin-body">
+      <div class="ndp1-admin-grid mb-4">
+        <div class="ndp1-admin-card"><p class="text-[10px] uppercase text-slate-500 font-black">New Requests</p><h3 id="ndp1AdminNewCount" class="text-3xl font-black text-amber-600">0</h3></div>
+        <div class="ndp1-admin-card"><p class="text-[10px] uppercase text-slate-500 font-black">Assigned</p><h3 id="ndp1AdminAssignedCount" class="text-3xl font-black text-blue-600">0</h3></div>
+        <div class="ndp1-admin-card"><p class="text-[10px] uppercase text-slate-500 font-black">Completed</p><h3 id="ndp1AdminCompletedCount" class="text-3xl font-black text-green-600">0</h3></div>
+      </div>
+      <div id="ndp1AdminBookingsList" class="grid md:grid-cols-2 gap-4"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  window.ndp1Types = {
+    buyer:{title:'Used Car Buyer PDI', label:'Used Car Buyer PDI', pack:'Advanced Report PDI', msg:'I want to book Used Car Buyer PDI before token/payment.'},
+    seller:{title:'Seller PDI / Listing Verification', label:'Seller PDI', pack:'Premium Photos + Report', msg:'I want Seller PDI so my car can be listed with more trust.'},
+    newcar:{title:'New Car Delivery Inspection', label:'New Car Delivery PDI', pack:'Advanced Report PDI', msg:'I want New Car Delivery PDI before taking showroom delivery.'}
+  };
+})();
+function ndp1SelectType(type){
+  const cfg = (window.ndp1Types && window.ndp1Types[type]) || window.ndp1Types.buyer;
+  document.getElementById('ndp1Type').value = type;
+  document.getElementById('ndp1SelectedTitle').textContent = cfg.title;
+  document.getElementById('ndp1Package').value = cfg.pack;
+  document.querySelectorAll('.ndp1-type').forEach(btn => btn.classList.toggle('active', btn.dataset.type === type));
+}
+function ndp1GetLocalBookings(){try{return JSON.parse(localStorage.getItem('nodealer_pdi_bookings_phase1')||'[]')}catch(e){return[]}}
+function ndp1SetLocalBookings(items){localStorage.setItem('nodealer_pdi_bookings_phase1', JSON.stringify(items||[]))}
+function ndp1BuildPayload(){
+  const type = document.getElementById('ndp1Type').value || 'buyer';
+  const cfg = window.ndp1Types[type] || window.ndp1Types.buyer;
+  const photos = document.getElementById('ndp1Photos');
+  const payload = {
+    id:'PDI-'+Date.now(),
+    submissionType:'PDI Booking - '+cfg.label,
+    leadStatus:'New PDI Request',
+    pdiStatus:'New Request',
+    pdiType:cfg.label,
+    name:document.getElementById('ndp1Name').value.trim(),
+    phone:document.getElementById('ndp1Phone').value.trim(),
+    location:document.getElementById('ndp1City').value.trim(),
+    city:document.getElementById('ndp1City').value.trim(),
+    carBrand:'PDI',
+    carModel:document.getElementById('ndp1Vehicle').value.trim(),
+    carYear:'',
+    carColor:'',
+    vehicle:document.getElementById('ndp1Vehicle').value.trim(),
+    registrationNumber:document.getElementById('ndp1Reg').value.trim(),
+    sellerName:document.getElementById('ndp1SellerName').value.trim(),
+    sellerPhone:document.getElementById('ndp1SellerPhone').value.trim(),
+    pdiPackage:document.getElementById('ndp1Package').value,
+    preferredDate:document.getElementById('ndp1Date').value,
+    preferredTime:document.getElementById('ndp1Time').value,
+    inspectionAddress:document.getElementById('ndp1Address').value.trim(),
+    customerConcern:document.getElementById('ndp1Notes').value.trim(),
+    attachedPhotosCount: photos && photos.files ? photos.files.length : 0,
+    note:'PDI Type: '+cfg.label+' | Package: '+document.getElementById('ndp1Package').value+' | Vehicle: '+document.getElementById('ndp1Vehicle').value.trim()+' | Reg: '+document.getElementById('ndp1Reg').value.trim()+' | Seller/Showroom: '+document.getElementById('ndp1SellerName').value.trim()+' '+document.getElementById('ndp1SellerPhone').value.trim()+' | Slot: '+document.getElementById('ndp1Date').value+' '+document.getElementById('ndp1Time').value+' | Address: '+document.getElementById('ndp1Address').value.trim()+' | Concern: '+document.getElementById('ndp1Notes').value.trim(),
+    aiSuggestion:'High intent PDI booking. Call quickly, confirm inspection address, assign inspector, then update status to Assigned.',
+    source:'NoDealer PDI Phase 1',
+    timestamp:new Date().toISOString()
+  };
+  return payload;
+}
+async function ndp1SubmitBooking(e){
+  e.preventDefault();
+  const btn = document.getElementById('ndp1SubmitBtn');
+  const oldText = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving Booking...';
+  const payload = ndp1BuildPayload();
+  try{
+    const local = ndp1GetLocalBookings(); local.unshift(payload); ndp1SetLocalBookings(local);
+    if(typeof saveLeadToSupabase === 'function'){
+      try{ await saveLeadToSupabase(payload); }catch(err){ console.warn('Supabase PDI save optional failed:', err); }
+    }
+    if(typeof MAKE_WEBHOOK_URL !== 'undefined' && MAKE_WEBHOOK_URL){
+      fetch(MAKE_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(()=>{});
+    }
+    if(typeof loadAdminLeadsDashboard === 'function'){ try{ await loadAdminLeadsDashboard(); }catch(e){} }
+    alert('PDI booking saved successfully. NoDealer team can now follow up.');
+    const msg = 'Hi NoDealer, I booked '+payload.pdiType+' for '+payload.vehicle+'. Name: '+payload.name+', Phone: '+payload.phone+', City: '+payload.city+', Preferred slot: '+(payload.preferredDate||'not selected')+' '+(payload.preferredTime||'')+'.';
+    window.open('https://wa.me/917838335143?text='+encodeURIComponent(msg), '_blank');
+    document.getElementById('ndp1BookingForm').reset(); ndp1SelectType('buyer');
+  }catch(err){
+    console.error(err); alert('PDI booking could not be saved. Please check details and try again.');
+  }finally{
+    btn.disabled = false; btn.innerHTML = oldText;
+  }
+}
+function ndp1NormalizeBooking(item){
+  const raw = item.raw_data || item.rawData || item;
+  return {
+    id:item.id || raw.id || ('PDI-'+Math.random()),
+    status: raw.pdiStatus || item.lead_status || item.leadStatus || 'New Request',
+    type: raw.pdiType || item.submission_type || item.submissionType || 'PDI Booking',
+    name: item.name || raw.name || '', phone:item.phone || raw.phone || '', city:item.location || raw.location || raw.city || '',
+    vehicle: raw.vehicle || item.car_model || item.carModel || raw.carModel || '', reg: raw.registrationNumber || '',
+    pack: raw.pdiPackage || '', date: raw.preferredDate || '', time: raw.preferredTime || '',
+    address: raw.inspectionAddress || '', concern: raw.customerConcern || item.note || raw.note || '',
+    seller: ((raw.sellerName||'')+' '+(raw.sellerPhone||'')).trim(),
+    timestamp:item.created_at || item.timestamp || raw.timestamp || ''
+  };
+}
+async function ndp1FetchSupabasePdiBookings(){
+  if(typeof supabaseClient === 'undefined' || !supabaseClient) return [];
+  try{
+    const res = await supabaseClient.from('leads').select('*').order('created_at',{ascending:false}).limit(200);
+    if(res.error) throw res.error;
+    return (res.data||[]).filter(row => String(row.submission_type || (row.raw_data&&row.raw_data.submissionType) || '').toLowerCase().includes('pdi'));
+  }catch(err){console.warn('Could not load Supabase PDI bookings:', err); return [];}
+}
+async function ndp1LoadAdminBookings(){
+  const box = document.getElementById('ndp1AdminBookingsList'); if(!box) return;
+  box.innerHTML = '<div class="ndp1-admin-card md:col-span-2 text-center font-black text-slate-500 uppercase">Loading PDI bookings...</div>';
+  const cloud = await ndp1FetchSupabasePdiBookings();
+  const local = ndp1GetLocalBookings();
+  const merged = [...local, ...cloud].map(ndp1NormalizeBooking);
+  const seen = new Set();
+  const items = merged.filter(x=>{const key=(x.phone+'|'+x.vehicle+'|'+x.timestamp).toLowerCase(); if(seen.has(key)) return false; seen.add(key); return true;});
+  const counts = {new:0,assigned:0,completed:0};
+  items.forEach(x=>{const s=String(x.status).toLowerCase(); if(s.includes('complete')||s.includes('done')) counts.completed++; else if(s.includes('assign')) counts.assigned++; else counts.new++;});
+  document.getElementById('ndp1AdminNewCount').textContent = counts.new;
+  document.getElementById('ndp1AdminAssignedCount').textContent = counts.assigned;
+  document.getElementById('ndp1AdminCompletedCount').textContent = counts.completed;
+  if(!items.length){box.innerHTML='<div class="ndp1-admin-card md:col-span-2 text-center"><h3 class="text-xl font-black uppercase">No PDI bookings yet</h3><p class="text-sm text-slate-500 font-semibold mt-1">New PDI form submissions will appear here and in your existing CRM leads.</p></div>'; return;}
+  box.innerHTML = items.map(x=>{
+    const statusClass = String(x.status).toLowerCase().includes('complete')?'ndp1-status-completed':(String(x.status).toLowerCase().includes('assign')?'ndp1-status-assigned':'ndp1-status-new');
+    return '<div class="ndp1-admin-booking"><div class="flex justify-between gap-2 items-start"><div><span class="ndp1-admin-pill '+statusClass+'">'+(x.status||'New Request')+'</span><h4 class="mt-3">'+(x.type||'PDI Booking')+'</h4></div><i class="fa-solid fa-clipboard-check text-amber-500 text-2xl"></i></div><p><b>Name:</b> '+(x.name||'-')+'</p><p><b>Phone:</b> '+(x.phone||'-')+'</p><p><b>City:</b> '+(x.city||'-')+'</p><p><b>Vehicle:</b> '+(x.vehicle||'-')+'</p><p><b>Reg:</b> '+(x.reg||'-')+'</p><p><b>Package:</b> '+(x.pack||'-')+'</p><p><b>Slot:</b> '+((x.date||'-')+' '+(x.time||''))+'</p><p><b>Address:</b> '+(x.address||'-')+'</p><p><b>Concern:</b> '+(x.concern||'-')+'</p><div class="grid grid-cols-3 gap-2 mt-4"><button onclick="ndp1LocalStatus(\''+x.id+'\',\'New Request\')" class="bg-amber-100 text-amber-700 rounded-xl py-2 text-[10px] font-black uppercase">New</button><button onclick="ndp1LocalStatus(\''+x.id+'\',\'Assigned\')" class="bg-blue-100 text-blue-700 rounded-xl py-2 text-[10px] font-black uppercase">Assigned</button><button onclick="ndp1LocalStatus(\''+x.id+'\',\'Completed\')" class="bg-green-100 text-green-700 rounded-xl py-2 text-[10px] font-black uppercase">Done</button></div></div>';
+  }).join('');
+}
+function ndp1LocalStatus(id,status){
+  const items=ndp1GetLocalBookings(); const found=items.find(x=>String(x.id)===String(id));
+  if(found){found.pdiStatus=status; found.leadStatus=status; ndp1SetLocalBookings(items);} else {alert('Status update is available for local Phase 1 bookings. Supabase status editing can be added in Phase 2.');}
+  ndp1LoadAdminBookings();
+}
+function ndp1OpenAdminBookings(){document.getElementById('ndp1AdminModal').classList.add('active'); ndp1LoadAdminBookings();}
+function ndp1CloseAdminBookings(){document.getElementById('ndp1AdminModal').classList.remove('active');}
+(function(){
+  function adminRouteCheck(){
+    const isAdmin = location.hash.toLowerCase()==='#admin' || location.pathname.toLowerCase().includes('admin');
+    const btn=document.getElementById('ndp1AdminLaunch'); if(btn) btn.style.display=isAdmin?'inline-flex':'none';
+  }
+  document.addEventListener('DOMContentLoaded', adminRouteCheck); window.addEventListener('hashchange', adminRouteCheck); setTimeout(adminRouteCheck,700);
 })();
 </script>
 
