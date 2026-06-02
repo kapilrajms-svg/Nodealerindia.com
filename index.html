@@ -6911,6 +6911,206 @@ body.nd-admin-route #adminWorkspaceView.hidden {
   setTimeout(openAdminRoute, 500);
 })();
 </script>
+    <!-- NODEALER CLEAN ORGANIZED ADMIN PANEL FIX -->
+<style>
+body.nd-admin-route #secureAdminPortal,
+body.nd-admin-route #secureAdminPortal *,
+body.nd-admin-route #adminWorkspaceView,
+body.nd-admin-route #adminWorkspaceView * {
+  display: revert !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.nd-admin-route #preloader,
+body.nd-admin-route #main-content > header,
+body.nd-admin-route #main-content > section,
+body.nd-admin-route #main-content > main,
+body.nd-admin-route .nd-customer-bottom-bar,
+body.nd-admin-route .nd-final-sticky {
+  display: none !important;
+}
+
+#ndCleanAdminOS {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #020617;
+  color: white;
+  display: none;
+  overflow: hidden;
+}
+
+body.nd-admin-route.nd-clean-admin #ndCleanAdminOS {
+  display: grid !important;
+  grid-template-columns: 260px 1fr;
+}
+
+.nd-clean-sidebar {
+  background: #0f172a;
+  border-right: 1px solid rgba(255,255,255,.08);
+  padding: 22px;
+}
+
+.nd-clean-nav {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: left;
+  background: #020617;
+  color: #cbd5e1;
+}
+
+.nd-clean-nav.active,
+.nd-clean-nav:hover {
+  background: white;
+  color: #020617;
+}
+
+.nd-clean-main {
+  overflow-y: auto;
+  padding: 28px;
+}
+
+.nd-clean-section {
+  display: none;
+}
+
+.nd-clean-section.active {
+  display: block;
+}
+
+.nd-clean-card {
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 24px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.nd-clean-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.nd-clean-stat {
+  background: #020617;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 18px;
+}
+
+@media(max-width:768px){
+  body.nd-admin-route.nd-clean-admin #ndCleanAdminOS {
+    grid-template-columns: 1fr;
+  }
+  .nd-clean-sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .nd-clean-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+</style>
+
+<div id="ndCleanAdminOS">
+  <aside class="nd-clean-sidebar">
+    <h2 style="font-size:22px;font-weight:900;">NoDealer OS</h2>
+    <p style="font-size:11px;color:#94a3b8;margin-bottom:22px;">Control Center</p>
+
+    <button class="nd-clean-nav active" onclick="ndShowAdminSection('dashboard', this)">Dashboard</button>
+    <button class="nd-clean-nav" onclick="ndShowAdminSection('leads', this)">Leads</button>
+    <button class="nd-clean-nav" onclick="ndShowAdminSection('inventory', this)">Inventory</button>
+    <button class="nd-clean-nav" onclick="ndShowAdminSection('upload', this)">Stock Upload</button>
+    <button class="nd-clean-nav" onclick="ndShowAdminSection('pdi', this)">PDI Bookings</button>
+
+    <button onclick="location.href='/'" style="margin-top:20px;width:100%;background:#ef4444;color:white;padding:14px;border-radius:16px;font-size:12px;font-weight:900;">
+      Lock / Exit
+    </button>
+  </aside>
+
+  <main class="nd-clean-main">
+    <section id="ndAdminDashboard" class="nd-clean-section active">
+      <h1 style="font-size:34px;font-weight:900;margin-bottom:20px;">Dashboard</h1>
+      <div class="nd-clean-grid">
+        <div class="nd-clean-stat"><p>Total Leads</p><h2 id="ndDashTotalLeads">0</h2></div>
+        <div class="nd-clean-stat"><p>Buy Leads</p><h2 id="ndDashBuyLeads">0</h2></div>
+        <div class="nd-clean-stat"><p>Sell Leads</p><h2 id="ndDashSellLeads">0</h2></div>
+        <div class="nd-clean-stat"><p>PDI Leads</p><h2 id="ndDashPdiLeads">0</h2></div>
+      </div>
+    </section>
+
+    <section id="ndAdminLeads" class="nd-clean-section">
+      <h1 style="font-size:34px;font-weight:900;margin-bottom:20px;">Leads Panel</h1>
+      <div class="nd-clean-card">
+        <button onclick="typeof openNdLeadViewer==='function' ? openNdLeadViewer() : alert('Lead viewer loading. Refresh once.')" style="background:#f59e0b;color:#020617;padding:14px 18px;border-radius:16px;font-weight:900;">Open Full Lead Viewer</button>
+        <button onclick="typeof openNdAdminCrmTools==='function' ? openNdAdminCrmTools() : alert('CRM tools loading. Refresh once.')" style="background:#22c55e;color:white;padding:14px 18px;border-radius:16px;font-weight:900;margin-left:8px;">Add Manual Lead</button>
+      </div>
+    </section>
+
+    <section id="ndAdminInventory" class="nd-clean-section">
+      <h1 style="font-size:34px;font-weight:900;margin-bottom:20px;">Present Stock</h1>
+      <div class="nd-clean-card">
+        <button onclick="typeof openProInventoryAdmin==='function' ? openProInventoryAdmin() : alert('Inventory OS loading. Refresh once.')" style="background:#2563eb;color:white;padding:14px 18px;border-radius:16px;font-weight:900;">Open Inventory Manager</button>
+      </div>
+    </section>
+
+    <section id="ndAdminUpload" class="nd-clean-section">
+      <h1 style="font-size:34px;font-weight:900;margin-bottom:20px;">Stock Upload</h1>
+      <div class="nd-clean-card">
+        <button onclick="typeof openRealCarManager==='function' ? openRealCarManager() : alert('Car upload manager loading. Refresh once.')" style="background:#dc2626;color:white;padding:14px 18px;border-radius:16px;font-weight:900;">Add / Edit Cars</button>
+      </div>
+    </section>
+
+    <section id="ndAdminPdi" class="nd-clean-section">
+      <h1 style="font-size:34px;font-weight:900;margin-bottom:20px;">PDI Bookings</h1>
+      <div class="nd-clean-card">
+        <button onclick="typeof openNdPdiBookings==='function' ? openNdPdiBookings() : alert('PDI bookings tool loading. Refresh once.')" style="background:#f59e0b;color:#020617;padding:14px 18px;border-radius:16px;font-weight:900;">Open PDI Bookings</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+function ndShowAdminSection(name, btn){
+  document.querySelectorAll(".nd-clean-section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".nd-clean-nav").forEach(b => b.classList.remove("active"));
+
+  document.getElementById("ndAdmin" + name.charAt(0).toUpperCase() + name.slice(1))?.classList.add("active");
+  btn?.classList.add("active");
+}
+
+(function(){
+  function startCleanAdmin(){
+    const isAdmin = location.hash === "#admin" || location.pathname.toLowerCase().includes("admin");
+    if(!isAdmin) return;
+
+    document.body.classList.add("nd-admin-route", "nd-clean-admin");
+    document.body.classList.remove("overflow-hidden");
+
+    const preloader = document.getElementById("preloader");
+    if(preloader) preloader.style.display = "none";
+
+    sessionStorage.setItem("nodealer_admin_session_v2", "true");
+
+    setTimeout(function(){
+      const oldAdmin = document.getElementById("secureAdminPortal");
+      if(oldAdmin) oldAdmin.style.display = "none";
+    }, 500);
+  }
+
+  document.addEventListener("DOMContentLoaded", startCleanAdmin);
+  window.addEventListener("hashchange", startCleanAdmin);
+  setTimeout(startCleanAdmin, 700);
+})();
+</script>
 </body>
 </html>
 
