@@ -6483,6 +6483,369 @@ document.addEventListener("click",function(){setTimeout(function(){injectNdVehic
 })();
 </script>
 
+
+<!-- NODEALER FINAL ADMIN RESTORE + ORGANIZED PANEL FIX - 02 JUNE -->
+<style id="ndFinalAdminRestoreCss">
+/* Open admin route safely and do NOT hide old lead data */
+body.nd-admin-route {
+  overflow: hidden !important;
+  background: #020617 !important;
+}
+
+body.nd-admin-route #preloader,
+body.nd-admin-route #main-content > header,
+body.nd-admin-route #main-content > section,
+body.nd-admin-route #main-content > main,
+body.nd-admin-route footer,
+body.nd-admin-route .nd-customer-bottom-bar,
+body.nd-admin-route .nd-final-sticky,
+body.nd-admin-route .nd-launch-cta-sticky {
+  display: none !important;
+}
+
+body.nd-admin-route #main-content {
+  opacity: 1 !important;
+  display: block !important;
+}
+
+body.nd-admin-route #secureAdminPortal {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  background: #020617 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.nd-admin-route #secureAdminPortal * {
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.nd-admin-route #adminAuthView:not(.hidden) {
+  display: block !important;
+}
+
+body.nd-admin-route #adminAuthView.hidden {
+  display: none !important;
+}
+
+body.nd-admin-route #adminWorkspaceView:not(.hidden) {
+  display: block !important;
+}
+
+body.nd-admin-route #adminWorkspaceView.hidden {
+  display: none !important;
+}
+
+body.nd-admin-route #adminWorkspaceView {
+  height: 100vh !important;
+  overflow-y: auto !important;
+  padding: 26px 28px 80px 292px !important;
+  background: #020617 !important;
+  color: white !important;
+}
+
+body.nd-admin-route #adminWorkspaceView > aside {
+  display: flex !important;
+  left: 18px !important;
+  top: 18px !important;
+  bottom: 18px !important;
+  width: 250px !important;
+  border-radius: 26px !important;
+}
+
+body.nd-admin-route #adminWorkspaceView > div.lg\:hidden {
+  display: none !important;
+}
+
+body.nd-admin-route .nd-admin-panel-hidden {
+  display: none !important;
+}
+
+body.nd-admin-route .nd-admin-panel-active {
+  display: block !important;
+}
+
+body.nd-admin-route .nd-admin-dashboard-wrap.nd-admin-panel-active {
+  display: block !important;
+}
+
+body.nd-admin-route .nd-admin-dashboard-wrap > div {
+  margin-bottom: 18px !important;
+}
+
+body.nd-admin-route .nd-admin-tab-btn {
+  width: 100% !important;
+  text-align: left !important;
+  background: #020617 !important;
+  color: #cbd5e1 !important;
+  padding: 13px 14px !important;
+  border-radius: 16px !important;
+  margin-bottom: 9px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  border: 1px solid rgba(255,255,255,.06) !important;
+}
+
+body.nd-admin-route .nd-admin-tab-btn.active,
+body.nd-admin-route .nd-admin-tab-btn:hover {
+  background: #ffffff !important;
+  color: #020617 !important;
+}
+
+body.nd-admin-route #adminWorkspaceView .bg-slate-900,
+body.nd-admin-route #adminWorkspaceView .bg-slate-950 {
+  border-color: rgba(255,255,255,.08) !important;
+}
+
+body.nd-admin-route #adminWorkspaceView table {
+  width: 100% !important;
+}
+
+body.nd-admin-route #adminWorkspaceView input,
+body.nd-admin-route #adminWorkspaceView select,
+body.nd-admin-route #adminWorkspaceView textarea {
+  color: white !important;
+}
+
+body.nd-admin-route #adminWorkspaceView input[type="date"],
+body.nd-admin-route #adminWorkspaceView input[type="time"] {
+  color-scheme: dark !important;
+}
+
+@media (max-width: 900px) {
+  body.nd-admin-route #adminWorkspaceView {
+    padding: 210px 14px 80px 14px !important;
+  }
+  body.nd-admin-route #adminWorkspaceView > aside {
+    display: block !important;
+    left: 12px !important;
+    right: 12px !important;
+    top: 12px !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: 180px !important;
+    overflow-y: auto !important;
+  }
+}
+</style>
+
+<script id="ndFinalAdminRestoreScript">
+(function () {
+  function isAdminRoute() {
+    const hash = (location.hash || "").toLowerCase();
+    const path = (location.pathname || "").toLowerCase();
+    return hash === "#admin" || path.endsWith("/admin.html") || path.endsWith("/admin");
+  }
+
+  function showElement(el, display) {
+    if (!el) return;
+    el.classList.remove("hidden");
+    el.style.setProperty("display", display || "block", "important");
+    el.style.setProperty("visibility", "visible", "important");
+    el.style.setProperty("pointer-events", "auto", "important");
+  }
+
+  function hideElement(el) {
+    if (!el) return;
+    el.classList.add("hidden");
+    el.style.setProperty("display", "none", "important");
+  }
+
+  function buildOrganizedAdmin() {
+    const workspace = document.getElementById("adminWorkspaceView");
+    if (!workspace || workspace.dataset.ndOrganized === "yes") return;
+
+    const children = Array.from(workspace.children).filter(el => el.tagName);
+    const sidebar = children[0];
+    const mobileShortcut = children[1];
+    const actionCenter = children[2];
+    const aiCards = children[3];
+    const oldTitle = children[4];
+    const inventoryPanel = children[5];
+    const leadsPanel = children[6];
+
+    if (mobileShortcut) mobileShortcut.style.setProperty("display", "none", "important");
+    if (oldTitle) oldTitle.classList.add("nd-admin-panel-hidden");
+
+    if (actionCenter || aiCards) {
+      const dashboardWrap = document.createElement("div");
+      dashboardWrap.id = "ndAdminDashboardPanel";
+      dashboardWrap.className = "nd-admin-dashboard-wrap nd-admin-panel-active";
+      if (actionCenter) workspace.insertBefore(dashboardWrap, actionCenter);
+      if (actionCenter) dashboardWrap.appendChild(actionCenter);
+      if (aiCards) dashboardWrap.appendChild(aiCards);
+    }
+
+    if (inventoryPanel) {
+      inventoryPanel.id = "ndAdminInventoryPanel";
+      inventoryPanel.classList.add("nd-admin-panel-hidden");
+    }
+
+    if (leadsPanel) {
+      leadsPanel.id = "ndAdminLeadsPanel";
+      leadsPanel.classList.add("nd-admin-panel-hidden");
+    }
+
+    const pdiPanel = document.createElement("div");
+    pdiPanel.id = "ndAdminPdiPanel";
+    pdiPanel.className = "nd-admin-panel-hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl";
+    pdiPanel.innerHTML = `
+      <h2 class="text-2xl font-black uppercase text-amber-400 mb-2">PDI Bookings</h2>
+      <p class="text-xs text-slate-400 mb-5">Open your existing PDI booking and report tools from here. Your old data is not removed.</p>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="typeof openNdPdiBookings === 'function' ? openNdPdiBookings() : alert('PDI booking tool is not loaded in this version.')" class="bg-amber-500 text-slate-950 px-5 py-3 rounded-xl text-xs font-black uppercase">Open PDI Bookings</button>
+        <button onclick="typeof openNdPdiReportBuilder === 'function' ? openNdPdiReportBuilder() : alert('PDI report builder is not loaded in this version.')" class="bg-blue-600 text-white px-5 py-3 rounded-xl text-xs font-black uppercase">PDI Report Builder</button>
+      </div>
+    `;
+    workspace.appendChild(pdiPanel);
+
+    const directPartyPanel = document.createElement("div");
+    directPartyPanel.id = "ndAdminDirectPartyPanel";
+    directPartyPanel.className = "nd-admin-panel-hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl";
+    directPartyPanel.innerHTML = `
+      <h2 class="text-2xl font-black uppercase text-purple-400 mb-2">Direct Party Cars</h2>
+      <p class="text-xs text-slate-400 mb-5">Private admin-only area for direct-party cars. Use the stock upload/inventory manager for now; direct-party tagging can be added next.</p>
+      <button onclick="ndSwitchAdminPanel('inventory')" class="bg-purple-600 text-white px-5 py-3 rounded-xl text-xs font-black uppercase">Go To Stock Upload</button>
+    `;
+    workspace.appendChild(directPartyPanel);
+
+    if (sidebar) {
+      const nav = sidebar.querySelector("nav");
+      if (nav) {
+        nav.innerHTML = `
+          <button class="nd-admin-tab-btn active" data-panel="dashboard" onclick="ndSwitchAdminPanel('dashboard')"><i class="fa-solid fa-house mr-2 text-blue-400"></i> Dashboard</button>
+          <button class="nd-admin-tab-btn" data-panel="leads" onclick="ndSwitchAdminPanel('leads')"><i class="fa-solid fa-address-book mr-2 text-amber-400"></i> Leads</button>
+          <button class="nd-admin-tab-btn" data-panel="inventory" onclick="ndSwitchAdminPanel('inventory')"><i class="fa-solid fa-car mr-2 text-emerald-400"></i> Inventory + Stock Upload</button>
+          <button class="nd-admin-tab-btn" data-panel="direct" onclick="ndSwitchAdminPanel('direct')"><i class="fa-solid fa-user-lock mr-2 text-purple-400"></i> Direct Party Cars</button>
+          <button class="nd-admin-tab-btn" data-panel="pdi" onclick="ndSwitchAdminPanel('pdi')"><i class="fa-solid fa-clipboard-check mr-2 text-orange-400"></i> PDI Bookings</button>
+          <button class="nd-admin-tab-btn" onclick="loadAdminInventoryDirectory?.(); loadAdminLeadsDashboard?.(); renderCars?.(); updateActionCenter?.();"><i class="fa-solid fa-rotate mr-2 text-sky-400"></i> Refresh Data</button>
+        `;
+      }
+    }
+
+    workspace.dataset.ndOrganized = "yes";
+  }
+
+  window.ndSwitchAdminPanel = function (panel) {
+    const map = {
+      dashboard: "ndAdminDashboardPanel",
+      leads: "ndAdminLeadsPanel",
+      inventory: "ndAdminInventoryPanel",
+      direct: "ndAdminDirectPartyPanel",
+      pdi: "ndAdminPdiPanel"
+    };
+
+    Object.values(map).forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove("nd-admin-panel-active");
+      el.classList.add("nd-admin-panel-hidden");
+    });
+
+    const active = document.getElementById(map[panel] || map.dashboard);
+    if (active) {
+      active.classList.remove("nd-admin-panel-hidden");
+      active.classList.add("nd-admin-panel-active");
+    }
+
+    document.querySelectorAll(".nd-admin-tab-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.panel === panel);
+    });
+
+    if (panel === "leads") {
+      setTimeout(function () {
+        if (typeof loadAdminLeadsDashboard === "function") loadAdminLeadsDashboard();
+        if (typeof updateActionCenter === "function") updateActionCenter();
+      }, 100);
+    }
+
+    if (panel === "inventory") {
+      setTimeout(function () {
+        if (typeof loadAdminInventoryDirectory === "function") loadAdminInventoryDirectory();
+        if (typeof renderCars === "function") renderCars();
+      }, 100);
+    }
+  };
+
+  function openAdminRoute() {
+    if (!isAdminRoute()) return;
+
+    document.body.classList.add("nd-admin-route");
+    document.body.classList.remove("overflow-hidden");
+
+    hideElement(document.getElementById("preloader"));
+    const main = document.getElementById("main-content");
+    if (main) {
+      main.classList.remove("opacity-0");
+      main.classList.add("opacity-100");
+      main.style.setProperty("opacity", "1", "important");
+      main.style.setProperty("display", "block", "important");
+    }
+
+    const portal = document.getElementById("secureAdminPortal");
+    const auth = document.getElementById("adminAuthView");
+    const workspace = document.getElementById("adminWorkspaceView");
+    showElement(portal, "block");
+
+    const hasSession =
+      sessionStorage.getItem("nodealerAdminAuth") === "true" ||
+      sessionStorage.getItem("nodealer_admin_session_v2") === "true" ||
+      localStorage.getItem("nodealerAdminAuth") === "true";
+
+    if (hasSession) {
+      hideElement(auth);
+      showElement(workspace, "block");
+      buildOrganizedAdmin();
+      setTimeout(function () {
+        ndSwitchAdminPanel("dashboard");
+        if (typeof loadAdminInventoryDirectory === "function") loadAdminInventoryDirectory();
+        if (typeof loadAdminLeadsDashboard === "function") loadAdminLeadsDashboard();
+        if (typeof updateActionCenter === "function") updateActionCenter();
+      }, 250);
+    } else {
+      showElement(auth, "block");
+      hideElement(workspace);
+    }
+  }
+
+  const originalLogin = window.executeAdminLogin;
+  window.executeAdminLogin = function () {
+    if (typeof originalLogin === "function") {
+      originalLogin.apply(this, arguments);
+    }
+    setTimeout(function () {
+      const workspace = document.getElementById("adminWorkspaceView");
+      if (workspace && !workspace.classList.contains("hidden")) {
+        sessionStorage.setItem("nodealer_admin_session_v2", "true");
+        buildOrganizedAdmin();
+        ndSwitchAdminPanel("dashboard");
+      }
+    }, 350);
+  };
+
+  const originalExit = window.exitAdminPortal;
+  window.exitAdminPortal = function () {
+    sessionStorage.removeItem("nodealer_admin_session_v2");
+    sessionStorage.removeItem("nodealerAdminAuth");
+    if (typeof originalExit === "function") {
+      originalExit.apply(this, arguments);
+    } else {
+      location.href = "/";
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", openAdminRoute);
+  window.addEventListener("hashchange", openAdminRoute);
+  setTimeout(openAdminRoute, 700);
+})();
+</script>
+
 </body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
@@ -6912,6 +7275,369 @@ body.nd-admin-route #adminWorkspaceView.hidden {
 })();
 </script>
     
+
+<!-- NODEALER FINAL ADMIN RESTORE + ORGANIZED PANEL FIX - 02 JUNE -->
+<style id="ndFinalAdminRestoreCss">
+/* Open admin route safely and do NOT hide old lead data */
+body.nd-admin-route {
+  overflow: hidden !important;
+  background: #020617 !important;
+}
+
+body.nd-admin-route #preloader,
+body.nd-admin-route #main-content > header,
+body.nd-admin-route #main-content > section,
+body.nd-admin-route #main-content > main,
+body.nd-admin-route footer,
+body.nd-admin-route .nd-customer-bottom-bar,
+body.nd-admin-route .nd-final-sticky,
+body.nd-admin-route .nd-launch-cta-sticky {
+  display: none !important;
+}
+
+body.nd-admin-route #main-content {
+  opacity: 1 !important;
+  display: block !important;
+}
+
+body.nd-admin-route #secureAdminPortal {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  background: #020617 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.nd-admin-route #secureAdminPortal * {
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.nd-admin-route #adminAuthView:not(.hidden) {
+  display: block !important;
+}
+
+body.nd-admin-route #adminAuthView.hidden {
+  display: none !important;
+}
+
+body.nd-admin-route #adminWorkspaceView:not(.hidden) {
+  display: block !important;
+}
+
+body.nd-admin-route #adminWorkspaceView.hidden {
+  display: none !important;
+}
+
+body.nd-admin-route #adminWorkspaceView {
+  height: 100vh !important;
+  overflow-y: auto !important;
+  padding: 26px 28px 80px 292px !important;
+  background: #020617 !important;
+  color: white !important;
+}
+
+body.nd-admin-route #adminWorkspaceView > aside {
+  display: flex !important;
+  left: 18px !important;
+  top: 18px !important;
+  bottom: 18px !important;
+  width: 250px !important;
+  border-radius: 26px !important;
+}
+
+body.nd-admin-route #adminWorkspaceView > div.lg\:hidden {
+  display: none !important;
+}
+
+body.nd-admin-route .nd-admin-panel-hidden {
+  display: none !important;
+}
+
+body.nd-admin-route .nd-admin-panel-active {
+  display: block !important;
+}
+
+body.nd-admin-route .nd-admin-dashboard-wrap.nd-admin-panel-active {
+  display: block !important;
+}
+
+body.nd-admin-route .nd-admin-dashboard-wrap > div {
+  margin-bottom: 18px !important;
+}
+
+body.nd-admin-route .nd-admin-tab-btn {
+  width: 100% !important;
+  text-align: left !important;
+  background: #020617 !important;
+  color: #cbd5e1 !important;
+  padding: 13px 14px !important;
+  border-radius: 16px !important;
+  margin-bottom: 9px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  border: 1px solid rgba(255,255,255,.06) !important;
+}
+
+body.nd-admin-route .nd-admin-tab-btn.active,
+body.nd-admin-route .nd-admin-tab-btn:hover {
+  background: #ffffff !important;
+  color: #020617 !important;
+}
+
+body.nd-admin-route #adminWorkspaceView .bg-slate-900,
+body.nd-admin-route #adminWorkspaceView .bg-slate-950 {
+  border-color: rgba(255,255,255,.08) !important;
+}
+
+body.nd-admin-route #adminWorkspaceView table {
+  width: 100% !important;
+}
+
+body.nd-admin-route #adminWorkspaceView input,
+body.nd-admin-route #adminWorkspaceView select,
+body.nd-admin-route #adminWorkspaceView textarea {
+  color: white !important;
+}
+
+body.nd-admin-route #adminWorkspaceView input[type="date"],
+body.nd-admin-route #adminWorkspaceView input[type="time"] {
+  color-scheme: dark !important;
+}
+
+@media (max-width: 900px) {
+  body.nd-admin-route #adminWorkspaceView {
+    padding: 210px 14px 80px 14px !important;
+  }
+  body.nd-admin-route #adminWorkspaceView > aside {
+    display: block !important;
+    left: 12px !important;
+    right: 12px !important;
+    top: 12px !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: 180px !important;
+    overflow-y: auto !important;
+  }
+}
+</style>
+
+<script id="ndFinalAdminRestoreScript">
+(function () {
+  function isAdminRoute() {
+    const hash = (location.hash || "").toLowerCase();
+    const path = (location.pathname || "").toLowerCase();
+    return hash === "#admin" || path.endsWith("/admin.html") || path.endsWith("/admin");
+  }
+
+  function showElement(el, display) {
+    if (!el) return;
+    el.classList.remove("hidden");
+    el.style.setProperty("display", display || "block", "important");
+    el.style.setProperty("visibility", "visible", "important");
+    el.style.setProperty("pointer-events", "auto", "important");
+  }
+
+  function hideElement(el) {
+    if (!el) return;
+    el.classList.add("hidden");
+    el.style.setProperty("display", "none", "important");
+  }
+
+  function buildOrganizedAdmin() {
+    const workspace = document.getElementById("adminWorkspaceView");
+    if (!workspace || workspace.dataset.ndOrganized === "yes") return;
+
+    const children = Array.from(workspace.children).filter(el => el.tagName);
+    const sidebar = children[0];
+    const mobileShortcut = children[1];
+    const actionCenter = children[2];
+    const aiCards = children[3];
+    const oldTitle = children[4];
+    const inventoryPanel = children[5];
+    const leadsPanel = children[6];
+
+    if (mobileShortcut) mobileShortcut.style.setProperty("display", "none", "important");
+    if (oldTitle) oldTitle.classList.add("nd-admin-panel-hidden");
+
+    if (actionCenter || aiCards) {
+      const dashboardWrap = document.createElement("div");
+      dashboardWrap.id = "ndAdminDashboardPanel";
+      dashboardWrap.className = "nd-admin-dashboard-wrap nd-admin-panel-active";
+      if (actionCenter) workspace.insertBefore(dashboardWrap, actionCenter);
+      if (actionCenter) dashboardWrap.appendChild(actionCenter);
+      if (aiCards) dashboardWrap.appendChild(aiCards);
+    }
+
+    if (inventoryPanel) {
+      inventoryPanel.id = "ndAdminInventoryPanel";
+      inventoryPanel.classList.add("nd-admin-panel-hidden");
+    }
+
+    if (leadsPanel) {
+      leadsPanel.id = "ndAdminLeadsPanel";
+      leadsPanel.classList.add("nd-admin-panel-hidden");
+    }
+
+    const pdiPanel = document.createElement("div");
+    pdiPanel.id = "ndAdminPdiPanel";
+    pdiPanel.className = "nd-admin-panel-hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl";
+    pdiPanel.innerHTML = `
+      <h2 class="text-2xl font-black uppercase text-amber-400 mb-2">PDI Bookings</h2>
+      <p class="text-xs text-slate-400 mb-5">Open your existing PDI booking and report tools from here. Your old data is not removed.</p>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="typeof openNdPdiBookings === 'function' ? openNdPdiBookings() : alert('PDI booking tool is not loaded in this version.')" class="bg-amber-500 text-slate-950 px-5 py-3 rounded-xl text-xs font-black uppercase">Open PDI Bookings</button>
+        <button onclick="typeof openNdPdiReportBuilder === 'function' ? openNdPdiReportBuilder() : alert('PDI report builder is not loaded in this version.')" class="bg-blue-600 text-white px-5 py-3 rounded-xl text-xs font-black uppercase">PDI Report Builder</button>
+      </div>
+    `;
+    workspace.appendChild(pdiPanel);
+
+    const directPartyPanel = document.createElement("div");
+    directPartyPanel.id = "ndAdminDirectPartyPanel";
+    directPartyPanel.className = "nd-admin-panel-hidden bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl";
+    directPartyPanel.innerHTML = `
+      <h2 class="text-2xl font-black uppercase text-purple-400 mb-2">Direct Party Cars</h2>
+      <p class="text-xs text-slate-400 mb-5">Private admin-only area for direct-party cars. Use the stock upload/inventory manager for now; direct-party tagging can be added next.</p>
+      <button onclick="ndSwitchAdminPanel('inventory')" class="bg-purple-600 text-white px-5 py-3 rounded-xl text-xs font-black uppercase">Go To Stock Upload</button>
+    `;
+    workspace.appendChild(directPartyPanel);
+
+    if (sidebar) {
+      const nav = sidebar.querySelector("nav");
+      if (nav) {
+        nav.innerHTML = `
+          <button class="nd-admin-tab-btn active" data-panel="dashboard" onclick="ndSwitchAdminPanel('dashboard')"><i class="fa-solid fa-house mr-2 text-blue-400"></i> Dashboard</button>
+          <button class="nd-admin-tab-btn" data-panel="leads" onclick="ndSwitchAdminPanel('leads')"><i class="fa-solid fa-address-book mr-2 text-amber-400"></i> Leads</button>
+          <button class="nd-admin-tab-btn" data-panel="inventory" onclick="ndSwitchAdminPanel('inventory')"><i class="fa-solid fa-car mr-2 text-emerald-400"></i> Inventory + Stock Upload</button>
+          <button class="nd-admin-tab-btn" data-panel="direct" onclick="ndSwitchAdminPanel('direct')"><i class="fa-solid fa-user-lock mr-2 text-purple-400"></i> Direct Party Cars</button>
+          <button class="nd-admin-tab-btn" data-panel="pdi" onclick="ndSwitchAdminPanel('pdi')"><i class="fa-solid fa-clipboard-check mr-2 text-orange-400"></i> PDI Bookings</button>
+          <button class="nd-admin-tab-btn" onclick="loadAdminInventoryDirectory?.(); loadAdminLeadsDashboard?.(); renderCars?.(); updateActionCenter?.();"><i class="fa-solid fa-rotate mr-2 text-sky-400"></i> Refresh Data</button>
+        `;
+      }
+    }
+
+    workspace.dataset.ndOrganized = "yes";
+  }
+
+  window.ndSwitchAdminPanel = function (panel) {
+    const map = {
+      dashboard: "ndAdminDashboardPanel",
+      leads: "ndAdminLeadsPanel",
+      inventory: "ndAdminInventoryPanel",
+      direct: "ndAdminDirectPartyPanel",
+      pdi: "ndAdminPdiPanel"
+    };
+
+    Object.values(map).forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove("nd-admin-panel-active");
+      el.classList.add("nd-admin-panel-hidden");
+    });
+
+    const active = document.getElementById(map[panel] || map.dashboard);
+    if (active) {
+      active.classList.remove("nd-admin-panel-hidden");
+      active.classList.add("nd-admin-panel-active");
+    }
+
+    document.querySelectorAll(".nd-admin-tab-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.panel === panel);
+    });
+
+    if (panel === "leads") {
+      setTimeout(function () {
+        if (typeof loadAdminLeadsDashboard === "function") loadAdminLeadsDashboard();
+        if (typeof updateActionCenter === "function") updateActionCenter();
+      }, 100);
+    }
+
+    if (panel === "inventory") {
+      setTimeout(function () {
+        if (typeof loadAdminInventoryDirectory === "function") loadAdminInventoryDirectory();
+        if (typeof renderCars === "function") renderCars();
+      }, 100);
+    }
+  };
+
+  function openAdminRoute() {
+    if (!isAdminRoute()) return;
+
+    document.body.classList.add("nd-admin-route");
+    document.body.classList.remove("overflow-hidden");
+
+    hideElement(document.getElementById("preloader"));
+    const main = document.getElementById("main-content");
+    if (main) {
+      main.classList.remove("opacity-0");
+      main.classList.add("opacity-100");
+      main.style.setProperty("opacity", "1", "important");
+      main.style.setProperty("display", "block", "important");
+    }
+
+    const portal = document.getElementById("secureAdminPortal");
+    const auth = document.getElementById("adminAuthView");
+    const workspace = document.getElementById("adminWorkspaceView");
+    showElement(portal, "block");
+
+    const hasSession =
+      sessionStorage.getItem("nodealerAdminAuth") === "true" ||
+      sessionStorage.getItem("nodealer_admin_session_v2") === "true" ||
+      localStorage.getItem("nodealerAdminAuth") === "true";
+
+    if (hasSession) {
+      hideElement(auth);
+      showElement(workspace, "block");
+      buildOrganizedAdmin();
+      setTimeout(function () {
+        ndSwitchAdminPanel("dashboard");
+        if (typeof loadAdminInventoryDirectory === "function") loadAdminInventoryDirectory();
+        if (typeof loadAdminLeadsDashboard === "function") loadAdminLeadsDashboard();
+        if (typeof updateActionCenter === "function") updateActionCenter();
+      }, 250);
+    } else {
+      showElement(auth, "block");
+      hideElement(workspace);
+    }
+  }
+
+  const originalLogin = window.executeAdminLogin;
+  window.executeAdminLogin = function () {
+    if (typeof originalLogin === "function") {
+      originalLogin.apply(this, arguments);
+    }
+    setTimeout(function () {
+      const workspace = document.getElementById("adminWorkspaceView");
+      if (workspace && !workspace.classList.contains("hidden")) {
+        sessionStorage.setItem("nodealer_admin_session_v2", "true");
+        buildOrganizedAdmin();
+        ndSwitchAdminPanel("dashboard");
+      }
+    }, 350);
+  };
+
+  const originalExit = window.exitAdminPortal;
+  window.exitAdminPortal = function () {
+    sessionStorage.removeItem("nodealer_admin_session_v2");
+    sessionStorage.removeItem("nodealerAdminAuth");
+    if (typeof originalExit === "function") {
+      originalExit.apply(this, arguments);
+    } else {
+      location.href = "/";
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", openAdminRoute);
+  window.addEventListener("hashchange", openAdminRoute);
+  setTimeout(openAdminRoute, 700);
+})();
+</script>
+
 </body>
 </html>
 
