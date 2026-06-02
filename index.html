@@ -8574,7 +8574,66 @@ body.nd-admin-route #adminWorkspaceView:not(.hidden) {
   setInterval(forceAdminCleanView, 1000);
 })();
 </script>
+<script>
+/* NODEALER FAST LEAD LOADER FIX */
+async function loadAdminLeadsDashboard() {
+  const tableBody = document.getElementById("adminLeadsTableBody");
+  if (!tableBody) return;
 
+  tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-blue-300 font-bold">Loading latest 50 leads...</td></tr>`;
+
+  if (!ensureSupabase()) return;
+
+  const { data, error } = await supabaseClient
+    .from("leads")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400 font-bold">
+      Supabase timeout. Latest leads could not load. Try again in 30 seconds.
+    </td></tr>`;
+    console.error(error);
+    return;
+  }
+
+  const logs = (data || []).map(mapLeadRowToLog);
+  window.LEAD_CACHE = logs;
+  tableBody.innerHTML = "";
+
+  if (!logs.length) {
+    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 font-bold">No leads found.</td></tr>`;
+    return;
+  }
+
+  logs.forEach(log => {
+    const phone = String(log.phone || "").replace(/\D/g, "");
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td class="p-4 align-top">
+        <b class="text-blue-300">${log.submissionType || "Lead"}</b><br>
+        <span class="text-xs text-slate-400">${log.timestamp || log.created_at || ""}</span>
+      </td>
+      <td class="p-4 align-top">
+        <b class="text-white">${log.name || "No Name"}</b><br>
+        <span class="text-xs text-slate-300">${log.phone || ""}</span><br>
+        <span class="text-xs text-slate-400">${log.city || log.location || ""}</span>
+      </td>
+      <td class="p-4 align-top">
+        <b class="text-amber-300">${log.carBrand || log.carTitle || log.carModel || log.pdiCarDetails || "No car details"}</b><br>
+        <span class="text-xs text-slate-400">${log.budget || log.message || log.notes || ""}</span>
+      </td>
+      <td class="p-4 align-top">
+        ${phone ? `<a href="https://wa.me/91${phone}" target="_blank" class="bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-black">WHATSAPP</a>` : ""}
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  if (typeof updateActionCenter === "function") updateActionCenter();
+}
+</script>
 </body>
 </html>
 
