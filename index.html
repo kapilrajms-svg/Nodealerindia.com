@@ -6848,7 +6848,69 @@ document.addEventListener("click",function(){setTimeout(function(){injectNdVehic
   checkUrlRoutingHash();
 });
 </script>
+<style>
+/* NODEALER ADMIN OPEN FIX */
+body.nd-admin-route #secureAdminPortal,
+body.nd-admin-route #secureAdminPortal *,
+body.nd-admin-route #adminAuthView,
+body.nd-admin-route #adminAuthView *,
+body.nd-admin-route #adminWorkspaceView,
+body.nd-admin-route #adminWorkspaceView * {
+  display: revert !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
 
+body.nd-admin-route #secureAdminPortal {
+  display: block !important;
+}
+
+body.nd-admin-route #adminAuthView.hidden,
+body.nd-admin-route #adminWorkspaceView.hidden {
+  display: none !important;
+}
+</style>
+
+<script>
+/* NODEALER ADMIN ROUTE FIX */
+(function () {
+  function openAdminRoute() {
+    const isAdmin =
+      window.location.hash.toLowerCase() === "#admin" ||
+      window.location.pathname.toLowerCase().endsWith("/admin.html") ||
+      window.location.pathname.replace(/\/$/, "").toLowerCase().endsWith("/admin");
+
+    if (!isAdmin) return;
+
+    document.body.classList.add("nd-admin-route");
+    document.body.classList.add("overflow-hidden");
+
+    const preloader = document.getElementById("preloader");
+    const main = document.getElementById("main-content");
+    const secureAdmin = document.getElementById("secureAdminPortal");
+    const auth = document.getElementById("adminAuthView");
+    const workspace = document.getElementById("adminWorkspaceView");
+
+    if (preloader) preloader.style.display = "none";
+    if (main) main.className = "opacity-100 transition-opacity duration-300";
+    if (secureAdmin) secureAdmin.classList.remove("hidden");
+
+    const session = sessionStorage.getItem("nodealer_admin_session_v2");
+
+    if (session) {
+      if (auth) auth.classList.add("hidden");
+      if (workspace) workspace.classList.remove("hidden");
+    } else {
+      if (auth) auth.classList.remove("hidden");
+      if (workspace) workspace.classList.add("hidden");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", openAdminRoute);
+  window.addEventListener("hashchange", openAdminRoute);
+  setTimeout(openAdminRoute, 500);
+})();
+</script>
 </body>
 </html>
 
