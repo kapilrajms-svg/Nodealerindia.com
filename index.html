@@ -8503,6 +8503,78 @@ function ndp1CloseAdminBookings(){document.getElementById('ndp1AdminModal').clas
 })();
 </script>
 
+
+<!-- NODEALER ADMIN LOGIN OVERLAY FINAL FIX: keeps login card hidden after successful login -->
+<style>
+body.nd-admin-route #adminAuthView.nd-force-hidden-admin,
+body.nd-admin-route #adminAuthView.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+body.nd-admin-route #adminWorkspaceView:not(.hidden) {
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+}
+</style>
+<script>
+(function(){
+  const ADMIN_KEY = 'nodealer_admin_session_v2';
+  function hasAdminSession(){
+    const raw = sessionStorage.getItem(ADMIN_KEY);
+    if(!raw) return false;
+    try{
+      const parsed = JSON.parse(raw);
+      if(parsed && parsed.ok) return true;
+    }catch(e){}
+    return raw === 'true' || raw === '1' || raw.toLowerCase().includes('true') || raw.toLowerCase().includes('ok');
+  }
+  function forceAdminCleanView(){
+    const isAdmin = location.hash.toLowerCase() === '#admin' || location.pathname.toLowerCase().includes('admin');
+    if(!isAdmin) return;
+    document.body.classList.add('nd-admin-route');
+    document.body.classList.remove('overflow-hidden');
+    document.body.style.overflow = 'auto';
+    const preloader = document.getElementById('preloader');
+    const main = document.getElementById('main-content');
+    const portal = document.getElementById('secureAdminPortal');
+    const auth = document.getElementById('adminAuthView');
+    const workspace = document.getElementById('adminWorkspaceView');
+    if(preloader) preloader.style.display = 'none';
+    if(main){ main.classList.remove('opacity-0'); main.style.opacity = '1'; }
+    if(portal){ portal.classList.remove('hidden'); portal.style.display = 'block'; }
+    if(hasAdminSession()){
+      if(auth){
+        auth.classList.add('hidden','nd-force-hidden-admin');
+        auth.style.setProperty('display','none','important');
+        auth.style.setProperty('visibility','hidden','important');
+        auth.style.setProperty('pointer-events','none','important');
+      }
+      if(workspace){
+        workspace.classList.remove('hidden');
+        workspace.style.setProperty('display','block','important');
+        workspace.style.setProperty('visibility','visible','important');
+        workspace.style.setProperty('pointer-events','auto','important');
+      }
+    }
+  }
+  const oldLogin = window.executeAdminLogin;
+  window.executeAdminLogin = async function(){
+    const result = oldLogin ? await oldLogin.apply(this, arguments) : undefined;
+    setTimeout(forceAdminCleanView, 30);
+    setTimeout(forceAdminCleanView, 200);
+    setTimeout(forceAdminCleanView, 800);
+    return result;
+  };
+  document.addEventListener('DOMContentLoaded', forceAdminCleanView);
+  window.addEventListener('hashchange', forceAdminCleanView);
+  setInterval(forceAdminCleanView, 1000);
+})();
+</script>
+
 </body>
 </html>
 
