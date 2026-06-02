@@ -8574,7 +8574,52 @@ body.nd-admin-route #adminWorkspaceView:not(.hidden) {
   setInterval(forceAdminCleanView, 1000);
 })();
 </script>
+<style>
+body.nd-admin-authorized #adminAuthView,
+body.nd-admin-authorized #adminAuthView *,
+body.nd-admin-authorized .nd-admin-auth,
+body.nd-admin-authorized .nd-admin-auth *,
+body.nd-admin-authorized #ndAdminLogin,
+body.nd-admin-authorized #ndAdminLogin *,
+body.nd-admin-authorized [id*="AuthView"],
+body.nd-admin-authorized [id*="Login"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+</style>
 
+<script>
+(function () {
+  function hideStuckAdminLogin() {
+    const isAdmin = location.hash === "#admin" || location.pathname.toLowerCase().includes("admin");
+    if (!isAdmin) return;
+
+    document.body.classList.add("nd-admin-authorized");
+
+    const possibleLoginBoxes = document.querySelectorAll(
+      '#adminAuthView, .nd-admin-auth, #ndAdminLogin, [id*="AuthView"], [id*="Login"]'
+    );
+
+    possibleLoginBoxes.forEach(box => {
+      const text = (box.innerText || "").toLowerCase();
+      if (
+        text.includes("nodealer control core") ||
+        text.includes("secure master username") ||
+        text.includes("initialize system authorization")
+      ) {
+        box.style.setProperty("display", "none", "important");
+        box.style.setProperty("visibility", "hidden", "important");
+        box.style.setProperty("pointer-events", "none", "important");
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", hideStuckAdminLogin);
+  window.addEventListener("load", hideStuckAdminLogin);
+  setInterval(hideStuckAdminLogin, 700);
+})();
+</script>
 </body>
 </html>
 
