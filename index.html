@@ -6846,6 +6846,159 @@ body.nd-admin-route #adminWorkspaceView input[type="time"] {
 })();
 </script>
 
+
+
+<!-- NODEALER PUBLIC HOMEPAGE REBUILD V2 - screenshot matched layout, functions preserved -->
+<style>
+body.nd-public-v2{background:#f7fbff!important;color:#061424!important;overflow-x:hidden!important;}
+body.nd-public-v2 #main-content{background:linear-gradient(180deg,#ffffff 0%,#eef7ff 72%,#ffffff 100%)!important;}
+body.nd-public-v2 #ndFinalHome,
+body.nd-public-v2 #ndFinalTrustStrip,
+body.nd-public-v2 #ndFinalFlow,
+body.nd-public-v2 #ndSimpleHome,
+body.nd-public-v2 #ndSimpleTrustStrip,
+body.nd-public-v2 #oldLongHeroHidden,
+body.nd-public-v2 #ndFeaturedCarsQuick,
+body.nd-public-v2 #recentlyViewedSection{display:none!important;}
+body.nd-public-v2 header{background:rgba(255,255,255,.97)!important;box-shadow:0 6px 24px rgba(2,20,43,.06)!important;border-bottom:0!important;position:sticky!important;top:0!important;z-index:9999!important;}
+body.nd-public-v2 header .max-w-7xl{max-width:1180px!important;padding:12px 18px!important;}
+body.nd-public-v2 .nd-public-nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:900;color:#081526;}
+body.nd-public-v2 .nd-public-nav a,body.nd-public-v2 .nd-public-nav button{white-space:nowrap;transition:.2s ease;}
+body.nd-public-v2 .nd-public-nav a:hover,body.nd-public-v2 .nd-public-nav button:hover{color:#e31e24;}
+body.nd-public-v2 .nd-public-login{background:#e31e24;color:white!important;padding:11px 18px;border-radius:9px;box-shadow:0 12px 26px rgba(227,30,36,.22);font-size:12px;font-weight:900;display:inline-flex;gap:9px;align-items:center;}
+body.nd-public-v2 .nd-public-lang{font-size:13px;font-weight:900;color:#081526;}
+body.nd-public-v2 .nd-public-lang span:first-child{color:#e31e24;}
+body.nd-public-v2 #inventory-section{padding-top:0!important;max-width:1180px!important;}
+body.nd-public-v2 #inventory-section>div{display:none!important;}
+body.nd-public-v2 main{max-width:1180px!important;padding-top:34px!important;padding-bottom:34px!important;background:#f4fbff!important;}
+body.nd-public-v2 main>div:first-child{border:0!important;margin-bottom:18px!important;padding-bottom:0!important;}
+body.nd-public-v2 main>div:first-child span{display:none!important;}
+body.nd-public-v2 main>div:first-child h2{font-size:26px!important;line-height:1.05!important;color:#061424!important;}
+body.nd-public-v2 main>div:first-child h2:before{content:'CHECK OUT OUR';display:block;font-size:22px;color:#061424;font-weight:950;}
+body.nd-public-v2 main>div:first-child h2{font-size:0!important;}
+body.nd-public-v2 main>div:first-child h2:after{content:'LATEST IN-STOCK CARS';font-size:28px;font-weight:950;color:#061424;}
+body.nd-public-v2 main>div:first-child h2:after{background:linear-gradient(90deg,#061424 0 44%,#1e88e5 44% 75%,#061424 75%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+body.nd-public-v2 main>div:first-child p{display:none!important;}
+body.nd-public-v2 main>div:first-child a{background:white!important;color:#061424!important;border:1px solid #9aa8b8!important;border-radius:8px!important;box-shadow:none!important;padding:12px 18px!important;}
+body.nd-public-v2 #carGrid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:24px!important;}
+body.nd-public-v2 #carGrid>div{border-radius:11px!important;overflow:hidden!important;background:white!important;border:1px solid #dbe8f5!important;box-shadow:0 14px 34px rgba(2,20,43,.10)!important;transform:none!important;}
+body.nd-public-v2 #carGrid img{height:178px!important;object-fit:cover!important;}
+body.nd-public-v2 #noStockMessage{background:white!important;border-radius:14px!important;}
+.nd-public-hero-v2{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#edf6ff 52%,#3d3d3d 52%,#262626 100%);}
+.nd-public-hero-v2:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 78% 16%,rgba(255,255,255,.92),transparent 23%),linear-gradient(90deg,rgba(255,255,255,.96),rgba(255,255,255,.65) 42%,rgba(255,255,255,.12));pointer-events:none;}
+.nd-public-hero-v2 .nd-hero-city{position:absolute;left:0;right:0;top:185px;height:210px;background:linear-gradient(180deg,rgba(196,216,230,.5),rgba(255,255,255,0));opacity:.7;}
+.nd-public-hero-v2 .nd-road{position:absolute;left:0;right:0;bottom:0;height:295px;background:linear-gradient(180deg,#6a6a6a,#232323);opacity:.92;}
+.nd-public-hero-v2 .nd-road:after{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:rgba(255,255,255,.6);}
+.nd-public-wrap{max-width:1180px;margin:0 auto;padding-left:18px;padding-right:18px;position:relative;z-index:2;}
+.nd-public-hero-grid{display:grid;grid-template-columns:1fr 1.15fr;align-items:center;min-height:390px;padding-top:28px;}
+.nd-public-title{font-size:58px;line-height:.94;font-weight:950;letter-spacing:-2px;color:#061424;text-transform:uppercase;}
+.nd-public-title span{display:block;color:#e31e24;}
+.nd-public-sub{font-size:19px;font-weight:800;color:#111;line-height:1.35;margin-top:14px;}
+.nd-public-hero-actions{display:flex;gap:14px;margin-top:28px;}
+.nd-public-btn-red,.nd-public-btn-blue{border:0;border-radius:9px;padding:15px 26px;font-size:14px;font-weight:950;color:#fff;box-shadow:0 14px 26px rgba(0,0,0,.12);display:inline-flex;gap:10px;align-items:center;justify-content:center;}
+.nd-public-btn-red{background:#ed171d;}.nd-public-btn-blue{background:#2493ec;}
+.nd-public-car{width:100%;max-height:340px;object-fit:contain;filter:drop-shadow(0 30px 24px rgba(0,0,0,.25));transform:translateY(16px) scale(1.08);}
+.nd-trust-strip{display:grid;grid-template-columns:repeat(4,1fr);background:rgba(25,25,25,.86);border-radius:12px;color:white;box-shadow:0 22px 40px rgba(0,0,0,.22);overflow:hidden;margin-top:-18px;}
+.nd-trust-item{display:flex;gap:14px;align-items:center;padding:18px 23px;border-right:1px solid rgba(255,255,255,.16);}
+.nd-trust-item:last-child{border-right:0;}
+.nd-trust-icon{width:44px;height:44px;border-radius:999px;background:#2493ec;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 0 5px rgba(36,147,236,.18);}
+.nd-trust-item h4{font-weight:950;font-size:15px;}.nd-trust-item p{font-size:12px;color:#e5e7eb;font-weight:700;}
+.nd-search-panel{background:linear-gradient(135deg,#32a9ff,#1685ef);border-radius:10px 10px 0 0;margin-top:18px;box-shadow:0 22px 38px rgba(30,136,229,.22);overflow:hidden;}
+.nd-search-top{padding:21px 20px 18px;color:white;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;}
+.nd-search-title{font-size:26px;font-weight:950;text-transform:uppercase;line-height:1;}.nd-search-top p{font-size:14px;font-weight:700;margin-top:8px;}
+.nd-search-minute{font-size:13px;font-weight:800;margin-top:8px;}
+.nd-search-fields{display:grid;grid-template-columns:repeat(5,1fr) 1.05fr;gap:12px;padding:0 20px 22px;}
+.nd-search-box{background:white;border-radius:7px;padding:12px 12px;color:#111;}
+.nd-search-box label{font-size:11px;font-weight:900;color:#0f172a;display:block;margin-bottom:5px;}.nd-search-box select{width:100%;font-size:13px;font-weight:800;outline:none;background:white;}
+.nd-show-cars{background:#ee171d;color:white;border-radius:8px;font-weight:950;font-size:14px;display:flex;gap:10px;align-items:center;justify-content:center;box-shadow:0 12px 24px rgba(238,23,29,.22);}
+.nd-search-bottom{background:#e31e24;color:white;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:13px;font-weight:900;}
+.nd-search-bottom a{border:1px solid rgba(255,255,255,.75);border-radius:9px;padding:9px 17px;color:white;display:inline-flex;gap:8px;align-items:center;}
+.nd-section-v2{background:#fff;padding:38px 0;}.nd-section-soft{background:#f4fbff;padding:38px 0;}
+.nd-why-title{font-size:26px;line-height:1.1;font-weight:950;text-transform:uppercase;color:#061424;margin-bottom:28px;}.nd-why-title span{color:#1e88e5;}
+.nd-why-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;}.nd-why-card{text-align:center;}.nd-why-card .ico{width:70px;height:70px;margin:0 auto 12px;border-radius:999px;border:2px solid #1e88e5;color:#e31e24;display:flex;align-items:center;justify-content:center;font-size:28px;background:white;}.nd-why-card h4{font-size:13px;font-weight:950;color:#061424;}.nd-why-card p{font-size:11px;font-weight:700;color:#334155;margin-top:3px;}
+.nd-how{background:linear-gradient(135deg,#001d38,#002e55);padding:44px 0;color:white;}.nd-how h2{text-align:center;font-size:25px;font-weight:950;text-transform:uppercase;margin-bottom:28px;}.nd-how h2 span{color:#2493ec;}.nd-how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;position:relative;}.nd-how-step{text-align:center;position:relative;}.nd-how-circle{width:76px;height:76px;border-radius:999px;margin:0 auto 14px;background:#2493ec;display:flex;align-items:center;justify-content:center;font-size:30px;border:3px solid rgba(255,255,255,.55);}.nd-how-step:nth-child(even) .nd-how-circle{background:#e31e24;}.nd-how-step h4{font-size:14px;font-weight:950;}.nd-how-step p{font-size:13px;color:#dbeafe;font-weight:700;margin-top:4px;}
+.nd-bottom-panels{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;}.nd-sell-panel,.nd-insta-panel{border-radius:13px;overflow:hidden;box-shadow:0 16px 34px rgba(2,20,43,.10);min-height:180px;}.nd-sell-panel{background:linear-gradient(90deg,#fff,#eaf3fb);display:grid;grid-template-columns:1fr 1.2fr;align-items:center;padding:22px;}.nd-sell-panel h3{font-size:25px;line-height:1;font-weight:950;color:#061424;text-transform:uppercase;}.nd-sell-panel p{font-size:14px;font-weight:700;margin-top:10px;}.nd-sell-panel img{height:150px;object-fit:contain;width:100%;}.nd-insta-panel{background:linear-gradient(135deg,#ed171d,#1e88e5);color:white;padding:22px;}.nd-insta-panel h3{font-size:25px;font-weight:950;text-transform:uppercase;}.nd-insta-photos{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px;}.nd-insta-photos img{height:76px;border-radius:6px;border:3px solid white;object-fit:cover;width:100%;}.nd-follow-btn{background:#2493ec;border-radius:7px;padding:8px 14px;font-size:12px;font-weight:900;display:inline-flex;gap:8px;margin-top:12px;}
+body.nd-public-v2 footer{background:#f7fbff!important;border-top:1px solid #dbe8f5!important;padding:30px 18px!important;color:#061424!important;}
+body.nd-public-v2 footer .max-w-7xl{max-width:1180px!important;}
+@media(max-width:900px){body.nd-public-v2 .nd-public-nav{display:none}.nd-public-hero-grid{grid-template-columns:1fr;min-height:auto;padding-top:28px;padding-bottom:20px}.nd-public-title{font-size:42px}.nd-public-car{transform:none;margin-top:12px}.nd-trust-strip{grid-template-columns:1fr 1fr}.nd-search-fields{grid-template-columns:1fr}.nd-search-top,.nd-search-bottom{flex-direction:column;align-items:flex-start}.nd-why-grid{grid-template-columns:1fr 1fr}.nd-how-grid{grid-template-columns:1fr 1fr;gap:24px}.nd-bottom-panels{grid-template-columns:1fr}body.nd-public-v2 #carGrid{grid-template-columns:1fr!important}.nd-sell-panel{grid-template-columns:1fr}.nd-insta-photos{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script>
+(function(){
+  function isAdminRoute(){return location.hash.toLowerCase()==='#admin'||location.pathname.toLowerCase().includes('admin');}
+  function publicSearchGo(){
+    var map=[['ndHomeBudget','filterBudget'],['ndHomeBrand','filterBrand'],['ndHomeFuel','filterFuel'],['ndHomeTrans','filterTransmission']];
+    map.forEach(function(pair){var a=document.getElementById(pair[0]),b=document.getElementById(pair[1]); if(a&&b)b.value=a.value;});
+    if(typeof applyFilters==='function') applyFilters();
+    document.querySelector('main')?.scrollIntoView({behavior:'smooth'});
+  }
+  window.ndPublicSearchGo=publicSearchGo;
+  function buildHeader(){
+    var header=document.querySelector('#main-content > header .max-w-7xl'); if(!header)return;
+    header.innerHTML = '<a href="#" class="flex items-center gap-3"><div class="bg-white p-1 rounded shadow-sm w-16 h-16 flex items-center justify-center overflow-hidden"><img src="logo.jpg" alt="No Dealer" class="max-w-full max-h-full object-contain block"></div></a>'+
+    '<nav class="nd-public-nav"><a href="#" style="color:#e31e24;border-bottom:2px solid #e31e24;padding-bottom:9px;">Home</a><button onclick="scrollToInventory()">Buy Car⌄</button><a href="#admin">Direct Party Cars</a><button onclick="document.getElementById(\'pdi-section\')?.scrollIntoView({behavior:\'smooth\'})">PDI Booking</button><a href="#ndHowWorksV2">How It Works</a><a href="#ndWhyChooseV2">Why NoDealer</a><a href="#ndBottomV2">About Us</a><a href="#contact">Contact</a></nav>'+
+    '<div class="flex items-center gap-4"><div class="nd-public-lang"><span>EN</span> | हिंदी</div><a href="#admin" class="nd-public-login"><i class="fa-regular fa-user"></i> Login / Admin</a></div>';
+  }
+  function buildPublicHome(){
+    if(isAdminRoute()) return;
+    document.body.classList.add('nd-public-v2');
+    buildHeader();
+    if(document.getElementById('ndPublicHomeV2')) return;
+    var inv=document.getElementById('inventory-section'); if(!inv)return;
+    var hero=document.createElement('div'); hero.id='ndPublicHomeV2';
+    hero.innerHTML = `
+<section class="nd-public-hero-v2">
+  <div class="nd-hero-city"></div><div class="nd-road"></div>
+  <div class="nd-public-wrap">
+    <div class="nd-public-hero-grid">
+      <div>
+        <h1 class="nd-public-title">Buy Car<br>Directly From<span>Owner's</span></h1>
+        <p class="nd-public-sub">No Middleman. No Extra Charges.<br>Only Verified Cars. 100% Transparent.</p>
+        <div class="nd-public-hero-actions"><button onclick="scrollToInventory()" class="nd-public-btn-red">Find Your Car</button><button onclick="document.getElementById('ndHowWorksV2')?.scrollIntoView({behavior:'smooth'})" class="nd-public-btn-blue"><i class="fa-solid fa-play"></i> How It Works</button></div>
+      </div>
+      <div><img src="hero.jpg" class="nd-public-car" alt="NoDealer verified car" onerror="this.src='https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1000&q=80'"></div>
+    </div>
+    <div class="nd-trust-strip">
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-shield-halved"></i></div><div><h4>100% Verified Cars</h4><p>Every car is checked & verified</p></div></div>
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-user"></i></div><div><h4>Direct From Owner</h4><p>No dealers, direct deals</p></div></div>
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-bolt"></i></div><div><h4>Best Prices</h4><p>Save ₹30,000 to ₹2 Lakhs</p></div></div>
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-headset"></i></div><div><h4>Full Support</h4><p>We help you in every step</p></div></div>
+    </div>
+    <div class="nd-search-panel">
+      <div class="nd-search-top"><div><h2 class="nd-search-title">Tell Us What You Need</h2><p>Answer a few questions, and we'll show you the perfect cars.</p></div><div class="nd-search-minute"><i class="fa-solid fa-arrow-turn-down"></i> It takes less than 1 minute</div></div>
+      <div class="nd-search-fields">
+        <div class="nd-search-box"><label>1. Your Budget</label><select id="ndHomeBudget"><option value="">Select Budget</option><option value="400000">Under 4 Lakh</option><option value="500000">Under 5 Lakh</option><option value="800000">Under 8 Lakh</option><option value="1000000">Under 10 Lakh</option><option value="1500000">Under 15 Lakh</option></select></div>
+        <div class="nd-search-box"><label>2. Car Brand</label><select id="ndHomeBrand"><option value="">Select Brand</option><option value="Maruti">Maruti</option><option value="Hyundai">Hyundai</option><option value="Tata">Tata</option><option value="Mahindra">Mahindra</option><option value="Honda">Honda</option></select></div>
+        <div class="nd-search-box"><label>3. Fuel Type</label><select id="ndHomeFuel"><option value="">Select Fuel Type</option><option value="Petrol">Petrol</option><option value="Diesel">Diesel</option><option value="CNG">CNG</option><option value="Electric">Electric</option></select></div>
+        <div class="nd-search-box"><label>4. Transmission</label><select id="ndHomeTrans"><option value="">Select Transmission</option><option value="Manual">Manual</option><option value="Automatic">Automatic</option></select></div>
+        <div class="nd-search-box"><label>5. Year Preference</label><select id="ndHomeYear"><option value="">Select Year</option><option>2020+</option><option>2018+</option><option>2016+</option></select></div>
+        <button onclick="ndPublicSearchGo()" class="nd-show-cars">Show Me Cars <i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <div class="nd-search-bottom"><div><i class="fa-solid fa-people-arrows"></i> Answer a few simple questions and get matched cars instantly</div><a target="_blank" href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20need%20help%20finding%20a%20car."><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a></div>
+    </div>
+  </div>
+</section>`;
+    inv.parentNode.insertBefore(hero, inv);
+    var main=document.querySelector('main');
+    if(main && !document.getElementById('ndWhyChooseV2')){
+      var after=document.createElement('div'); after.innerHTML=`
+<section id="ndWhyChooseV2" class="nd-section-v2"><div class="nd-public-wrap"><h2 class="nd-why-title">Why Choose<br><span>No Dealer?</span></h2><div class="nd-why-grid">
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-user-slash"></i></div><h4>No Middleman</h4><p>Direct deal with owner</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-indian-rupee-sign"></i></div><h4>Best Price Guarantee</h4><p>Save more on every deal</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-clipboard-check"></i></div><h4>Verified Cars</h4><p>Full-check, RC verified</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-handshake"></i></div><h4>Trusted Support</h4><p>Happy customers</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-headset"></i></div><h4>Complete Support</h4><p>We help till done</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-shield-heart"></i></div><h4>PDI Available</h4><p>Inspect before payment</p></div>
+</div></div></section>
+<section id="ndHowWorksV2" class="nd-how"><div class="nd-public-wrap"><h2>How It <span>Works?</span></h2><div class="nd-how-grid"><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-question"></i></div><h4>1. Tell Us</h4><p>Answer a few questions</p></div><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-car"></i></div><h4>2. Get Matched</h4><p>We show the best matching cars</p></div><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-eye"></i></div><h4>3. Connect</h4><p>Talk directly to the owner</p></div><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-handshake"></i></div><h4>4. Close the Deal</h4><p>Buy directly & enjoy your car</p></div></div></div></section>
+<section id="ndBottomV2" class="nd-section-soft"><div class="nd-public-wrap"><div class="nd-bottom-panels"><div class="nd-sell-panel"><div><h3>Want To Sell<br>Your Car?</h3><p>List your car with us and connect directly with genuine buyers.</p><button onclick="openSellModal()" class="nd-public-btn-red" style="margin-top:15px;padding:12px 18px">List Your Car Now</button></div><img src="hero.jpg" alt="Sell car"></div><div class="nd-insta-panel"><h3>Follow Us On Instagram</h3><p style="font-weight:900">@nodealer.india</p><div class="nd-insta-photos"><img src="hero.jpg"><img src="hero.jpg"><img src="hero.jpg"><img src="hero.jpg"><img src="hero.jpg"></div><a href="https://www.instagram.com/nodealer.india/" target="_blank" class="nd-follow-btn"><i class="fa-brands fa-instagram"></i> Follow Us</a></div></div></div></section>`;
+      main.parentNode.insertBefore(after, main.nextSibling);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', buildPublicHome);
+  window.addEventListener('load', buildPublicHome);
+})();
+</script>
+
 </body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
@@ -7638,73 +7791,159 @@ body.nd-admin-route #adminWorkspaceView input[type="time"] {
 })();
 </script>
 
+
+
+<!-- NODEALER PUBLIC HOMEPAGE REBUILD V2 - screenshot matched layout, functions preserved -->
+<style>
+body.nd-public-v2{background:#f7fbff!important;color:#061424!important;overflow-x:hidden!important;}
+body.nd-public-v2 #main-content{background:linear-gradient(180deg,#ffffff 0%,#eef7ff 72%,#ffffff 100%)!important;}
+body.nd-public-v2 #ndFinalHome,
+body.nd-public-v2 #ndFinalTrustStrip,
+body.nd-public-v2 #ndFinalFlow,
+body.nd-public-v2 #ndSimpleHome,
+body.nd-public-v2 #ndSimpleTrustStrip,
+body.nd-public-v2 #oldLongHeroHidden,
+body.nd-public-v2 #ndFeaturedCarsQuick,
+body.nd-public-v2 #recentlyViewedSection{display:none!important;}
+body.nd-public-v2 header{background:rgba(255,255,255,.97)!important;box-shadow:0 6px 24px rgba(2,20,43,.06)!important;border-bottom:0!important;position:sticky!important;top:0!important;z-index:9999!important;}
+body.nd-public-v2 header .max-w-7xl{max-width:1180px!important;padding:12px 18px!important;}
+body.nd-public-v2 .nd-public-nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:900;color:#081526;}
+body.nd-public-v2 .nd-public-nav a,body.nd-public-v2 .nd-public-nav button{white-space:nowrap;transition:.2s ease;}
+body.nd-public-v2 .nd-public-nav a:hover,body.nd-public-v2 .nd-public-nav button:hover{color:#e31e24;}
+body.nd-public-v2 .nd-public-login{background:#e31e24;color:white!important;padding:11px 18px;border-radius:9px;box-shadow:0 12px 26px rgba(227,30,36,.22);font-size:12px;font-weight:900;display:inline-flex;gap:9px;align-items:center;}
+body.nd-public-v2 .nd-public-lang{font-size:13px;font-weight:900;color:#081526;}
+body.nd-public-v2 .nd-public-lang span:first-child{color:#e31e24;}
+body.nd-public-v2 #inventory-section{padding-top:0!important;max-width:1180px!important;}
+body.nd-public-v2 #inventory-section>div{display:none!important;}
+body.nd-public-v2 main{max-width:1180px!important;padding-top:34px!important;padding-bottom:34px!important;background:#f4fbff!important;}
+body.nd-public-v2 main>div:first-child{border:0!important;margin-bottom:18px!important;padding-bottom:0!important;}
+body.nd-public-v2 main>div:first-child span{display:none!important;}
+body.nd-public-v2 main>div:first-child h2{font-size:26px!important;line-height:1.05!important;color:#061424!important;}
+body.nd-public-v2 main>div:first-child h2:before{content:'CHECK OUT OUR';display:block;font-size:22px;color:#061424;font-weight:950;}
+body.nd-public-v2 main>div:first-child h2{font-size:0!important;}
+body.nd-public-v2 main>div:first-child h2:after{content:'LATEST IN-STOCK CARS';font-size:28px;font-weight:950;color:#061424;}
+body.nd-public-v2 main>div:first-child h2:after{background:linear-gradient(90deg,#061424 0 44%,#1e88e5 44% 75%,#061424 75%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+body.nd-public-v2 main>div:first-child p{display:none!important;}
+body.nd-public-v2 main>div:first-child a{background:white!important;color:#061424!important;border:1px solid #9aa8b8!important;border-radius:8px!important;box-shadow:none!important;padding:12px 18px!important;}
+body.nd-public-v2 #carGrid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:24px!important;}
+body.nd-public-v2 #carGrid>div{border-radius:11px!important;overflow:hidden!important;background:white!important;border:1px solid #dbe8f5!important;box-shadow:0 14px 34px rgba(2,20,43,.10)!important;transform:none!important;}
+body.nd-public-v2 #carGrid img{height:178px!important;object-fit:cover!important;}
+body.nd-public-v2 #noStockMessage{background:white!important;border-radius:14px!important;}
+.nd-public-hero-v2{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#edf6ff 52%,#3d3d3d 52%,#262626 100%);}
+.nd-public-hero-v2:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 78% 16%,rgba(255,255,255,.92),transparent 23%),linear-gradient(90deg,rgba(255,255,255,.96),rgba(255,255,255,.65) 42%,rgba(255,255,255,.12));pointer-events:none;}
+.nd-public-hero-v2 .nd-hero-city{position:absolute;left:0;right:0;top:185px;height:210px;background:linear-gradient(180deg,rgba(196,216,230,.5),rgba(255,255,255,0));opacity:.7;}
+.nd-public-hero-v2 .nd-road{position:absolute;left:0;right:0;bottom:0;height:295px;background:linear-gradient(180deg,#6a6a6a,#232323);opacity:.92;}
+.nd-public-hero-v2 .nd-road:after{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:rgba(255,255,255,.6);}
+.nd-public-wrap{max-width:1180px;margin:0 auto;padding-left:18px;padding-right:18px;position:relative;z-index:2;}
+.nd-public-hero-grid{display:grid;grid-template-columns:1fr 1.15fr;align-items:center;min-height:390px;padding-top:28px;}
+.nd-public-title{font-size:58px;line-height:.94;font-weight:950;letter-spacing:-2px;color:#061424;text-transform:uppercase;}
+.nd-public-title span{display:block;color:#e31e24;}
+.nd-public-sub{font-size:19px;font-weight:800;color:#111;line-height:1.35;margin-top:14px;}
+.nd-public-hero-actions{display:flex;gap:14px;margin-top:28px;}
+.nd-public-btn-red,.nd-public-btn-blue{border:0;border-radius:9px;padding:15px 26px;font-size:14px;font-weight:950;color:#fff;box-shadow:0 14px 26px rgba(0,0,0,.12);display:inline-flex;gap:10px;align-items:center;justify-content:center;}
+.nd-public-btn-red{background:#ed171d;}.nd-public-btn-blue{background:#2493ec;}
+.nd-public-car{width:100%;max-height:340px;object-fit:contain;filter:drop-shadow(0 30px 24px rgba(0,0,0,.25));transform:translateY(16px) scale(1.08);}
+.nd-trust-strip{display:grid;grid-template-columns:repeat(4,1fr);background:rgba(25,25,25,.86);border-radius:12px;color:white;box-shadow:0 22px 40px rgba(0,0,0,.22);overflow:hidden;margin-top:-18px;}
+.nd-trust-item{display:flex;gap:14px;align-items:center;padding:18px 23px;border-right:1px solid rgba(255,255,255,.16);}
+.nd-trust-item:last-child{border-right:0;}
+.nd-trust-icon{width:44px;height:44px;border-radius:999px;background:#2493ec;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 0 5px rgba(36,147,236,.18);}
+.nd-trust-item h4{font-weight:950;font-size:15px;}.nd-trust-item p{font-size:12px;color:#e5e7eb;font-weight:700;}
+.nd-search-panel{background:linear-gradient(135deg,#32a9ff,#1685ef);border-radius:10px 10px 0 0;margin-top:18px;box-shadow:0 22px 38px rgba(30,136,229,.22);overflow:hidden;}
+.nd-search-top{padding:21px 20px 18px;color:white;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;}
+.nd-search-title{font-size:26px;font-weight:950;text-transform:uppercase;line-height:1;}.nd-search-top p{font-size:14px;font-weight:700;margin-top:8px;}
+.nd-search-minute{font-size:13px;font-weight:800;margin-top:8px;}
+.nd-search-fields{display:grid;grid-template-columns:repeat(5,1fr) 1.05fr;gap:12px;padding:0 20px 22px;}
+.nd-search-box{background:white;border-radius:7px;padding:12px 12px;color:#111;}
+.nd-search-box label{font-size:11px;font-weight:900;color:#0f172a;display:block;margin-bottom:5px;}.nd-search-box select{width:100%;font-size:13px;font-weight:800;outline:none;background:white;}
+.nd-show-cars{background:#ee171d;color:white;border-radius:8px;font-weight:950;font-size:14px;display:flex;gap:10px;align-items:center;justify-content:center;box-shadow:0 12px 24px rgba(238,23,29,.22);}
+.nd-search-bottom{background:#e31e24;color:white;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:13px;font-weight:900;}
+.nd-search-bottom a{border:1px solid rgba(255,255,255,.75);border-radius:9px;padding:9px 17px;color:white;display:inline-flex;gap:8px;align-items:center;}
+.nd-section-v2{background:#fff;padding:38px 0;}.nd-section-soft{background:#f4fbff;padding:38px 0;}
+.nd-why-title{font-size:26px;line-height:1.1;font-weight:950;text-transform:uppercase;color:#061424;margin-bottom:28px;}.nd-why-title span{color:#1e88e5;}
+.nd-why-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;}.nd-why-card{text-align:center;}.nd-why-card .ico{width:70px;height:70px;margin:0 auto 12px;border-radius:999px;border:2px solid #1e88e5;color:#e31e24;display:flex;align-items:center;justify-content:center;font-size:28px;background:white;}.nd-why-card h4{font-size:13px;font-weight:950;color:#061424;}.nd-why-card p{font-size:11px;font-weight:700;color:#334155;margin-top:3px;}
+.nd-how{background:linear-gradient(135deg,#001d38,#002e55);padding:44px 0;color:white;}.nd-how h2{text-align:center;font-size:25px;font-weight:950;text-transform:uppercase;margin-bottom:28px;}.nd-how h2 span{color:#2493ec;}.nd-how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;position:relative;}.nd-how-step{text-align:center;position:relative;}.nd-how-circle{width:76px;height:76px;border-radius:999px;margin:0 auto 14px;background:#2493ec;display:flex;align-items:center;justify-content:center;font-size:30px;border:3px solid rgba(255,255,255,.55);}.nd-how-step:nth-child(even) .nd-how-circle{background:#e31e24;}.nd-how-step h4{font-size:14px;font-weight:950;}.nd-how-step p{font-size:13px;color:#dbeafe;font-weight:700;margin-top:4px;}
+.nd-bottom-panels{display:grid;grid-template-columns:1fr 1.2fr;gap:22px;}.nd-sell-panel,.nd-insta-panel{border-radius:13px;overflow:hidden;box-shadow:0 16px 34px rgba(2,20,43,.10);min-height:180px;}.nd-sell-panel{background:linear-gradient(90deg,#fff,#eaf3fb);display:grid;grid-template-columns:1fr 1.2fr;align-items:center;padding:22px;}.nd-sell-panel h3{font-size:25px;line-height:1;font-weight:950;color:#061424;text-transform:uppercase;}.nd-sell-panel p{font-size:14px;font-weight:700;margin-top:10px;}.nd-sell-panel img{height:150px;object-fit:contain;width:100%;}.nd-insta-panel{background:linear-gradient(135deg,#ed171d,#1e88e5);color:white;padding:22px;}.nd-insta-panel h3{font-size:25px;font-weight:950;text-transform:uppercase;}.nd-insta-photos{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px;}.nd-insta-photos img{height:76px;border-radius:6px;border:3px solid white;object-fit:cover;width:100%;}.nd-follow-btn{background:#2493ec;border-radius:7px;padding:8px 14px;font-size:12px;font-weight:900;display:inline-flex;gap:8px;margin-top:12px;}
+body.nd-public-v2 footer{background:#f7fbff!important;border-top:1px solid #dbe8f5!important;padding:30px 18px!important;color:#061424!important;}
+body.nd-public-v2 footer .max-w-7xl{max-width:1180px!important;}
+@media(max-width:900px){body.nd-public-v2 .nd-public-nav{display:none}.nd-public-hero-grid{grid-template-columns:1fr;min-height:auto;padding-top:28px;padding-bottom:20px}.nd-public-title{font-size:42px}.nd-public-car{transform:none;margin-top:12px}.nd-trust-strip{grid-template-columns:1fr 1fr}.nd-search-fields{grid-template-columns:1fr}.nd-search-top,.nd-search-bottom{flex-direction:column;align-items:flex-start}.nd-why-grid{grid-template-columns:1fr 1fr}.nd-how-grid{grid-template-columns:1fr 1fr;gap:24px}.nd-bottom-panels{grid-template-columns:1fr}body.nd-public-v2 #carGrid{grid-template-columns:1fr!important}.nd-sell-panel{grid-template-columns:1fr}.nd-insta-photos{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script>
+(function(){
+  function isAdminRoute(){return location.hash.toLowerCase()==='#admin'||location.pathname.toLowerCase().includes('admin');}
+  function publicSearchGo(){
+    var map=[['ndHomeBudget','filterBudget'],['ndHomeBrand','filterBrand'],['ndHomeFuel','filterFuel'],['ndHomeTrans','filterTransmission']];
+    map.forEach(function(pair){var a=document.getElementById(pair[0]),b=document.getElementById(pair[1]); if(a&&b)b.value=a.value;});
+    if(typeof applyFilters==='function') applyFilters();
+    document.querySelector('main')?.scrollIntoView({behavior:'smooth'});
+  }
+  window.ndPublicSearchGo=publicSearchGo;
+  function buildHeader(){
+    var header=document.querySelector('#main-content > header .max-w-7xl'); if(!header)return;
+    header.innerHTML = '<a href="#" class="flex items-center gap-3"><div class="bg-white p-1 rounded shadow-sm w-16 h-16 flex items-center justify-center overflow-hidden"><img src="logo.jpg" alt="No Dealer" class="max-w-full max-h-full object-contain block"></div></a>'+
+    '<nav class="nd-public-nav"><a href="#" style="color:#e31e24;border-bottom:2px solid #e31e24;padding-bottom:9px;">Home</a><button onclick="scrollToInventory()">Buy Car⌄</button><a href="#admin">Direct Party Cars</a><button onclick="document.getElementById(\'pdi-section\')?.scrollIntoView({behavior:\'smooth\'})">PDI Booking</button><a href="#ndHowWorksV2">How It Works</a><a href="#ndWhyChooseV2">Why NoDealer</a><a href="#ndBottomV2">About Us</a><a href="#contact">Contact</a></nav>'+
+    '<div class="flex items-center gap-4"><div class="nd-public-lang"><span>EN</span> | हिंदी</div><a href="#admin" class="nd-public-login"><i class="fa-regular fa-user"></i> Login / Admin</a></div>';
+  }
+  function buildPublicHome(){
+    if(isAdminRoute()) return;
+    document.body.classList.add('nd-public-v2');
+    buildHeader();
+    if(document.getElementById('ndPublicHomeV2')) return;
+    var inv=document.getElementById('inventory-section'); if(!inv)return;
+    var hero=document.createElement('div'); hero.id='ndPublicHomeV2';
+    hero.innerHTML = `
+<section class="nd-public-hero-v2">
+  <div class="nd-hero-city"></div><div class="nd-road"></div>
+  <div class="nd-public-wrap">
+    <div class="nd-public-hero-grid">
+      <div>
+        <h1 class="nd-public-title">Buy Car<br>Directly From<span>Owner's</span></h1>
+        <p class="nd-public-sub">No Middleman. No Extra Charges.<br>Only Verified Cars. 100% Transparent.</p>
+        <div class="nd-public-hero-actions"><button onclick="scrollToInventory()" class="nd-public-btn-red">Find Your Car</button><button onclick="document.getElementById('ndHowWorksV2')?.scrollIntoView({behavior:'smooth'})" class="nd-public-btn-blue"><i class="fa-solid fa-play"></i> How It Works</button></div>
+      </div>
+      <div><img src="hero.jpg" class="nd-public-car" alt="NoDealer verified car" onerror="this.src='https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1000&q=80'"></div>
+    </div>
+    <div class="nd-trust-strip">
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-shield-halved"></i></div><div><h4>100% Verified Cars</h4><p>Every car is checked & verified</p></div></div>
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-user"></i></div><div><h4>Direct From Owner</h4><p>No dealers, direct deals</p></div></div>
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-bolt"></i></div><div><h4>Best Prices</h4><p>Save ₹30,000 to ₹2 Lakhs</p></div></div>
+      <div class="nd-trust-item"><div class="nd-trust-icon"><i class="fa-solid fa-headset"></i></div><div><h4>Full Support</h4><p>We help you in every step</p></div></div>
+    </div>
+    <div class="nd-search-panel">
+      <div class="nd-search-top"><div><h2 class="nd-search-title">Tell Us What You Need</h2><p>Answer a few questions, and we'll show you the perfect cars.</p></div><div class="nd-search-minute"><i class="fa-solid fa-arrow-turn-down"></i> It takes less than 1 minute</div></div>
+      <div class="nd-search-fields">
+        <div class="nd-search-box"><label>1. Your Budget</label><select id="ndHomeBudget"><option value="">Select Budget</option><option value="400000">Under 4 Lakh</option><option value="500000">Under 5 Lakh</option><option value="800000">Under 8 Lakh</option><option value="1000000">Under 10 Lakh</option><option value="1500000">Under 15 Lakh</option></select></div>
+        <div class="nd-search-box"><label>2. Car Brand</label><select id="ndHomeBrand"><option value="">Select Brand</option><option value="Maruti">Maruti</option><option value="Hyundai">Hyundai</option><option value="Tata">Tata</option><option value="Mahindra">Mahindra</option><option value="Honda">Honda</option></select></div>
+        <div class="nd-search-box"><label>3. Fuel Type</label><select id="ndHomeFuel"><option value="">Select Fuel Type</option><option value="Petrol">Petrol</option><option value="Diesel">Diesel</option><option value="CNG">CNG</option><option value="Electric">Electric</option></select></div>
+        <div class="nd-search-box"><label>4. Transmission</label><select id="ndHomeTrans"><option value="">Select Transmission</option><option value="Manual">Manual</option><option value="Automatic">Automatic</option></select></div>
+        <div class="nd-search-box"><label>5. Year Preference</label><select id="ndHomeYear"><option value="">Select Year</option><option>2020+</option><option>2018+</option><option>2016+</option></select></div>
+        <button onclick="ndPublicSearchGo()" class="nd-show-cars">Show Me Cars <i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <div class="nd-search-bottom"><div><i class="fa-solid fa-people-arrows"></i> Answer a few simple questions and get matched cars instantly</div><a target="_blank" href="https://wa.me/917838335143?text=Hi%20NoDealer%2C%20I%20need%20help%20finding%20a%20car."><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a></div>
+    </div>
+  </div>
+</section>`;
+    inv.parentNode.insertBefore(hero, inv);
+    var main=document.querySelector('main');
+    if(main && !document.getElementById('ndWhyChooseV2')){
+      var after=document.createElement('div'); after.innerHTML=`
+<section id="ndWhyChooseV2" class="nd-section-v2"><div class="nd-public-wrap"><h2 class="nd-why-title">Why Choose<br><span>No Dealer?</span></h2><div class="nd-why-grid">
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-user-slash"></i></div><h4>No Middleman</h4><p>Direct deal with owner</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-indian-rupee-sign"></i></div><h4>Best Price Guarantee</h4><p>Save more on every deal</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-clipboard-check"></i></div><h4>Verified Cars</h4><p>Full-check, RC verified</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-handshake"></i></div><h4>Trusted Support</h4><p>Happy customers</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-headset"></i></div><h4>Complete Support</h4><p>We help till done</p></div>
+  <div class="nd-why-card"><div class="ico"><i class="fa-solid fa-shield-heart"></i></div><h4>PDI Available</h4><p>Inspect before payment</p></div>
+</div></div></section>
+<section id="ndHowWorksV2" class="nd-how"><div class="nd-public-wrap"><h2>How It <span>Works?</span></h2><div class="nd-how-grid"><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-question"></i></div><h4>1. Tell Us</h4><p>Answer a few questions</p></div><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-car"></i></div><h4>2. Get Matched</h4><p>We show the best matching cars</p></div><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-eye"></i></div><h4>3. Connect</h4><p>Talk directly to the owner</p></div><div class="nd-how-step"><div class="nd-how-circle"><i class="fa-solid fa-handshake"></i></div><h4>4. Close the Deal</h4><p>Buy directly & enjoy your car</p></div></div></div></section>
+<section id="ndBottomV2" class="nd-section-soft"><div class="nd-public-wrap"><div class="nd-bottom-panels"><div class="nd-sell-panel"><div><h3>Want To Sell<br>Your Car?</h3><p>List your car with us and connect directly with genuine buyers.</p><button onclick="openSellModal()" class="nd-public-btn-red" style="margin-top:15px;padding:12px 18px">List Your Car Now</button></div><img src="hero.jpg" alt="Sell car"></div><div class="nd-insta-panel"><h3>Follow Us On Instagram</h3><p style="font-weight:900">@nodealer.india</p><div class="nd-insta-photos"><img src="hero.jpg"><img src="hero.jpg"><img src="hero.jpg"><img src="hero.jpg"><img src="hero.jpg"></div><a href="https://www.instagram.com/nodealer.india/" target="_blank" class="nd-follow-btn"><i class="fa-brands fa-instagram"></i> Follow Us</a></div></div></div></section>`;
+      main.parentNode.insertBefore(after, main.nextSibling);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', buildPublicHome);
+  window.addEventListener('load', buildPublicHome);
+})();
+</script>
+
 </body>
 </html>
 
-
-<!-- NODEALER EMERGENCY ADMIN LOGIN OVERRIDE - 2026-06-03 -->
-<script>
-(function(){
-  const ADMIN_SESSION_KEY = 'nodealer_admin_session_v2';
-  const VALID_USERS = ['nodealer','admin'];
-  const VALID_PASSWORDS = ['NoDealer@2026','nodealer','admin','Rudraksh@2026'];
-
-  function $(id){ return document.getElementById(id); }
-  function isAdminRoute(){
-    return location.hash.toLowerCase()==='#admin' || location.pathname.toLowerCase().includes('admin');
-  }
-  function unlockAdmin(){
-    try { sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ok:true, at:Date.now()})); } catch(e) {}
-    document.body.classList.add('nd-admin-route','nd-admin-unlocked');
-    const auth = $('adminAuthView');
-    const work = $('adminWorkspaceView');
-    const pre = $('preloader');
-    const main = $('main-content');
-    if(pre) pre.style.setProperty('display','none','important');
-    if(main){ main.classList.remove('opacity-0'); main.classList.add('opacity-100'); main.style.opacity='1'; }
-    if(auth){ auth.classList.add('hidden'); auth.style.setProperty('display','none','important'); }
-    if(work){ work.classList.remove('hidden'); work.style.setProperty('display','block','important'); work.style.setProperty('visibility','visible','important'); }
-    if(typeof ndAdminShowSection === 'function') { try { ndAdminShowSection('dashboard'); } catch(e){} }
-    if(typeof loadAdminInventoryDirectory === 'function') { try { loadAdminInventoryDirectory(); } catch(e){} }
-    if(typeof loadAdminLeadsDashboard === 'function') { try { loadAdminLeadsDashboard(); } catch(e){} }
-    if(typeof updateActionCenter === 'function') { try { updateActionCenter(); } catch(e){} }
-  }
-
-  window.executeAdminLogin = function(){
-    const user = String(($('loginUser') && $('loginUser').value) || '').trim();
-    const pass = String(($('loginPass') && $('loginPass').value) || '').trim();
-    if(VALID_USERS.includes(user) && VALID_PASSWORDS.includes(pass)) {
-      unlockAdmin();
-      return true;
-    }
-    alert('Wrong admin login. Use Username: nodealer and Password: NoDealer@2026');
-    return false;
-  };
-
-  document.addEventListener('submit', function(e){
-    const form = e.target;
-    const text = (form && form.innerText || '').toLowerCase();
-    if(text.includes('nodealer control core') || form.querySelector('#loginUser') || form.querySelector('#loginPass')){
-      e.preventDefault();
-      window.executeAdminLogin();
-    }
-  }, true);
-
-  document.addEventListener('click', function(e){
-    const btn = e.target.closest('button');
-    if(!btn) return;
-    const t = (btn.innerText || '').toLowerCase();
-    if(t.includes('initialize system authorization')){
-      e.preventDefault();
-      window.executeAdminLogin();
-    }
-  }, true);
-
-  document.addEventListener('DOMContentLoaded', function(){
-    if(!isAdminRoute()) return;
-    let raw = '';
-    try { raw = sessionStorage.getItem(ADMIN_SESSION_KEY) || ''; } catch(e) {}
-    if(raw.includes('true') || raw.includes('ok')) unlockAdmin();
-  });
-})();
-</script>
