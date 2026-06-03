@@ -3208,112 +3208,116 @@ const uploadedPhotoUrls = await uploadAdminPhotosToStorage();
         async function loadAdminLeadsDashboard() {
             const tableBody = document.getElementById('adminLeadsTableBody');
             const searchTerm = (document.getElementById('leadSearchInput')?.value || '').toLowerCase();
-            tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">Loading cloud Support leads...</td></tr>`;
+            if (!tableBody) return;
 
-            if (!ensureSupabase()) return;
+            tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-blue-300 font-black">Loading latest leads safely...</td></tr>`;
 
-            const { data, error } = await supabaseClient
-                .from('leads')
-                .select('*')
-                .order('created_at', { ascending: false });
+            function renderLeadRows(rows) {
+                const logs = (rows || []).map(row => row.raw_data || row.submissionType ? row : mapLeadRowToLog(row));
+                window.LEAD_CACHE = logs;
+                tableBody.innerHTML = "";
 
-            if (error) {
-                console.error(error);
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400 font-medium">Could not load Supabase leads: ${safeText(error.message)}</td></tr>`;
-                return;
-            }
+                const filteredLogs = logs.filter(log => {
+                    const matchesSearch = JSON.stringify(log).toLowerCase().includes(searchTerm);
+                    const matchesStatus = window.ACTIVE_LEAD_FILTER === 'all' ? true : (log.leadStatus || 'New Lead') === window.ACTIVE_LEAD_FILTER;
+                    const matchesDateTime = typeof leadPassesDateTimeFilter === "function" ? leadPassesDateTimeFilter(log) : true;
+                    return matchesSearch && matchesStatus && matchesDateTime;
+                });
 
-            const logs = (data || []).map(mapLeadRowToLog);
-            window.LEAD_CACHE = logs;
-            tableBody.innerHTML = "";
+                if (!filteredLogs.length) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 font-bold">No leads match this search/filter.</td></tr>`;
+                    if (typeof updateActionCenter === "function") updateActionCenter();
+                    return;
+                }
 
-            if (logs.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No customer inquiries saved in Supabase yet.</td></tr>`;
-                updateActionCenter();
-                return;
-            }
+                filteredLogs.forEach(log => {
+                    const phoneClean = safeText(log.phone).replace(/\D/g, '');
+                    const status = log.leadStatus || 'New Lead';
+                    const statusClass = status === 'Closed' ? 'bg-green-500/20 text-green-300' : status === 'Negotiation' ? 'bg-amber-500/20 text-amber-300' : status === 'Contacted' ? 'bg-blue-500/20 text-blue-300' : 'bg-red-500/20 text-red-300';
+                    const leadTemp = typeof getLeadTemperature === "function" ? getLeadTemperature(log) : "Warm";
+                    const leadTempClass = typeof getLeadTemperatureClass === "function" ? getLeadTemperatureClass(leadTemp) : "bg-orange-500/20 text-orange-300";
+                    const smartWhatsAppText = encodeURIComponent(typeof getSmartWhatsAppText === "function" ? getSmartWhatsAppText(log) : `Hi ${safeText(log.name) || "there"}, this is NoDealer India.`);
 
-            const filteredLogs = logs.filter(log => {
-                const matchesSearch = JSON.stringify(log).toLowerCase().includes(searchTerm);
-                const matchesStatus = window.ACTIVE_LEAD_FILTER === 'all' ? true : (log.leadStatus || 'New Lead') === window.ACTIVE_LEAD_FILTER;
-                const matchesDateTime = leadPassesDateTimeFilter(log);
-                return matchesSearch && matchesStatus && matchesDateTime;
-            });
+                    let formattedDetails = "";
+                    let imageNodeOutput = `<span class="text-slate-500 text-[11px]">No Assets Attached</span>`;
 
-            if (filteredLogs.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 font-medium">No leads match this search/filter.</td></tr>`;
-                updateActionCenter();
-                return;
-            }
+                    if (log.submissionType === "PDI Inspection Request" || String(log.submissionType || "").toLowerCase().includes("pdi")) {
+                        formattedDetails = `<strong class="text-amber-300">PDI Booking / Inspection Request</strong><br><span class="text-[10px] text-slate-400">${safeText(log.carBrand || log.carModel || log.rawData?.pdiCarDetails || "")}</span>`;
+                    } else {
+                        formattedDetails = `<span class="uppercase font-bold text-slate-200">${safeText(log.carBrand)} ${safeText(log.carModel)}</span><br><span class="text-[10px] text-slate-400">Year: ${safeText(log.carYear)} • Color: ${safeText(log.carColor) || 'N/A'}</span>`;
+                    }
 
-            filteredLogs.forEach(log => {
-                let formattedDetails = "";
-                let imageNodeOutput = `<span class="text-slate-500 text-[11px]">No Assets Attached</span>`;
-                const phoneClean = safeText(log.phone).replace(/\D/g, '');
-                const status = log.leadStatus || 'New Lead';
-                const statusClass = status === 'Closed' ? 'bg-green-500/20 text-green-300' : status === 'Negotiation' ? 'bg-amber-500/20 text-amber-300' : status === 'Contacted' ? 'bg-blue-500/20 text-blue-300' : 'bg-red-500/20 text-red-300';
-                const leadTemp = getLeadTemperature(log);
-                const leadTempClass = getLeadTemperatureClass(leadTemp);
-                const smartWhatsAppText = encodeURIComponent(getSmartWhatsAppText(log));
-
-                if (log.submissionType === "PDI Inspection Request") {
-                    formattedDetails = `<strong>PDI Route Request</strong>`;
-                } else {
-                    formattedDetails = `<span class="uppercase font-bold text-slate-200">${safeText(log.carBrand)} ${safeText(log.carModel)}</span><br><span class="text-[10px] text-slate-400">Year: ${safeText(log.carYear)} • Color: ${safeText(log.carColor) || 'N/A'}</span>`;
                     if (log.attachedPhotosData && log.attachedPhotosData.length > 0) {
                         imageNodeOutput = `<div class="flex flex-wrap gap-1">`;
-                        log.attachedPhotosData.forEach(picData => {
+                        log.attachedPhotosData.slice(0, 6).forEach(picData => {
                             imageNodeOutput += `<a href="${picData}" target="_blank" class="h-8 w-10 border border-slate-700 rounded overflow-hidden inline-block hover:scale-105 transition-all"><img src="${picData}" class="w-full h-full object-cover"></a>`;
                         });
                         imageNodeOutput += `</div>`;
                     }
+
+                    tableBody.innerHTML += `
+                        <tr class="hover:bg-slate-800/20 transition-all text-slate-300 border-l-4 border-amber-500">
+                            <td class="p-3">
+                                <span class="block font-bold text-[11px] text-blue-400 uppercase tracking-wide">${safeText(log.submissionType)}</span>
+                                <span class="text-[10px] font-mono text-slate-500">${(safeText(log.timestamp).split('T')[0] || "")} @ ${(safeText(log.timestamp).split('T')[1] || "00:00").substring(0,5)}</span>
+                            </td>
+                            <td class="p-3">
+                                <span class="block font-bold text-white text-sm">${safeText(log.name) || "No Name"}</span>
+                                <div class="flex gap-1 mt-1 flex-wrap">
+                                    <span class="${statusClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${status}</span>
+                                    <span class="${leadTempClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${leadTemp} Lead</span>
+                                    <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${safeText(log.source) || 'Website'}</span>
+                                </div>
+                                <span class="block text-slate-400 font-medium tracking-tight mt-1"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${safeText(log.phone)}</span>
+                            </td>
+                            <td class="p-3">
+                                <span class="block font-medium text-slate-200"><i class="fa-solid fa-location-dot text-[10px] text-red-400 mr-0.5"></i> ${safeText(log.location) || 'N/A'}</span>
+                                <div class="mt-0.5 leading-tight">${formattedDetails}</div>
+                            </td>
+                            <td class="p-3">
+                                <div class="space-y-2">
+                                    ${imageNodeOutput}
+                                    ${phoneClean ? `<a href="https://wa.me/91${phoneClean}?text=${smartWhatsAppText}" target="_blank" class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                                    <a href="tel:${phoneClean}" class="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all ml-1"><i class="fa-solid fa-phone"></i> Call</a>` : ''}
+                                    <div class="flex flex-wrap gap-1 mt-2">
+                                        <button onclick="updateLeadStatus('${log.timestamp}', 'Contacted')" class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black">Contacted</button>
+                                        <button onclick="updateLeadStatus('${log.timestamp}', 'Negotiation')" class="bg-amber-500 text-black px-2 py-1 rounded text-[9px] font-black">Negotiation</button>
+                                        <button onclick="updateLeadStatus('${log.timestamp}', 'Closed')" class="bg-green-600 text-white px-2 py-1 rounded text-[9px] font-black">Closed</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>`;
+                });
+
+                if (typeof updateActionCenter === "function") updateActionCenter();
+            }
+
+            try {
+                if (!ensureSupabase()) {
+                    const localLogs = JSON.parse(localStorage.getItem('nodealerLeads') || '[]');
+                    renderLeadRows(localLogs);
+                    return;
                 }
 
-                tableBody.innerHTML += `
-                    <tr class="hover:bg-slate-800/20 transition-all text-slate-300 border-l-4 border-amber-500">
-                        <td class="p-3">
-                            <span class="block font-bold text-[11px] text-blue-400 uppercase tracking-wide">${safeText(log.submissionType)}</span>
-                            <span class="text-[10px] font-mono text-slate-500">${safeText(log.timestamp).split('T')[0] || ""} @ ${(safeText(log.timestamp).split('T')[1] || "00:00").substring(0,5)}</span>
-                        </td>
-                        <td class="p-3">
-                            <span class="block font-bold text-white text-sm">${safeText(log.name)}</span>
-                            <div class="flex gap-1 mt-1 flex-wrap">
-                                <span class="${statusClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${status}</span>
-                                <span class="${leadTempClass} text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${leadTemp} Lead</span>
-                                <span class="bg-blue-500/20 text-blue-300 text-[9px] px-2 py-0.5 rounded-full uppercase font-black">${safeText(log.source) || 'Website'}</span>
-                            </div>
-                            <span class="block text-slate-400 font-medium tracking-tight mt-1"><i class="fa-solid fa-phone text-[10px] text-emerald-400 mr-0.5"></i> ${safeText(log.phone)}</span>
-                        </td>
-                        <td class="p-3">
-                            <span class="block font-medium text-slate-200"><i class="fa-solid fa-location-dot text-[10px] text-red-400 mr-0.5"></i> ${safeText(log.location) || 'N/A'}</span>
-                            <div class="mt-0.5 leading-tight">${formattedDetails}</div>
-                        </td>
-                        <td class="p-3">
-                            <div class="space-y-2">
-                                ${imageNodeOutput}
-                                <a href="https://wa.me/${phoneClean}?text=${smartWhatsAppText}" target="_blank" class="inline-flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all"><i class="fa-brands fa-whatsapp"></i> Smart WhatsApp</a>
-                                ${phoneClean ? `<a href="tel:${phoneClean}" class="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-black transition-all ml-1"><i class="fa-solid fa-phone"></i> Call</a>` : ''}
-                                <div class="flex flex-wrap gap-1 mt-2">
-                                    <button onclick="updateLeadStatus('${log.timestamp}', 'Contacted')" class="bg-blue-600 text-white px-2 py-1 rounded text-[9px] font-black">Contacted</button>
-                                    <button onclick="updateLeadStatus('${log.timestamp}', 'Negotiation')" class="bg-amber-500 text-black px-2 py-1 rounded text-[9px] font-black">Negotiation</button>
-                                    <button onclick="updateLeadStatus('${log.timestamp}', 'Closed')" class="bg-green-600 text-white px-2 py-1 rounded text-[9px] font-black">Closed</button>
-                                </div>
-                                <div class="flex flex-wrap gap-1 mt-2">
-                                    <button onclick="addLeadNote('${log.timestamp}')" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Add Note</button>
-                                    <button onclick="aiSuggestLeadAction('${log.timestamp}')" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">AI Suggest</button>
-                                </div>
-                                <button onclick="setFollowUpDate('${log.timestamp}')" class="mt-2 bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Set Follow-Up Date</button>
-                                ${log.followUpDate ? `<div class="mt-2 bg-orange-950/40 border border-orange-800 rounded-lg p-2 text-[10px] text-orange-200"><strong class="text-orange-300">Follow-Up Date:</strong> ${safeText(log.followUpDate)}</div>` : ''}
-                                ${log.aiSuggestion ? `<div class="mt-2 bg-purple-950/40 border border-purple-800 rounded-lg p-2 text-[10px] text-purple-200"><strong class="text-purple-300">AI:</strong> ${safeText(log.aiSuggestion)}<br><strong class="text-amber-300">Follow-Up:</strong> ${safeText(log.followUpReminder) || 'Not set'}</div>` : ''}
-                                ${log.note ? `<div class="mt-2 bg-slate-950 border border-slate-800 rounded-lg p-2 text-[10px] text-slate-300"><strong class="text-amber-400">Note:</strong> ${safeText(log.note)}</div>` : ''}
-                                <button onclick="deleteLead('${safeText(log.id)}', '${safeText(log.timestamp)}')" class="mt-2 bg-red-700 hover:bg-red-800 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase">Delete Lead</button>
-                            </div>
-                        </td>
-                    </tr>`;
-            });
+                const { data, error } = await supabaseClient
+                    .from('leads')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(75);
 
-            updateActionCenter();
+                if (error) throw error;
+                renderLeadRows(data || []);
+            } catch (error) {
+                console.error(error);
+                const localLogs = JSON.parse(localStorage.getItem('nodealerLeads') || '[]');
+                if (localLogs.length) {
+                    renderLeadRows(localLogs);
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400 font-bold">Supabase is slow right now. Leads are safe in database, but could not load. Try Refresh Data after 1 minute.</td></tr>`;
+                }
+            }
         }
+
         function exportInquiriesToExcel() {
             const logs = window.LEAD_CACHE || [];
             if (logs.length === 0) { alert("No Supabase Support leads ready to export."); return; }
@@ -7223,6 +7227,73 @@ body.nd-admin-route #ndAdminHeavenDock { display: flex; }
 })();
 </script>
 
+
+<!-- NODEALER CLEANUP FIX: leads load limit + modal layer fix -->
+<style>
+  #realCarManagerModal,
+  #proInventoryAdminModal,
+  #ndPdiBookingsModal,
+  #ndPdiReportBuilderModal,
+  #ndp1AdminModal,
+  #ndAdminCrmToolsModal,
+  #ndLeadViewerModal {
+    z-index: 2147483000 !important;
+  }
+  body.nd-modal-open #secureAdminPortal {
+    filter: none !important;
+  }
+  #adminLeadsTableBody tr td {
+    vertical-align: top;
+  }
+</style>
+<script>
+(function(){
+  function bringAdminModalToFront(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.remove('hidden');
+    el.style.setProperty('z-index','2147483000','important');
+    document.body.classList.add('nd-modal-open');
+  }
+
+  const oldOpenRealCarManager = window.openRealCarManager;
+  window.openRealCarManager = function(){
+    if(typeof oldOpenRealCarManager === 'function') {
+      try { oldOpenRealCarManager(); } catch(e) { console.warn(e); }
+    }
+    bringAdminModalToFront('realCarManagerModal');
+    if(typeof renderRealCarManagerList === 'function') renderRealCarManagerList();
+  };
+
+  const oldOpenProInventoryAdmin = window.openProInventoryAdmin;
+  window.openProInventoryAdmin = function(){
+    if(typeof oldOpenProInventoryAdmin === 'function') {
+      try { oldOpenProInventoryAdmin(); } catch(e) { console.warn(e); }
+    }
+    bringAdminModalToFront('proInventoryAdminModal');
+  };
+
+  const oldOpenNdPdiBookings = window.openNdPdiBookings;
+  window.openNdPdiBookings = function(){
+    if(typeof oldOpenNdPdiBookings === 'function') {
+      try { oldOpenNdPdiBookings(); } catch(e) { console.warn(e); }
+    }
+    bringAdminModalToFront('ndPdiBookingsModal');
+  };
+
+  document.addEventListener('click', function(e){
+    const closeBtn = e.target.closest('[onclick*="closeRealCarManager"], [onclick*="closeProInventory"], [onclick*="closeNdPdi"], [onclick*="close"]');
+    if(closeBtn){
+      setTimeout(function(){
+        if(!document.querySelector('#realCarManagerModal:not(.hidden), #proInventoryAdminModal:not(.hidden), #ndPdiBookingsModal:not(.hidden), #ndPdiReportBuilderModal:not(.hidden), #ndp1AdminModal:not(.hidden)')){
+          document.body.classList.remove('nd-modal-open');
+        }
+      },300);
+    }
+  }, true);
+})();
+</script>
+
 </body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
@@ -8574,150 +8645,73 @@ body.nd-admin-route #adminWorkspaceView:not(.hidden) {
   setInterval(forceAdminCleanView, 1000);
 })();
 </script>
+
+<!-- NODEALER CLEANUP FIX: leads load limit + modal layer fix -->
+<style>
+  #realCarManagerModal,
+  #proInventoryAdminModal,
+  #ndPdiBookingsModal,
+  #ndPdiReportBuilderModal,
+  #ndp1AdminModal,
+  #ndAdminCrmToolsModal,
+  #ndLeadViewerModal {
+    z-index: 2147483000 !important;
+  }
+  body.nd-modal-open #secureAdminPortal {
+    filter: none !important;
+  }
+  #adminLeadsTableBody tr td {
+    vertical-align: top;
+  }
+</style>
 <script>
-/* NODEALER FAST LEAD LOADER FIX */
-async function loadAdminLeadsDashboard() {
-  const tableBody = document.getElementById("adminLeadsTableBody");
-  if (!tableBody) return;
-
-  tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-blue-300 font-bold">Loading latest 50 leads...</td></tr>`;
-
-  if (!ensureSupabase()) return;
-
-  const { data, error } = await supabaseClient
-    .from("leads")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(50);
-
-  if (error) {
-    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400 font-bold">
-      Supabase timeout. Latest leads could not load. Try again in 30 seconds.
-    </td></tr>`;
-    console.error(error);
-    return;
+(function(){
+  function bringAdminModalToFront(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.remove('hidden');
+    el.style.setProperty('z-index','2147483000','important');
+    document.body.classList.add('nd-modal-open');
   }
 
-  const logs = (data || []).map(mapLeadRowToLog);
-  window.LEAD_CACHE = logs;
-  tableBody.innerHTML = "";
-
-  if (!logs.length) {
-    tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 font-bold">No leads found.</td></tr>`;
-    return;
-  }
-
-  logs.forEach(log => {
-    const phone = String(log.phone || "").replace(/\D/g, "");
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td class="p-4 align-top">
-        <b class="text-blue-300">${log.submissionType || "Lead"}</b><br>
-        <span class="text-xs text-slate-400">${log.timestamp || log.created_at || ""}</span>
-      </td>
-      <td class="p-4 align-top">
-        <b class="text-white">${log.name || "No Name"}</b><br>
-        <span class="text-xs text-slate-300">${log.phone || ""}</span><br>
-        <span class="text-xs text-slate-400">${log.city || log.location || ""}</span>
-      </td>
-      <td class="p-4 align-top">
-        <b class="text-amber-300">${log.carBrand || log.carTitle || log.carModel || log.pdiCarDetails || "No car details"}</b><br>
-        <span class="text-xs text-slate-400">${log.budget || log.message || log.notes || ""}</span>
-      </td>
-      <td class="p-4 align-top">
-        ${phone ? `<a href="https://wa.me/91${phone}" target="_blank" class="bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-black">WHATSAPP</a>` : ""}
-      </td>
-    `;
-    tableBody.appendChild(row);
-  });
-
-  if (typeof updateActionCenter === "function") updateActionCenter();
-}
-</script>
-    <script>
-/* NODEALER FINAL FORCE LEAD FIX */
-(function () {
-  let leadLoading = false;
-
-  async function forceFastLeads() {
-    const tableBody = document.getElementById("adminLeadsTableBody");
-    if (!tableBody || leadLoading) return;
-
-    leadLoading = true;
-
-    try {
-      if (typeof ensureSupabase !== "function" || !ensureSupabase()) {
-        leadLoading = false;
-        return;
-      }
-
-      tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-blue-300 font-bold">Loading latest leads safely...</td></tr>`;
-
-      const { data, error } = await supabaseClient
-        .from("leads")
-        .select("id,created_at,name,phone,city,car_brand,car_model,submission_type,lead_status,message")
-        .order("created_at", { ascending: false })
-        .limit(25);
-
-      if (error) throw error;
-
-      const logs = data || [];
-      window.LEAD_CACHE = logs;
-
-      if (!logs.length) {
-        tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 font-bold">No leads found.</td></tr>`;
-        leadLoading = false;
-        return;
-      }
-
-      tableBody.innerHTML = "";
-
-      logs.forEach(log => {
-        const phone = String(log.phone || "").replace(/\D/g, "");
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td class="p-4 align-top">
-            <b class="text-amber-300">${log.submission_type || "Lead"}</b><br>
-            <span class="text-xs text-slate-400">${log.created_at || ""}</span>
-          </td>
-          <td class="p-4 align-top">
-            <b class="text-white">${log.name || "No Name"}</b><br>
-            <span class="text-xs text-slate-300">${log.phone || ""}</span><br>
-            <span class="text-xs text-slate-400">${log.city || ""}</span>
-          </td>
-          <td class="p-4 align-top">
-            <b class="text-blue-300">${log.car_brand || ""} ${log.car_model || ""}</b><br>
-            <span class="text-xs text-slate-400">${log.message || ""}</span>
-          </td>
-          <td class="p-4 align-top">
-            ${phone ? `<a href="https://wa.me/91${phone}" target="_blank" class="bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-black">WHATSAPP</a>` : ""}
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
-
-    } catch (e) {
-      console.error("Fast lead loader failed:", e);
+  const oldOpenRealCarManager = window.openRealCarManager;
+  window.openRealCarManager = function(){
+    if(typeof oldOpenRealCarManager === 'function') {
+      try { oldOpenRealCarManager(); } catch(e) { console.warn(e); }
     }
+    bringAdminModalToFront('realCarManagerModal');
+    if(typeof renderRealCarManagerList === 'function') renderRealCarManagerList();
+  };
 
-    leadLoading = false;
-  }
-
-  window.loadAdminLeadsDashboard = forceFastLeads;
-
-  setInterval(() => {
-    const body = document.getElementById("adminLeadsTableBody");
-    if (!body) return;
-
-    if (body.innerText.includes("Could not load Supabase leads") || body.innerText.includes("statement timeout")) {
-      forceFastLeads();
+  const oldOpenProInventoryAdmin = window.openProInventoryAdmin;
+  window.openProInventoryAdmin = function(){
+    if(typeof oldOpenProInventoryAdmin === 'function') {
+      try { oldOpenProInventoryAdmin(); } catch(e) { console.warn(e); }
     }
-  }, 500);
+    bringAdminModalToFront('proInventoryAdminModal');
+  };
 
-  document.addEventListener("DOMContentLoaded", () => setTimeout(forceFastLeads, 1200));
-  window.addEventListener("load", () => setTimeout(forceFastLeads, 1200));
+  const oldOpenNdPdiBookings = window.openNdPdiBookings;
+  window.openNdPdiBookings = function(){
+    if(typeof oldOpenNdPdiBookings === 'function') {
+      try { oldOpenNdPdiBookings(); } catch(e) { console.warn(e); }
+    }
+    bringAdminModalToFront('ndPdiBookingsModal');
+  };
+
+  document.addEventListener('click', function(e){
+    const closeBtn = e.target.closest('[onclick*="closeRealCarManager"], [onclick*="closeProInventory"], [onclick*="closeNdPdi"], [onclick*="close"]');
+    if(closeBtn){
+      setTimeout(function(){
+        if(!document.querySelector('#realCarManagerModal:not(.hidden), #proInventoryAdminModal:not(.hidden), #ndPdiBookingsModal:not(.hidden), #ndPdiReportBuilderModal:not(.hidden), #ndp1AdminModal:not(.hidden)')){
+          document.body.classList.remove('nd-modal-open');
+        }
+      },300);
+    }
+  }, true);
 })();
 </script>
+
 </body>
 </html>
 
