@@ -6846,6 +6846,238 @@ body.nd-admin-route #adminWorkspaceView input[type="time"] {
 })();
 </script>
 
+
+<!-- NODEALER ADMIN REBUILD FROM SCRATCH - SAFE DATA CONNECTED VERSION -->
+<style>
+/* Hide old broken/stacked admin only on admin route */
+body.nd-admin-rebuild-active #secureAdminPortal,
+body.nd-admin-rebuild-active #secureAdminPortal *,
+body.nd-admin-rebuild-active #adminWorkspaceView,
+body.nd-admin-rebuild-active #adminWorkspaceView *{
+  display:none!important;visibility:hidden!important;pointer-events:none!important;
+}
+body.nd-admin-rebuild-active #preloader,
+body.nd-admin-rebuild-active #main-content{
+  display:none!important;
+}
+#ndAdminRebuild{display:none;position:fixed;inset:0;z-index:999999;background:#020617;color:#fff;font-family:'Open Sans',sans-serif;overflow:hidden}
+body.nd-admin-rebuild-active #ndAdminRebuild{display:grid!important;grid-template-columns:280px 1fr}
+.nd-admin-side{background:linear-gradient(180deg,#111827,#081225);border-right:1px solid rgba(255,255,255,.08);padding:20px;display:flex;flex-direction:column;gap:14px}
+.nd-admin-logo{display:flex;align-items:center;gap:12px;padding:8px 6px 18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:8px}
+.nd-admin-logo-badge{width:42px;height:42px;border-radius:16px;background:linear-gradient(135deg,#2563eb,#60a5fa);display:flex;align-items:center;justify-content:center;box-shadow:0 16px 38px rgba(37,99,235,.35)}
+.nd-admin-logo h2{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;line-height:1;margin:0}.nd-admin-logo p{font-size:10px;color:#94a3b8;text-transform:uppercase;font-weight:800;margin-top:4px}
+.nd-admin-menu{display:flex;flex-direction:column;gap:9px}.nd-admin-menu button{width:100%;border:0;border-radius:16px;padding:14px 14px;background:#020617;color:#cbd5e1;text-align:left;font-size:11px;font-weight:900;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:.2s;cursor:pointer}.nd-admin-menu button:hover,.nd-admin-menu button.active{background:#fff;color:#020617;box-shadow:0 18px 40px rgba(255,255,255,.08)}.nd-admin-menu button i{width:18px;text-align:center}
+.nd-admin-status{margin-top:auto;background:#020617;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}.nd-admin-status b{color:#22c55e;font-size:22px}.nd-admin-logout{background:#ef4444!important;color:white!important;justify-content:center!important;margin-top:10px!important}
+.nd-admin-main{height:100vh;overflow-y:auto;background:radial-gradient(circle at top left,rgba(37,99,235,.18),transparent 35%),radial-gradient(circle at bottom right,rgba(227,30,36,.12),transparent 35%),#020617;padding:26px 30px 80px}.nd-admin-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.nd-admin-top h1{font-family:'Montserrat',sans-serif;font-size:34px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin:0}.nd-admin-top p{color:#94a3b8;font-size:13px;font-weight:700;margin-top:5px}.nd-admin-chip{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);border-radius:999px;padding:10px 14px;font-size:11px;font-weight:900;text-transform:uppercase;color:#cbd5e1}.nd-admin-section{display:none}.nd-admin-section.active{display:block;animation:ndAdminFade .22s ease both}@keyframes ndAdminFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.nd-admin-card{background:rgba(15,23,42,.88);border:1px solid rgba(255,255,255,.08);border-radius:26px;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.2);margin-bottom:18px}.nd-admin-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.nd-admin-stat{background:#020617;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:18px}.nd-admin-stat span{display:block;color:#94a3b8;font-size:10px;font-weight:900;text-transform:uppercase}.nd-admin-stat b{display:block;font-size:32px;font-weight:900;margin-top:8px}.nd-admin-actions{display:flex;flex-wrap:wrap;gap:10px}.nd-admin-btn{border:0;border-radius:15px;padding:12px 16px;font-size:11px;font-weight:900;text-transform:uppercase;cursor:pointer}.nd-admin-btn.blue{background:#2563eb;color:white}.nd-admin-btn.green{background:#16a34a;color:white}.nd-admin-btn.amber{background:#f59e0b;color:#020617}.nd-admin-btn.red{background:#dc2626;color:white}.nd-admin-btn.dark{background:#020617;color:white;border:1px solid rgba(255,255,255,.1)}
+.nd-admin-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:16px;padding:13px 14px;font-size:13px;font-weight:700;outline:none}.nd-admin-input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.16)}.nd-admin-table-wrap{overflow:auto;border-radius:18px;border:1px solid rgba(255,255,255,.08)}.nd-admin-table{width:100%;border-collapse:collapse;min-width:900px;background:#020617}.nd-admin-table th{background:#030712;color:#94a3b8;font-size:10px;text-transform:uppercase;font-weight:900;text-align:left;padding:12px}.nd-admin-table td{border-top:1px solid rgba(255,255,255,.07);padding:14px;vertical-align:top;font-size:12px;color:#cbd5e1}.nd-admin-pill{display:inline-flex;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:900;text-transform:uppercase}.nd-admin-pill.new{background:#fee2e2;color:#dc2626}.nd-admin-pill.contacted{background:#dbeafe;color:#2563eb}.nd-admin-pill.negotiation{background:#fef3c7;color:#b45309}.nd-admin-pill.closed{background:#dcfce7;color:#16a34a}
+#ndAdminLoginScreen{position:fixed;inset:0;z-index:1000001;background:radial-gradient(circle at top left,rgba(37,99,235,.25),transparent 35%),#020617;display:none;align-items:center;justify-content:center;padding:20px}body.nd-admin-login-needed #ndAdminLoginScreen{display:flex}.nd-login-card{width:100%;max-width:390px;background:#111827;border:1px solid rgba(255,255,255,.09);border-radius:28px;padding:28px;box-shadow:0 30px 100px rgba(0,0,0,.35);text-align:center}.nd-login-card h2{font-family:'Montserrat';font-weight:900;font-size:22px;margin:12px 0 4px}.nd-login-card label{text-align:left;display:block;margin:14px 0 6px;color:#94a3b8;font-size:10px;font-weight:900;text-transform:uppercase}
+#realCarManagerModal,#proInventoryAdminModal,#ndLeadViewerModal,#ndAdminCrmToolsModal,#ndPdiBookingsModal,#pdiSampleReportModal,#ndPdiReportBuilderModal{z-index:1000050!important}#realCarManagerModal:not(.hidden),#proInventoryAdminModal:not(.hidden),#ndLeadViewerModal:not(.hidden),#ndAdminCrmToolsModal:not(.hidden),#ndPdiBookingsModal:not(.hidden),#pdiSampleReportModal:not(.hidden),#ndPdiReportBuilderModal:not(.hidden){display:block!important;visibility:visible!important;pointer-events:auto!important}
+@media(max-width:900px){body.nd-admin-rebuild-active #ndAdminRebuild{grid-template-columns:1fr}.nd-admin-side{position:sticky;top:0;z-index:2}.nd-admin-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.nd-admin-main{height:auto}.nd-admin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nd-admin-top{align-items:flex-start;flex-direction:column}}
+</style>
+
+<div id="ndAdminLoginScreen">
+  <div class="nd-login-card">
+    <div class="nd-admin-logo-badge" style="margin:0 auto"><i class="fa-solid fa-fingerprint"></i></div>
+    <h2>NODEALER ADMIN</h2>
+    <p style="color:#94a3b8;font-size:12px;font-weight:700">Clean control center login</p>
+    <label>Username</label>
+    <input id="ndProLoginUser" class="nd-admin-input" value="nodealer" autocomplete="username">
+    <label>Password</label>
+    <input id="ndProLoginPass" class="nd-admin-input" type="password" placeholder="Enter password" autocomplete="current-password">
+    <button class="nd-admin-btn blue" style="width:100%;margin-top:16px" onclick="ndProLogin()">Open Admin</button>
+    <button class="nd-admin-btn dark" style="width:100%;margin-top:10px" onclick="location.hash=''">Return to Website</button>
+  </div>
+</div>
+
+<div id="ndAdminRebuild">
+  <aside class="nd-admin-side">
+    <div class="nd-admin-logo"><div class="nd-admin-logo-badge"><i class="fa-solid fa-car-side"></i></div><div><h2>NoDealer OS</h2><p>Private command center</p></div></div>
+    <nav class="nd-admin-menu">
+      <button class="active" data-nd-section="dashboard" onclick="ndShowAdminPanel('dashboard',this)"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+      <button data-nd-section="leads" onclick="ndShowAdminPanel('leads',this); ndLoadLeadsFast();"><i class="fa-solid fa-address-book"></i> Leads</button>
+      <button data-nd-section="inventory" onclick="ndShowAdminPanel('inventory',this); ndLoadInventoryFast();"><i class="fa-solid fa-car"></i> Inventory</button>
+      <button data-nd-section="stockupload" onclick="ndShowAdminPanel('stockupload',this)"><i class="fa-solid fa-upload"></i> Stock Upload</button>
+      <button data-nd-section="directparty" onclick="ndShowAdminPanel('directparty',this)"><i class="fa-solid fa-users"></i> Direct Party Cars</button>
+      <button data-nd-section="pdi" onclick="ndShowAdminPanel('pdi',this)"><i class="fa-solid fa-clipboard-check"></i> PDI Bookings</button>
+      <button data-nd-section="settings" onclick="ndShowAdminPanel('settings',this)"><i class="fa-solid fa-gear"></i> Settings</button>
+      <button onclick="ndRefreshAdminEverything()"><i class="fa-solid fa-rotate"></i> Refresh Data</button>
+    </nav>
+    <div class="nd-admin-status"><span style="font-size:10px;color:#94a3b8;font-weight:900;text-transform:uppercase">System Status</span><br><b>Live</b><p style="font-size:11px;color:#94a3b8;margin-top:4px">Supabase + storage ready</p><button class="nd-admin-menu nd-admin-logout" onclick="ndProLogout()"><i class="fa-solid fa-power-off"></i> Lock / Exit</button></div>
+  </aside>
+  <main class="nd-admin-main">
+    <div class="nd-admin-top"><div><h1 id="ndAdminPageTitle">Dashboard</h1><p id="ndAdminPageSubtitle">Your clean business overview. No scrolling through random panels.</p></div><span class="nd-admin-chip" id="ndAdminClock">NoDealer Admin</span></div>
+
+    <section id="ndPanelDashboard" class="nd-admin-section active">
+      <div class="nd-admin-grid">
+        <div class="nd-admin-stat"><span>Total Leads</span><b id="ndStatTotalLeads">—</b></div>
+        <div class="nd-admin-stat"><span>New Leads</span><b id="ndStatNewLeads">—</b></div>
+        <div class="nd-admin-stat"><span>Inventory Cars</span><b id="ndStatInventory">—</b></div>
+        <div class="nd-admin-stat"><span>PDI Leads</span><b id="ndStatPdi">—</b></div>
+      </div>
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;margin-bottom:10px">Quick Access</h2><div class="nd-admin-actions"><button class="nd-admin-btn amber" onclick="ndShowAdminPanel('leads',document.querySelector('[data-nd-section=leads]'));ndLoadLeadsFast();">Open Leads</button><button class="nd-admin-btn blue" onclick="ndShowAdminPanel('inventory',document.querySelector('[data-nd-section=inventory]'));ndLoadInventoryFast();">Open Inventory</button><button class="nd-admin-btn green" onclick="ndOpenOldTool('openRealCarManager')">Add / Edit Stock</button><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openNdPdiBookings')">Open PDI Bookings</button></div></div>
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;margin-bottom:8px">Today’s Notes</h2><p style="color:#94a3b8;font-size:13px;font-weight:700">This admin is rebuilt as separate sections. Your old data and Supabase connection are still used, but the old stacked admin layout is hidden.</p></div>
+    </section>
+
+    <section id="ndPanelLeads" class="nd-admin-section">
+      <div class="nd-admin-card"><div class="nd-admin-actions" style="align-items:center"><input id="ndLeadSearch" class="nd-admin-input" style="max-width:460px" placeholder="Search by name, phone, city, car, source..." oninput="ndRenderLeadsTable()"><button class="nd-admin-btn blue" onclick="ndLoadLeadsFast()">Reload Leads</button><button class="nd-admin-btn green" onclick="ndExportLeadsCsv()">Export CSV</button></div></div>
+      <div class="nd-admin-card"><div class="nd-admin-table-wrap"><table class="nd-admin-table"><thead><tr><th>Type & Time</th><th>Customer</th><th>Vehicle / Requirement</th><th>Actions</th></tr></thead><tbody id="ndLeadsTableBody"><tr><td colspan="4">Open Leads to load data.</td></tr></tbody></table></div></div>
+    </section>
+
+    <section id="ndPanelInventory" class="nd-admin-section">
+      <div class="nd-admin-card"><div class="nd-admin-actions"><button class="nd-admin-btn blue" onclick="ndLoadInventoryFast()">Load Inventory</button><button class="nd-admin-btn green" onclick="ndOpenOldTool('openProInventoryAdmin')">Open Inventory Manager</button><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openRealCarManager')">Add / Edit Stock</button></div></div>
+      <div class="nd-admin-card"><div class="nd-admin-table-wrap"><table class="nd-admin-table"><thead><tr><th>Car</th><th>Year / Fuel</th><th>Price</th><th>Status</th></tr></thead><tbody id="ndInventoryTableBody"><tr><td colspan="4">Click Load Inventory.</td></tr></tbody></table></div></div>
+    </section>
+
+    <section id="ndPanelStockupload" class="nd-admin-section">
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900">Stock Upload / Edit</h2><p style="color:#94a3b8;font-size:13px;margin:8px 0 16px">Use your existing car manager here. It will open in front, not behind the admin.</p><button class="nd-admin-btn green" onclick="ndOpenOldTool('openRealCarManager')">Open Add / Edit Stock Manager</button></div>
+    </section>
+
+    <section id="ndPanelDirectparty" class="nd-admin-section">
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;color:#c084fc">Direct Party Cars</h2><p style="color:#94a3b8;font-size:13px;margin:8px 0 16px">Private admin-only area. Use Stock Upload for now and tag cars as Direct Party in notes/title until we add a dedicated direct-party column.</p><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openRealCarManager')">Add Direct Party Car</button></div>
+    </section>
+
+    <section id="ndPanelPdi" class="nd-admin-section">
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;color:#f59e0b">PDI Bookings</h2><p style="color:#94a3b8;font-size:13px;margin:8px 0 16px">Open PDI bookings and report tools from here. Your old PDI data is not removed.</p><div class="nd-admin-actions"><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openNdPdiBookings')">Open PDI Bookings</button><button class="nd-admin-btn blue" onclick="ndOpenOldTool('openPdiSampleReportModal')">Sample Report</button></div></div>
+    </section>
+
+    <section id="ndPanelSettings" class="nd-admin-section"><div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900">Settings</h2><p style="color:#94a3b8;font-size:13px;margin-top:8px">Admin route: <b style="color:#fff">/#admin</b></p><p style="color:#94a3b8;font-size:13px">Public website and old tools are untouched. This rebuild only controls the admin screen layout.</p></div></section>
+  </main>
+</div>
+
+<script>
+(function(){
+  const ADMIN_SESSION_KEY = 'nodealer_admin_session_v3_clean';
+  window.ndAdminLeadsCache = [];
+  window.ndAdminCarsCache = [];
+
+  function isAdminRoute(){ return location.hash === '#admin' || location.pathname.toLowerCase().includes('admin'); }
+  function adminAuthorized(){ return sessionStorage.getItem(ADMIN_SESSION_KEY) === 'yes' || sessionStorage.getItem('nodealer_admin_session_v2') === 'true'; }
+
+  window.ndBootAdminRebuild = function(){
+    if(!isAdminRoute()){
+      document.body.classList.remove('nd-admin-rebuild-active','nd-admin-login-needed');
+      return;
+    }
+    document.body.classList.add('nd-admin-rebuild-active');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('preloader')?.style.setProperty('display','none','important');
+    if(adminAuthorized()){
+      document.body.classList.remove('nd-admin-login-needed');
+      setTimeout(()=>{ ndLoadDashboardCounts(); }, 300);
+    }else{
+      document.body.classList.add('nd-admin-login-needed');
+    }
+  };
+
+  window.ndProLogin = function(){
+    const user = document.getElementById('ndProLoginUser')?.value.trim();
+    const pass = document.getElementById('ndProLoginPass')?.value;
+    if(user !== 'nodealer' || pass !== 'NoDealer@2026') { alert('Wrong admin login.'); return; }
+    sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');
+    document.body.classList.remove('nd-admin-login-needed');
+    ndLoadDashboardCounts();
+  };
+  window.ndProLogout = function(){ sessionStorage.removeItem(ADMIN_SESSION_KEY); sessionStorage.removeItem('nodealer_admin_session_v2'); location.hash=''; location.href = location.pathname; };
+
+  window.ndShowAdminPanel = function(name, btn){
+    document.querySelectorAll('.nd-admin-section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.nd-admin-menu button').forEach(b=>b.classList.remove('active'));
+    document.getElementById('ndPanel' + name.charAt(0).toUpperCase() + name.slice(1))?.classList.add('active');
+    btn?.classList.add('active');
+    const titles = {
+      dashboard:['Dashboard','Your clean business overview. No scrolling through random panels.'],
+      leads:['Leads Room','All customer inquiries in one focused section.'],
+      inventory:['Inventory','Current live stock and stock tools.'],
+      stockupload:['Stock Upload','Add and edit vehicle stock.'],
+      directparty:['Direct Party Cars','Private admin-only direct-owner car area.'],
+      pdi:['PDI Bookings','Inspection requests, bookings and reports.'],
+      settings:['Settings','Admin controls and website information.']
+    };
+    const t = titles[name] || titles.dashboard;
+    document.getElementById('ndAdminPageTitle').textContent = t[0];
+    document.getElementById('ndAdminPageSubtitle').textContent = t[1];
+  };
+
+  window.ndOpenOldTool = function(fnName){
+    try{
+      const fn = window[fnName];
+      if(typeof fn === 'function') { fn(); setTimeout(ndFixToolLayering,80); }
+      else alert('This tool exists in the old admin but did not load yet. Refresh once.');
+    }catch(e){ console.error(e); alert('Could not open this tool.'); }
+  };
+  window.ndFixToolLayering = function(){
+    ['realCarManagerModal','proInventoryAdminModal','ndLeadViewerModal','ndAdminCrmToolsModal','ndPdiBookingsModal','pdiSampleReportModal','ndPdiReportBuilderModal'].forEach(id=>{
+      const el=document.getElementById(id); if(!el) return;
+      el.style.setProperty('z-index','1000050','important');
+      if(!el.classList.contains('hidden')){ el.style.setProperty('display','block','important'); el.style.setProperty('visibility','visible','important'); el.style.setProperty('pointer-events','auto','important'); }
+    });
+  };
+
+  function s(v){ return String(v ?? '').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); }
+  function leadFromRow(row){
+    const raw=row.raw_data||{};
+    return {id:row.id, type:row.submission_type||raw.submissionType||'Website Lead', status:row.lead_status||raw.leadStatus||'New Lead', name:row.name||raw.name||'', phone:row.phone||raw.phone||'', location:row.location||raw.location||'', carBrand:row.car_brand||raw.carBrand||'', carModel:row.car_model||raw.carModel||'', carYear:row.car_year||raw.carYear||'', carColor:row.car_color||raw.carColor||'', note:row.note||raw.note||'', source:row.source||raw.source||'Website', created_at:row.created_at||raw.timestamp||'', raw};
+  }
+  function statusClass(status){ const x=String(status||'').toLowerCase(); if(x.includes('closed'))return'closed'; if(x.includes('nego'))return'negotiation'; if(x.includes('contact'))return'contacted'; return'new'; }
+
+  window.ndLoadLeadsFast = async function(){
+    const body=document.getElementById('ndLeadsTableBody'); if(!body) return;
+    body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#93c5fd;font-weight:900">Loading latest leads safely...</td></tr>';
+    try{
+      if(typeof ensureSupabase !== 'function' || !ensureSupabase()) throw new Error('Supabase not ready');
+      let res = await supabaseClient.from('leads').select('*').limit(120);
+      if(res.error) throw res.error;
+      window.ndAdminLeadsCache=(res.data||[]).map(leadFromRow).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
+      ndRenderLeadsTable(); ndUpdateLeadStats();
+    }catch(e){ console.error(e); body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#fca5a5;font-weight:900">Could not load leads. Supabase may be slow. Try Refresh Data once.</td></tr>'; }
+  };
+
+  window.ndRenderLeadsTable = function(){
+    const body=document.getElementById('ndLeadsTableBody'); if(!body) return;
+    const q=(document.getElementById('ndLeadSearch')?.value||'').toLowerCase();
+    const leads=(window.ndAdminLeadsCache||[]).filter(l=>JSON.stringify(l).toLowerCase().includes(q));
+    if(!leads.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#94a3b8;font-weight:900">No leads found.</td></tr>';return;}
+    body.innerHTML=leads.map(l=>{ const ph=String(l.phone||'').replace(/\D/g,''); const car=[l.carBrand,l.carModel,l.carYear,l.carColor].filter(Boolean).join(' '); return `<tr><td><b style="color:#fbbf24">${s(l.type)}</b><br><span style="color:#64748b;font-size:11px">${s(String(l.created_at).replace('T',' ').slice(0,16))}</span></td><td><b style="color:white">${s(l.name||'No Name')}</b><br>${s(l.phone)}<br><span style="color:#94a3b8">${s(l.location||'')}</span><br><span class="nd-admin-pill ${statusClass(l.status)}">${s(l.status)}</span></td><td><b style="color:#93c5fd">${s(car||'No car details')}</b><br><span style="color:#94a3b8">${s(l.note||l.source||'')}</span></td><td>${ph?`<a class="nd-admin-btn green" style="display:inline-block;text-decoration:none" target="_blank" href="https://wa.me/91${ph}">WhatsApp</a> <a class="nd-admin-btn blue" style="display:inline-block;text-decoration:none" href="tel:${ph}">Call</a>`:''}</td></tr>`}).join('');
+  };
+
+  window.ndLoadInventoryFast = async function(){
+    const body=document.getElementById('ndInventoryTableBody'); if(!body) return;
+    body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#93c5fd;font-weight:900">Loading inventory...</td></tr>';
+    try{
+      if(typeof ensureSupabase !== 'function' || !ensureSupabase()) throw new Error('Supabase not ready');
+      const {data,error}=await supabaseClient.from('cars').select('*').limit(150);
+      if(error) throw error;
+      window.ndAdminCarsCache=data||[];
+      if(!window.ndAdminCarsCache.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#94a3b8;font-weight:900">No cars found.</td></tr>';return;}
+      body.innerHTML=window.ndAdminCarsCache.map(c=>`<tr><td><b style="color:white">${s(c.title||c.name||c.model||'Vehicle')}</b><br><span style="color:#94a3b8">${s(c.brand||'')}</span></td><td>${s(c.year||'')}<br><span style="color:#94a3b8">${s(c.fuel||'')} ${s(c.transmission||'')}</span></td><td><b style="color:#86efac">₹${Number(c.price||0).toLocaleString('en-IN')}</b></td><td><span class="nd-admin-pill contacted">${s(c.status||'Live')}</span></td></tr>`).join('');
+      ndUpdateLeadStats();
+    }catch(e){ console.error(e); body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#fca5a5;font-weight:900">Could not load inventory.</td></tr>'; }
+  };
+
+  window.ndUpdateLeadStats = function(){
+    const leads=window.ndAdminLeadsCache||[]; const cars=window.ndAdminCarsCache||[];
+    document.getElementById('ndStatTotalLeads').textContent=leads.length || '0';
+    document.getElementById('ndStatNewLeads').textContent=leads.filter(l=>String(l.status).toLowerCase().includes('new')).length || '0';
+    document.getElementById('ndStatPdi').textContent=leads.filter(l=>JSON.stringify(l).toLowerCase().includes('pdi')).length || '0';
+    document.getElementById('ndStatInventory').textContent=cars.length || '0';
+  };
+  window.ndLoadDashboardCounts = async function(){ await ndLoadLeadsFast(); await ndLoadInventoryFast(); ndShowAdminPanel('dashboard',document.querySelector('[data-nd-section=dashboard]')); };
+  window.ndRefreshAdminEverything = async function(){ await ndLoadLeadsFast(); await ndLoadInventoryFast(); alert('Admin data refreshed.'); };
+  window.ndExportLeadsCsv = function(){
+    const leads=window.ndAdminLeadsCache||[]; if(!leads.length){alert('No leads loaded yet.');return;}
+    const headers=['Created','Type','Status','Name','Phone','Location','Car Brand','Car Model','Note','Source'];
+    const rows=leads.map(l=>[l.created_at,l.type,l.status,l.name,l.phone,l.location,l.carBrand,l.carModel,l.note,l.source].map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(','));
+    const blob=new Blob([headers.join(',')+'\n'+rows.join('\n')],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='NoDealer_Admin_Leads.csv'; a.click(); URL.revokeObjectURL(a.href);
+  };
+
+  document.addEventListener('DOMContentLoaded', ndBootAdminRebuild);
+  window.addEventListener('hashchange', ndBootAdminRebuild);
+  window.addEventListener('load', ()=>{ ndBootAdminRebuild(); setInterval(()=>{document.getElementById('ndAdminClock').textContent=new Date().toLocaleString('en-IN');},1000); });
+  setTimeout(ndBootAdminRebuild,500);
+})();
+</script>
+
 </body>. It hardens admin visibility,
      fixes missing filter/reserve flows, improves CRM cards/follow-ups,
      and keeps legacy admin launchers off customer pages. -->
@@ -7635,6 +7867,238 @@ body.nd-admin-route #adminWorkspaceView input[type="time"] {
   document.addEventListener("DOMContentLoaded", openAdminRoute);
   window.addEventListener("hashchange", openAdminRoute);
   setTimeout(openAdminRoute, 700);
+})();
+</script>
+
+
+<!-- NODEALER ADMIN REBUILD FROM SCRATCH - SAFE DATA CONNECTED VERSION -->
+<style>
+/* Hide old broken/stacked admin only on admin route */
+body.nd-admin-rebuild-active #secureAdminPortal,
+body.nd-admin-rebuild-active #secureAdminPortal *,
+body.nd-admin-rebuild-active #adminWorkspaceView,
+body.nd-admin-rebuild-active #adminWorkspaceView *{
+  display:none!important;visibility:hidden!important;pointer-events:none!important;
+}
+body.nd-admin-rebuild-active #preloader,
+body.nd-admin-rebuild-active #main-content{
+  display:none!important;
+}
+#ndAdminRebuild{display:none;position:fixed;inset:0;z-index:999999;background:#020617;color:#fff;font-family:'Open Sans',sans-serif;overflow:hidden}
+body.nd-admin-rebuild-active #ndAdminRebuild{display:grid!important;grid-template-columns:280px 1fr}
+.nd-admin-side{background:linear-gradient(180deg,#111827,#081225);border-right:1px solid rgba(255,255,255,.08);padding:20px;display:flex;flex-direction:column;gap:14px}
+.nd-admin-logo{display:flex;align-items:center;gap:12px;padding:8px 6px 18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:8px}
+.nd-admin-logo-badge{width:42px;height:42px;border-radius:16px;background:linear-gradient(135deg,#2563eb,#60a5fa);display:flex;align-items:center;justify-content:center;box-shadow:0 16px 38px rgba(37,99,235,.35)}
+.nd-admin-logo h2{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;line-height:1;margin:0}.nd-admin-logo p{font-size:10px;color:#94a3b8;text-transform:uppercase;font-weight:800;margin-top:4px}
+.nd-admin-menu{display:flex;flex-direction:column;gap:9px}.nd-admin-menu button{width:100%;border:0;border-radius:16px;padding:14px 14px;background:#020617;color:#cbd5e1;text-align:left;font-size:11px;font-weight:900;text-transform:uppercase;display:flex;align-items:center;gap:10px;transition:.2s;cursor:pointer}.nd-admin-menu button:hover,.nd-admin-menu button.active{background:#fff;color:#020617;box-shadow:0 18px 40px rgba(255,255,255,.08)}.nd-admin-menu button i{width:18px;text-align:center}
+.nd-admin-status{margin-top:auto;background:#020617;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}.nd-admin-status b{color:#22c55e;font-size:22px}.nd-admin-logout{background:#ef4444!important;color:white!important;justify-content:center!important;margin-top:10px!important}
+.nd-admin-main{height:100vh;overflow-y:auto;background:radial-gradient(circle at top left,rgba(37,99,235,.18),transparent 35%),radial-gradient(circle at bottom right,rgba(227,30,36,.12),transparent 35%),#020617;padding:26px 30px 80px}.nd-admin-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.nd-admin-top h1{font-family:'Montserrat',sans-serif;font-size:34px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;margin:0}.nd-admin-top p{color:#94a3b8;font-size:13px;font-weight:700;margin-top:5px}.nd-admin-chip{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);border-radius:999px;padding:10px 14px;font-size:11px;font-weight:900;text-transform:uppercase;color:#cbd5e1}.nd-admin-section{display:none}.nd-admin-section.active{display:block;animation:ndAdminFade .22s ease both}@keyframes ndAdminFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.nd-admin-card{background:rgba(15,23,42,.88);border:1px solid rgba(255,255,255,.08);border-radius:26px;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.2);margin-bottom:18px}.nd-admin-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.nd-admin-stat{background:#020617;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:18px}.nd-admin-stat span{display:block;color:#94a3b8;font-size:10px;font-weight:900;text-transform:uppercase}.nd-admin-stat b{display:block;font-size:32px;font-weight:900;margin-top:8px}.nd-admin-actions{display:flex;flex-wrap:wrap;gap:10px}.nd-admin-btn{border:0;border-radius:15px;padding:12px 16px;font-size:11px;font-weight:900;text-transform:uppercase;cursor:pointer}.nd-admin-btn.blue{background:#2563eb;color:white}.nd-admin-btn.green{background:#16a34a;color:white}.nd-admin-btn.amber{background:#f59e0b;color:#020617}.nd-admin-btn.red{background:#dc2626;color:white}.nd-admin-btn.dark{background:#020617;color:white;border:1px solid rgba(255,255,255,.1)}
+.nd-admin-input{width:100%;background:#020617;border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:16px;padding:13px 14px;font-size:13px;font-weight:700;outline:none}.nd-admin-input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.16)}.nd-admin-table-wrap{overflow:auto;border-radius:18px;border:1px solid rgba(255,255,255,.08)}.nd-admin-table{width:100%;border-collapse:collapse;min-width:900px;background:#020617}.nd-admin-table th{background:#030712;color:#94a3b8;font-size:10px;text-transform:uppercase;font-weight:900;text-align:left;padding:12px}.nd-admin-table td{border-top:1px solid rgba(255,255,255,.07);padding:14px;vertical-align:top;font-size:12px;color:#cbd5e1}.nd-admin-pill{display:inline-flex;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:900;text-transform:uppercase}.nd-admin-pill.new{background:#fee2e2;color:#dc2626}.nd-admin-pill.contacted{background:#dbeafe;color:#2563eb}.nd-admin-pill.negotiation{background:#fef3c7;color:#b45309}.nd-admin-pill.closed{background:#dcfce7;color:#16a34a}
+#ndAdminLoginScreen{position:fixed;inset:0;z-index:1000001;background:radial-gradient(circle at top left,rgba(37,99,235,.25),transparent 35%),#020617;display:none;align-items:center;justify-content:center;padding:20px}body.nd-admin-login-needed #ndAdminLoginScreen{display:flex}.nd-login-card{width:100%;max-width:390px;background:#111827;border:1px solid rgba(255,255,255,.09);border-radius:28px;padding:28px;box-shadow:0 30px 100px rgba(0,0,0,.35);text-align:center}.nd-login-card h2{font-family:'Montserrat';font-weight:900;font-size:22px;margin:12px 0 4px}.nd-login-card label{text-align:left;display:block;margin:14px 0 6px;color:#94a3b8;font-size:10px;font-weight:900;text-transform:uppercase}
+#realCarManagerModal,#proInventoryAdminModal,#ndLeadViewerModal,#ndAdminCrmToolsModal,#ndPdiBookingsModal,#pdiSampleReportModal,#ndPdiReportBuilderModal{z-index:1000050!important}#realCarManagerModal:not(.hidden),#proInventoryAdminModal:not(.hidden),#ndLeadViewerModal:not(.hidden),#ndAdminCrmToolsModal:not(.hidden),#ndPdiBookingsModal:not(.hidden),#pdiSampleReportModal:not(.hidden),#ndPdiReportBuilderModal:not(.hidden){display:block!important;visibility:visible!important;pointer-events:auto!important}
+@media(max-width:900px){body.nd-admin-rebuild-active #ndAdminRebuild{grid-template-columns:1fr}.nd-admin-side{position:sticky;top:0;z-index:2}.nd-admin-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.nd-admin-main{height:auto}.nd-admin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nd-admin-top{align-items:flex-start;flex-direction:column}}
+</style>
+
+<div id="ndAdminLoginScreen">
+  <div class="nd-login-card">
+    <div class="nd-admin-logo-badge" style="margin:0 auto"><i class="fa-solid fa-fingerprint"></i></div>
+    <h2>NODEALER ADMIN</h2>
+    <p style="color:#94a3b8;font-size:12px;font-weight:700">Clean control center login</p>
+    <label>Username</label>
+    <input id="ndProLoginUser" class="nd-admin-input" value="nodealer" autocomplete="username">
+    <label>Password</label>
+    <input id="ndProLoginPass" class="nd-admin-input" type="password" placeholder="Enter password" autocomplete="current-password">
+    <button class="nd-admin-btn blue" style="width:100%;margin-top:16px" onclick="ndProLogin()">Open Admin</button>
+    <button class="nd-admin-btn dark" style="width:100%;margin-top:10px" onclick="location.hash=''">Return to Website</button>
+  </div>
+</div>
+
+<div id="ndAdminRebuild">
+  <aside class="nd-admin-side">
+    <div class="nd-admin-logo"><div class="nd-admin-logo-badge"><i class="fa-solid fa-car-side"></i></div><div><h2>NoDealer OS</h2><p>Private command center</p></div></div>
+    <nav class="nd-admin-menu">
+      <button class="active" data-nd-section="dashboard" onclick="ndShowAdminPanel('dashboard',this)"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+      <button data-nd-section="leads" onclick="ndShowAdminPanel('leads',this); ndLoadLeadsFast();"><i class="fa-solid fa-address-book"></i> Leads</button>
+      <button data-nd-section="inventory" onclick="ndShowAdminPanel('inventory',this); ndLoadInventoryFast();"><i class="fa-solid fa-car"></i> Inventory</button>
+      <button data-nd-section="stockupload" onclick="ndShowAdminPanel('stockupload',this)"><i class="fa-solid fa-upload"></i> Stock Upload</button>
+      <button data-nd-section="directparty" onclick="ndShowAdminPanel('directparty',this)"><i class="fa-solid fa-users"></i> Direct Party Cars</button>
+      <button data-nd-section="pdi" onclick="ndShowAdminPanel('pdi',this)"><i class="fa-solid fa-clipboard-check"></i> PDI Bookings</button>
+      <button data-nd-section="settings" onclick="ndShowAdminPanel('settings',this)"><i class="fa-solid fa-gear"></i> Settings</button>
+      <button onclick="ndRefreshAdminEverything()"><i class="fa-solid fa-rotate"></i> Refresh Data</button>
+    </nav>
+    <div class="nd-admin-status"><span style="font-size:10px;color:#94a3b8;font-weight:900;text-transform:uppercase">System Status</span><br><b>Live</b><p style="font-size:11px;color:#94a3b8;margin-top:4px">Supabase + storage ready</p><button class="nd-admin-menu nd-admin-logout" onclick="ndProLogout()"><i class="fa-solid fa-power-off"></i> Lock / Exit</button></div>
+  </aside>
+  <main class="nd-admin-main">
+    <div class="nd-admin-top"><div><h1 id="ndAdminPageTitle">Dashboard</h1><p id="ndAdminPageSubtitle">Your clean business overview. No scrolling through random panels.</p></div><span class="nd-admin-chip" id="ndAdminClock">NoDealer Admin</span></div>
+
+    <section id="ndPanelDashboard" class="nd-admin-section active">
+      <div class="nd-admin-grid">
+        <div class="nd-admin-stat"><span>Total Leads</span><b id="ndStatTotalLeads">—</b></div>
+        <div class="nd-admin-stat"><span>New Leads</span><b id="ndStatNewLeads">—</b></div>
+        <div class="nd-admin-stat"><span>Inventory Cars</span><b id="ndStatInventory">—</b></div>
+        <div class="nd-admin-stat"><span>PDI Leads</span><b id="ndStatPdi">—</b></div>
+      </div>
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;margin-bottom:10px">Quick Access</h2><div class="nd-admin-actions"><button class="nd-admin-btn amber" onclick="ndShowAdminPanel('leads',document.querySelector('[data-nd-section=leads]'));ndLoadLeadsFast();">Open Leads</button><button class="nd-admin-btn blue" onclick="ndShowAdminPanel('inventory',document.querySelector('[data-nd-section=inventory]'));ndLoadInventoryFast();">Open Inventory</button><button class="nd-admin-btn green" onclick="ndOpenOldTool('openRealCarManager')">Add / Edit Stock</button><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openNdPdiBookings')">Open PDI Bookings</button></div></div>
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;margin-bottom:8px">Today’s Notes</h2><p style="color:#94a3b8;font-size:13px;font-weight:700">This admin is rebuilt as separate sections. Your old data and Supabase connection are still used, but the old stacked admin layout is hidden.</p></div>
+    </section>
+
+    <section id="ndPanelLeads" class="nd-admin-section">
+      <div class="nd-admin-card"><div class="nd-admin-actions" style="align-items:center"><input id="ndLeadSearch" class="nd-admin-input" style="max-width:460px" placeholder="Search by name, phone, city, car, source..." oninput="ndRenderLeadsTable()"><button class="nd-admin-btn blue" onclick="ndLoadLeadsFast()">Reload Leads</button><button class="nd-admin-btn green" onclick="ndExportLeadsCsv()">Export CSV</button></div></div>
+      <div class="nd-admin-card"><div class="nd-admin-table-wrap"><table class="nd-admin-table"><thead><tr><th>Type & Time</th><th>Customer</th><th>Vehicle / Requirement</th><th>Actions</th></tr></thead><tbody id="ndLeadsTableBody"><tr><td colspan="4">Open Leads to load data.</td></tr></tbody></table></div></div>
+    </section>
+
+    <section id="ndPanelInventory" class="nd-admin-section">
+      <div class="nd-admin-card"><div class="nd-admin-actions"><button class="nd-admin-btn blue" onclick="ndLoadInventoryFast()">Load Inventory</button><button class="nd-admin-btn green" onclick="ndOpenOldTool('openProInventoryAdmin')">Open Inventory Manager</button><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openRealCarManager')">Add / Edit Stock</button></div></div>
+      <div class="nd-admin-card"><div class="nd-admin-table-wrap"><table class="nd-admin-table"><thead><tr><th>Car</th><th>Year / Fuel</th><th>Price</th><th>Status</th></tr></thead><tbody id="ndInventoryTableBody"><tr><td colspan="4">Click Load Inventory.</td></tr></tbody></table></div></div>
+    </section>
+
+    <section id="ndPanelStockupload" class="nd-admin-section">
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900">Stock Upload / Edit</h2><p style="color:#94a3b8;font-size:13px;margin:8px 0 16px">Use your existing car manager here. It will open in front, not behind the admin.</p><button class="nd-admin-btn green" onclick="ndOpenOldTool('openRealCarManager')">Open Add / Edit Stock Manager</button></div>
+    </section>
+
+    <section id="ndPanelDirectparty" class="nd-admin-section">
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;color:#c084fc">Direct Party Cars</h2><p style="color:#94a3b8;font-size:13px;margin:8px 0 16px">Private admin-only area. Use Stock Upload for now and tag cars as Direct Party in notes/title until we add a dedicated direct-party column.</p><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openRealCarManager')">Add Direct Party Car</button></div>
+    </section>
+
+    <section id="ndPanelPdi" class="nd-admin-section">
+      <div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900;color:#f59e0b">PDI Bookings</h2><p style="color:#94a3b8;font-size:13px;margin:8px 0 16px">Open PDI bookings and report tools from here. Your old PDI data is not removed.</p><div class="nd-admin-actions"><button class="nd-admin-btn amber" onclick="ndOpenOldTool('openNdPdiBookings')">Open PDI Bookings</button><button class="nd-admin-btn blue" onclick="ndOpenOldTool('openPdiSampleReportModal')">Sample Report</button></div></div>
+    </section>
+
+    <section id="ndPanelSettings" class="nd-admin-section"><div class="nd-admin-card"><h2 style="font-family:Montserrat;font-weight:900">Settings</h2><p style="color:#94a3b8;font-size:13px;margin-top:8px">Admin route: <b style="color:#fff">/#admin</b></p><p style="color:#94a3b8;font-size:13px">Public website and old tools are untouched. This rebuild only controls the admin screen layout.</p></div></section>
+  </main>
+</div>
+
+<script>
+(function(){
+  const ADMIN_SESSION_KEY = 'nodealer_admin_session_v3_clean';
+  window.ndAdminLeadsCache = [];
+  window.ndAdminCarsCache = [];
+
+  function isAdminRoute(){ return location.hash === '#admin' || location.pathname.toLowerCase().includes('admin'); }
+  function adminAuthorized(){ return sessionStorage.getItem(ADMIN_SESSION_KEY) === 'yes' || sessionStorage.getItem('nodealer_admin_session_v2') === 'true'; }
+
+  window.ndBootAdminRebuild = function(){
+    if(!isAdminRoute()){
+      document.body.classList.remove('nd-admin-rebuild-active','nd-admin-login-needed');
+      return;
+    }
+    document.body.classList.add('nd-admin-rebuild-active');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('preloader')?.style.setProperty('display','none','important');
+    if(adminAuthorized()){
+      document.body.classList.remove('nd-admin-login-needed');
+      setTimeout(()=>{ ndLoadDashboardCounts(); }, 300);
+    }else{
+      document.body.classList.add('nd-admin-login-needed');
+    }
+  };
+
+  window.ndProLogin = function(){
+    const user = document.getElementById('ndProLoginUser')?.value.trim();
+    const pass = document.getElementById('ndProLoginPass')?.value;
+    if(user !== 'nodealer' || pass !== 'NoDealer@2026') { alert('Wrong admin login.'); return; }
+    sessionStorage.setItem(ADMIN_SESSION_KEY,'yes');
+    document.body.classList.remove('nd-admin-login-needed');
+    ndLoadDashboardCounts();
+  };
+  window.ndProLogout = function(){ sessionStorage.removeItem(ADMIN_SESSION_KEY); sessionStorage.removeItem('nodealer_admin_session_v2'); location.hash=''; location.href = location.pathname; };
+
+  window.ndShowAdminPanel = function(name, btn){
+    document.querySelectorAll('.nd-admin-section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.nd-admin-menu button').forEach(b=>b.classList.remove('active'));
+    document.getElementById('ndPanel' + name.charAt(0).toUpperCase() + name.slice(1))?.classList.add('active');
+    btn?.classList.add('active');
+    const titles = {
+      dashboard:['Dashboard','Your clean business overview. No scrolling through random panels.'],
+      leads:['Leads Room','All customer inquiries in one focused section.'],
+      inventory:['Inventory','Current live stock and stock tools.'],
+      stockupload:['Stock Upload','Add and edit vehicle stock.'],
+      directparty:['Direct Party Cars','Private admin-only direct-owner car area.'],
+      pdi:['PDI Bookings','Inspection requests, bookings and reports.'],
+      settings:['Settings','Admin controls and website information.']
+    };
+    const t = titles[name] || titles.dashboard;
+    document.getElementById('ndAdminPageTitle').textContent = t[0];
+    document.getElementById('ndAdminPageSubtitle').textContent = t[1];
+  };
+
+  window.ndOpenOldTool = function(fnName){
+    try{
+      const fn = window[fnName];
+      if(typeof fn === 'function') { fn(); setTimeout(ndFixToolLayering,80); }
+      else alert('This tool exists in the old admin but did not load yet. Refresh once.');
+    }catch(e){ console.error(e); alert('Could not open this tool.'); }
+  };
+  window.ndFixToolLayering = function(){
+    ['realCarManagerModal','proInventoryAdminModal','ndLeadViewerModal','ndAdminCrmToolsModal','ndPdiBookingsModal','pdiSampleReportModal','ndPdiReportBuilderModal'].forEach(id=>{
+      const el=document.getElementById(id); if(!el) return;
+      el.style.setProperty('z-index','1000050','important');
+      if(!el.classList.contains('hidden')){ el.style.setProperty('display','block','important'); el.style.setProperty('visibility','visible','important'); el.style.setProperty('pointer-events','auto','important'); }
+    });
+  };
+
+  function s(v){ return String(v ?? '').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])); }
+  function leadFromRow(row){
+    const raw=row.raw_data||{};
+    return {id:row.id, type:row.submission_type||raw.submissionType||'Website Lead', status:row.lead_status||raw.leadStatus||'New Lead', name:row.name||raw.name||'', phone:row.phone||raw.phone||'', location:row.location||raw.location||'', carBrand:row.car_brand||raw.carBrand||'', carModel:row.car_model||raw.carModel||'', carYear:row.car_year||raw.carYear||'', carColor:row.car_color||raw.carColor||'', note:row.note||raw.note||'', source:row.source||raw.source||'Website', created_at:row.created_at||raw.timestamp||'', raw};
+  }
+  function statusClass(status){ const x=String(status||'').toLowerCase(); if(x.includes('closed'))return'closed'; if(x.includes('nego'))return'negotiation'; if(x.includes('contact'))return'contacted'; return'new'; }
+
+  window.ndLoadLeadsFast = async function(){
+    const body=document.getElementById('ndLeadsTableBody'); if(!body) return;
+    body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#93c5fd;font-weight:900">Loading latest leads safely...</td></tr>';
+    try{
+      if(typeof ensureSupabase !== 'function' || !ensureSupabase()) throw new Error('Supabase not ready');
+      let res = await supabaseClient.from('leads').select('*').limit(120);
+      if(res.error) throw res.error;
+      window.ndAdminLeadsCache=(res.data||[]).map(leadFromRow).sort((a,b)=>String(b.created_at).localeCompare(String(a.created_at)));
+      ndRenderLeadsTable(); ndUpdateLeadStats();
+    }catch(e){ console.error(e); body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#fca5a5;font-weight:900">Could not load leads. Supabase may be slow. Try Refresh Data once.</td></tr>'; }
+  };
+
+  window.ndRenderLeadsTable = function(){
+    const body=document.getElementById('ndLeadsTableBody'); if(!body) return;
+    const q=(document.getElementById('ndLeadSearch')?.value||'').toLowerCase();
+    const leads=(window.ndAdminLeadsCache||[]).filter(l=>JSON.stringify(l).toLowerCase().includes(q));
+    if(!leads.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#94a3b8;font-weight:900">No leads found.</td></tr>';return;}
+    body.innerHTML=leads.map(l=>{ const ph=String(l.phone||'').replace(/\D/g,''); const car=[l.carBrand,l.carModel,l.carYear,l.carColor].filter(Boolean).join(' '); return `<tr><td><b style="color:#fbbf24">${s(l.type)}</b><br><span style="color:#64748b;font-size:11px">${s(String(l.created_at).replace('T',' ').slice(0,16))}</span></td><td><b style="color:white">${s(l.name||'No Name')}</b><br>${s(l.phone)}<br><span style="color:#94a3b8">${s(l.location||'')}</span><br><span class="nd-admin-pill ${statusClass(l.status)}">${s(l.status)}</span></td><td><b style="color:#93c5fd">${s(car||'No car details')}</b><br><span style="color:#94a3b8">${s(l.note||l.source||'')}</span></td><td>${ph?`<a class="nd-admin-btn green" style="display:inline-block;text-decoration:none" target="_blank" href="https://wa.me/91${ph}">WhatsApp</a> <a class="nd-admin-btn blue" style="display:inline-block;text-decoration:none" href="tel:${ph}">Call</a>`:''}</td></tr>`}).join('');
+  };
+
+  window.ndLoadInventoryFast = async function(){
+    const body=document.getElementById('ndInventoryTableBody'); if(!body) return;
+    body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#93c5fd;font-weight:900">Loading inventory...</td></tr>';
+    try{
+      if(typeof ensureSupabase !== 'function' || !ensureSupabase()) throw new Error('Supabase not ready');
+      const {data,error}=await supabaseClient.from('cars').select('*').limit(150);
+      if(error) throw error;
+      window.ndAdminCarsCache=data||[];
+      if(!window.ndAdminCarsCache.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#94a3b8;font-weight:900">No cars found.</td></tr>';return;}
+      body.innerHTML=window.ndAdminCarsCache.map(c=>`<tr><td><b style="color:white">${s(c.title||c.name||c.model||'Vehicle')}</b><br><span style="color:#94a3b8">${s(c.brand||'')}</span></td><td>${s(c.year||'')}<br><span style="color:#94a3b8">${s(c.fuel||'')} ${s(c.transmission||'')}</span></td><td><b style="color:#86efac">₹${Number(c.price||0).toLocaleString('en-IN')}</b></td><td><span class="nd-admin-pill contacted">${s(c.status||'Live')}</span></td></tr>`).join('');
+      ndUpdateLeadStats();
+    }catch(e){ console.error(e); body.innerHTML='<tr><td colspan="4" style="text-align:center;color:#fca5a5;font-weight:900">Could not load inventory.</td></tr>'; }
+  };
+
+  window.ndUpdateLeadStats = function(){
+    const leads=window.ndAdminLeadsCache||[]; const cars=window.ndAdminCarsCache||[];
+    document.getElementById('ndStatTotalLeads').textContent=leads.length || '0';
+    document.getElementById('ndStatNewLeads').textContent=leads.filter(l=>String(l.status).toLowerCase().includes('new')).length || '0';
+    document.getElementById('ndStatPdi').textContent=leads.filter(l=>JSON.stringify(l).toLowerCase().includes('pdi')).length || '0';
+    document.getElementById('ndStatInventory').textContent=cars.length || '0';
+  };
+  window.ndLoadDashboardCounts = async function(){ await ndLoadLeadsFast(); await ndLoadInventoryFast(); ndShowAdminPanel('dashboard',document.querySelector('[data-nd-section=dashboard]')); };
+  window.ndRefreshAdminEverything = async function(){ await ndLoadLeadsFast(); await ndLoadInventoryFast(); alert('Admin data refreshed.'); };
+  window.ndExportLeadsCsv = function(){
+    const leads=window.ndAdminLeadsCache||[]; if(!leads.length){alert('No leads loaded yet.');return;}
+    const headers=['Created','Type','Status','Name','Phone','Location','Car Brand','Car Model','Note','Source'];
+    const rows=leads.map(l=>[l.created_at,l.type,l.status,l.name,l.phone,l.location,l.carBrand,l.carModel,l.note,l.source].map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(','));
+    const blob=new Blob([headers.join(',')+'\n'+rows.join('\n')],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='NoDealer_Admin_Leads.csv'; a.click(); URL.revokeObjectURL(a.href);
+  };
+
+  document.addEventListener('DOMContentLoaded', ndBootAdminRebuild);
+  window.addEventListener('hashchange', ndBootAdminRebuild);
+  window.addEventListener('load', ()=>{ ndBootAdminRebuild(); setInterval(()=>{document.getElementById('ndAdminClock').textContent=new Date().toLocaleString('en-IN');},1000); });
+  setTimeout(ndBootAdminRebuild,500);
 })();
 </script>
 
