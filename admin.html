@@ -1,101 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NoDealer India Admin OS</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    *{font-family:Inter,system-ui,sans-serif} body{background:#f8fafc;color:#0f172a}.glass{background:rgba(255,255,255,.88);backdrop-filter:blur(18px)}.side{background:linear-gradient(180deg,#071225,#071827 50%,#06101f)}.nav-btn{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:14px;color:#cbd5e1;font-size:13px;font-weight:800;transition:.18s}.nav-btn:hover,.nav-btn.active{background:#0d6efd;color:white;box-shadow:0 12px 30px rgba(13,110,253,.28)}.card{background:#fff;border:1px solid #e5e7eb;border-radius:22px;box-shadow:0 16px 45px rgba(15,23,42,.06)}.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900}.hot{background:#fee2e2;color:#dc2626}.warm{background:#ffedd5;color:#ea580c}.cold{background:#f1f5f9;color:#475569}.pdi{background:#fef3c7;color:#b45309}.buy{background:#dbeafe;color:#2563eb}.sell{background:#fee2e2;color:#dc2626}.wa{background:#dcfce7;color:#16a34a}.input{width:100%;border:1px solid #e2e8f0;background:#fff;border-radius:14px;padding:12px 13px;font-size:13px;font-weight:700;outline:none}.input:focus{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.12)}.section{display:none}.section.active{display:block}.table-wrap{overflow:auto}.modal{position:fixed;inset:0;background:rgba(2,6,23,.72);z-index:80;display:none;padding:18px;overflow:auto}.modal.open{display:block}.mini-line{height:92px;background:linear-gradient(180deg,transparent 0 23%,#e5e7eb 24%,transparent 25% 48%,#e5e7eb 49%,transparent 50% 73%,#e5e7eb 74%,transparent 75%)}.toast{position:fixed;right:18px;bottom:18px;background:#020617;color:white;border-radius:18px;padding:13px 16px;z-index:100;font-size:13px;font-weight:800;box-shadow:0 20px 60px rgba(2,6,23,.3)} @media(max-width:900px){aside{display:none}.main{margin-left:0!important}.mobile-tabs{display:flex!important}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoDealerIndia | Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <div id="loginScreen" class="min-h-screen flex items-center justify-center p-5 bg-slate-950">
-    <div class="absolute inset-0 opacity-30" style="background:radial-gradient(circle at top left,#1d4ed8,transparent 35%),radial-gradient(circle at bottom right,#dc2626,transparent 35%)"></div>
-    <div class="relative w-full max-w-md card p-8">
-      <div class="flex items-center gap-3 mb-7"><div class="w-12 h-12 rounded-2xl bg-slate-950 text-white flex items-center justify-center font-black">ND</div><div><h1 class="text-2xl font-black">NoDealer Admin OS</h1><p class="text-xs text-slate-500 font-bold">Professional control room</p></div></div>
-      <label class="text-[11px] font-black uppercase text-slate-400">Username</label><input id="loginUser" class="input mt-1 mb-4" placeholder="admin">
-      <label class="text-[11px] font-black uppercase text-slate-400">Password</label><input id="loginPass" type="password" class="input mt-1 mb-5" placeholder="Password">
-      <button onclick="login()" class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-2xl py-4 text-xs font-black uppercase">Open Dashboard</button>
-      <a href="/" class="block text-center mt-4 text-xs font-black text-slate-500">Return to website</a>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Locked State Secure Gate -->
+    <div id="adminSecurityLockView" class="bg-slate-800 p-8 rounded-3xl max-w-md w-full border border-slate-700 shadow-2xl space-y-6">
+        <div class="text-center space-y-2">
+            <h2 class="text-2xl font-black text-white">NoDealerIndia Admin</h2>
+            <p class="text-xs text-slate-400 font-medium">Verify your email to manage your inventory upload desk.</p>
+        </div>
+        <div class="space-y-4">
+            <input type="email" id="authGateEmailField" placeholder="Enter Admin Email" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-indigo-500">
+            <button onclick="evaluateSecurityGate()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-sm transition-all">Verify Access</button>
+        </div>
     </div>
-  </div>
 
-  <div id="app" class="hidden">
-    <aside class="side fixed left-0 top-0 h-screen w-[270px] p-5 text-white z-40">
-      <div class="flex items-center gap-3 pb-6 border-b border-white/10"><div class="w-11 h-11 rounded-2xl bg-white text-slate-950 flex items-center justify-center font-black">ND</div><div><h2 class="font-black tracking-wide">NO DEALER</h2><p class="text-[10px] text-slate-400 font-black tracking-[.25em]">INDIA</p></div></div>
-      <nav class="mt-6 space-y-1">
-        <button class="nav-btn active" onclick="showSec('dashboard',this)"><i class="fa-solid fa-chart-line w-4"></i>Dashboard</button>
-        <p class="text-[10px] font-black text-slate-500 uppercase mt-5 mb-2">Operations</p>
-        <button class="nav-btn" onclick="showSec('leads',this)"><i class="fa-solid fa-headset w-4"></i>Enquiries</button>
-        <button class="nav-btn" onclick="showSec('pdi',this)"><i class="fa-solid fa-clipboard-check w-4"></i>PDI Bookings</button>
-        <button class="nav-btn" onclick="showSec('cars',this)"><i class="fa-solid fa-car w-4"></i>Cars</button>
-        <button class="nav-btn" onclick="showSec('customers',this)"><i class="fa-solid fa-users w-4"></i>Customers</button>
-        <p class="text-[10px] font-black text-slate-500 uppercase mt-5 mb-2">Tools</p>
-        <button class="nav-btn" onclick="exportLeadsCSV()"><i class="fa-solid fa-file-excel w-4"></i>Export Excel</button>
-        <button class="nav-btn" onclick="refreshAll()"><i class="fa-solid fa-rotate w-4"></i>Refresh</button>
-        <button class="nav-btn" onclick="logout()"><i class="fa-solid fa-lock w-4"></i>Lock</button>
-      </nav>
-    </aside>
+    <!-- Active Admin Form Panel (Hidden Initially) -->
+    <div id="adminConsoleWorkspace" class="max-w-4xl w-full bg-slate-800 rounded-3xl border border-slate-700 p-8 space-y-8 shadow-2xl hidden">
+        <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+            <div>
+                <h2 class="text-2xl font-black text-white">Upload New Car Listing</h2>
+                <p class="text-xs text-slate-400">Logged in as: kapilraj.ms@gmail.com</p>
+            </div>
+            <a href="index.html" class="text-xs font-bold text-indigo-400 bg-indigo-950/40 border border-indigo-900/50 px-3 py-1.5 rounded-lg">View Live Showroom</a>
+        </div>
 
-    <main class="main ml-[270px] min-h-screen">
-      <header class="sticky top-0 z-30 glass border-b border-slate-200 px-6 py-4 flex items-center justify-between gap-4">
-        <div class="flex items-center gap-3 flex-1"><button class="md:hidden text-xl"><i class="fa-solid fa-bars"></i></button><div class="relative max-w-md w-full"><i class="fa-solid fa-search absolute left-4 top-3.5 text-slate-400"></i><input id="globalSearch" oninput="renderAll()" class="input pl-11" placeholder="Search anything..."></div></div>
-        <div class="flex items-center gap-4"><button onclick="refreshAll()" class="w-11 h-11 rounded-2xl bg-white border"><i class="fa-solid fa-bell text-slate-500"></i></button><div class="hidden sm:flex items-center gap-3"><div class="w-11 h-11 rounded-full bg-slate-200 flex items-center justify-center"><i class="fa-solid fa-user"></i></div><div><p class="text-sm font-black">Admin User</p><p class="text-xs text-slate-400 font-bold">Super Admin</p></div></div></div>
-      </header>
-      <div class="mobile-tabs hidden overflow-auto gap-2 p-3 bg-white border-b"><button class="chip buy" onclick="showSec('dashboard')">Dashboard</button><button class="chip cold" onclick="showSec('leads')">Leads</button><button class="chip pdi" onclick="showSec('pdi')">PDI</button><button class="chip wa" onclick="showSec('cars')">Cars</button></div>
-      <div class="p-5 md:p-8 space-y-7">
-        <section id="dashboard" class="section active">
-          <div class="flex flex-wrap justify-between items-end gap-4 mb-5"><div><h1 class="text-3xl font-black">Dashboard</h1><p class="text-sm text-slate-500 font-semibold">Overview of business operations</p></div><div class="chip cold"><i class="fa-solid fa-calendar"></i><span id="dateRange"></span></div></div>
-          <div class="grid sm:grid-cols-2 xl:grid-cols-5 gap-4" id="statsCards"></div>
-          <div class="grid xl:grid-cols-3 gap-5 mt-5"><div class="card p-5 xl:col-span-2"><div class="flex justify-between mb-5"><h3 class="font-black">Business Overview</h3><span class="chip cold">Last 7 Days</span></div><div class="mini-line relative rounded-2xl"><svg viewBox="0 0 700 120" class="absolute inset-0 w-full h-full"><polyline id="chartLine1" fill="none" stroke="#2563eb" stroke-width="4" points="20,80 130,70 240,78 350,62 460,50 570,60 680,46"/><polyline fill="none" stroke="#16a34a" stroke-width="4" points="20,98 130,92 240,96 350,84 460,80 570,88 680,74"/></svg></div></div><div class="card p-5"><div class="flex justify-between mb-4"><h3 class="font-black">Enquiry Source</h3><span class="chip cold">Live</span></div><div class="flex items-center justify-center py-2"><div class="w-44 h-44 rounded-full" id="donut" style="background:conic-gradient(#2563eb 0 45%,#10b981 45% 72%,#f59e0b 72% 88%,#8b5cf6 88% 100%)"><div class="w-24 h-24 rounded-full bg-white m-10 flex items-center justify-center text-center"><b id="donutTotal">0</b></div></div></div></div></div>
-          <div class="grid lg:grid-cols-3 gap-5 mt-5"><div class="card p-5"><div class="flex justify-between mb-4"><h3 class="font-black">Recent Enquiries</h3><button onclick="showSec('leads')" class="text-blue-600 text-xs font-black">View All</button></div><div id="recentLeads" class="space-y-3"></div></div><div class="card p-5"><h3 class="font-black mb-4">Top Cars</h3><div id="topCars" class="space-y-3"></div></div><div class="card p-5"><h3 class="font-black mb-4">Stock Status</h3><div id="stockStatus" class="space-y-3"></div></div></div>
-        </section>
-        <section id="leads" class="section"><div class="flex flex-wrap justify-between gap-3 mb-5"><div><h1 class="text-3xl font-black">Customer Enquiries</h1><p class="text-sm text-slate-500 font-semibold">All website, WhatsApp, buy, sell and valuation leads</p></div><button onclick="exportLeadsCSV()" class="bg-green-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase"><i class="fa-solid fa-file-excel"></i> Export</button></div><div class="card p-4 mb-4 grid md:grid-cols-4 gap-3"><input id="leadSearch" oninput="renderLeads()" class="input md:col-span-2" placeholder="Search name, phone, car"><select id="leadType" onchange="renderLeads()" class="input"><option value="">All Types</option><option>Buy</option><option>Sell</option><option>PDI</option><option>WhatsApp</option><option>Valuation</option></select><select id="leadStatus" onchange="renderLeads()" class="input"><option value="">All Status</option><option>New Lead</option><option>Contacted</option><option>Follow-Up</option><option>Closed</option></select></div><div id="leadList" class="grid lg:grid-cols-2 gap-4"></div></section>
-        <section id="pdi" class="section"><h1 class="text-3xl font-black mb-1">PDI Bookings</h1><p class="text-sm text-slate-500 font-semibold mb-5">Inspection requests separated clearly from normal leads</p><div id="pdiList" class="grid lg:grid-cols-2 gap-4"></div></section>
-        <section id="cars" class="section"><div class="flex flex-wrap justify-between gap-3 mb-5"><div><h1 class="text-3xl font-black">Inventory Manager</h1><p class="text-sm text-slate-500 font-semibold">Add, edit, delete and mark car status</p></div><button onclick="openCarModal()" class="bg-blue-600 text-white rounded-2xl px-5 py-3 text-xs font-black uppercase"><i class="fa-solid fa-plus"></i> Add Car</button></div><div id="carList" class="grid xl:grid-cols-3 md:grid-cols-2 gap-5"></div></section>
-        <section id="customers" class="section"><h1 class="text-3xl font-black mb-5">Customers</h1><div id="customerList" class="card p-5 table-wrap"></div></section>
-      </div>
-    </main>
-  </div>
+        <form id="vehicleCaptureForm" onsubmit="commitCarRecordToDatabase(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm text-gray-900">
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Car Model & Brand Name</label>
+                <input type="text" id="inName" required placeholder="e.g., Toyota Fortuner" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Variant / Specifications Details</label>
+                <input type="text" id="inVariant" required placeholder="e.g., Sigma4 Automatic Diesel" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Year of Manufacture</label>
+                <input type="number" id="inYear" required placeholder="e.g., 2021" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Kilometers Driven (KMs)</label>
+                <input type="text" id="inKms" required placeholder="e.g., 34,000" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none focus:border-indigo-500">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Fuel Type</label>
+                <select id="inFuel" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="CNG">CNG</option>
+                    <option value="Electric">Electric</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Gearbox Transmission</label>
+                <select id="inTrans" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+                    <option value="Automatic">Automatic</option>
+                    <option value="Manual">Manual</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Ownership Log</label>
+                <select id="inOwners" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+                    <option value="1st Owner">1st Owner</option>
+                    <option value="2nd Owner">2nd Owner</option>
+                    <option value="3rd Owner">3rd Owner</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Exterior Color</label>
+                <input type="text" id="inColor" required placeholder="e.g., Phantom Black" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Registration RTO State</label>
+                <input type="text" id="inRto" required placeholder="e.g., DL-3C" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Insurance Validity</label>
+                <input type="text" id="inInsurance" required placeholder="e.g., Comprehensive Valid" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Price Evaluation (Numbers only: e.g., 3650000)</label>
+                <input type="text" id="inPrice" required placeholder="3650000" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Select Placeholder Car Photo</label>
+                <select id="inImage" class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+                    <option value="hero.jpg">Default Banner Image</option>
+                    <option value="car1.jpg">car1.jpg</option>
+                    <option value="car2.jpg">car2.jpg</option>
+                    <option value="car3.jpg">car3.jpg</option>
+                </select>
+            </div>
+            <div class="col-span-1 sm:col-span-2">
+                <label class="block text-xs font-semibold text-slate-400 mb-1">Instagram Reel Link (Optional)</label>
+                <input type="url" id="inReel" placeholder="https://instagram.com/reel/..." class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl p-3 focus:outline-none">
+            </div>
+            <div class="col-span-1 sm:col-span-2 pt-4">
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all text-sm">
+                    Publish Listing Live on Website
+                </button>
+            </div>
+        </form>
+    </div>
 
-  <div id="carModal" class="modal"><div class="card max-w-3xl mx-auto p-6"><div class="flex justify-between mb-5"><h2 id="carModalTitle" class="text-2xl font-black">Add Car</h2><button onclick="closeCarModal()" class="text-3xl">×</button></div><form id="carForm" onsubmit="saveCar(event)" class="grid md:grid-cols-2 gap-3"><input type="hidden" id="carId"><input id="carTitle" class="input md:col-span-2" required placeholder="Car title e.g. Hyundai i20 Asta"><input id="carBrand" class="input" required placeholder="Brand"><input id="carYear" class="input" required placeholder="Year"><input id="carPrice" class="input" required placeholder="Price"><input id="carDriven" class="input" placeholder="Driven e.g. 32000 KM"><select id="carFuel" class="input"><option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option></select><select id="carTransmission" class="input"><option>Manual</option><option>Automatic</option></select><input id="carColor" class="input" placeholder="Color"><select id="carStatus" class="input"><option value="available">Available</option><option value="reserved">Reserved</option><option value="sold">Sold</option><option value="pdi">PDI Running</option></select><textarea id="carImages" class="input md:col-span-2" rows="3" placeholder="Image URLs, one per line"></textarea><div class="md:col-span-2 flex gap-3"><button class="bg-blue-600 text-white rounded-2xl px-6 py-3 text-xs font-black uppercase">Save Car</button><button type="button" onclick="closeCarModal()" class="bg-slate-100 rounded-2xl px-6 py-3 text-xs font-black uppercase">Cancel</button></div></form></div></div>
+    <script>
+        const SECURE_ID = "kapilraj.ms@gmail.com";
 
-<script>
-const SUPABASE_URL='https://ahpiqihruhfkvyzoarde.supabase.co';
-const SUPABASE_KEY='sb_publishable_0vFfZDHjow24NQoyMXwqTw_zpR1SbUR';
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const MASTER_USER='admin'; const MASTER_PASS='Rudraksh@2026';
-let cars=[], leads=[];
-const $=id=>document.getElementById(id); const money=v=>Number(v||0).toLocaleString('en-IN');
-function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2500)}
-function login(){if($('loginUser').value.trim()!==MASTER_USER||$('loginPass').value!==MASTER_PASS){alert('Wrong admin login');return}sessionStorage.setItem('nd_admin_ok','1');$('loginScreen').classList.add('hidden');$('app').classList.remove('hidden');refreshAll()}
-function logout(){sessionStorage.removeItem('nd_admin_ok');location.reload()}
-if(sessionStorage.getItem('nd_admin_ok')==='1'){ $('loginScreen').classList.add('hidden'); $('app').classList.remove('hidden'); setTimeout(refreshAll,100)}
-function showSec(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); renderAll()}
-function carImgs(c){return Array.isArray(c.images)?c.images:(typeof c.imageSrc==='string'?[c.imageSrc]:[])}
-function leadType(l){const t=JSON.stringify(l).toLowerCase(); if(t.includes('pdi')||t.includes('inspection'))return 'PDI'; if(t.includes('sell'))return 'Sell'; if(t.includes('whatsapp'))return 'WhatsApp'; if(t.includes('valuation')||t.includes('value'))return 'Valuation'; return 'Buy'}
-function priority(l){const t=JSON.stringify(l).toLowerCase(); if(t.includes('urgent')||t.includes('pdi')||t.includes('reserve')||t.includes('inspection'))return 'Hot'; if(t.includes('sell')||t.includes('price')||t.includes('emi'))return 'Warm'; return 'Cold'}
-function mapLead(r){const raw=r.raw_data||{};return {id:r.id, created_at:r.created_at, submissionType:r.submission_type||raw.submissionType||'Website Lead', name:r.name||raw.name||'Customer', phone:r.phone||raw.phone||'', location:r.location||raw.location||raw.city||'', carBrand:r.car_brand||raw.carBrand||'', carModel:r.car_model||raw.carModel||raw.car||raw.pdiCarDetails||'', carYear:r.car_year||raw.carYear||'', status:r.lead_status||raw.leadStatus||'New Lead', note:r.note||raw.note||raw.concern||'', source:r.source||raw.source||'Website', raw:raw}}
-async function refreshAll(){try{const [cr,lr]=await Promise.all([sb.from('cars').select('*').order('created_at',{ascending:false}),sb.from('leads').select('*').order('created_at',{ascending:false})]); if(cr.error)throw cr.error; if(lr.error)throw lr.error; cars=cr.data||[]; leads=(lr.data||[]).map(mapLead); renderAll(); toast('Dashboard refreshed')}catch(e){alert('Load error: '+e.message)}}
-function renderAll(){renderStats();renderLeads();renderCars();renderPdi();renderCustomers()}
-function renderStats(){const p=leads.filter(l=>leadType(l)==='PDI').length, sold=cars.filter(c=>String(c.status).toLowerCase()==='sold').length, revenue=cars.filter(c=>String(c.status).toLowerCase()==='sold').reduce((s,c)=>s+Number(c.price||0),0); $('dateRange').textContent=new Date().toLocaleDateString('en-IN'); $('donutTotal').textContent=leads.length; const data=[['Total Enquiries',leads.length,'fa-comments','text-blue-600'],['Cars Listed',cars.length,'fa-car','text-green-600'],['Cars Sold',sold,'fa-tag','text-amber-600'],['Revenue','₹ '+money(revenue),'fa-indian-rupee-sign','text-pink-600'],['PDI Requests',p,'fa-clipboard-check','text-purple-600']]; $('statsCards').innerHTML=data.map(x=>`<div class="card p-5"><div class="flex justify-between"><div><p class="text-xs text-slate-500 font-bold">${x[0]}</p><h2 class="text-2xl font-black mt-2">${x[1]}</h2><p class="text-xs text-green-600 font-black mt-3">↑ Live data</p></div><div class="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center"><i class="fa-solid ${x[2]} ${x[3]}"></i></div></div></div>`).join(''); $('recentLeads').innerHTML=leads.slice(0,5).map(l=>`<div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-black">${(l.name||'C')[0]}</div><div class="flex-1"><p class="text-sm font-black">${l.name}</p><p class="text-xs text-slate-500">${l.carModel||l.submissionType}</p></div><span class="text-xs text-slate-400">${leadType(l)}</span></div>`).join('')||'<p class="text-sm text-slate-400 font-bold">No leads yet</p>'; $('topCars').innerHTML=cars.slice(0,5).map((c,i)=>`<div class="flex items-center gap-3"><span class="text-xs font-black text-slate-400">${i+1}</span><img src="${carImgs(c)[0]||'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=160&q=80'}" class="w-12 h-9 rounded-lg object-cover"><p class="text-sm font-black flex-1">${c.title||'Car'}</p><span class="text-xs font-bold">₹${money(c.price)}</span></div>`).join('')||'<p class="text-sm text-slate-400 font-bold">No cars</p>'; const st=['available','reserved','sold','pdi']; $('stockStatus').innerHTML=st.map(s=>`<div class="flex justify-between border-b pb-3"><span class="text-sm font-bold capitalize">${s}</span><b>${cars.filter(c=>String(c.status||'available').toLowerCase()===s).length}</b></div>`).join('')}
-function leadCard(l){const t=leadType(l),p=priority(l),ph=String(l.phone||'').replace(/\D/g,'').slice(-10),wa=ph?`https://wa.me/91${ph}?text=${encodeURIComponent('Hi '+(l.name||'there')+', this is NoDealer India. We received your enquiry. Can we help with the next step?')}`:'#';return `<article class="card p-5"><div class="flex justify-between gap-3"><div><p class="text-[11px] uppercase text-slate-400 font-black">${l.source}</p><h3 class="font-black text-lg">${l.name}</h3><p class="text-sm text-slate-500 font-bold">${l.carModel||l.submissionType}</p></div><span class="chip ${t==='PDI'?'pdi':t==='Sell'?'sell':t==='WhatsApp'?'wa':'buy'}">${t}</span></div><div class="flex flex-wrap gap-2 mt-3"><span class="chip ${p==='Hot'?'hot':p==='Warm'?'warm':'cold'}">${p}</span><span class="chip cold">${l.status}</span></div><div class="grid grid-cols-2 gap-2 text-xs text-slate-600 font-bold mt-4"><p><i class="fa-solid fa-phone text-green-600"></i> ${l.phone||'No phone'}</p><p><i class="fa-solid fa-location-dot text-red-600"></i> ${l.location||'N/A'}</p><p><i class="fa-solid fa-calendar text-amber-600"></i> ${String(l.created_at||'').slice(0,10)}</p><p><i class="fa-solid fa-car text-blue-600"></i> ${l.carBrand||'N/A'}</p></div><p class="bg-slate-50 border rounded-2xl p-3 text-xs text-slate-500 font-semibold mt-4">${l.note||JSON.stringify(l.raw).slice(0,180)||'No notes'}</p><div class="grid grid-cols-3 gap-2 mt-4"><a href="tel:${ph}" class="bg-slate-950 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">Call</a><a href="${wa}" target="_blank" class="bg-green-600 text-white text-center rounded-xl py-3 text-[10px] font-black uppercase">WhatsApp</a><button onclick="setLeadStatus(${l.id},'Contacted')" class="bg-blue-600 text-white rounded-xl py-3 text-[10px] font-black uppercase">Contacted</button></div></article>`}
-function renderLeads(){const s=($('leadSearch')?.value||$('globalSearch')?.value||'').toLowerCase(), t=$('leadType')?.value||'', st=$('leadStatus')?.value||'';let rows=leads.filter(l=>(!s||JSON.stringify(l).toLowerCase().includes(s))&&(!t||leadType(l)===t)&&(!st||l.status===st)); if($('leadList'))$('leadList').innerHTML=rows.map(leadCard).join('')||'<div class="card p-6 text-slate-500 font-bold">No leads found.</div>'}
-function renderPdi(){if($('pdiList'))$('pdiList').innerHTML=leads.filter(l=>leadType(l)==='PDI').map(leadCard).join('')||'<div class="card p-6 text-slate-500 font-bold">No PDI bookings yet.</div>'}
-function renderCars(){if(!$('carList'))return; $('carList').innerHTML=cars.map(c=>`<article class="card overflow-hidden"><img src="${carImgs(c)[0]||'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=800&q=80'}" class="h-48 w-full object-cover bg-slate-100"><div class="p-5"><div class="flex justify-between"><h3 class="font-black text-lg">${c.title||'Untitled Car'}</h3><span class="chip cold capitalize">${c.status||'available'}</span></div><p class="text-2xl font-black text-green-600 mt-2">₹${money(c.price)}</p><p class="text-xs text-slate-500 font-bold mt-2">${c.year||''} • ${c.driven||''} • ${c.fuel||''} • ${c.transmission||''}</p><div class="grid grid-cols-2 gap-2 mt-4"><button onclick="editCar(${c.id})" class="bg-blue-600 text-white rounded-xl py-3 text-[10px] font-black uppercase">Edit</button><button onclick="deleteCar(${c.id})" class="bg-red-600 text-white rounded-xl py-3 text-[10px] font-black uppercase">Delete</button><button onclick="setCarStatus(${c.id},'available')" class="bg-green-100 text-green-700 rounded-xl py-2 text-[10px] font-black uppercase">Available</button><button onclick="setCarStatus(${c.id},'sold')" class="bg-slate-100 text-slate-700 rounded-xl py-2 text-[10px] font-black uppercase">Sold</button></div></div></article>`).join('')||'<div class="card p-6 text-slate-500 font-bold">No cars uploaded.</div>'}
-function renderCustomers(){const map={};leads.forEach(l=>{const k=(l.phone||l.name||Math.random()).toString(); if(!map[k])map[k]={name:l.name,phone:l.phone,count:0,types:new Set()}; map[k].count++; map[k].types.add(leadType(l))}); const rows=Object.values(map); if($('customerList'))$('customerList').innerHTML=`<table class="w-full text-sm"><tr class="text-left text-slate-400"><th class="p-3">Customer</th><th>Phone</th><th>Enquiries</th><th>Types</th></tr>${rows.map(r=>`<tr class="border-t"><td class="p-3 font-black">${r.name}</td><td>${r.phone}</td><td>${r.count}</td><td>${[...r.types].join(', ')}</td></tr>`).join('')}</table>`}
-async function setLeadStatus(id,status){const {error}=await sb.from('leads').update({lead_status:status}).eq('id',id); if(error)alert(error.message); else refreshAll()}
-function openCarModal(){ $('carForm').reset(); $('carId').value=''; $('carModalTitle').textContent='Add Car'; $('carModal').classList.add('open')}
-function closeCarModal(){ $('carModal').classList.remove('open')}
-function editCar(id){const c=cars.find(x=>Number(x.id)===Number(id)); if(!c)return; openCarModal(); $('carModalTitle').textContent='Edit Car'; $('carId').value=c.id; $('carTitle').value=c.title||''; $('carBrand').value=c.brand||''; $('carYear').value=c.year||''; $('carPrice').value=c.price||''; $('carDriven').value=c.driven||''; $('carFuel').value=c.fuel||'Petrol'; $('carTransmission').value=c.transmission||'Manual'; $('carColor').value=c.color||''; $('carStatus').value=c.status||'available'; $('carImages').value=carImgs(c).join('\n')}
-async function saveCar(e){e.preventDefault(); const id=$('carId').value; const data={title:$('carTitle').value,brand:$('carBrand').value,year:$('carYear').value,price:$('carPrice').value,driven:$('carDriven').value,fuel:$('carFuel').value,transmission:$('carTransmission').value,color:$('carColor').value,status:$('carStatus').value,images:$('carImages').value.split('\n').map(x=>x.trim()).filter(Boolean)}; const q=id?sb.from('cars').update(data).eq('id',Number(id)):sb.from('cars').insert([data]); const {error}=await q; if(error)alert(error.message); else{closeCarModal();refreshAll()}}
-async function setCarStatus(id,status){const {error}=await sb.from('cars').update({status}).eq('id',Number(id)); if(error)alert(error.message); else refreshAll()}
-async function deleteCar(id){if(!confirm('Delete this vehicle from live website?'))return; const {error}=await sb.from('cars').delete().eq('id',Number(id)); if(error)alert(error.message); else refreshAll()}
-function exportLeadsCSV(){const cols=['created_at','submissionType','name','phone','location','carBrand','carModel','status','source','note']; const csv=[cols.join(',')].concat(leads.map(l=>cols.map(k=>'"'+String(l[k]||'').replace(/"/g,'""')+'"').join(','))).join('\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='nodealer_leads_export.csv'; a.click()}
-</script>
+        function evaluateSecurityGate() {
+            const enteredEmail = document.getElementById("authGateEmailField").value.trim().toLowerCase();
+            if (enteredEmail === SECURE_ID) {
+                document.getElementById("adminSecurityLockView").classList.add("hidden");
+                document.getElementById("adminConsoleWorkspace").classList.remove("hidden");
+            } else {
+                alert("Access Denied: Only kapilraj.ms@gmail.com can log into this system dashboard.");
+            }
+        }
+
+        function commitCarRecordToDatabase(event) {
+            event.preventDefault();
+
+            const newCar = {
+                id: "NDI-" + Math.floor(1000 + Math.random() * 9000),
+                name: document.getElementById("inName").value.trim(),
+                variant: document.getElementById("inVariant").value.trim(),
+                year: document.getElementById("inYear").value.trim(),
+                kms: document.getElementById("inKms").value.trim(),
+                price: document.getElementById("inPrice").value.trim(),
+                fuel: document.getElementById("inFuel").value,
+                transmission: document.getElementById("inTrans").value,
+                owners: document.getElementById("inOwners").value,
+                color: document.getElementById("inColor").value.trim(),
+                rto: document.getElementById("inRto").value.trim(),
+                insurance: document.getElementById("inInsurance").value.trim(),
+                reelLink: document.getElementById("inReel").value.trim(),
+                image: document.getElementById("inImage").value,
+                status: "Available"
+            };
+
+            let currentStock = JSON.parse(localStorage.getItem("NODEALER_INVENTORY")) || [];
+            currentStock.unshift(newCar);
+            localStorage.setItem("NODEALER_INVENTORY", JSON.stringify(currentStock));
+
+            alert(`Successfully posted! ${newCar.name} is now live on your main showroom view.`);
+            document.getElementById("vehicleCaptureForm").reset();
+        }
+    </script>
 </body>
 </html>
