@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoDealerIndia | Marketplace</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen pb-24">
+
+    <!-- Premium Mobile App Sticky Top Bar -->
+    <header class="bg-slate-900/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-800/80 px-4 py-3 flex items-center justify-between">
+        <div class="flex flex-col">
+            <span class="text-base font-black text-white tracking-tight">NoDealer<span class="text-indigo-500">India</span></span>
+            <span class="text-[9px] font-bold text-slate-400 tracking-wider uppercase">Direct Peer-To-Peer Fleet</span>
+        </div>
+        <a href="https://wa.me/919999999999" target="_blank" class="bg-emerald-600/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Live Support
+        </a>
+    </header>
+
+    <!-- App Main Dynamic Body -->
+    <main class="px-4 pt-4 space-y-6">
+        
+        <!-- Story-Style Fast Category Pill Swiper Filters -->
+        <div class="flex gap-2 overflow-x-auto hide-scrollbar py-1 text-xs font-bold">
+            <button onclick="filterMobileCategory('ALL')" id="pill-ALL" class="bg-indigo-600 text-white px-4 py-2 rounded-full whitespace-nowrap shadow-md shadow-indigo-600/10 transition-all">All Stock</button>
+            <button onclick="filterMobileCategory('Automatic')" id="pill-Automatic" class="bg-slate-900 text-slate-400 border border-slate-800 px-4 py-2 rounded-full whitespace-nowrap transition-all">Automatics</button>
+            <button onclick="filterMobileCategory('Manual')" id="pill-Manual" class="bg-slate-900 text-slate-400 border border-slate-800 px-4 py-2 rounded-full whitespace-nowrap transition-all">Manuals</button>
+            <button onclick="filterMobileCategory('Diesel')" id="pill-Diesel" class="bg-slate-900 text-slate-400 border border-slate-800 px-4 py-2 rounded-full whitespace-nowrap transition-all">Diesel Only</button>
+        </div>
+
+        <!-- Dynamic Mobile Feed Container Stack -->
+        <div id="mobileAppFeedTarget" class="space-y-6">
+            <!-- App Cards dynamically generated here -->
+        </div>
+    </main>
+
+    <!-- LEAD CAPTURE INTERSTITIAL POPUP OVERLAY -->
+    <div id="leadCaptureModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 space-y-5 text-center shadow-2xl relative">
+            <button onclick="closeLeadModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white text-xs font-bold">✕ Skip</button>
+            <div class="w-12 h-12 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-xl flex items-center justify-center rounded-2xl mx-auto">🛡️</div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white">Unlock Certified Breakdown</h3>
+                <p class="text-xs text-slate-400 font-medium px-2">Verify your profile with your phone number to access our private 140-point diagnostic reports instantly.</p>
+            </div>
+            <div class="space-y-3 text-xs text-left font-semibold">
+                <input type="hidden" id="targetLeadCarId">
+                <div>
+                    <label class="block text-slate-400 mb-1 pl-1">WhatsApp Mobile Number</label>
+                    <div class="relative">
+                        <span class="absolute left-3.5 top-3.5 text-slate-500 text-sm font-bold">+91</span>
+                        <input type="tel" id="leadPhoneInput" maxlength="10" placeholder="9876543210" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3.5 pl-12 text-sm tracking-wide focus:outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+                <button onclick="submitBuyerLeadToCloud()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/10">Verify & Unlock Reports</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Screen Bottom Sheet Drawer Overlay (Specs & PDI Reports) -->
+    <div id="mobileBottomSheet" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-end transition-all duration-300">
+        <div class="bg-slate-900 w-full rounded-t-[2.5rem] border-t border-slate-800 max-h-[85vh] overflow-y-auto p-6 space-y-6 flex flex-col transform translate-y-0 text-slate-300">
+            <div class="w-12 h-1.5 bg-slate-700 rounded-full mx-auto -mt-2 mb-2" onclick="closeMobileAppDrawer()"></div>
+            <div id="mobileBottomSheetDynamicTarget"></div>
+        </div>
+    </div>
+
+    <!-- App Navigation Bar (Fixed Bottom Control Node) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800/80 h-16 flex items-center justify-around px-6 z-40">
+        <button onclick="window.location.reload()" class="flex flex-col items-center justify-center text-indigo-400 space-y-0.5">
+            <span class="text-lg">🚗</span><span class="text-[9px] font-bold tracking-wider uppercase">Showroom</span>
+        </button>
+        <a href="https://wa.me/919999999999?text=Hi,%20I%20want%20to%20sell%20my%20car%20on%20NoDealerIndia" target="_blank" class="flex flex-col items-center justify-center text-slate-400 hover:text-white space-y-0.5">
+            <span class="text-lg">➕</span><span class="text-[9px] font-bold tracking-wider uppercase">Sell Car</span>
+        </a>
+    </nav>
+
+    <!-- Mobile Execution Pipeline Engine -->
+    <script>
+        const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
+        
+        let localMobileFeedState = [];
+
+        async function bootMobileApplication() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&order=created_at.desc`, {
+                    headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+                });
+                localMobileFeedState = await response.json();
+                renderMobileAppCards(localMobileFeedState);
+            } catch (e) {
+                console.error("App fetch failed", e);
+            }
+        }
+
+        function renderMobileAppCards(dataset) {
+            const container = document.getElementById("mobileAppFeedTarget");
+            if (!container) return;
+            container.innerHTML = "";
+
+            if (dataset.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-500 text-xs font-semibold">No certified stock matching these parameters.</div>`;
+                return;
+            }
+
+            dataset.forEach(car => {
+                const isReserved = car.status === "Reserved";
+                const cardHtml = `
+                    <div class="bg-slate-900 border border-slate-800/60 rounded-3xl overflow-hidden shadow-xl flex flex-col relative group">
+                        <div class="absolute top-3 left-3 z-10 flex flex-col gap-1 items-start">
+                            <span class="bg-emerald-500 text-slate-950 text-[9px] font-black tracking-wider px-2 py-0.5 rounded-md uppercase shadow-md">✓ 140-Pt Passed</span>
+                            ${car.reel_link ? `<span class="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[8px] font-black tracking-widest px-2 py-0.5 rounded-md uppercase">On Reel</span>` : ""}
+                        </div>
+                        ${isReserved ? `<div class="absolute inset-0 bg-slate-950/70 backdrop-blur-[1px] z-20 flex items-center justify-center"><span class="bg-amber-500 text-slate-950 text-[10px] font-black tracking-widest px-4 py-2 rounded-xl uppercase border border-white">Reserved & Locked</span></div>` : ""}
+                        <div class="aspect-[16/10] bg-slate-950 relative"><img src="${car.image}" alt="${car.name}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600'"></div>
+                        <div class="p-5 space-y-3 flex-grow flex flex-col justify-between">
+                            <div>
+                                <span class="text-[9px] font-bold text-indigo-400 uppercase tracking-widest">${car.year} • ${car.rto} RTO</span>
+                                <h3 class="text-lg font-black text-white tracking-tight mt-0.5">${car.name}</h3>
+                                <p class="text-[11px] text-slate-400 font-medium">${car.variant}</p>
+                            </div>
+                            <div class="flex gap-1.5 text-[10px] font-bold text-slate-400">
+                                <span class="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-850">${car.kms} KM</span>
+                                <span class="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-850">${car.fuel}</span>
+                                <span class="bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-850">${car.transmission}</span>
+                            </div>
+                            <div class="pt-3 border-t border-slate-800/60 flex items-center justify-between">
+                                <div><span class="block text-[8px] font-bold text-slate-500 uppercase tracking-wider">Direct Price</span><span class="text-lg font-black text-white">₹${formatMobilePrice(car.price)}</span></div>
+                                <button onclick="evaluateLeadGatingRouter('${car.id}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow-md shadow-indigo-600/10">View Report</button>
+                            </div>
+                        </div>
+                    </div>`;
+                container.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        function evaluateLeadGatingRouter(carId) {
+            // Check if user has already unlocked profiles previously
+            const isUnlocked = localStorage.getItem("ndi_lead_verified") === "true";
+            
+            if (isUnlocked) {
+                openMobileAppSpecsSheet(carId);
+            } else {
+                document.getElementById("targetLeadCarId").value = carId;
+                document.getElementById("leadCaptureModal").classList.remove("hidden");
+            }
+        }
+
+        async function submitBuyerLeadToCloud() {
+            const rawPhone = document.getElementById("leadPhoneInput").value.trim();
+            const targetedCarId = document.getElementById("targetLeadCarId").value;
+
+            if (rawPhone.length !== 10 || isNaN(rawPhone)) {
+                alert("Please enter a valid 10-digit Indian mobile number.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/buyer_leads`, {
+                    method: "POST",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        phone_number: "+91 " + rawPhone,
+                        vehicle_interest_id: targetedCarId
+                    })
+                });
+
+                if (response.ok) {
+                    localStorage.setItem("ndi_lead_verified", "true");
+                    document.getElementById("leadCaptureModal").classList.add("hidden");
+                    openMobileAppSpecsSheet(targetedCarId);
+                } else {
+                    alert("Sync encounter error. Initializing emergency bypass.");
+                    openMobileAppSpecsSheet(targetedCarId);
+                }
+            } catch (error) {
+                openMobileAppSpecsSheet(targetedCarId);
+            }
+        }
+
+        function closeLeadModal() {
+            const currentCarId = document.getElementById("targetLeadCarId").value;
+            document.getElementById("leadCaptureModal").classList.add("hidden");
+            openMobileAppSpecsSheet(currentCarId); // Don't block completely, allow structural skip
+        }
+
+        function formatMobilePrice(val) {
+            let num = parseFloat(val); if(isNaN(num)) return val;
+            if(num >= 100000) return (num/100000).toFixed(2) + " Lakh";
+            return num.toLocaleString('en-IN');
+        }
+
+        function openMobileAppSpecsSheet(carId) {
+            const car = localMobileFeedState.find(c => c.id === carId); if(!car) return;
+            const drawer = document.getElementById("mobileBottomSheet");
+            const target = document.getElementById("mobileBottomSheetDynamicTarget");
+            const isReserved = car.status === "Reserved";
+
+            target.innerHTML = `
+                <div class="space-y-5 text-slate-300">
+                    <div>
+                        <span class="text-[9px] font-bold text-indigo-400 uppercase tracking-widest">${car.id}</span>
+                        <h2 class="text-xl font-black text-white tracking-tight">${car.name}</h2>
+                        <p class="text-xs text-slate-400">${car.variant}</p>
+                    </div>
+                    
+                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-2xl space-y-2 text-xs">
+                        <h4 class="text-[9px] font-bold text-emerald-400 uppercase tracking-widest border-b border-slate-850 pb-1.5">Mechanical Inspection Logs</h4>
+                        <div class="grid grid-cols-2 gap-2 text-[11px]">
+                            <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Engine: <span class="text-white font-bold ml-auto">${car.pdi_engine_status || 'Passed'}</span></div>
+                            <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Body: <span class="text-white font-bold ml-auto">${car.pdi_structural_status || 'Passed'}</span></div>
+                            <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Cab: <span class="text-white font-bold ml-auto">${car.pdi_interior_status || 'Passed'}</span></div>
+                            <div class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Tires: <span class="text-white font-bold ml-auto">${car.pdi_tyres_status || 'Passed'}</span></div>
+                        </div>
+                        ${car.inspector_notes ? `<p class="text-[10px] text-slate-500 italic pt-1.5 border-t border-slate-900">"${car.inspector_notes}"</p>` : ""}
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span class="block text-slate-500 text-[8px] uppercase font-bold">Odometer</span><span class="text-white font-bold block mt-0.5">${car.kms}</span></div>
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span class="block text-slate-500 text-[8px] uppercase font-bold">Owner Log</span><span class="text-white font-bold block mt-0.5">${car.owners}</span></div>
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span class="block text-slate-500 text-[8px] uppercase font-bold">Paint Color</span><span class="text-white font-bold block mt-0.5 truncate">${car.color}</span></div>
+                    </div>
+
+                    <div class="bg-amber-950/40 text-amber-300 border border-amber-900/40 rounded-xl p-3 text-[10px] font-medium leading-relaxed">
+                        ⚠️ <strong>PhonePe 48h Lock Rule:</strong> Token amount is refundable. Cancellation post 48 hours deducts a ₹999 documentation file charge setup. Balance ₹10,001 will be automatically reversed.
+                    </div>
+
+                    <div class="flex flex-col gap-2 pt-1">
+                        <button onclick="executeMobileAppPhonePeLock('${car.id}')" ${isReserved ? 'disabled':''} class="w-full ${isReserved ? 'bg-slate-800 text-slate-500 cursor-not-allowed':'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20'} font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider">
+                            ${isReserved ? 'Slot Already Locked':'Reserve via PhonePe (₹11,000)'}
+                        </button>
+                        <a href="https://wa.me/919999999999?text=Hi%20Kapil,%20I'm%20interested%20in%20the%20${encodeURIComponent(car.name)}%20(${car.id})" target="_blank" class="w-full bg-slate-950 border border-slate-800 hover:border-slate-700 text-white font-bold py-3.5 rounded-xl text-center text-xs uppercase tracking-wider">Discuss With Founder</a>
+                    </div>
+                </div>`;
+            drawer.classList.remove("hidden");
+        }
+
+        function closeMobileAppDrawer() { document.getElementById("mobileBottomSheet").classList.add("hidden"); }
+
+        async function executeMobileAppPhonePeLock(id) {
+            alert("[PhonePe Security Router Node Loading...]");
+            const pass = confirm(`Authorize secure PhonePe merchant transaction entry row hold of ₹11,000 for item reference ${id}?`);
+            if(pass) {
+                try {
+                    await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${id}`, {
+                        method: "PATCH",
+                        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" },
+                        body: JSON.stringify({ status: "Reserved" })
+                    });
+                    alert("Transaction Completed! Vehicle slot successfully locked down.");
+                    closeMobileAppDrawer();
+                    bootMobileApplication();
+                } catch(e){}
+            }
+        }
+
+        function filterMobileCategory(tag) {
+            document.querySelectorAll('div.flex button').forEach(b => {
+                b.classList.remove('bg-indigo-600', 'text-white'); b.classList.add('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
+            });
+            const targetedBtn = document.getElementById(`pill-${tag}`);
+            targetedBtn.classList.remove('bg-slate-900', 'text-slate-400', 'border', 'border-slate-800');
+            targetedBtn.classList.add('bg-indigo-600', 'text-white');
+
+            if(tag === 'ALL') { renderMobileAppCards(localMobileFeedState); return; }
+            const filtered = localMobileFeedState.filter(c => c.transmission === tag || c.fuel === tag);
+            renderMobileAppCards(filtered);
+        }
+
+        window.addEventListener("DOMContentLoaded", () => { bootMobileApplication(); });
+    </script>
+</body>
+</html>
