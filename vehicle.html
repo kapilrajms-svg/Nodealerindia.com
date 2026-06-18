@@ -1,209 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoDealerIndia | Certified Vehicle Detail</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
-</head>
-<body class="bg-slate-950 text-slate-100 min-h-screen pb-16">
+const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
 
-    <!-- Sticky Sub Nav -->
-    <nav class="bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800 px-4 py-4">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <button onclick="history.back()" class="text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1">← Back to Showroom</button>
-            <span class="text-sm font-black text-white tracking-tight">NoDealer<span class="text-indigo-500">India</span> Verified</span>
-            <span id="headerStatusBadge" class="text-[9px] font-black tracking-widest uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-400">Loading...</span>
-        </div>
-    </nav>
+let localFleetState = [];
 
-    <!-- Main Detail Layout Frame Container -->
-    <main class="max-w-6xl mx-auto px-4 pt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- LEFT 2 COLUMNS: Media & Detailed Inspection Breakdown Reports -->
-        <div class="lg:col-span-2 space-y-6">
-            <!-- Full Hero Image Showcase -->
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl relative aspect-[16/9]">
-                <img id="detailVehicleImg" src="" alt="Vehicle Presentation" class="w-full h-full object-cover">
-                <div class="absolute bottom-4 left-4 bg-slate-950/80 backdrop-blur-md border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-                    <span class="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span> 140-Point Inspection Active
-                </div>
-            </div>
+async function initializeShowroomEngine() {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&order=created_at.desc`, {
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": `Bearer ${SUPABASE_KEY}`
+            }
+        });
+        localFleetState = await response.json();
+        renderDesktopGridCards(localFleetState);
+    } catch (e) {
+        console.error("Showroom engine failed to boot sync nodes:", e);
+    }
+}
 
-            <!-- Deep Specs Parameter Grid Box -->
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-                <h3 class="text-base font-bold text-white tracking-tight border-b border-slate-800 pb-3">Technical Specifications Matrix</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-semibold text-slate-400">
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-[10px] block text-slate-500 uppercase tracking-wider">Odometer Log</span><span id="specKms" class="text-white font-bold text-sm block mt-0.5">--</span></div>
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-[10px] block text-slate-500 uppercase tracking-wider">Fuel System</span><span id="specFuel" class="text-white font-bold text-sm block mt-0.5">--</span></div>
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-[10px] block text-slate-500 uppercase tracking-wider">Transmission</span><span id="specTrans" class="text-white font-bold text-sm block mt-0.5">--</span></div>
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-[10px] block text-slate-500 uppercase tracking-wider">RTO Location</span><span id="specRto" class="text-white font-bold text-sm block mt-0.5">--</span></div>
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-[10px] block text-slate-500 uppercase tracking-wider">Ownership Tier</span><span id="specOwners" class="text-white font-bold text-sm block mt-0.5">--</span></div>
-                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-[10px] block text-slate-500 uppercase tracking-wider">Paint Finish</span><span id="specColor" class="text-white font-bold text-sm block mt-0.5 truncate">--</span></div>
-                </div>
-            </div>
+function renderDesktopGridCards(dataset) {
+    const container = document.getElementById("fleetPlacementGrid");
+    if (!container) return; // Prevents errors if script runs on pages without this grid
+    container.innerHTML = "";
 
-            <!-- Advanced 140-Point Mechanical Breakdown Sheet (Like Spinny) -->
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-                <h3 class="text-base font-bold text-white tracking-tight border-b border-slate-800 pb-3">Professional Diagnostic Evaluation Sheet</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
-                    <div class="bg-slate-950 border border-slate-850 p-3.5 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center gap-2"><span>⚙️</span><div><p class="text-white">Engine Block & Powertrain</p><p class="text-[10px] text-slate-500 font-medium">Compression, head gasket, timing belt</p></div></div>
-                        <span id="pdiEngine" class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">PASSED</span>
-                    </div>
-                    <div class="bg-slate-950 border border-slate-850 p-3.5 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center gap-2"><span>🛡️</span><div><p class="text-white">Structural Chassis Integrity</p><p class="text-[10px] text-slate-500 font-medium">Aprons, pillars, floorboard bed frames</p></div></div>
-                        <span id="pdiStructure" class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">PASSED</span>
-                    </div>
-                    <div class="bg-slate-950 border border-slate-850 p-3.5 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center gap-2"><span>🛋️</span><div><p class="text-white">Cabin Comfort & Electronics</p><p class="text-[10px] text-slate-500 font-medium">HVAC climate cluster, OBD diagnostics</p></div></div>
-                        <span id="pdiInterior" class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">PASSED</span>
-                    </div>
-                    <div class="bg-slate-950 border border-slate-850 p-3.5 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center gap-2"><span>⭕</span><div><p class="text-white">Tread Life, Suspension & Alloys</p><p class="text-[10px] text-slate-500 font-medium">Link rods, struts, caliper wear limits</p></div></div>
-                        <span id="pdiTyres" class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">PASSED</span>
-                    </div>
-                </div>
-                <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl text-xs space-y-1">
-                    <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider block">Inspector Field Log</span>
-                    <p id="inspectorNotes" class="text-slate-300 italic font-medium leading-relaxed">"No evaluation notes submitted for this asset reference string."</p>
-                </div>
-            </div>
-        </div>
+    if (dataset.length === 0) {
+        container.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-400 font-semibold text-sm">No certified vehicles found matching the search criteria.</div>`;
+        return;
+    }
 
-        <!-- RIGHT 1 COLUMN: Pricing, Secure Holds & Contact Action Center -->
-        <div class="space-y-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5 sticky top-24 shadow-2xl">
-                <div>
-                    <span id="detailYear" class="text-xs font-bold text-indigo-400 uppercase tracking-wider">--</span>
-                    <h1 id="detailName" class="text-2xl font-black text-white tracking-tight mt-0.5">--</h1>
-                    <p id="detailVariant" class="text-xs text-slate-400 font-semibold mt-0.5">--</p>
+    dataset.forEach(car => {
+        const isReserved = car.status === "Reserved";
+        const cardHtml = `
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all flex flex-col relative group">
+                <!-- Premium Certification Tag Badge -->
+                <div class="absolute top-4 left-4 z-10 flex flex-col gap-1 items-start">
+                    <span class="bg-emerald-600 text-white text-[9px] font-black tracking-wider px-2.5 py-1 rounded-lg uppercase shadow-sm flex items-center gap-1">
+                        ✓ 140-Point Certified
+                    </span>
                 </div>
 
-                <div class="bg-slate-950 border border-slate-850 p-4 rounded-2xl flex items-center justify-between">
+                <!-- Reserved Shield Lock -->
+                ${isReserved ? `
+                <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px] z-20 flex items-center justify-center p-4 text-center">
+                    <span class="bg-amber-500 text-slate-950 text-xs font-black tracking-widest px-5 py-2.5 rounded-2xl uppercase shadow-xl border border-white">
+                        Reserved Slot Locked
+                    </span>
+                </div>` : ""}
+
+                <!-- Media Section Frame -->
+                <div class="aspect-[16/10] bg-slate-100 relative overflow-hidden">
+                    <img src="${car.image}" alt="${car.name}" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600'">
+                </div>
+
+                <!-- Details Panel -->
+                <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
                     <div>
-                        <span class="text-[9px] text-slate-500 block font-bold uppercase tracking-widest">Fixed Direct Outflow Cost</span>
-                        <span id="detailPrice" class="text-2xl font-black text-white">₹--</span>
+                        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">${car.year} Model • ${car.rto} RTO</span>
+                        <h3 class="text-xl font-extrabold text-slate-950 tracking-tight mt-0.5 capitalize">${car.name}</h3>
+                        <p class="text-xs text-slate-500 font-medium">${car.variant}</p>
                     </div>
-                    <span class="text-[10px] text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 font-bold px-2 py-1 rounded-lg">Zero Commission</span>
+
+                    <!-- Specs Pills Matrix Row -->
+                    <div class="flex flex-wrap gap-1 text-[10px] font-bold text-gray-500">
+                        <span class="bg-slate-50 px-2.5 py-1 rounded-md border border-gray-100">${car.kms} KM</span>
+                        <span class="bg-slate-50 px-2.5 py-1 rounded-md border border-gray-100">${car.fuel}</span>
+                        <span class="bg-slate-50 px-2.5 py-1 rounded-md border border-gray-100">${car.transmission}</span>
+                    </div>
+
+                    <!-- Action Pricing Anchor Foot -->
+                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[8px] font-bold text-slate-400 uppercase tracking-wider">Fixed NDI Cost</span>
+                            <span class="text-xl font-black text-slate-900">₹${formatPriceString(car.price)}</span>
+                        </div>
+                        <!-- ROUTING TO DEDICATED URL WITH CAR ID PARAMETER -->
+                        <a href="vehicle.html?id=${car.id}" class="bg-slate-900 hover:bg-indigo-600 text-white font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-sm">
+                            View Specs
+                        </a>
+                    </div>
                 </div>
+            </div>`;
+        container.insertAdjacentHTML('beforeend', cardHtml);
+    });
+}
 
-                <div class="bg-amber-950/30 text-amber-300 border border-amber-900/40 rounded-xl p-3.5 text-[10px] font-medium leading-relaxed">
-                    ⚠️ <strong>NDI Secure Token Policy:</strong> Holding tokens are fully protected and transparently managed under the 48-hour client cancellation ledger window rules.
-                </div>
+function runFilterPipeline() {
+    const txFilter = document.getElementById("uiFilterTransmission").value;
+    const fuelFilter = document.getElementById("uiFilterFuel").value;
 
-                <div class="space-y-2 text-xs font-bold pt-1">
-                    <button id="mainBookingBtn" onclick="triggerPhonePeHold()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/10">
-                        Reserve with Token (₹11,000)
-                    </button>
-                    <a id="whatsappRouterLink" href="#" target="_blank" class="w-full bg-slate-950 border border-slate-800 text-white hover:border-slate-700 font-bold py-4 rounded-xl text-center block uppercase tracking-wider transition-all">
-                        💬 Connect with Founder
-                    </a>
-                </div>
-            </div>
-        </div>
-    </main>
+    let filteredData = localFleetState;
 
-    <script>
-        const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
+    if (txFilter !== "ALL") {
+        filteredData = filteredData.filter(car => car.transmission === txFilter);
+    }
+    if (fuelFilter !== "ALL") {
+        filteredData = filteredData.filter(car => car.fuel === fuelFilter);
+    }
 
-        async function loadDedicatedVehicleData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const targetId = urlParams.get('id');
+    renderDesktopGridCards(filteredData);
+}
 
-            if (!targetId) {
-                alert("Missing tracking query target context.");
-                window.location.href = "showroom.html";
-                return;
-            }
+function resetFiltersUI() {
+    document.getElementById("uiFilterTransmission").value = "ALL";
+    document.getElementById("uiFilterFuel").value = "ALL";
+    renderDesktopGridCards(localFleetState);
+}
 
-            try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${targetId}&select=*`, {
-                    headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
-                });
-                const carArray = await response.json();
-                
-                if (carArray.length === 0) {
-                    alert("Vehicle ledger target context missing.");
-                    return;
-                }
+function formatPriceString(val) {
+    let num = parseFloat(val); if (isNaN(num)) return val;
+    if (num >= 100000) return (num / 100000).toFixed(2) + " Lakh";
+    return num.toLocaleString('en-IN');
+}
 
-                const car = carArray[0];
-                renderPageUIContent(car);
-            } catch (e) {
-                console.error("Data mapping initialization breakdown", e);
-            }
-        }
-
-        function renderPageUIContent(car) {
-            const isReserved = car.status === "Reserved";
-
-            // Status Badge
-            const badge = document.getElementById("headerStatusBadge");
-            badge.innerText = car.status;
-            if(isReserved) {
-                badge.className = "text-[9px] font-black tracking-widest uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30";
-                const bookBtn = document.getElementById("mainBookingBtn");
-                bookBtn.disabled = true;
-                bookBtn.className = "w-full bg-slate-800 text-slate-500 cursor-not-allowed font-bold py-4 rounded-xl uppercase tracking-wider text-xs";
-                bookBtn.innerText = "Slot Already Locked";
-            } else {
-                badge.className = "text-[9px] font-black tracking-widest uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
-            }
-
-            // Core Info
-            document.getElementById("detailVehicleImg").src = car.image;
-            document.getElementById("detailYear").innerText = car.year + " Model • " + car.rto + " Registered";
-            document.getElementById("detailName").innerText = car.name;
-            document.getElementById("detailVariant").innerText = car.variant;
-            document.getElementById("detailPrice").innerText = "₹" + formatPrice(car.price);
-
-            // Technical Specs Grid
-            document.getElementById("specKms").innerText = car.kms + " KM";
-            document.getElementById("specFuel").innerText = car.fuel;
-            document.getElementById("specTrans").innerText = car.transmission;
-            document.getElementById("specRto").innerText = car.rto + " RTO";
-            document.getElementById("specOwners").innerText = "Owner " + car.owners;
-            document.getElementById("specColor").innerText = car.color;
-
-            // Inspection Badging Status
-            setInspectionStatusText("pdiEngine", car.pdi_engine_status);
-            setInspectionStatusText("pdiStructure", car.pdi_structural_status);
-            setInspectionStatusText("pdiInterior", car.pdi_interior_status);
-            setInspectionStatusText("pdiTyres", car.pdi_tyres_status);
-
-            if(car.inspector_notes) {
-                document.getElementById("inspectorNotes").innerText = `"${car.inspector_notes}"`;
-            }
-
-            // Dynamic WhatsApp Router Link Config
-            const msg = encodeURIComponent(`Hi Kapil! I am reviewing the dedicated report for the ${car.name} (${car.variant}) [Ref: ${car.id}]. Is this asset open for validation?`);
-            document.getElementById("whatsappRouterLink").href = `https://wa.me/917838335143?text=${msg}`;
-        }
-
-        function setInspectionStatusText(elementId, val) {
-            const el = document.getElementById(elementId);
-            if(!val) return;
-            el.innerText = val.toUpperCase();
-            if(val !== "Passed") {
-                el.className = "text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded text-[10px]";
-            }
-        }
-
-        function formatPrice(val) {
-            let num = parseFloat(val); if(isNaN(num)) return val;
-            if(num >= 100000) return (num/100000).toFixed(2) + " Lakh";
-            return num.toLocaleString('en-IN');
-        }
-
-        function triggerPhonePeHold() {
-            alert("[PhonePe Transaction Node Gateway Routing...]");
-        }
-
-        window.addEventListener("DOMContentLoaded", loadDedicatedVehicleData);
-    </script>
-</body>
-</html>
+// Automatically switch on the engine grid row scan when the window finishes structural building
+window.addEventListener("DOMContentLoaded", initializeShowroomEngine);
