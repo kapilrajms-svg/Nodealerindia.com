@@ -22,15 +22,14 @@
             <span class="text-base font-black text-white tracking-tight">NoDealer<span class="text-indigo-500">India</span></span>
             <span class="text-[9px] font-bold text-slate-400 tracking-wider uppercase">Direct Peer-To-Peer Fleet</span>
         </div>
-        <a href="https://wa.me/919999999999" target="_blank" class="bg-emerald-600/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold flex items-center gap-1">
+        <a href="https://wa.me/917838335143?text=Hi%20Kapil,%20I%20need%20live%20support%20regarding%20the%20certified%20inventory." target="_blank" class="bg-emerald-600/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full text-[10px] font-bold flex items-center gap-1">
             <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Live Support
         </a>
     </header>
 
     <!-- App Main Dynamic Body -->
     <main class="px-4 pt-4 space-y-6">
-        
-        <!-- Story-Style Fast Category Pill Swiper Filters -->
+        <!-- Story-Style Filters -->
         <div class="flex gap-2 overflow-x-auto hide-scrollbar py-1 text-xs font-bold">
             <button onclick="filterMobileCategory('ALL')" id="pill-ALL" class="bg-indigo-600 text-white px-4 py-2 rounded-full whitespace-nowrap shadow-md shadow-indigo-600/10 transition-all">All Stock</button>
             <button onclick="filterMobileCategory('Automatic')" id="pill-Automatic" class="bg-slate-900 text-slate-400 border border-slate-800 px-4 py-2 rounded-full whitespace-nowrap transition-all">Automatics</button>
@@ -39,12 +38,10 @@
         </div>
 
         <!-- Dynamic Mobile Feed Container Stack -->
-        <div id="mobileAppFeedTarget" class="space-y-6">
-            <!-- App Cards dynamically generated here -->
-        </div>
+        <div id="mobileAppFeedTarget" class="space-y-6"></div>
     </main>
 
-    <!-- LEAD CAPTURE INTERSTITIAL POPUP OVERLAY -->
+    <!-- LEAD CAPTURE POPUP OVERLAY -->
     <div id="leadCaptureModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 space-y-5 text-center shadow-2xl relative">
             <button onclick="closeLeadModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white text-xs font-bold">✕ Skip</button>
@@ -75,12 +72,12 @@
         </div>
     </div>
 
-    <!-- App Navigation Bar (Fixed Bottom Control Node) -->
+    <!-- App Navigation Bar -->
     <nav class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800/80 h-16 flex items-center justify-around px-6 z-40">
         <button onclick="window.location.reload()" class="flex flex-col items-center justify-center text-indigo-400 space-y-0.5">
             <span class="text-lg">🚗</span><span class="text-[9px] font-bold tracking-wider uppercase">Showroom</span>
         </button>
-        <a href="https://wa.me/919999999999?text=Hi,%20I%20want%20to%20sell%20my%20car%20on%20NoDealerIndia" target="_blank" class="flex flex-col items-center justify-center text-slate-400 hover:text-white space-y-0.5">
+        <a href="https://wa.me/917838335143?text=Hi%20Kapil,%20I%20want%20to%20onboard%20and%20sell%20my%20car%20on%20NoDealerIndia." target="_blank" class="flex flex-col items-center justify-center text-slate-400 hover:text-white space-y-0.5">
             <span class="text-lg">➕</span><span class="text-[9px] font-bold tracking-wider uppercase">Sell Car</span>
         </a>
     </nav>
@@ -146,9 +143,7 @@
         }
 
         function evaluateLeadGatingRouter(carId) {
-            // Check if user has already unlocked profiles previously
             const isUnlocked = localStorage.getItem("ndi_lead_verified") === "true";
-            
             if (isUnlocked) {
                 openMobileAppSpecsSheet(carId);
             } else {
@@ -160,32 +155,21 @@
         async function submitBuyerLeadToCloud() {
             const rawPhone = document.getElementById("leadPhoneInput").value.trim();
             const targetedCarId = document.getElementById("targetLeadCarId").value;
-
             if (rawPhone.length !== 10 || isNaN(rawPhone)) {
                 alert("Please enter a valid 10-digit Indian mobile number.");
                 return;
             }
-
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/buyer_leads`, {
                     method: "POST",
-                    headers: {
-                        "apikey": SUPABASE_KEY,
-                        "Authorization": `Bearer ${SUPABASE_KEY}`,
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        phone_number: "+91 " + rawPhone,
-                        vehicle_interest_id: targetedCarId
-                    })
+                    headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({ phone_number: "+91 " + rawPhone, vehicle_interest_id: targetedCarId })
                 });
-
                 if (response.ok) {
                     localStorage.setItem("ndi_lead_verified", "true");
                     document.getElementById("leadCaptureModal").classList.add("hidden");
                     openMobileAppSpecsSheet(targetedCarId);
                 } else {
-                    alert("Sync encounter error. Initializing emergency bypass.");
                     openMobileAppSpecsSheet(targetedCarId);
                 }
             } catch (error) {
@@ -196,7 +180,7 @@
         function closeLeadModal() {
             const currentCarId = document.getElementById("targetLeadCarId").value;
             document.getElementById("leadCaptureModal").classList.add("hidden");
-            openMobileAppSpecsSheet(currentCarId); // Don't block completely, allow structural skip
+            openMobileAppSpecsSheet(currentCarId);
         }
 
         function formatMobilePrice(val) {
@@ -210,6 +194,10 @@
             const drawer = document.getElementById("mobileBottomSheet");
             const target = document.getElementById("mobileBottomSheetDynamicTarget");
             const isReserved = car.status === "Reserved";
+
+            // PRE-FILLED WHATSAPP ROUTING TEXT LOGIC
+            const formattedMessage = encodeURIComponent(`Hi Kapil! I am highly interested in booking the ${car.name} (${car.variant}). Is this vehicle available for a test scan?`);
+            const liveWhatsappLink = `https://wa.me/917838335143?text=${formattedMessage}`;
 
             target.innerHTML = `
                 <div class="space-y-5 text-slate-300">
@@ -237,14 +225,16 @@
                     </div>
 
                     <div class="bg-amber-950/40 text-amber-300 border border-amber-900/40 rounded-xl p-3 text-[10px] font-medium leading-relaxed">
-                        ⚠️ <strong>PhonePe 48h Lock Rule:</strong> Token amount is refundable. Cancellation post 48 hours deducts a ₹999 documentation file charge setup. Balance ₹10,001 will be automatically reversed.
+                        ⚠️ <strong>PhonePe 48h Lock Rule:</strong> Token amount is refundable. Cancellation post 48 hours deducts a ₹999 documentation file charge setup.
                     </div>
 
                     <div class="flex flex-col gap-2 pt-1">
                         <button onclick="executeMobileAppPhonePeLock('${car.id}')" ${isReserved ? 'disabled':''} class="w-full ${isReserved ? 'bg-slate-800 text-slate-500 cursor-not-allowed':'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20'} font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider">
                             ${isReserved ? 'Slot Already Locked':'Reserve via PhonePe (₹11,000)'}
                         </button>
-                        <a href="https://wa.me/919999999999?text=Hi%20Kapil,%20I'm%20interested%20in%20the%20${encodeURIComponent(car.name)}%20(${car.id})" target="_blank" class="w-full bg-slate-950 border border-slate-800 hover:border-slate-700 text-white font-bold py-3.5 rounded-xl text-center text-xs uppercase tracking-wider">Discuss With Founder</a>
+                        <a href="${liveWhatsappLink}" target="_blank" class="w-full bg-slate-950 border border-slate-800 hover:border-slate-700 text-white font-bold py-3.5 rounded-xl text-center text-xs uppercase tracking-wider flex items-center justify-center gap-1.5">
+                            💬 Discuss With Founder
+                        </a>
                     </div>
                 </div>`;
             drawer.classList.remove("hidden");
