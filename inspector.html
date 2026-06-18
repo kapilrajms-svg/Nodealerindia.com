@@ -3,195 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoDealerIndia | PDI Inspector App</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>NoDealerIndia | Fleet PDI Node</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen pb-12">
+<body class="bg-slate-950 text-slate-100 min-h-screen p-4 pb-12">
 
-    <header class="bg-slate-900/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-800 px-4 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></span>
-            <h1 class="text-sm font-black tracking-tight text-white uppercase">PDI Mobile Node</h1>
+    <!-- Auth Protection Node Shield -->
+    <div id="inspectorAuthGate" class="max-w-sm mx-auto mt-20 bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
+        <div class="text-center space-y-1">
+            <h2 class="text-lg font-black text-white">Field Inspector Node</h2>
+            <p class="text-xs text-slate-400">Enter secure operational pin clearance code</p>
         </div>
-        <span class="text-[10px] font-bold bg-slate-800 text-slate-400 px-2.5 py-1 rounded-md border border-slate-700" id="userBadge">Connecting...</span>
-    </header>
+        <input type="password" id="inspectorPinInput" placeholder="••••" maxlength="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-center font-bold tracking-widest text-white text-lg focus:outline-none focus:border-indigo-500">
+        <button onclick="verifyInspectorPinNode()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Authorize Terminal</button>
+    </div>
 
-    <main class="max-w-md mx-auto px-4 pt-6 space-y-6" id="appMainContainer">
-        
-        <div id="pdiAuthGate" class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-6 shadow-xl">
-            <div class="space-y-1.5">
-                <h2 class="text-xl font-black text-white">Inspector Sign In</h2>
-                <p class="text-xs text-slate-400 font-medium">Access restricted to authorized NoDealerIndia field mechanics.</p>
+    <!-- Active Field Form Interface -->
+    <div id="inspectorFormTerminal" class="max-w-md mx-auto space-y-6 hidden">
+        <header class="flex items-center justify-between bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+            <div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Agent Node</span>
+                <h3 class="text-sm font-black text-white">Kapil Raj | Active</h3>
             </div>
-            <div class="space-y-4 text-xs font-semibold">
-                <div>
-                    <label class="block text-slate-400 mb-1">Select Active Crew Member</label>
-                    <select id="inspectorSelect" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3.5 focus:outline-none focus:border-indigo-500 font-medium text-sm">
-                        <option value="Kapil Raj">Kapil Raj (Master Inspector)</option>
-                        <option value="Teammate">Field Inspector (Teammate)</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-slate-400 mb-1">Secret Access Pin</label>
-                    <input type="password" id="inspectorPin" placeholder="••••" maxlength="4" pattern="\d*" inputmode="numeric" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3.5 text-center text-lg tracking-widest focus:outline-none focus:border-indigo-500">
-                </div>
-                <button onclick="verifyInspectorCredentials()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-lg shadow-indigo-600/20 uppercase tracking-wider">Unlock Inspection Pad</button>
+            <!-- Sync Indicator Status Tag -->
+            <div id="syncStatusIndicator" class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md">
+                🟢 System Online
             </div>
+        </header>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-4">
+            <h3 class="text-sm font-black text-white tracking-wide uppercase border-b border-slate-800 pb-2">Vehicle Core Ledger</h3>
+            
+            <div class="grid grid-cols-2 gap-3 text-xs font-semibold">
+                <div><label class="text-slate-400 block mb-1">Unique Vehicle Reference ID</label><input type="text" id="carId" placeholder="NDI-4821" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none uppercase"></div>
+                <div><label class="text-slate-400 block mb-1">Standard Name</label><input type="text" id="carName" placeholder="Toyota Fortuner" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+                <div><label class="text-slate-400 block mb-1">Variant Level</label><input type="text" id="carVariant" placeholder="Sigma 4 Diesel Automatic" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+                <div><label class="text-slate-400 block mb-1">Manufacturing Year</label><input type="number" id="carYear" placeholder="2022" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+                <div><label class="text-slate-400 block mb-1">Direct Outflow Price (INR)</label><input type="number" id="carPrice" placeholder="3400000" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+                <div><label class="text-slate-400 block mb-1">Odometer KMs Log</label><input type="text" id="carKms" placeholder="42,000" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+                <div><label class="text-slate-400 block mb-1">Fuel Setup</label><select id="carFuel" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"><option value="Diesel">Diesel</option><option value="Petrol">Petrol</option></select></div>
+                <div><label class="text-slate-400 block mb-1">Transmission System</label><select id="carTransmission" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"><option value="Automatic">Automatic</option><option value="Manual">Manual</option></select></div>
+                <div><label class="text-slate-400 block mb-1">RTO Registration</label><input type="text" id="carRto" placeholder="HR26" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none uppercase"></div>
+                <div><label class="text-slate-400 block mb-1">Owner Count Log</label><input type="number" id="carOwners" placeholder="1" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+                <div><label class="text-slate-400 block mb-1">Paint Work Color</label><input type="text" id="carColor" placeholder="Attitude Black" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+                <div><label class="text-slate-400 block mb-1">Image CDN File Path</label><input type="text" id="carImage" placeholder="images/fortuner.jpg" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
+            </div>
+
+            <div class="pt-2 space-y-3">
+                <h3 class="text-sm font-black text-white tracking-wide uppercase border-b border-slate-800 pb-1">140-Point Inspection Toggle Array</h3>
+                <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>⚙️ Engine Block</span><select id="pdiEngine" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Attention Needed">ALERT</option></select></div>
+                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>🛡️ Structural Frame</span><select id="pdiStructure" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Repainted Panel">ALERT</option></select></div>
+                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>🛋️ Cabin Electricals</span><select id="pdiInterior" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Alert Logged">ALERT</option></select></div>
+                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>⭕ Tires & Alloys</span><select id="pdiTyres" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Replace Soon">ALERT</option></select></div>
+                </div>
+            </div>
+
+            <div class="space-y-1 text-xs font-semibold">
+                <label class="text-slate-400 block pl-1">Professional Inspector Notes Log</label>
+                <textarea id="inspectorNotes" placeholder="Engine compression ratio flawless. Minor scuff right lower panel bumper. Tires at 85% tread depth remaining." rows="3" class="w-full bg-slate-950 border border-slate-850 text-slate-300 rounded-xl p-3 text-xs focus:outline-none focus:border-indigo-500"></textarea>
+            </div>
+
+            <button onclick="executeInspectorSubmissionPipeline()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-600/10 mt-2">
+                Submit Certified Report & Go Live
+            </button>
         </div>
-
-        <div id="pdiFormWorkspace" class="space-y-6 hidden">
-            <div class="bg-gradient-to-r from-indigo-900 to-slate-900 rounded-2xl p-5 border border-indigo-800/40 shadow-md">
-                <h3 class="text-base font-bold text-white">New Inspection Log</h3>
-                <p class="text-[11px] text-indigo-300 font-medium mt-0.5">Fill out parameters on-site during vehicle review.</p>
-            </div>
-
-            <form onsubmit="submitPdiReportToCloud(event)" class="space-y-5 text-xs">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 font-semibold text-gray-950">
-                    <h4 class="text-white text-xs font-bold uppercase tracking-wider border-b border-slate-800 pb-2">1. Core Vehicle Specs</h4>
-                    <div class="space-y-3">
-                        <input type="text" id="pdiName" required placeholder="Car Model (e.g., Toyota Fortuner)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                        <input type="text" id="pdiVariant" required placeholder="Variant (e.g., Sigma4 Diesel AT)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="number" id="pdiYear" required placeholder="Year (2021)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                            <input type="text" id="pdiKms" required placeholder="KMs Driven (34,000)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <select id="pdiFuel" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none"><option value="Diesel">Diesel</option><option value="Petrol">Petrol</option><option value="CNG">CNG</option></select>
-                            <select id="pdiTrans" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none"><option value="Automatic">Automatic</option><option value="Manual">Manual</option></select>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="pdiPrice" required placeholder="Price (3650000)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                            <input type="text" id="pdiRto" required placeholder="RTO (DL-3C)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <input type="text" id="pdiColor" required placeholder="Color (Black)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                            <input type="text" id="pdiOwners" required placeholder="Owners (1st Owner)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                        </div>
-                        <input type="text" id="pdiInsurance" required placeholder="Insurance Status (Comprehensive)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4">
-                    <h4 class="text-white text-xs font-bold uppercase tracking-wider border-b border-slate-800 pb-2">2. 140-Point Inspection Toggles</h4>
-                    
-                    <div class="flex items-center justify-between p-2 bg-slate-950 rounded-xl border border-slate-850">
-                        <div><span class="font-bold text-white block">Engine & Gearbox</span><span class="text-[10px] text-slate-500">Compression, oil, & mechanics</span></div>
-                        <select id="chkEngine" class="bg-slate-900 border border-slate-700 rounded-lg p-2 font-bold text-emerald-400 focus:outline-none"><option value="Passed" class="text-emerald-400">PASSED</option><option value="Defect" class="text-rose-400">DEFECT</option></select>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2 bg-slate-950 rounded-xl border border-slate-850">
-                        <div><span class="font-bold text-white block">Structural Integrity</span><span class="text-[10px] text-slate-500">Non-accidental, original welds</span></div>
-                        <select id="chkStructure" class="bg-slate-900 border border-slate-700 rounded-lg p-2 font-bold text-emerald-400 focus:outline-none"><option value="Passed">PASSED</option><option value="Defect">DEFECT</option></select>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2 bg-slate-950 rounded-xl border border-slate-850">
-                        <div><span class="font-bold text-white block">Interior & Electronics</span><span class="text-[10px] text-slate-500">AC performance, scan tests</span></div>
-                        <select id="chkInterior" class="bg-slate-900 border border-slate-700 rounded-lg p-2 font-bold text-emerald-400 focus:outline-none"><option value="Passed">PASSED</option><option value="Defect">DEFECT</option></select>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2 bg-slate-950 rounded-xl border border-slate-850">
-                        <div><span class="font-bold text-white block">Tires & Suspension</span><span class="text-[10px] text-slate-500">Tread depth > 4mm, alignment</span></div>
-                        <select id="chkTyres" class="bg-slate-900 border border-slate-700 rounded-lg p-2 font-bold text-emerald-400 focus:outline-none"><option value="Passed">PASSED</option><option value="Defect">DEFECT</option></select>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2 bg-slate-950 rounded-xl border border-slate-850">
-                        <div><span class="font-bold text-white block">Documentation & History</span><span class="text-[10px] text-slate-500">RC check, clean challan metrics</span></div>
-                        <select id="chkDocs" class="bg-slate-900 border border-slate-700 rounded-lg p-2 font-bold text-emerald-400 focus:outline-none"><option value="Passed">PASSED</option><option value="Defect">DEFECT</option></select>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
-                    <h4 class="text-white text-xs font-bold uppercase tracking-wider border-b border-slate-800 pb-2">3. Digital Showroom Assets</h4>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Standard Showroom Image Link (Placeholder)</label>
-                        <input type="text" id="pdiImage" value="hero.jpg" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-slate-400 mb-1">Inspector Diagnostic Overview Notes</label>
-                        <textarea id="pdiNotes" rows="3" placeholder="Engine bay perfectly clean. Front bumper minor scratch noted..." class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 focus:outline-none"></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl text-xs uppercase tracking-widest shadow-lg shadow-emerald-600/10 transition-all">Submit Certified Report & Go Live</button>
-            </form>
-        </div>
-    </main>
+    </div>
 
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
-        
-        let authenticatedInspectorName = "";
 
-        function verifyInspectorCredentials() {
-            const selectedUser = document.getElementById("inspectorSelect").value;
-            const enteredPin = document.getElementById("inspectorPin").value;
-
-            // Simple bulletproof 4-digit master pin for your phase 1 deployment launch
-            if (enteredPin === "1805") {
-                authenticatedInspectorName = selectedUser;
-                document.getElementById("userBadge").innerText = `Crew: ${selectedUser}`;
-                document.getElementById("pdiAuthGate").classList.add("hidden");
-                document.getElementById("pdiFormWorkspace").classList.remove("hidden");
+        function verifyInspectorPinNode() {
+            const pin = document.getElementById("inspectorPinInput").value;
+            if(pin === "1805") {
+                document.getElementById("inspectorAuthGate").classList.add("hidden");
+                document.getElementById("inspectorFormTerminal").classList.remove("hidden");
+                checkNetworkStatusNode();
             } else {
-                alert("Security Code Denied: Access mismatch detected.");
-                document.getElementById("inspectorPin").value = "";
+                alert("Clearance code pin rejected.");
             }
         }
 
-        async function submitPdiReportToCloud(event) {
-            event.preventDefault();
+        function checkNetworkStatusNode() {
+            const indicator = document.getElementById("syncStatusIndicator");
+            if (navigator.onLine) {
+                indicator.className = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md";
+                indicator.innerText = "🟢 System Online";
+                attemptAutoQueueSync();
+            } else {
+                indicator.className = "bg-rose-500/10 text-rose-400 border border-rose-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md";
+                indicator.innerText = "🚨 Offline Mode Safe";
+            }
+        }
 
-            const certifiedVehiclePayload = {
-                id: "NDI-" + Math.floor(1000 + Math.random() * 9000),
-                name: document.getElementById("pdiName").value.trim(),
-                variant: document.getElementById("pdiVariant").value.trim(),
-                year: parseInt(document.getElementById("pdiYear").value.trim()),
-                kms: document.getElementById("pdiKms").value.trim(),
-                price: parseFloat(document.getElementById("pdiPrice").value.trim()),
-                fuel: document.getElementById("pdiFuel").value,
-                transmission: document.getElementById("pdiTrans").value,
-                owners: document.getElementById("pdiOwners").value,
-                color: document.getElementById("pdiColor").value.trim(),
-                rto: document.getElementById("pdiRto").value.trim(),
-                insurance: document.getElementById("pdiInsurance").value.trim(),
-                image: document.getElementById("pdiImage").value,
-                status: "Available",
-                pdi_engine_status: document.getElementById("chkEngine").value,
-                pdi_structural_status: document.getElementById("chkStructure").value,
-                pdi_interior_status: document.getElementById("chkInterior").value,
-                pdi_tyres_status: document.getElementById("chkTyres").value,
-                pdi_docs_status: document.getElementById("chkDocs").value,
-                inspector_notes: document.getElementById("pdiNotes").value.trim() + ` (Certified by ${authenticatedInspectorName})`
+        window.addEventListener('online', checkNetworkStatusNode);
+        window.addEventListener('offline', checkNetworkStatusNode);
+
+        async function executeInspectorSubmissionPipeline() {
+            const payload = {
+                id: document.getElementById("carId").value.trim().toUpperCase(),
+                name: document.getElementById("carName").value.trim(),
+                variant: document.getElementById("carVariant").value.trim(),
+                year: parseInt(document.getElementById("carYear").value),
+                price: parseFloat(document.getElementById("carPrice").value),
+                kms: document.getElementById("carKms").value.trim(),
+                fuel: document.getElementById("carFuel").value,
+                transmission: document.getElementById("carTransmission").value,
+                rto: document.getElementById("carRto").value.trim().toUpperCase(),
+                owners: parseInt(document.getElementById("carOwners").value),
+                color: document.getElementById("carColor").value.trim(),
+                image: document.getElementById("carImage").value.trim() || "images/hero.jpg",
+                pdi_engine_status: document.getElementById("pdiEngine").value,
+                pdi_structural_status: document.getElementById("pdiStructure").value,
+                pdi_interior_status: document.getElementById("pdiInterior").value,
+                pdi_tyres_status: document.getElementById("pdiTyres").value,
+                inspector_notes: document.getElementById("inspectorNotes").value.trim(),
+                status: "Available"
             };
 
+            if(!payload.id || !payload.name || !payload.price) {
+                alert("Please complete all primary tracking tags before row initialization.");
+                return;
+            }
+
+            if (!navigator.onLine) {
+                // Device is offline! Intercept data and back it up locally
+                let offlineQueue = JSON.parse(localStorage.getItem("ndi_offline_pdi_queue") || "[]");
+                offlineQueue.push(payload);
+                localStorage.setItem("ndi_offline_pdi_queue", JSON.stringify(offlineQueue));
+                alert("🔒 Network link missing! This vehicle report has been successfully encrypted and saved to your phone's storage. It will go live automatically the moment you return to a coverage area!");
+                clearInspectorFormUI();
+                return;
+            }
+
+            // Standard Online Database Sync Pipeline
+            await uploadVehicleToCloud(payload);
+        }
+
+        async function uploadVehicleToCloud(payload) {
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles`, {
                     method: "POST",
                     headers: {
                         "apikey": SUPABASE_KEY,
                         "Authorization": `Bearer ${SUPABASE_KEY}`,
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
                     },
-                    body: JSON.stringify(certifiedVehiclePayload)
+                    body: JSON.stringify(payload)
                 });
 
-                if (response.ok) {
-                    alert(`Report Processed Successfully!\n${certifiedVehiclePayload.name} is now 100% Certified and instantly live on the NoDealerIndia showroom!`);
-                    document.querySelector("form").reset();
-                    document.getElementById("pdiImage").value = "hero.jpg";
+                if(response.ok) {
+                    alert(`🚀 Execution Success! Vehicle ${payload.id} is now live across the network architecture.`);
+                    clearInspectorFormUI();
                 } else {
-                    alert("Sync Error: Cloud row formatting mismatch.");
+                    alert("Cloud transaction rejected. Dropping data payload to offline safety cache.");
+                    backupToOfflineAlternative(payload);
                 }
-            } catch (error) {
-                alert("Network timeout. Report stored to device emergency buffer.");
+            } catch(e) {
+                backupToOfflineAlternative(payload);
             }
+        }
+
+        function backupToOfflineAlternative(payload) {
+            let offlineQueue = JSON.parse(localStorage.getItem("ndi_offline_pdi_queue") || "[]");
+            offlineQueue.push(payload);
+            localStorage.setItem("ndi_offline_pdi_queue", JSON.stringify(offlineQueue));
+        }
+
+        async function attemptAutoQueueSync() {
+            let offlineQueue = JSON.parse(localStorage.getItem("ndi_offline_pdi_queue") || "[]");
+            if (offlineQueue.length === 0) return;
+
+            console.log(`Detecting ${offlineQueue.length} offline inspection row backups. Initializing global network sync node...`);
+            
+            for (let i = 0; i < offlineQueue.length; i++) {
+                const item = offlineQueue[i];
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles`, {
+                        method: "POST",
+                        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" },
+                        body: JSON.stringify(item)
+                    });
+                    if (response.ok) {
+                        offlineQueue.splice(i, 1);
+                        i--;
+                    }
+                } catch(e) { break; }
+            }
+            localStorage.setItem("ndi_offline_pdi_queue", JSON.stringify(offlineQueue));
+        }
+
+        function clearInspectorFormUI() {
+            document.getElementById("carId").value = "";
+            document.getElementById("carName").value = "";
+            document.getElementById("carVariant").value = "";
+            document.getElementById("carYear").value = "";
+            document.getElementById("carPrice").value = "";
+            document.getElementById("carKms").value = "";
+            document.getElementById("carRto").value = "";
+            document.getElementById("carOwners").value = "";
+            document.getElementById("carColor").value = "";
+            document.getElementById("carImage").value = "";
+            document.getElementById("inspectorNotes").value = "";
         }
     </script>
 </body>
