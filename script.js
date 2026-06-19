@@ -1,194 +1,149 @@
-// Local Database Mock Initialization - Loaded with 2 premium placeholders to start
-const defaultCertifiedFleet = [
-    {
-        id: "NDI-1001",
-        name: "Toyota Fortuner",
-        variant: "Sigma4 4x4 Luxury",
-        year: "2021",
-        kms: "34,000",
-        price: "3650000",
-        fuel: "Diesel",
-        transmission: "Automatic",
-        owners: "1st Owner",
-        color: "Phantom Black",
-        rto: "DL-3C",
-        insurance: "Comprehensive Valid",
-        reelLink: "https://instagram.com",
-        image: "hero.jpg",
-        status: "Available"
-    },
-    {
-        id: "NDI-1002",
-        name: "Maruti Suzuki Swift",
-        variant: "VXI Premium",
-        year: "2019",
-        kms: "42,100",
-        price: "580000",
-        fuel: "Petrol",
-        transmission: "Manual",
-        owners: "2nd Owner",
-        color: "Solid White",
-        rto: "HR-26",
-        insurance: "Third Party Valid",
-        reelLink: "",
-        image: "car1.jpg",
-        status: "Available"
-    }
-];
+const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
 
-// Fallback Cache Management System
-if (!localStorage.getItem("NODEALER_INVENTORY")) {
-    localStorage.setItem("NODEALER_INVENTORY", JSON.stringify(defaultCertifiedFleet));
+// Global cache storage to prevent unnecessary API over-fetching
+let localFleetState = [];
+
+async function initializeShowroomEngine() {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&order=created_at.desc`, {
+            headers: {
+                "apikey": SUPABASE_KEY,
+                "Authorization": `Bearer ${SUPABASE_KEY}`
+            }
+        });
+        localFleetState = await response.json();
+        renderDesktopGridCards(localFleetState);
+    } catch (e) {
+        console.error("Showroom engine failed to boot sync nodes:", e);
+    }
 }
 
-let activeInventoryState = JSON.parse(localStorage.getItem("NODEALER_INVENTORY"));
-
-// Render Controller Matrix
-function drawShowroomCatalog(dataset) {
-    const mainGrid = document.getElementById("fleetPlacementGrid");
-    if (!mainGrid) return;
-    mainGrid.innerHTML = "";
+function renderDesktopGridCards(dataset) {
+    const container = document.getElementById("fleetPlacementGrid");
+    if (!container) return; // Prevents errors if script runs on pages without this grid
+    container.innerHTML = "";
 
     if (dataset.length === 0) {
-        mainGrid.innerHTML = `
-            <div class="col-span-full text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200 p-8">
-                <p class="text-slate-400 font-medium text-sm">No cars match your search tags right now.</p>
-                <button onclick="resetFiltersUI()" class="mt-2 text-xs font-bold text-indigo-600 hover:underline">Show All Stock</button>
-            </div>`;
+        container.innerHTML = `<div class="col-span-1 md:col-span-3 text-center py-12 text-slate-400 font-semibold text-sm">No certified vehicles found matching the current search criteria.</div>`;
         return;
     }
 
     dataset.forEach(car => {
         const isReserved = car.status === "Reserved";
-        const showroomCardHtml = `
-            <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-200 flex flex-col group relative">
-                <div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">
-                    <span class="bg-white/90 backdrop-blur-sm text-slate-900 text-[10px] font-bold tracking-wider px-2.5 py-1 rounded-md shadow-sm border border-slate-100">100% Certified</span>
-                    ${car.reelLink ? `<span class="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-[9px] font-extrabold tracking-widest px-2.5 py-1 rounded-md shadow-md uppercase">As Seen on Reel</span>` : ""}
-                </div>
-                
-                ${isReserved ? `<div class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] z-20 flex items-center justify-center"><span class="bg-amber-500 text-white text-xs font-black tracking-widest px-4 py-2 rounded-xl shadow-lg uppercase transform -rotate-6 border-2 border-white">Reserved Slot Locked</span></div>` : ""}
-
-                <div class="bg-slate-100 aspect-[16/10] relative overflow-hidden">
-                    <img src="${car.image}" alt="${car.name}" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300" onerror="this.src='https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600'">
+        
+        container.innerHTML += `
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all flex flex-col relative group">
+                <!-- Premium Certification Tag Badge -->
+                <div class="absolute top-4 left-4 z-10 flex flex-col gap-1 items-start">
+                    <span class="bg-emerald-600 text-white text-[9px] font-black tracking-wider px-2.5 py-1 rounded-lg uppercase shadow-sm flex items-center gap-1">
+                        ✓ 140-Point Certified
+                    </span>
                 </div>
 
-                <div class="p-6 flex flex-col flex-grow space-y-4">
+                <!-- Reserved Shield Lock Overlay -->
+                ${isReserved ? `
+                <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] z-20 flex items-center justify-center p-4 text-center">
+                    <span class="bg-amber-500 text-slate-950 text-xs font-black tracking-widest px-4 py-2 rounded-xl uppercase shadow-2xl border border-white/20">
+                        🔒 Holding Token Secured
+                    </span>
+                </div>
+                ` : ''}
+
+                <!-- Media Section Frame -->
+                <div class="aspect-[16/10] w-full bg-gray-100 overflow-hidden relative">
+                    <img src="${car.image}" alt="${car.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='car1.jpg'">
+                </div>
+
+                <!-- Core Information Layout -->
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">${car.year} Model • ${car.rto} RTO</span>
-                        <h3 class="text-xl font-bold text-slate-900 tracking-tight mt-0.5">${car.name}</h3>
-                        <p class="text-xs font-medium text-slate-400 mt-0.5">${car.variant}</p>
-                    </div>
-
-                    <div class="flex flex-wrap gap-1 text-slate-600 font-semibold text-[11px]">
-                        <span class="bg-slate-100 px-2.5 py-1 rounded-md">${car.kms} KM</span>
-                        <span class="bg-slate-100 px-2.5 py-1 rounded-md">${car.fuel}</span>
-                        <span class="bg-slate-100 px-2.5 py-1 rounded-md">${car.transmission}</span>
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-50 flex items-center justify-between mt-auto">
-                        <div>
-                            <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider">No-Dealer Cost</span>
-                            <span class="text-xl font-black text-slate-900">₹${formatIndianCurrency(car.price)}</span>
+                        <div class="flex items-center justify-between text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                            <span>${car.year} Model</span>
+                            <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-mono">${car.rto} RTO</span>
                         </div>
-                        <button onclick="launchVehicleDetailsModal('${car.id}')" class="bg-slate-900 text-white hover:bg-indigo-600 px-4 py-2 rounded-xl font-bold text-xs transition-colors shadow-sm">
-                            View Specs
-                        </button>
+                        <h3 class="text-xl font-bold text-slate-900 tracking-tight mt-1">${car.name}</h3>
+                        <p class="text-xs text-gray-500 font-medium mt-0.5">${car.variant}</p>
+                    </div>
+
+                    <!-- Micro Specification Blueprint Matrix -->
+                    <div class="grid grid-cols-3 gap-2 bg-gray-50 p-2.5 rounded-xl border border-gray-100 text-center text-[10px] font-bold text-gray-500">
+                        <div><span class="block text-gray-400 text-[8px] uppercase">Odometer</span><span class="text-gray-800 text-xs">${formatKms(car.kms)}</span></div>
+                        <div><span class="block text-gray-400 text-[8px] uppercase">Fuel</span><span class="text-gray-800 text-xs">${car.fuel}</span></div>
+                        <div><span class="block text-gray-400 text-[8px] uppercase">Gearbox</span><span class="text-gray-800 text-xs">${car.transmission}</span></div>
+                    </div>
+
+                    <!-- Pricing & Route Action Anchor -->
+                    <div class="pt-2 flex items-center justify-between border-t border-gray-100">
+                        <div>
+                            <span class="text-[9px] text-gray-400 block font-bold uppercase tracking-wider">Fixed Price</span>
+                            <span class="text-xl font-black text-slate-950">₹${formatPrice(car.price)}</span>
+                        </div>
+                        <a href="vehicle.html?id=${car.id}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-md shadow-indigo-100 transition-all">
+                            View Inspection Report →
+                        </a>
                     </div>
                 </div>
-            </div>`;
-        mainGrid.insertAdjacentHTML('beforeend', showroomCardHtml);
+            </div>
+        `;
     });
 }
 
-function formatIndianCurrency(priceStr) {
-    let num = parseFloat(priceStr);
-    if (isNaN(num)) return priceStr;
-    if (num >= 100000) {
-        return (num / 100000).toFixed(2) + " Lakh";
-    }
-    return num.toLocaleString('en-IN');
-}
-
+// Multi-Axis Pipeline Engine
 function runFilterPipeline() {
-    const selectedTrans = document.getElementById("uiFilterTransmission").value;
+    const textSearchQuery = document.getElementById("uiSearchBar").value.toLowerCase().trim();
+    const selectedTransmission = document.getElementById("uiFilterTransmission").value;
     const selectedFuel = document.getElementById("uiFilterFuel").value;
+    const selectedPriceOrder = document.getElementById("uiFilterPriceSort").value;
 
-    const queryResult = activeInventoryState.filter(car => {
-        const transMatch = (selectedTrans === "ALL" || car.transmission === selectedTrans);
-        const fuelMatch = (selectedFuel === "ALL" || car.fuel === selectedFuel);
-        return transMatch && fuelMatch;
-    });
+    let processedDataset = [...localFleetState];
 
-    drawShowroomCatalog(queryResult);
+    // Axis 1: Live Text Input Filter (Matches Name, Variant, or Year)
+    if (textSearchQuery !== "") {
+        processedDataset = processedDataset.filter(car => 
+            car.name.toLowerCase().includes(textSearchQuery) || 
+            car.variant.toLowerCase().includes(textSearchQuery) ||
+            car.year.toString().includes(textSearchQuery)
+        );
+    }
+
+    // Axis 2: Transmission Logic Dropdown
+    if (selectedTransmission !== "ALL") {
+        processedDataset = processedDataset.filter(car => car.transmission === selectedTransmission);
+    }
+
+    // Axis 3: Fuel Type Logic Dropdown
+    if (selectedFuel !== "ALL") {
+        processedDataset = processedDataset.filter(car => car.fuel === selectedFuel);
+    }
+
+    // Axis 4: Mathematical Sorting Matrix
+    if (selectedPriceOrder === "LOW_TO_HIGH") {
+        processedDataset.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    } else if (selectedPriceOrder === "HIGH_TO_LOW") {
+        processedDataset.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    }
+
+    renderDesktopGridCards(processedDataset);
 }
 
 function resetFiltersUI() {
+    document.getElementById("uiSearchBar").value = "";
     document.getElementById("uiFilterTransmission").value = "ALL";
     document.getElementById("uiFilterFuel").value = "ALL";
-    drawShowroomCatalog(activeInventoryState);
+    document.getElementById("uiFilterPriceSort").value = "DEFAULT";
+    renderDesktopGridCards(localFleetState);
 }
 
-function launchVehicleDetailsModal(targetId) {
-    const matchedCar = activeInventoryState.find(c => car.id === targetId || c.id === targetId);
-    if (!matchedCar) return;
-
-    const modalWindow = document.getElementById("premiumDetailModal");
-    const targetDiv = document.getElementById("modalDynamicTarget");
-    const isCarReserved = matchedCar.status === "Reserved";
-
-    targetDiv.innerHTML = `
-        <div class="p-6 space-y-6 text-gray-900">
-            <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-100 flex items-center gap-3">
-                <div class="bg-emerald-500 text-white p-2 rounded-xl">✓</div>
-                <div>
-                    <h4 class="font-bold text-emerald-900 text-sm">100% Certified & Inspected by NoDealerIndia</h4>
-                    <p class="text-xs text-emerald-700 font-medium">Chassis structure, engine compression, and mechanics verified passed.</p>
-                </div>
-            </div>
-
-            <h2 class="text-2xl font-black">${matchedCar.name} <span class="text-sm font-normal text-gray-500">(${matchedCar.variant})</span></h2>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
-                <div class="bg-slate-50 p-3 rounded-xl"><span class="block text-slate-400 font-bold uppercase text-[9px]">Odometer</span><span class="text-sm font-bold">${matchedCar.kms} KMs</span></div>
-                <div class="bg-slate-50 p-3 rounded-xl"><span class="block text-slate-400 font-bold uppercase text-[9px]">Fuel Setup</span><span class="text-sm font-bold">${matchedCar.fuel}</span></div>
-                <div class="bg-slate-50 p-3 rounded-xl"><span class="block text-slate-400 font-bold uppercase text-[9px]">Gearbox</span><span class="text-sm font-bold">${matchedCar.transmission}</span></div>
-                <div class="bg-slate-50 p-3 rounded-xl"><span class="block text-slate-400 font-bold uppercase text-[9px]">Ownership</span><span class="text-sm font-bold">${matchedCar.owners}</span></div>
-                <div class="bg-slate-50 p-3 rounded-xl"><span class="block text-slate-400 font-bold uppercase text-[9px]">Color</span><span class="text-sm font-bold">${matchedCar.color}</span></div>
-                <div class="bg-slate-50 p-3 rounded-xl"><span class="block text-slate-400 font-bold uppercase text-[9px]">RTO</span><span class="text-sm font-bold">${matchedCar.rto}</span></div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                <a href="https://wa.me/919999999999?text=Hi,%20I'm%20interested%20in%20the%20${encodeURIComponent(matchedCar.name)}%20(${matchedCar.id})" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-center text-sm transition-all">
-                    Discuss on WhatsApp
-                </a>
-                <button onclick="triggerPhonePeLockPipe('${matchedCar.id}')" ${isCarReserved ? "disabled" : ""} class="flex-1 ${isCarReserved ? "bg-slate-300 text-slate-500 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700 text-white"} font-bold py-3.5 rounded-xl text-sm transition-all">
-                    ${isCarReserved ? "Slot Already Reserved" : "Reserve via PhonePe (₹4,999)"}
-                </button>
-            </div>
-        </div>`;
-
-    modalWindow.classList.remove("hidden");
+function formatPrice(val) {
+    let num = parseFloat(val); if (isNaN(num)) return val;
+    if (num >= 100000) return (num / 100000).toFixed(2) + " Lakh";
+    return num.toLocaleString('en-IN');
 }
 
-function closeDetailedModal() {
-    document.getElementById("premiumDetailModal").classList.add("hidden");
+function formatKms(val) {
+    let num = parseFloat(val); if (isNaN(num)) return val;
+    return (num / 1000).toFixed(0) + "K";
 }
 
-function triggerPhonePeLockPipe(vehicleId) {
-    alert(`[PhonePe Gateway Loading...]\nConnecting to secure PhonePe Business Network.`);
-    const paymentCompletedSuccessfully = confirm(`Authorize reservation transaction code for ₹4,999 to lock ${vehicleId}?`);
-    
-    if (paymentCompletedSuccessfully) {
-        activeInventoryState = activeInventoryState.map(car => {
-            if (car.id === vehicleId) { return { ...car, status: "Reserved" }; }
-            return car;
-        });
-        localStorage.setItem("NODEALER_INVENTORY", JSON.stringify(activeInventoryState));
-        alert(`Success! Payment Received.\nStock Slot ${vehicleId} is now locked. Check your email/admin dashboard.`);
-        closeDetailedModal();
-        drawShowroomCatalog(activeInventoryState);
-    }
-}
-
-window.addEventListener("DOMContentLoaded", () => { drawShowroomCatalog(activeInventoryState); });
+window.addEventListener("DOMContentLoaded", initializeShowroomEngine);
