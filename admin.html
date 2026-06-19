@@ -3,177 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoDealerIndia | Master Cockpit</title>
+    <title>NoDealerIndia | Fleet Control Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen pb-12">
+<body class="bg-slate-950 text-slate-100 min-h-screen pb-24">
 
-    <!-- Admin Nav -->
-    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <h1 class="text-base font-black tracking-tight uppercase">NDI Command Console</h1>
-            <span class="bg-indigo-500/10 text-indigo-400 text-[10px] font-bold px-2.5 py-1 rounded-md border border-indigo-500/20">Secure Node</span>
+    <!-- Admin Header -->
+    <nav class="bg-slate-900 border-b border-slate-800 px-6 py-5 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-black text-white">NDI // <span class="text-indigo-500">Ops Console</span></span>
+                <span class="text-[10px] bg-indigo-500/10 text-indigo-400 font-bold px-2 py-0.5 rounded border border-indigo-500/20 uppercase tracking-widest">Live Inventory Node</span>
+            </div>
+            <a href="showroom.html" class="text-xs font-bold text-slate-400 hover:text-white transition-colors">← Exit To Showroom</a>
         </div>
-        <div class="flex gap-2 text-xs font-bold">
-            <button onclick="switchAdminTab('inventory')" id="tabBtn-inventory" class="bg-indigo-600 text-white px-4 py-2 rounded-xl transition-all">Manage Vehicles</button>
-            <button onclick="switchAdminTab('leads')" id="tabBtn-leads" class="bg-slate-800 text-slate-400 px-4 py-2 rounded-xl transition-all flex items-center gap-1.5">
-                Buyer Leads <span id="leadCounterBadge" class="bg-indigo-500 text-white text-[10px] px-1.5 py-0.5 rounded-md">0</span>
-            </button>
-        </div>
-    </header>
+    </nav>
 
-    <main class="max-w-6xl mx-auto px-4 pt-8">
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 space-y-12">
         
-        <!-- TAB 1: VEHICLE MANAGEMENT -->
-        <div id="adminTab-inventory" class="space-y-6">
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-                <h2 class="text-lg font-bold text-white mb-4">Quick Stock Control Panel</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs font-semibold">
-                        <thead>
-                            <tr class="border-b border-slate-800 text-slate-400 uppercase tracking-wider">
-                                <th class="pb-3 pl-2">Vehicle ID</th>
-                                <th class="pb-3">Name</th>
-                                <th class="pb-3">Price</th>
-                                <th class="pb-3">Status</th>
-                                <th class="pb-3 text-right pr-2">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminInventoryTableBody" class="divide-y divide-slate-850">
-                            <!-- Injected dynamically -->
-                        </tbody>
-                    </table>
-                </div>
+        <!-- Fleet Inventory Control Section -->
+        <section class="space-y-6">
+            <div>
+                <h2 class="text-xl font-bold tracking-tight text-white">Active Inventory Manager</h2>
+                <p class="text-xs text-slate-400 mt-1">Direct API overrides for modifying specifications or purging vehicle listing blocks instantly.</p>
             </div>
-        </div>
 
-        <!-- TAB 2: LIVE BUYER LEADS COLLECTED -->
-        <div id="adminTab-leads" class="space-y-6 hidden">
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <div>
-                        <h2 class="text-lg font-bold text-white">Captured Buyer Intent Leads</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">These users dropped their mobile numbers to unlock your PDI reports.</p>
-                    </div>
-                    <button onclick="fetchLeadsFromCloud()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">🔄 Refresh Leads</button>
-                </div>
+            <!-- Inventory Grid System -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs font-semibold">
+                    <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-slate-800 text-slate-400 uppercase tracking-wider">
-                                <th class="pb-3 pl-2">Timestamp</th>
-                                <th class="pb-3">Customer Phone</th>
-                                <th class="pb-3">Car ID Reference</th>
-                                <th class="pb-3 text-right pr-2">Instant Action</th>
+                            <tr class="border-b border-slate-800 bg-slate-950/50 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                <th class="p-4">Vehicle Details</th>
+                                <th class="p-4">Current Price (₹)</th>
+                                <th class="p-4">Operational Status</th>
+                                <th class="p-4 text-right">Terminal Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="adminLeadsTableBody" class="divide-y divide-slate-850">
-                            <!-- Injected dynamically -->
+                        <tbody id="adminInventoryTableBody" class="divide-y divide-slate-800 text-xs font-semibold text-slate-300">
+                            <!-- Injected by Javascript Engine -->
+                            <tr>
+                                <td colspan="4" class="p-8 text-center text-slate-500 animate-pulse">Initializing cloud inventory sync hook...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
+        </section>
 
     </main>
 
+    <!-- Core Admin Logic Engine -->
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
 
-        async function initAdminDashboard() {
-            await fetchInventoryFromCloud();
-            await fetchLeadsFromCloud();
-        }
+        // Initialize and fetch data on load
+        async function syncAdminFleetInventory() {
+            const tableBody = document.getElementById("adminInventoryTableBody");
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&order=created_at.desc`, {
+                    headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
+                });
+                const fleet = await response.json();
+                
+                if (fleet.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-500">Zero active vehicles found in database pipeline.</td></tr>`;
+                    return;
+                }
 
-        async function fetchInventoryFromCloud() {
-            const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&order=created_at.desc`, {
-                headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
-            });
-            const data = await res.json();
-            const tbody = document.getElementById("adminInventoryTableBody");
-            tbody.innerHTML = "";
-            
-            data.forEach(car => {
-                const tr = `
-                    <tr class="text-slate-300 hover:bg-slate-900/50">
-                        <td class="py-4 pl-2 font-mono text-indigo-400">${car.id}</td>
-                        <td class="py-4 text-white font-bold">${car.name} <span class="text-[10px] font-medium text-slate-500">(${car.variant})</span></td>
-                        <td class="py-4">₹${(car.price/100000).toFixed(2)} Lakh</td>
-                        <td class="py-4">
-                            <span class="px-2 py-1 rounded text-[10px] font-black uppercase ${car.status === 'Reserved' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20':'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}">
-                                ${car.status}
-                            </span>
-                        </td>
-                        <td class="py-4 text-right pr-2">
-                            <button onclick="toggleCarStatus('${car.id}', '${car.status}')" class="bg-slate-800 hover:bg-slate-700 text-[11px] font-bold px-2.5 py-1 rounded-md text-white transition-colors">
-                                Toggle Status
-                            </button>
-                        </td>
-                    </tr>`;
-                tbody.insertAdjacentHTML('beforeend', tr);
-            });
-        }
-
-        async function fetchLeadsFromCloud() {
-            const res = await fetch(`${SUPABASE_URL}/rest/v1/buyer_leads?select=*&order=created_at.desc`, {
-                headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
-            });
-            const leads = await res.json();
-            document.getElementById("leadCounterBadge").innerText = leads.length;
-            
-            const tbody = document.getElementById("adminLeadsTableBody");
-            tbody.innerHTML = "";
-
-            if(leads.length === 0) {
-                tbody.innerHTML = `<tr><td col-span="4" class="text-center py-8 text-slate-500">No client phone leads captured yet.</td></tr>`;
-                return;
+                tableBody.innerHTML = "";
+                fleet.forEach(car => {
+                    tableBody.innerHTML += `
+                        <tr class="hover:bg-slate-850/40 transition-colors" id="row-${car.id}">
+                            <!-- Vehicle Frame Details -->
+                            <td class="p-4 flex items-center gap-4">
+                                <img src="${car.image}" class="w-14 h-10 object-cover rounded-lg border border-slate-700 bg-slate-950" onerror="this.src='car1.jpg'">
+                                <div>
+                                    <p class="font-bold text-white text-sm">${car.name}</p>
+                                    <p class="text-[10px] text-slate-400">${car.year} • ${car.variant} • ${car.kms} KM</p>
+                                </div>
+                            </td>
+                            
+                            <!-- Inline Price Modifier Input -->
+                            <td class="p-4">
+                                <div class="flex items-center gap-2 max-w-[150px]">
+                                    <span class="text-slate-500 font-bold">₹</span>
+                                    <input type="number" id="price-input-${car.id}" value="${car.price}" 
+                                        class="w-full bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 font-mono text-white text-xs focus:outline-none focus:border-indigo-500">
+                                </div>
+                            </td>
+                            
+                            <!-- Status Selector Modification Terminal -->
+                            <td class="p-4">
+                                <select id="status-select-${car.id}" 
+                                    class="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                    <option value="Available" ${car.status === 'Available' ? 'selected' : ''}>Available</option>
+                                    <option value="Reserved" ${car.status === 'Reserved' ? 'selected' : ''}>Reserved</option>
+                                </select>
+                            </td>
+                            
+                            <!-- Destructive Actions Matrix -->
+                            <td class="p-4 text-right space-x-2">
+                                <button onclick="commitAssetModifications('${car.id}')" 
+                                    class="bg-emerald-600/10 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-500/20 rounded-lg px-3 py-1.5 font-bold transition-all">
+                                    Save Updates
+                                </button>
+                                <button onclick="purgeVehicleListing('${car.id}', '${car.name}')" 
+                                    class="bg-rose-600/10 hover:bg-rose-600 text-rose-400 hover:text-white border border-rose-500/20 rounded-lg px-3 py-1.5 font-bold transition-all">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                console.error(err);
+                tableBody.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-rose-400">Database Sync Pipeline Connection Failure.</td></tr>`;
             }
-
-            leads.forEach(lead => {
-                const timestamp = new Date(lead.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) + " | " + new Date(lead.created_at).toLocaleDateString();
-                const directLink = `https://wa.me/${lead.phone_number.replace(/[^0-9]/g, '')}`;
-                const tr = `
-                    <tr class="text-slate-300 hover:bg-slate-900/50">
-                        <td class="py-4 pl-2 text-slate-500">${timestamp}</td>
-                        <td class="py-4 text-white font-bold text-sm">${lead.phone_number}</td>
-                        <td class="py-4 font-mono text-indigo-400 uppercase">${lead.vehicle_interest_id || 'General'}</td>
-                        <td class="py-4 text-right pr-2">
-                            <a href="${directLink}" target="_blank" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-[11px] font-bold px-3 py-1 rounded-md text-white shadow-sm transition-colors">
-                                Call on WhatsApp
-                            </a>
-                        </td>
-                    </tr>`;
-                tbody.insertAdjacentHTML('beforeend', tr);
-            });
         }
 
-        async function toggleCarStatus(id, currentStatus) {
-            const nextStatus = currentStatus === "Available" ? "Reserved" : "Available";
-            await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${id}`, {
-                method: "PATCH",
-                headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" },
-                body: JSON.stringify({ status: nextStatus })
-            });
-            initAdminDashboard();
+        // Action 1: Commit Price/Status Updates Live to Cloud
+        async function commitAssetModifications(id) {
+            const updatedPrice = document.getElementById(`price-input-${id}`).value;
+            const updatedStatus = document.getElementById(`status-select-${id}`).value;
+
+            if(!updatedPrice) { alert("Price target matrix cannot be left blank."); return; }
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${id}`, {
+                    method: "PATCH",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
+                    },
+                    body: JSON.stringify({
+                        price: parseFloat(updatedPrice),
+                        status: updatedStatus
+                    })
+                });
+
+                if (response.ok) {
+                    alert("✅ Asset matrix updated successfully inside cloud nodes.");
+                    syncAdminFleetInventory();
+                } else {
+                    alert("❌ Operation rejected by database ledger rules.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Critical API Transmission Error.");
+            }
         }
 
-        function switchAdminTab(targetTab) {
-            document.getElementById("adminTab-inventory").classList.add("hidden");
-            document.getElementById("adminTab-leads").classList.add("hidden");
-            document.getElementById("tabBtn-inventory").classList.remove("bg-indigo-600", "text-white");
-            document.getElementById("tabBtn-inventory").classList.add("bg-slate-800", "text-slate-400");
-            document.getElementById("tabBtn-leads").classList.remove("bg-indigo-600", "text-white");
-            document.getElementById("tabBtn-leads").classList.add("bg-slate-800", "text-slate-400");
+        // Action 2: Completely Purge Listing from Database
+        async function purgeVehicleListing(id, vehicleName) {
+            const doubleCheckFlag = confirm(`⚠️ DESTRUCTIVE ACTION WARNING:\nAre you absolutely sure you want to permanently erase the ${vehicleName} from the live marketplace matrix? This cannot be undone.`);
+            
+            if (!doubleCheckFlag) return;
 
-            document.getElementById(`adminTab-${targetTab}`).classList.remove("hidden");
-            document.getElementById(`tabBtn-${targetTab}`).classList.remove("bg-slate-800", "text-slate-400");
-            document.getElementById(`tabBtn-${targetTab}`).classList.add("bg-indigo-600", "text-white");
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Prefer": "return=minimal"
+                    }
+                });
+
+                if (response.ok) {
+                    // Instantly clean up UI row seamlessly
+                    const UIrow = document.getElementById(`row-${id}`);
+                    if(UIrow) UIrow.remove();
+                    alert("🗑️ Listing purged completely from network infrastructure.");
+                } else {
+                    alert("❌ Deletion process rejected by operational rules.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Critical Deletion Pipeline Interface Interruption.");
+            }
         }
 
-        window.addEventListener("DOMContentLoaded", initAdminDashboard);
+        // Initialize execution routines on DOM wake
+        window.addEventListener("DOMContentLoaded", syncAdminFleetInventory);
     </script>
 </body>
 </html>
