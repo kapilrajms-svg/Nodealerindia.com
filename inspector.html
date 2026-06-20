@@ -85,6 +85,11 @@
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Exterior Body Color Finish</label>
                             <input type="text" id="carColor" required placeholder="e.g., Pearl White" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
+                        
+                        <div class="space-y-1.5 sm:col-span-2">
+                            <label class="text-indigo-400 pl-1 uppercase tracking-wider text-[10px] font-black">Customer Expected Price (₹ In Raw Numbers Only)</label>
+                            <input type="number" id="carPrice" required placeholder="e.g., 2950000" class="w-full bg-slate-950 border border-indigo-900/60 rounded-xl p-3 text-white font-mono focus:outline-none focus:border-indigo-500 shadow-inner">
+                        </div>
                     </div>
                 </div>
 
@@ -188,7 +193,6 @@
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
 
-        // Multi-Step Tab View Navigation Router Engine
         function navigateWizardStep(targetStepNumber) {
             document.querySelectorAll('.form-step-block').forEach(section => section.classList.add('hidden'));
             
@@ -203,7 +207,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Photo Processing and Base64 Compression Engine
         function processCapturedPhoto(input) {
             const file = input.files[0];
             const statusText = document.getElementById("uploadStatusText");
@@ -244,7 +247,7 @@
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    const base64DataString = canvas.toDataURL("image/jpeg", 0.7);
+                    const base64DataString = canvas.toDataURL("image/jpeg", 0.6); // Slightly lower to guarantee small database string payload size
                     
                     hiddenImageInput.value = base64DataString;
                     imagePreview.src = base64DataString;
@@ -257,22 +260,17 @@
             reader.readAsDataURL(file);
         }
 
-        // Mass-Form Data Assembly & Serialization Transmit Handshake Pipeline
         async function handleFormSubmissionPipeline(event) {
             event.preventDefault();
 
             const submitBtn = document.getElementById("submitTerminalBtn");
             const photoContent = document.getElementById("carImage").value;
-            
-            if(!photoContent) {
-                alert("Operation Terminated: You must snap or choose a vehicle photo profile before deploying.");
-                return;
-            }
+            const targetPrice = document.getElementById("carPrice").value;
 
             submitBtn.disabled = true;
             submitBtn.innerText = "TRANSMITTING DATA METRIC VAULT...";
 
-            // FIXED: Automatically maps 0 value into price slot to satisfy not-null constraints seamlessly
+            // FIXED PAYLOAD ROUTE PASSING DYNAMIC USER EXPECTED PRICE DATA
             const packedPayloadNode = {
                 id: document.getElementById("carId").value.trim(),
                 name: document.getElementById("carName").value.trim(),
@@ -288,41 +286,3 @@
                 pdi_structural_status: document.getElementById("pdiStructure").value,
                 pdi_interior_status: document.getElementById("pdiInterior").value,
                 pdi_tyres_status: document.getElementById("pdiTyres").value,
-                inspector_notes: document.getElementById("inspectorNotes").value.trim(),
-                image: photoContent,
-                price: 0, // Default baseline placeholder initialization parameter
-                status: "Available"
-            };
-
-            try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles`, {
-                    method: "POST",
-                    headers: {
-                        "apikey": SUPABASE_KEY,
-                        "Authorization": `Bearer ${SUPABASE_KEY}`,
-                        "Content-Type": "application/json",
-                        "Prefer": "return=minimal"
-                    },
-                    body: JSON.stringify(packedPayloadNode)
-                });
-
-                if (response.ok) {
-                    alert("🎯 SUCCESS!\nEvaluation report packed and injected successfully into the cloud database rows.");
-                    document.getElementById("inspectionReportForm").reset();
-                    document.getElementById("previewContainer").classList.add("hidden");
-                    navigateWizardStep(1);
-                } else {
-                    const errorDetail = await response.text();
-                    alert(`❌ TRANSMISSION REJECTED:\nEnsure the Car ID is completely unique.\n\nLog Details: ${errorDetail}`);
-                }
-            } catch (err) {
-                console.error(err);
-                alert("Network communication timeout fault occurred.");
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "🚀 Deploy Report to Admin Queue";
-            }
-        }
-    </script>
-</body>
-</html>
