@@ -3,147 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoDealerIndia | Fleet PDI Node</title>
+    <title>NDI // Field Evaluation Console</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .step-pill-active { background-color: #4f46e5; color: #ffffff; border-color: #4f46e5; }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen p-4 pb-12">
+<body class="bg-slate-950 text-slate-300 min-h-screen pb-24">
 
-    <!-- Auth Protection Node Shield -->
-    <div id="inspectorAuthGate" class="max-w-sm mx-auto mt-20 bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
-        <div class="text-center space-y-1">
-            <h2 class="text-lg font-black text-white">Field Inspector Node</h2>
-            <p class="text-xs text-slate-400">Enter secure operational pin clearance code</p>
+    <nav class="bg-slate-900 border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-lg font-black text-white">NDI // <span class="text-indigo-400">Inspector Node</span></span>
+                <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-widest">Field Active</span>
+            </div>
+            <span class="text-xs text-slate-500 font-bold" id="liveClockDisplay">June 2026 Terminal</span>
         </div>
-        <input type="password" id="inspectorPinInput" placeholder="••••" maxlength="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-center font-bold tracking-widest text-white text-lg focus:outline-none focus:border-indigo-500">
-        <button onclick="verifyInspectorPinNode()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider">Authorize Terminal</button>
-    </div>
+    </nav>
 
-    <!-- Active Field Form Interface -->
-    <div id="inspectorFormTerminal" class="max-w-md mx-auto space-y-6 hidden">
-        <header class="flex items-center justify-between bg-slate-900 border border-slate-800 p-4 rounded-2xl">
-            <div>
-                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Agent Node</span>
-                <h3 class="text-sm font-black text-white">Kapil Raj | Active</h3>
-            </div>
-            <!-- Sync Indicator Status Tag -->
-            <div id="syncStatusIndicator" class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md">
-                🟢 System Online
-            </div>
-        </header>
+    <main class="max-w-4xl mx-auto px-4 pt-8">
+        
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-8 flex items-center justify-between text-xs font-bold shadow-xl">
+            <div id="pill-step1" class="step-pill-active border border-slate-700 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1">1. Vehicle Basics</div>
+            <div id="pill-step2" class="bg-slate-950 text-slate-500 border border-slate-900 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1">2. 140-Pt Checklist</div>
+            <div id="pill-step3" class="bg-slate-950 text-slate-500 border border-slate-900 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1">3. Media Profiles</div>
+        </div>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-4">
-            <h3 class="text-sm font-black text-white tracking-wide uppercase border-b border-slate-800 pb-2">Vehicle Core Ledger</h3>
+        <form id="inspectionReportForm" class="space-y-6" onsubmit="handleFormSubmissionPipeline(event)">
             
-            <div class="grid grid-cols-2 gap-3 text-xs font-semibold">
-                <div><label class="text-slate-400 block mb-1">Unique Vehicle Reference ID</label><input type="text" id="carId" placeholder="NDI-4821" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none uppercase"></div>
-                <div><label class="text-slate-400 block mb-1">Standard Name</label><input type="text" id="carName" placeholder="Toyota Fortuner" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-                <div><label class="text-slate-400 block mb-1">Variant Level</label><input type="text" id="carVariant" placeholder="Sigma 4 Diesel Automatic" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-                <div><label class="text-slate-400 block mb-1">Manufacturing Year</label><input type="number" id="carYear" placeholder="2022" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-                <div><label class="text-slate-400 block mb-1">Direct Outflow Price (INR)</label><input type="number" id="carPrice" placeholder="3400000" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-                <div><label class="text-slate-400 block mb-1">Odometer KMs Log</label><input type="text" id="carKms" placeholder="42,000" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-                <div><label class="text-slate-400 block mb-1">Fuel Setup</label><select id="carFuel" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"><option value="Diesel">Diesel</option><option value="Petrol">Petrol</option></select></div>
-                <div><label class="text-slate-400 block mb-1">Transmission System</label><select id="carTransmission" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"><option value="Automatic">Automatic</option><option value="Manual">Manual</option></select></div>
-                <div><label class="text-slate-400 block mb-1">RTO Registration</label><input type="text" id="carRto" placeholder="HR26" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none uppercase"></div>
-                <div><label class="text-slate-400 block mb-1">Owner Count Log</label><input type="number" id="carOwners" placeholder="1" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-                <div><label class="text-slate-400 block mb-1">Paint Work Color</label><input type="text" id="carColor" placeholder="Attitude Black" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-                <div><label class="text-slate-400 block mb-1">Image CDN File Path</label><input type="text" id="carImage" placeholder="images/fortuner.jpg" class="w-full bg-slate-950 border border-slate-850 rounded-xl p-3 text-white focus:outline-none"></div>
-            </div>
+            <div id="formSection-step1" class="form-step-block space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                    <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Identity Parameters Registry</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Vehicle Custom unique ID (e.g., NDI-T505)</label>
+                            <input type="text" id="carId" required placeholder="Must match target unique string" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Make & Model Name</label>
+                            <input type="text" id="carName" required placeholder="e.g., Toyota Fortuner" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Trim Variant Details</label>
+                            <input type="text" id="carVariant" required placeholder="e.g., Sigma Diesel AT" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Manufacturing Year</label>
+                            <input type="number" id="carYear" required placeholder="e.g., 2023" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Odometer Log (KMs Run)</label>
+                            <input type="number" id="carKms" required placeholder="e.g., 31000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Registered RTO Location</label>
+                            <input type="text" id="carRto" required placeholder="e.g., HR26" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Fuel Engine Type</label>
+                            <select id="carFuel" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                <option value="Diesel">Diesel</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="CNG">CNG / Hybrid</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Transmission Box Setup</label>
+                            <select id="carTransmission" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Ownership Tier</label>
+                            <input type="number" id="carOwners" required placeholder="e.g., 1" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Exterior Body Color Finish</label>
+                            <input type="text" id="carColor" required placeholder="e.g., Pearl White" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                    </div>
+                </div>
 
-            <div class="pt-2 space-y-3">
-                <h3 class="text-sm font-black text-white tracking-wide uppercase border-b border-slate-800 pb-1">140-Point Inspection Toggle Array</h3>
-                <div class="grid grid-cols-2 gap-2 text-xs font-bold">
-                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>⚙️ Engine Block</span><select id="pdiEngine" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Attention Needed">ALERT</option></select></div>
-                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>🛡️ Structural Frame</span><select id="pdiStructure" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Repainted Panel">ALERT</option></select></div>
-                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>🛋️ Cabin Electricals</span><select id="pdiInterior" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Alert Logged">ALERT</option></select></div>
-                    <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-xl border border-slate-850"><span>⭕ Tires & Alloys</span><select id="pdiTyres" class="bg-slate-900 border border-slate-800 text-emerald-400 rounded p-1"><option value="Passed">PASSED</option><option value="Replace Soon">ALERT</option></select></div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="navigateWizardStep(2)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-600/10 uppercase tracking-wider cursor-pointer">
+                        Proceed to 140-Point Checklist →
+                    </button>
                 </div>
             </div>
 
-            <div class="space-y-1 text-xs font-semibold">
-                <label class="text-slate-400 block pl-1">Professional Inspector Notes Log</label>
-                <textarea id="inspectorNotes" placeholder="Engine compression ratio flawless. Minor scuff right lower panel bumper. Tires at 85% tread depth remaining." rows="3" class="w-full bg-slate-950 border border-slate-850 text-slate-300 rounded-xl p-3 text-xs focus:outline-none focus:border-indigo-500"></textarea>
+            <div id="formSection-step2" class="form-step-block space-y-6 hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                    <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">140-Point Component Health Diagnostics</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Engine Block & Transmission Status</label>
+                            <select id="pdiEngine" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                <option value="Passed">Passed (No blow-by, clean exhaust)</option>
+                                <option value="Attention">Attention Required (Minor oil leak / noise)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Chassis & Structural Pillar State</label>
+                            <select id="pdiStructure" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                <option value="Passed">Passed (Original aprons & frame structure)</option>
+                                <option value="Attention">Attention Required (Accident alert / refitted panel)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Cabin Electricals & AC Functionality</label>
+                            <select id="pdiInterior" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                <option value="Passed">Passed (Chilling AC, zero scanning fault alerts)</option>
+                                <option value="Attention">Attention Required (Switch error / display wear)</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Suspension Dynamics & Tire Tread Depth</label>
+                            <select id="pdiTyres" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-bold">
+                                <option value="Passed">Passed (Healthy tread life, no rattle)</option>
+                                <option value="Attention">Attention Required (Tire replacements needed)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5 pt-2">
+                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Inspector Field Log Evaluation Notes Summary</label>
+                        <textarea id="inspectorNotes" rows="3" placeholder="Describe body scratches, test-drive performance details, or general notes clearly..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 text-xs font-semibold"></textarea>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <button type="button" onclick="navigateWizardStep(1)" class="bg-slate-900 border border-slate-800 text-slate-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all uppercase tracking-wider cursor-pointer">
+                        ← Back to Basics
+                    </button>
+                    <button type="button" onclick="navigateWizardStep(3)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-indigo-600/10 uppercase tracking-wider cursor-pointer">
+                        Proceed to Media Profiles →
+                    </button>
+                </div>
             </div>
 
-            <button onclick="executeInspectorSubmissionPipeline()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-600/10 mt-2">
-                Submit Certified Report & Go Live
-            </button>
-        </div>
-    </div>
+            <div id="formSection-step3" class="form-step-block space-y-6 hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+                    <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Digital Media Proof Integration Vault</h3>
+                    
+                    <div class="space-y-4 text-xs font-semibold">
+                        <div class="space-y-1.5">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Primary Showcase Car Image URL Address</label>
+                            <input type="url" id="carImage" required placeholder="https://images.unsplash.com/photo-... or custom uploaded host string" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-mono text-[11px]">
+                        </div>
+                        <div class="bg-slate-950 p-4 border border-slate-850 rounded-2xl text-[11px] text-slate-400 leading-relaxed font-medium">
+                            💡 <strong>Operational Note for Mechanic Crew:</strong> For instant image testing, you can paste public car images from image hosting links, Unsplash, or utilize your default placeholder asset link strings directly.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <button type="button" onclick="navigateWizardStep(2)" class="bg-slate-900 border border-slate-800 text-slate-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all uppercase tracking-wider cursor-pointer">
+                        ← Back to Checklist
+                    </button>
+                    <button type="submit" id="submitTerminalBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-600/10 uppercase tracking-wider cursor-pointer">
+                        🚀 Deploy Report to Admin Queue
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </main>
 
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
+        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
 
-        function verifyInspectorPinNode() {
-            const pin = document.getElementById("inspectorPinInput").value;
-            if(pin === "1805") {
-                document.getElementById("inspectorAuthGate").classList.add("hidden");
-                document.getElementById("inspectorFormTerminal").classList.remove("hidden");
-                checkNetworkStatusNode();
-            } else {
-                alert("Clearance code pin rejected.");
-            }
+        // Multi-Step Tab View Navigation Router
+        function navigateWizardStep(targetStepNumber) {
+            // Hide all sections
+            document.querySelectorAll('.form-step-block').forEach(section => section.classList.add('hidden'));
+            
+            // Standardize step pills styling matrices
+            const inactivePillStyle = "bg-slate-950 text-slate-500 border border-slate-900 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1";
+            document.getElementById('pill-step1').className = inactivePillStyle;
+            document.getElementById('pill-step2').className = inactivePillStyle;
+            document.getElementById('pill-step3').className = inactivePillStyle;
+
+            // Make targeted view window active
+            document.getElementById(`formSection-step${targetStepNumber}`).classList.remove('hidden');
+            document.getElementById(`pill-step${targetStepNumber}`).className = "step-pill-active border border-slate-700 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1";
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function checkNetworkStatusNode() {
-            const indicator = document.getElementById("syncStatusIndicator");
-            if (navigator.onLine) {
-                indicator.className = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md";
-                indicator.innerText = "🟢 System Online";
-                attemptAutoQueueSync();
-            } else {
-                indicator.className = "bg-rose-500/10 text-rose-400 border border-rose-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md";
-                indicator.innerText = "🚨 Offline Mode Safe";
-            }
-        }
+        // Mass-Form Data Assembly & Serialization Transmit Handshake Pipeline
+        async function handleFormSubmissionPipeline(event) {
+            event.preventDefault();
 
-        window.addEventListener('online', checkNetworkStatusNode);
-        window.addEventListener('offline', checkNetworkStatusNode);
+            const submitBtn = document.getElementById("submitTerminalBtn");
+            submitBtn.disabled = true;
+            submitBtn.innerText = "TRANSMITTING DATA METRIC VAULT...";
 
-        async function executeInspectorSubmissionPipeline() {
-            const payload = {
-                id: document.getElementById("carId").value.trim().toUpperCase(),
+            // Pack every data capture node completely into one unified ledger element block
+            const packedPayloadNode = {
+                id: document.getElementById("carId").value.trim(),
                 name: document.getElementById("carName").value.trim(),
                 variant: document.getElementById("carVariant").value.trim(),
                 year: parseInt(document.getElementById("carYear").value),
-                price: parseFloat(document.getElementById("carPrice").value),
-                kms: document.getElementById("carKms").value.trim(),
+                kms: parseFloat(document.getElementById("carKms").value),
+                rto: document.getElementById("carRto").value.trim(),
                 fuel: document.getElementById("carFuel").value,
                 transmission: document.getElementById("carTransmission").value,
-                rto: document.getElementById("carRto").value.trim().toUpperCase(),
                 owners: parseInt(document.getElementById("carOwners").value),
                 color: document.getElementById("carColor").value.trim(),
-                image: document.getElementById("carImage").value.trim() || "images/hero.jpg",
                 pdi_engine_status: document.getElementById("pdiEngine").value,
                 pdi_structural_status: document.getElementById("pdiStructure").value,
                 pdi_interior_status: document.getElementById("pdiInterior").value,
                 pdi_tyres_status: document.getElementById("pdiTyres").value,
                 inspector_notes: document.getElementById("inspectorNotes").value.trim(),
-                status: "Available"
+                image: document.getElementById("carImage").value.trim(),
+                status: "Available" // Defaults to Available for operational validation reviews
             };
 
-            if(!payload.id || !payload.name || !payload.price) {
-                alert("Please complete all primary tracking tags before row initialization.");
-                return;
-            }
-
-            if (!navigator.onLine) {
-                // Device is offline! Intercept data and back it up locally
-                let offlineQueue = JSON.parse(localStorage.getItem("ndi_offline_pdi_queue") || "[]");
-                offlineQueue.push(payload);
-                localStorage.setItem("ndi_offline_pdi_queue", JSON.stringify(offlineQueue));
-                alert("🔒 Network link missing! This vehicle report has been successfully encrypted and saved to your phone's storage. It will go live automatically the moment you return to a coverage area!");
-                clearInspectorFormUI();
-                return;
-            }
-
-            // Standard Online Database Sync Pipeline
-            await uploadVehicleToCloud(payload);
-        }
-
-        async function uploadVehicleToCloud(payload) {
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles`, {
                     method: "POST",
@@ -153,62 +234,24 @@
                         "Content-Type": "application/json",
                         "Prefer": "return=minimal"
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(packedPayloadNode)
                 });
 
-                if(response.ok) {
-                    alert(`🚀 Execution Success! Vehicle ${payload.id} is now live across the network architecture.`);
-                    clearInspectorFormUI();
+                if (response.ok) {
+                    alert("🎯 SUCCESS!\nEvaluation report packed and injected successfully into the cloud data network rows.");
+                    document.getElementById("inspectionReportForm").reset();
+                    navigateWizardStep(1);
                 } else {
-                    alert("Cloud transaction rejected. Dropping data payload to offline safety cache.");
-                    backupToOfflineAlternative(payload);
+                    const errorDetail = await response.text();
+                    alert(`❌ TRANSMISSION REJECTED:\nEnsure the Car custom unique ID is completely unique and doesn't conflict with active entries.\n\nLog Details: ${errorDetail}`);
                 }
-            } catch(e) {
-                backupToOfflineAlternative(payload);
+            } catch (err) {
+                console.error("Critical core transaction link break:", err);
+                alert("Network communication timeout fault occurred.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "🚀 Deploy Report to Admin Queue";
             }
-        }
-
-        function backupToOfflineAlternative(payload) {
-            let offlineQueue = JSON.parse(localStorage.getItem("ndi_offline_pdi_queue") || "[]");
-            offlineQueue.push(payload);
-            localStorage.setItem("ndi_offline_pdi_queue", JSON.stringify(offlineQueue));
-        }
-
-        async function attemptAutoQueueSync() {
-            let offlineQueue = JSON.parse(localStorage.getItem("ndi_offline_pdi_queue") || "[]");
-            if (offlineQueue.length === 0) return;
-
-            console.log(`Detecting ${offlineQueue.length} offline inspection row backups. Initializing global network sync node...`);
-            
-            for (let i = 0; i < offlineQueue.length; i++) {
-                const item = offlineQueue[i];
-                try {
-                    const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles`, {
-                        method: "POST",
-                        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" },
-                        body: JSON.stringify(item)
-                    });
-                    if (response.ok) {
-                        offlineQueue.splice(i, 1);
-                        i--;
-                    }
-                } catch(e) { break; }
-            }
-            localStorage.setItem("ndi_offline_pdi_queue", JSON.stringify(offlineQueue));
-        }
-
-        function clearInspectorFormUI() {
-            document.getElementById("carId").value = "";
-            document.getElementById("carName").value = "";
-            document.getElementById("carVariant").value = "";
-            document.getElementById("carYear").value = "";
-            document.getElementById("carPrice").value = "";
-            document.getElementById("carKms").value = "";
-            document.getElementById("carRto").value = "";
-            document.getElementById("carOwners").value = "";
-            document.getElementById("carColor").value = "";
-            document.getElementById("carImage").value = "";
-            document.getElementById("inspectorNotes").value = "";
         }
     </script>
 </body>
