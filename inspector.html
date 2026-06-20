@@ -40,27 +40,27 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Vehicle Custom unique ID (e.g., NDI-T505)</label>
-                            <input type="text" id="carId" required placeholder="Must match target unique string" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="text" id="carId" placeholder="Must match target unique string" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Make & Model Name</label>
-                            <input type="text" id="carName" required placeholder="e.g., Toyota Fortuner" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="text" id="carName" placeholder="e.g., Toyota Fortuner" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Trim Variant Details</label>
-                            <input type="text" id="carVariant" required placeholder="e.g., Sigma Diesel AT" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="text" id="carVariant" placeholder="e.g., Sigma Diesel AT" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Manufacturing Year</label>
-                            <input type="number" id="carYear" required placeholder="e.g., 2023" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="number" id="carYear" placeholder="e.g., 2023" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Odometer Log (KMs Run)</label>
-                            <input type="number" id="carKms" required placeholder="e.g., 31000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="number" id="carKms" placeholder="e.g., 31000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Registered RTO Location</label>
-                            <input type="text" id="carRto" required placeholder="e.g., HR26" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="text" id="carRto" placeholder="e.g., HR26" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Fuel Engine Type</label>
@@ -79,16 +79,16 @@
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Ownership Tier</label>
-                            <input type="number" id="carOwners" required placeholder="e.g., 1" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="number" id="carOwners" placeholder="e.g., 1" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Exterior Body Color Finish</label>
-                            <input type="text" id="carColor" required placeholder="e.g., Pearl White" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            <input type="text" id="carColor" placeholder="e.g., Pearl White" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         
                         <div class="space-y-1.5 sm:col-span-2">
                             <label class="text-indigo-400 pl-1 uppercase tracking-wider text-[10px] font-black">Customer Expected Price (₹ In Raw Numbers Only)</label>
-                            <input type="number" id="carPrice" required placeholder="e.g., 2950000" class="w-full bg-slate-950 border border-indigo-900/60 rounded-xl p-3 text-white font-mono focus:outline-none focus:border-indigo-500 shadow-inner">
+                            <input type="number" id="carPrice" placeholder="e.g., 2950000" class="w-full bg-slate-950 border border-indigo-900/60 rounded-xl p-3 text-white font-mono focus:outline-none focus:border-indigo-500 shadow-inner">
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                     const canvas = document.createElement("canvas");
                     const ctx = canvas.getContext("2d");
 
-                    const maxDimension = 600; // Scaled down slightly more to increase save speeds
+                    const maxDimension = 600; 
                     let width = img.width;
                     let height = img.height;
 
@@ -263,14 +263,14 @@
         async function handleFormSubmissionPipeline(event) {
             event.preventDefault();
 
-            // Perform safety validation checks right at the submission stage instead of breaking buttons
-            const targetIdField = document.getElementById("carId").value.trim();
-            const targetNameField = document.getElementById("carName").value.trim();
-            const targetPriceField = document.getElementById("carPrice").value;
-            const photoContent = document.getElementById("carImage").value;
+            // FIXED ANTI-CRASH FALLBACK GUARD PATTERNS: Prevents Javascript execution lock ups if elements are skipped blank
+            const carIdVal = document.getElementById("carId") ? document.getElementById("carId").value.trim() : "";
+            const carNameVal = document.getElementById("carName") ? document.getElementById("carName").value.trim() : "";
+            const carPriceVal = document.getElementById("carPrice") ? document.getElementById("carPrice").value : "";
+            const photoContent = document.getElementById("carImage") ? document.getElementById("carImage").value : "";
 
-            if(!targetIdField || !targetNameField || !targetPriceField) {
-                alert("⚠️ Validation Failure:\nYou must complete the input parameters in Step 1 (ID, Name, and Price) before publishing.");
+            if (!carIdVal || !carNameVal || !carPriceVal) {
+                alert("⚠️ Input Parameters Required:\nYou cannot deploy an incomplete file. Please click Step 1 at the top and specify the unique Car ID, Name, and Price before submitting.");
                 navigateWizardStep(1);
                 return;
             }
@@ -280,9 +280,9 @@
             submitBtn.innerText = "TRANSMITTING DATA METRIC VAULT...";
 
             const packedPayloadNode = {
-                id: targetIdField,
-                name: targetNameField,
-                variant: document.getElementById("carVariant").value.trim(),
+                id: carIdVal,
+                name: carNameVal,
+                variant: document.getElementById("carVariant") ? document.getElementById("carVariant").value.trim() : "Standard",
                 year: parseInt(document.getElementById("carYear").value) || 2026,
                 kms: parseFloat(document.getElementById("carKms").value) || 0,
                 rto: document.getElementById("carRto").value.trim() || "DL",
@@ -296,7 +296,7 @@
                 pdi_tyres_status: document.getElementById("pdiTyres").value,
                 inspector_notes: document.getElementById("inspectorNotes").value.trim(),
                 image: photoContent || "car1.jpg", 
-                price: parseFloat(targetPriceField), 
+                price: parseFloat(carPriceVal), 
                 status: "Available"
             };
 
