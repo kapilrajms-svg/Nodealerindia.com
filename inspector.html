@@ -224,7 +224,6 @@
                     const canvas = document.createElement("canvas");
                     const ctx = canvas.getContext("2d");
 
-                    // Scale resolution down to standard mobile load sizes
                     const maxDimension = 800;
                     let width = img.width;
                     let height = img.height;
@@ -245,7 +244,6 @@
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    // Output compressed JPEG string payload data object
                     const base64DataString = canvas.toDataURL("image/jpeg", 0.7);
                     
                     hiddenImageInput.value = base64DataString;
@@ -264,9 +262,8 @@
             event.preventDefault();
 
             const submitBtn = document.getElementById("submitTerminalBtn");
-            
-            // Check if uploader contains photo text content strings
             const photoContent = document.getElementById("carImage").value;
+            
             if(!photoContent) {
                 alert("Operation Terminated: You must snap or choose a vehicle photo profile before deploying.");
                 return;
@@ -275,6 +272,7 @@
             submitBtn.disabled = true;
             submitBtn.innerText = "TRANSMITTING DATA METRIC VAULT...";
 
+            // FIXED: Automatically maps 0 value into price slot to satisfy not-null constraints seamlessly
             const packedPayloadNode = {
                 id: document.getElementById("carId").value.trim(),
                 name: document.getElementById("carName").value.trim(),
@@ -292,6 +290,7 @@
                 pdi_tyres_status: document.getElementById("pdiTyres").value,
                 inspector_notes: document.getElementById("inspectorNotes").value.trim(),
                 image: photoContent,
+                price: 0, // Default baseline placeholder initialization parameter
                 status: "Available"
             };
 
