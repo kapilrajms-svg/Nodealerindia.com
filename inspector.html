@@ -23,7 +23,7 @@
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 pt-8">
+    <main id="mainInspectorWorkspace" class="max-w-4xl mx-auto px-4 pt-8">
         
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-8 flex items-center justify-between text-xs font-bold shadow-xl">
             <button type="button" onclick="navigateWizardStep(1)" id="pill-step1" class="step-pill-active border border-slate-700 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1 cursor-pointer">1. Vehicle Basics</button>
@@ -31,7 +31,7 @@
             <button type="button" onclick="navigateWizardStep(3)" id="pill-step3" class="bg-slate-950 text-slate-500 border border-slate-900 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1 cursor-pointer">3. Media Profiles</button>
         </div>
 
-        <form id="inspectionReportForm" class="space-y-6" onsubmit="handleFormSubmissionPipeline(event)">
+        <form id="inspectionReportForm" class="space-y-6">
             
             <div id="formSection-step1" class="form-step-block space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
@@ -180,7 +180,7 @@
                     <button type="button" onclick="navigateWizardStep(2)" class="bg-slate-900 border border-slate-800 text-slate-400 hover:text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all uppercase tracking-wider cursor-pointer">
                         ← Back to Checklist
                     </button>
-                    <button type="submit" id="submitTerminalBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-600/10 uppercase tracking-wider cursor-pointer">
+                    <button type="button" onclick="executeManualSubmitPayload()" id="submitTerminalBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-600/10 uppercase tracking-wider cursor-pointer">
                         🚀 Deploy Report to Admin Queue
                     </button>
                 </div>
@@ -188,6 +188,35 @@
 
         </form>
     </main>
+
+    <div id="premiumSuccessView" class="hidden max-w-2xl mx-auto px-4 pt-16 text-center space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden space-y-6">
+            
+            <div class="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl shadow-lg">
+                ✓
+            </div>
+
+            <div class="space-y-1.5">
+                <h1 class="text-2xl font-black text-white tracking-tight uppercase">Data Transmitted Successfully</h1>
+                <p class="text-xs text-slate-400">The 140-point diagnostic log report has been verified and committed to your cloud registry row matrix.</p>
+            </div>
+
+            <div class="bg-slate-950 border border-slate-850 p-6 rounded-2xl text-left space-y-3 font-semibold text-xs text-slate-400">
+                <div class="border-b border-slate-900 pb-2 flex justify-between"><p class="uppercase tracking-wider text-[10px] text-slate-500">Parameter Node</p><p class="uppercase tracking-wider text-[10px] text-slate-500">Live Status</p></div>
+                <div class="flex justify-between"><span>Vehicle Asset Identifier:</span><span id="receiptId" class="text-white font-mono">—</span></div>
+                <div class="flex justify-between"><span>Make / Model Block:</span><span id="receiptName" class="text-white">—</span></div>
+                <div class="flex justify-between"><span>Odometer Run Metric:</span><span id="receiptKms" class="text-white">—</span></div>
+                <div class="flex justify-between"><span>Client Expected Valuation:</span><span id="receiptPrice" class="text-indigo-400 font-bold">—</span></div>
+                <div class="flex justify-between"><span>Showroom Availability Tag:</span><span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px] font-black uppercase">Available</span></div>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="window.location.reload()" class="w-full h-12 bg-slate-950 border border-slate-800 hover:border-slate-700 text-white font-bold text-xs rounded-xl uppercase tracking-wider transition-all cursor-pointer">
+                    ← Initiate Next Field Inspection
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
@@ -260,17 +289,19 @@
             reader.readAsDataURL(file);
         }
 
-        async function handleFormSubmissionPipeline(event) {
-            event.preventDefault();
+        // REENGINEERED MANUAL EXECUTION PIPELINE ENGINE
+        async function executeManualSubmitPayload() {
+            // Read elements safely without letting missing inputs throw fatal script block freezes
+            const getVal = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ""; };
 
-            // FIXED ANTI-CRASH FALLBACK GUARD PATTERNS: Prevents Javascript execution lock ups if elements are skipped blank
-            const carIdVal = document.getElementById("carId") ? document.getElementById("carId").value.trim() : "";
-            const carNameVal = document.getElementById("carName") ? document.getElementById("carName").value.trim() : "";
-            const carPriceVal = document.getElementById("carPrice") ? document.getElementById("carPrice").value : "";
-            const photoContent = document.getElementById("carImage") ? document.getElementById("carImage").value : "";
+            const carIdVal = getVal("carId");
+            const carNameVal = getVal("carName");
+            const carPriceVal = getVal("carPrice");
+            const photoContent = getVal("carImage");
 
+            // Validation checks handled explicitly
             if (!carIdVal || !carNameVal || !carPriceVal) {
-                alert("⚠️ Input Parameters Required:\nYou cannot deploy an incomplete file. Please click Step 1 at the top and specify the unique Car ID, Name, and Price before submitting.");
+                alert("⚠️ Missing Fields:\nYou must supply the Car ID, Model Name, and Price parameters in Step 1 before transmitting.");
                 navigateWizardStep(1);
                 return;
             }
@@ -282,19 +313,19 @@
             const packedPayloadNode = {
                 id: carIdVal,
                 name: carNameVal,
-                variant: document.getElementById("carVariant") ? document.getElementById("carVariant").value.trim() : "Standard",
-                year: parseInt(document.getElementById("carYear").value) || 2026,
-                kms: parseFloat(document.getElementById("carKms").value) || 0,
-                rto: document.getElementById("carRto").value.trim() || "DL",
-                fuel: document.getElementById("carFuel").value,
-                transmission: document.getElementById("carTransmission").value,
-                owners: parseInt(document.getElementById("carOwners").value) || 1,
-                color: document.getElementById("carColor").value.trim() || "Standard",
-                pdi_engine_status: document.getElementById("pdiEngine").value,
-                pdi_structural_status: document.getElementById("pdiStructure").value,
-                pdi_interior_status: document.getElementById("pdiInterior").value,
-                pdi_tyres_status: document.getElementById("pdiTyres").value,
-                inspector_notes: document.getElementById("inspectorNotes").value.trim(),
+                variant: getVal("carVariant") || "Standard",
+                year: parseInt(getVal("carYear")) || 2026,
+                kms: parseFloat(getVal("carKms")) || 0,
+                rto: getVal("carRto") || "DL",
+                fuel: getVal("carFuel") || "Petrol",
+                transmission: getVal("carTransmission") || "Automatic",
+                owners: parseInt(getVal("carOwners")) || 1,
+                color: getVal("carColor") || "Standard",
+                pdi_engine_status: getVal("pdiEngine") || "Passed",
+                pdi_structural_status: getVal("pdiStructure") || "Passed",
+                pdi_interior_status: getVal("pdiInterior") || "Passed",
+                pdi_tyres_status: getVal("pdiTyres") || "Passed",
+                inspector_notes: getVal("inspectorNotes") || "No notes provided.",
                 image: photoContent || "car1.jpg", 
                 price: parseFloat(carPriceVal), 
                 status: "Available"
@@ -313,13 +344,18 @@
                 });
 
                 if (response.ok) {
-                    alert("🎯 SUCCESS!\nEvaluation report packed and injected successfully into the cloud database rows.");
-                    document.getElementById("inspectionReportForm").reset();
-                    document.getElementById("previewContainer").classList.add("hidden");
-                    navigateWizardStep(1);
+                    // Populate details inside the Thank You Panel dynamically before switching screens
+                    document.getElementById("receiptId").innerText = packedPayloadNode.id;
+                    document.getElementById("receiptName").innerText = `${packedPayloadNode.name} (${packedPayloadNode.variant})`;
+                    document.getElementById("receiptKms").innerText = packedPayloadNode.kms + " KM";
+                    document.getElementById("receiptPrice").innerText = "₹" + (packedPayloadNode.price / 100000).toFixed(2) + " Lakh";
+
+                    // HIDE form panels and REVEAL the dedicated high-end Thank You View layout page
+                    document.getElementById("mainInspectorWorkspace").classList.add("hidden");
+                    document.getElementById("premiumSuccessView").classList.remove("hidden");
                 } else {
                     const errorDetail = await response.text();
-                    alert(`❌ TRANSMISSION REJECTED:\nEnsure the Car ID unique string doesn't duplicate existing network records.\n\nLog Details: ${errorDetail}`);
+                    alert(`❌ TRANSMISSION REJECTED:\nVerify your Car ID tracking string is completely unique.\n\nLog Details: ${errorDetail}`);
                 }
             } catch (err) {
                 console.error(err);
