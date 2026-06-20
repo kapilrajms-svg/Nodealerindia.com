@@ -19,7 +19,7 @@
                 <span class="text-lg font-black text-white">NDI // <span class="text-indigo-400">Inspector Node</span></span>
                 <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-widest">Field Active</span>
             </div>
-            <span class="text-xs text-slate-500 font-bold" id="liveClockDisplay">June 2026 Terminal</span>
+            <span class="text-xs text-slate-500 font-bold">June 2026 Terminal</span>
         </div>
     </nav>
 
@@ -148,15 +148,25 @@
 
             <div id="formSection-step3" class="form-step-block space-y-6 hidden">
                 <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-                    <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Digital Media Proof Integration Vault</h3>
+                    <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Digital Media Proof Capture</h3>
                     
                     <div class="space-y-4 text-xs font-semibold">
-                        <div class="space-y-1.5">
-                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Primary Showcase Car Image URL Address</label>
-                            <input type="url" id="carImage" required placeholder="https://images.unsplash.com/photo-... or custom uploaded host string" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-mono text-[11px]">
+                        <div class="space-y-2">
+                            <label class="text-slate-400 pl-1 uppercase tracking-wider text-[10px]">Capture / Upload Vehicle Photo</label>
+                            
+                            <input type="file" id="carImageFile" accept="image/*" capture="environment" class="hidden" onchange="processCapturedPhoto(this)">
+                            
+                            <div type="button" onclick="document.getElementById('carImageFile').click()" class="w-full h-40 border-2 border-dashed border-slate-800 hover:border-indigo-500 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-all bg-slate-950/50 group">
+                                <svg class="w-8 h-8 text-slate-500 group-hover:text-indigo-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span class="text-slate-400 group-hover:text-white transition-colors text-xs font-bold">Click to Open Camera or Photo Gallery</span>
+                                <span class="text-[10px] text-slate-600 font-bold tracking-wide" id="uploadStatusText">No file selected</span>
+                            </div>
+
+                            <input type="hidden" id="carImage" value="">
                         </div>
-                        <div class="bg-slate-950 p-4 border border-slate-850 rounded-2xl text-[11px] text-slate-400 leading-relaxed font-medium">
-                            💡 <strong>Operational Note for Mechanic Crew:</strong> For instant image testing, you can paste public car images from image hosting links, Unsplash, or utilize your default placeholder asset link strings directly.
+
+                        <div id="previewContainer" class="hidden w-full rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 p-2">
+                            <img id="imagePreview" src="" class="w-full h-48 object-cover rounded-xl">
                         </div>
                     </div>
                 </div>
@@ -178,22 +188,75 @@
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
 
-        // Multi-Step Tab View Navigation Router
+        // Multi-Step Tab View Navigation Router Engine
         function navigateWizardStep(targetStepNumber) {
-            // Hide all sections
             document.querySelectorAll('.form-step-block').forEach(section => section.classList.add('hidden'));
             
-            // Standardize step pills styling matrices
             const inactivePillStyle = "bg-slate-950 text-slate-500 border border-slate-900 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1";
             document.getElementById('pill-step1').className = inactivePillStyle;
             document.getElementById('pill-step2').className = inactivePillStyle;
             document.getElementById('pill-step3').className = inactivePillStyle;
 
-            // Make targeted view window active
             document.getElementById(`formSection-step${targetStepNumber}`).classList.remove('hidden');
             document.getElementById(`pill-step${targetStepNumber}`).className = "step-pill-active border border-slate-700 px-4 py-2 rounded-xl transition-all flex-1 text-center mx-1";
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Photo Processing and Base64 Compression Engine
+        function processCapturedPhoto(input) {
+            const file = input.files[0];
+            const statusText = document.getElementById("uploadStatusText");
+            const previewContainer = document.getElementById("previewContainer");
+            const imagePreview = document.getElementById("imagePreview");
+            const hiddenImageInput = document.getElementById("carImage");
+
+            if (!file) return;
+
+            statusText.innerText = "Processing & compressing image data matrix...";
+            statusText.className = "text-[10px] text-indigo-400 font-bold";
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+
+                    // Scale resolution down to standard mobile load sizes
+                    const maxDimension = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > maxDimension) {
+                            height *= maxDimension / width;
+                            width = maxDimension;
+                        }
+                    } else {
+                        if (height > maxDimension) {
+                            width *= maxDimension / height;
+                            height = maxDimension;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Output compressed JPEG string payload data object
+                    const base64DataString = canvas.toDataURL("image/jpeg", 0.7);
+                    
+                    hiddenImageInput.value = base64DataString;
+                    imagePreview.src = base64DataString;
+                    previewContainer.classList.remove("hidden");
+                    
+                    statusText.innerText = `✅ Successfully Loaded: ${file.name}`;
+                    statusText.className = "text-[10px] text-emerald-400 font-bold";
+                };
+            };
+            reader.readAsDataURL(file);
         }
 
         // Mass-Form Data Assembly & Serialization Transmit Handshake Pipeline
@@ -201,10 +264,17 @@
             event.preventDefault();
 
             const submitBtn = document.getElementById("submitTerminalBtn");
+            
+            // Check if uploader contains photo text content strings
+            const photoContent = document.getElementById("carImage").value;
+            if(!photoContent) {
+                alert("Operation Terminated: You must snap or choose a vehicle photo profile before deploying.");
+                return;
+            }
+
             submitBtn.disabled = true;
             submitBtn.innerText = "TRANSMITTING DATA METRIC VAULT...";
 
-            // Pack every data capture node completely into one unified ledger element block
             const packedPayloadNode = {
                 id: document.getElementById("carId").value.trim(),
                 name: document.getElementById("carName").value.trim(),
@@ -221,8 +291,8 @@
                 pdi_interior_status: document.getElementById("pdiInterior").value,
                 pdi_tyres_status: document.getElementById("pdiTyres").value,
                 inspector_notes: document.getElementById("inspectorNotes").value.trim(),
-                image: document.getElementById("carImage").value.trim(),
-                status: "Available" // Defaults to Available for operational validation reviews
+                image: photoContent,
+                status: "Available"
             };
 
             try {
@@ -238,15 +308,16 @@
                 });
 
                 if (response.ok) {
-                    alert("🎯 SUCCESS!\nEvaluation report packed and injected successfully into the cloud data network rows.");
+                    alert("🎯 SUCCESS!\nEvaluation report packed and injected successfully into the cloud database rows.");
                     document.getElementById("inspectionReportForm").reset();
+                    document.getElementById("previewContainer").classList.add("hidden");
                     navigateWizardStep(1);
                 } else {
                     const errorDetail = await response.text();
-                    alert(`❌ TRANSMISSION REJECTED:\nEnsure the Car custom unique ID is completely unique and doesn't conflict with active entries.\n\nLog Details: ${errorDetail}`);
+                    alert(`❌ TRANSMISSION REJECTED:\nEnsure the Car ID is completely unique.\n\nLog Details: ${errorDetail}`);
                 }
             } catch (err) {
-                console.error("Critical core transaction link break:", err);
+                console.error(err);
                 alert("Network communication timeout fault occurred.");
             } finally {
                 submitBtn.disabled = false;
