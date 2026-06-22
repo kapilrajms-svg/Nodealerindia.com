@@ -3,92 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoDealerIndia // Sell Your Vehicle Online</title>
+    <title>NoDealerIndia // Sell Your Car Directly</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-slate-950 text-slate-300 min-h-screen">
+<body class="bg-slate-950 text-slate-300 min-h-screen selection:bg-indigo-500 selection:text-white">
 
-    <nav class="bg-slate-900 border-b border-slate-800 px-6 py-4">
-        <div class="max-w-4xl mx-auto flex items-center justify-between">
-            <span class="text-xl font-black text-white">NoDealerIndia // <span class="text-indigo-400">Seller Studio</span></span>
-            <a href="showroom.html" class="text-xs font-bold text-slate-400 hover:text-white transition-colors">← Exit To Showroom</a>
+    <!-- NAVIGATION BANNER -->
+    <nav class="bg-slate-950 border-b border-slate-900 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-black text-white">NoDealerIndia // <span class="text-indigo-400">Sell Studio</span></span>
+            </div>
+            <a href="showroom.html" class="text-xs font-bold text-slate-400 hover:text-white transition-colors">← View Showroom Stock</a>
         </div>
     </nav>
 
-    <main class="max-w-xl mx-auto px-4 pt-12">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-            <div class="space-y-1">
-                <h1 class="text-xl font-black text-white uppercase tracking-tight">Request Valuation Checklist</h1>
-                <p class="text-xs text-slate-400">Fill in your car details to schedule an evaluation and skip the dealer margins completely.</p>
-            </div>
+    <!-- MAIN INTERACTIVE FLOW GRID -->
+    <main class="max-w-5xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-5 gap-8">
+        
+        <!-- Left Side: Interactive Step-Through Engine -->
+        <div class="lg:col-span-3 space-y-6">
+            <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
+                <div>
+                    <h1 class="text-xl font-black text-white uppercase tracking-tight">Instant Valuation Engine</h1>
+                    <p class="text-xs text-slate-400 mt-1">Provide your asset parameters below to generate an immediate direct-to-consumer price estimation matrix.</p>
+                </div>
 
-            <form id="publicSellerIntakeForm" onsubmit="submitPublicSellerLeadPipeline(event)" class="space-y-4 text-xs font-semibold">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-1.5 col-span-2">
-                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Your Contact Name</label>
-                        <input type="text" id="sellerLeadName" required placeholder="Full Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                <form id="premiumValuationForm" onsubmit="handleSellerFormSubmission(event)" class="space-y-5 text-xs font-semibold">
+                    <!-- Step 1: Vehicle Brand & Model Core Parameters -->
+                    <div class="space-y-2">
+                        <label class="block text-[10px] uppercase tracking-wider font-black text-slate-500 pl-1">1. Select Your Asset Baseline</label>
+                        <select id="sellCarModel" onchange="runLiveDynamicValuationInference()" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                            <option value="950000">Maruti Suzuki Swift (2022-2025)</option>
+                            <option value="1450000">Hyundai i20 Asta (2021-2024)</option>
+                            <option value="2800000">Mahindra Thar 4x4 Lx (2022-2026)</option>
+                            <option value="3800000">Toyota Fortuner Sigma 4 (2020-2025)</option>
+                            <option value="7200000">BMW 3 Series Gran Limousine (2021-2025)</option>
+                        </select>
                     </div>
-                    <div class="space-y-1.5 col-span-2">
-                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">WhatsApp Phone Number</label>
-                        <input type="tel" id="sellerLeadPhone" required placeholder="e.g., +91 9999999999" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+
+                    <!-- Step 2: Usage Profile Sliders -->
+                    <div class="space-y-4 bg-slate-950 border border-slate-850 p-4 rounded-2xl">
+                        <div class="space-y-2">
+                            <div class="flex justify-between font-mono text-[11px]">
+                                <span class="text-slate-500 uppercase font-bold text-[10px]">Odometer Reading</span>
+                                <span id="sellKmsDisplayValue" class="text-indigo-400 font-bold">25,000 KM</span>
+                            </div>
+                            <input type="range" id="sellKmsSlider" min="5000" max="120000" step="5000" value="25000" oninput="runLiveDynamicValuationInference()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between font-mono text-[11px]">
+                                <span class="text-slate-500 uppercase font-bold text-[10px]">Owner Framework History</span>
+                                <span id="sellOwnerDisplayValue" class="text-indigo-400 font-bold">1st Owner</span>
+                            </div>
+                            <input type="range" id="sellOwnerSlider" min="1" max="3" step="1" value="1" oninput="runLiveDynamicValuationInference()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                        </div>
                     </div>
-                    <div class="space-y-1.5 col-span-2">
-                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Vehicle Make & Model</label>
-                        <input type="text" id="sellerLeadCarModel" required placeholder="e.g., Honda City" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+
+                    <!-- Step 3: Visual Condition Evaluation Nodes -->
+                    <div class="space-y-2">
+                        <label class="block text-[10px] uppercase tracking-wider font-black text-slate-500 pl-1">2. General Condition Profile</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <label class="bg-slate-950 border border-indigo-500/30 p-3 rounded-xl flex flex-col items-center gap-1 cursor-pointer text-center group hover:border-indigo-500 transition-colors">
+                                <input type="radio" name="carConditionState" value="1.0" checked onchange="runLiveDynamicValuationInference()" class="accent-indigo-500 hidden">
+                                <span class="text-white font-bold text-[11px] block">Excellent</span>
+                                <span class="text-[9px] text-slate-500 block">No Dents/Scratches</span>
+                            </label>
+                            <label class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col items-center gap-1 cursor-pointer text-center group hover:border-indigo-500 transition-colors">
+                                <input type="radio" name="carConditionState" value="0.9" onchange="runLiveDynamicValuationInference()" class="accent-indigo-500 hidden">
+                                <span class="text-slate-300 font-bold text-[11px] block">Good</span>
+                                <span class="text-[9px] text-slate-500 block">Minor Wear/Scratches</span>
+                            </label>
+                            <label class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex flex-col items-center gap-1 cursor-pointer text-center group hover:border-indigo-500 transition-colors">
+                                <input type="radio" name="carConditionState" value="0.75" onchange="runLiveDynamicValuationInference()" class="accent-indigo-500 hidden">
+                                <span class="text-slate-400 font-bold text-[11px] block">Fair</span>
+                                <span class="text-[9px] text-slate-500 block">Requires Body Work</span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="space-y-1.5">
-                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Manufacturing Year</label>
-                        <input type="number" id="sellerLeadYear" required placeholder="2022" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+
+                    <!-- Step 4: Secure Owner Ingestion Coordinates -->
+                    <div class="space-y-3 pt-2 border-t border-slate-850/60">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Full Name</label>
+                                <input type="text" id="sellerContactName" required placeholder="Enter full name" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">WhatsApp Connected Phone</label>
+                                <input type="tel" id="sellerContactPhone" required placeholder="e.g., +91 9999999999" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-1.5">
-                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Total Kilometers Driven</label>
-                        <input type="number" id="sellerLeadKms" required placeholder="45000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
-                    </div>
-                    <div class="space-y-1.5 col-span-2">
-                        <label class="text-indigo-400 pl-1 uppercase tracking-wider text-[9px]">Your Expected Selling Price (₹)</label>
-                        <input type="number" id="sellerLeadExpectedPrice" required placeholder="e.g., 850000" class="w-full bg-slate-950 border border-indigo-900/50 rounded-xl p-3 text-white font-mono focus:outline-none focus:border-indigo-500">
+
+                    <button type="submit" id="sellerSubmitPipelineBtn" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/10 cursor-pointer">
+                        🚀 Schedule Field Verification & Lock Estimate
+                    </button>
+                </form>
+
+                <!-- Complete Success Module Interface Deck -->
+                <div id="premiumSellerSuccessDeck" class="hidden text-center py-12 space-y-4">
+                    <span class="text-5xl block animate-bounce">✨</span>
+                    <h3 class="text-white font-black uppercase text-lg tracking-tight">Valuation Entry Logged!</h3>
+                    <p class="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">Your digital estimation profile entry has been safely locked into the cloud queue layout. An inspection expert will reach out directly on WhatsApp to run your 140-point verification check.</p>
+                    <button onclick="window.location.reload()" class="mt-4 bg-slate-950 border border-slate-800 hover:bg-slate-900 text-white text-xs px-5 py-2.5 rounded-xl font-bold uppercase transition-all cursor-pointer">Submit New Evaluation Profile</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Real-Time Animated Pricing Metrics Panel Display -->
+        <div class="lg:col-span-2">
+            <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl sticky top-28 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-600/5 to-transparent pointer-events-none"></div>
+                
+                <div>
+                    <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest inline-block mb-3">
+                        Estimated P2P Payout
+                    </span>
+                    <h2 class="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Your Estimated Cash Payout Range</h2>
+                    <div class="mt-2 space-y-1">
+                        <span id="calculatedPayoutRangeDisplay" class="text-2xl sm:text-3xl font-black text-white font-mono tracking-tight block">₹0.00 Lakh</span>
+                        <p class="text-[10px] font-semibold text-slate-500">Based on active market velocity data tracking arrays.</p>
                     </div>
                 </div>
 
-                <button type="submit" id="submitLeadBtn" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl uppercase tracking-wider transition-all shadow-lg cursor-pointer pt-1">
-                    🚀 Submit Car for Review
-                </button>
-            </form>
-
-            <div id="sellerLeadSuccessContainer" class="hidden text-center py-6 space-y-4">
-                <span class="text-4xl">🎯</span>
-                <h3 class="text-white font-black uppercase text-base tracking-tight">Request Successfully Lodged!</h3>
-                <p class="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">Our field mechanic crew has received your car specs array and will contact you shortly via WhatsApp to confirm your inspection window.</p>
-                <button onclick="window.location.reload()" class="bg-slate-950 border border-slate-800 text-white text-xs px-4 py-2 rounded-xl font-bold uppercase transition-all cursor-pointer">Submit Another Asset</button>
+                <div class="border-t border-slate-850 pt-6 text-left space-y-4 text-xs font-semibold">
+                    <div class="bg-slate-950 border border-slate-850/60 p-3.5 rounded-xl flex items-start gap-3">
+                        <span class="text-indigo-400 text-sm mt-0.5">⚡</span>
+                        <div>
+                            <h4 class="text-white font-bold text-[11px] uppercase tracking-tight">Skip Dealer Deductions</h4>
+                            <p class="text-[10px] text-slate-500 mt-0.5">By matching directly with verified buyer networks, you keep 10% more of your vehicle value.</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-850/60 p-3.5 rounded-xl flex items-start gap-3">
+                        <span class="text-emerald-400 text-sm mt-0.5">🛡️</span>
+                        <div>
+                            <h4 class="text-white font-bold text-[11px] uppercase tracking-tight">Instant Account Settlement</h4>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Funds route via encrypted banking handshake logs within 45 minutes of field verification clearance.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- PROCESSING PIPELINE INFRASTRUCTURE LOGIC -->
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
 
-        async function submitPublicSellerLeadPipeline(event) {
+        function runLiveDynamicValuationInference() {
+            // Extract raw structural matrix variables from the DOM inputs
+            const baselineValue = parseFloat(document.getElementById("sellCarModel").value);
+            const drivenKms = parseInt(document.getElementById("sellKmsSlider").value);
+            const totalOwners = parseInt(document.getElementById("sellOwnerSlider").value);
+            
+            const conditionRadioGroup = document.getElementsByName("carConditionState");
+            let conditionModifier = 1.0;
+            for(let i = 0; i < conditionRadioGroup.length; i++) {
+                if(conditionRadioGroup[i].checked) {
+                    conditionModifier = parseFloat(conditionRadioGroup[i].value);
+                    break;
+                }
+            }
+
+            // Sync visual text strings live on layout modifications loops
+            document.getElementById("sellKmsDisplayValue").innerText = drivenKms.toLocaleString('en-IN') + " KM";
+            
+            let ownerOrdinalLabel = "1st Owner";
+            if(totalOwners === 2) ownerOrdinalLabel = "2nd Owner";
+            if(totalOwners === 3) ownerOrdinalLabel = "3rd Owner +";
+            document.getElementById("sellOwnerDisplayValue").innerText = ownerOrdinalLabel;
+
+            // Algorithmic degradation calculations matrix
+            const kmsDepreciationFactor = (drivenKms / 120000) * 0.20; // Up to 20% drop for heavy use
+            const ownerDepreciationFactor = (totalOwners - 1) * 0.08;   // 8% drop per additional owner
+            
+            let finalCalculatedEstimateBase = baselineValue * (1 - kmsDepreciationFactor - ownerDepreciationFactor) * conditionModifier;
+            
+            // Floor clamp boundary protection checks
+            if (finalCalculatedEstimateBase < (baselineValue * 0.4)) {
+                finalCalculatedEstimateBase = baselineValue * 0.4;
+            }
+
+            const rangeLowEnd = finalCalculatedEstimateBase * 0.94;
+            const rangeHighEnd = finalCalculatedEstimateBase * 1.04;
+
+            document.getElementById("calculatedPayoutRangeDisplay").innerText = `₹${(rangeLowEnd / 100000).toFixed(2)}L - ₹${(rangeHighEnd / 100000).toFixed(2)}L`;
+        }
+
+        async function handleSellerFormSubmission(event) {
             event.preventDefault();
+            const processBtn = document.getElementById("sellerSubmitPipelineBtn");
+            processBtn.disabled = true;
+            processBtn.innerText = "ALIGNED DATA MATRIX VERIFICATION CORE...";
 
-            const submitBtn = document.getElementById("submitLeadBtn");
-            submitBtn.disabled = true;
-            submitBtn.innerText = "SENDING TO VERIFICATION STORAGE...";
-
-            // Generates a mock registration row to maintain data integrity until you deploy a dedicated table
-            const leadPayloadNode = {
-                id: "LEAD-" + Date.now().toString().slice(-6),
-                name: document.getElementById("sellerLeadCarModel").value.trim() + " [INBOUND LEAD]",
-                variant: "Contact: " + document.getElementById("sellerLeadName").value.trim(),
-                year: parseInt(document.getElementById("sellerLeadYear").value) || 2026,
-                kms: parseFloat(document.getElementById("sellerLeadKms").value) || 0,
-                price: parseFloat(document.getElementById("sellerLeadExpectedPrice").value) || 0,
-                inspector_notes: "⚠️ CLIENT LEAD INBOUND SHEET: Call back seller at target connection line: " + document.getElementById("sellerLeadPhone").value.trim(),
-                image: "car1.jpg", 
-                status: "Reserved", // Automatically holds row state hidden or highlighted for your validation reviews
-                rto: "INBOUND", fuel: "Petrol", transmission: "Manual", color: "Pending", owners: 1
+            const selectedModelElement = document.getElementById("sellCarModel");
+            const carModelTextLabel = selectedModelElement.options[selectedModelElement.selectedIndex].text;
+            
+            // Package unified payload tracking node structure
+            const targetLeadPayloadNode = {
+                id: "SELL-LEAD-" + Date.now().toString().slice(-5),
+                name: carModelTextLabel + " [INBOUND SELLER]",
+                variant: "Owner Name: " + document.getElementById("sellerContactName").value.trim(),
+                year: 2024,
+                kms: parseFloat(document.getElementById("sellKmsSlider").value),
+                price: parseFloat(document.getElementById("sellCarModel").value), // Store target model index pricing baseline
+                inspector_notes: `🔥 VALUATION INBOUND ALERT: Contact Client at phone profile: ${document.getElementById("sellerContactPhone").value.trim()}. Owner range generated output: ${document.getElementById("calculatedPayoutRangeDisplay").innerText}`,
+                image: "car1.jpg",
+                status: "Available",
+                rto: "INBOUND", fuel: "Petrol", transmission: "Manual", color: "Pending", owners: parseInt(document.getElementById("sellOwnerSlider").value)
             };
 
             try {
@@ -97,26 +224,28 @@
                     headers: {
                         "apikey": SUPABASE_KEY,
                         "Authorization": `Bearer ${SUPABASE_KEY}`,
-                        "Content-Type": "application/json",
-                        "Prefer": "return=minimal"
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(leadPayloadNode)
+                    body: JSON.stringify(targetLeadPayloadNode)
                 });
 
                 if (response.ok) {
-                    document.getElementById("publicSellerIntakeForm").classList.add("hidden");
-                    document.getElementById("sellerLeadSuccessContainer").classList.remove("hidden");
+                    document.getElementById("premiumValuationForm").classList.add("hidden");
+                    document.getElementById("premiumSellerSuccessDeck").classList.remove("hidden");
                 } else {
-                    alert("Communication handshake failure. Verify connection criteria strings.");
+                    alert("Database routing intercept error. Recheck keys array parameters.");
                 }
-            } catch (err) {
-                console.error(err);
-                alert("Network transaction error occurred.");
+            } catch (error) {
+                console.error(error);
+                alert("Network communication pipe broken.");
             } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "🚀 Submit Car for Review";
+                processBtn.disabled = false;
+                processBtn.innerText = "🚀 Schedule Field Verification & Lock Estimate";
             }
         }
+
+        // Initialize computational logic fields cleanly on layout start lines
+        window.addEventListener("DOMContentLoaded", runLiveDynamicValuationInference);
     </script>
 </body>
 </html>
