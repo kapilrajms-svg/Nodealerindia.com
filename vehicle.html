@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NDI // Vehicle Inspection Asset Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght text-400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
 <body class="bg-slate-950 text-slate-300 min-h-screen">
@@ -21,7 +21,7 @@
     <!-- MAIN DISPLAY CONTENT FRAME -->
     <main class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <!-- Left Profile Column: Media & Mechanics Specifications Log -->
+        <!-- Left Profile Column: Media & Specs -->
         <div class="lg:col-span-2 space-y-6">
             <div class="bg-slate-900 border border-slate-850 rounded-3xl overflow-hidden shadow-xl">
                 <img id="carProfileImageDisplay" src="car1.jpg" class="w-full aspect-[16/10] object-cover bg-slate-950">
@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <!-- Dynamic 140-Point Metric Diagnostic Output Board -->
+            <!-- Certified 140-Point Condition Logs -->
             <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6">
                 <h2 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
                     <span class="text-indigo-400">✓</span> Certified 140-Point Condition Logs
@@ -40,7 +40,7 @@
                     <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Engine Blow-by System</span><span class="text-emerald-400 font-bold">PASSED VERIFIED</span></div>
                     <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Structural Frame Integration</span><span class="text-emerald-400 font-bold">NON-ACCIDENTAL</span></div>
                     <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Suspension Linkage Array</span><span class="text-emerald-400 font-bold">HEALTHY (88%)</span></div>
-                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Transmission Handshake Core</span><span class="text-emerald-400 font-bold">SMOOTH EXECUTION</span></div>
+                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-emerald-400 font-bold">Transmission Handshake Core</span><span class="text-emerald-400 font-bold">SMOOTH EXECUTION</span></div>
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <button onclick="dismissSecureTokenModalLayout()" class="absolute top-4 right-4 text-slate-500 hover:text-white font-bold text-sm cursor-pointer">✕</button>
             
             <div class="space-y-1">
-                <h3 class="text-lg font-black text-white uppercase tracking-tight">Secure Secure Fleet Token Allocation</h3>
+                <h3 class="text-lg font-black text-white uppercase tracking-tight">Secure Fleet Token Allocation</h3>
                 <p class="text-xs text-slate-400">Lock down this asset instantly with a refundable deposit signature routing protocol mapping.</p>
             </div>
 
@@ -92,7 +92,7 @@
                     <input type="tel" id="buyerPhoneContactInput" placeholder="e.g., +91 9999999999" class="w-full bg-slate-950 border border-slate-850 text-xs font-bold rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition-colors">
                 </div>
                 <div class="bg-indigo-500/5 border border-indigo-500/10 p-4 rounded-xl text-[11px] font-semibold text-indigo-400">
-                    🛡️ Refundable Intent Token: <span class="font-black font-mono text-white text-xs">₹10,000</span>. Holds vehicle row status for 48 operational hours.
+                    🛡️ Refundable Intent Token: <span class="font-black font-mono text-white text-xs">₹10,000</span>. Holds vehicle status for 48 operational hours.
                 </div>
                 <button onclick="executeMockBankingGatewayTransaction()" type="button" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg cursor-pointer">
                     Proceed to Secure Payment Gateway →
@@ -124,14 +124,12 @@
 
         let globalCurrentCarPayloadReference = null;
 
-        // 1. Collect URL Identifier Parameters dynamically
         function extractTargetVehicleQueryId() {
             const URLRouteString = window.location.search;
             const parameterDecoder = new URLSearchParams(URLRouteString);
             return parameterDecoder.get("id");
         }
 
-        // 2. Fetch Single Record from Cloud Network Cache Arrays
         async function loadTargetVehicleProfileData() {
             const carId = extractTargetVehicleQueryId();
             if (!carId) {
@@ -157,7 +155,6 @@
             }
         }
 
-        // 3. Bind Database Strings into Frontend UI Template Tags
         function populateInterfaceLayoutFields(car) {
             document.getElementById("carProfileImageDisplay").src = car.image || "car1.jpg";
             document.getElementById("carProfileNameTitle").innerText = `${car.year || 2026} ${car.name}`;
@@ -169,12 +166,10 @@
                 ? "₹" + (rawValuationFloat / 100000).toFixed(2) + " Lakh" 
                 : "Pricing Evaluating Process";
 
-            // Establish direct channel WhatsApp text configurations strings
             const prefilledMessageText = encodeURIComponent(`Hello NoDealerIndia Specialist! I am looking to connect with a field evaluation lead regarding the certified Stock Listing Asset:\n\n🚘 Vehicle: ${car.name}\n🆔 Registry ID: ${car.id}\n💰 Valuation: ₹${(rawValuationFloat / 100000).toFixed(2)} Lakh\n\nPlease verify availability status layers.`);
             document.getElementById("directWhatsAppLinkAnchor").href = `https://wa.me/917838?text=${prefilledMessageText}`;
         }
 
-        // 4. Modal Screen Control Interfaces Layout Interactions
         function revealSecureTokenModalLayout() {
             document.getElementById("tokenCheckoutShieldWrapper").style.display = "flex";
         }
@@ -182,7 +177,6 @@
             document.getElementById("tokenCheckoutShieldWrapper").style.display = "none";
         }
 
-        // 5. Mock Gateway Interceptor Script Animations (The Live Demo Experience Matrix)
         function executeMockBankingGatewayTransaction() {
             const clientNameInput = document.getElementById("buyerFullNameInput").value.trim();
             const clientPhoneInput = document.getElementById("buyerPhoneContactInput").value.trim();
@@ -192,18 +186,15 @@
                 return;
             }
 
-            // Hide configuration fields, slide loader active block loop elements
             document.getElementById("checkoutFormInputGroup").classList.add("hidden");
             document.getElementById("checkoutProcessingScreen").classList.remove("hidden");
 
-            // Timed delay triggers simulating transaction routing authorizations handshakes loops
             setTimeout(() => {
                 document.getElementById("checkoutProcessingScreen").classList.add("hidden");
                 document.getElementById("checkoutSuccessConfirmationDeck").classList.remove("hidden");
             }, 3000);
         }
 
-        // 6. Complete Transaction Handshake via Direct WhatsApp Channels Redirect Loops
         function triggerFinalWhatsAppPaymentConfirmation() {
             const clientName = document.getElementById("buyerFullNameInput").value;
             const car = globalCurrentCarPayloadReference;
