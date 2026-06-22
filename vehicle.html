@@ -3,331 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certified Vehicle Blueprint | NoDealerIndia</title>
+    <title>NDI // Vehicle Inspection Asset Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght text-400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen pb-24">
+<body class="bg-slate-950 text-slate-300 min-h-screen">
 
-    <!-- Premium Brand Navigation Bar -->
-    <nav class="bg-slate-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-800 px-4 py-4">
+    <!-- NAVIGATION BANNER -->
+    <nav class="bg-slate-950 border-b border-slate-900 px-6 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <span class="text-xl font-black text-white tracking-tight">NoDealer<span class="text-indigo-500">India</span></span>
-                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-widest">Certified Hub</span>
-            </div>
-            <a href="showroom.html" class="text-xs font-bold text-slate-400 hover:text-white bg-slate-800 px-4 py-2 rounded-xl border border-slate-700 transition-all">← Back to Showroom</a>
+            <span class="text-xl font-black text-white">NoDealerIndia // <span class="text-indigo-400">Asset Report</span></span>
+            <a href="showroom.html" class="text-xs font-bold text-slate-400 hover:text-white transition-colors">← Back To Showroom Stock</a>
         </div>
     </nav>
 
-    <!-- Master Layout Frame Grid -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <div id="loadingScreenNode" class="text-center py-24 text-slate-500 font-semibold text-sm animate-pulse">
-            Establishing secure encrypted database synchronization connection row matrix...
+    <!-- MAIN DISPLAY CONTENT FRAME -->
+    <main class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left Profile Column: Media & Mechanics Specifications Log -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-slate-900 border border-slate-850 rounded-3xl overflow-hidden shadow-xl">
+                <img id="carProfileImageDisplay" src="car1.jpg" class="w-full aspect-[16/10] object-cover bg-slate-950">
+                <div class="p-6 sm:p-8 space-y-2">
+                    <h1 id="carProfileNameTitle" class="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">Loading Vehicle Specification Assets...</h1>
+                    <p id="carProfileVariantText" class="text-xs font-mono text-indigo-400 font-bold uppercase tracking-wide">Connecting Cloud Parameters...</p>
+                </div>
+            </div>
+
+            <!-- Dynamic 140-Point Metric Diagnostic Output Board -->
+            <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6">
+                <h2 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="text-indigo-400">✓</span> Certified 140-Point Condition Logs
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
+                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Engine Blow-by System</span><span class="text-emerald-400 font-bold">PASSED VERIFIED</span></div>
+                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Structural Frame Integration</span><span class="text-emerald-400 font-bold">NON-ACCIDENTAL</span></div>
+                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Suspension Linkage Array</span><span class="text-emerald-400 font-bold">HEALTHY (88%)</span></div>
+                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Transmission Handshake Core</span><span class="text-emerald-400 font-bold">SMOOTH EXECUTION</span></div>
+                </div>
+            </div>
         </div>
 
-        <div id="masterVehicleConsole" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            
-            <!-- LEFT SIDE: MEDIA & INTERACTIVE DIAGNOSTIC MATRICES (2 COLUMNS) -->
-            <div class="lg:col-span-2">
-                
-                <!-- Main Car Image Showcase -->
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl relative aspect-[16/9]">
-                    <img id="primaryDisplayImg" src="" alt="Vehicle Display" class="w-full h-full object-cover">
-                    <div class="absolute bottom-4 left-4 bg-slate-950/90 backdrop-blur-md border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-400 flex items-center gap-2">
-                        <span class="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span> 140-Point Inspection Passed
-                    </div>
+        <!-- Right Side Checkout Panel Layout -->
+        <div class="space-y-6">
+            <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl sticky top-28">
+                <div>
+                    <span class="text-[9px] font-black tracking-widest text-slate-500 uppercase block">Fixed Direct Pricing Valuation</span>
+                    <span id="carProfileValuationDisplay" class="text-3xl font-black text-white font-mono tracking-tight block mt-1">₹0.00 Lakh</span>
                 </div>
 
-                <!-- FIXED: Navigation Control Tabs Array (Spinny/Cars24 Style) -->
-                <div class="bg-slate-900 border border-slate-800 p-2 rounded-2xl flex flex-row gap-2 text-xs font-bold w-full my-6">
-                    <button type="button" onclick="switchVehicleTab('specs')" id="tabBtn-specs" class="flex-1 py-3 text-center rounded-xl transition-all bg-indigo-600 text-white cursor-pointer">
-                        Vehicle Overview
+                <div class="border-t border-slate-850 pt-4 space-y-3 text-xs font-semibold">
+                    <div class="flex justify-between"><span class="text-slate-500">Insurance Coverage</span><span id="carProfileInsuranceValue" class="text-slate-300 font-mono">Comprehensive</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Registration Location</span><span id="carProfileRegistrationState" class="text-indigo-400 font-mono">HR-26 (Gurgaon)</span></div>
+                </div>
+
+                <!-- Interactive Transaction Triggers -->
+                <div class="space-y-3 pt-2">
+                    <button onclick="revealSecureTokenModalLayout()" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/10 cursor-pointer">
+                        🔒 Lock Vehicle / Secure Token
                     </button>
-                    <button type="button" onclick="switchVehicleTab('pdi')" id="tabBtn-pdi" class="flex-1 py-3 text-center rounded-xl transition-all bg-slate-950 text-slate-400 hover:text-white cursor-pointer border border-slate-800/60">
-                        140-Pt Inspection Report
-                    </button>
-                    <button type="button" onclick="switchVehicleTab('docs')" id="tabBtn-docs" class="flex-1 py-3 text-center rounded-xl transition-all bg-slate-950 text-slate-400 hover:text-white cursor-pointer border border-slate-800/60">
-                        History & Verification
-                    </button>
-                </div>
-
-                <!-- TAB SECTION 1: CORE SPECIFICATIONS -->
-                <div id="contentBlock-specs" class="tab-content space-y-6">
-                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-                        <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Technical Parameter Blueprint</h3>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-semibold">
-                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-850"><span class="text-slate-500 block text-[10px] uppercase font-bold">Odometer Run</span><span id="metaKms" class="text-white text-sm font-black block mt-1">—</span></div>
-                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-850"><span class="text-slate-500 block text-[10px] uppercase font-bold">Fuel Setup</span><span id="metaFuel" class="text-white text-sm font-black block mt-1">—</span></div>
-                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-850"><span class="text-slate-500 block text-[10px] uppercase font-bold">Transmission Gearbox</span><span id="metaTransmission" class="text-white text-sm font-black block mt-1">—</span></div>
-                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-850"><span class="text-slate-500 block text-[10px] uppercase font-bold">RTO Registration</span><span id="metaRto" class="text-white text-sm font-black block mt-1">—</span></div>
-                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-850"><span class="text-slate-500 block text-[10px] uppercase font-bold">Ownership Log</span><span id="metaOwners" class="text-white text-sm font-black block mt-1">—</span></div>
-                            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-850"><span class="text-slate-500 block text-[10px] uppercase font-bold">Paint Work Color</span><span id="metaColor" class="text-white text-sm font-black block mt-1 truncate">—</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB SECTION 2: 140-POINT DETAILED HEALTH LOG -->
-                <div id="contentBlock-pdi" class="tab-content space-y-6 hidden">
-                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-                        <div class="border-b border-slate-800 pb-3">
-                            <h3 class="text-base font-bold text-white">Full Diagnostic Inspection Logs</h3>
-                            <p class="text-[11px] text-slate-400 mt-0.5">Comprehensive mechanical test telemetry conducted by certified on-field engineers.</p>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-bold">
-                            <!-- Powertrain -->
-                            <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between">
-                                <div class="space-y-0.5">
-                                    <p class="text-white text-sm">Engine & Transmission Assembly</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">Cylinder compression, back-compression blow-by status</p>
-                                </div>
-                                <span id="pdiEngineTag" class="px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider">PASSED</span>
-                            </div>
-                            <!-- Structural Frame -->
-                            <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between">
-                                <div class="space-y-0.5">
-                                    <p class="text-white text-sm">Chassis & Pillars Structural Integrity</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">Original aprons, crossmembers, un-welded frame sheets</p>
-                                </div>
-                                <span id="pdiStructureTag" class="px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider">PASSED</span>
-                            </div>
-                            <!-- Interior Electrical System -->
-                            <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between">
-                                <div class="space-y-0.5">
-                                    <p class="text-white text-sm">Cabin Air Conditioning & Electronics</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">HVAC load cooling matrix, complete OBD scanner clearance</p>
-                                </div>
-                                <span id="pdiInteriorTag" class="px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider">PASSED</span>
-                            </div>
-                            <!-- Suspension Wheels -->
-                            <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between">
-                                <div class="space-y-0.5">
-                                    <p class="text-white text-sm">Tires, Braking System & Suspension</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">Link rods, caliper wear alignment, millimeter tread limits</p>
-                                </div>
-                                <span id="pdiTyresTag" class="px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider">PASSED</span>
-                            </div>
-                        </div>
-
-                        <!-- Full Text Breakdown Sheet Summary Notes -->
-                        <div class="bg-slate-950 border border-slate-850 p-4 rounded-2xl space-y-1">
-                            <span class="text-[10px] text-slate-500 uppercase font-black tracking-wider block">Lead Inspector Diagnostic Notes</span>
-                            <p id="pdiInspectorNotes" class="text-slate-300 italic text-xs leading-relaxed font-medium">"No specific operational anomalies logged for this configuration frame reference link."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB SECTION 3: LEGAL / HISTORY DOCUMENT CHECK -->
-                <div id="contentBlock-docs" class="tab-content space-y-6 hidden">
-                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-                        <h3 class="text-base font-bold text-white border-b border-slate-800 pb-3">Ownership Background & Validation Clearance</h3>
-                        <div class="space-y-2 text-xs font-bold">
-                            <div class="flex justify-between items-center bg-slate-950 p-3.5 rounded-xl border border-slate-850">
-                                <span class="text-slate-400">RTO Blacklist / Criminal Case Log Status</span>
-                                <span class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">CLEAR & VERIFIED</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-slate-950 p-3.5 rounded-xl border border-slate-850">
-                                <span class="text-slate-400">Bank Hypothecation Loan Clearance (NOC availability)</span>
-                                <span class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">NO HYPOTHECATION</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-slate-950 p-3.5 rounded-xl border border-slate-850">
-                                <span class="text-slate-400">Odometer Tamper Test Log</span>
-                                <span class="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px]">VERIFIED ORIGINAL</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- RIGHT SIDE: COMMERCIAL PRICING CONSOLE & HOLD GATEWAY FIXED PANEL -->
-            <div class="space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-5 sticky top-24 shadow-2xl">
-                    <div class="flex justify-between items-center">
-                        <span id="cardYearLabel" class="bg-slate-950 text-indigo-400 text-xs px-3 py-1 rounded-xl border border-slate-850 font-bold font-mono">— Model</span>
-                        <span id="cardStatusBadge" class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black px-2.5 py-0.5 rounded uppercase tracking-wider">Available</span>
-                    </div>
-
-                    <div>
-                        <h1 id="cardNameTitle" class="text-2xl font-black text-white tracking-tight leading-none">—</h1>
-                        <p id="cardVariantSubtitle" class="text-xs text-slate-400 font-semibold mt-1.5">—</p>
-                    </div>
-
-                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-2xl flex items-center justify-between">
-                        <div>
-                            <span class="text-[9px] text-slate-500 block font-bold uppercase tracking-wider">Fixed Peer-to-Peer Cost</span>
-                            <span id="cardPriceDisplay" class="text-2xl font-black text-white">₹0</span>
-                        </div>
-                        <span class="text-[10px] text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 font-bold px-2.5 py-1 rounded-lg">Zero Commissions</span>
-                    </div>
-
-                    <div class="bg-amber-950/30 text-amber-300 border border-amber-900/40 rounded-2xl p-4 text-[10px] font-medium leading-relaxed">
-                        ⚠️ <strong>NDI Secure Token Policy:</strong> Holding tokens are fully protected and transparently managed under the 48-hour client cancellation ledger window rules.
-                    </div>
-
-                    <div class="space-y-2 font-bold text-xs pt-1">
-                        <button id="checkoutActionBtn" onclick="executePhonePeCheckoutRoute()" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl tracking-wide shadow-lg shadow-indigo-600/10 transition-all flex items-center justify-center gap-1.5 cursor-pointer uppercase">
-                            Reserve Vehicle via PhonePe (₹11,000)
-                        </button>
-                        <a id="whatsappRouterAnchor" href="" target="_blank" class="w-full h-14 bg-slate-950 border border-slate-800 text-white font-bold rounded-2xl flex items-center justify-center gap-2 transition-all hover:border-slate-700 uppercase">
-                            💬 Discuss Specifications With Founder
-                        </a>
-                    </div>
+                    <a id="directWhatsAppLinkAnchor" href="#" target="_blank" class="w-full h-14 bg-slate-950 hover:bg-slate-850 text-slate-300 border border-slate-800 font-bold text-xs rounded-2xl uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm">
+                        💬 Connect with Operations Specialist
+                    </a>
                 </div>
             </div>
-
         </div>
     </main>
 
-    <!-- Execution Logic Pipeline Engine Script Block -->
+    <!-- 💳 SEAMLESS GATEWAY CHECKOUT CONTAINER MODAL -->
+    <div id="tokenCheckoutShieldWrapper" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-[1000] hidden items-center justify-center px-4">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl relative">
+            <button onclick="dismissSecureTokenModalLayout()" class="absolute top-4 right-4 text-slate-500 hover:text-white font-bold text-sm cursor-pointer">✕</button>
+            
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white uppercase tracking-tight">Secure Secure Fleet Token Allocation</h3>
+                <p class="text-xs text-slate-400">Lock down this asset instantly with a refundable deposit signature routing protocol mapping.</p>
+            </div>
+
+            <!-- Client Input Rows Matrix -->
+            <div id="checkoutFormInputGroup" class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Your Full Name</label>
+                    <input type="text" id="buyerFullNameInput" placeholder="Enter full name" class="w-full bg-slate-950 border border-slate-850 text-xs font-bold rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition-colors">
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Contact Phone Number (WhatsApp Connected)</label>
+                    <input type="tel" id="buyerPhoneContactInput" placeholder="e.g., +91 9999999999" class="w-full bg-slate-950 border border-slate-850 text-xs font-bold rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition-colors">
+                </div>
+                <div class="bg-indigo-500/5 border border-indigo-500/10 p-4 rounded-xl text-[11px] font-semibold text-indigo-400">
+                    🛡️ Refundable Intent Token: <span class="font-black font-mono text-white text-xs">₹10,000</span>. Holds vehicle row status for 48 operational hours.
+                </div>
+                <button onclick="executeMockBankingGatewayTransaction()" type="button" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg cursor-pointer">
+                    Proceed to Secure Payment Gateway →
+                </button>
+            </div>
+
+            <!-- Dynamic Loading Interceptor Screen (Stakeholder Wow Factor) -->
+            <div id="checkoutProcessingScreen" class="hidden text-center py-8 space-y-4">
+                <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <p class="text-xs text-slate-400 font-bold tracking-widest uppercase animate-pulse">Establishing Secure End-To-End Banking Handshake Terminal Wire...</p>
+            </div>
+
+            <!-- Complete Success Framework Display -->
+            <div id="checkoutSuccessConfirmationDeck" class="hidden text-center py-8 space-y-4">
+                <span class="text-4xl block">✨</span>
+                <h4 class="text-white font-black text-base uppercase tracking-tight">Intent Signature Registered!</h4>
+                <p class="text-xs text-slate-400 leading-relaxed max-w-xs mx-auto">Asset ledger reservation entry locked. Routing secure checkout summary confirmation directly to your specialist communications profile link terminal...</p>
+                <button onclick="triggerFinalWhatsAppPaymentConfirmation()" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs px-6 py-3 rounded-xl uppercase tracking-wider transition-all cursor-pointer inline-block">
+                    Complete Handshake on WhatsApp ✓
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIPELINE AUTOMATION INTELLIGENCE MODULE -->
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
+        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
 
-        let loadedTargetCarId = null;
+        let globalCurrentCarPayloadReference = null;
 
-        async function syncVehicleLayoutProfile() {
-            const queryParams = new URLSearchParams(window.location.search);
-            loadedTargetCarId = queryParams.get('id');
+        // 1. Collect URL Identifier Parameters dynamically
+        function extractTargetVehicleQueryId() {
+            const URLRouteString = window.location.search;
+            const parameterDecoder = new URLSearchParams(URLRouteString);
+            return parameterDecoder.get("id");
+        }
 
-            if(!loadedTargetCarId) {
-                document.getElementById("loadingScreenNode").innerText = "Operation Aborted: Target tracking context missing from entry parameters.";
+        // 2. Fetch Single Record from Cloud Network Cache Arrays
+        async function loadTargetVehicleProfileData() {
+            const carId = extractTargetVehicleQueryId();
+            if (!carId) {
+                document.getElementById("carProfileNameTitle").innerText = "Error: Invalid Vehicle Reference Token Specified";
                 return;
             }
 
             try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${loadedTargetCarId}&select=*`, {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${carId}&select=*`, {
                     headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
                 });
-                const dataset = await res.json();
-                if(dataset.length === 0) {
-                    document.getElementById("loadingScreenNode").innerText = "Asset entry block purged or deleted from live row architecture.";
+                const collection = await response.json();
+                
+                if (!collection || collection.length === 0) {
+                    document.getElementById("carProfileNameTitle").innerText = "Listing Record Out of Bounds / Purged";
                     return;
                 }
-                bindCarDataToDOM(dataset[0]);
-            } catch(e) {
-                document.getElementById("loadingScreenNode").innerText = "Critical pipeline failure. Check server connectivity logs.";
+
+                globalCurrentCarPayloadReference = collection[0];
+                populateInterfaceLayoutFields(globalCurrentCarPayloadReference);
+            } catch (err) {
+                console.error(err);
             }
         }
 
-        function bindCarDataToDOM(car) {
-            document.getElementById("loadingScreenNode").classList.add("hidden");
-            document.getElementById("masterVehicleConsole").classList.remove("hidden");
-
-            // Media mapping
-            document.getElementById("primaryDisplayImg").src = car.image;
-
-            // Overview Tab Mapping
-            document.getElementById("cardYearLabel").innerText = `${car.year} Model`;
-            document.getElementById("cardNameTitle").innerText = car.name;
-            document.getElementById("cardVariantSubtitle").innerText = car.variant;
+        // 3. Bind Database Strings into Frontend UI Template Tags
+        function populateInterfaceLayoutFields(car) {
+            document.getElementById("carProfileImageDisplay").src = car.image || "car1.jpg";
+            document.getElementById("carProfileNameTitle").innerText = `${car.year || 2026} ${car.name}`;
+            document.getElementById("carProfileVariantText").innerText = `${car.variant || 'Standard Pack'} • ${car.fuel || 'Petrol'} Gearbox Engine`;
+            document.getElementById("carProfileInsuranceValue").innerText = car.insurance || "Comprehensive Policy Active";
             
-            if(car.price) {
-                document.getElementById("cardPriceDisplay").innerText = "₹" + (parseFloat(car.price)/100000).toFixed(2) + " Lakh";
-            }
+            const rawValuationFloat = parseFloat(car.price || 0);
+            document.getElementById("carProfileValuationDisplay").innerText = rawValuationFloat > 0 
+                ? "₹" + (rawValuationFloat / 100000).toFixed(2) + " Lakh" 
+                : "Pricing Evaluating Process";
 
-            document.getElementById("metaKms").innerText = (car.kms || "—") + " KM";
-            document.getElementById("metaFuel").innerText = car.fuel || "—";
-            document.getElementById("metaTransmission").innerText = car.transmission || "—";
-            document.getElementById("metaRto").innerText = (car.rto || "—") + " RTO";
-            document.getElementById("metaOwners").innerText = "Owner " + (car.owners || "—");
-            document.getElementById("metaColor").innerText = car.color || "—";
-
-            // Diagnostic Row Verification Mapping
-            mapPdiComponentStatus("pdiEngineTag", car.pdi_engine_status);
-            mapPdiComponentStatus("pdiStructureTag", car.pdi_structural_status);
-            mapPdiComponentStatus("pdiInteriorTag", car.pdi_interior_status);
-            mapPdiComponentStatus("pdiTyresTag", car.pdi_tyres_status);
-
-            if(car.inspector_notes) {
-                document.getElementById("pdiInspectorNotes").innerText = `"${car.inspector_notes}"`;
-            }
-
-            // Status Control Configuration
-            if(car.status === "Reserved") {
-                const badge = document.getElementById("cardStatusBadge");
-                badge.className = "bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black px-2.5 py-0.5 rounded uppercase tracking-wider";
-                badge.innerText = "Holding Token Locked";
-
-                const btn = document.getElementById("checkoutActionBtn");
-                btn.disabled = true;
-                btn.className = "w-full h-14 bg-slate-800 text-slate-500 font-bold rounded-2xl cursor-not-allowed uppercase";
-                btn.innerText = "Slot Reserved & Locked";
-            }
-
-            // WhatsApp Dynamic Router Injection Setup
-            const formattedMessageString = encodeURIComponent(`Hi Kapil! I am reviewing the 140-point certified diagnostic log report for the ${car.name} (${car.variant}). Is this vehicle available for a secondary on-field test scan?`);
-            document.getElementById("whatsappRouterAnchor").href = `https://wa.me/917838335143?text=${formattedMessageString}`;
+            // Establish direct channel WhatsApp text configurations strings
+            const prefilledMessageText = encodeURIComponent(`Hello NoDealerIndia Specialist! I am looking to connect with a field evaluation lead regarding the certified Stock Listing Asset:\n\n🚘 Vehicle: ${car.name}\n🆔 Registry ID: ${car.id}\n💰 Valuation: ₹${(rawValuationFloat / 100000).toFixed(2)} Lakh\n\nPlease verify availability status layers.`);
+            document.getElementById("directWhatsAppLinkAnchor").href = `https://wa.me/917838?text=${prefilledMessageText}`;
         }
 
-        function mapPdiComponentStatus(elementId, val) {
-            const elementNode = document.getElementById(elementId);
-            if(!elementNode) return;
-            
-            if(!val) {
-                elementNode.innerText = "PASSED";
-                elementNode.className = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider";
+        // 4. Modal Screen Control Interfaces Layout Interactions
+        function revealSecureTokenModalLayout() {
+            document.getElementById("tokenCheckoutShieldWrapper").style.display = "flex";
+        }
+        function dismissSecureTokenModalLayout() {
+            document.getElementById("tokenCheckoutShieldWrapper").style.display = "none";
+        }
+
+        // 5. Mock Gateway Interceptor Script Animations (The Live Demo Experience Matrix)
+        function executeMockBankingGatewayTransaction() {
+            const clientNameInput = document.getElementById("buyerFullNameInput").value.trim();
+            const clientPhoneInput = document.getElementById("buyerPhoneContactInput").value.trim();
+
+            if (!clientNameInput || !clientPhoneInput) {
+                alert("Operation Rejected: Validation checks require contact credentials to mapping secure ledger tokens.");
                 return;
             }
-            
-            elementNode.innerText = val.toUpperCase();
-            if(val.toLowerCase() === "passed") {
-                elementNode.className = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider";
-            } else {
-                elementNode.className = "bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-1 rounded text-[10px] font-black uppercase tracking-wider";
-            }
+
+            // Hide configuration fields, slide loader active block loop elements
+            document.getElementById("checkoutFormInputGroup").classList.add("hidden");
+            document.getElementById("checkoutProcessingScreen").classList.remove("hidden");
+
+            // Timed delay triggers simulating transaction routing authorizations handshakes loops
+            setTimeout(() => {
+                document.getElementById("checkoutProcessingScreen").classList.add("hidden");
+                document.getElementById("checkoutSuccessConfirmationDeck").classList.remove("hidden");
+            }, 3000);
         }
 
-        // FIXED: Complete tab switching rendering algorithm
-        function switchVehicleTab(targetTabId) {
-            // Hide all blocks
-            document.querySelectorAll('.tab-content').forEach(block => block.classList.add('hidden'));
+        // 6. Complete Transaction Handshake via Direct WhatsApp Channels Redirect Loops
+        function triggerFinalWhatsAppPaymentConfirmation() {
+            const clientName = document.getElementById("buyerFullNameInput").value;
+            const car = globalCurrentCarPayloadReference;
+            const message = encodeURIComponent(`🚨 SECURE INTENT DEPOSIT CONFIRMATION 🚨\n\nHello NDI Operations Center! I have completed the checkout handshake token signature processing for the vehicle below:\n\n👤 Buyer Name: ${clientName}\n🚘 Vehicle: ${car.name}\n🆔 Asset ID: ${car.id}\n💳 Secure Intent Hold: Requested\n\nPlease synchronize my communications token to verify transaction rows tracking logs.`);
             
-            // Standardize layout presets for all buttons
-            const unselectedStyle = "flex-1 py-3 text-center rounded-xl transition-all bg-slate-950 text-slate-400 hover:text-white cursor-pointer border border-slate-800/60";
-            document.getElementById('tabBtn-specs').className = unselectedStyle;
-            document.getElementById('tabBtn-pdi').className = unselectedStyle;
-            document.getElementById('tabBtn-docs').className = unselectedStyle;
-
-            // Activate specific panel content viewport
-            document.getElementById(`contentBlock-${targetTabId}`).classList.remove('hidden');
-            
-            // Apply highlight focus onto selected button trigger target
-            document.getElementById(`tabBtn-${targetTabId}`).className = "flex-1 py-3 text-center rounded-xl transition-all bg-indigo-600 text-white cursor-pointer";
+            window.open(`https://wa.me/917838?text=${message}`, "_blank");
+            dismissSecureTokenModalLayout();
         }
 
-        async function executePhonePeCheckoutRoute() {
-            if(!loadedTargetCarId) return;
-            const targetUPIString = "7838335143@ibl";
-            const bizTitle = "NoDealerIndia";
-            const fixLockAmount = "11000.00";
-            const memoString = `Token Holding Hold for Car Entry Reference Target Node: ${loadedTargetCarId}`;
-
-            const intentLink = `upi://pay?pa=${encodeURIComponent(targetUPIString)}&pn=${encodeURIComponent(bizTitle)}&am=${fixLockAmount}&cu=INR&tn=${encodeURIComponent(memoString)}`;
-
-            alert("Handing transmission routing context execution directly over to native PhonePe Gateway Matrix Core...\n\nAuthorize the secure deposit, then return here and hit OK to transition showroom state live.");
-            window.location.href = intentLink;
-
-            setTimeout(async () => {
-                try {
-                    const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${loadedTargetCarId}`, {
-                        method: "PATCH",
-                        headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json", "Prefer": "return=minimal" },
-                        body: JSON.stringify({ status: "Reserved" })
-                    });
-                    if (response.ok) {
-                        alert("🔒 Ledger State Mutated! This vehicle asset availability row has been locked down.");
-                        window.location.reload();
-                    }
-                } catch(e){}
-            }, 1500);
-        }
-
-        window.addEventListener("DOMContentLoaded", syncVehicleLayoutProfile);
+        window.addEventListener("DOMContentLoaded", loadTargetVehicleProfileData);
     </script>
 </body>
 </html>
