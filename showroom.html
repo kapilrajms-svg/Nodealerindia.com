@@ -18,7 +18,6 @@
                 <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">140+ Pt Verified</span>
             </div>
             
-            <!-- ❌ LINK EXCISED: "Admin Portal" option completely wiped out from public view layout elements -->
             <div class="hidden md:flex items-center gap-8 text-xs font-bold tracking-wide text-slate-400">
                 <a href="showroom.html" class="text-white hover:text-white transition-colors">Buy Cars</a>
                 <a href="#" class="hover:text-white transition-colors">Sell Your Car</a>
@@ -83,26 +82,23 @@
             </button>
         </div>
 
-        <!-- Micro Dynamic Injection Grid Node -->
         <div id="showroomDynamicGridDisplay" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamic JavaScript Car Cards Populate In This Array Frame -->
+            <!-- Dynamic JavaScript Car Cards Populate Here -->
         </div>
     </main>
 
-    <!-- 🌐 DATA LAYER CONTROL SCRIPT ENGINE -->
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
 
-        let masterVehiclesCacheMemory = []; // Holds absolute array feed row copies locally
+        let masterVehiclesCacheMemory = [];
 
-        // 1. Initial Data Fetch Pipeline Activation
         async function runShowroomInventoryDownloadPipeline() {
             const gridFrame = document.getElementById("showroomDynamicGridDisplay");
             gridFrame.innerHTML = `
                 <div class="col-span-full text-center py-20 space-y-3 animate-pulse">
                     <span class="text-2xl block">🌐</span>
-                    <p class="text-xs text-slate-500 font-bold tracking-wide uppercase">Connecting to Peer-to-Peer Fleet Registry Row Systems...</p>
+                    <p class="text-xs text-slate-500 font-bold tracking-wide uppercase">Connecting to Peer-to-Peer Fleet Registry...</p>
                 </div>`;
 
             try {
@@ -110,7 +106,6 @@
                     headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
                 });
                 masterVehiclesCacheMemory = await response.json();
-                
                 renderShowroomGridMatrix(masterVehiclesCacheMemory);
             } catch (err) {
                 console.error(err);
@@ -118,7 +113,6 @@
             }
         }
 
-        // 2. Main Render Generation Engine Loop
         function renderShowroomGridMatrix(carsList) {
             const gridFrame = document.getElementById("showroomDynamicGridDisplay");
             gridFrame.innerHTML = "";
@@ -171,7 +165,6 @@
             });
         }
 
-        // 3. Dynamic Filter Handler System Matrix Execution Code block
         function executeLocalGridMatrixFiltering() {
             const txSelect = document.getElementById("filterTransmission").value;
             const fuelSelect = document.getElementById("filterFuel").value;
@@ -193,7 +186,6 @@
                 });
             }
 
-            // Manage conditional interface "Clear Tags" asset visibility
             if (txSelect !== "All" || fuelSelect !== "All") {
                 clearBtn.classList.remove("hidden");
             } else {
@@ -203,15 +195,13 @@
             renderShowroomGridMatrix(computationalFilteredArray);
         }
 
-        // 4. Reset Action Controller Hook
-        function resetSearchFilters() {
+        document.getElementById("clearTagsBtn").addEventListener("click", () => {
             document.getElementById("filterTransmission").value = "All";
             document.getElementById("filterFuel").value = "All";
             document.getElementById("clearTagsBtn").classList.add("hidden");
             renderShowroomGridMatrix(masterVehiclesCacheMemory);
-        }
+        });
 
-        // Boot system row loops on initial asset download completion events
         window.addEventListener("DOMContentLoaded", runShowroomInventoryDownloadPipeline);
     </script>
 </body>
