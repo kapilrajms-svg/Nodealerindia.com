@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoDealerIndia // Sell Your Vehicle Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+</head>
+<body class="bg-slate-950 text-slate-300 min-h-screen">
+
+    <nav class="bg-slate-900 border-b border-slate-800 px-6 py-4">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <span class="text-xl font-black text-white">NoDealerIndia // <span class="text-indigo-400">Seller Studio</span></span>
+            <a href="showroom.html" class="text-xs font-bold text-slate-400 hover:text-white transition-colors">← Exit To Showroom</a>
+        </div>
+    </nav>
+
+    <main class="max-w-xl mx-auto px-4 pt-12">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div class="space-y-1">
+                <h1 class="text-xl font-black text-white uppercase tracking-tight">Request Valuation Checklist</h1>
+                <p class="text-xs text-slate-400">Fill in your car details to schedule an evaluation and skip the dealer margins completely.</p>
+            </div>
+
+            <form id="publicSellerIntakeForm" onsubmit="submitPublicSellerLeadPipeline(event)" class="space-y-4 text-xs font-semibold">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5 col-span-2">
+                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Your Contact Name</label>
+                        <input type="text" id="sellerLeadName" required placeholder="Full Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div class="space-y-1.5 col-span-2">
+                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">WhatsApp Phone Number</label>
+                        <input type="tel" id="sellerLeadPhone" required placeholder="e.g., +91 9999999999" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div class="space-y-1.5 col-span-2">
+                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Vehicle Make & Model</label>
+                        <input type="text" id="sellerLeadCarModel" required placeholder="e.g., Honda City" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Manufacturing Year</label>
+                        <input type="number" id="sellerLeadYear" required placeholder="2022" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-slate-400 pl-1 uppercase tracking-wider text-[9px]">Total Kilometers Driven</label>
+                        <input type="number" id="sellerLeadKms" required placeholder="45000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div class="space-y-1.5 col-span-2">
+                        <label class="text-indigo-400 pl-1 uppercase tracking-wider text-[9px]">Your Expected Selling Price (₹)</label>
+                        <input type="number" id="sellerLeadExpectedPrice" required placeholder="e.g., 850000" class="w-full bg-slate-950 border border-indigo-900/50 rounded-xl p-3 text-white font-mono focus:outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <button type="submit" id="submitLeadBtn" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl uppercase tracking-wider transition-all shadow-lg cursor-pointer pt-1">
+                    🚀 Submit Car for Review
+                </button>
+            </form>
+
+            <div id="sellerLeadSuccessContainer" class="hidden text-center py-6 space-y-4">
+                <span class="text-4xl">🎯</span>
+                <h3 class="text-white font-black uppercase text-base tracking-tight">Request Successfully Lodged!</h3>
+                <p class="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">Our field mechanic crew has received your car specs array and will contact you shortly via WhatsApp to confirm your inspection window.</p>
+                <button onclick="window.location.reload()" class="bg-slate-950 border border-slate-800 text-white text-xs px-4 py-2 rounded-xl font-bold uppercase transition-all cursor-pointer">Submit Another Asset</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
+
+        async function submitPublicSellerLeadPipeline(event) {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById("submitLeadBtn");
+            submitBtn.disabled = true;
+            submitBtn.innerText = "SENDING TO VERIFICATION STORAGE...";
+
+            // Generates a mock registration row to maintain data integrity until you deploy a dedicated table
+            const leadPayloadNode = {
+                id: "LEAD-" + Date.now().toString().slice(-6),
+                name: document.getElementById("sellerLeadCarModel").value.trim() + " [INBOUND LEAD]",
+                variant: "Contact: " + document.getElementById("sellerLeadName").value.trim(),
+                year: parseInt(document.getElementById("sellerLeadYear").value) || 2026,
+                kms: parseFloat(document.getElementById("sellerLeadKms").value) || 0,
+                price: parseFloat(document.getElementById("sellerLeadExpectedPrice").value) || 0,
+                inspector_notes: "⚠️ CLIENT LEAD INBOUND SHEET: Call back seller at target connection line: " + document.getElementById("sellerLeadPhone").value.trim(),
+                image: "car1.jpg", 
+                status: "Reserved", // Automatically holds row state hidden or highlighted for your validation reviews
+                rto: "INBOUND", fuel: "Petrol", transmission: "Manual", color: "Pending", owners: 1
+            };
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles`, {
+                    method: "POST",
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
+                    },
+                    body: JSON.stringify(leadPayloadNode)
+                });
+
+                if (response.ok) {
+                    document.getElementById("publicSellerIntakeForm").classList.add("hidden");
+                    document.getElementById("sellerLeadSuccessContainer").classList.remove("hidden");
+                } else {
+                    alert("Communication handshake failure. Verify connection criteria strings.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network transaction error occurred.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "🚀 Submit Car for Review";
+            }
+        }
+    </script>
+</body>
+</html>
