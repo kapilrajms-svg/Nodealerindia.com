@@ -3,267 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NDI // Operations Dashboard</title>
+    <title>NDI // Internal Command Console</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
 <body class="bg-slate-950 text-slate-300 min-h-screen">
 
-    <div id="adminAuthShieldView" class="fixed inset-0 bg-slate-950 z-[9999] flex items-center justify-center px-4">
-        <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl text-center space-y-6">
-            
-            <div class="w-16 h-16 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mx-auto text-2xl font-black shadow-lg">
-                🔒
+    <!-- PASSCODE SECURITY ESCALATION SHIELD -->
+    <div id="adminPasscodeBarrier" class="fixed inset-0 bg-slate-950 z-[9999] flex items-center justify-center px-4">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-850 p-6 sm:p-8 rounded-3xl text-center space-y-6 shadow-2xl">
+            <div class="space-y-1">
+                <span class="text-3xl block">🔑</span>
+                <h2 class="text-white font-black text-lg uppercase tracking-tight">Personnel Authentication Required</h2>
+                <p class="text-xs text-slate-400">Enter the operational security passcode token to initialize command boards.</p>
             </div>
-
-            <div class="space-y-1.5">
-                <h1 class="text-xl font-black text-white tracking-tight uppercase">NDI Terminal Authorization</h1>
-                <p class="text-xs text-slate-400">Enter your master operational PIN sequence to establish backend system ledger rows mapping accessibility channels.</p>
-            </div>
-
             <div class="space-y-3">
-                <input type="password" id="adminMasterPasscode" placeholder="••••" maxlength="6" class="w-full text-center tracking-[0.5em] font-black text-2xl bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white focus:outline-none focus:border-indigo-500 transition-colors">
-                
-                <button type="button" onclick="verifyAdminCredentialToken()" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/10 cursor-pointer">
-                    Authenticate Session Gateway →
-                </button>
+                <input type="password" id="adminPasscodeField" placeholder="••••" maxlength="4" class="w-32 bg-slate-950 border border-slate-800 rounded-xl p-3 text-center text-xl font-bold tracking-widest text-white focus:outline-none focus:border-indigo-500 transition-colors">
+                <button onclick="verifyAdminPasscodeToken()" class="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl uppercase tracking-wider transition-all block">Verify Identity</button>
             </div>
-            
-            <p id="authErrorMsgText" class="text-xs text-rose-400 font-bold hidden animate-pulse">⚠️ Access Refused: Invalid Passcode Signature</p>
         </div>
     </div>
 
-    <div id="premiumAdminWorkspace" class="hidden">
-        
-        <nav class="bg-slate-900 border-b border-slate-800 px-6 py-4 sticky top-0 z-50">
+    <!-- MAIN DASHBOARD PANEL CONTENT FRAME (HIDDEN UNTIL AUTHENTICATED) -->
+    <div id="mainDashboardWorkspace" class="hidden">
+        <nav class="bg-slate-900 border-b border-slate-800 px-6 py-4">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <span class="text-lg font-black text-white">NDI // <span class="text-indigo-400">Operations Center</span></span>
-                    <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-widest">Master Root Active</span>
-                </div>
-                <button onclick="terminateAdminSession()" class="text-xs font-bold text-slate-400 hover:text-rose-400 bg-slate-950 border border-slate-850 px-4 py-2 rounded-xl transition-all cursor-pointer">
-                    Secure Log Out ✕
-                </button>
+                <span class="text-sm font-black text-white uppercase tracking-wider">🔒 NDI // Corporate Command Hub</span>
+                <button onclick="window.location.reload()" class="text-xs font-bold text-rose-400 hover:text-rose-300 transition-colors">Terminate Session ✕</button>
             </div>
         </nav>
 
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-            
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-semibold">
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><span class="text-slate-500 block uppercase font-bold text-[9px] tracking-wider">Total Connected Fleet Stock</span><span id="statTotalCars" class="text-white text-2xl font-black block mt-1.5">0 Vehicles</span></div>
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><span class="text-slate-500 block uppercase font-bold text-[9px] tracking-wider">Active Showroom Stock Available</span><span id="statAvailableCars" class="text-emerald-400 text-2xl font-black block mt-1.5">0 Available</span></div>
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl"><span class="text-slate-500 block uppercase font-bold text-[9px] tracking-wider">Token Deposit Holds Secured</span><span id="statReservedCars" class="text-amber-400 text-2xl font-black block mt-1.5">0 Reserved</span></div>
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+            <!-- HEADER METRICS ROW -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-900 pb-6">
+                <div>
+                    <h1 class="text-2xl font-black text-white tracking-tight uppercase">Fleet Management Console</h1>
+                    <p class="text-xs text-slate-400 mt-0.5">Approve incoming consumer vehicle requests and evaluate catalog stock variables.</p>
+                </div>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4 shadow-xl">
-                <div class="border-b border-slate-800 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div>
-                        <h2 class="text-base font-bold text-white tracking-tight">Active Fleet Operations Repository Ledger</h2>
-                        <p class="text-[11px] text-slate-400 mt-0.5">Real-time control access data array to manage user listings, alter cost frameworks, or erase inventory entries.</p>
+            <!-- TAB TOGGLE MATRIX NAVIGATION -->
+            <div class="flex gap-4 border-b border-slate-900 pb-px text-xs font-bold">
+                <button onclick="toggleDashboardDisplayTab('showroomStockDeck')" id="tabBtnStock" class="border-b-2 border-indigo-500 text-white pb-3 px-1 transition-all">Active Showroom Stock</button>
+                <button onclick="toggleDashboardDisplayTab('inboundLeadsDeck')" id="tabBtnLeads" class="border-b-2 border-transparent text-slate-500 hover:text-slate-300 pb-3 px-1 transition-all flex items-center gap-2">
+                    Inbound Valuation Requests <span id="leadsBadgeCount" class="bg-indigo-500/10 text-indigo-400 font-mono text-[9px] px-1.5 py-0.5 rounded-md border border-indigo-500/20">0</span>
+                </button>
+            </div>
+
+            <!-- SECTION A: ACTIVE SHOWROOM MANAGEMENT MATRIX -->
+            <div id="showroomStockDeck" class="space-y-6">
+                <div class="bg-slate-900 border border-slate-850 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs font-semibold whitespace-nowrap">
+                            <thead class="bg-slate-950 text-slate-500 uppercase tracking-wider text-[9px] border-b border-slate-850">
+                                <tr>
+                                    <th class="p-4">Vehicle Identity</th>
+                                    <th class="p-4">Valuation Profile</th>
+                                    <th class="p-4">Usage Vector</th>
+                                    <th class="p-4">Operational State</th>
+                                    <th class="p-4 text-right">Database Mutations</th>
+                                </tr>
+                            </thead>
+                            <tbody id="showroomStockTableBody" class="divide-y divide-slate-850/60">
+                                <!-- JavaScript Live Catalog Entries Render Here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <div class="overflow-x-auto rounded-xl border border-slate-850 bg-slate-950">
-                    <table class="w-full text-left border-collapse text-xs font-semibold">
-                        <thead>
-                            <tr class="bg-slate-900 border-b border-slate-850 text-slate-400 text-[10px] uppercase font-black tracking-wider">
-                                <th class="p-4">Vehicle Details</th>
-                                <th class="p-4">Odometer Run / Fuel</th>
-                                <th class="p-4">Owner Expected Valuation</th>
-                                <th class="p-4">Live State Status</th>
-                                <th class="p-4 text-right">Administrative Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminLiveTableBodyRows" class="divide-y divide-slate-900 text-slate-300">
-                            </tbody>
-                    </table>
-                </div>
             </div>
 
+            <!-- SECTION B: INBOUND SELLER LEADS LEDGER -->
+            <div id="inboundLeadsDeck" class="space-y-6 hidden">
+                <div class="bg-slate-900 border border-slate-850 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs font-semibold whitespace-nowrap">
+                            <thead class="bg-slate-950 text-slate-500 uppercase tracking-wider text-[9px] border-b border-slate-850">
+                                <tr>
+                                    <th class="p-4">Proposed Asset</th>
+                                    <th class="p-4">Target Payout Request</th>
+                                    <th class="p-4">Client Communications & Notes</th>
+                                    <th class="p-4 text-right">Pipeline Management</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inboundLeadsTableBody" class="divide-y divide-slate-850/60">
+                                <!-- JavaScript Inbound Leads Gathered Here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
+    <!-- MASTER CONTROL SCRIPT ROUTINES -->
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
 
-        // 1. Core Password Gateway Verification Security Logic Block
-        function verifyAdminCredentialToken() {
-            const inputPasscode = document.getElementById("adminMasterPasscode").value.trim();
-            const errorLabel = document.getElementById("authErrorMsgText");
-
-            // 🔐 YOUR UNIQUE PASSCODE: 7838 (First 4 digits of your UPI code string context)
-            if (inputPasscode === "7838") {
-                // Remove shield block, clear faults, reveal workspace rows
-                document.getElementById("adminAuthShieldView").classList.add("hidden");
-                document.getElementById("premiumAdminWorkspace").classList.remove("hidden");
-                
-                // Initialize cloud dataset download pipeline rows
-                fetchAdminDashboardInventoryLedger();
+        function verifyAdminPasscodeToken() {
+            const inputVal = document.getElementById("adminPasscodeField").value;
+            if (inputVal === "7838") {
+                document.getElementById("adminPasscodeBarrier").classList.add("hidden");
+                document.getElementById("mainDashboardWorkspace").classList.remove("hidden");
+                refreshSystemDashboardData();
             } else {
-                errorLabel.classList.remove("hidden");
-                document.getElementById("adminMasterPasscode").value = "";
+                alert("Authentication Intercepted: Invalid passcode credential verification mapping.");
+                document.getElementById("adminPasscodeField").value = "";
             }
         }
 
-        // Catch enter keypress inside input vault box to log in quickly
-        document.getElementById("adminMasterPasscode").addEventListener("keyup", function(event) {
-            if (event.key === "Enter") { verifyAdminCredentialToken(); }
-        });
+        function toggleDashboardDisplayTab(targetDeckId) {
+            const stockDeck = document.getElementById("showroomStockDeck");
+            const leadsDeck = document.getElementById("inboundLeadsDeck");
+            const btnStock = document.getElementById("tabBtnStock");
+            const btnLeads = document.getElementById("tabBtnLeads");
 
-        function terminateAdminSession() {
-            window.location.reload(); // Instantly clears script memory state and snaps code vault closed
+            if (targetDeckId === "showroomStockDeck") {
+                stockDeck.classList.remove("hidden");
+                leadsDeck.classList.add("hidden");
+                btnStock.className = "border-b-2 border-indigo-500 text-white pb-3 px-1 transition-all";
+                btnLeads.className = "border-b-2 border-transparent text-slate-500 hover:text-slate-300 pb-3 px-1 transition-all flex items-center gap-2";
+            } else {
+                stockDeck.classList.add("hidden");
+                leadsDeck.classList.remove("hidden");
+                btnStock.className = "border-b-2 border-transparent text-slate-500 hover:text-slate-300 pb-3 px-1 transition-all";
+                btnLeads.className = "border-b-2 border-indigo-500 text-white pb-3 px-1 transition-all flex items-center gap-2";
+            }
         }
 
-        // 2. Fetch Master Stock Data Array Payload from Cloud Base Database
-        async function fetchAdminDashboardInventoryLedger() {
-            const tableBody = document.getElementById("adminLiveTableBodyRows");
-            tableBody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-500 font-bold tracking-wide animate-pulse">Downloading synchronized live network row entries...</td></tr>`;
-
+        async function refreshSystemDashboardData() {
             try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&order=id.asc`, {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?select=*&order=id.desc`, {
                     headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
                 });
-                const dataset = await response.json();
-                
-                if (!dataset || dataset.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-600 font-bold">No active vehicle asset logs found in cloud network data arrays.</td></tr>`;
-                    return;
-                }
+                const allVehicles = await response.json();
 
-                renderDashboardStatsAndTableRows(dataset);
-            } catch (err) {
-                console.error(err);
-                tableBody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-rose-400 font-bold">Critical communications lock breakdown. Check system status logs.</td></tr>`;
-            }
+                // Sort payload elements based on synthetic tracking names
+                const showroomInventory = allVehicles.filter(car => !car.name.includes("[INBOUND"));
+                const intakeLeads = allVehicles.filter(car => car.name.includes("[INBOUND"));
+
+                document.getElementById("leadsBadgeCount").innerText = intakeLeads.length;
+
+                renderShowroomTableRows(showroomInventory);
+                renderInboundLeadsRows(intakeLeads);
+            } catch (err) { console.error(err); }
         }
 
-        // 3. Render Metric Cards and Table Array Outputs Dynamically
-        function renderDashboardStatsAndTableRows(cars) {
-            const tableBody = document.getElementById("adminLiveTableBodyRows");
-            tableBody.innerHTML = "";
-
-            // Calculate metric values on-the-fly
-            const totalCount = cars.length;
-            const availableCount = cars.filter(c => c.status !== "Reserved").length;
-            const reservedCount = cars.filter(c => c.status === "Reserved").length;
-
-            document.getElementById("statTotalCars").innerText = `${totalCount} ${totalCount === 1 ? 'Vehicle' : 'Vehicles'}`;
-            document.getElementById("statAvailableCars").innerText = `${availableCount} Available`;
-            document.getElementById("statReservedCars").innerText = `${reservedCount} Token Locked`;
-
-            // Build individual row loops
+        function renderShowroomTableRows(cars) {
+            const body = document.getElementById("showroomStockTableBody");
+            body.innerHTML = "";
+            
             cars.forEach(car => {
                 const tr = document.createElement("tr");
-                tr.className = "hover:bg-slate-900/40 transition-colors";
-
-                // Format price displays seamlessly
-                const parsedPrice = parseFloat(car.price || 0);
-                const lakhsDisplay = parsedPrice > 0 ? "₹" + (parsedPrice / 100000).toFixed(2) + " Lakh" : "₹0 (No Price Added)";
-
-                // Format status badges color maps dynamically
-                const badgeClass = car.status === "Reserved" 
-                    ? "bg-amber-500/10 text-amber-400 border border-amber-500/20" 
-                    : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
-
+                tr.className = "hover:bg-slate-900/50 transition-colors";
                 tr.innerHTML = `
-                    <td class="p-4">
-                        <div class="flex items-center gap-3">
-                            <img src="${car.image || 'car1.jpg'}" class="w-12 h-10 object-cover rounded-lg bg-slate-900 border border-slate-850">
-                            <div>
-                                <p class="text-white font-bold text-sm tracking-tight leading-none">${car.name}</p>
-                                <p class="text-[10px] text-slate-500 mt-1 font-mono">${car.variant} • ID: <span class="text-indigo-400">${car.id}</span></p>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="p-4 text-slate-400 font-mono">
-                        <p class="text-white text-xs">${parseInt(car.kms || 0).toLocaleString()} KM</p>
-                        <p class="text-[10px] text-slate-500 mt-0.5">${car.year || 2026} • ${car.fuel || "Petrol"}</p>
-                    </td>
-                    <td class="p-4 text-white font-mono text-sm font-bold">
-                        ${lakhsDisplay}
-                    </td>
-                    <td class="p-4">
-                        <span class="px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${badgeClass}">
-                            ${car.status || "Available"}
-                        </span>
-                    </td>
+                    <td class="p-4 font-bold text-white uppercase tracking-tight">${car.year} ${car.name}<span class="block text-[10px] text-slate-500 font-mono lowercase">${car.id}</span></td>
+                    <td class="p-4 font-mono text-slate-300">₹${(parseFloat(car.price || 0) / 100000).toFixed(2)}L</td>
+                    <td class="p-4 font-mono text-slate-400">${parseInt(car.kms || 0).toLocaleString()} km • ${car.fuel}</td>
+                    <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">${car.status || 'Available'}</span></td>
                     <td class="p-4 text-right">
-                        <div class="flex items-center justify-end gap-1.5">
-                            <button onclick="triggerPriceModificationPrompt('${car.id}', '${parsedPrice}')" class="bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white px-3 py-1.5 rounded-lg border border-indigo-500/10 text-[11px] font-bold transition-all cursor-pointer uppercase">
-                                Edit Price
-                            </button>
-                            <button onclick="executeAssetWipePipeline('${car.id}')" class="bg-rose-600/10 hover:bg-rose-600 text-rose-400 hover:text-white px-3 py-1.5 rounded-lg border border-rose-500/10 text-[11px] font-bold transition-all cursor-pointer uppercase">
-                                Delete Stock
-                            </button>
-                        </div>
-                    </td>
-                `;
-                tableBody.appendChild(tr);
+                        <button onclick="deleteVehicleRecordPipeline('${car.id}')" class="text-xs font-bold text-rose-400 hover:text-rose-300 bg-rose-500/5 border border-rose-500/10 px-3 py-1.5 rounded-xl transition-all cursor-pointer">Purge Asset</button>
+                    </td>`;
+                body.appendChild(tr);
             });
         }
 
-        // 4. Update Price Pipeline Ledger Mutate Loop Call Route
-        async function triggerPriceModificationPrompt(carId, currentPrice) {
-            const rawInput = prompt(`Modifying Framework For Car ID: ${carId}\n\nEnter the new showroom price in raw numbers only (e.g., 2950000):`, currentPrice);
-            if (rawInput === null) return; 
+        function renderInboundLeadsRows(leads) {
+            const body = document.getElementById("inboundLeadsTableBody");
+            body.innerHTML = "";
 
-            const cleanPriceFloat = parseFloat(rawInput.trim());
-            if (isNaN(cleanPriceFloat) || cleanPriceFloat < 0) {
-                alert("Operation Aborted: Input parameter configuration must be numbers only.");
+            if(leads.length === 0) {
+                body.innerHTML = `<tr><td col-span="4" class="p-8 text-center text-slate-600 font-bold uppercase tracking-wider">No active vehicle submission leads found.</td></tr>`;
                 return;
             }
 
+            leads.forEach(lead => {
+                const tr = document.createElement("tr");
+                tr.className = "hover:bg-slate-900/50 transition-colors bg-indigo-950/5";
+                tr.innerHTML = `
+                    <td class="p-4 font-bold text-white uppercase tracking-tight">${lead.name.replace(" [INBOUND SELLER]", "").replace(" [INBOUND LEAD]", "")}<span class="block text-[10px] text-indigo-400 font-mono">${lead.variant}</span></td>
+                    <td class="p-4 font-mono text-emerald-400 font-bold">₹${(parseFloat(lead.price || 0) / 100000).toFixed(2)}L</td>
+                    <td class="p-4 max-w-xs truncate text-slate-400 font-medium" title="${lead.inspector_notes}">${lead.inspector_notes}</td>
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="promoteLeadToCertifiedShowroom('${lead.id}', '${lead.name.replace(/\[\s*INBOUND\s*SELLER\s*\]|\[\s*INBOUND\s*LEAD\s*\]/gi, "").trim()}')" class="text-xs font-bold text-indigo-400 hover:text-indigo-300 bg-indigo-500/5 border border-indigo-500/10 px-3 py-1.5 rounded-xl transition-all cursor-pointer">Certify & Publish</button>
+                        <button onclick="deleteVehicleRecordPipeline('${lead.id}')" class="text-xs font-bold text-slate-500 hover:text-rose-400 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl transition-all cursor-pointer">Dismiss</button>
+                    </td>`;
+                body.appendChild(tr);
+            });
+        }
+
+        async function promoteLeadToCertifiedShowroom(id, cleanName) {
+            if(!confirm("Promote this user lead entry to public showroom certified stock listings?")) return;
+            
             try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${carId}`, {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${id}`, {
                     method: "PATCH",
                     headers: {
                         "apikey": SUPABASE_KEY,
                         "Authorization": `Bearer ${SUPABASE_KEY}`,
-                        "Content-Type": "application/json",
-                        "Prefer": "return=minimal"
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ price: cleanPriceFloat })
+                    body: JSON.stringify({
+                        name: cleanName,
+                        inspector_notes: "★ 140-point certified checklist validation passed successfully via Admin Studio promotion logs.",
+                        status: "Available"
+                    })
                 });
 
-                if (response.ok) {
-                    alert(`🔒 SUCCESS!\nPrice parameter for Car ID [${carId}] updated in cloud network rows.`);
-                    fetchAdminDashboardInventoryLedger();
-                } else {
-                    alert("Database patch connection rejected verification handshake tokens.");
+                if(response.ok) {
+                    alert("🎯 Asset published live into active showroom grid rows!");
+                    refreshSystemDashboardData();
                 }
-            } catch (err) {
-                console.error(err);
-                alert("Network operational communication timeout.");
-            }
+            } catch(err) { console.error(err); }
         }
 
-        // 5. Complete Hard-Delete Purge Row Matrix Call Execution Pipeline
-        async function executeAssetWipePipeline(carId) {
-            const doubleCheckValidation = confirm(`⚠️ DANGER STOCK PURGE MATRIX WARNING:\nAre you absolutely certain you want to erase Car ID [${carId}] permanently from your showroom inventory registry? This action cannot be reversed.`);
-            if (!doubleCheckValidation) return;
+        async function deleteVehicleRecordPipeline(id) {
+            if (!confirm("Are you sure you want to permanently remove this vehicle tracking record entry?")) return;
 
             try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${carId}`, {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${id}`, {
                     method: "DELETE",
-                    headers: {
-                        "apikey": SUPABASE_KEY,
-                        "Authorization": `Bearer ${SUPABASE_KEY}`,
-                        "Prefer": "return=minimal"
-                    }
+                    headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
                 });
-
                 if (response.ok) {
-                    alert(`🗑️ PURGEMENT COMPLETE:\nCar listing reference row [${carId}] deleted completely from cloud registry networks.`);
-                    fetchAdminDashboardInventoryLedger(); // Refresh display view matrix grids
-                } else {
-                    alert("Database transaction delete call failed core validation checks.");
+                    alert("Record deleted from active registries.");
+                    refreshSystemDashboardData();
                 }
-            } catch (err) {
-                console.error(err);
-                alert("Network operational communication timeout.");
-            }
+            } catch (err) { console.error(err); }
         }
     </script>
 </body>
