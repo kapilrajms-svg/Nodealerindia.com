@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NDI // Vehicle Inspection Asset Report</title>
+    <title>NDI // Vehicle Asset Report & Financing</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
 <body class="bg-slate-950 text-slate-300 min-h-screen">
 
-    <!-- NAVIGATION BANNER -->
     <nav class="bg-slate-950 border-b border-slate-900 px-6 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <span class="text-xl font-black text-white">NoDealerIndia // <span class="text-indigo-400">Asset Report</span></span>
@@ -18,11 +18,9 @@
         </div>
     </nav>
 
-    <!-- MAIN DISPLAY CONTENT FRAME -->
     <main class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <!-- Left Profile Column: Media & Specs -->
-        <div class="lg:col-span-2 space-y-6">
+        <div class="lg:col-span-2 space-y-8">
             <div class="bg-slate-900 border border-slate-850 rounded-3xl overflow-hidden shadow-xl">
                 <img id="carProfileImageDisplay" src="car1.jpg" class="w-full aspect-[16/10] object-cover bg-slate-950">
                 <div class="p-6 sm:p-8 space-y-2">
@@ -31,21 +29,57 @@
                 </div>
             </div>
 
-            <!-- Certified 140-Point Condition Logs -->
+            <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6">
+                <div>
+                    <h2 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
+                        <span class="text-indigo-400">📊</span> Real-Time Instant EMI Estimation Engine
+                    </h2>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Adjust down payments and monthly tenures to formulate a structured interest framework profile.</p>
+                </div>
+
+                <div class="space-y-6 bg-slate-950 border border-slate-850 p-6 rounded-2xl">
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-bold font-mono">
+                            <span class="text-slate-400 uppercase tracking-wider text-[10px]">Your Down Payment Allocation</span>
+                            <span id="sliderDownPaymentValueText" class="text-white">₹0</span>
+                        </div>
+                        <input type="range" id="loanDownPaymentSlider" min="100000" max="5000000" step="50000" value="500000" oninput="executeEMIMathematicalFormulaCalculations()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-bold font-mono">
+                            <span class="text-slate-400 uppercase tracking-wider text-[10px]">Loan Tenure Duration</span>
+                            <span id="sliderTenureValueText" class="text-white">60 Months (5 Years)</span>
+                        </div>
+                        <input type="range" id="loanTenureSlider" min="12" max="84" step="12" value="60" oninput="executeEMIMathematicalFormulaCalculations()" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+                    </div>
+
+                    <div class="border-t border-slate-900 pt-5 flex items-center justify-between flex-wrap gap-4">
+                        <div>
+                            <span class="block text-[8px] font-black text-slate-500 uppercase tracking-widest">Calculated Interest Rate Baseline</span>
+                            <span class="text-white font-mono text-sm font-bold">@ 9.5% Fixed APR</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[8px] font-black text-indigo-400 uppercase tracking-widest">Estimated Monthly EMI</span>
+                            <span id="emiResultDisplayBox" class="text-white font-black text-2xl font-mono tracking-tight text-gradient bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">₹0 / month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6">
                 <h2 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
-                    <span class="text-indigo-400">✓</span> Certified 140-Point Condition Logs
+                    <span class="text-emerald-400">✓</span> Certified 140-Point Condition Logs
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
                     <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Engine Blow-by System</span><span class="text-emerald-400 font-bold">PASSED VERIFIED</span></div>
                     <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Structural Frame Integration</span><span class="text-emerald-400 font-bold">NON-ACCIDENTAL</span></div>
                     <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Suspension Linkage Array</span><span class="text-emerald-400 font-bold">HEALTHY (88%)</span></div>
-                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-emerald-400 font-bold">Transmission Handshake Core</span><span class="text-emerald-400 font-bold">SMOOTH EXECUTION</span></div>
+                    <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex items-center justify-between"><span class="text-slate-500">Transmission Handshake Core</span><span class="text-emerald-400 font-bold">SMOOTH EXECUTION</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- Right Side Checkout Panel Layout -->
         <div class="space-y-6">
             <div class="bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl sticky top-28">
                 <div>
@@ -58,66 +92,18 @@
                     <div class="flex justify-between"><span class="text-slate-500">Registration Location</span><span id="carProfileRegistrationState" class="text-indigo-400 font-mono">HR-26 (Gurgaon)</span></div>
                 </div>
 
-                <!-- Interactive Transaction Triggers -->
                 <div class="space-y-3 pt-2">
-                    <button onclick="revealSecureTokenModalLayout()" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/10 cursor-pointer">
-                        🔒 Lock Vehicle / Secure Token
+                    <button onclick="launchOfficialRazorpaySecureGateway()" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/10 cursor-pointer flex items-center justify-center gap-2">
+                        💳 Secure Booking Token (₹10,000)
                     </button>
                     <a id="directWhatsAppLinkAnchor" href="#" target="_blank" class="w-full h-14 bg-slate-950 hover:bg-slate-850 text-slate-300 border border-slate-800 font-bold text-xs rounded-2xl uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm">
-                        💬 Connect with Operations Specialist
+                        💬 Connect via WhatsApp Chat Line
                     </a>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- 💳 SEAMLESS GATEWAY CHECKOUT CONTAINER MODAL -->
-    <div id="tokenCheckoutShieldWrapper" class="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-[1000] hidden items-center justify-center px-4">
-        <div class="max-w-md w-full bg-slate-900 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl relative">
-            <button onclick="dismissSecureTokenModalLayout()" class="absolute top-4 right-4 text-slate-500 hover:text-white font-bold text-sm cursor-pointer">✕</button>
-            
-            <div class="space-y-1">
-                <h3 class="text-lg font-black text-white uppercase tracking-tight">Secure Fleet Token Allocation</h3>
-                <p class="text-xs text-slate-400">Lock down this asset instantly with a refundable deposit signature routing protocol mapping.</p>
-            </div>
-
-            <!-- Client Input Rows Matrix -->
-            <div id="checkoutFormInputGroup" class="space-y-4">
-                <div class="space-y-1">
-                    <label class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Your Full Name</label>
-                    <input type="text" id="buyerFullNameInput" placeholder="Enter full name" class="w-full bg-slate-950 border border-slate-850 text-xs font-bold rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition-colors">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-[10px] font-black uppercase text-slate-500 tracking-wider">Contact Phone Number (WhatsApp Connected)</label>
-                    <input type="tel" id="buyerPhoneContactInput" placeholder="e.g., +91 9999999999" class="w-full bg-slate-950 border border-slate-850 text-xs font-bold rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition-colors">
-                </div>
-                <div class="bg-indigo-500/5 border border-indigo-500/10 p-4 rounded-xl text-[11px] font-semibold text-indigo-400">
-                    🛡️ Refundable Intent Token: <span class="font-black font-mono text-white text-xs">₹10,000</span>. Holds vehicle status for 48 operational hours.
-                </div>
-                <button onclick="executeMockBankingGatewayTransaction()" type="button" class="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-2xl uppercase tracking-wider transition-all shadow-lg cursor-pointer">
-                    Proceed to Secure Payment Gateway →
-                </button>
-            </div>
-
-            <!-- Dynamic Loading Interceptor Screen (Stakeholder Wow Factor) -->
-            <div id="checkoutProcessingScreen" class="hidden text-center py-8 space-y-4">
-                <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-                <p class="text-xs text-slate-400 font-bold tracking-widest uppercase animate-pulse">Establishing Secure End-To-End Banking Handshake Terminal Wire...</p>
-            </div>
-
-            <!-- Complete Success Framework Display -->
-            <div id="checkoutSuccessConfirmationDeck" class="hidden text-center py-8 space-y-4">
-                <span class="text-4xl block">✨</span>
-                <h4 class="text-white font-black text-base uppercase tracking-tight">Intent Signature Registered!</h4>
-                <p class="text-xs text-slate-400 leading-relaxed max-w-xs mx-auto">Asset ledger reservation entry locked. Routing secure checkout summary confirmation directly to your specialist communications profile link terminal...</p>
-                <button onclick="triggerFinalWhatsAppPaymentConfirmation()" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs px-6 py-3 rounded-xl uppercase tracking-wider transition-all cursor-pointer inline-block">
-                    Complete Handshake on WhatsApp ✓
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PIPELINE AUTOMATION INTELLIGENCE MODULE -->
     <script>
         const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
         const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1"; 
@@ -125,83 +111,98 @@
         let globalCurrentCarPayloadReference = null;
 
         function extractTargetVehicleQueryId() {
-            const URLRouteString = window.location.search;
-            const parameterDecoder = new URLSearchParams(URLRouteString);
-            return parameterDecoder.get("id");
+            return new URLSearchParams(window.location.search).get("id");
         }
 
         async function loadTargetVehicleProfileData() {
             const carId = extractTargetVehicleQueryId();
-            if (!carId) {
-                document.getElementById("carProfileNameTitle").innerText = "Error: Invalid Vehicle Reference Token Specified";
-                return;
-            }
+            if (!carId) return;
 
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?id=eq.${carId}&select=*`, {
                     headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
                 });
                 const collection = await response.json();
-                
-                if (!collection || collection.length === 0) {
-                    document.getElementById("carProfileNameTitle").innerText = "Listing Record Out of Bounds / Purged";
-                    return;
+                if (collection && collection.length > 0) {
+                    globalCurrentCarPayloadReference = collection[0];
+                    populateInterfaceLayoutFields(globalCurrentCarPayloadReference);
+                    initializeFinancingSliders();
                 }
-
-                globalCurrentCarPayloadReference = collection[0];
-                populateInterfaceLayoutFields(globalCurrentCarPayloadReference);
-            } catch (err) {
-                console.error(err);
-            }
+            } catch (err) { console.error(err); }
         }
 
         function populateInterfaceLayoutFields(car) {
             document.getElementById("carProfileImageDisplay").src = car.image || "car1.jpg";
             document.getElementById("carProfileNameTitle").innerText = `${car.year || 2026} ${car.name}`;
-            document.getElementById("carProfileVariantText").innerText = `${car.variant || 'Standard Pack'} • ${car.fuel || 'Petrol'} Gearbox Engine`;
+            document.getElementById("carProfileVariantText").innerText = `${car.variant || 'Standard Pack'} • ${car.fuel || 'Petrol'} Framework`;
             document.getElementById("carProfileInsuranceValue").innerText = car.insurance || "Comprehensive Policy Active";
             
             const rawValuationFloat = parseFloat(car.price || 0);
-            document.getElementById("carProfileValuationDisplay").innerText = rawValuationFloat > 0 
-                ? "₹" + (rawValuationFloat / 100000).toFixed(2) + " Lakh" 
-                : "Pricing Evaluating Process";
+            document.getElementById("carProfileValuationDisplay").innerText = "₹" + (rawValuationFloat / 100000).toFixed(2) + " Lakh";
 
-            const prefilledMessageText = encodeURIComponent(`Hello NoDealerIndia Specialist! I am looking to connect with a field evaluation lead regarding the certified Stock Listing Asset:\n\n🚘 Vehicle: ${car.name}\n🆔 Registry ID: ${car.id}\n💰 Valuation: ₹${(rawValuationFloat / 100000).toFixed(2)} Lakh\n\nPlease verify availability status layers.`);
+            const prefilledMessageText = encodeURIComponent(`Hello NoDealerIndia! I want to confirm the certified Stock Listing Asset:\n\n🚘 Vehicle: ${car.name}\n🆔 Asset ID: ${car.id}\n💰 Price: ₹${(rawValuationFloat / 100000).toFixed(2)} Lakh.`);
             document.getElementById("directWhatsAppLinkAnchor").href = `https://wa.me/917838?text=${prefilledMessageText}`;
         }
 
-        function revealSecureTokenModalLayout() {
-            document.getElementById("tokenCheckoutShieldWrapper").style.display = "flex";
-        }
-        function dismissSecureTokenModalLayout() {
-            document.getElementById("tokenCheckoutShieldWrapper").style.display = "none";
+        // AMORTIZATION ENGINE FOR LOAN EMI SLIDERS
+        function initializeFinancingSliders() {
+            if (!globalCurrentCarPayloadReference) return;
+            const carPrice = parseFloat(globalCurrentCarPayloadReference.price || 0);
+            
+            const downSlider = document.getElementById("loanDownPaymentSlider");
+            downSlider.min = Math.floor(carPrice * 0.2); // Minimum 20% down payment
+            downSlider.max = Math.floor(carPrice * 0.8); // Maximum 80% down payment
+            downSlider.value = Math.floor(carPrice * 0.3); // Default 30% down payment
+            downSlider.step = 25000;
+
+            executeEMIMathematicalFormulaCalculations();
         }
 
-        function executeMockBankingGatewayTransaction() {
-            const clientNameInput = document.getElementById("buyerFullNameInput").value.trim();
-            const clientPhoneInput = document.getElementById("buyerPhoneContactInput").value.trim();
+        function executeEMIMathematicalFormulaCalculations() {
+            if (!globalCurrentCarPayloadReference) return;
+            
+            const totalPrice = parseFloat(globalCurrentCarPayloadReference.price || 0);
+            const downPayment = parseFloat(document.getElementById("loanDownPaymentSlider").value);
+            const totalTenureMonths = parseInt(document.getElementById("loanTenureSlider").value);
 
-            if (!clientNameInput || !clientPhoneInput) {
-                alert("Operation Rejected: Validation checks require contact credentials to mapping secure ledger tokens.");
-                return;
+            // Print UI value states
+            document.getElementById("sliderDownPaymentValueText").innerText = "₹" + downPayment.toLocaleString('en-IN');
+            document.getElementById("sliderTenureValueText").innerText = `${totalTenureMonths} Months (${totalTenureMonths / 12} Years)`;
+
+            const principalLoanAmount = totalPrice - downPayment;
+            
+            // Standard Fixed APR @ 9.5% Annual
+            const annualInterestRateBaseline = 9.5;
+            const monthlyInterestRate = annualInterestRateBaseline / 12 / 100;
+
+            let finalMonthlyEMICalc = 0;
+            if (principalLoanAmount > 0) {
+                finalMonthlyEMICalc = (principalLoanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalTenureMonths)) / (Math.pow(1 + monthlyInterestRate, totalTenureMonths) - 1);
             }
 
-            document.getElementById("checkoutFormInputGroup").classList.add("hidden");
-            document.getElementById("checkoutProcessingScreen").classList.remove("hidden");
-
-            setTimeout(() => {
-                document.getElementById("checkoutProcessingScreen").classList.add("hidden");
-                document.getElementById("checkoutSuccessConfirmationDeck").classList.remove("hidden");
-            }, 3000);
+            document.getElementById("emiResultDisplayBox").innerText = "₹" + Math.round(finalMonthlyEMICalc).toLocaleString('en-IN') + " / month";
         }
 
-        function triggerFinalWhatsAppPaymentConfirmation() {
-            const clientName = document.getElementById("buyerFullNameInput").value;
-            const car = globalCurrentCarPayloadReference;
-            const message = encodeURIComponent(`🚨 SECURE INTENT DEPOSIT CONFIRMATION 🚨\n\nHello NDI Operations Center! I have completed the checkout handshake token signature processing for the vehicle below:\n\n👤 Buyer Name: ${clientName}\n🚘 Vehicle: ${car.name}\n🆔 Asset ID: ${car.id}\n💳 Secure Intent Hold: Requested\n\nPlease synchronize my communications token to verify transaction rows tracking logs.`);
-            
-            window.open(`https://wa.me/917838?text=${message}`, "_blank");
-            dismissSecureTokenModalLayout();
+        // RAZORPAY API CONNECTIONS SIGNATURE INTERFACE HOOK
+        function launchOfficialRazorpaySecureGateway() {
+            if(!globalCurrentCarPayloadReference) return;
+
+            const checkoutGatewayOptionsMatrix = {
+                "key": "rzp_live_XXXXXXXXXXXXXX", // Replace with your live API verification key string when ready
+                "amount": 1000000, // ₹10,000 in raw subunit paise strings
+                "currency": "INR",
+                "name": "NoDealerIndia Core",
+                "description": `Booking Token Reservation Pass for Stock ID: ${globalCurrentCarPayloadReference.id}`,
+                "image": "https://nodealerindia.com/favicon.png",
+                "handler": function (transactionResponseToken) {
+                    alert(`🎯 BOOKING CONFIRMED!\nPayment successfully authorized via secure channels.\nTransaction ID: ${transactionResponseToken.razorpay_payment_id}`);
+                },
+                "prefill": { "name": "NDI Client User", "contact": "917838XXXX" },
+                "theme": { "color": "#4f46e5" }
+            };
+
+            const paymentGatewayWindowInstance = new Razorpay(checkoutGatewayOptionsMatrix);
+            paymentGatewayWindowInstance.open();
         }
 
         window.addEventListener("DOMContentLoaded", loadTargetVehicleProfileData);
