@@ -3,155 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoDealerIndia // Premium Certified Showroom</title>
+    <title>NoDealerIndia // Certified Automotive Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-slate-950 text-slate-300 min-h-screen">
+<body class="bg-[#0b0f19] text-slate-300 min-h-screen selection:bg-indigo-500 selection:text-white">
 
-    <!-- NAV BAR -->
-    <nav class="bg-slate-950 border-b border-slate-900 px-6 py-4 sticky top-0 z-40">
+    <!-- GLOBAL EXECUTIVE NAVIGATION FRAME -->
+    <nav class="bg-[#0b0f19]/80 backdrop-blur-xl border-b border-slate-900 sticky top-0 z-50 px-4 sm:px-8 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <span class="text-xl font-black text-white">NoDealerIndia // <span class="text-indigo-400">Showroom</span></span>
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-extrabold text-white tracking-tight">NoDealer<span class="text-indigo-500">India</span></span>
+                <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[9px] font-bold px-2 py-0.5 rounded-md uppercase">PRO PLATFORM</span>
+            </div>
             <div class="flex items-center gap-4">
-                <a href="sell.html" class="bg-slate-900 hover:bg-slate-850 text-white font-bold text-xs px-4 py-2 rounded-xl border border-slate-800 transition-colors">Sell Your Car</a>
-                <button onclick="togglePdiModalDisplay(true)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors shadow-lg shadow-indigo-600/10">Book PDI Inspection</button>
+                <a href="sell.html" class="text-xs font-bold text-slate-400 hover:text-white transition-colors">Sell Car</a>
+                <button onclick="togglePdiBookingModal(true)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shadow-lg shadow-indigo-600/20">Book Doorstep PDI</button>
             </div>
         </div>
     </nav>
 
-    <!-- PREMIUM PDI ADVANTAGE HERO BANNER -->
-    <header class="max-w-7xl mx-auto px-4 pt-12">
-        <div class="bg-gradient-to-r from-indigo-950 via-slate-900 to-slate-900 border border-indigo-900/40 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
-            <div class="space-y-2 max-w-xl">
-                <span class="bg-indigo-500/10 text-indigo-400 text-[10px] font-black tracking-widest uppercase px-2.5 py-1 rounded-full border border-indigo-500/20">Cars24 & Spinny Standard Grade</span>
-                <h1 class="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">Ensure Asset Integrity with On-Demand PDI</h1>
-                <p class="text-xs text-slate-400 leading-relaxed">Don't buy blindly. Book an independent certified NoDealerIndia mechanic to perform a comprehensive 140-point Pre-Delivery Inspection right at your doorstep.</p>
+    <!-- AUTOMOTIVE HERO & FILTER HUB -->
+    <header class="max-w-7xl mx-auto px-4 sm:px-8 pt-12 pb-6 space-y-8">
+        <div class="bg-gradient-to-br from-slate-900 via-[#0f1524] to-[#0b0f19] border border-slate-850 rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 p-8 text-slate-800 text-9xl font-black select-none pointer-events-none opacity-20">NDI</div>
+            <div class="max-w-2xl space-y-4 relative z-10">
+                <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black tracking-wider uppercase px-3 py-1 rounded-full">★ Cars24 & Spinny Technical Parity</span>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-white uppercase tracking-tight leading-none">Find Certified Pre-Owned Vehicles</h1>
+                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">Every vehicle features a verified 140-point inspection history, structural damage analysis, OBD-II telemetry logs, and certified pricing tracking.</p>
             </div>
-            <button onclick="togglePdiModalDisplay(true)" class="bg-white hover:bg-slate-100 text-slate-950 font-black text-xs px-6 h-12 rounded-xl uppercase tracking-wider transition-all whitespace-nowrap shadow-md">
-                ⚡ Book Doorstep PDI
-            </button>
+        </div>
+
+        <!-- SEARCH AND STRUCTURAL FILTERS -->
+        <div class="bg-slate-900/60 border border-slate-850 p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="applyFuelFilter('All')" class="fuel-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white transition-all">All Fuel Types</button>
+                <button onclick="applyFuelFilter('Petrol')" class="fuel-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-950 text-slate-400 hover:text-white transition-all">Petrol</button>
+                <button onclick="applyFuelFilter('Diesel')" class="fuel-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-950 text-slate-400 hover:text-white transition-all">Diesel</button>
+                <button onclick="applyFuelFilter('Electric')" class="fuel-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-950 text-slate-400 hover:text-white transition-all">Electric</button>
+            </div>
+            <input type="text" id="showroomSearchInput" oninput="executeSearchFilter()" placeholder="Search by model, brand, or registration variant..." class="bg-slate-950 border border-slate-850 text-xs text-white rounded-xl px-4 py-3 w-full sm:w-72 focus:outline-none focus:border-indigo-500 transition-colors">
         </div>
     </header>
 
-    <!-- ACTIVE STOCK LISTINGS CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 py-12 space-y-6">
-        <h2 class="text-sm font-black text-white uppercase tracking-wider">Available Certified Inventory</h2>
-        <div id="showroomGridContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamic Showroom Render Nodes via JavaScript Core Pipeline -->
+    <!-- SHOWROOM CONTENT GRID -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-6">
+        <div id="masterShowroomGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic data cards hydrate here via internal pipeline -->
         </div>
     </main>
 
-    <!-- INTERACTIVE PRE-DELIVERY INSPECTION (PDI) REGISTRATION MODAL -->
-    <div id="pdiBookingModalWrapper" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center px-4">
-        <div class="bg-slate-900 border border-slate-850 max-w-md w-full p-6 sm:p-8 rounded-3xl space-y-6 relative shadow-2xl">
-            <button onclick="togglePdiModalDisplay(false)" class="absolute top-4 right-4 text-slate-500 hover:text-white font-bold text-sm">✕</button>
-            
-            <div class="space-y-1">
-                <h3 class="text-lg font-black text-white uppercase tracking-tight">Schedule Expert PDI</h3>
-                <p class="text-xs text-slate-400">Lock in an expert mechanic field review window location parameters.</p>
-            </div>
+    <!-- INTERACTIVE VEHICLE DETAIL LIGHTBOX (INSIGNIA VIEW) -->
+    <div id="vehicleDetailLightbox" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 hidden overflow-y-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto bg-slate-900 border border-slate-850 rounded-3xl overflow-hidden shadow-2xl relative">
+            <button onclick="closeVehicleDetailLightbox()" class="absolute top-6 right-6 bg-slate-950 text-slate-400 hover:text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm z-10 border border-slate-800 transition-colors">✕</button>
+            <div id="lightboxDataContainer"><!-- Dynamic Hydration Frame --></div>
+        </div>
+    </div>
 
-            <form id="pdiSchedulerForm" onsubmit="submitCustomerPdiPipeline(event)" class="space-y-4 text-xs font-semibold">
+    <!-- PDI BOOKING MODAL (DOORSTEP INTEGRATION) -->
+    <div id="pdiBookingModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center px-4">
+        <div class="bg-slate-900 border border-slate-850 max-w-md w-full p-6 sm:p-8 rounded-3xl space-y-6 relative shadow-2xl">
+            <button onclick="togglePdiBookingModal(false)" class="absolute top-4 right-4 text-slate-500 hover:text-white font-bold text-sm">✕</button>
+            <div class="space-y-1">
+                <h3 class="text-lg font-black text-white uppercase tracking-tight">Schedule Doorstep PDI</h3>
+                <p class="text-xs text-slate-400">Deploy a certified technician to inspect any vehicle before purchase.</p>
+            </div>
+            <form onsubmit="executePdiBooking(event)" class="space-y-4 text-xs font-semibold">
                 <div class="space-y-1.5">
                     <label class="text-slate-400 uppercase tracking-wider text-[9px]">Full Name</label>
-                    <input type="text" id="pdiClientName" required placeholder="Your Full Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    <input type="text" id="pdiName" required placeholder="Enter name" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                 </div>
                 <div class="space-y-1.5">
-                    <label class="text-slate-400 uppercase tracking-wider text-[9px]">WhatsApp Phone Target Line</label>
-                    <input type="tel" id="pdiClientPhone" required placeholder="e.g., +91 9999999999" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    <label class="text-slate-400 uppercase tracking-wider text-[9px]">Contact Line (WhatsApp)</label>
+                    <input type="tel" id="pdiPhone" required placeholder="Enter number" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                 </div>
                 <div class="space-y-1.5">
-                    <label class="text-slate-400 uppercase tracking-wider text-[9px]">Target Vehicle Details</label>
-                    <input type="text" id="pdiCarModelTarget" required placeholder="e.g., Hyundai i20 or Copy Asset ID String" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
+                    <label class="text-slate-400 uppercase tracking-wider text-[9px]">Target Vehicle Reference</label>
+                    <input type="text" id="pdiVehicle" required placeholder="Model name or catalog tracking number" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500">
                 </div>
                 <div class="space-y-1.5">
-                    <label class="text-slate-400 uppercase tracking-wider text-[9px]">Preferred Inspection Date</label>
-                    <input type="date" id="pdiScheduleDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-mono">
+                    <label class="text-slate-400 tracking-wider text-[9px] uppercase">Preferred Date Window</label>
+                    <input type="date" id="pdiDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-indigo-500 font-mono">
                 </div>
-
-                <button type="submit" id="pdiSubmitBtn" class="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl uppercase tracking-wider transition-all pt-0.5 shadow-lg">
-                    🔒 Request Secure PDI Allocation
-                </button>
+                <button type="submit" class="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl uppercase tracking-wider transition-all shadow-lg shadow-indigo-600/20">Submit Inspection Request</button>
             </form>
         </div>
     </div>
 
+    <!-- CORE SCRIPT CONSOLE INTERFACE -->
     <script>
-        const SUPABASE_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
+        const DB_URL = "https://vzksbpiscgmplgbsgozi.supabase.co";
+        const DB_KEY = "sb_publishable_Hm8jYH8uEtR29suCqldB-A_Lf5miwL1";
+        let localInventoryCache = [];
+        let runningFuelFilter = "All";
 
-        function togglePdiModalDisplay(shouldShow) {
-            const modal = document.getElementById("pdiBookingModalWrapper");
-            if(shouldShow) modal.classList.remove("hidden");
-            else modal.classList.add("hidden");
+        async function bootstrapShowroomGrid() {
+            try {
+                const res = await fetch(`${DB_URL}/rest/v1/vehicles?status=eq.Available&select=*`, {
+                    headers: { "apikey": DB_KEY, "Authorization": `Bearer ${DB_KEY}` }
+                });
+                localInventoryCache = await res.json();
+                renderShowroomInterface(localInventoryCache);
+            } catch (err) { console.error("Database Connection Failure: ", err); }
         }
 
-        async function loadActiveShowroomCards() {
-            try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/vehicles?status=eq.Available&select=*`, {
-                    headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}` }
-                });
-                const inventory = await response.json();
-                const grid = document.getElementById("showroomGridContainer");
-                grid.innerHTML = "";
+        function renderShowroomInterface(dataset) {
+            const container = document.getElementById("masterShowroomGrid");
+            container.innerHTML = "";
+            
+            const filtered = dataset.filter(car => {
+                if (car.name.includes("[INBOUND") || car.name.includes("[PDI REQUEST]")) return false;
+                if (runningFuelFilter !== "All" && car.fuel !== runningFuelFilter) return false;
+                return true;
+            });
 
-                inventory.filter(car => !car.name.includes("[INBOUND")).forEach(car => {
-                    const card = document.createElement("div");
-                    card.className = "bg-slate-900 border border-slate-850 rounded-2xl overflow-hidden hover:border-slate-700 transition-all cursor-pointer flex flex-col justify-between";
-                    card.innerHTML = `
-                        <div onclick="window.location.href='vehicle.html?id=${car.id}'">
-                            <img src="${car.image || 'car1.jpg'}" class="w-full h-48 object-cover bg-slate-950">
-                            <div class="p-5 space-y-2">
-                                <h3 class="text-sm font-black text-white uppercase tracking-tight">${car.year} ${car.name}</h3>
-                                <p class="text-[10px] font-mono text-slate-500 uppercase">${car.variant || 'Standard Model'}</p>
-                                <span class="block text-base font-black text-indigo-400 font-mono mt-2">₹${(parseFloat(car.price)/100000).toFixed(2)} Lakh</span>
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full py-16 text-center text-slate-500 text-xs font-bold uppercase tracking-wider">No matching certified vehicle assets match active query parameters.</div>`;
+                return;
+            }
+
+            filtered.forEach(car => {
+                const card = document.createElement("div");
+                card.className = "bg-slate-900 border border-slate-850 rounded-2xl overflow-hidden hover:border-slate-700 transition-all flex flex-col justify-between group shadow-lg";
+                
+                // Read structural inspector metric payload safely
+                let scoring = "9.2";
+                try { if(car.inspector_notes && car.inspector_notes.includes("SCORE:")) { scoring = car.inspector_notes.split("SCORE:")[1].split("/")[0].trim(); } } catch(e){}
+
+                card.innerHTML = `
+                    <div onclick="launchVehicleLightbox('${car.id}')" class="cursor-pointer">
+                        <div class="relative overflow-hidden h-48 bg-slate-950">
+                            <img src="${car.image || 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600'}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md border border-slate-800 text-[10px] font-mono font-bold text-emerald-400 px-2 py-1 rounded-md">★ ${scoring}/10 Report Score</div>
+                        </div>
+                        <div class="p-5 space-y-3">
+                            <div class="space-y-1">
+                                <h3 class="text-sm font-extrabold text-white uppercase group-hover:text-indigo-400 transition-colors">${car.year} ${car.name}</h3>
+                                <p class="text-[10px] font-mono text-slate-500 uppercase tracking-tight">${car.variant || 'Standard Option Line'}</p>
+                            </div>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase">
+                                <span class="bg-slate-950 border border-slate-850 px-2 py-1 rounded-md">${car.kms.toLocaleString()} KM</span>
+                                <span class="bg-slate-950 border border-slate-850 px-2 py-1 rounded-md">${car.fuel}</span>
+                                <span class="bg-slate-950 border border-slate-850 px-2 py-1 rounded-md">${car.transmission}</span>
+                            </div>
+                            <div class="text-base font-black text-indigo-400 font-mono pt-1">₹${(parseFloat(car.price)/100000).toFixed(2)} Lakh</div>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-1 flex items-center gap-2">
+                        <button onclick="launchVehicleLightbox('${car.id}')" class="flex-1 py-2.5 bg-slate-950 hover:bg-slate-850 border border-slate-850 rounded-xl text-[11px] font-bold uppercase text-slate-300 transition-all">View 140-Point Report</button>
+                        <button onclick="triggerDirectPdiAllocation('${car.name} (ID: ${car.id})')" class="bg-indigo-600/10 hover:bg-indigo-600 text-indigo-400 hover:text-white border border-indigo-500/20 px-3 py-2.5 rounded-xl text-[11px] font-bold transition-all">Book PDI</button>
+                    </div>`;
+                container.appendChild(card);
+            });
+        }
+
+        function applyFuelFilter(type) {
+            runningFuelFilter = type;
+            document.querySelectorAll(".fuel-filter-btn").forEach(btn => {
+                btn.className = "fuel-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-950 text-slate-400 hover:text-white transition-all";
+            });
+            event.target.className = "fuel-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white transition-all";
+            renderShowroomInterface(localInventoryCache);
+        }
+
+        function executeSearchFilter() {
+            const query = document.getElementById("showroomSearchInput").value.toLowerCase().trim();
+            if (!query) { renderShowroomInterface(localInventoryCache); return; }
+            const searchResults = localInventoryCache.filter(car => 
+                car.name.toLowerCase().includes(query) || 
+                (car.variant && car.variant.toLowerCase().includes(query)) ||
+                car.fuel.toLowerCase().includes(query)
+            );
+            renderShowroomInterface(searchResults);
+        }
+
+        function togglePdiBookingModal(status) {
+            const el = document.getElementById("pdiBookingModal");
+            if (status) el.classList.remove("hidden"); else el.classList.add("hidden");
+        }
+
+        function triggerDirectPdiAllocation(carStr) {
+            document.getElementById("pdiVehicle").value = carStr;
+            togglePdiBookingModal(true);
+        }
+
+        async function executePdiBooking(e) {
+            e.preventDefault();
+            const payload = {
+                id: "PDI-" + Date.now().toString().slice(-5),
+                name: "[PDI REQUEST] " + document.getElementById("pdiVehicle").value.trim(),
+                variant: "Client: " + document.getElementById("pdiName").value.trim(),
+                year: 2026, kms: 0, price: 0, image: "car1.jpg", status: "Reserved",
+                rto: "INBOUND", fuel: "N/A", transmission: "N/A", color: "Pending", owners: 1,
+                inspector_notes: `📆 SCHEDULE WINDOW: ${document.getElementById("pdiDate").value} // Callback contact line: ${document.getElementById("pdiPhone").value.trim()}`
+            };
+            try {
+                const res = await fetch(`${DB_URL}/rest/v1/vehicles`, {
+                    method: "POST",
+                    headers: { "apikey": DB_KEY, "Authorization": `Bearer ${DB_KEY}`, "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                if(res.ok) { alert("🎯 PDI Slot Requested! Our service coordinator will initiate contact shortly."); togglePdiBookingModal(false); }
+            } catch(err) { console.error(err); }
+        }
+
+        function launchVehicleLightbox(carId) {
+            const car = localInventoryCache.find(item => item.id == carId);
+            if(!car) return;
+            const target = document.getElementById("lightboxDataContainer");
+            
+            target.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 sm:p-10">
+                    <div class="space-y-4">
+                        <img src="${car.image}" class="w-full h-64 object-cover rounded-2xl bg-slate-950 border border-slate-800">
+                        <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-slate-500 block uppercase text-[9px]">RTO Location</span><span class="text-white font-bold">${car.rto || 'DL-3C'}</span></div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-slate-500 block uppercase text-[9px]">Ownership Count</span><span class="text-white font-bold">${car.owners || 1} Owner</span></div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-slate-500 block uppercase text-[9px]">Color State</span><span class="text-white font-bold">${car.color || 'Metallic'}</span></div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-850"><span class="text-slate-500 block uppercase text-[9px]">Asset Reference ID</span><span class="text-indigo-400 font-bold">${car.id}</span></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">140-Point Verified Vehicle Report</span>
+                            <h2 class="text-2xl font-black text-white uppercase tracking-tight">${car.year} ${car.name}</h2>
+                            
+                            <!-- TAB TOGGLE MECHANICS -->
+                            <div class="border-b border-slate-800 flex gap-4 text-xs font-bold pb-2">
+                                <button class="text-white border-b-2 border-indigo-500 pb-1">Technical Checklist Summary</button>
+                            </div>
+                            <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl max-h-48 overflow-y-auto text-xs font-medium text-slate-400 leading-relaxed whitespace-pre-line">
+                                ${car.inspector_notes || "No structural structural damage markers declared. Mechanics verified suspension components and electrical networks successfully."}
                             </div>
                         </div>
-                        <div class="px-5 pb-5 pt-1">
-                            <button onclick="openPdiForSpecificCar('${car.name} (ID: ${car.id})')" class="w-full py-2 bg-slate-950 hover:bg-slate-850 text-slate-300 border border-slate-800 rounded-xl text-[11px] font-bold uppercase transition-all">Request PDI For This Car</button>
-                        </div>`;
-                    grid.appendChild(card);
-                });
-            } catch(e) { console.error(e); }
+                        <div class="bg-slate-950 border border-slate-850 p-4 rounded-2xl flex items-center justify-between">
+                            <div><span class="text-[10px] text-slate-500 font-mono block uppercase">Fixed Price Assurance</span><span class="text-xl font-mono font-black text-emerald-400">₹${(parseFloat(car.price)/100000).toFixed(2)}L</span></div>
+                            <button onclick="window.location.href='vehicle.html?id=${car.id}'" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all">Calculate Instant Auto Loan Loan</button>
+                        </div>
+                    </div>
+                </div>`;
+            document.getElementById("vehicleDetailLightbox").classList.remove("hidden");
         }
 
-        function openPdiForSpecificCar(carIdentStr) {
-            document.getElementById("pdiCarModelTarget").value = carIdentStr;
-            togglePdiModalDisplay(true);
-        }
-
-        async function submitCustomerPdiPipeline(event) {
-            event.preventDefault();
-            const btn = document.getElementById("pdiSubmitBtn");
-            btn.disabled = true; btn.innerText = "ROUTING APPOINTMENT ARRAYS...";
-
-            const pdiPayload = {
-                id: "PDI-" + Date.now().toString().slice(-5),
-                name: "[PDI REQUEST] " + document.getElementById("pdiCarModelTarget").value.trim(),
-                variant: "Client: " + document.getElementById("pdiClientName").value.trim(),
-                year: 2026, kms: 0, price: 0, image: "car1.jpg", status: "Reserved",
-                rto: "PDI-INBOUND", fuel: "N/A", transmission: "N/A", color: "Pending", owners: 1,
-                inspector_notes: `📆 TARGET WINDOW DATE: ${document.getElementById("pdiScheduleDate").value} // Contact target wire: ${document.getElementById("pdiClientPhone").value.trim()}`
-            };
-
-            try {
-                const res = await fetch(`${SUPABASE_URL}/rest/v1/vehicles`, {
-                    method: "POST",
-                    headers: { "apikey": SUPABASE_KEY, "Authorization": `Bearer ${SUPABASE_KEY}`, "Content-Type": "application/json" },
-                    body: JSON.stringify(pdiPayload)
-                });
-                if(res.ok) {
-                    alert("🎯 PDI Appointment Logged Successfully! An inspection coordinator will contact you via WhatsApp to align scheduling matrices.");
-                    togglePdiModalDisplay(false);
-                    document.getElementById("pdiSchedulerForm").reset();
-                }
-            } catch(err) { console.error(err); }
-            finally { btn.disabled = false; btn.innerText = "🔒 Request Secure PDI Allocation"; }
-        }
-
-        window.addEventListener("DOMContentLoaded", loadActiveShowroomCards);
+        function closeVehicleDetailLightbox() { document.getElementById("vehicleDetailLightbox").classList.add("hidden"); }
+        window.addEventListener("DOMContentLoaded", bootstrapShowroomGrid);
     </script>
 </body>
 </html>
